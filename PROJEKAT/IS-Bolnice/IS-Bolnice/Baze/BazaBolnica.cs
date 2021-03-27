@@ -1,5 +1,5 @@
 // File:    BazaBolnica.cs
-// Author:  Zola #naaaci #normalno
+// Author:  Zola
 // Created: Monday, March 22, 2021 9:11:00 PM
 // Purpose: Definition of Class BazaBolnica
 

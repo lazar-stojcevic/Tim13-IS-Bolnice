@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Prozori\DodajSobuWindow.xaml.cs">
+      <DependentUpon>DodajSobuWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\DodavanjeGuestNalogaWindow.xaml.cs">
       <DependentUpon>DodavanjeGuestNalogaWindow.xaml</DependentUpon>
     </Compile>
@@ -66,6 +69,9 @@
     </Compile>
     <Compile Include="Prozori\IzmenaPacijentaWindow.xaml.cs">
       <DependentUpon>IzmenaPacijentaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\IzmeniSobuWindow.xaml.cs">
+      <DependentUpon>IzmeniSobuWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\LekarIzmenaPregleda.xaml.cs">
       <DependentUpon>LekarIzmenaPregleda.xaml</DependentUpon>
@@ -88,6 +94,10 @@
     <Compile Include="Prozori\ZakazivanjeOperacije.xaml.cs">
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
+    <Page Include="Prozori\DodajSobuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\DodavanjeGuestNalogaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +126,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Prozori\IzmeniSobuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\LekarIzmenaPregleda.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -202,10 +216,22 @@
   <ItemGroup>
     <Resource Include="Datoteke\pacijenti.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Slike\menu1.png" />
+    <Resource Include="Slike\refresh1.png" />
+    <Resource Include="Slike\tick.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\menu.png" />
     <Resource Include="Slike\timetable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\bolnice.txt" />
+    <Resource Include="Datoteke\lekari.txt" />
+    <Resource Include="Datoteke\operacije.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\pregledi.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

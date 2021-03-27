@@ -37,20 +37,33 @@ public class Soba
         return true;
     }
    
-   public bool Izmeni(string noviID, string noviBrojSprata, bool noviStatusZauzetosti, bool noviStatusZaRenoviranja)
+   public bool Izmeni(string noviID, int noviBrojSprata, RoomType noviTip, double novaKvadratura)
    {
-      throw new NotImplementedException();
-   }
+        this.id = noviID;
+        this.sprat = noviBrojSprata;
+        this.tip = noviTip;
+        this.kvadratura = novaKvadratura;
+        return true;
+    }
    
    public bool Obrisi()
    {
-      throw new NotImplementedException();
-   }
+        this.obrisano = true;
+        return true;
+    }
    
    public bool Zauzmi()
    {
-      throw new NotImplementedException();
-   }
+        if (zauzeta)
+        {
+            return false;
+        }
+        else
+        {
+            this.zauzeta = true;
+            return true;
+        }
+    }
    
    public System.Collections.Generic.List<Predmet> predmet;
    

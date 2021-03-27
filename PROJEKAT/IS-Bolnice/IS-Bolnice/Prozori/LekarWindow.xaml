@@ -48,7 +48,7 @@
                     <Separator />
                     <MenuItem Header="Odjavi se" x:Name="subItemOdjava" Click="odjavaClick" />
                 </MenuItem>
-                <Image IsEnabled="False" Source="Slike\menu.png" Height="27" Margin="23,10,326.4,0" VerticalAlignment="Top" RenderTransformOrigin="-0.417,-0.441"/>
+                <Image IsEnabled="False" Source="..\Slike\menu.png" Height="27" Margin="23,10,326.4,0" VerticalAlignment="Top" RenderTransformOrigin="-0.417,-0.441"/>
             </Menu>
         </ToolBarPanel>
         <Label x:Name="labelaImena" Opacity="0.6" FontWeight="Bold" FontSize="18" Content="Lazar Stojčević" Height="40" Margin="202,7,43.6,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
