@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Bolnica
 
 using System;
+using System.Collections.Generic;
 
 public class Bolnica
 {
@@ -13,12 +14,23 @@ public class Bolnica
    private string brojTelefona;
    
    public System.Collections.Generic.List<Soba> soba;
-   
-   /// <summary>
-   /// Property for collection of Soba
-   /// </summary>
-   /// <pdGenerated>Default opposite class collection property</pdGenerated>
-   public System.Collections.Generic.List<Soba> Soba
+
+    public Bolnica(string ime, string adresa, string eMail, string brTel, List<Soba> sobe)
+    {
+        this.ime = ime;
+        this.adresa = adresa;
+        this.eMail = eMail;
+        this.brojTelefona = brTel;
+        this.soba = sobe;
+    }
+
+    public Bolnica()
+    {
+
+    }
+
+
+    public System.Collections.Generic.List<Soba> Soba
    {
       get
       {
@@ -74,5 +86,10 @@ public class Bolnica
          soba.Clear();
    }
    public Upravnik upravnik;
+
+    public string Ime { get; set; }
+    public string Adresa { get; set; }
+    public string EMail { get; set; }
+    public string BrojTelefona { get; set; }
 
 }

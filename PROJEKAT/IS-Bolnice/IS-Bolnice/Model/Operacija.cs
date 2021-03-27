@@ -12,12 +12,16 @@ public class Operacija
    
    public Soba soba;
    public Lekar lekar;
-   
-   /// <summary>
-   /// Property for Lekar
-   /// </summary>
-   /// <pdGenerated>Default opposite class property</pdGenerated>
-   public Lekar Lekar
+
+    public Operacija()
+    {
+        this.Pacijent = new Pacijent();
+        this.Lekar = new Lekar();
+        this.Soba = new Soba();
+    }
+
+
+    public Lekar Lekar
    {
       get
       {
@@ -30,10 +34,7 @@ public class Operacija
    }
    public Pacijent pacijent;
    
-   /// <summary>
-   /// Property for Pacijent
-   /// </summary>
-   /// <pdGenerated>Default opposite class property</pdGenerated>
+  
    public Pacijent Pacijent
    {
       get
@@ -45,5 +46,10 @@ public class Operacija
          this.pacijent = value;
       }
    }
+
+    public DateTime VremePocetaOperacije { get; set; }
+    public DateTime VremeKrajaOperacije { get; set; }
+
+    public Soba Soba { get; set; }
 
 }

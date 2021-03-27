@@ -18,7 +18,14 @@ public class Pregled
         this.lekar = lekar;
     }
 
+    public Pregled() { }
+
     public Pacijent pacijent;
-   public Lekar lekar;
+    public Lekar lekar;
+
+    public Pacijent Pacijent { get; set; }
+    public Lekar Lekar { get; set; }
+    public DateTime VremePocetkaPregleda { get; set; }
+    public DateTime VremeKrajaPregleda { get; set; }
 
 }

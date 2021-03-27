@@ -61,17 +61,32 @@
     <Compile Include="Prozori\DodavanjePacijentaWindow.xaml.cs">
       <DependentUpon>DodavanjePacijentaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\IzmenaOperacije.xaml.cs">
+      <DependentUpon>IzmenaOperacije.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\IzmenaPacijentaWindow.xaml.cs">
       <DependentUpon>IzmenaPacijentaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\LekarIzmenaPregleda.xaml.cs">
+      <DependentUpon>LekarIzmenaPregleda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\LekarRaspored.xaml.cs">
+      <DependentUpon>LekarRaspored.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\LekarWindow.xaml.cs">
       <DependentUpon>LekarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\LekarZakazivanjePregleda.xaml.cs">
+      <DependentUpon>LekarZakazivanjePregleda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\SekretarWindow.xaml.cs">
       <DependentUpon>SekretarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\UpravnikWindow.xaml.cs">
       <DependentUpon>UpravnikWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\ZakazivanjeOperacije.xaml.cs">
+      <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Page Include="Prozori\DodavanjeGuestNalogaWindow.xaml">
       <SubType>Designer</SubType>
@@ -80,6 +95,10 @@
     <Page Include="Prozori\DodavanjePacijentaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\IzmenaOperacije.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\IzmenaPacijentaWindow.xaml">
       <SubType>Designer</SubType>
@@ -97,9 +116,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Prozori\LekarIzmenaPregleda.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\LekarRaspored.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\LekarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\LekarZakazivanjePregleda.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\PacijentWindow.xaml">
       <SubType>Designer</SubType>
@@ -112,6 +143,10 @@
     <Page Include="Prozori\UpravnikWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\ZakazivanjeOperacije.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +201,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\pacijenti.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Slike\menu.png" />
+    <Resource Include="Slike\timetable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

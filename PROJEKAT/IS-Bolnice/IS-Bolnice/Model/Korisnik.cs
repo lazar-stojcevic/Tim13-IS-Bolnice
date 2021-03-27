@@ -32,6 +32,20 @@ public class Korisnik
         this.pol = pol;
     }
 
+    public Korisnik()
+    {
+        this.jmbg = "123456789";
+        this.korisnickoIme = "mare123";
+        this.sifra = "1234";
+        this.ime = "Marko";
+        this.prezime = "Markovic";
+        this.brojTelefona = "0123456789";
+        this.eMail = "nema";
+        this.adresa = "nema";
+        this.pol = Pol.muski;
+        this.obrisan = false;
+    }
+
     public Korisnik(Korisnik korisnik)
     {
         this.jmbg = korisnik.jmbg;
@@ -45,10 +59,7 @@ public class Korisnik
         this.pol = korisnik.pol;
     }
 
-    public Korisnik()
-    {
-
-    }
+    //OVDE JE BIO PRAZAN KONSTRUKTOR BEZ ICEG
 
     public string Jmbg { get; set; }
     public string KorisnickoIme { get; set; }

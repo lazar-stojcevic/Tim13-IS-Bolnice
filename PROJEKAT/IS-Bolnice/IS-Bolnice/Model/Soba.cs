@@ -14,11 +14,28 @@ public class Soba
    private bool obrisano = false;
    private int sprat;
    private double kvadratura;
-   
+
+   public Soba(string id, bool zauzeta, bool podRenoviranje, RoomType tip, bool obrisano, int sprat, double kvadratura)
+    {
+        this.id = id;
+        this.zauzeta = zauzeta;
+        this.podRenoviranje = podRenoviranje;
+        this.tip = tip;
+        this.obrisano = obrisano;
+        this.sprat = sprat;
+        this.kvadratura = kvadratura;
+    }
+
+   public Soba()
+    {
+
+    }
+
    public bool Renoviraj()
    {
-      throw new NotImplementedException();
-   }
+        this.podRenoviranje = true;
+        return true;
+    }
    
    public bool Izmeni(string noviID, string noviBrojSprata, bool noviStatusZauzetosti, bool noviStatusZaRenoviranja)
    {
@@ -110,5 +127,13 @@ public class Soba
          tmpPredmet.Clear();
       }
    }
+
+    public string Id { get; set; }
+    public bool Zauzeta { get; set; }
+    public bool PodRenoviranje { get; set; }
+    public RoomType Tip { get; set; }
+    public bool Obrisano { get; set; }
+    public int Sprat { get; set; }
+    public double Kvadratura { get; set; }
 
 }
