@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace IS_Bolnice
+namespace IS_Bolnice.Prozori
 {
     /// <summary>
-    /// Interaction logic for SekretarWindow.xaml
+    /// Interaction logic for LekarWindow.xaml
     /// </summary>
-    public partial class SekretarWindow : Window
+    public partial class LekarWindow : Window
     {
-        public SekretarWindow()
+        public LekarWindow()
         {
             InitializeComponent();
         }

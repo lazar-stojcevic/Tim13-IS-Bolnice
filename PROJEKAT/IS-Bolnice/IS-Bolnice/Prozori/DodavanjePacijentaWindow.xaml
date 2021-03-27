@@ -1,0 +1,41 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.DodavanjePacijentaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice"
+        mc:Ignorable="d"
+        Title="Dodavanje novog pacijenta" Height="450" Width="723.132">
+    <Grid Margin="0,0,3.6,0">
+        <WrapPanel Orientation="Horizontal" Margin="38,42,49.6,10">
+            <Label Content="Ime:" Width="300"/>
+            <TextBox Width="300" Name="txtIme"/>
+            <Label Content="Prezime:" Width="300"/>
+            <TextBox Width="300" Name="txtPrezime"/>
+            <Label Content="JMBG:" Width="300"/>
+            <TextBox Width="300" Name="txtJMBG"/>
+            <Label Content="Adresa stanovanja:" Width="300"/>
+            <TextBox Width="300" Name="txtAdresa"/>
+            <Label Content="Broj telefona:" Width="300"/>
+            <TextBox Width="300" Name="txtBrTelefona"/>
+            <Label Content="eMail:" Width="300"/>
+            <TextBox Width="300" Name="txtEMail"/>
+            <Label Content="Pol:" Width="300"/>
+            <ComboBox Width="300" Name="comboPol">
+                <ComboBoxItem IsSelected="True">Muški</ComboBoxItem>
+                <ComboBoxItem>Ženski</ComboBoxItem>
+                <ComboBoxItem>Drugo</ComboBoxItem>
+            </ComboBox>
+            <Label Content="Izabrani lekar:" Width="300"/>
+            <ComboBox Width="300" Name="comboLekar"/>
+            <Label Content="Korisničko ime:" Width="300"/>
+            <TextBox Width="300" Name="txtKorisnickoIme"/>
+            <Label Content="Lozinka" Width="300"/>
+            <PasswordBox Width="300" Name="txtLozinka"/>
+            <Label Content="" Width="100" Height="100"/>
+            <Button Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi"/>
+            <Label Content="" Width="200"/>
+            <Button Content="Odustani" Height="50" Width="100" Click="Button_Click_Odustani"/>
+        </WrapPanel>
+    </Grid>
+</Window>

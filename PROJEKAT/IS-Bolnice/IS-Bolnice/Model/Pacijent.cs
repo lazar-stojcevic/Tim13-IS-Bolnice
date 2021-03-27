@@ -7,7 +7,9 @@ using System;
 
 public class Pacijent : Korisnik
 {
-   private Lekar izbraniLekar;
-   private bool guest = false;
+    private Lekar izabraniLekar;
+    private bool guest = false;
 
+    public Lekar IzabraniLekar { get; set; }
+    public bool Guest { get; set; }
 }

@@ -28,12 +28,35 @@ namespace IS_Bolnice
 
         private void btnLogin_Click_1(object sender, RoutedEventArgs e)
         {
-            
+            string korisnik = txtUserId.Text;
+
+            if(korisnik.Equals("sekretar"))
+            {
+                SekretarWindow sw = new SekretarWindow();
+                sw.Show();
+            }
+            else if (korisnik.Equals("upravnik"))
+            {
+                UpravnikWindow uw = new UpravnikWindow();
+                uw.Show();
+            }
+            else if (korisnik.Equals("lekar"))
+            {
+                LekarWindow lw = new LekarWindow();
+                lw.Show();
+            }
+            else // pacijent
+            {
+                PacijentWindow pw = new PacijentWindow();
+                pw.Show();
+            }
+
+            this.Close();
         }
 
         private void btnClose_Click_1(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
     }
