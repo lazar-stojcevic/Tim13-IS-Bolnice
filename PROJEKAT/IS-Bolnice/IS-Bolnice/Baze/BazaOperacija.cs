@@ -16,7 +16,7 @@ public class BazaOperacija
         List<Operacija> ret = new List<Operacija>();
         BazaPacijenata bazaPacijenata = new BazaPacijenata();
         BazaBolnica bazaBolnica = new BazaBolnica();
-        List<Bolnica> bolnice = bazaBolnica.SveBolcine();
+        List<Bolnica> bolnice = bazaBolnica.SveBolnice();
         List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
         if (File.Exists(@"..\..\Datoteke\operacije.txt"))
         {

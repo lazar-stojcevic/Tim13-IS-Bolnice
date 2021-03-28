@@ -25,7 +25,7 @@ namespace IS_Bolnice
             List<Soba> lista = new List<Soba>();
             List<Bolnica> bolnice = new List<Bolnica>();
             BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolcine();
+            bolnice = baza.SveBolnice();
             foreach (Bolnica b in bolnice)
             {
                 foreach (Soba s in b.Soba)
@@ -94,7 +94,7 @@ namespace IS_Bolnice
                 {
                     List<Bolnica> bolnice = new List<Bolnica>();
                     BazaBolnica baza = new BazaBolnica();
-                    bolnice = baza.SveBolcine();
+                    bolnice = baza.SveBolnice();
                     string tekst = (string)lvDataBinding.SelectedItem;
                     string[] niz = tekst.Split(' ');
                     foreach (Bolnica b in bolnice)
@@ -140,7 +140,7 @@ namespace IS_Bolnice
                 Soba selected = new Soba();
                 List<Bolnica> bolnice = new List<Bolnica>();
                 BazaBolnica baza = new BazaBolnica();
-                bolnice = baza.SveBolcine();
+                bolnice = baza.SveBolnice();
                 string tekst = (string)lvDataBinding.SelectedItem;
                 string[] niz = tekst.Split(' ');
                 foreach (Bolnica b in bolnice)

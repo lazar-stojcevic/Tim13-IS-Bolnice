@@ -33,7 +33,7 @@ namespace IS_Bolnice.Prozori
             newS.Sprat = int.Parse(sprat_txt.Text);
             List<Bolnica> bolnice = new List<Bolnica>();
             BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolcine();
+            bolnice = baza.SveBolnice();
             int flag = 0;
             foreach (Bolnica b in bolnice)
             {

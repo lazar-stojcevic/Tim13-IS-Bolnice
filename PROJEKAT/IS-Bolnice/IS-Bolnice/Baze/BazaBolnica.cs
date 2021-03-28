@@ -10,7 +10,7 @@ using System.Windows;
 
 public class BazaBolnica
 {
-    public List<Bolnica> SveBolcine()
+    public List<Bolnica> SveBolnice()
     {
         List<Bolnica> ret = new List<Bolnica>();
         if (File.Exists(fileLocation))

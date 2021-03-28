@@ -47,7 +47,7 @@ namespace IS_Bolnice.Prozori
             List<Bolnica> bolnice = new List<Bolnica>();
             Bolnica b1 = new Bolnica();
             BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolcine();
+            bolnice = baza.SveBolnice();
             foreach (Bolnica b in bolnice)
             {
                 foreach (Soba s in b.Soba)

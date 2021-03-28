@@ -32,7 +32,7 @@ namespace IS_Bolnice.Prozori
                 }
             }
             BazaBolnica bazaBolnica = new BazaBolnica();
-            foreach (Bolnica b in bazaBolnica.SveBolcine())
+            foreach (Bolnica b in bazaBolnica.SveBolnice())
              //TODO: TREBA DA SE DODA PROVERA ZA TRENUTNU BOLNICU
             {
                 foreach(Soba s in b.Soba)
