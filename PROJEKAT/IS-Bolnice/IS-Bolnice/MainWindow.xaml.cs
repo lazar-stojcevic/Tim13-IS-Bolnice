@@ -91,6 +91,8 @@ namespace IS_Bolnice
                         {
                             found = true;
                             LekarWindow lekar = new LekarWindow();
+                            lekar.labelaImena.Content = l.Ime + " " + l.Prezime;
+                            lekar.Sifra = l.Jmbg;
                             lekar.Show();
                             this.Close();
                         }

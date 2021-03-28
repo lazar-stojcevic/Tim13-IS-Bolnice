@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace IS_Bolnice.Prozori
 {
-    /// <summary>
-    /// Interaction logic for LekarWindow.xaml
-    /// </summary>
+    
     public partial class LekarWindow : Window
     {
         public LekarWindow()
@@ -79,15 +77,17 @@ namespace IS_Bolnice.Prozori
             var raspored = new LekarRaspored();
             BazaOperacija operacije = new BazaOperacija();
             foreach (Operacija op in operacije.SveSledeceOperacije())
+            if(op.Lekar.Jmbg.Equals(Sifra))
             {
                 raspored.listaOperacija.Items.Add("Pacijent: "+op.Pacijent.Ime+" "+op.Pacijent.Prezime+" "+
                     op.Pacijent.Jmbg +" u prostoriji: "+op.Soba.Tip.ToString()+" "+ op.Soba.Id +" ( "+ op.VremePocetaOperacije.ToString("dd/MM/yyyy HH:mm")+
                     " - " + op.VremeKrajaOperacije.ToString("HH:mm") + " )");
             }
+                BazaPregleda pregledi = new BazaPregleda();
 
-            BazaPregleda pregledi = new BazaPregleda();
             foreach (Pregled pr in pregledi.SviSledeciPregledi())
-            {
+                if (pr.Lekar.Jmbg.Equals(Sifra))
+                {
                 raspored.listaPregleda.Items.Add("Pacijent: " + pr.Pacijent.Ime + " " + pr.Pacijent.Prezime + " " +
                     pr.Pacijent.Jmbg + " u prostoriji: " + RoomType.ordinacija.ToString() + " " + "FALI_ORDINACIJA_LEKARA" + " ( " + pr.VremePocetkaPregleda.ToString("dd/MM/yyyy HH:mm") +
                     " - " + pr.VremeKrajaPregleda.ToString("HH:mm") + " )");
@@ -104,6 +104,8 @@ namespace IS_Bolnice.Prozori
             this.Close();
 
         }
+
+        public string Sifra { get; set; }
     }
 
 

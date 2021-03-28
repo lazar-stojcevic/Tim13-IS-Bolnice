@@ -51,7 +51,7 @@
                 <Image IsEnabled="False" Source="..\Slike\menu.png" Height="27" Margin="23,10,326.4,0" VerticalAlignment="Top" RenderTransformOrigin="-0.417,-0.441"/>
             </Menu>
         </ToolBarPanel>
-        <Label x:Name="labelaImena" Opacity="0.6" FontWeight="Bold" FontSize="18" Content="Lazar Stojčević" Height="40" Margin="202,7,43.6,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelaImena" Opacity="0.6" FontWeight="Bold" FontSize="18" Content="Lazar Stojčević" Height="40" Margin="183,5,28.6,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Button Content="Zakaži pregled" x:Name="btnPregled" IsEnabled="False" Margin="23.2,107,9.6,520.4" Click="btnKreirajPregled" Background="Red" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
         <Button Content="Zakaži operaciju" x:Name="btnOperacija" IsEnabled="False" Margin="23.2,162,9.6,461.4" Click="btnKreirajOperaciju" Background="CadetBlue" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="71.2,577,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="ButtonRaspored_Click">
