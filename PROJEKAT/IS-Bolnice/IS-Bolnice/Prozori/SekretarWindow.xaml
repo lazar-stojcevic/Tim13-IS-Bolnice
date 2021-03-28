@@ -28,7 +28,7 @@
                         <TextBlock Text="{Binding Pol}" FontWeight="Bold" />
                         <TextBlock Text=", " />
                         <TextBlock Text="Datum rođenja: " />
-                        <TextBlock Text="{Binding DatumRodjenja}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding DatumRodjenja, StringFormat={}{0:dd/MM/yyyy}}" FontWeight="Bold" />
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

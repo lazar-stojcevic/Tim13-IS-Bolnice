@@ -16,7 +16,7 @@ public class Korisnik
     private string eMail;
     private string adresa;
     private Pol pol;
-    private String datumRodjenja;
+    private DateTime datumRodjenja;
     private bool obrisan = false;
 
     public Korisnik(string jmbg, string korisnickoIme, string sifra, string ime, string prezime, string brojTelefona,
@@ -71,6 +71,6 @@ public class Korisnik
     public string EMail { get; set; }
     public string Adresa { get; set; }
     public Pol Pol { get; set; }
-    public String DatumRodjenja { get; set; }
+    public DateTime DatumRodjenja { get; set; }
     public bool Obrisan { get; set; }
 }

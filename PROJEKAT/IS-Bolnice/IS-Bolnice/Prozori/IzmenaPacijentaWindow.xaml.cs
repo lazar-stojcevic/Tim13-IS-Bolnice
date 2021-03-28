@@ -11,6 +11,8 @@ namespace IS_Bolnice.Prozori
     {
         private Pacijent pacijent;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
         private BazaPacijenata bp;
+        private BazaLekara bl;
+        private List<Lekar> lekari;
 
         public IzmenaPacijentaWindow(Pacijent p)
         {
@@ -18,6 +20,8 @@ namespace IS_Bolnice.Prozori
 
             pacijent = p;
             bp = new BazaPacijenata();
+            bl = new BazaLekara();
+            lekari = bl.SviLekari();
 
             txtIme.Text = p.Ime;
             txtPrezime.Text = p.Prezime;
@@ -38,9 +42,34 @@ namespace IS_Bolnice.Prozori
                 comboPol.SelectedIndex = 2;
             }
 
-            if (p.DatumRodjenja != "")
+            datum.SelectedDate = p.DatumRodjenja;
+
+            // oznacavanje izabranog lekara
+            List<string> lekariString = new List<string>();
+
+            foreach (Lekar l in lekari)
             {
-                datum.SelectedDate = DateTime.Parse(p.DatumRodjenja);
+                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";
+                lekariString.Add(lekarString);
+            }         
+            
+            comboLekari.ItemsSource = lekariString;
+            if (p.IzabraniLekar == null)
+            {
+                comboLekari.SelectedIndex = -1;
+            }
+            else
+            {
+                int indeks = 0;
+                foreach (Lekar l in lekari)
+                {
+                    if (l.Jmbg.Equals(p.IzabraniLekar.Jmbg))
+                    {
+                        break;
+                    }
+                    indeks++;
+                }
+                comboLekari.SelectedIndex = indeks;
             }
             
             txtKorisnickoIme.Text = p.KorisnickoIme;
@@ -76,6 +105,17 @@ namespace IS_Bolnice.Prozori
             }
             DateTime tempDatumRodjenja = (DateTime)datum.SelectedDate;
 
+            Lekar lekar;
+            int indeks = comboLekari.SelectedIndex;
+            if (indeks == 0)
+            {
+                lekar = null;
+            }
+            else
+            {
+                lekar = lekari[indeks];
+            }
+
             Pacijent p = new Pacijent
             {
                 Jmbg = tempJmbg,
@@ -87,8 +127,8 @@ namespace IS_Bolnice.Prozori
                 EMail = tempEMail,
                 Adresa = tempAdresa,
                 Pol = tempPol,
-                DatumRodjenja = tempDatumRodjenja.ToShortDateString(),
-                IzabraniLekar = null
+                DatumRodjenja = tempDatumRodjenja,
+                IzabraniLekar = lekar
             };
 
             // p je pacijent sa izmenjenim informacijama, a "pacijent" predstavlja selektovanog pacijenta (bitno ukoliko ima potreba da se promeni JMBG)
@@ -97,9 +137,59 @@ namespace IS_Bolnice.Prozori
             this.Close();
         }
 
+        private void dugmePotvrdi_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // ako nisu popunjena sva obavezna polja ne dozvoli dugme potvrde
+            if (!popunjenaObaveznaPolja())
+            {
+                dugmePotvrdi.IsEnabled = false;
+
+                string sMessageBoxText = "Nisu popunjena sva obavezna polja!";
+                string sCaption = "Upozorenje";
+
+                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            }
+        }
+
         private void Button_Click_Odustani(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool popunjenaObaveznaPolja()
+        {
+            // provera da li su sada popunjena sva polja
+            string ime = txtIme.Text;
+            string prezime = txtPrezime.Text;
+            string jmbg = txtJMBG.Text;
+            string korisnickoIme = txtKorisnickoIme.Text;
+            string lozinka = txtLozinka.Password;
+
+            if (!(ime == "" || prezime == "" || jmbg == "" || korisnickoIme == "" || lozinka == ""))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void txtIme_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (popunjenaObaveznaPolja())
+            {
+                dugmePotvrdi.IsEnabled = true;
+            }
+        }
+
+        private void txtPrezime_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (popunjenaObaveznaPolja())
+            {
+                dugmePotvrdi.IsEnabled = true;
+            }
         }
 
         private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
@@ -127,7 +217,10 @@ namespace IS_Bolnice.Prozori
 
         private void txtJMBG_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            dugmePotvrdi.IsEnabled = true;
+            if (popunjenaObaveznaPolja())
+            {
+                dugmePotvrdi.IsEnabled = true;
+            }
         }
 
         private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
@@ -155,7 +248,18 @@ namespace IS_Bolnice.Prozori
 
         private void txtKorisnickoIme_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            dugmePotvrdi.IsEnabled = true;
+            if (popunjenaObaveznaPolja())
+            {
+                dugmePotvrdi.IsEnabled = true;
+            }
+        }
+
+        private void txtLozinka_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (popunjenaObaveznaPolja())
+            {
+                dugmePotvrdi.IsEnabled = true;
+            }
         }
     }
 }

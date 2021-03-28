@@ -83,6 +83,11 @@ public class BazaPacijenata
             pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
             pacijent.Pol.ToString() + "#" + pacijent.DatumRodjenja;
 
+        if (pacijent.IzabraniLekar != null)
+        {
+            p += "#" + pacijent.IzabraniLekar.Jmbg;
+        }
+
         return p;
     }
 
@@ -119,8 +124,22 @@ public class BazaPacijenata
             // ako postoji i datum (bez provere bi puklo ukoliko korisnik nema naveden datum)
             if(delovi.Length > 9)
             {
-                p.DatumRodjenja = delovi[9];
-            }            
+                p.DatumRodjenja = DateTime.Parse(delovi[9]);
+            }
+            // ako postoji i izabrani lekar (bez provere bi puklo ukoliko korisnik nema izabranog lekara)
+            if (delovi.Length > 10)
+            {
+                BazaLekara bl = new BazaLekara();
+                List<Lekar> lekari = bl.SviLekari();
+                foreach (Lekar l in lekari)
+                {
+                    if (l.Jmbg.Equals(delovi[10]))
+                    {
+                        p.IzabraniLekar = l;
+                        break;
+                    }
+                }
+            }
 
             pacijenti.Add(p);
         }
