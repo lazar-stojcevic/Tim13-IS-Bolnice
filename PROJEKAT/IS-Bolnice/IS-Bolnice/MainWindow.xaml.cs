@@ -29,29 +29,109 @@ namespace IS_Bolnice
         private void btnLogin_Click_1(object sender, RoutedEventArgs e)
         {
             string korisnik = txtUserId.Text;
+            string sifra = txtPassword.Password;
+            BazaUpravnika baza1 = new BazaUpravnika();
+            List<Upravnik> upravnici = new List<Upravnik>();
+            upravnici = baza1.SviUpravnici();
+            bool found = false;
+            foreach (Upravnik u in upravnici)
+            {
+                if (u.KorisnickoIme.Equals(korisnik))
+                {
+                    if (u.Sifra.Equals(sifra))
+                    {
+                        found = true;
+                        UpravnikWindow upravnik = new UpravnikWindow();
+                        upravnik.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
+                        found = true;
+                    }
+                }
+            }
 
-            if(korisnik.Equals("sekretar"))
+            if (found == false)
             {
-                SekretarWindow sw = new SekretarWindow();
-                sw.Show();
-            }
-            else if (korisnik.Equals("upravnik"))
-            {
-                UpravnikWindow uw = new UpravnikWindow();
-                uw.Show();
-            }
-            else if (korisnik.Equals("lekar"))
-            {
-                LekarWindow lw = new LekarWindow();
-                lw.Show();
-            }
-            else // pacijent
-            {
-                PacijentWindow pw = new PacijentWindow();
-                pw.Show();
+                BazaSekretara baza2 = new BazaSekretara();
+                List<Sekretar> sekretari = new List<Sekretar>();
+                sekretari = baza2.SviSekretari();
+                foreach (Sekretar s in sekretari)
+                {
+                    if (s.KorisnickoIme.Equals(korisnik))
+                    {
+                        if (s.Sifra.Equals(sifra))
+                        {
+                            found = true;
+                            SekretarWindow sekretar = new SekretarWindow();
+                            sekretar.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
+                            found = true;
+                        }
+                    }
+                }
             }
 
-            this.Close();
+            if (found == false)
+            {
+                BazaLekara baza3 = new BazaLekara();
+                List<Lekar> lekari = new List<Lekar>();
+                lekari = baza3.SviLekari();
+                foreach (Lekar l in lekari)
+                {
+                    if (l.KorisnickoIme.Equals(korisnik))
+                    {
+                        if (l.Sifra.Equals(sifra))
+                        {
+                            found = true;
+                            LekarWindow lekar = new LekarWindow();
+                            lekar.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
+                            found = true;
+                        }
+                    }
+                }
+            }
+
+            if (found == false)
+            {
+                BazaPacijenata baza4 = new BazaPacijenata();
+                List<Pacijent> pacijenti = new List<Pacijent>();
+                pacijenti = baza4.SviPacijenti();
+                foreach (Pacijent p in pacijenti)
+                {
+                    if (p.KorisnickoIme.Equals(korisnik))
+                    {
+                        if (p.Sifra.Equals(sifra))
+                        {
+                            found = true;
+                            PacijentWindow pacijent = new PacijentWindow();
+                            pacijent.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
+                            found = true;
+                        }
+                    }
+                }
+            }
+
+            if (found == false)
+            {
+                MessageBox.Show("Korisnicko ime ne postoji!");
+            }
         }
 
         private void btnClose_Click_1(object sender, RoutedEventArgs e)

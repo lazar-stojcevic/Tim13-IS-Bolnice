@@ -227,11 +227,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\bolnice.txt" />
-    <Resource Include="Datoteke\lekari.txt" />
     <Resource Include="Datoteke\operacije.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\pregledi.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\sekretari.txt" />
+    <Resource Include="Datoteke\upravnici.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\lekari.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -30,6 +30,8 @@ public class BazaLekara
                 {
                     p.Tip = TipLekara.lekarSpecijalista;
                 }
+                p.KorisnickoIme = delovi[4];
+                p.Sifra = delovi[5];
                 ret.Add(p);
                 Console.WriteLine(line);
             }

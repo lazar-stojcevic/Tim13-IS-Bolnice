@@ -106,15 +106,15 @@ namespace IS_Bolnice
                             {
                                 s.Obrisano = true;
                                 baza.KreirajBolnicu(b);
-                                MessageBox.Show("Greska");
                                 break;
                             }
                         }
 
                     }
-                    this.Close();
+               
                     UpravnikWindow upravnik = new UpravnikWindow();
                     upravnik.Show();
+                    this.Close();
                 }
 
             }
