@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
         mc:Ignorable="d"
-        Title="Dodavanje novog pacijenta" Height="450" Width="723.132">
+        Title="Dodavanje novog pacijenta" Height="450" Width="723.132"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,3.6,0">
         <WrapPanel Orientation="Horizontal" Margin="38,42,49.6,10">
             <Label Content="Ime:" Width="300"/>
@@ -13,7 +14,7 @@
             <Label Content="Prezime:" Width="300"/>
             <TextBox Width="300" Name="txtPrezime"/>
             <Label Content="JMBG:" Width="300"/>
-            <TextBox Width="300" Name="txtJMBG"/>
+            <TextBox Width="300" Name="txtJMBG" LostFocus="txtJMBG_LostFocus" TextChanged="txtJMBG_TextChanged"/>
             <Label Content="Adresa stanovanja:" Width="300"/>
             <TextBox Width="300" Name="txtAdresa"/>
             <Label Content="Broj telefona:" Width="300"/>
@@ -26,14 +27,16 @@
                 <ComboBoxItem>Ženski</ComboBoxItem>
                 <ComboBoxItem>Drugo</ComboBoxItem>
             </ComboBox>
+            <Label Content="Datum rodjenja:" Width="300"/>
+            <DatePicker Width="300" Name="datum"/>
             <Label Content="Izabrani lekar:" Width="300"/>
-            <ComboBox Width="300" Name="comboLekar"/>
+            <ComboBox Width="300" Name="comboLekari"/>
             <Label Content="Korisničko ime:" Width="300"/>
-            <TextBox Width="300" Name="txtKorisnickoIme"/>
+            <TextBox Width="300" Name="txtKorisnickoIme" LostFocus="txtKorisnickoIme_LostFocus" TextChanged="txtKorisnickoIme_TextChanged"/>
             <Label Content="Lozinka" Width="300"/>
             <PasswordBox Width="300" Name="txtLozinka"/>
             <Label Content="" Width="100" Height="100"/>
-            <Button Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi"/>
+            <Button Name="dugmePotvrdi" Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi"/>
             <Label Content="" Width="200"/>
             <Button Content="Odustani" Height="50" Width="100" Click="Button_Click_Odustani"/>
         </WrapPanel>

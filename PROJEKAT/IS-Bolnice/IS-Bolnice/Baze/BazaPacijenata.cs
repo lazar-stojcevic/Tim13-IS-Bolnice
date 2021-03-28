@@ -80,7 +80,8 @@ public class BazaPacijenata
     private string PacijentToString(Pacijent pacijent)
     {
         string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
-            pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" + pacijent.Pol.ToString();
+            pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
+            pacijent.Pol.ToString() + "#" + pacijent.DatumRodjenja;
 
         return p;
     }
@@ -114,6 +115,12 @@ public class BazaPacijenata
             {
                 p.Pol = Pol.drugo;
             }
+            
+            // ako postoji i datum (bez provere bi puklo ukoliko korisnik nema naveden datum)
+            if(delovi.Length > 9)
+            {
+                p.DatumRodjenja = delovi[9];
+            }            
 
             pacijenti.Add(p);
         }

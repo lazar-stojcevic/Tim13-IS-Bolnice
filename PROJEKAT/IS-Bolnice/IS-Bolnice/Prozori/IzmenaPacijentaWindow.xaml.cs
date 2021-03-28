@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace IS_Bolnice.Prozori
 {
@@ -7,8 +9,8 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class IzmenaPacijentaWindow : Window
     {
-        Pacijent pacijent;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
-        BazaPacijenata bp;
+        private Pacijent pacijent;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
+        private BazaPacijenata bp;
 
         public IzmenaPacijentaWindow(Pacijent p)
         {
@@ -35,6 +37,12 @@ namespace IS_Bolnice.Prozori
             {
                 comboPol.SelectedIndex = 2;
             }
+
+            if (p.DatumRodjenja != "")
+            {
+                datum.SelectedDate = DateTime.Parse(p.DatumRodjenja);
+            }
+            
             txtKorisnickoIme.Text = p.KorisnickoIme;
             txtLozinka.Password = p.Sifra;
         }
@@ -66,6 +74,7 @@ namespace IS_Bolnice.Prozori
             {
                 tempPol = Pol.drugo;
             }
+            DateTime tempDatumRodjenja = (DateTime)datum.SelectedDate;
 
             Pacijent p = new Pacijent
             {
@@ -78,6 +87,7 @@ namespace IS_Bolnice.Prozori
                 EMail = tempEMail,
                 Adresa = tempAdresa,
                 Pol = tempPol,
+                DatumRodjenja = tempDatumRodjenja.ToShortDateString(),
                 IzabraniLekar = null
             };
 
@@ -90,6 +100,62 @@ namespace IS_Bolnice.Prozori
         private void Button_Click_Odustani(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
+        {
+            List<Pacijent> pacijenti = bp.SviPacijenti();
+            string tempJmbg = txtJMBG.Text;
+
+            foreach (Pacijent p in pacijenti)
+            {
+                // potrebno je omoguciti da ostane isti ako se JMBG ne menja
+                if (p.Jmbg.Equals(tempJmbg) && !p.Jmbg.Equals(pacijent.Jmbg))
+                {
+                    dugmePotvrdi.IsEnabled = false;
+
+                    string sMessageBoxText = "Uneti JMBG već postoji u sistemu!";
+                    string sCaption = "Upozorenje";
+
+                    MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+                    MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                    MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                }
+            }
+        }
+
+        private void txtJMBG_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            dugmePotvrdi.IsEnabled = true;
+        }
+
+        private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
+        {
+            List<Pacijent> pacijenti = bp.SviPacijenti();
+            string tempKorisnickoIme = txtKorisnickoIme.Text;
+
+            foreach (Pacijent p in pacijenti)
+            {
+                // potrebno je omoguciti da ostane isti ako se JMBG ne menja
+                if (p.KorisnickoIme.Equals(tempKorisnickoIme) && !p.KorisnickoIme.Equals(pacijent.KorisnickoIme))
+                {
+                    dugmePotvrdi.IsEnabled = false;
+
+                    string sMessageBoxText = "Uneto korisničko ime već postoji u sistemu!";
+                    string sCaption = "Upozorenje";
+
+                    MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+                    MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                    MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                }
+            }
+        }
+
+        private void txtKorisnickoIme_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            dugmePotvrdi.IsEnabled = true;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class DodavanjeGuestNalogaWindow : Window
     {
-        BazaPacijenata bp;
+        private BazaPacijenata bp;
 
         public DodavanjeGuestNalogaWindow()
         {

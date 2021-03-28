@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
         mc:Ignorable="d"
-        Title="Log in Window" Height="300" Width="600">
+        Title="Log in Window" Height="300" Width="600"
+        WindowStartupLocation="CenterScreen">
     <StackPanel Orientation="Vertical" Background="#eee" Margin="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
         <Border CornerRadius="25" Margin="20,10,20,10" BorderBrush="Red" Background="White" Width="330">
             <StackPanel Orientation="Vertical">

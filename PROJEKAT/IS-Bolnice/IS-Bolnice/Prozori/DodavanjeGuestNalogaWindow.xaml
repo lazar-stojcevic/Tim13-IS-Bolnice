@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
         mc:Ignorable="d"
-        Title="Dodavanje guest naloga" Height="305.305" Width="705.949">
+        Title="Dodavanje guest naloga" Height="305.305" Width="705.949"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,3.2,0">
         <WrapPanel Orientation="Horizontal" Margin="36,42,50.4,10">
             <Label Content="Ime:" Width="300"/>

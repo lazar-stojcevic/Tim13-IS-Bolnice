@@ -9,7 +9,6 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class SekretarWindow : Window
     {
-        private List<Pacijent> pacijenti = new List<Pacijent>();
         private BazaPacijenata bp;
 
         public SekretarWindow()
@@ -17,9 +16,8 @@ namespace IS_Bolnice.Prozori
             InitializeComponent();
 
             bp = new BazaPacijenata();
-            pacijenti = bp.SviPacijenti();
 
-            PacijentiDataBinding.ItemsSource = pacijenti;
+            PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
         }
 
         private void Button_Click_Novi(object sender, RoutedEventArgs e)
@@ -28,9 +26,7 @@ namespace IS_Bolnice.Prozori
             dpw.ShowDialog();
 
             //za osvezavanje prikaza            
-            SekretarWindow sw = new SekretarWindow();
-            sw.Show();
-            this.Close();
+            PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
         }
 
         private void Button_Click_Izmeni(object sender, RoutedEventArgs e)
@@ -42,9 +38,7 @@ namespace IS_Bolnice.Prozori
                 ipw.ShowDialog();
 
                 //za osvezavanje prikaza            
-                SekretarWindow sw = new SekretarWindow();
-                sw.Show();
-                this.Close();
+                PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
             }
         }
 
@@ -67,9 +61,7 @@ namespace IS_Bolnice.Prozori
                         bp.ObrisiPacijenta(p);
 
                         //za osvezavanje prikaza            
-                        SekretarWindow sw = new SekretarWindow();
-                        sw.Show();
-                        this.Close();
+                        PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
                         break;
 
                     case MessageBoxResult.No:
@@ -84,9 +76,7 @@ namespace IS_Bolnice.Prozori
             DodavanjeGuestNalogaWindow dgw = new DodavanjeGuestNalogaWindow();
             dgw.ShowDialog();
 
-            SekretarWindow sw = new SekretarWindow();
-            sw.Show();
-            this.Close();
+            PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
         }
     }
 }
