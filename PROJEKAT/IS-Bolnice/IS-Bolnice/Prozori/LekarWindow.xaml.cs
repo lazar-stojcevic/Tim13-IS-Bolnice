@@ -70,6 +70,10 @@ namespace IS_Bolnice.Prozori
                 }
 
             }
+            if (!nasao) 
+            { 
+                MessageBox.Show("Ne postoji pacijent sa unetim jmbg-om", "Probaj ponovo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void ButtonRaspored_Click(object sender, RoutedEventArgs e)

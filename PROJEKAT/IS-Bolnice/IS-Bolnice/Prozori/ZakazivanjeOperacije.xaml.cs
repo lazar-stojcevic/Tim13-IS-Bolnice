@@ -57,6 +57,8 @@ namespace IS_Bolnice.Prozori
             o.VremePocetaOperacije = pocetak;
             o.VremeKrajaOperacije = kraj;
             baza.ZakaziOperaciju(o);
+            MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

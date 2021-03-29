@@ -58,6 +58,8 @@ namespace IS_Bolnice.Prozori
             o.VremePocetkaPregleda = pocetak;
             o.VremeKrajaPregleda = kraj;
             baza.ZakaziPregled(o);
+            MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
