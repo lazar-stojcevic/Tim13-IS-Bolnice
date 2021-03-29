@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace IS_Bolnice
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -118,6 +115,7 @@ namespace IS_Bolnice
                         {
                             found = true;
                             PacijentWindow pacijent = new PacijentWindow();
+                            pacijent.imeKorisnika.Text = p.Ime + " " + p.Prezime + " " + p.Jmbg;
                             pacijent.Show();
                             this.Close();
                         }

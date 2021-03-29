@@ -1,8 +1,3 @@
-// File:    BazaPacijenata.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 7:57:46 PM
-// Purpose: Definition of Class BazaPacijenata
-
 using System;
 using System.Collections.Generic;
 using System.IO;

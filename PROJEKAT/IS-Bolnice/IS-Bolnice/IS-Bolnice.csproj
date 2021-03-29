@@ -85,6 +85,15 @@
     <Compile Include="Prozori\LekarZakazivanjePregleda.xaml.cs">
       <DependentUpon>LekarZakazivanjePregleda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\PacijentIzmenaTermina.xaml.cs">
+      <DependentUpon>PacijentIzmenaTermina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\PacijentPregledZakazanihTermina.xaml.cs">
+      <DependentUpon>PacijentPregledZakazanihTermina.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\PacijentZakazivanjePregledaProzor.xaml.cs">
+      <DependentUpon>PacijentZakazivanjePregledaProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\SekretarWindow.xaml.cs">
       <DependentUpon>SekretarWindow.xaml</DependentUpon>
     </Compile>
@@ -146,7 +155,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\PacijentIzmenaTermina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\PacijentPregledZakazanihTermina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\PacijentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\PacijentZakazivanjePregledaProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace IS_Bolnice.Prozori
 {
-    /// <summary>
-    /// Interaction logic for ZakazivanjeOperacije.xaml
-    /// </summary>
     public partial class ZakazivanjeOperacije : Window
     {
         public ZakazivanjeOperacije()

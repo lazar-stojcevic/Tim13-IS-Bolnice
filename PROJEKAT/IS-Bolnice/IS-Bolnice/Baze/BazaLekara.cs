@@ -1,14 +1,26 @@
-// File:    BazaLekara.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 8:08:26 PM
-// Purpose: Definition of Class BazaLekara
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 public class BazaLekara
 {
+    // metoda izlistava samo lekare opste prakse
+    public List<Lekar> LekariOpstePrakse()
+    {
+        List<Lekar> LekariOP = new List<Lekar>();
+        List<Lekar> sviLekari = SviLekari();
+
+        foreach(Lekar l in sviLekari)
+        {
+            if(l.Tip.Equals(TipLekara.lekarOpstePrakse))
+            {
+                LekariOP.Add(l);
+            }
+        }
+
+        return LekariOP;
+    }
+
     public List<Lekar> SviLekari()
     {
         List<Lekar> ret = new List<Lekar>();

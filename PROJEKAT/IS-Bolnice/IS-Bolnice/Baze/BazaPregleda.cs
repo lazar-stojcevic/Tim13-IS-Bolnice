@@ -1,15 +1,28 @@
-// File:    BazaPregleda.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 5:52:52 PM
-// Purpose: Definition of Class BazaPregleda
-
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
 public class BazaPregleda
 {
+    public List<Pregled> PreglediOdredjenogPacijenta(string jmbg)
+    {
+        List<Pregled> pregledi = new List<Pregled>();
+        List<Pregled> sviPregledi = SviSledeciPregledi();
+
+        foreach(Pregled p in sviPregledi)
+        {
+            if (p.Pacijent.Jmbg.Equals(jmbg))
+            {
+                pregledi.Add(p);
+            }
+        }
+
+        return pregledi;
+    }
+
+    // dodati proveru da li su pregledi u buducnosti od danasnjeg dana
     public List<Pregled> SviSledeciPregledi()
     {
         string path = @"..\..\Datoteke\pregledi.txt";
@@ -31,6 +44,7 @@ public class BazaPregleda
 
             Pregled p = new Pregled();
             Pacijent pac = new Pacijent();
+
             string jmbgPacijenta = items[0];
             string jmbgLekara = items[1];
             string vremePocetka = items[2];
@@ -44,11 +58,17 @@ public class BazaPregleda
                     p.Lekar = l;
                 }
             }
-            // dodati pacijenta
             pac.Jmbg = jmbgPacijenta;
             p.Pacijent = pac;
-            p.VremePocetkaPregleda = DateTime.Parse(vremePocetka);
-            p.VremeKrajaPregleda = DateTime.Parse(vremeKraja);
+
+            // parsiranje vremena
+            CultureInfo provider = new CultureInfo("en-UN");
+            //p.VremePocetkaPregleda = DateTime.Parse(vremePocetka);
+            p.VremePocetkaPregleda = DateTime.ParseExact(vremePocetka,"G", provider);
+            //p.VremeKrajaPregleda = DateTime.Parse(vremeKraja);
+            p.VremeKrajaPregleda = DateTime.ParseExact(vremeKraja, "G", provider);
+ 
+
             //DODATO NA BOJANOV KOD
             foreach (Pacijent pacijent in pacijenti)
             {
@@ -73,7 +93,8 @@ public class BazaPregleda
         DateTime vremeKraja = noviPregled.VremeKrajaPregleda;
 
         //dodati broj sobe lekaru
-        string zakazivanje = jmbgPacijenta + "#" + jmbgLekara + "#" + vremePocetka.ToString() + "#" + vremeKraja.ToString() + "#" + "Broj ordinacije";
+        //promenjen upis
+        string zakazivanje = jmbgPacijenta + "#" + jmbgLekara + "#" + vremePocetka + "#" + vremeKraja + "#" + "Broj ordinacije";
 
         List<string> pregledi = new List<string>();
         pregledi.Add(zakazivanje);
@@ -95,7 +116,8 @@ public class BazaPregleda
         {
             if (p.Lekar.Jmbg != pregled.Lekar.Jmbg || !p.VremePocetkaPregleda.Equals(pregled.VremePocetkaPregleda))
             {
-                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString() + "#" + p.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
+                // menjanje upisa
+                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda + "#" + p.VremeKrajaPregleda + "#" + "brojSobe";
                 lines.Add(zakazivanje);
             }
 
@@ -104,9 +126,10 @@ public class BazaPregleda
         File.WriteAllLines(path, lines);
     }
 
-    public void IzmeniPregled(Pregled pregled)
+    public void IzmeniPregled(Pregled pregled, Pregled stariPregled)
    {
-      throw new NotImplementedException();
+        OtkaziPregled(stariPregled);
+        ZakaziPregled(pregled);
    }
    
    public List<Pregled> PreglediDatogPacijenta(Pacijent pacijent)

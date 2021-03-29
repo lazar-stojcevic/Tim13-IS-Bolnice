@@ -1,0 +1,73 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.PacijentZakazivanjePregledaProzor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        mc:Ignorable="d"
+        Title="Zakazivanje termina" Height="400" Width="350"
+        WindowStartupLocation="CenterScreen">
+    <Border>
+        <StackPanel Margin="10">
+
+            <!--Lekar-->
+            <TextBlock Text="Lekar"/>
+            <ComboBox x:Name="comboLekari" Margin="0 5"/>
+
+            <!--Datum-->
+            <TextBlock Text="Datum pregleda"/>
+            <DatePicker x:Name="datePicker" Margin= "0 5" SelectedDate="01/01"/>
+            <!-- DODATI OVO SelectedDate="{x:Static sys:DateTime.Now}" DisplayDateStart="{x:Static sys:DateTime.Now}"-->
+            <!--Vreme-->
+            <TextBlock Text="Vreme pregleda"/>
+            <Grid Height="61">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtHour" BorderThickness="0" MaxLength="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="00"/>
+                <TextBlock Text=":" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBox x:Name="txtMinute" BorderThickness="0" MaxLength="2" TextAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="00"/>
+            </Grid>
+
+            <!--Dugmad za sate-->
+            <Grid Height="61">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Button Margin="2" x:Name="btnUpHrs" Content="+" FontSize="20" Click="btnUpHrs_Click"/>
+                    <Button Margin="2" x:Name="btnDownHrs" Grid.Row="1" Content="-" FontSize="20" Click="btnDownHrs_Click"/>
+                </Grid>
+
+                <!--Dugamd za minute-->
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Button Margin="2" x:Name="btnUpMin" Content="+" FontSize="20" Click="btnUpMin_Click"/>
+                    <Button Margin="2" x:Name="btnDownMin" Grid.Row="1" Content="-" FontSize="20" Click="btnDownMin_Click"/>
+                </Grid>
+            </Grid>
+
+            <!--Razmak-->
+            <Grid Height="75" Margin="5 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Potvrdi" Margin="5" x:Name="btnPotvrdi" Click="btnPotvrdi_Click"/>
+                <Button Grid.Column="1" Content="Odustani" Margin="5" x:Name="Odustani" Click="Odustani_Click"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
