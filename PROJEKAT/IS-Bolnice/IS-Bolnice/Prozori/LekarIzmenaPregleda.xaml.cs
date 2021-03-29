@@ -48,7 +48,7 @@ namespace IS_Bolnice.Prozori
         {
             BazaPregleda baza = new BazaPregleda();
             List<Pregled> lista = baza.SviSledeciPregledi();
-            File.WriteAllText(@"..\..\Serijalizacija\pregledi.txt", String.Empty);
+            File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
 
             foreach (Pregled p in lista)
             {

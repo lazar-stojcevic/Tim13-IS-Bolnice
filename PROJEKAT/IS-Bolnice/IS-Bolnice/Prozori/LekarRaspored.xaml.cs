@@ -76,7 +76,7 @@ namespace IS_Bolnice.Prozori
 
             BazaOperacija baza = new BazaOperacija();
             List<Operacija> lista = baza.SveSledeceOperacije();
-            File.WriteAllText(@"..\..\Serijalizacija\operacije.txt", String.Empty);
+            File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
             foreach (Operacija o in lista)
             {
                 if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetaOperacije.Hour == Int32.Parse(vreme[0]) && o.VremePocetaOperacije.Minute == Int32.Parse(vreme[1]) && o.VremePocetaOperacije.Date.Equals(DateTime.ParseExact(datum, "dd/MM/yyyy", provider)))
@@ -145,7 +145,7 @@ namespace IS_Bolnice.Prozori
 
             BazaPregleda baza = new BazaPregleda();
             List<Pregled> lista = baza.SviSledeciPregledi();
-            File.WriteAllText(@"..\..\Serijalizacija\pregledi.txt", String.Empty);
+            File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
             foreach (Pregled p in lista)
             {
                 if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == Int32.Parse(vreme[0]) && p.VremePocetkaPregleda.Minute == Int32.Parse(vreme[1]) && p.VremePocetkaPregleda.Date.Equals(DateTime.ParseExact(datum, "dd/MM/yyyy", provider)))
