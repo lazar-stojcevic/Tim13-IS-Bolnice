@@ -47,12 +47,14 @@ namespace IS_Bolnice.Prozori
             // oznacavanje izabranog lekara
             List<string> lekariString = new List<string>();
 
+            // formiranje stringa za svakog lekara
             foreach (Lekar l in lekari)
             {
                 string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";
                 lekariString.Add(lekarString);
             }         
             
+            // postavljanje combo boxa na odgovarajuceg lekara
             comboLekari.ItemsSource = lekariString;
             if (p.IzabraniLekar == null)
             {
@@ -78,67 +80,6 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            string tempIme = txtIme.Text;
-            string tempPrezime = txtPrezime.Text;
-            string tempJmbg = txtJMBG.Text;
-            string tempAdresa = txtAdresa.Text;
-            string tempBrTelefona = txtBrTelefona.Text;
-            string tempEMail = txtEMail.Text;
-            string tempKorisnickoIme = txtKorisnickoIme.Text;
-            string tempLozinka = txtLozinka.Password;
-
-            string polString = comboPol.Text;
-
-            Pol tempPol;
-
-            if (polString.Equals("Muški"))
-            {
-                tempPol = Pol.muski;
-            }
-            else if (polString.Equals("Ženski"))
-            {
-                tempPol = Pol.zenski;
-            }
-            else
-            {
-                tempPol = Pol.drugo;
-            }
-            DateTime tempDatumRodjenja = (DateTime)datum.SelectedDate;
-
-            Lekar lekar;
-            int indeks = comboLekari.SelectedIndex;
-            if (indeks == 0)
-            {
-                lekar = null;
-            }
-            else
-            {
-                lekar = lekari[indeks];
-            }
-
-            Pacijent p = new Pacijent
-            {
-                Jmbg = tempJmbg,
-                KorisnickoIme = tempKorisnickoIme,
-                Sifra = tempLozinka,
-                Ime = tempIme,
-                Prezime = tempPrezime,
-                BrojTelefona = tempBrTelefona,
-                EMail = tempEMail,
-                Adresa = tempAdresa,
-                Pol = tempPol,
-                DatumRodjenja = tempDatumRodjenja,
-                IzabraniLekar = lekar
-            };
-
-            // p je pacijent sa izmenjenim informacijama, a "pacijent" predstavlja selektovanog pacijenta (bitno ukoliko ima potreba da se promeni JMBG)
-            bp.IzmeniPacijenta(p, pacijent);
-
-            this.Close();
-        }
-
-        private void dugmePotvrdi_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
             // ako nisu popunjena sva obavezna polja ne dozvoli dugme potvrde
             if (!popunjenaObaveznaPolja())
             {
@@ -151,6 +92,66 @@ namespace IS_Bolnice.Prozori
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
                 MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            }
+            else
+            {
+                string tempIme = txtIme.Text;
+                string tempPrezime = txtPrezime.Text;
+                string tempJmbg = txtJMBG.Text;
+                string tempAdresa = txtAdresa.Text;
+                string tempBrTelefona = txtBrTelefona.Text;
+                string tempEMail = txtEMail.Text;
+                string tempKorisnickoIme = txtKorisnickoIme.Text;
+                string tempLozinka = txtLozinka.Password;
+
+                string polString = comboPol.Text;
+
+                Pol tempPol;
+
+                if (polString.Equals("Muški"))
+                {
+                    tempPol = Pol.muski;
+                }
+                else if (polString.Equals("Ženski"))
+                {
+                    tempPol = Pol.zenski;
+                }
+                else
+                {
+                    tempPol = Pol.drugo;
+                }
+                DateTime tempDatumRodjenja = (DateTime)datum.SelectedDate;
+
+                Lekar lekar;
+                int indeks = comboLekari.SelectedIndex;
+                if (indeks == -1)
+                {
+                    lekar = null;
+                }
+                else
+                {
+                    lekar = lekari[indeks];
+                }
+
+                Pacijent p = new Pacijent
+                {
+                    Jmbg = tempJmbg,
+                    KorisnickoIme = tempKorisnickoIme,
+                    Sifra = tempLozinka,
+                    Ime = tempIme,
+                    Prezime = tempPrezime,
+                    BrojTelefona = tempBrTelefona,
+                    EMail = tempEMail,
+                    Adresa = tempAdresa,
+                    Pol = tempPol,
+                    DatumRodjenja = tempDatumRodjenja,
+                    IzabraniLekar = lekar
+                };
+
+                // p je pacijent sa izmenjenim informacijama, a "pacijent" predstavlja selektovanog pacijenta (bitno ukoliko ima potreba da se promeni JMBG)
+                bp.IzmeniPacijenta(p, pacijent);
+
+                this.Close();
             }
         }
 

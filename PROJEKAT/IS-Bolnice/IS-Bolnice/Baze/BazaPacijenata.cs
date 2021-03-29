@@ -12,7 +12,19 @@ public class BazaPacijenata
         List<string> linije = new List<string>();
         linije = File.ReadAllLines(fileLocation).ToList();
 
-        return NapraviPacijente(linije);
+        //return NapraviPacijente(linije);
+        // odabir i vracanje samo onih pacijenata koji nisu logicki obrisani
+        List<Pacijent> sviPacijenti = NapraviPacijente(linije);
+        List<Pacijent> aktuelniPacijenti = new List<Pacijent>();
+
+        foreach (Pacijent p in sviPacijenti)
+        {
+            if (p.Obrisan == false)
+            {
+                aktuelniPacijenti.Add(p);
+            }
+        }
+        return aktuelniPacijenti;
     }
    
     public void KreirajPacijenta(Pacijent pacijent)
@@ -36,12 +48,9 @@ public class BazaPacijenata
         {
             if (pacijent.Jmbg.Equals(p.Jmbg))
             {
-                // ne dodavati u listu
+                p.Obrisan = true;
             }
-            else
-            {
-                pacijentiString.Add(PacijentToString(p));
-            }
+            pacijentiString.Add(PacijentToString(p));
         }
 
         File.WriteAllLines(fileLocation, pacijentiString);
@@ -76,7 +85,7 @@ public class BazaPacijenata
     {
         string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
             pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
-            pacijent.Pol.ToString() + "#" + pacijent.DatumRodjenja;
+            pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja;
 
         if (pacijent.IzabraniLekar != null)
         {
@@ -115,20 +124,21 @@ public class BazaPacijenata
             {
                 p.Pol = Pol.drugo;
             }
-            
+            p.Obrisan = Boolean.Parse(delovi[9]);
+
             // ako postoji i datum (bez provere bi puklo ukoliko korisnik nema naveden datum)
-            if(delovi.Length > 9)
+            if (delovi.Length > 10)
             {
-                p.DatumRodjenja = DateTime.Parse(delovi[9]);
+                p.DatumRodjenja = DateTime.Parse(delovi[10]);
             }
             // ako postoji i izabrani lekar (bez provere bi puklo ukoliko korisnik nema izabranog lekara)
-            if (delovi.Length > 10)
+            if (delovi.Length > 11)
             {
                 BazaLekara bl = new BazaLekara();
                 List<Lekar> lekari = bl.SviLekari();
                 foreach (Lekar l in lekari)
                 {
-                    if (l.Jmbg.Equals(delovi[10]))
+                    if (l.Jmbg.Equals(delovi[11]))
                     {
                         p.IzabraniLekar = l;
                         break;

@@ -36,7 +36,7 @@
             <Label Content="Lozinka*" Width="300"/>
             <PasswordBox Width="300" Name="txtLozinka" PasswordChanged="txtLozinka_PasswordChanged"/>
             <Label Content="" Width="100" Height="100"/>
-            <Button Name="dugmePotvrdi" Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi" MouseEnter="dugmePotvrdi_MouseEnter"/>
+            <Button Name="dugmePotvrdi" Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi"/>
             <Label Content="" Width="200"/>
             <Button Content="Odustani" Height="50" Width="100" Click="Button_Click_Odustani"/>
         </WrapPanel>
