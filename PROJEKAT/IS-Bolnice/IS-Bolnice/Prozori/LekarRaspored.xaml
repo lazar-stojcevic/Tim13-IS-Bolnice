@@ -8,11 +8,49 @@
         Title="Raspored"  Height="700" Width="400">
     <Grid>
         <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="101"/>
-        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,50,-0.4,0" VerticalAlignment="Top" Width="394"/>
+        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,50,-0.4,0" VerticalAlignment="Top" Width="394">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Pacijent: " />
+                        <TextBlock Text="{Binding Pacijent.Ime}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Pacijent.Prezime}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Pacijent.Jmbg}" />
+                        <TextBlock Text=" u Prostoriji: " />
+                        <TextBlock Text="{Binding Soba.Tip}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Soba.Id}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding VremePocetaOperacije, StringFormat=dd-MM-yyyy HH:mm}" />
+                        
+                        
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="233,245,0,0" VerticalAlignment="Top" Width="151" Click="Button_ClickObrisi"/>
         <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,245,0,0" VerticalAlignment="Top" Width="151" Click="Button_IzmeniOperaciju" />
         <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="10,312,0,0" VerticalAlignment="Top" Width="101"/>
-        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="0,359,-0.4,0" VerticalAlignment="Top" Width="394"/>
+        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="0,359,-0.4,0" VerticalAlignment="Top" Width="394">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <WrapPanel>
+                    <TextBlock Text="Pacijent: " />
+                    <TextBlock Text="{Binding Pacijent.Ime}" />
+                    <TextBlock Text=" " />
+                    <TextBlock Text="{Binding Pacijent.Prezime}" />
+                    <TextBlock Text=" " />
+                    <TextBlock Text="{Binding Pacijent.Jmbg}" />
+                    <TextBlock Text=" u Prostoriji: TREBA DA SE DODA " />
+                    <TextBlock Text="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}" />
+
+
+                </WrapPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        </ListBox>
         <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="233,554,0,0" VerticalAlignment="Top" Width="151" Click="Button_ClickObrisiPregled"/>
         <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,554,0,0" VerticalAlignment="Top" Width="151" Click="Button_IzmeniPregled" />
 

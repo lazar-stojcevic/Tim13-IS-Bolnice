@@ -22,10 +22,10 @@
         <DatePicker x:Name="kalendar" DisplayDateStart="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Height="30" Margin="10,401,0,0" VerticalAlignment="Top" Width="374"/>
         <TextBlock Margin="10,382,274.6,264.4"><Run Text="Datum operacije"/><Run Text=":"/></TextBlock>
         <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="84" Margin="10,287,0,0" VerticalAlignment="Top" Width="374"/>
-        <Button Content="+" Height="36" Margin="212,515,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="172"/>
-        <Button Content="-" HorizontalAlignment="Left" Height="36" Margin="212,556,0,0" VerticalAlignment="Top" Width="172" />
-        <Button Content="-" HorizontalAlignment="Left" Height="36" Margin="10,557,0,0" VerticalAlignment="Top" Width="176"/>
-        <Button Content="+" HorizontalAlignment="Left" Height="36" Margin="10,515,0,0" VerticalAlignment="Top" Width="176" />
+        <Button Content="+" Height="36" Margin="212,515,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="172" Click="Button_Click_3"/>
+        <Button Content="-" HorizontalAlignment="Left" Height="36" Margin="212,556,0,0" VerticalAlignment="Top" Width="172" Click="Button_Click_4" />
+        <Button Content="-" HorizontalAlignment="Left" Height="36" Margin="10,557,0,0" VerticalAlignment="Top" Width="176" Click="Button_Click_2"/>
+        <Button Content="+" HorizontalAlignment="Left" Height="36" Margin="10,515,0,0" VerticalAlignment="Top" Width="176" Click="Button_Click_1" />
         <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,261,0,0" VerticalAlignment="Top" Width="176"/>
         <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,135,0,0" VerticalAlignment="Top" Width="196"/>
         <Grid Margin="0,427,-0.4,139.4">

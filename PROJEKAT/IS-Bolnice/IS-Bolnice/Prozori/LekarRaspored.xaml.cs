@@ -21,23 +21,36 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class LekarRaspored : Window
     {
-        public LekarRaspored()
+        private BazaOperacija operacije = new BazaOperacija();
+        private BazaPregleda pregledi = new BazaPregleda();
+        private string sifra;
+        public LekarRaspored(string id)
         {
             InitializeComponent();
+            sifra = id;
+            //operacije = new BazaOperacija();
+            //pregledi = new BazaPregleda();
+            List<Operacija> op = operacije.SveSledeceOperacijeZaLekara(id);
+            listaOperacija.ItemsSource = op;
+            List<Pregled> pr = pregledi.PreglediOdredjenogLekara(id);
+            listaPregleda.ItemsSource = pr;
         }
 
         private void Button_IzmeniOperaciju(object sender, RoutedEventArgs e)
         {
-            CultureInfo provider = CultureInfo.InvariantCulture;
-
-            string selektovani = listaOperacija.SelectedItem.ToString();
-            string[] delovi = selektovani.Split(' ');
-            string ime = delovi[1];
-            string prz = delovi[2];
-            string jmbg = delovi[3];
-            string datum = delovi[9];
+            if (listaOperacija.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Operacija selektovani = (Operacija)listaOperacija.SelectedItem;
+            string ime = selektovani.Pacijent.Ime;
+            string prz = selektovani.Pacijent.Prezime;
+            string jmbg = selektovani.Pacijent.Jmbg;
+            DateTime datum = selektovani.VremePocetaOperacije.Date;
             Console.WriteLine(datum);
-            string[] vreme = delovi[10].Split(':');
+            DateTime vreme = selektovani.VremePocetaOperacije;
+
 
             BazaOperacija baza = new BazaOperacija();
             List<Operacija> operacije = baza.SveSledeceOperacije();
@@ -46,15 +59,15 @@ namespace IS_Bolnice.Prozori
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
-            izmena.kalendar.SelectedDate = DateTime.ParseExact(datum,"dd/MM/yyyy", provider);
-            izmena.txtHour.Text = vreme[0];
-            izmena.txtMinute.Text = vreme[1];
+            izmena.kalendar.SelectedDate = datum;
+            izmena.txtHour.Text = vreme.Hour.ToString();
+            izmena.txtMinute.Text = vreme.Minute.ToString();
             //OVEJ DEO TREBA MODIFIKOVATI
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;
-            izmena.StariSat = vreme[0];
-            izmena.StariMinut = vreme[1];
-            izmena.StariDatum = DateTime.ParseExact(datum, "dd/MM/yyyy", provider);
+            izmena.StariSat = vreme.Hour.ToString();
+            izmena.StariMinut = vreme.Minute.ToString();
+            izmena.StariDatum = datum;
 
             izmena.ShowDialog();
 
@@ -62,16 +75,19 @@ namespace IS_Bolnice.Prozori
 
         private void Button_ClickObrisi(object sender, RoutedEventArgs e)
         {
-            CultureInfo provider = CultureInfo.InvariantCulture;
+            if (listaOperacija.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-            string selektovani = listaOperacija.SelectedItem.ToString();
-            string[] delovi = selektovani.Split(' ');
-            string ime = delovi[1];
-            string prz = delovi[2];
-            string jmbg = delovi[3];
-            string datum = delovi[9];
+            Operacija selektovani = (Operacija)listaOperacija.SelectedItem;
+            string ime = selektovani.Pacijent.Ime;
+            string prz = selektovani.Pacijent.Prezime;
+            string jmbg = selektovani.Pacijent.Jmbg;
+            DateTime datum = selektovani.VremePocetaOperacije.Date;
             Console.WriteLine(datum);
-            string[] vreme = delovi[10].Split(':');
+            DateTime vreme = selektovani.VremePocetaOperacije;
 
 
             BazaOperacija baza = new BazaOperacija();
@@ -79,7 +95,7 @@ namespace IS_Bolnice.Prozori
             File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
             foreach (Operacija o in lista)
             {
-                if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetaOperacije.Hour == Int32.Parse(vreme[0]) && o.VremePocetaOperacije.Minute == Int32.Parse(vreme[1]) && o.VremePocetaOperacije.Date.Equals(DateTime.ParseExact(datum, "dd/MM/yyyy", provider)))
+                if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetaOperacije.Hour == vreme.Hour && o.VremePocetaOperacije.Minute == vreme.Minute && o.VremePocetaOperacije.Date.Equals(datum))
                 {
                     //nista
                 }
@@ -89,40 +105,45 @@ namespace IS_Bolnice.Prozori
                 }
             }
 
+            List<Operacija> op = operacije.SveSledeceOperacijeZaLekara(sifra);
+            listaOperacija.ItemsSource = op;
+
         }
 
         private void Button_IzmeniPregled(object sender, RoutedEventArgs e)
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
 
-
-            string selektovani = listaPregleda.SelectedItem.ToString();
-            string[] delovi = selektovani.Split(' ');
-            string ime = delovi[1];
-            string prz = delovi[2];
-            string jmbg = delovi[3];
-            string datum = delovi[9];
+            if (listaPregleda.SelectedIndex == -1) { 
+                MessageBox.Show("Nista nije selektovano","Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Pregled selektovani = (Pregled)listaPregleda.SelectedItem;
+            //string[] delovi = selektovani.Split(' ');
+            string ime = selektovani.Pacijent.Ime;
+            string prz = selektovani.Pacijent.Prezime;
+            string jmbg = selektovani.Pacijent.Jmbg;
+            DateTime datum = selektovani.VremePocetkaPregleda.Date;
             Console.WriteLine(datum);
-            string[] vreme = delovi[10].Split(':');
+            DateTime vreme = selektovani.VremePocetkaPregleda;
 
             BazaPregleda baza = new BazaPregleda();
             List<Pregled> pregledi = baza.SviSledeciPregledi();
 
-            string izListe = listaPregleda.SelectedItem.ToString();
             LekarIzmenaPregleda izmena = new LekarIzmenaPregleda();
 
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
-            izmena.kalendar.SelectedDate = DateTime.ParseExact(datum, "dd/MM/yyyy", provider);
-            izmena.txtHour.Text = vreme[0];
-            izmena.txtMinute.Text = vreme[1];
+            izmena.kalendar.SelectedDate = datum;
+            izmena.txtHour.Text = vreme.Hour.ToString();
+            izmena.txtMinute.Text = vreme.Minute.ToString();
             //OVEJ DEO TREBA MODIFIKOVATI
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;
-            izmena.StariSat = vreme[0];
-            izmena.StariMinut = vreme[1];
-            izmena.StariDatum = DateTime.ParseExact(datum, "dd/MM/yyyy", provider);
+            izmena.StariSat = vreme.Hour.ToString();
+            izmena.StariMinut = vreme.Minute.ToString();
+            izmena.StariDatum = datum;
 
             izmena.ShowDialog();
 
@@ -131,16 +152,19 @@ namespace IS_Bolnice.Prozori
 
         private void Button_ClickObrisiPregled(object sender, RoutedEventArgs e)
         {
+            if (listaPregleda.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             CultureInfo provider = CultureInfo.InvariantCulture;
 
-            string selektovani = listaPregleda.SelectedItem.ToString();
-            string[] delovi = selektovani.Split(' ');
-            string ime = delovi[1];
-            string prz = delovi[2];
-            string jmbg = delovi[3];
-            string datum = delovi[9];
+            Pregled selektovani = (Pregled)listaPregleda.SelectedItem;
+            string jmbg = selektovani.Pacijent.Jmbg;
+            string jmbgLekara = selektovani.Lekar.Jmbg;
+            DateTime datum = selektovani.VremePocetkaPregleda.Date;
             Console.WriteLine(datum);
-            string[] vreme = delovi[10].Split(':');
+            DateTime vreme = selektovani.VremePocetkaPregleda;
 
 
             BazaPregleda baza = new BazaPregleda();
@@ -148,7 +172,7 @@ namespace IS_Bolnice.Prozori
             File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
             foreach (Pregled p in lista)
             {
-                if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == Int32.Parse(vreme[0]) && p.VremePocetkaPregleda.Minute == Int32.Parse(vreme[1]) && p.VremePocetkaPregleda.Date.Equals(DateTime.ParseExact(datum, "dd/MM/yyyy", provider)))
+                if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == vreme.Hour && p.VremePocetkaPregleda.Minute == vreme.Minute && p.VremePocetkaPregleda.Date.Equals(datum.Date) && jmbgLekara.Equals(p.Lekar.Jmbg))
                 {
                     //nista
                 }
@@ -157,6 +181,9 @@ namespace IS_Bolnice.Prozori
                     baza.ZakaziPregled(p);
                 }
             }
+
+            List<Pregled> pr = pregledi.PreglediOdredjenogLekara(sifra);
+            listaPregleda.ItemsSource = pr;
 
         }
 
