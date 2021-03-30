@@ -49,7 +49,7 @@ namespace IS_Bolnice.Prozori
         {
             BazaOperacija baza = new BazaOperacija();
             List<Operacija> lista = baza.SveSledeceOperacije();
-            File.WriteAllText(@"..\..\Serijalizacija\operacije.txt", String.Empty);
+            File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
             foreach (Operacija o in lista)
             {
                 if (txtOperJmbg.Text.Equals(o.Pacijent.Jmbg) && o.VremePocetaOperacije.Hour == Int32.Parse(StariSat) && o.VremePocetaOperacije.Date.Equals(StariDatum))
@@ -82,6 +82,80 @@ namespace IS_Bolnice.Prozori
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            int sati = Int32.Parse(txtHour.Text);
+            sati += 1;
+
+            if (sati > 23)
+                sati = 0;
+
+            if (sati == 0)
+            {
+                txtHour.Text = "00";
+            }
+            else
+            {
+                txtHour.Text = sati.ToString();
+            }
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            int sati = Int32.Parse(txtHour.Text);
+            sati -= 1;
+
+            if (sati < 0)
+                sati = 23;
+
+            if (sati == 0)
+            {
+                txtHour.Text = "00";
+            }
+            else
+            {
+                txtHour.Text = sati.ToString();
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            int min = Int32.Parse(txtMinute.Text);
+            min += 1;
+
+            if (min > 59)
+                min = 0;
+
+            if (min == 0)
+            {
+                txtMinute.Text = "00";
+            }
+            else
+            {
+                txtMinute.Text = min.ToString();
+            }
+
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            int min = Int32.Parse(txtMinute.Text);
+            min -= 1;
+
+            if (min < 0)
+                min = 59;
+
+            if (min == 0)
+            {
+                txtMinute.Text = "00";
+            }
+            else
+            {
+                txtMinute.Text = min.ToString();
+            }
         }
     }
 }

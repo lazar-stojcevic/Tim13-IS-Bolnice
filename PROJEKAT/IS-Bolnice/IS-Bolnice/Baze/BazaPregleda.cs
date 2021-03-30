@@ -22,6 +22,22 @@ public class BazaPregleda
         return pregledi;
     }
 
+    public List<Pregled> PreglediOdredjenogLekara(string jmbg)
+    {
+        List<Pregled> pregledi = new List<Pregled>();
+        List<Pregled> sviPregledi = SviSledeciPregledi();
+
+        foreach (Pregled p in sviPregledi)
+        {
+            if (p.Lekar.Jmbg.Equals(jmbg))
+            {
+                pregledi.Add(p);
+            }
+        }
+
+        return pregledi;
+    }
+
     // dodati proveru da li su pregledi u buducnosti od danasnjeg dana
     public List<Pregled> SviSledeciPregledi()
     {

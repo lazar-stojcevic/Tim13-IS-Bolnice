@@ -78,23 +78,25 @@ namespace IS_Bolnice.Prozori
 
         private void ButtonRaspored_Click(object sender, RoutedEventArgs e)
         {
-            var raspored = new LekarRaspored();
+            var raspored = new LekarRaspored(Sifra);
+            
             BazaOperacija operacije = new BazaOperacija();
             foreach (Operacija op in operacije.SveSledeceOperacije())
             if(op.Lekar.Jmbg.Equals(Sifra))
             {
-                raspored.listaOperacija.Items.Add("Pacijent: "+op.Pacijent.Ime+" "+op.Pacijent.Prezime+" "+
+               /* raspored.listaOperacija.Items.Add("Pacijent: "+op.Pacijent.Ime+" "+op.Pacijent.Prezime+" "+
                     op.Pacijent.Jmbg +" u prostoriji: "+op.Soba.Tip.ToString()+" "+ op.Soba.Id +" ( "+ op.VremePocetaOperacije.ToString("dd/MM/yyyy HH:mm")+
-                    " - " + op.VremeKrajaOperacije.ToString("HH:mm") + " )");
+                    " - " + op.VremeKrajaOperacije.ToString("HH:mm") + " )"); */
             }
                 BazaPregleda pregledi = new BazaPregleda();
 
             foreach (Pregled pr in pregledi.SviSledeciPregledi())
                 if (pr.Lekar.Jmbg.Equals(Sifra))
                 {
+                    /*
                 raspored.listaPregleda.Items.Add("Pacijent: " + pr.Pacijent.Ime + " " + pr.Pacijent.Prezime + " " +
                     pr.Pacijent.Jmbg + " u prostoriji: " + RoomType.ordinacija.ToString() + " " + "FALI_ORDINACIJA_LEKARA" + " ( " + pr.VremePocetkaPregleda.ToString("dd/MM/yyyy HH:mm") +
-                    " - " + pr.VremeKrajaPregleda.ToString("HH:mm") + " )");
+                    " - " + pr.VremeKrajaPregleda.ToString("HH:mm") + " )"); */
             }
 
             raspored.ShowDialog();
