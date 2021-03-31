@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Baze\BazaIzvestaja.cs" />
+    <Compile Include="Baze\BazaObavestenja.cs" />
+    <Compile Include="Model\Izvestaj.cs" />
+    <Compile Include="Model\Lek.cs" />
+    <Compile Include="Model\Obavestenje.cs" />
     <Compile Include="Prozori\DodajSobuWindow.xaml.cs">
       <DependentUpon>DodajSobuWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +108,7 @@
     <Compile Include="Prozori\ZakazivanjeOperacije.xaml.cs">
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Terapija.cs" />
     <Page Include="Prozori\DodajSobuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

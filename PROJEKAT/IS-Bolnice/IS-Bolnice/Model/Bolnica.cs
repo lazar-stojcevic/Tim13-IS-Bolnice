@@ -1,8 +1,3 @@
-// File:    Bolnica.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 6:39:01 PM
-// Purpose: Definition of Class Bolnica
-
 using System;
 using System.Collections.Generic;
 
@@ -48,11 +43,7 @@ public class Bolnica
          }
       }
    }
-   
-   /// <summary>
-   /// Add a new Soba in the collection
-   /// </summary>
-   /// <pdGenerated>Default Add</pdGenerated>
+
    public void AddSoba(Soba newSoba)
    {
       if (newSoba == null)
@@ -63,10 +54,6 @@ public class Bolnica
          this.soba.Add(newSoba);
    }
    
-   /// <summary>
-   /// Remove an existing Soba from the collection
-   /// </summary>
-   /// <pdGenerated>Default Remove</pdGenerated>
    public void RemoveSoba(Soba oldSoba)
    {
       if (oldSoba == null)
@@ -76,10 +63,6 @@ public class Bolnica
             this.soba.Remove(oldSoba);
    }
    
-   /// <summary>
-   /// Remove all instances of Soba from the collection
-   /// </summary>
-   /// <pdGenerated>Default removeAll</pdGenerated>
    public void RemoveAllSoba()
    {
       if (soba != null)

@@ -7,8 +7,6 @@ using System;
 
 public enum TipOpreme
 {
-   uredjaj,
-   lek,
-   alat,
-   namestaj
+   staticka,
+   dinamicka
 }

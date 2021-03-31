@@ -6,3 +6,4 @@
 3213124232#nikola#nikola123#Nikola#Nikićević#065532423#nikola11@gmail.com#Alekse Šantića#muski#False#27-Jan-99 00:00:00#654
 11111111111#marko#marko123#Marko#Markić#060005453#marko@gmail.com#Adresa stanovanja 34#muski#True#27-Jan-99 00:00:00
 3333333343#Mina#mina123#Mina#Mikić#067323213#mina@gmail.com#Glavna adresa 87#zenski#False#11-Mar-21 00:00:00#420
+ddd###dddd#dddd####drugo#True#01-Jan-01 00:00:00
