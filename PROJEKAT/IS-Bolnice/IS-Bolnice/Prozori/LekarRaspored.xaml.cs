@@ -187,5 +187,16 @@ namespace IS_Bolnice.Prozori
 
         }
 
+        private void Button_VidiPacijenta(object sender, RoutedEventArgs e)
+        {
+            if (listaOperacija.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Operacija selektovana = (Operacija)listaOperacija.SelectedItem;
+            PodaciOPacijentu pod = new PodaciOPacijentu(selektovana.Pacijent.Jmbg);
+            pod.ShowDialog();
+        }
     }
 }

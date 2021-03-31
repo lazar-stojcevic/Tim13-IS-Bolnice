@@ -26,7 +26,31 @@ public class BazaPacijenata
         }
         return aktuelniPacijenti;
     }
-   
+
+    public Pacijent PacijentSaOvimJMBG(string jmbg)
+    {
+        List<string> linije = new List<string>();
+        linije = File.ReadAllLines(fileLocation).ToList();
+
+        //return NapraviPacijente(linije);
+        // odabir i vracanje samo onih pacijenata koji nisu logicki obrisani
+        List<Pacijent> sviPacijenti = NapraviPacijente(linije);
+        Pacijent aktuelniPacijenti = new Pacijent();
+
+        foreach (Pacijent p in sviPacijenti)
+        {
+            if (p.Obrisan == false)
+            {
+                if (p.Jmbg.Equals(jmbg))
+                {
+                    aktuelniPacijenti = p;
+                    return aktuelniPacijenti;
+                }
+            }
+        }
+        return aktuelniPacijenti;
+    }
+
     public void KreirajPacijenta(Pacijent pacijent)
     {
         // lista se koristi samo zato sto je to potrebno za metodu AppendAllLines

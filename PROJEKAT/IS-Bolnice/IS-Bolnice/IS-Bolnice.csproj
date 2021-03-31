@@ -60,6 +60,9 @@
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />
     <Compile Include="Model\Obavestenje.cs" />
+    <Compile Include="Prozori\PodaciOPacijentu.xaml.cs">
+      <DependentUpon>PodaciOPacijentu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\DodajSobuWindow.xaml.cs">
       <DependentUpon>DodajSobuWindow.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
+    <Page Include="Prozori\PodaciOPacijentu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\DodajSobuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
