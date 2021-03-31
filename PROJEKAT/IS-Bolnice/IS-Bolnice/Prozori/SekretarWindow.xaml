@@ -3,41 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IS_Bolnice"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
         Title="SekretarWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListView Margin="10,60,9.6,124" Name="PacijentiDataBinding">
+        <ListView Margin="10,40,9.6,144" Name="obavestenjaDataBinding">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="Ime: " />
-                        <TextBlock Text="{Binding Ime}" FontWeight="Bold" />
+                        <TextBlock Text="Naslov: " />
+                        <TextBlock Text="{Binding Naslov}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="Prezime: " />
-                        <TextBlock Text="{Binding Prezime}" FontWeight="Bold" />
+                        <TextBlock Text="Sadrzaj: " />
+                        <TextBlock Text="{Binding Sadrzaj}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="JMBG: " />
-                        <TextBlock Text="{Binding Jmbg}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Broj telefona: " />
-                        <TextBlock Text="{Binding BrojTelefona}" FontWeight="Bold"/>
-                        <TextBlock Text=", " />
-                        <TextBlock Text="POL: " />
-                        <TextBlock Text="{Binding Pol}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Datum rođenja: " />
-                        <TextBlock Text="{Binding DatumRodjenja, StringFormat={}{0:dd/MM/yyyy}}" FontWeight="Bold" />
+                        <TextBlock Text="Datum kreiranja: " />
+                        <TextBlock Text="{Binding VremeKreiranja}" FontWeight="Bold" />
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="Sekretar" HorizontalAlignment="Left" Margin="52,10,0,0" VerticalAlignment="Top"/>
-        <Button Content="Novi pacijent" HorizontalAlignment="Left" Margin="52,320,0,0" VerticalAlignment="Top" Width="130" Height="48" Click="Button_Click_Novi"/>
-        <Button Content="Izmeni pacijenta" HorizontalAlignment="Left" Margin="236,320,0,0" VerticalAlignment="Top" Width="130" Height="48" Click="Button_Click_Izmeni"/>
-        <Button Content="Obriši pacijenta" HorizontalAlignment="Left" Margin="418,320,0,0" VerticalAlignment="Top" Width="130" Height="48" Click="Button_Click_Obrisi"/>
-        <Button Content="Guest nalog" HorizontalAlignment="Left" Margin="608,320,0,0" VerticalAlignment="Top" Width="130" Height="48" Click="Button_Click_NoviGuest"/>
+        <Button Content="Prikaz pacijenata" HorizontalAlignment="Left" Margin="73,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Prikaz"/>
+        <Button Content="Novo obaveštenje" HorizontalAlignment="Left" Margin="291,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Novo"/>
+        <Button Content="Izmena obaveštenja" HorizontalAlignment="Left" Margin="482,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Izmena"/>
+        <Button Content="Brisanje obaveštenja" HorizontalAlignment="Left" Margin="636,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Brisanje"/>
 
     </Grid>
 </Window>

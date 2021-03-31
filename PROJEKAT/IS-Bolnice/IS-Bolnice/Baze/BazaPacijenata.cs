@@ -5,7 +5,7 @@ using System.Linq;
 
 public class BazaPacijenata
 {
-    public static string fileLocation = @"..\..\Datoteke\pacijenti.txt";
+    private static string fileLocation = @"..\..\Datoteke\pacijenti.txt";
 
     public List<Pacijent> SviPacijenti()
     {
@@ -29,6 +29,7 @@ public class BazaPacijenata
    
     public void KreirajPacijenta(Pacijent pacijent)
     {
+        // lista se koristi samo zato sto je to potrebno za metodu AppendAllLines
         List<string> pLista = new List<string>();
         pLista.Add(PacijentToString(pacijent));
         File.AppendAllLines(fileLocation, pLista);

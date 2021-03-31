@@ -1,6 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace IS_Bolnice.Prozori
 {
@@ -9,46 +19,51 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class SekretarWindow : Window
     {
-        private BazaPacijenata bp;
+        private BazaObavestenja bo;
 
         public SekretarWindow()
         {
             InitializeComponent();
 
-            bp = new BazaPacijenata();
+            bo = new BazaObavestenja();
 
-            PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
+            obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
         }
 
-        private void Button_Click_Novi(object sender, RoutedEventArgs e)
+        private void Button_Click_Novo(object sender, RoutedEventArgs e)
         {
-            DodavanjePacijentaWindow dpw = new DodavanjePacijentaWindow();
-            dpw.ShowDialog();
+            FormiranjeObavestenjaWindow fow = new FormiranjeObavestenjaWindow();
+            fow.ShowDialog();
 
-            //za osvezavanje prikaza            
-            PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
+            obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
         }
 
-        private void Button_Click_Izmeni(object sender, RoutedEventArgs e)
+        private void Button_Click_Prikaz(object sender, RoutedEventArgs e)
         {
-            Pacijent p = (Pacijent) PacijentiDataBinding.SelectedItem;
-            if (p != null)
+            PrikazPacijenata pp = new PrikazPacijenata();
+            pp.Show();
+        }
+
+        private void Button_Click_Izmena(object sender, RoutedEventArgs e)
+        {
+            Obavestenje o = (Obavestenje)obavestenjaDataBinding.SelectedItem;
+            if (o != null)
             {
-                IzmenaPacijentaWindow ipw = new IzmenaPacijentaWindow(p);
-                ipw.ShowDialog();
+                IzmenaObavestenjaWindow iow = new IzmenaObavestenjaWindow(o);
+                iow.ShowDialog();
 
-                //za osvezavanje prikaza            
-                PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
+                // za osvezavanje prikaza
+                obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
             }
         }
 
-        private void Button_Click_Obrisi(object sender, RoutedEventArgs e)
+        private void Button_Click_Brisanje(object sender, RoutedEventArgs e)
         {
-            Pacijent p = (Pacijent)PacijentiDataBinding.SelectedItem;
-            if (p != null)
+            Obavestenje o = (Obavestenje)obavestenjaDataBinding.SelectedItem;
+            if (o != null)
             {
-                string sMessageBoxText = "Da li ste sigurni da želite da obrišete pacijenta?";
-                string sCaption = "Brisanje pacijenta";
+                string sMessageBoxText = "Da li ste sigurni da želite da obrišete obaveštenje?";
+                string sCaption = "Brisanje obaveštenja";
 
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Question;
@@ -58,25 +73,17 @@ namespace IS_Bolnice.Prozori
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bp.ObrisiPacijenta(p);
+                        bo.ObrisiObavestenje(o);
 
                         //za osvezavanje prikaza            
-                        PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
+                        obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
                         break;
 
                     case MessageBoxResult.No:
                         /* ... */
                         break;
                 }
-            } 
-        }
-
-        private void Button_Click_NoviGuest(object sender, RoutedEventArgs e)
-        {
-            DodavanjeGuestNalogaWindow dgw = new DodavanjeGuestNalogaWindow();
-            dgw.ShowDialog();
-
-            PacijentiDataBinding.ItemsSource = bp.SviPacijenti();
+            }
         }
     }
 }
