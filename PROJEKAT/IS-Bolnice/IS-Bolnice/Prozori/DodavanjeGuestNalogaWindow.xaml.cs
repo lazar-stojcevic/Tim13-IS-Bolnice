@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 
 
 namespace IS_Bolnice.Prozori
@@ -9,12 +10,14 @@ namespace IS_Bolnice.Prozori
     public partial class DodavanjeGuestNalogaWindow : Window
     {
         private BazaPacijenata bp;
+        private ObservableCollection<Pacijent> PacijentiRef;
 
-        public DodavanjeGuestNalogaWindow()
+        public DodavanjeGuestNalogaWindow(ObservableCollection<Pacijent> Pacijenti)
         {
             InitializeComponent();
 
             bp = new BazaPacijenata();
+            PacijentiRef = Pacijenti;
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
@@ -39,6 +42,7 @@ namespace IS_Bolnice.Prozori
             };
 
             bp.KreirajPacijenta(p);
+            PacijentiRef.Add(p);
 
             this.Close();
         }

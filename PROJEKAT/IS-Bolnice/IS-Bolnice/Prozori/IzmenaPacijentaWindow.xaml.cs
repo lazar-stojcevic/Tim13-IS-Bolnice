@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace IS_Bolnice.Prozori
@@ -13,8 +14,9 @@ namespace IS_Bolnice.Prozori
         private BazaPacijenata bp;
         private BazaLekara bl;
         private List<Lekar> lekari;
+        private ObservableCollection<Pacijent> PacijentiRef;
 
-        public IzmenaPacijentaWindow(Pacijent p)
+        public IzmenaPacijentaWindow(Pacijent p, ObservableCollection<Pacijent> Pacijenti)
         {
             InitializeComponent();
 
@@ -22,6 +24,7 @@ namespace IS_Bolnice.Prozori
             bp = new BazaPacijenata();
             bl = new BazaLekara();
             lekari = bl.SviLekari();
+            PacijentiRef = Pacijenti;
 
             txtIme.Text = p.Ime;
             txtPrezime.Text = p.Prezime;
@@ -52,8 +55,8 @@ namespace IS_Bolnice.Prozori
             {
                 string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";
                 lekariString.Add(lekarString);
-            }         
-            
+            }
+
             // postavljanje combo boxa na odgovarajuceg lekara
             comboLekari.ItemsSource = lekariString;
             if (p.IzabraniLekar == null)
@@ -73,7 +76,7 @@ namespace IS_Bolnice.Prozori
                 }
                 comboLekari.SelectedIndex = indeks;
             }
-            
+
             txtKorisnickoIme.Text = p.KorisnickoIme;
             txtLozinka.Password = p.Sifra;
         }
@@ -150,6 +153,12 @@ namespace IS_Bolnice.Prozori
 
                 // p je pacijent sa izmenjenim informacijama, a "pacijent" predstavlja selektovanog pacijenta (bitno ukoliko ima potreba da se promeni JMBG)
                 bp.IzmeniPacijenta(p, pacijent);
+                // osvezavanje liste
+                int i = PacijentiRef.IndexOf(pacijent);
+                if (i != -1)
+                {
+                    PacijentiRef[i] = p;
+                }
 
                 this.Close();
             }

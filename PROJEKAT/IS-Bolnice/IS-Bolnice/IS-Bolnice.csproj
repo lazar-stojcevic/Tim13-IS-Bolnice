@@ -108,9 +108,6 @@
     <Compile Include="Prozori\PacijentZakazivanjePregledaProzor.xaml.cs">
       <DependentUpon>PacijentZakazivanjePregledaProzor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\PrikazPacijenata.xaml.cs">
-      <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Prozori\SekretarWindow.xaml.cs">
       <DependentUpon>SekretarWindow.xaml</DependentUpon>
     </Compile>
@@ -198,10 +195,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\PacijentZakazivanjePregledaProzor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Prozori\PrikazPacijenata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,13 +18,15 @@ namespace IS_Bolnice.Prozori
 {
     public partial class FormiranjeObavestenjaWindow : Window
     {
-        BazaObavestenja bo;
+        private BazaObavestenja bo;
+        private ObservableCollection<Obavestenje> ObavestenjaRef;
 
-        public FormiranjeObavestenjaWindow()
+        public FormiranjeObavestenjaWindow(ObservableCollection<Obavestenje> Obavestenja)
         {
             InitializeComponent();
 
             bo = new BazaObavestenja();
+            ObavestenjaRef = Obavestenja;
         }
 
         private void Button_Click_Odustani(object sender, RoutedEventArgs e)
@@ -46,6 +49,7 @@ namespace IS_Bolnice.Prozori
             };
 
             bo.KreirajObavestenje(obavestenje);
+            ObavestenjaRef.Add(obavestenje);
             this.Close();
         }
     }

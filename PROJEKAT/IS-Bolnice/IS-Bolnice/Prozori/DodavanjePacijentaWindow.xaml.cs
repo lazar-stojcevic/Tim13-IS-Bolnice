@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 
@@ -13,17 +14,19 @@ namespace IS_Bolnice.Prozori
         private BazaPacijenata bp;
         private BazaLekara bl;
         private List<Lekar> lekari;
+        private ObservableCollection<Pacijent> PacijentiRef;
 
-        public DodavanjePacijentaWindow()
+        public DodavanjePacijentaWindow(ObservableCollection<Pacijent> Pacijenti)
         {
             InitializeComponent();
 
             bp = new BazaPacijenata();
             bl = new BazaLekara();
+            PacijentiRef = Pacijenti;
 
             List<string> lekariString = new List<string>();
             lekari = bl.SviLekari();
-            foreach(Lekar l in lekari)
+            foreach (Lekar l in lekari)
             {
                 string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";
                 lekariString.Add(lekarString);
@@ -114,9 +117,10 @@ namespace IS_Bolnice.Prozori
                 };
 
                 bp.KreirajPacijenta(p);
+                PacijentiRef.Add(p);
 
                 this.Close();
-            }           
+            }
         }
 
         private bool popunjenaObaveznaPolja()
@@ -132,7 +136,7 @@ namespace IS_Bolnice.Prozori
             {
                 return true;
             }
-            
+
             return false;
         }
 

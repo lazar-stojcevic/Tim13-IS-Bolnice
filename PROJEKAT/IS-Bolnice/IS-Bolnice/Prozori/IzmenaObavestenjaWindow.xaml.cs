@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,15 @@ namespace IS_Bolnice.Prozori
     {
         private BazaObavestenja bo;
         private Obavestenje odabranoObavestenje;
-        private string sifraObavestenja;
+        private ObservableCollection<Obavestenje> ObavestenjaRef;
 
-        public IzmenaObavestenjaWindow(Obavestenje obavestenje)
+        public IzmenaObavestenjaWindow(Obavestenje obavestenje, ObservableCollection<Obavestenje> Obavestenja)
         {
             InitializeComponent();
 
             bo = new BazaObavestenja();
             odabranoObavestenje = obavestenje;
+            ObavestenjaRef = Obavestenja;
 
             txtNaslov.Text = obavestenje.Naslov;
             txtSadrzaj.Text = obavestenje.Sadrzaj;
@@ -38,13 +40,20 @@ namespace IS_Bolnice.Prozori
         {
             Obavestenje obavestenje = new Obavestenje
             {
-                Sifra = odabranoObavestenje.Sifra,
+                Sifra = odabranoObavestenje.Sifra,  // uvek ce imati pocetnu sifru
                 Naslov = txtNaslov.Text,
                 Sadrzaj = txtSadrzaj.Text,
-                VremeKreiranja = odabranoObavestenje.VremeKreiranja
+                VremeKreiranja = odabranoObavestenje.VremeKreiranja // uvek ce imati inicijalno vreme kreiranja
             };
 
             bo.IzmeniObavestenje(obavestenje);
+            // osvezavanje liste
+            int i = ObavestenjaRef.IndexOf(odabranoObavestenje);
+            if (i != -1)
+            {
+                ObavestenjaRef[i] = obavestenje;
+            }
+
             this.Close();
         }
 

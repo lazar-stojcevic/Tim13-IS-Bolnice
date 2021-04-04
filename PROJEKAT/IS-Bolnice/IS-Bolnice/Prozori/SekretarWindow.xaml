@@ -5,29 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="SekretarWindow" Height="450" Width="800"
+        Title="SekretarWindow" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListView Margin="10,40,9.6,144" Name="obavestenjaDataBinding">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Naslov: " />
-                        <TextBlock Text="{Binding Naslov}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Sadrzaj: " />
-                        <TextBlock Text="{Binding Sadrzaj}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Datum kreiranja: " />
-                        <TextBlock Text="{Binding VremeKreiranja}" FontWeight="Bold" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Content="Prikaz pacijenata" HorizontalAlignment="Left" Margin="73,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Prikaz"/>
-        <Button Content="Novo obaveštenje" HorizontalAlignment="Left" Margin="291,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Novo"/>
-        <Button Content="Izmena obaveštenja" HorizontalAlignment="Left" Margin="482,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Izmena"/>
-        <Button Content="Brisanje obaveštenja" HorizontalAlignment="Left" Margin="636,307,0,0" VerticalAlignment="Top" Width="110" Height="44" Click="Button_Click_Brisanje"/>
-
+        <StackPanel>
+            <Menu>
+                <MenuItem Header="Meni1"/>
+            </Menu>
+            <ToolBar>
+                <Button Content="Guest" />
+            </ToolBar>
+            <TabControl Height="555" Margin="0,0,-0.4,0">
+                <TabItem Header="Početna">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="20" HorizontalAlignment="Left" Margin="10"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button Content="Dodaj" Margin="5" Width="40" Height="30" Click="Button_Click_NovoObavestenje"/>
+                            <Button Content="Izmeni" Margin="5" Width="40" Height="30" Click="Button_Click_IzmenaObavestenja"/>
+                            <Button Content="Obrisi" Margin="5" Width="40" Height="30" Click="Button_Click_BrisanjeObavestenja"/>
+                        </StackPanel>
+                        <ListView Margin="0,0,0,184.2" Name="obavestenjaDataBinding" ItemsSource="{Binding Obavestenja}"
+                                  Grid.Row="1" Grid.Column="1" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <TextBlock Text="Naslov: " />
+                                        <TextBlock Text="{Binding Naslov}" FontWeight="Bold" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="Sadrzaj: " />
+                                        <TextBlock Text="{Binding Sadrzaj}" FontWeight="Bold" />
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="Datum kreiranja: " />
+                                        <TextBlock Text="{Binding VremeKreiranja}" FontWeight="Bold" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Pacijenti">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="9*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0" Content="Novi pacijent" Width="130" Height="48" Click="Button_Click_Novi"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Izmeni pacijenta" Width="130" Height="48" Click="Button_Click_Izmeni"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="Obriši pacijenta" Width="130" Height="48" Click="Button_Click_Obrisi"/>
+                        <Button Grid.Row="0" Grid.Column="3" Content="Guest nalog" Width="130" Height="48" Click="Button_Click_NoviGuest"/>
+                        <TextBox Grid.Row="0" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
+                            <Button Content="Zakaži pregled" Margin="10"/>
+                            <Button Content="Zakaži operaciju" Margin="10"/>
+                            <Button Content="Ažuriraj alergene" Margin="10"/>
+                            <Button Content="Prikaz termina" Margin="10"/>
+                        </StackPanel>
+                        <DataGrid x:Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
+                                <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="1*"/>
+                                <DataGridTextColumn Header="JMBG" Binding="{Binding Jmbg}" Width="1*"/>
+                                <DataGridTextColumn Header="Pol" Binding="{Binding Pol}" Width="0.5*"/>
+                                <DataGridTextColumn Header="Datum rođenja" Binding="{Binding DatumRodjenja, StringFormat={}{0:dd/MM/yyyy}}" Width="1*"/>
+                                <DataGridTextColumn Header="Broj telefona" Binding="{Binding BrojTelefona}" Width="1*"/>
+                                <DataGridTextColumn Header="Izabrani lekar" Binding="{Binding izabraniLekar}" Width="1*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
     </Grid>
 </Window>
