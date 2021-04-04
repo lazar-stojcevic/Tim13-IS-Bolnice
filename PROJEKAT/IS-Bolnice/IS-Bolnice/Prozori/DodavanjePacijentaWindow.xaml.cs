@@ -25,7 +25,7 @@ namespace IS_Bolnice.Prozori
             PacijentiRef = Pacijenti;
 
             List<string> lekariString = new List<string>();
-            lekari = bl.SviLekari();
+            lekari = bl.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
             foreach (Lekar l in lekari)
             {
                 string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";

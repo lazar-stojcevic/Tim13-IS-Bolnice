@@ -57,7 +57,7 @@ namespace IS_Bolnice.Prozori
             p.Jmbg = jmbgPacijenta;
 
             stariPregled.Lekar = ll;
-            stariPregled.pacijent = p;
+            stariPregled.Pacijent = p;
             stariPregled.VremePocetkaPregleda = datum;
         }
 

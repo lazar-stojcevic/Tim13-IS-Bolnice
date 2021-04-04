@@ -160,7 +160,7 @@ public class BazaPacijenata
             if (delovi.Length > 11)
             {
                 BazaLekara bl = new BazaLekara();
-                List<Lekar> lekari = bl.SviLekari();
+                List<Lekar> lekari = bl.LekariOpstePrakse();
                 foreach (Lekar l in lekari)
                 {
                     if (l.Jmbg.Equals(delovi[11]))
@@ -169,7 +169,7 @@ public class BazaPacijenata
                         break;
                     }
                 }
-            }
+            } 
 
             pacijenti.Add(p);
         }

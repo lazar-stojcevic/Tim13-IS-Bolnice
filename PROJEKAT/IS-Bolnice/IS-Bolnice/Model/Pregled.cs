@@ -9,6 +9,8 @@ public class Pregled
 {
    private DateTime vremePocetkaPregleda;
    private DateTime vremeKrajaPregleda;
+   private Pacijent pacijent;
+   private Lekar lekar;
 
     public Pregled(DateTime vremePocetkaPregleda, DateTime vremeKrajaPregleda, Pacijent pacijent, Lekar lekar)
     {
@@ -19,9 +21,6 @@ public class Pregled
     }
 
     public Pregled() { }
-
-    public Pacijent pacijent;
-    public Lekar lekar;
 
     public Pacijent Pacijent { get; set; }
     public Lekar Lekar { get; set; }

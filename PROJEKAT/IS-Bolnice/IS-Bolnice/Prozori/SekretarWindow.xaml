@@ -72,7 +72,7 @@
                         <Button Grid.Row="0" Grid.Column="3" Content="Guest nalog" Width="130" Height="48" Click="Button_Click_NoviGuest"/>
                         <TextBox Grid.Row="0" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
                         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
-                            <Button Content="Zakaži pregled" Margin="10"/>
+                            <Button Content="Zakaži pregled" Margin="10" Click="Button_Click_Zakazivanje_Pregleda"/>
                             <Button Content="Zakaži operaciju" Margin="10"/>
                             <Button Content="Ažuriraj alergene" Margin="10"/>
                             <Button Content="Prikaz termina" Margin="10"/>

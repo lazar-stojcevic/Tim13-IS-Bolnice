@@ -23,7 +23,7 @@ namespace IS_Bolnice.Prozori
             pacijent = p;
             bp = new BazaPacijenata();
             bl = new BazaLekara();
-            lekari = bl.SviLekari();
+            lekari = bl.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
             PacijentiRef = Pacijenti;
 
             txtIme.Text = p.Ime;

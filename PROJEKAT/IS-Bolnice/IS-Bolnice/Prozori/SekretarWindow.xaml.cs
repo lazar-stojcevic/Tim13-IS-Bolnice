@@ -137,65 +137,16 @@ namespace IS_Bolnice.Prozori
                         break;
                 }
             }
+        }
+
+        private void Button_Click_Zakazivanje_Pregleda(object sender, RoutedEventArgs e)
+        {
+            Pacijent p = (Pacijent)dataGridPacijenti.SelectedItem;
+            if (p != null)
+            {
+                SekretarZakazivanjePregleda szp = new SekretarZakazivanjePregleda(p);
+                szp.ShowDialog();
+            }
+        }
+    }
 }
-
-
-/*
-        private void Button_Click_Novo(object sender, RoutedEventArgs e)
-        {
-            FormiranjeObavestenjaWindow fow = new FormiranjeObavestenjaWindow();
-            fow.ShowDialog();
-
-            obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
-        }
-
-        private void Button_Click_Prikaz(object sender, RoutedEventArgs e)
-        {
-            PrikazPacijenata pp = new PrikazPacijenata();
-            pp.Show();
-        }
-
-        private void Button_Click_Izmena(object sender, RoutedEventArgs e)
-        {
-            Obavestenje o = (Obavestenje)obavestenjaDataBinding.SelectedItem;
-            if (o != null)
-            {
-                IzmenaObavestenjaWindow iow = new IzmenaObavestenjaWindow(o);
-                iow.ShowDialog();
-
-                // za osvezavanje prikaza
-                obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
-            }
-        }
-
-        private void Button_Click_Brisanje(object sender, RoutedEventArgs e)
-        {
-            Obavestenje o = (Obavestenje)obavestenjaDataBinding.SelectedItem;
-            if (o != null)
-            {
-                string sMessageBoxText = "Da li ste sigurni da želite da obrišete obaveštenje?";
-                string sCaption = "Brisanje obaveštenja";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-
-                switch (rsltMessageBox)
-                {
-                    case MessageBoxResult.Yes:
-                        bo.ObrisiObavestenje(o);
-
-                        //za osvezavanje prikaza            
-                        obavestenjaDataBinding.ItemsSource = bo.SvaObavestenja();
-                        break;
-
-                    case MessageBoxResult.No:
-                        /* ... //
-                        break;
-                }
-            }
-        }
-*/
-                }
-            }

@@ -78,11 +78,10 @@ public class BazaPregleda
             p.Pacijent = pac;
 
             // parsiranje vremena
-            CultureInfo provider = new CultureInfo("en-UN");
-            //p.VremePocetkaPregleda = DateTime.Parse(vremePocetka);
-            p.VremePocetkaPregleda = DateTime.ParseExact(vremePocetka,"G", provider);
-            //p.VremeKrajaPregleda = DateTime.Parse(vremeKraja);
-            p.VremeKrajaPregleda = DateTime.ParseExact(vremeKraja, "G", provider);
+            p.VremePocetkaPregleda = DateTime.Parse(vremePocetka);
+            //p.VremePocetkaPregleda = DateTime.ParseExact(vremePocetka,"G", provider);
+            p.VremeKrajaPregleda = DateTime.Parse(vremeKraja);
+            //p.VremeKrajaPregleda = DateTime.ParseExact(vremeKraja, "G", provider);
  
 
             //DODATO NA BOJANOV KOD
@@ -110,7 +109,8 @@ public class BazaPregleda
 
         //dodati broj sobe lekaru
         //promenjen upis
-        string zakazivanje = jmbgPacijenta + "#" + jmbgLekara + "#" + vremePocetka + "#" + vremeKraja + "#" + "Broj ordinacije";
+        string zakazivanje = jmbgPacijenta + "#" + jmbgLekara + "#" + vremePocetka.ToString() + "#" + vremeKraja.ToString() 
+            + "#" + "Broj ordinacije";
 
         List<string> pregledi = new List<string>();
         pregledi.Add(zakazivanje);
