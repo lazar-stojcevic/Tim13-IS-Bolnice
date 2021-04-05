@@ -148,5 +148,25 @@ namespace IS_Bolnice.Prozori
                 szp.ShowDialog();
             }
         }
+
+        private void Button_Click_Prikaz_Termina(object sender, RoutedEventArgs e)
+        {
+            Pacijent p = (Pacijent)dataGridPacijenti.SelectedItem;
+            if (p != null)
+            {
+                SekretarPrikazZakazanihTerminaPacijenta spzt = new SekretarPrikazZakazanihTerminaPacijenta(p);
+                spzt.ShowDialog();
+            }
+        }
+
+        private void Button_Click_Azuriranje_Alergena(object sender, RoutedEventArgs e)
+        {
+            Pacijent p = (Pacijent)dataGridPacijenti.SelectedItem;
+            if (p != null)
+            {
+                SekretarAzuriranjeAlergena sa = new SekretarAzuriranjeAlergena(p);
+                sa.ShowDialog();
+            }
+        }
     }
 }

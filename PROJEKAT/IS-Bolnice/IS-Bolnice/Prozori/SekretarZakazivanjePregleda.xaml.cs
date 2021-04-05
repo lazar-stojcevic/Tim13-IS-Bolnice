@@ -20,23 +20,26 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class SekretarZakazivanjePregleda : Window
     {
+        private BazaPregleda bpreg;
         private BazaLekara bl;
         private List<Lekar> lekari;
         private Pacijent pacijent;
 
-        //public ObservableCollection<Pregled> PreglediLekara
-        //{
-         //   get;
-        //    set;
-        //}
+        public ObservableCollection<Pregled> PreglediLekara
+        {
+            get;
+            set;
+        }
 
         public SekretarZakazivanjePregleda(Pacijent p)
         {
             InitializeComponent();
 
+            this.DataContext = this;
             bl = new BazaLekara();
+            bpreg = new BazaPregleda();
             lekari = bl.LekariOpstePrakse();
-            //PreglediLekara = new ObservableCollection<Pregled>();
+            PreglediLekara = new ObservableCollection<Pregled>();
             pacijent = p;
 
             txtIme.Text = pacijent.Ime;
@@ -76,7 +79,14 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-
+            int index = prikazTermina.SelectedIndex;
+            if (index != -1)
+            {
+                Pregled pregled = PreglediLekara[index];
+                pregled.Pacijent = pacijent;
+                bpreg.ZakaziPregled(pregled);
+                this.Close();
+            }
         }
 
         private void Button_Click_Odustani(object sender, RoutedEventArgs e)
@@ -86,14 +96,33 @@ namespace IS_Bolnice.Prozori
 
         private void comboLekari_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //BazaPregleda bpreg = new BazaPregleda();
-            //Lekar lekar = lekari[comboLekari.SelectedIndex];
-           // List<Pregled> pregledi = bpreg.PreglediOdredjenogLekara(lekar.Jmbg);
-           // PreglediLekara.Clear();
-           // foreach (Pregled p in pregledi)
-           // {
-            //    PreglediLekara.Add(p);
-            //}
+            Lekar lekar = lekari[comboLekari.SelectedIndex];
+            List<Pregled> pregledi = bpreg.PreglediOdredjenogLekara(lekar.Jmbg);
+            PreglediLekara.Clear();
+
+            int i = 0;
+            DateTime trenutnoVreme = DateTime.Now;
+            while (i < 5)
+            {
+                Pregled pregled = new Pregled();
+                pregled.VremePocetkaPregleda = trenutnoVreme.AddMinutes(5);
+                pregled.VremeKrajaPregleda = pregled.VremePocetkaPregleda.AddMinutes(45);   // pretpostavka da termin traje 45min
+                pregled.Lekar = lekar;
+                trenutnoVreme = pregled.VremeKrajaPregleda; // potencijalno sledeci slobodan termin je 5min nakon zavrsetka ovog termina
+                //TODO: provera da li se termin vec preklapa sa nekim terminom i koje je radno vreme lekara
+                i++;
+                PreglediLekara.Add(pregled);
+            }
+        }
+
+        private void RadioButton_Termin_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RadioButton_Lekar_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
         mc:Ignorable="d"
         Title="Zakazivanje pregleda" Height="600" Width="600">
     <Grid>
@@ -17,20 +18,28 @@
         <TextBox Name="txtIme" HorizontalAlignment="Left" Height="23" Margin="281,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <TextBox Name="txtPrezime" HorizontalAlignment="Left" Height="23" Margin="281,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <TextBox Name="txtJmbg" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
-        <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,195,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="64" Margin="40,221,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
-        <CheckBox Content="Izabrani lekar" HorizontalAlignment="Left" Margin="69,245,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <ComboBox Name="comboLekari" HorizontalAlignment="Left" Margin="281,243,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
+        <Label Content="Prioritet:" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
+        <StackPanel Margin="166,191,55.6,359.4" Orientation="Horizontal">
+            <RadioButton IsChecked="True" HorizontalAlignment="Left" Checked="RadioButton_Termin_Checked">Termin</RadioButton>
+            <Label Content="                                "/>
+            <RadioButton HorizontalAlignment="Right" Checked="RadioButton_Lekar_Checked">Lekar</RadioButton>
+        </StackPanel>
+        <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,216,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="55" Margin="40,243,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
+        <CheckBox Name="checkBoxLekar" Content="Izabrani lekar" HorizontalAlignment="Left" Margin="69,262,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <ComboBox Name="comboLekari" HorizontalAlignment="Left" Margin="281,260,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
         <Label Content="Najbliži termini" HorizontalAlignment="Left" Margin="40,307,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding PreglediLekara}" HorizontalAlignment="Left" Height="100" Margin="40,338,0,0" VerticalAlignment="Top" Width="498">
+        <ListView Name="prikazTermina" ItemsSource="{Binding PreglediLekara}" HorizontalAlignment="Left" Height="100" Margin="40,338,0,0" VerticalAlignment="Top" Width="498">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock Text="Vreme početka: " />
-                        <TextBlock Text="{Binding VremePocetka}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding VremePocetkaPregleda, StringFormat={}{0:HH:mm}}" FontWeight="Bold" />
                         <TextBlock Text=" - " />
                         <TextBlock Text="Vreme kraja: " />
-                        <TextBlock Text="{Binding VremeKraja}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding VremeKrajaPregleda, StringFormat={}{0:HH:mm}}" FontWeight="Bold" />
+                        <TextBlock Text="   Lekar: "/>
+                        <TextBlock Text="{Binding Lekar, Converter={cvt:LekarToTextConverter}}" FontWeight="Bold"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

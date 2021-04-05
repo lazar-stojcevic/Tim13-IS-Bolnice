@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
         mc:Ignorable="d"
         Title="SekretarWindow" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
@@ -74,8 +75,8 @@
                         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
                             <Button Content="Zakaži pregled" Margin="10" Click="Button_Click_Zakazivanje_Pregleda"/>
                             <Button Content="Zakaži operaciju" Margin="10"/>
-                            <Button Content="Ažuriraj alergene" Margin="10"/>
-                            <Button Content="Prikaz termina" Margin="10"/>
+                            <Button Content="Ažuriraj alergene" Margin="10" Click="Button_Click_Azuriranje_Alergena"/>
+                            <Button Content="Prikaz termina" Margin="10" Click="Button_Click_Prikaz_Termina"/>
                         </StackPanel>
                         <DataGrid x:Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
@@ -86,7 +87,7 @@
                                 <DataGridTextColumn Header="Pol" Binding="{Binding Pol}" Width="0.5*"/>
                                 <DataGridTextColumn Header="Datum rođenja" Binding="{Binding DatumRodjenja, StringFormat={}{0:dd/MM/yyyy}}" Width="1*"/>
                                 <DataGridTextColumn Header="Broj telefona" Binding="{Binding BrojTelefona}" Width="1*"/>
-                                <DataGridTextColumn Header="Izabrani lekar" Binding="{Binding izabraniLekar}" Width="1*"/>
+                                <DataGridTextColumn Header="Izabrani lekar" Binding="{Binding IzabraniLekar, Converter={cvt:LekarToTextConverter}}" Width="1*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

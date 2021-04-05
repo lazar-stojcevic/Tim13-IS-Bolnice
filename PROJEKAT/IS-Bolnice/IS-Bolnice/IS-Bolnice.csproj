@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Baze\BazaIzvestaja.cs" />
     <Compile Include="Baze\BazaObavestenja.cs" />
+    <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />
     <Compile Include="Model\Obavestenje.cs" />
@@ -107,6 +108,12 @@
     </Compile>
     <Compile Include="Prozori\PacijentZakazivanjePregledaProzor.xaml.cs">
       <DependentUpon>PacijentZakazivanjePregledaProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\SekretarAzuriranjeAlergena.xaml.cs">
+      <DependentUpon>SekretarAzuriranjeAlergena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\SekretarPrikazZakazanihTerminaPacijenta.xaml.cs">
+      <DependentUpon>SekretarPrikazZakazanihTerminaPacijenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\SekretarWindow.xaml.cs">
       <DependentUpon>SekretarWindow.xaml</DependentUpon>
@@ -198,6 +205,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\PacijentZakazivanjePregledaProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\SekretarAzuriranjeAlergena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\SekretarPrikazZakazanihTerminaPacijenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
