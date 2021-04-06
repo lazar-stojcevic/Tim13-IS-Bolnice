@@ -113,7 +113,8 @@ namespace IS_Bolnice.Prozori
                     Adresa = tempAdresa,
                     Pol = tempPol,
                     DatumRodjenja = tempDatumRodjenja,
-                    IzabraniLekar = lekar
+                    IzabraniLekar = lekar,
+                    Alergeni = new List<string>()
                 };
 
                 bp.KreirajPacijenta(p);

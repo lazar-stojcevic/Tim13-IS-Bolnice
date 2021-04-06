@@ -168,5 +168,15 @@ namespace IS_Bolnice.Prozori
                 sa.ShowDialog();
             }
         }
+
+        private void Button_Click_Zakazivanje_Operacije(object sender, RoutedEventArgs e)
+        {
+            Pacijent p = (Pacijent)dataGridPacijenti.SelectedItem;
+            if (p != null)
+            {
+                //SekretarZakazivanjeOperacije szo = new SekretarZakazivanjeOperacije(p);
+                //szo.ShowDialog();
+            }
+        }
     }
 }

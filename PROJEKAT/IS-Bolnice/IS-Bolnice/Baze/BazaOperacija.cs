@@ -12,12 +12,13 @@ public class BazaOperacija
 {
     public List<Operacija> SveSledeceOperacije()
     {
-        CultureInfo provider = new CultureInfo("en-UN");
         List<Operacija> ret = new List<Operacija>();
         BazaPacijenata bazaPacijenata = new BazaPacijenata();
         BazaBolnica bazaBolnica = new BazaBolnica();
+        BazaLekara bazaLekara = new BazaLekara();
         List<Bolnica> bolnice = bazaBolnica.SveBolnice();
         List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
+        List<Lekar> lekari = bazaLekara.SviLekari();
         if (File.Exists(@"..\..\Datoteke\operacije.txt"))
         {
             string[] lines = File.ReadAllLines(@"..\..\Datoteke\operacije.txt");
@@ -26,8 +27,8 @@ public class BazaOperacija
                 Operacija o = new Operacija();
                 string[] delovi = line.Split('#');
                 Console.WriteLine(delovi[0]);
-                o.VremePocetaOperacije = DateTime.ParseExact(delovi[0], "G", provider);
-                o.VremeKrajaOperacije = DateTime.ParseExact(delovi[1], "G", provider);
+                o.VremePocetaOperacije = DateTime.Parse(delovi[0]);
+                o.VremeKrajaOperacije = DateTime.Parse(delovi[1]);
                 o.Pacijent.Jmbg = delovi[2];
                 foreach (Pacijent p in pacijenti)
                 {
@@ -50,6 +51,14 @@ public class BazaOperacija
                     }
                 }
                 o.Lekar.Jmbg = delovi[3];
+                foreach (Lekar lekar in lekari)
+                {
+                    if (delovi[3].Equals(lekar.Jmbg))
+                    {
+                        o.Lekar = lekar;
+                        break;
+                    }
+                }
                 o.Soba.Id = delovi[4];
                 ret.Add(o);
             }
@@ -79,14 +88,24 @@ public class BazaOperacija
       throw new NotImplementedException();
    }
    
-   public List<Operacija> OperacijeDatogPacijenta(Pacijent pacijent)
+   public List<Operacija> OperacijeOdredjenogPacijenta(Pacijent pacijent)
    {
-      throw new NotImplementedException();
-   }
+        List<Operacija> operacije = new List<Operacija>();
+        List<Operacija> sveOperacije = SveSledeceOperacije();
+
+        foreach (Operacija o in sveOperacije)
+        {
+            if (o.Pacijent.Jmbg.Equals(pacijent.Jmbg))
+            {
+                operacije.Add(o);
+            }
+        }
+
+        return operacije;
+    }
 
     public List<Operacija> SveSledeceOperacijeZaLekara(string sifra)
     {
-        CultureInfo provider = new CultureInfo("en-UN");
         List<Operacija> ret = new List<Operacija>();
         BazaPacijenata bazaPacijenata = new BazaPacijenata();
         BazaBolnica bazaBolnica = new BazaBolnica();
@@ -103,8 +122,8 @@ public class BazaOperacija
                 if (delovi[3].Equals(sifra))
                 {
                     Console.WriteLine(delovi[0]);
-                    o.VremePocetaOperacije = DateTime.ParseExact(delovi[0], "G", provider);
-                    o.VremeKrajaOperacije = DateTime.ParseExact(delovi[1], "G", provider);
+                    o.VremePocetaOperacije = DateTime.Parse(delovi[0]);
+                    o.VremeKrajaOperacije = DateTime.Parse(delovi[1]);
                     o.Pacijent.Jmbg = delovi[2];
                     foreach (Pacijent p in pacijenti)
                     {

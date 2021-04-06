@@ -9,9 +9,6 @@ public class Operacija
 {
    private DateTime vremePocetaOperacije;
    private DateTime vremeKrajaOperacije;
-   
-   public Soba soba;
-   public Lekar lekar;
 
     public Operacija()
     {
@@ -21,35 +18,10 @@ public class Operacija
     }
 
 
-    public Lekar Lekar
-   {
-      get
-      {
-         return lekar;
-      }
-      set
-      {
-         this.lekar = value;
-      }
-   }
-   public Pacijent pacijent;
-   
-  
-   public Pacijent Pacijent
-   {
-      get
-      {
-         return pacijent;
-      }
-      set
-      {
-         this.pacijent = value;
-      }
-   }
-
+    public Lekar Lekar { get; set; }
+    public Pacijent Pacijent { get; set; }
     public DateTime VremePocetaOperacije { get; set; }
     public DateTime VremeKrajaOperacije { get; set; }
-
     public Soba Soba { get; set; }
 
 }

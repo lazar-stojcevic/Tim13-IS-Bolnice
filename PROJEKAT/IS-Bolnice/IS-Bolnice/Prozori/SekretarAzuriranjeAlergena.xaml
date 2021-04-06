@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="SekretarAzuriranjeAlergena" Height="450" Width="600">
+        Title="SekretarAzuriranjeAlergena" Height="450" Width="500"
+        Closing="Window_Closing">
     <Grid>
         <Label Content="Alergeni za pacijenta " HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.153,0.707" FontWeight="Bold"/>
         <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="23" Margin="151,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>
-        <DataGrid Name="lvPregledi" ItemsSource="{Binding AlergeniPacijenta}" Margin="10,56,9.6,105" IsReadOnly="True"
-                  SelectionMode="Single" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Alergeni" Width="1*" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView Name="lvAlergeni" Margin="10,62,9.6,99" SelectionMode="Single">
+        </ListView>
+        <TextBox Name="alergenTxt" Text="Unos novog alergena" HorizontalAlignment="Left" Height="23" Margin="10,364,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"
+                 GotFocus="alergenTxt_GotFocus" LostFocus="alergenTxt_LostFocus"/>
+        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="200,361,0,0" VerticalAlignment="Top" Width="92" Height="28" Click="Button_Click_Dodaj"/>
+        <Button Content="Obriši" HorizontalAlignment="Left" Margin="358,361,0,0" VerticalAlignment="Top" Width="92" Height="28" Click="Button_Click_Obrisi"/>
     </Grid>
 </Window>

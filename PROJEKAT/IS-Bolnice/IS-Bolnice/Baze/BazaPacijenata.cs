@@ -110,8 +110,16 @@ public class BazaPacijenata
     {
         string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
             pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
-            pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja;
+            pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja + "#";
 
+        // upisivanje liste alergena
+        foreach (string s in pacijent.Alergeni)
+        {
+            p += s + ",";
+        }
+        p = p.TrimEnd(',');
+
+        // upisivanje izabranog lekara ako postoji
         if (pacijent.IzabraniLekar != null)
         {
             p += "#" + pacijent.IzabraniLekar.Jmbg;
@@ -150,20 +158,26 @@ public class BazaPacijenata
                 p.Pol = Pol.drugo;
             }
             p.Obrisan = Boolean.Parse(delovi[9]);
+            p.DatumRodjenja = DateTime.Parse(delovi[10]);
 
-            // ako postoji i datum (bez provere bi puklo ukoliko korisnik nema naveden datum)
-            if (delovi.Length > 10)
+            // lista alergena
+            string[] alergeni = delovi[11].Split(',');
+            foreach (string a in alergeni)
             {
-                p.DatumRodjenja = DateTime.Parse(delovi[10]);
+                if (!a.Equals(""))
+                {
+                    p.Alergeni.Add(a);
+                }
             }
+
             // ako postoji i izabrani lekar (bez provere bi puklo ukoliko korisnik nema izabranog lekara)
-            if (delovi.Length > 11)
+            if (delovi.Length > 12)
             {
                 BazaLekara bl = new BazaLekara();
                 List<Lekar> lekari = bl.LekariOpstePrakse();
                 foreach (Lekar l in lekari)
                 {
-                    if (l.Jmbg.Equals(delovi[11]))
+                    if (l.Jmbg.Equals(delovi[12]))
                     {
                         p.IzabraniLekar = l;
                         break;

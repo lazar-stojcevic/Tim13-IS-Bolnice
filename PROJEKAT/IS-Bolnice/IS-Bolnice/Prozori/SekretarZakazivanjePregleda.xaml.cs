@@ -57,6 +57,9 @@ namespace IS_Bolnice.Prozori
 
             comboLekari.ItemsSource = lekariString;
             comboLekari.SelectedIndex = -1;
+
+            // inicijalno dugme za novi termin nije dostupno dok se ne odabere lekar
+            odabirTermina.IsEnabled = false;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -96,9 +99,17 @@ namespace IS_Bolnice.Prozori
 
         private void comboLekari_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            odabirTermina.IsEnabled = true;
+
             Lekar lekar = lekari[comboLekari.SelectedIndex];
             List<Pregled> pregledi = bpreg.PreglediOdredjenogLekara(lekar.Jmbg);
             PreglediLekara.Clear();
+
+            // provera za checkbox da li treba da ostane oznacen
+            if (checkBoxLekar.IsChecked == true && !lekar.Jmbg.Equals(pacijent.IzabraniLekar.Jmbg))
+            {
+                checkBoxLekar.IsChecked = false;
+            }
 
             int i = 0;
             DateTime trenutnoVreme = DateTime.Now;
@@ -123,6 +134,27 @@ namespace IS_Bolnice.Prozori
         private void RadioButton_Lekar_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_Novi_Termin(object sender, RoutedEventArgs e)
+        {
+            // na prvom mestu je pocetak termina a na drugom kraj termina
+            List<DateTime> termin = new List<DateTime>();
+            Lekar lekar = lekari[comboLekari.SelectedIndex];
+            OdredjivanjeTermina ot = new OdredjivanjeTermina(termin, lekar);
+            ot.ShowDialog();
+
+            // unutar liste termin moze da se nalazi samo pocetak i samo kraj termina
+            if (termin.Count == 2)
+            {
+                Pregled p = new Pregled
+                {
+                    VremePocetkaPregleda = termin[0],
+                    VremeKrajaPregleda = termin[1],
+                    Lekar = lekar
+                };
+                PreglediLekara.Add(p);
+            }
         }
     }
 }
