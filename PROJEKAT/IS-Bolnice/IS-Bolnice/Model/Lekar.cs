@@ -7,20 +7,10 @@ using System;
 
 public class Lekar : Korisnik
 {
-    private TipLekara tip;
-
-    public Soba soba;
-
-    public Lekar(TipLekara tip, Soba soba) : base()
-    {
-        this.tip = tip;
-        this.soba = soba;
-    }
-
-    public Lekar()
-    {
-    }
+    public Lekar() { }
 
     public TipLekara Tip { get; set; }
-
+    public Soba Ordinacija { get; set; }
+    public DateTime PocetakRadnogVremena { get; set; }
+    public DateTime KrajRadnogVremena { get; set; }
 }
