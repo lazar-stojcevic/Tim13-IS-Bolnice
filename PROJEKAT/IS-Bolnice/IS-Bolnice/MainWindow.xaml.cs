@@ -87,8 +87,7 @@ namespace IS_Bolnice
                         if (l.Sifra.Equals(sifra))
                         {
                             found = true;
-                            LekarWindow lekar = new LekarWindow();
-                            lekar.labelaImena.Content = l.Ime + " " + l.Prezime;
+                            LekarGlavniMeni lekar = new LekarGlavniMeni();
                             lekar.Sifra = l.Jmbg;
                             lekar.Show();
                             this.Close();
