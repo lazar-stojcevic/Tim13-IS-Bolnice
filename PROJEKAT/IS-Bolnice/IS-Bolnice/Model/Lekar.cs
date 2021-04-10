@@ -8,6 +8,7 @@ using System;
 public class Lekar : Korisnik
 {
     public Lekar() { }
+    
 
     public TipLekara Tip { get; set; }
     public Soba Ordinacija { get; set; }

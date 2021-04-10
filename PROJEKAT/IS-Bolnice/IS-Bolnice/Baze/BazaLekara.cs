@@ -29,7 +29,7 @@ public class BazaLekara
             string[] lines = File.ReadAllLines(@"..\..\Datoteke\lekari.txt");
             foreach (string line in lines)
             {
-                Lekar p = new Lekar(TipLekara.lekarSpecijalista, null);
+                Lekar p = new Lekar();
                 string[] delovi = line.Split('#');
                 p.Jmbg = delovi[0];
                 p.Ime = delovi[1];
