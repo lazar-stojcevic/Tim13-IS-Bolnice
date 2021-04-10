@@ -61,8 +61,14 @@
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />
     <Compile Include="Model\Obavestenje.cs" />
+    <Compile Include="Prozori\LekarDodavanjeLeka.xaml.cs">
+      <DependentUpon>LekarDodavanjeLeka.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\LekarGlavniMeni.xaml.cs">
       <DependentUpon>LekarGlavniMeni.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\LekarIzvestaj.xaml.cs">
+      <DependentUpon>LekarIzvestaj.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\OdredjivanjeTermina.xaml.cs">
       <DependentUpon>OdredjivanjeTermina.xaml</DependentUpon>
@@ -137,7 +143,15 @@
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
+    <Page Include="Prozori\LekarDodavanjeLeka.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\LekarGlavniMeni.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\LekarIzvestaj.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -350,6 +364,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\report.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

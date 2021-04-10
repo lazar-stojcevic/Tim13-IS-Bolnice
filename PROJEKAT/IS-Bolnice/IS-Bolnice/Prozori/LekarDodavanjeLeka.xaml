@@ -1,0 +1,33 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.LekarDodavanjeLeka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        mc:Ignorable="d"
+        Title="LekarDodavanjeLeka" Height="700" Width="400">
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2" Margin="-4,0,-0.4,0">
+        </ToolBarPanel>
+        <Label Content="Dodavanje leka" FontSize="22" HorizontalAlignment="Left" Margin="53,4,0,0" VerticalAlignment="Top" Height="40" Width="163"/>
+
+        <ListView HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="338" Margin="29,93,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime leka" Width="250"/>
+                    <GridViewColumn Header="Gramaza" Width="88"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Spisak lekova" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,67,0,0"/>
+        <Label Content="Broj uzimanja lekova na dan:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,347,0,0"/>
+        <Label Content="Trajanje terapije:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,413,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="225,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="225,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="39,585,0,0" VerticalAlignment="Top" Width="149" Height="52"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Width="149" Height="52"/>
+
+
+
+    </Grid>
+</Window>

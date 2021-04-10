@@ -57,5 +57,11 @@
                 <Image Source="../Slike/timetable.png" Height="71" Width="77" />
             </StackPanel>
         </Button>
+
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,577,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
+            <StackPanel>
+                <Image Source="../Slike/report.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
