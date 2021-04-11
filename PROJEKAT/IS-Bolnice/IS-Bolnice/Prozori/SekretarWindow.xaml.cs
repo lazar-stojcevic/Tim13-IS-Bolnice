@@ -174,8 +174,8 @@ namespace IS_Bolnice.Prozori
             Pacijent p = (Pacijent)dataGridPacijenti.SelectedItem;
             if (p != null)
             {
-                //SekretarZakazivanjeOperacije szo = new SekretarZakazivanjeOperacije(p);
-                //szo.ShowDialog();
+                SekretarZakazivanjeOperacije szo = new SekretarZakazivanjeOperacije(p);
+                szo.ShowDialog();
             }
         }
     }
