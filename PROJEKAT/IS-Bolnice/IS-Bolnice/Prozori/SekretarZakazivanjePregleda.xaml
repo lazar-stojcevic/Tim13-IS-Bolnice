@@ -10,8 +10,8 @@
         Title="Zakazivanje pregleda" Height="600" Width="600"
         WindowStartupLocation="CenterOwner">
     <Grid>
-        
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="137" Margin="40,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
+
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="122" Margin="40,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
         <Label Content="Pacijent" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Label Content="Ime:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="141" Margin="69,49,0,0"/>
         <Label Content="Prezime:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,465.4"/>
@@ -19,18 +19,18 @@
         <TextBox Name="txtIme" HorizontalAlignment="Left" Height="23" Margin="281,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <TextBox Name="txtPrezime" HorizontalAlignment="Left" Height="23" Margin="281,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <TextBox Name="txtJmbg" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
-        <Label Content="Prioritet:" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
+        <Label Content="Prioritet:" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <StackPanel Margin="166,191,55.6,359.4" Orientation="Horizontal">
-            <RadioButton IsChecked="True" HorizontalAlignment="Left" Checked="RadioButton_Termin_Checked">Termin</RadioButton>
-            <Label Content="                                "/>
-            <RadioButton HorizontalAlignment="Right" Checked="RadioButton_Lekar_Checked">Lekar</RadioButton>
+            <RadioButton IsChecked="True" HorizontalAlignment="Left" Checked="RadioButton_Termin_Checked" Margin="0,-8,0,8">Termin</RadioButton>
+            <Label Content="                                " Margin="0,-10,0,10"/>
+            <RadioButton HorizontalAlignment="Right" Checked="RadioButton_Lekar_Checked" Margin="0,-10,0,10">Lekar</RadioButton>
         </StackPanel>
-        <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,216,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="55" Margin="40,243,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
-        <CheckBox Name="checkBoxLekar" Content="Izabrani lekar" HorizontalAlignment="Left" Margin="69,262,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <ComboBox Name="comboLekari" HorizontalAlignment="Left" Margin="281,260,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
-        <Label Content="Najbliži termini" HorizontalAlignment="Left" Margin="40,307,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
-        <ListView Name="prikazTermina" ItemsSource="{Binding PreglediLekara}" HorizontalAlignment="Left" Height="100" Margin="40,338,0,0" VerticalAlignment="Top" Width="498">
+        <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,206,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="55" Margin="40,233,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
+        <CheckBox Name="checkBoxLekar" Content="Izabrani lekar" HorizontalAlignment="Left" Margin="69,252,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <ComboBox Name="comboLekari" HorizontalAlignment="Left" Margin="281,250,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
+        <Label Content="Najbliži termini" HorizontalAlignment="Left" Margin="40,297,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
+        <ListView Name="prikazTermina" ItemsSource="{Binding PreglediLekara}" HorizontalAlignment="Left" Height="100" Margin="40,328,0,0" VerticalAlignment="Top" Width="498">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -50,6 +50,6 @@
         <Button Name="odabirTermina" Content="Odaberi drugi termin" HorizontalAlignment="Left" Margin="166,443,0,0" VerticalAlignment="Top" Width="245" Height="30" Click="Button_Click_Novi_Termin"/>
         <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="82,508,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_Potvrdi" Height="40"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="397,508,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_Odustani" Height="40"/>
-        
+
     </Grid>
 </Window>

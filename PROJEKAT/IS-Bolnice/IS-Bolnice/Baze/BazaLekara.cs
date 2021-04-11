@@ -21,6 +21,23 @@ public class BazaLekara
         return LekariOP;
     }
 
+    // metoda izlistava samo lekare specijaliste
+    public List<Lekar> LekariSpecijalisti()
+    {
+        List<Lekar> LekariSpecijalisti = new List<Lekar>();
+        List<Lekar> sviLekari = SviLekari();
+
+        foreach (Lekar l in sviLekari)
+        {
+            if (l.Tip.Equals(TipLekara.lekarSpecijalista))
+            {
+                LekariSpecijalisti.Add(l);
+            }
+        }
+
+        return LekariSpecijalisti;
+    }
+
     public List<Lekar> SviLekari()
     {
         List<Lekar> ret = new List<Lekar>();
