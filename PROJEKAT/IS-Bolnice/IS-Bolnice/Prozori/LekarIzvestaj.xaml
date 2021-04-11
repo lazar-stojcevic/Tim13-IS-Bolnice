@@ -11,7 +11,7 @@
         </ToolBarPanel>
         <Label Content="Izveštaj" FontSize="22" HorizontalAlignment="Left" Margin="53,4,0,0" VerticalAlignment="Top" Height="40" Width="91"/>
         <Label Content="Tekst izveštaja:" HorizontalAlignment="Left" Margin="34,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,2.194" Width="110"/>
-        <TextBox HorizontalAlignment="Left" Height="195" Margin="34,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
+        <TextBox x:Name="txtAnamneza" HorizontalAlignment="Left" Height="195" Margin="34,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
         <ListBox x:Name="listaLekova" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="230" Margin="34,349,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>

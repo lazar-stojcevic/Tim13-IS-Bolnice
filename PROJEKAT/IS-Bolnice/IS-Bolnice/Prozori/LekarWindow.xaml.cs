@@ -97,7 +97,8 @@ namespace IS_Bolnice.Prozori
 
         private void ButtonIzvestaj_Click(object sender, RoutedEventArgs e)
         {
-            LekarIzvestaj izvestaj = new LekarIzvestaj();
+            string jmbgPacijenta = txtJMBG.Text;
+            LekarIzvestaj izvestaj = new LekarIzvestaj(jmbgPacijenta, Sifra);
             izvestaj.Show();
 
         }

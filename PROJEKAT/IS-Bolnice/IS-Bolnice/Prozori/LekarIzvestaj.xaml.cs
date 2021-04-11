@@ -22,11 +22,14 @@ namespace IS_Bolnice.Prozori
     {
 
         ObservableCollection<Terapija> terapije = new ObservableCollection<Terapija>();
-
-        public LekarIzvestaj()
+        string jmbgPac;
+        string jmbgLek;
+        public LekarIzvestaj(string jmbgPacijenta, string jmbgLekara)
         {
             InitializeComponent();
             listaLekova.ItemsSource = terapije;
+            jmbgPac = jmbgPacijenta;
+            jmbgLek = jmbgLekara;
         }
 
         private void Button_DodajLek(object sender, RoutedEventArgs e)
@@ -44,7 +47,19 @@ namespace IS_Bolnice.Prozori
 
         private void Button_ZavrsiPregled(object sender, RoutedEventArgs e)
         {
-            //Ovde ce biti generisanje nekog izvestaja
+            //Zapisivanje izvestaja u txt datoteku lekar#pacijent#anamneza#datum#Lekovi sa terapijom
+            string textIzvestaja = txtAnamneza.Text.Replace("\n", "%%%"); //Nisam siguran da li treba ova linija
+            textIzvestaja =jmbgLek +"#"+ jmbgPac + "#" + textIzvestaja + "#" + DateTime.Now.Date + "#";
+            foreach (Terapija ter in terapije)
+            {
+                textIzvestaja = textIzvestaja + ter.Lek.Sifra + "$$" + ter.Lek.Ime + "$$" + ter.Lek.Opis + "$$" 
+                    + ter.UcestanostKonzumiranja.ToString() + "$$" + ter.VremePocetka.ToString() + "$$" + ter.VremeKraja.ToString() + "$$$"; 
+            }
+            BazaIzvestaja baza = new BazaIzvestaja();
+            textIzvestaja = textIzvestaja + System.Environment.NewLine;
+            baza.KreirajIzvestaj(textIzvestaja);
+            this.Close();
+
         }
     }
 }

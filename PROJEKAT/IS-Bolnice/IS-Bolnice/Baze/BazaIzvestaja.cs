@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 public class BazaIzvestaja
 {
@@ -8,10 +9,10 @@ public class BazaIzvestaja
       throw new NotImplementedException();
    }
    
-   public void KreirajIzvestaj(Izvestaj izvestaj)
+   public void KreirajIzvestaj(string izvestaj)
    {
-      throw new NotImplementedException();
-   }
+        File.AppendAllText(@"..\..\Datoteke\izvestaji.txt", izvestaj);
+    }
    
    public void IzmeniIzvestaj(Izvestaj izvestaj)
    {
