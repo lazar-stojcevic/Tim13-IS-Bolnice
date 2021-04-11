@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Baze\BazaIzvestaja.cs" />
+    <Compile Include="Baze\BazaLekova.cs" />
     <Compile Include="Baze\BazaObavestenja.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Izvestaj.cs" />
@@ -367,6 +368,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\lekovi.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

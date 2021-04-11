@@ -31,16 +31,20 @@ namespace IS_Bolnice.Prozori
 
         private void Button_DodajLek(object sender, RoutedEventArgs e)
         {
-            //SAMO ZA PROBU
-            Lek jedan = new Lek();
-            jedan.Sifra = "ABC";
-            jedan.Ime = "DROGA";
-            jedan.Opis = "DROGETINA";
-            Terapija t = new Terapija();
-            t.Lek = jedan;
-            terapije.Add(t);
+            LekarDodavanjeLeka prozor = new LekarDodavanjeLeka(terapije);
+            prozor.Show();
 
             
+        }
+
+        private void Button_ObrisiLek(object sender, RoutedEventArgs e)
+        {
+            terapije.Remove((Terapija)listaLekova.SelectedItem);
+        }
+
+        private void Button_ZavrsiPregled(object sender, RoutedEventArgs e)
+        {
+            //Ovde ce biti generisanje nekog izvestaja
         }
     }
 }

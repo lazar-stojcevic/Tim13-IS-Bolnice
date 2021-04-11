@@ -11,20 +11,22 @@
         </ToolBarPanel>
         <Label Content="Dodavanje leka" FontSize="22" HorizontalAlignment="Left" Margin="53,4,0,0" VerticalAlignment="Top" Height="40" Width="163"/>
 
-        <ListView HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="338" Margin="29,93,0,0">
+        <ListView x:Name="listaSvihLekova" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="338" Margin="29,93,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Ime leka" Width="250"/>
-                    <GridViewColumn Header="Gramaza" Width="88"/>
+                    <GridViewColumn Header="Ime leka" Width="250" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Header="Gramaza" Width="88" DisplayMemberBinding="{Binding Opis}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Label Content="Spisak lekova" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,67,0,0"/>
         <Label Content="Broj uzimanja lekova na dan:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,347,0,0"/>
         <Label Content="Trajanje terapije:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,413,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="225,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="225,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="39,585,0,0" VerticalAlignment="Top" Width="149" Height="52"/>
+        
+        <TextBox HorizontalAlignment="Left" x:Name="txtBrojUzimanja" Height="22" Margin="225,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <TextBox HorizontalAlignment="Left" x:Name="txtTrajanje" Height="22" Margin="225,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        
+        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="39,585,0,0" VerticalAlignment="Top" Width="149" Height="52" Click="Button_DodajClick"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Width="149" Height="52"/>
 
 

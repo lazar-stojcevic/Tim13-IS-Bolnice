@@ -15,15 +15,22 @@
         <ListBox x:Name="listaLekova" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="230" Margin="34,349,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Lek.Ime}"></TextBlock>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Lek.Ime}"></TextBlock>
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Lek.Opis}"></TextBlock>
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding UcestanostKonzumiranja}"></TextBlock>
+                        <TextBlock Text=" puta na dan" />
+                    </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
         <Label Content="Lekovi:" HorizontalAlignment="Left" Margin="34,321,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,2.194" Width="110"/>
         <Button Content="Dodaj lek" HorizontalAlignment="Left" Height="40" Margin="269,394,0,0" VerticalAlignment="Top" Width="115" Click="Button_DodajLek"/>
-        <Button Content="Obriši" HorizontalAlignment="Left" Height="40" Margin="269,464,0,0" VerticalAlignment="Top" Width="115"/>
-        <Button Content="Završi pregled" HorizontalAlignment="Left" Height="52" Margin="105,596,0,0" VerticalAlignment="Top" Width="181"/>
+        <Button Content="Obriši" HorizontalAlignment="Left" Height="40" Margin="269,464,0,0" VerticalAlignment="Top" Width="115" Click="Button_ObrisiLek"/>
+        <Button Content="Završi pregled" HorizontalAlignment="Left" Height="52" Margin="105,596,0,0" VerticalAlignment="Top" Width="181" Click="Button_ZavrsiPregled"/>
 
     </Grid>
 </Window>
