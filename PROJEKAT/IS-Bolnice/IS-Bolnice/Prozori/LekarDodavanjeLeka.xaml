@@ -21,10 +21,10 @@
         </ListView>
         <Label Content="Spisak lekova" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,67,0,0"/>
         <Label Content="Broj uzimanja lekova na dan:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,347,0,0"/>
-        <Label Content="Trajanje terapije:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,413,0,0"/>
-        
-        <TextBox HorizontalAlignment="Left" x:Name="txtBrojUzimanja" Height="22" Margin="225,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
-        <TextBox HorizontalAlignment="Left" x:Name="txtTrajanje" Height="22" Margin="225,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <Label Content="Trajanje terapije u danima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,413,0,0"/>
+
+        <TextBox HorizontalAlignment="Left" x:Name="txtBrojUzimanja" PreviewTextInput="NumberValidationTextBox" Height="22" Margin="225,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <TextBox HorizontalAlignment="Left" x:Name="txtTrajanje" PreviewTextInput="NumberValidationTextBox" Height="22" Margin="225,417,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
         
         <Button Content="Dodaj" HorizontalAlignment="Left" Margin="39,585,0,0" VerticalAlignment="Top" Width="149" Height="52" Click="Button_DodajClick"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Width="149" Height="52"/>

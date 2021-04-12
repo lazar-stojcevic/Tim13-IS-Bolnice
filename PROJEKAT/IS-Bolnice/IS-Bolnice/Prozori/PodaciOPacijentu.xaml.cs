@@ -34,6 +34,13 @@ namespace IS_Bolnice.Prozori
             brojTxt.Text = p.BrojTelefona;
             adresaTxt.Text = p.Adresa;
             mailTxt.Text = p.EMail;
+            if (p.Alergeni.Count != 0)
+            {
+                foreach (string alergen in p.Alergeni)
+                {
+                    listaAlergena.Items.Add(alergen);
+                }
+            }
         }
     }
 }

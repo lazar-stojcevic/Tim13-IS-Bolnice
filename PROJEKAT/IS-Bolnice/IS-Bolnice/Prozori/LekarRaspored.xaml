@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Raspored"  Height="700" Width="400">
     <Grid>
-        <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="101"/>
-        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,50,-0.4,0" VerticalAlignment="Top" Width="394">
+        <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,343,0,0" VerticalAlignment="Top" Width="101"/>
+        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,383,-0.4,0" VerticalAlignment="Top" Width="394">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -28,11 +28,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="146,245,0,0" VerticalAlignment="Top" Width="101" Click="Button_ClickObrisi"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,245,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniOperaciju" />
-        <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="10,312,0,0" VerticalAlignment="Top" Width="101"/>
-        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="284,245,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
-        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="0,359,-0.4,0" VerticalAlignment="Top" Width="394">
+        <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="146,578,0,0" VerticalAlignment="Top" Width="101" Click="Button_ClickObrisi"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,578,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniOperaciju" />
+        <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="9,29,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="284,578,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
+        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,76,0,0" VerticalAlignment="Top" Width="394">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -50,9 +50,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Obriši" Height="54" Margin="146,554,146.6,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,554,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniPregled" />
-        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="284,554,0,0" VerticalAlignment="Top" Width="101" Height="54"/>
+        <Button Content="Obriši" Height="54" Margin="145,271,147.6,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="9,271,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniPregled" />
+        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,271,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijentaPr"/>
 
     </Grid>
 </Window>

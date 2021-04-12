@@ -198,5 +198,18 @@ namespace IS_Bolnice.Prozori
             PodaciOPacijentu pod = new PodaciOPacijentu(selektovana.Pacijent.Jmbg);
             pod.ShowDialog();
         }
+
+        private void Button_VidiPacijentaPr(object sender, RoutedEventArgs e)
+        {
+            if (listaPregleda.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Pregled selektovana = (Pregled)listaPregleda.SelectedItem;
+            PodaciOPacijentu pod = new PodaciOPacijentu(selektovana.Pacijent.Jmbg);
+            pod.ShowDialog();
+
+        }
     }
 }

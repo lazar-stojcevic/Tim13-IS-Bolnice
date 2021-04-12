@@ -16,7 +16,7 @@
         <Image Source="..\Slike\menu.png" HorizontalAlignment="Left" Height="38" Margin="23,10,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="-0.417,-0.441"/>
         <Button Content="Učitaj pacijenta" HorizontalAlignment="Left" Height="43" Margin="23.2,52,0,0" VerticalAlignment="Top" Width="124" Click="btnUcitajPacijenta" Grid.Column="1"/>
         <Label Content="JMBG:" HorizontalAlignment="Left" Margin="27,57,0,0" VerticalAlignment="Top" Width="46"/>
-        <TextBox Grid.ColumnSpan="2" x:Name="txtJMBG" HorizontalAlignment="Left" Height="26" Margin="73,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" x:Name="txtJMBG" HorizontalAlignment="Left" Height="26" Margin="73,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
         <Label Content="Ime:" HorizontalAlignment="Left" Margin="36,98,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime:" HorizontalAlignment="Left" Margin="35,129,0,0" VerticalAlignment="Top"/>
         <TextBox Grid.ColumnSpan="2" x:Name="txtIme" HorizontalAlignment="Left" Height="26" Margin="112,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
@@ -58,7 +58,7 @@
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,577,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
+        <Button x:Name="btnIzvestaj" Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,577,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
             <StackPanel>
                 <Image Source="../Slike/report.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
             </StackPanel>

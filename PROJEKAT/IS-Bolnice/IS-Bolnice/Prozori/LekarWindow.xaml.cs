@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,6 +55,7 @@ namespace IS_Bolnice.Prozori
                     txtPrz.Text = p.Prezime;
                     btnOperacija.IsEnabled = true;
                     btnPregled.IsEnabled = true;
+                    btnIzvestaj.IsEnabled = true;
                     nasao = true;
                 }
                 else
@@ -67,6 +69,7 @@ namespace IS_Bolnice.Prozori
                 {
                     btnOperacija.IsEnabled = false;
                     btnPregled.IsEnabled = false;
+                    btnIzvestaj.IsEnabled = false;
                 }
 
             }
@@ -101,6 +104,12 @@ namespace IS_Bolnice.Prozori
             LekarIzvestaj izvestaj = new LekarIzvestaj(jmbgPacijenta, Sifra);
             izvestaj.Show();
 
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         public string Sifra { get; set; }
