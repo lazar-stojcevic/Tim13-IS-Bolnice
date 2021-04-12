@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Lek
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 public class Lek: INotifyPropertyChanged
@@ -11,6 +12,11 @@ public class Lek: INotifyPropertyChanged
    private String sifra;
    private String ime;
    private String opis;
+   private List<String> alergeni;
+
+    public Lek() {
+        alergeni = new List<string>();
+    }
 
     public String Sifra
     {
@@ -42,6 +48,17 @@ public class Lek: INotifyPropertyChanged
             if (opis == value) return;
             opis = value;
             RaisePropertyChanged("opis");
+        }
+    }
+
+    public List<String> Alergeni
+    {
+        get { return alergeni; }
+        set
+        {
+            if (alergeni == value) return;
+            alergeni = value;
+            RaisePropertyChanged("alergeni");
         }
     }
 

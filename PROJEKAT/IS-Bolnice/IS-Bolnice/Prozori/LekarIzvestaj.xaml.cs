@@ -34,7 +34,7 @@ namespace IS_Bolnice.Prozori
 
         private void Button_DodajLek(object sender, RoutedEventArgs e)
         {
-            LekarDodavanjeLeka prozor = new LekarDodavanjeLeka(terapije);
+            LekarDodavanjeLeka prozor = new LekarDodavanjeLeka(terapije, jmbgPac);
             prozor.Show();
 
             
@@ -53,7 +53,7 @@ namespace IS_Bolnice.Prozori
             foreach (Terapija ter in terapije)
             {
                 textIzvestaja = textIzvestaja + ter.Lek.Sifra + "$$" + ter.Lek.Ime + "$$" + ter.Lek.Opis + "$$" 
-                    + ter.UcestanostKonzumiranja.ToString() + "$$" + ter.VremePocetka.ToString() + "$$" + ter.VremeKraja.ToString() + "$$$"; 
+                    + ter.UcestanostKonzumiranja.ToString() + "$$" + ter.VremePocetka.ToString() + "$$" + ter.VremeKraja.ToString()+ "$$" +ter.Detalji + "$$$"; 
             }
             BazaIzvestaja baza = new BazaIzvestaja();
             textIzvestaja = textIzvestaja + System.Environment.NewLine;

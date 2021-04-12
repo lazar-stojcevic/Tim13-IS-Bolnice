@@ -14,6 +14,8 @@ public class Terapija : INotifyPropertyChanged
    
    private Lek lek;
 
+   private string detalji;
+
     public Double UcestanostKonzumiranja
     {
         get { return ucestanostKonzumiranja; }
@@ -55,6 +57,17 @@ public class Terapija : INotifyPropertyChanged
             if (lek == value) return;
             lek = value;
             RaisePropertyChanged("lek");
+        }
+    }
+
+    public string Detalji
+    {
+        get { return detalji; }
+        set
+        {
+            if (detalji == value) return;
+            detalji = value;
+            RaisePropertyChanged("detalji");
         }
     }
 

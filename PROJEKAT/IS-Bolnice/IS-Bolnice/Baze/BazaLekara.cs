@@ -62,7 +62,6 @@ public class BazaLekara
                 p.KorisnickoIme = delovi[4];
                 p.Sifra = delovi[5];
                 ret.Add(p);
-                Console.WriteLine(line);
             }
         }
         else

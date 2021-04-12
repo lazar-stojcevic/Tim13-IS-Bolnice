@@ -22,10 +22,40 @@ namespace IS_Bolnice.Prozori
     public partial class LekarDodavanjeLeka : Window
     {
         ObservableCollection<Terapija> pomocna = new ObservableCollection<Terapija>();
-        public LekarDodavanjeLeka(ObservableCollection<Terapija> terapija)
+        public LekarDodavanjeLeka(ObservableCollection<Terapija> terapija, string jmbgPacijenta)
         {
             BazaLekova bazaLekova = new BazaLekova();
+            BazaPacijenata bazaPacijenata = new BazaPacijenata();
             List<Lek> lekovi = bazaLekova.SviLekovi();
+            List<Lek> lekoviZaPrikaz = bazaLekova.SviLekovi();
+            Pacijent p = bazaPacijenata.PacijentSaOvimJMBG(jmbgPacijenta);
+
+            if(p.Alergeni.Count != 0)
+            {
+                int i = 0;
+                foreach (string alergen in p.Alergeni)
+                {
+                    foreach (Lek lek in lekoviZaPrikaz)
+                    {
+                        ++i;
+                        foreach (string alergenLek in lek.Alergeni)
+                        {
+                            Console.WriteLine("AAA");
+                            Console.WriteLine(alergen);
+                            Console.WriteLine("AAA");
+                            if (alergenLek.Equals(alergen) && !alergenLek.Equals(""))
+                            {
+                                Console.WriteLine(alergenLek + "            " + alergen);
+                                lekovi.RemoveAt(i);
+                            }
+                            --i;
+                            break;
+                        }
+                    }
+                    Console.WriteLine(alergen);
+                }
+            }
+
             InitializeComponent();
             listaSvihLekova.ItemsSource = lekovi;
             pomocna = terapija;
@@ -40,6 +70,7 @@ namespace IS_Bolnice.Prozori
             t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
             t.VremePocetka = System.DateTime.Now;
             t.VremeKraja = DateTime.Now.AddDays(Int16.Parse(txtTrajanje.Text));
+            t.Detalji = txtDetalji.Text;
             pomocna.Add(t);
 
         }
