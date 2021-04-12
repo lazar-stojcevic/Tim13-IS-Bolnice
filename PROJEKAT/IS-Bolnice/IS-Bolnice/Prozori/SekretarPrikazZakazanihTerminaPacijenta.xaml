@@ -12,7 +12,7 @@
         <Label Content="Termini za pacijenta " HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.153,0.707" FontWeight="Bold"/>
         <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="23" Margin="151,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>
         <Label Content="Pregledi:" FontWeight="Bold" Margin="10,60,443.6,455.4"/>
-        <DataGrid Name="lvPregledi" ItemsSource="{Binding PreglediPacijenta}" Margin="10,90,9.6,361" IsReadOnly="True"
+        <DataGrid Name="dataGridPregledi" ItemsSource="{Binding PreglediPacijenta}" Margin="10,90,9.6,361" IsReadOnly="True"
                   SelectionMode="Single" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding Lekar, Converter={cvt:LekarToTextConverter}}" />
@@ -22,9 +22,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Otkaži pregled" HorizontalAlignment="Left" Margin="180,274,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Otkazi_Pregled"/>
-        <Button Content="Pomeri pregled" HorizontalAlignment="Left" Margin="33,274,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Izmeni_Pregled"/>
+        <Button Content="Pomeri pregled" HorizontalAlignment="Left" Margin="33,274,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Pomeri_Pregled"/>
         <Label Content="Operacije:" FontWeight="Bold" Margin="10,328,443.6,181"/>
-        <DataGrid Name="lvOperacije" ItemsSource="{Binding OperacijePacijenta}" Margin="10,358,9.6,80" IsReadOnly="True"
+        <DataGrid Name="dataGridOperacije" ItemsSource="{Binding OperacijePacijenta}" Margin="10,358,9.6,80" IsReadOnly="True"
             SelectionMode="Single" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding Lekar, Converter={cvt:LekarToTextConverter}}" />
@@ -35,7 +35,7 @@
                 <DataGridTextColumn Header="Datum pregleda" Width="1*" Binding="{Binding VremePocetaOperacije, StringFormat=\{0:dd.MM.yyyy\}}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Pomeri operaciju" HorizontalAlignment="Left" Margin="33,560,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Izmeni_Operaciju"/>
+        <Button Content="Pomeri operaciju" HorizontalAlignment="Left" Margin="33,560,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Pomeri_Operaciju"/>
         <Button Content="Otkaži operaciju" HorizontalAlignment="Left" Margin="180,560,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Otkazi_Operaciju"/>
     </Grid>
 </Window>

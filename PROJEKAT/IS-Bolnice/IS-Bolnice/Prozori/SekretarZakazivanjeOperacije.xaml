@@ -23,17 +23,17 @@
         <Button Name="odabirTermina" Content="Odaberi termin" HorizontalAlignment="Left" Margin="348,341,0,0" VerticalAlignment="Top" Width="190" Height="30" Click="Button_Click_Odaberi_Termin"/>
         <Label Content="Sala:" HorizontalAlignment="Left" Margin="40,261,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Label Content="Termin:" HorizontalAlignment="Left" Margin="40,345,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
-        <TextBox x:Name="txtTermin" HorizontalAlignment="Left" Height="23" Margin="114,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>
+        <TextBox Name="txtTermin" HorizontalAlignment="Left" Height="23" Margin="114,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>
         <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="82,508,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_Potvrdi" Height="40"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="397,508,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_Odustani" Height="40"/>
-        <Label Content="Trajanje operacije:" HorizontalAlignment="Left" Margin="42,395,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
+        <Label Content="Trajanje operacije (u satima):" HorizontalAlignment="Left" Margin="42,395,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="42" Margin="42,203,0,0" Stroke="Black" VerticalAlignment="Top" Width="496"/>
         <ComboBox Name="comboLekari" HorizontalAlignment="Left" Margin="281,212,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
         <Label Content="Specijalista:" HorizontalAlignment="Left" Margin="69,212,0,0" VerticalAlignment="Top"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="39" Margin="42,286,0,0" Stroke="Black" VerticalAlignment="Top" Width="496"/>
-        <ComboBox Name="comboSobe" HorizontalAlignment="Left" Margin="281,295,0,0" VerticalAlignment="Top" Width="188"  SelectionChanged="comboSala_SelectionChanged"/>
+        <ComboBox Name="comboSale" HorizontalAlignment="Left" Margin="281,295,0,0" VerticalAlignment="Top" Width="188"  SelectionChanged="comboSala_SelectionChanged"/>
         <Label Content="Sala za operaciju:" HorizontalAlignment="Left" Margin="69,293,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="182,398,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="comboTrajanja" HorizontalAlignment="Left" Margin="232,398,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboTrajanje_SelectionChanged"/>
 
     </Grid>
 </Window>

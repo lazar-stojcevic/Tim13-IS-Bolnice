@@ -53,11 +53,11 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Click_Otkazi_Pregled(object sender, RoutedEventArgs e)
         {
-            Pregled pregled = PreglediPacijenta[lvPregledi.SelectedIndex];
+            Pregled pregled = PreglediPacijenta[dataGridPregledi.SelectedIndex];
             if (pregled != null)
             {
-                string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin?";
-                string sCaption = "Otkazivanje termina";
+                string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin pregleda?";
+                string sCaption = "Otkazivanje termina pregleda";
 
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Question;
@@ -78,19 +78,104 @@ namespace IS_Bolnice.Prozori
             }
         }
 
-        private void Button_Click_Izmeni_Pregled(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_Izmeni_Operaciju(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click_Otkazi_Operaciju(object sender, RoutedEventArgs e)
         {
+            Operacija operacija = OperacijePacijenta[dataGridOperacije.SelectedIndex];
+            if (operacija != null)
+            {
+                string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin operacije?";
+                string sCaption = "Otkazivanje termina operacije";
 
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+
+                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+                switch (rsltMessageBox)
+                {
+                    case MessageBoxResult.Yes:
+                        bo.OtkaziOperaciju(operacija);
+                        OperacijePacijenta.Remove(operacija);
+                        break;
+
+                    case MessageBoxResult.No:
+                        /* ... */
+                        break;
+                }
+            }
+        }
+
+        private void Button_Click_Pomeri_Pregled(object sender, RoutedEventArgs e)
+        {
+            int index = dataGridPregledi.SelectedIndex;
+            if (index != -1)
+            {
+                Pregled stariPregled = PreglediPacijenta[index];
+                Lekar lekar = stariPregled.Lekar;
+
+                Pregled noviPregled = new Pregled
+                {
+                    Lekar = stariPregled.Lekar,
+                    Pacijent = stariPregled.Pacijent,
+                    VremePocetkaPregleda = stariPregled.VremePocetkaPregleda,
+                    VremeKrajaPregleda = stariPregled.VremeKrajaPregleda
+                };
+
+                // na prvom mestu je pocetak termina a na drugom kraj termina
+                List < DateTime > termin = new List<DateTime>();
+                termin.Add(stariPregled.VremePocetkaPregleda);
+                termin.Add(stariPregled.VremeKrajaPregleda);
+
+                OdredjivanjeTermina ot = new OdredjivanjeTermina(termin, lekar);
+                ot.ShowDialog();
+
+                // unutar liste termin moze da se nalazi samo pocetak i samo kraj termina
+                if (termin.Count == 2)
+                {
+                    noviPregled.VremePocetkaPregleda = termin[0];
+                    noviPregled.VremeKrajaPregleda = termin[1];
+
+                    bp.IzmeniPregled(noviPregled, stariPregled);
+                    PreglediPacijenta[index] = noviPregled;
+                }
+            }
+        }
+
+        private void Button_Click_Pomeri_Operaciju(object sender, RoutedEventArgs e)
+        {
+            int index = dataGridOperacije.SelectedIndex;
+            if (index != -1)
+            {
+                Operacija staraOperacija = OperacijePacijenta[index];
+                Operacija novaOperacija = new Operacija
+                {
+                    Lekar = staraOperacija.Lekar,
+                    Pacijent = staraOperacija.Pacijent,
+                    Soba = staraOperacija.Soba,
+                    VremePocetaOperacije = staraOperacija.VremePocetaOperacije,
+                    VremeKrajaOperacije = staraOperacija.VremeKrajaOperacije
+                };
+                Lekar lekar = staraOperacija.Lekar;
+
+                // na prvom mestu je pocetak termina a na drugom kraj termina
+                List<DateTime> termin = new List<DateTime>();
+                termin.Add(staraOperacija.VremePocetaOperacije);
+                termin.Add(staraOperacija.VremeKrajaOperacije);
+
+                OdredjivanjeTermina ot = new OdredjivanjeTermina(termin, lekar);
+                ot.ShowDialog();
+
+                // unutar liste termin moze da se nalazi samo pocetak i samo kraj termina
+                if (termin.Count == 2)
+                {
+                    novaOperacija.VremePocetaOperacije = termin[0];
+                    TimeSpan trajanje = staraOperacija.VremeKrajaOperacije.Subtract(staraOperacija.VremePocetaOperacije);
+                    novaOperacija.VremeKrajaOperacije = novaOperacija.VremePocetaOperacije.Add(trajanje);
+
+                    bo.IzmeniOperaciju(novaOperacija, staraOperacija);
+                    OperacijePacijenta[index] = novaOperacija;
+                }
+            }
         }
     }
 }

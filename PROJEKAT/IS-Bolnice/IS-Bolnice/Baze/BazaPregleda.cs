@@ -133,7 +133,7 @@ public class BazaPregleda
             if (p.Lekar.Jmbg != pregled.Lekar.Jmbg || !p.VremePocetkaPregleda.Equals(pregled.VremePocetkaPregleda))
             {
                 // menjanje upisa
-                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda + "#" + p.VremeKrajaPregleda + "#" + "brojSobe";
+                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString() + "#" + p.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
                 lines.Add(zakazivanje);
             }
 
@@ -142,11 +142,31 @@ public class BazaPregleda
         File.WriteAllLines(path, lines);
     }
 
-    public void IzmeniPregled(Pregled pregled, Pregled stariPregled)
+    public void IzmeniPregled(Pregled noviPregled, Pregled stariPregled)
    {
-        OtkaziPregled(stariPregled);
-        ZakaziPregled(pregled);
-   }
+        string path = @"..\..\Datoteke\pregledi.txt";
+
+        List<Pregled> pregedi = SviSledeciPregledi();
+        List<string> lines = new List<string>();
+
+        foreach (Pregled p in pregedi)
+        {
+            if (p.Lekar.Jmbg != stariPregled.Lekar.Jmbg || !p.VremePocetkaPregleda.Equals(stariPregled.VremePocetkaPregleda))
+            {
+                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString() + "#" + p.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
+                lines.Add(zakazivanje);
+            }
+            else
+            {
+                // upisivanje pregleda sa izmenjenim terminom
+                string zakazivanje = noviPregled.Pacijent.Jmbg + "#" + noviPregled.Lekar.Jmbg + "#" + noviPregled.VremePocetkaPregleda.ToString() + "#" + noviPregled.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
+                lines.Add(zakazivanje);
+            }
+
+        }
+
+        File.WriteAllLines(path, lines);
+    }
    
    public List<Pregled> PreglediDatogPacijenta(Pacijent pacijent)
    {

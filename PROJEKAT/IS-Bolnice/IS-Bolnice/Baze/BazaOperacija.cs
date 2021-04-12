@@ -80,12 +80,29 @@ public class BazaOperacija
 
     public void OtkaziOperaciju(Operacija operacija)
    {
-      throw new NotImplementedException();
-   }
+        string path = @"..\..\Datoteke\operacije.txt";
+
+        List<Operacija> operacije = SveSledeceOperacije();
+        List<string> lines = new List<string>();
+
+        foreach (Operacija o in operacije)
+        {
+            if (!(o.Pacijent.Jmbg.Equals(operacija.Pacijent.Jmbg) && o.Soba.Id.Equals(operacija.Soba.Id) && o.VremePocetaOperacije.Equals(operacija.VremePocetaOperacije)))
+            {
+                string zakazivanje = o.VremePocetaOperacije.ToString() + "#" + o.VremeKrajaOperacije.ToString() + "#" +
+                    o.Pacijent.Jmbg + "#" + o.Lekar.Jmbg + "#" + o.Soba.Id;
+                lines.Add(zakazivanje);
+            }
+
+        }
+
+        File.WriteAllLines(path, lines);
+    }
    
-   public void IzmeniOperaciju(Operacija operacija)
+   public void IzmeniOperaciju(Operacija novaOperacija, Operacija staraOperacija)
    {
-      throw new NotImplementedException();
+        OtkaziOperaciju(staraOperacija);
+        ZakaziOperaciju(novaOperacija);
    }
    
    public List<Operacija> OperacijeOdredjenogPacijenta(Pacijent pacijent)

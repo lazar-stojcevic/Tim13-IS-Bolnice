@@ -27,6 +27,11 @@ namespace IS_Bolnice.Prozori
 
             termin = terminParam;
 
+            if (termin.Count != 0)
+            {
+                kalendar.SelectedDate = termin[0];
+            }
+
             lekarTxt.Text = lekar.Ime + " " + lekar.Prezime;
         }
 
@@ -43,8 +48,17 @@ namespace IS_Bolnice.Prozori
                 kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
             krajTermina = krajTermina.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
 
-            termin.Add(pocetakTermina);
-            termin.Add(krajTermina);
+            if (termin.Count == 0)
+            {
+                termin.Add(pocetakTermina);
+                termin.Add(krajTermina);
+            }
+            else
+            {
+                termin[0] = pocetakTermina;
+                termin[1] = krajTermina;
+            }
+            
 
             this.Close();
         }

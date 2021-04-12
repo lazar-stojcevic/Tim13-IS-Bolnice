@@ -7,16 +7,12 @@ using System;
 
 public class Operacija
 {
-   private DateTime vremePocetaOperacije;
-   private DateTime vremeKrajaOperacije;
-
     public Operacija()
     {
         this.Pacijent = new Pacijent();
         this.Lekar = new Lekar();
         this.Soba = new Soba();
     }
-
 
     public Lekar Lekar { get; set; }
     public Pacijent Pacijent { get; set; }

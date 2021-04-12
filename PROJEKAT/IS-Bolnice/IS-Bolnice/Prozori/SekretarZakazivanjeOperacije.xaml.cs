@@ -22,10 +22,12 @@ namespace IS_Bolnice.Prozori
     {
         private BazaLekara bl;
         private BazaBolnica bb;
+        private BazaOperacija bo;
         private List<Lekar> lekari;
         private List<Bolnica> bolnice;
         private List<Soba> sobe;
         private Pacijent pacijent;
+        private Operacija operacija;
 
 
         public SekretarZakazivanjeOperacije(Pacijent p)
@@ -34,21 +36,25 @@ namespace IS_Bolnice.Prozori
 
             bl = new BazaLekara();
             bb = new BazaBolnica();
+            bo = new BazaOperacija();
 
             lekari = bl.LekariSpecijalisti();
             bolnice = bb.SveBolnice();
             sobe = new List<Soba>();
+            operacija = new Operacija();
             List<Soba> sveSobe = bolnice[0].Soba; // za sada se podrazumeva da postoji samo jedna bolnica
 
             foreach(Soba s in sveSobe)
             {
-                if (!(s.PodRenoviranje || s.Obrisano) && (s.Tip == RoomType.operacionaSala))    // samo operacione sale
+                // samo operacione sale koje nisu obrisane i koje se trenutno ne renoviraju
+                if (!(s.PodRenoviranje || s.Obrisano) && (s.Tip == RoomType.operacionaSala))
                 {
                     sobe.Add(s);
                 }
             }
 
             pacijent = p;
+            operacija.Pacijent = p;
 
             txtIme.Text = pacijent.Ime;
             txtPrezime.Text = pacijent.Prezime;
@@ -65,9 +71,6 @@ namespace IS_Bolnice.Prozori
             comboLekari.ItemsSource = lekariString;
             comboLekari.SelectedIndex = -1;
 
-            // inicijalno dugme za novi termin nije dostupno dok se ne odabere lekar
-            odabirTermina.IsEnabled = false;
-
             List<string> sobeString = new List<string>();
             // formiranje stringa za svaku sobu
             foreach (Soba s in sobe)
@@ -75,23 +78,43 @@ namespace IS_Bolnice.Prozori
                 string sobaString = s.Id + " " + s.Tip.ToString();
                 sobeString.Add(sobaString);
             }
-            comboSobe.ItemsSource = sobeString;
-            comboSobe.SelectedIndex = -1;
+            comboSale.ItemsSource = sobeString;
+            comboSale.SelectedIndex = -1;
+
+            // popunjavanje ponudjenih trajanja
+            List<double> trajanja = new List<double>();
+            for (double i = 0.5; i <= 24; i += 0.5)
+            {
+                trajanja.Add(i);
+            }
+            comboTrajanja.ItemsSource = trajanja;
+            comboTrajanja.IsEnabled = false;
+
+            // inicijalno dugme za novi termin nije dostupno dok se ne odabere lekar
+            odabirTermina.IsEnabled = false;
         }
 
         private void comboLekari_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            odabirTermina.IsEnabled = true;
 
+            Lekar lekar = lekari[comboLekari.SelectedIndex];
+            operacija.Lekar = lekar;
         }
 
         private void comboSala_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Soba sala = sobe[comboSale.SelectedIndex];
+            operacija.Soba = sala;
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-
+            if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1 && operacija.VremePocetaOperacije != null)
+            {
+                bo.ZakaziOperaciju(operacija);
+                this.Close();
+            }
         }
 
         private void Button_Click_Odustani(object sender, RoutedEventArgs e)
@@ -101,7 +124,26 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Click_Odaberi_Termin(object sender, RoutedEventArgs e)
         {
+            // na prvom mestu je pocetak termina a na drugom kraj termina
+            List<DateTime> termin = new List<DateTime>();
+            Lekar lekar = lekari[comboLekari.SelectedIndex];
+            OdredjivanjeTermina ot = new OdredjivanjeTermina(termin, lekar);
+            ot.ShowDialog();
 
+            // unutar liste termin moze da se nalazi samo pocetak i samo kraj termina
+            if (termin.Count == 2)
+            {
+                operacija.VremePocetaOperacije = termin[0];
+                operacija.VremeKrajaOperacije = termin[1];
+                comboTrajanja.IsEnabled = true;
+                txtTermin.Text = termin[0].ToString();
+            }
+        }
+
+        private void comboTrajanje_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            double trajanje = (double)comboTrajanja.SelectedItem;
+            operacija.VremeKrajaOperacije = operacija.VremePocetaOperacije.AddHours(trajanje);
         }
     }
 }

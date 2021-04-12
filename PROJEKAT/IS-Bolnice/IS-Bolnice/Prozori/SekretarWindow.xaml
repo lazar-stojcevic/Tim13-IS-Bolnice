@@ -78,7 +78,7 @@
                             <Button Content="Ažuriraj alergene" Margin="10" Click="Button_Click_Azuriranje_Alergena"/>
                             <Button Content="Prikaz termina" Margin="10" Click="Button_Click_Prikaz_Termina"/>
                         </StackPanel>
-                        <DataGrid x:Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
+                        <DataGrid Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
