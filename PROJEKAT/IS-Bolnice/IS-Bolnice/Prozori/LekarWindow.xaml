@@ -58,7 +58,7 @@
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnIzvestaj" Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,577,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
+        <Button x:Name="btnIzvestaj" IsEnabled="False" Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,577,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
             <StackPanel>
                 <Image Source="../Slike/report.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
             </StackPanel>
