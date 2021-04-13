@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
+
 
 namespace IS_Bolnice.Prozori
 {
@@ -58,6 +60,37 @@ namespace IS_Bolnice.Prozori
             BazaIzvestaja baza = new BazaIzvestaja();
             textIzvestaja = textIzvestaja + System.Environment.NewLine;
             baza.KreirajIzvestaj(textIzvestaja);
+            ///////////////////////////////////////////////////////////////
+            // GENERISANJE RECEPTA, OVAJ PUT STVARNO
+            if (terapije.Count != 0)
+            {
+                StringFormat stringFormat = new StringFormat();
+                stringFormat.Alignment = StringAlignment.Near;
+
+                Pacijent p = new BazaPacijenata().PacijentSaOvimJMBG(jmbgPac);
+
+                string text1 = "Super bolnica";
+                string text2 = p.Ime + " " + p.Prezime;
+                string datum = p.DatumRodjenja.ToString("dd MM yyyy");
+                string danasniDatum = System.DateTime.Now.ToString("dd MM yyyy");
+                int broj = 0;
+                foreach (Terapija ter in terapije)
+                {
+                    System.Drawing.Image bitmap = new Bitmap(@"..\..\Slike\recept.bmp");
+                    Graphics graphicsImage = Graphics.FromImage(bitmap);
+
+                    graphicsImage.DrawString(text1, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(30, 70), stringFormat);
+                    graphicsImage.DrawString(text2, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(30, 110), stringFormat);
+                    graphicsImage.DrawString(datum, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(30, 140), stringFormat);
+                    graphicsImage.DrawString(danasniDatum, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(110, 210), stringFormat);
+                    graphicsImage.DrawString(jmbgLek, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(100, 280), stringFormat);
+                    graphicsImage.DrawString(ter.Lek.Sifra, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(30, 310), stringFormat);
+                    graphicsImage.DrawString(ter.UcestanostKonzumiranja.ToString() + "puta na dan", new Font("arail", 10),
+                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 360), stringFormat);
+                    broj++;
+                    bitmap.Save(@"..\..\Recepti\noviRecept" +jmbgPac +"_("+broj+ ").bmp");
+                }
+            }
             this.Close();
 
         }

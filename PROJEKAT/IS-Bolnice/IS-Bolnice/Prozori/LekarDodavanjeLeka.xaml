@@ -27,7 +27,7 @@
         <TextBox HorizontalAlignment="Left" x:Name="txtTrajanje" PreviewTextInput="NumberValidationTextBox" Height="22" Margin="225,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
 
         <Button Content="Dodaj" HorizontalAlignment="Left" Margin="39,585,0,0" VerticalAlignment="Top" Width="149" Height="52" Click="Button_DodajClick"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Width="149" Height="52"/>
+        <Button Content="Kraj" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Width="149" Height="52" Click="Button_KrajClick"/>
         <Label Content="Dodatni detalji o terapiji:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,397,0,0"/>
         <TextBox x:Name="txtDetalji" HorizontalAlignment="Left" Height="116" Margin="29,423,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="338"/>
 
