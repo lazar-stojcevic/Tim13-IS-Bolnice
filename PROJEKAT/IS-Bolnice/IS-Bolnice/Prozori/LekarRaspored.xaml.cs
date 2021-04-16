@@ -211,5 +211,56 @@ namespace IS_Bolnice.Prozori
             pod.ShowDialog();
 
         }
+
+        private void Button_OtvoriPregled(object sender, RoutedEventArgs e)
+        {
+            if (listaPregleda.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Pregled selektovanPregled = (Pregled)listaPregleda.SelectedItem;
+            LekarWindow prozorZaPregled = new LekarWindow();
+            prozorZaPregled.Sifra = sifra;
+
+            prozorZaPregled.txtJMBG.Text = selektovanPregled.Pacijent.Jmbg;
+            prozorZaPregled.txtIme.Text = selektovanPregled.Pacijent.Ime;
+            prozorZaPregled.txtPrz.Text = selektovanPregled.Pacijent.Prezime;
+
+            prozorZaPregled.btnPregled.IsEnabled = true;
+            prozorZaPregled.btnOperacija.IsEnabled = true;
+            prozorZaPregled.btnIzvestaj.IsEnabled = true;
+            this.Close();
+
+            prozorZaPregled.ShowDialog();
+
+        }
+
+        private void Button_OtvoriOperaciju(object sender, RoutedEventArgs e)
+        {
+            if (listaOperacija.SelectedIndex == -1)
+            {
+                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Operacija selektovanaOperacija = (Operacija)listaOperacija.SelectedItem;
+            LekarWindow prozorZaPregled = new LekarWindow();
+            prozorZaPregled.Sifra = sifra;
+
+            prozorZaPregled.txtJMBG.Text = selektovanaOperacija.Pacijent.Jmbg;
+            prozorZaPregled.txtIme.Text = selektovanaOperacija.Pacijent.Ime;
+            prozorZaPregled.txtPrz.Text = selektovanaOperacija.Pacijent.Prezime;
+
+            prozorZaPregled.btnPregled.IsEnabled = true;
+            prozorZaPregled.btnOperacija.IsEnabled = true;
+            prozorZaPregled.btnIzvestaj.IsEnabled = true;
+            this.Close();
+
+            prozorZaPregled.ShowDialog();
+
+
+
+        }
+
     }
 }

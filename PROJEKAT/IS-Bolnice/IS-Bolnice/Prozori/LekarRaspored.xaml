@@ -9,6 +9,11 @@
     <Grid>
         <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,343,0,0" VerticalAlignment="Top" Width="101"/>
         <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,383,-0.4,0" VerticalAlignment="Top" Width="394">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Otvori ovu operaciju" Click="Button_OtvoriOperaciju" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -33,6 +38,11 @@
         <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="9,29,0,0" VerticalAlignment="Top" Width="101"/>
         <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="284,578,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
         <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,76,0,0" VerticalAlignment="Top" Width="394">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Otvori ovaj pregled" Click="Button_OtvoriPregled" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -44,7 +54,6 @@
                         <TextBlock Text="{Binding Pacijent.Jmbg}" />
                         <TextBlock Text=" u Prostoriji: TREBA DA SE DODA " />
                         <TextBlock Text="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}" />
-
 
                     </WrapPanel>
                 </DataTemplate>
