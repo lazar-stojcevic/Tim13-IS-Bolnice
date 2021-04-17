@@ -1,0 +1,6 @@
+1#stolica#False#0#
+2#igla#False#1#
+3#mikroskop#False#0#
+4#toplomer#False#0#
+5#maska#False#0#
+6#sto#True#0#

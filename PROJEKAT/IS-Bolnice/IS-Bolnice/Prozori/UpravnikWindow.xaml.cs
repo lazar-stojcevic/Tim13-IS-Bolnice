@@ -161,5 +161,12 @@ namespace IS_Bolnice
                 this.Close();
             }
         }
+
+        private void Button_Oprema(object sender, RoutedEventArgs e)
+        {
+            Prozori.OpremaWindow opremaWindow = new Prozori.OpremaWindow();
+            opremaWindow.Show();
+            this.Close();
+        }
     }
 }

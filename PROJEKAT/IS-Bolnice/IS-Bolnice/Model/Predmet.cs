@@ -10,7 +10,8 @@ public class Predmet
    private TipOpreme tip;
    private int kolicina;
    private string naziv;
-   private int id;
+   private string id;
+   private bool obrisano;
    
    public Soba soba;
    
@@ -42,5 +43,10 @@ public class Predmet
          }
       }
    }
+    public TipOpreme Tip { get; set; }
+    public int Kolicina { get; set; }
+    public string Naziv { get; set; }
+    public string Id { get; set; }
 
+    public bool Obrisano { get; set; }
 }
