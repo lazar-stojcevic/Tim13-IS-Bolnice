@@ -61,6 +61,10 @@ public class BazaLekara
                 }
                 p.KorisnickoIme = delovi[4];
                 p.Sifra = delovi[5];
+                //DODATO ZA RADNO VREME
+                p.PocetakRadnogVremena = DateTime.Parse(delovi[6]);
+                p.KrajRadnogVremena = DateTime.Parse(delovi[7]);
+                //TREBA DODATI ORDINACIJU
                 ret.Add(p);
             }
         }

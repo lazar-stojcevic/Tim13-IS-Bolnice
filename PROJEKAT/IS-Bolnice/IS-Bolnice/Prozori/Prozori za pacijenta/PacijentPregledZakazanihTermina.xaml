@@ -25,7 +25,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="obrisiTermin" Margin="10" Content="Obrisi termin" FontSize="20" Click="obrisiTermin_Click"/>
+            <Button Grid.Column="0" x:Name="obrisiTermin" Margin="10" Content="Obrisi termin" FontSize="20" Click="obrisiTermin_Click" IsEnabled="False"/>
             <Button Grid.Column="1" x:Name="izmeniTermin" Margin="10" Content="Izmeni termin" FontSize="20" Click="izmeniTermin_Click" IsEnabled="False"/>
             <Button Grid.Column="2" x:Name="izadji" Margin="10" Content="Izadji iz prikaza" FontSize="20" Click="izadji_Click"/>
         </Grid>

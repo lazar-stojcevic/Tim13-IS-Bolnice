@@ -1,8 +1,3 @@
-// File:    BazaOperacija.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 5:52:52 PM
-// Purpose: Definition of Class BazaOperacija
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;

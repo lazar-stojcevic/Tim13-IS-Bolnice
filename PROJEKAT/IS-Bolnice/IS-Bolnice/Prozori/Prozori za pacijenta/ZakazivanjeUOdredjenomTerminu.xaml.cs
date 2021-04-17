@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
+{
+    public partial class ZakazivanjeUOdredjenomTerminu : Window
+    {
+        string jmbgPac;
+        public ZakazivanjeUOdredjenomTerminu(string jmbgPacijenta)
+        {
+            InitializeComponent();
+            jmbgPac = jmbgPacijenta;
+        }
+
+        private void btnUpHrs_Click(object sender, RoutedEventArgs e)
+        {
+            int sati = Int32.Parse(txtHour.Text);
+            sati += 1;
+
+            if (sati > 23)
+                sati = 0;
+
+            if (sati == 0)
+            {
+                txtHour.Text = "00";
+            }
+            else
+            {
+                txtHour.Text = sati.ToString();
+            }
+        }
+
+        private void btnUpMin_Click(object sender, RoutedEventArgs e)
+        {
+            int min = Int32.Parse(txtMinute.Text);
+            min += 10;
+
+            if (min > 59)
+                min = 0;
+
+            if (min == 0)
+            {
+                txtMinute.Text = "00";
+            }
+            else
+            {
+                txtMinute.Text = min.ToString();
+            }
+        }
+
+        private void btnDownMin_Click(object sender, RoutedEventArgs e)
+        {
+            int min = Int32.Parse(txtMinute.Text);
+            min -= 10;
+
+            if (min < 0)
+                min = 50;
+
+            if (min == 0)
+            {
+                txtMinute.Text = "00";
+            }
+            else
+            {
+                txtMinute.Text = min.ToString();
+            }
+        }
+
+        private void btnDownHrs_Click(object sender, RoutedEventArgs e)
+        {
+            int sati = Int32.Parse(txtHour.Text);
+            sati -= 1;
+
+            if (sati < 0)
+                sati = 23;
+
+            if (sati == 0)
+            {
+                txtHour.Text = "00";
+            }
+            else
+            {
+                txtHour.Text = sati.ToString();
+            }
+        }
+
+        private void btnPotvrdi_Click(object sender, RoutedEventArgs e)
+        {
+            string vreme = datePicker.SelectedDate.ToString();
+            DateTime piker = DateTime.Parse(vreme);
+            DateTime now = DateTime.Now;
+
+            if (piker.Day == now.Day)
+            {
+                string message = "Molimo vas da pomerite datum bar za jedan dan";
+                MessageBox.Show(message);
+            }
+            else
+            {
+                Pregled pregled = new Pregled();
+                Pacijent pacijent = new Pacijent();
+                BazaPregleda bp = new BazaPregleda();
+
+                System.DateTime pocetakPregleda = new System.DateTime(piker.Year, piker.Month, piker.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0, 0);
+                DateTime krajPregleda = pocetakPregleda.AddMinutes(30);
+
+                pacijent.Jmbg = jmbgPac;
+                pregled.Pacijent = pacijent;
+                pregled.VremePocetkaPregleda = pocetakPregleda;
+                pregled.VremeKrajaPregleda = krajPregleda;
+
+                if (bp.PacijentImaZakazanPregled(pregled))
+                {
+                    string message = "Već imate zakazani pregled u tom terminu";
+                    MessageBox.Show(message);
+                }
+                else
+                {
+                    if (bp.ZakazivanjePregledaUTerminu(pregled))
+                    {
+                        string message = "Uspešno ste zakazali pregled";
+                        MessageBox.Show(message);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Za uneseni termin su svi lekari zauzeti");
+                    }
+                }
+
+            }
+
+        }
+
+        private void Odustani_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

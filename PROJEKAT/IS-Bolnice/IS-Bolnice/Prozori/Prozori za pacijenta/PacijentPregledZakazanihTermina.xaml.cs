@@ -18,18 +18,12 @@ namespace IS_Bolnice.Prozori
     {
         private string jmbgPac;
 
+        BazaPregleda bp = new BazaPregleda();
         public PacijentPregledZakazanihTermina(string jmbgPacijenta)
         {
             InitializeComponent();
             jmbgPac = jmbgPacijenta;
 
-            BazaPregleda bp = new BazaPregleda();
-            List<Pregled> pregledi = bp.SviSledeciPregledi();
-            foreach(Pregled p in pregledi)
-            {
-                Console.WriteLine(p.VremePocetkaPregleda.ToString());
-            }
-            
             lvPregledi.ItemsSource = bp.PreglediOdredjenogPacijenta(jmbgPacijenta);
         }
 
@@ -44,7 +38,7 @@ namespace IS_Bolnice.Prozori
             p.Pacijent = pac;
 
             bp.OtkaziPregled(p);
-            this.Close();
+            lvPregledi.ItemsSource = bp.PreglediOdredjenogPacijenta(jmbgPac);
         }
 
         private void izadji_Click(object sender, RoutedEventArgs e)
@@ -56,20 +50,21 @@ namespace IS_Bolnice.Prozori
         private void izmeniTermin_Click(object sender, RoutedEventArgs e)
         {
             Pregled p = (Pregled)lvPregledi.SelectedItem;
-            PacijentIzmenaTermina pit = new PacijentIzmenaTermina(jmbgPac, p.Lekar.Jmbg, p.VremePocetkaPregleda.ToString("HH:mm"), p.VremePocetkaPregleda);
+            PacijentIzmenaTermina pit = new PacijentIzmenaTermina(jmbgPac, p.Lekar.Jmbg, p.VremePocetkaPregleda, lvPregledi);
             pit.ShowDialog();
         }
 
         private void lvPregledi_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Pregled p = new Pregled();
-            p = (Pregled)lvPregledi.SelectedItem;
-            if (p.Equals(null))
+            int index = lvPregledi.SelectedIndex;
+            if (index == -1)
             {
                 izmeniTermin.IsEnabled = false;
+                obrisiTermin.IsEnabled = false;
             }
             else
             {
+                obrisiTermin.IsEnabled = true;
                 izmeniTermin.IsEnabled = true;
             }
         }

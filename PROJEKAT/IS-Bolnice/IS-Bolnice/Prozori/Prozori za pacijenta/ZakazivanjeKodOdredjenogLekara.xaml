@@ -1,0 +1,44 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prozori_za_pacijenta.ZakazivanjeKodOdredjenogLekara"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
+        mc:Ignorable="d"
+        Title="Zakazivanje termina kod određenog lekara" Height="400" Width="350"
+        WindowStartupLocation="CenterScreen">
+    <Border Background="#eee">
+        <StackPanel Margin="10" Background="White">
+            <!--Lista lekara-->
+            <TextBlock 
+               Text="Odaberite lekara"
+               FontSize="16"
+               Margin="10 10 10 0"/>
+            <ListBox 
+                Height="100"
+                Margin="5"
+                FontSize="16"
+                x:Name="lekariList" SelectionChanged="lekariList_SelectionChanged"/>
+
+            <!--Predlozeni termini-->
+            <TextBlock
+                Text="Odaberite termin"
+                FontSize="16"
+                Margin="10 0 10 0"/>
+            <ListBox
+                Height="100"
+                Margin="5"
+                FontSize="16"
+                x:Name="terminiList" SelectionChanged="terminiList_SelectionChanged"/>
+            <!--Dugmad-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button IsEnabled="false" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="Potvrdi" Click="potvrdi_Click"/>
+                <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="Odustani" Click="odustani_Click"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>

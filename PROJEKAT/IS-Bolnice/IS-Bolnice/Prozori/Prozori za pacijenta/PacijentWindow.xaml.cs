@@ -1,4 +1,5 @@
 ﻿using IS_Bolnice.Prozori;
+using IS_Bolnice.Prozori.Prozori_za_pacijenta;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,8 @@ namespace IS_Bolnice
         {
             string[] items = imeKorisnika.Text.Split(); //items[2] jmbg
 
-            PacijentZakazivanjePregledaProzor pp = new PacijentZakazivanjePregledaProzor(items[2]);
-            pp.ShowDialog();
+            OdabirZakazivanja oz = new OdabirZakazivanja(items[2]);
+            oz.ShowDialog();
         }
 
         private void prikaziBtn_Click(object sender, RoutedEventArgs e)
@@ -36,7 +37,13 @@ namespace IS_Bolnice
             PacijentPregledZakazanihTermina pp = new PacijentPregledZakazanihTermina(items[2]);
             pp.ShowDialog();
         }
-    }
 
-    //DODATI DUGME ZA ODJAVLJIVANJE
+        private void odjavaBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
+        }
+    }
 }
