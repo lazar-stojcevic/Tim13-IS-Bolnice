@@ -1,0 +1,3 @@
+Koleginica je opisala sistem koji bi radio u praksi, ali tu se može naći mesta za određena poboljštanja.
+Konkretno iz klase baza bolnica se možda ne moraju dobavljati sve bolnice u prozor RaspoređivanjeOpereme, nego
+mu se može dati argument bolnice koja želi da se menja. Takođe je možda potrebno dodati još neke validacije radi očuvanja konzistentnosti sistema.
