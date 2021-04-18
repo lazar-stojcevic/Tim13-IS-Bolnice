@@ -1,0 +1,16 @@
+Komentar za dijagram aktivnosti Bojana za funkcionalnost "Izmena termina"
+
+-dobar je preduslov za početak dijagrama
+-dobro su predstavljena odlučivanja za promenu lekara i promenu dana jer u početku imaju početnu vrednost pa mogu a i ne moraju da se menjaju
+-dobra stvar je to što je predstavljen potencijalni izlazak iz toka aktivnosti ukoliko korisnik nije zadovoljan terminima
+-prikazana je validacija što omogućava otpornost aplikacije od toga da korisnik može u proizvoljnom vremenu da zatraži zakazivanje 
+nekog termina koji mu je bio prikazan od otvaranja prozora
+-prikazana mogućnost da nakon što je termin zauzeo neko drugi u međuvremenu može da promeni lekara ili dan za pregled
+-prikazivanjem liste slobodnih termina za odabrani dan ubrzava proces zakazivanja gde korisnik ne mora sam da unosi termin i čeka proveru 
+da li je taj termin zauzet
+
+-možda bi bilo bolje da nema odlučivanja "Korisnik menja termin" u slučaju kada je odabrani termin zakazao neki drugi korisnik 
+već da se nakon aktivnosti "Obaveštavanje korisnika da je termin zauzet" doda aktivnost koja predstavlja osvežavanje liste termina 
+za izabranog lekara i izabrani dan i da se ta aktivnost dalje veže na odlučivanje "Promena lekara"
+-ja bih dodatno prikazao na dijagramu da iz odlučivanja "Korisnik je zadovoljan sa predloženim terminima" pored toga što može da se završi 
+tok, ukoliko nije zadovoljan, da korisnik može ponovo da menja lekara ili dan za termine
