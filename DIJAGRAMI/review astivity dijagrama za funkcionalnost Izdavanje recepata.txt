@@ -1,0 +1,4 @@
+
+-Dobro je što uzeta su u obzir 2 slučaja otvaranja završne forme
+-Postoje više validacija unesenih podataka, što je bolje nego da ima jednu u kojoj se sve proverava. Ovako se izbegava vraćanje za mnogo koraka.
+-Možda bi bilo bolje da se "Odabir leka za koji se izdaje recept" stavi kao korak u "Definisanje terapije", umesto posebnog čvora.
