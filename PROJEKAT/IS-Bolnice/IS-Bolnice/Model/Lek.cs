@@ -13,6 +13,7 @@ public class Lek: INotifyPropertyChanged
    private String ime;
    private String opis;
    private List<String> alergeni;
+   private bool potrebanRecept;
 
     public Lek() {
         alergeni = new List<string>();
@@ -59,6 +60,17 @@ public class Lek: INotifyPropertyChanged
             if (alergeni == value) return;
             alergeni = value;
             RaisePropertyChanged("alergeni");
+        }
+    }
+
+    public bool PotrebanRecept
+    {
+        get { return potrebanRecept; }
+        set
+        {
+            if (potrebanRecept == value) return;
+            potrebanRecept = value;
+            RaisePropertyChanged("potrebanRecept");
         }
     }
 

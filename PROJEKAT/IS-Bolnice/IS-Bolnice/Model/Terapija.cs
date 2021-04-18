@@ -11,7 +11,7 @@ public class Terapija : INotifyPropertyChanged
    private Double ucestanostKonzumiranja;
    private DateTime vremePocetka;
    private DateTime vremeKraja;
-   
+   private int razlikaNaKolikoSeDanaUzimaLek;
    private Lek lek;
 
    private string detalji;
@@ -46,6 +46,17 @@ public class Terapija : INotifyPropertyChanged
             if (vremeKraja == value) return;
             vremeKraja = value;
             RaisePropertyChanged("vremeKraja");
+        }
+    }
+
+    public int RazlikaNaKolikoSeDanaUzimaLek
+    {
+        get { return razlikaNaKolikoSeDanaUzimaLek; }
+        set
+        {
+            if (razlikaNaKolikoSeDanaUzimaLek == value) return;
+            razlikaNaKolikoSeDanaUzimaLek = value;
+            RaisePropertyChanged("razlikaNaKolikoSeDanaUzimaLek");
         }
     }
 

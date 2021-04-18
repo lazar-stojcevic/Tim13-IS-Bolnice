@@ -22,8 +22,16 @@ public class BazaLekova
                 p.Sifra = delovi[0];
                 p.Ime = delovi[1];
                 p.Opis = delovi[2];
+                if (delovi[3].Equals("1"))
+                {
+                    p.PotrebanRecept = true;
+                }
+                else
+                {
+                    p.PotrebanRecept = false;
+                }
 
-                string alergeniSvi = delovi[3];
+                string alergeniSvi = delovi[4];
                 if (!alergeniSvi.Equals("")) 
                  {
                     string[] alergen = alergeniSvi.Split(',');

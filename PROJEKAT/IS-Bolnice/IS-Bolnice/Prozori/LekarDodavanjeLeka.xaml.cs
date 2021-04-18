@@ -70,6 +70,7 @@ namespace IS_Bolnice.Prozori
             t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
             t.VremePocetka = System.DateTime.Now;
             t.VremeKraja = DateTime.Now.AddDays(Int16.Parse(txtTrajanje.Text));
+            t.RazlikaNaKolikoSeDanaUzimaLek = comboboxNaKolikoDana.SelectedIndex;
             t.Detalji = txtDetalji.Text;
             pomocna.Add(t);
 
@@ -85,5 +86,6 @@ namespace IS_Bolnice.Prozori
         {
             this.Close();
         }
+
     }
 }

@@ -1,5 +1,5 @@
-1#Bensedin#3mg#Penicilin,Grinje,Dlake
-2#Bromazepam#2mg#Penicilin
-3#Brufen#500mg#nema
-4#NekiProbiotik#1000mg#Penicilin
-5#Xanax#10mg#nema
+1#Bensedin#3mg#1#Penicilin,Grinje,Dlake
+2#Bromazepam#2mg#1#Penicilin
+3#Brufen#500mg#1#nema
+4#NekiProbiotik#1000mg#0#Penicilin
+5#Xanax#10mg#1#nema
