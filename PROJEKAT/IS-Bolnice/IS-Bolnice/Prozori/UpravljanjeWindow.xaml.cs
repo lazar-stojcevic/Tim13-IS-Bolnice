@@ -90,23 +90,46 @@ namespace IS_Bolnice.Prozori
                     predmeti = baza.SvaOprema();
                     string tekst = (string)lvDataBinding.SelectedItem;
                     string[] niz = tekst.Split(' ');
-                    foreach (Predmet p in predmeti)
+                    if (!this.CheckNumber(niz[1]))
                     {
-                        if (p.Id.Equals(niz[1]))
+                        foreach (Predmet p in predmeti)
                         {
-                            p.Obrisano = true;
-                            break;
+                            if (p.Id.Equals(niz[1]))
+                            {
+                                p.Obrisano = true;
+                                break;
+                            }
+
                         }
+                        baza.KreirajOpremu(predmeti);
 
+                        UpravljanjeWindow upravljanjeWindow = new UpravljanjeWindow();
+                        upravljanjeWindow.Show();
+                        this.Close();
                     }
-                    baza.KreirajOpremu(predmeti);
-
-                    UpravljanjeWindow upravljanjeWindow = new UpravljanjeWindow();
-                    upravljanjeWindow.Show();
-                    this.Close();
+                    else {
+                        MessageBox.Show("Oprema postoji na stanju, ne može biti obrisana!");
+                    }
                 }
 
             }
+        }
+
+        public bool CheckNumber(string id) {
+            BazaBolnica baza = new BazaBolnica();
+            List<Bolnica> bolnice = baza.SveBolnice();
+            Bolnica b = bolnice[0];
+            bool postoji = false;
+            foreach (Soba s in b.Soba) {
+                foreach (Predmet p in s.Predmet) {
+                    if (p.Id.Equals(id)) {
+                        postoji = true;
+                        break;
+                    }
+                }
+                if (postoji) break;
+            }
+            return postoji;
         }
     }
 }

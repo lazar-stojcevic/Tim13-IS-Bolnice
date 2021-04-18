@@ -4,3 +4,4 @@
 4#toplomer#False#0#
 5#maska#False#0#
 6#sto#True#0#
+100#stapic#True#1#

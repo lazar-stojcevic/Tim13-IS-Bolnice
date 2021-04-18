@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="OpremaWindow" Height="450" Width="800">
+        Title="OpremaWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="Upravljanje opremom" FontWeight="DemiBold" Background="Green" FontSize="22" HorizontalAlignment="Left" Margin="262,51,0,0" VerticalAlignment="Top" Width="241" Height="58" Click="Button_Upravljanje" />
         <Button Content="Nabavka opreme" FontWeight="DemiBold" Background="Green" FontSize="22" HorizontalAlignment="Left" Margin="262,171,0,0" VerticalAlignment="Top" Width="241" Height="58" Click="Button_Nabavka"/>

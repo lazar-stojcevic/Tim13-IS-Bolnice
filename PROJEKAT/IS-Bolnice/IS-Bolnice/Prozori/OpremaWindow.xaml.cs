@@ -42,7 +42,6 @@ namespace IS_Bolnice.Prozori
         {
             PreraspodelaWindow preraspodelaWindow = new PreraspodelaWindow();
             preraspodelaWindow.Show();
-            this.Close();
         }
     }
 }
