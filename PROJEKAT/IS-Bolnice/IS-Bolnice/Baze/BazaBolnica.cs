@@ -58,6 +58,16 @@ public class BazaBolnica
                     }
                     s.Sprat = Int32.Parse(ds[5]);
                     s.Kvadratura = Double.Parse(ds[6]);
+                    string[] predmeti = ds[7].Split('$');
+                    foreach (string dp in predmeti)
+                    {
+                        if (dp.Equals("")) break;
+                        string[] deo = dp.Split('-');
+                        Predmet p = new Predmet();
+                        p.Id = deo[0];
+                        p.Kolicina = Int32.Parse(deo[1]);
+                        s.AddPredmet(p);
+                    }
                     b.AddSoba(s);
                 }
 
@@ -81,7 +91,13 @@ public class BazaBolnica
             niz[0] = novaBolnica.Ime + "#" + novaBolnica.Adresa + "#" + novaBolnica.EMail + "#" + novaBolnica.BrojTelefona + "#";
             foreach (Soba s in novaBolnica.Soba)
             {
-                niz[0] = niz[0] + s.Id + "/" + s.Zauzeta + "/" + s.PodRenoviranje + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "%";
+                niz[0] = niz[0] + s.Id + "/" + s.Zauzeta + "/" + s.PodRenoviranje + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "/";
+                foreach (Predmet p in s.Predmet)
+                {
+
+                    niz[0] = niz[0] + p.Id + "-" + p.Kolicina + "$";
+                }
+                niz[0] = niz[0] + "%";
             }
             niz[0] = niz[0] + "#";
             File.WriteAllLines(fileLocation, niz);

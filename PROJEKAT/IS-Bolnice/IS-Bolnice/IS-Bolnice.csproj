@@ -82,6 +82,9 @@
     <Compile Include="Prozori\LekarIzvestaj.xaml.cs">
       <DependentUpon>LekarIzvestaj.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\NabavkaOpremeWindow.xaml.cs">
+      <DependentUpon>NabavkaOpremeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\OdredjivanjeTermina.xaml.cs">
       <DependentUpon>OdredjivanjeTermina.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,9 @@
     </Compile>
     <Compile Include="Prozori\LekarZakazivanjePregleda.xaml.cs">
       <DependentUpon>LekarZakazivanjePregleda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\PreraspodelaWindow.xaml.cs">
+      <DependentUpon>PreraspodelaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prozori za pacijenta\OdabirZakazivanja.xaml.cs">
       <DependentUpon>OdabirZakazivanja.xaml</DependentUpon>
@@ -186,6 +192,10 @@
     <Page Include="Prozori\LekarIzvestaj.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\NabavkaOpremeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\OdredjivanjeTermina.xaml">
       <SubType>Designer</SubType>
@@ -256,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\LekarZakazivanjePregleda.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\PreraspodelaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -425,6 +439,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\oprema.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\3d-up-arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

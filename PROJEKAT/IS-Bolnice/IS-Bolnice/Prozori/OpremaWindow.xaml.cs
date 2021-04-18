@@ -33,12 +33,16 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Nabavka(object sender, RoutedEventArgs e)
         {
-
+            NabavkaOpremeWindow nabavkaOpremeWindow = new NabavkaOpremeWindow();
+            nabavkaOpremeWindow.Show();
+            this.Close();
         }
 
         private void Button_Preraspodela(object sender, RoutedEventArgs e)
         {
-
+            PreraspodelaWindow preraspodelaWindow = new PreraspodelaWindow();
+            preraspodelaWindow.Show();
+            this.Close();
         }
     }
 }
