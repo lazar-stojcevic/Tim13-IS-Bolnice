@@ -1,0 +1,18 @@
+Kolega Matija je napravio dva dijagrama sekvenci, koja su veoma slicna tako da cu se ja bazirati na reviziju meni blizeg i 
+poznatijeg - zakazivanju termina pregleda. 
+Na prvi pogled dijagram je odradjen veoma detaljno i sa dubokim razumevanjem.
+
+1. Po mom misljenu jako je dobra praksa ostavljati komentar sa strane kao sto je kolega uradio gde zapravo spaja logiku dijagrama
+sa samim izgledom softvera, zbog boljeg razumevanja od strane osobe koja tumaci dijagram
+2. Dodati komentar da je na samom pocetku akcije oznacen RadioButton za prioritet zakazivanja u najblizem terminu, posto kasije 
+postoji kao opciono izvrsavanje ako je selektovan RadioButton za lekara kao prioritet
+3. Obrisati "1" kod klase BazaLekara ako nema neku posebnu semnatiku
+4. Pohvala na nacin organizovanja i same implementacije "return meseage" - strelice, sve sem jedne strelice ujedno oznacavju i 
+kraj zivotnog ciklusa neke funkcje/funkcionalnosti
+5. Dodao bih samo, u slucaju kada je odabrani termin dostupan, proveru da li je u medjuvremenu neko zakazao pregled kod 
+odabranog lekara u preklapajucem terminu
+6. U okviru petlje [termin nije dostupan] postoji vise interaction fragmen-ata koji se isto ili slicno zovu kao i sama petlja
+pa bi bilo dobro samo malo promeniti nazive/uslove radi boljeg tumacenja
+7. Pozivi funkcija i parametri koji se prosledjuju su dobro odradjeni
+8. 
+ 
