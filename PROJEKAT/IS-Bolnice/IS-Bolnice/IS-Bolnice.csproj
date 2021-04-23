@@ -63,10 +63,12 @@
     <Compile Include="Baze\BazaLekova.cs" />
     <Compile Include="Baze\BazaObavestenja.cs" />
     <Compile Include="Baze\BazaOpreme.cs" />
+    <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />
     <Compile Include="Model\Obavestenje.cs" />
+    <Compile Include="Model\Sastojak.cs" />
     <Compile Include="Prozori\DodajOpremuWindow.xaml.cs">
       <DependentUpon>DodajOpremuWindow.xaml</DependentUpon>
     </Compile>

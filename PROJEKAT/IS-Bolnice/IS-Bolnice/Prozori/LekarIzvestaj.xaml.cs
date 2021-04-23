@@ -55,7 +55,7 @@ namespace IS_Bolnice.Prozori
             foreach (Terapija ter in terapije)
             {
                 textIzvestaja = textIzvestaja + ter.Lek.Sifra + "$$" + ter.Lek.Ime + "$$" + ter.Lek.Opis + "$$" + ter.RazlikaNaKolikoSeDanaUzimaLek.ToString() + "$$"
-                    +ter.UcestanostKonzumiranja.ToString() + "$$" + ter.VremePocetka.ToString() + "$$" + ter.VremeKraja.ToString() + "$$" + ter.Detalji + "$$$";
+                    +ter.UcestanostKonzumiranja.ToString() + "$$" + ter.VremePocetka.ToString() + "$$" + ter.VremeKraja.ToString() + "$$" + ter.Opis + "$$$";
             }
             BazaIzvestaja baza = new BazaIzvestaja();
             textIzvestaja = textIzvestaja + System.Environment.NewLine;

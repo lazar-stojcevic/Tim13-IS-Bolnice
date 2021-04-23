@@ -11,10 +11,9 @@ public class Terapija : INotifyPropertyChanged
    private Double ucestanostKonzumiranja;
    private DateTime vremePocetka;
    private DateTime vremeKraja;
-   private int razlikaNaKolikoSeDanaUzimaLek;
+   private int daniIzmedjuKonzumiranja;
    private Lek lek;
-
-   private string detalji;
+   private string opis;
 
     public Double UcestanostKonzumiranja
     {
@@ -51,12 +50,12 @@ public class Terapija : INotifyPropertyChanged
 
     public int RazlikaNaKolikoSeDanaUzimaLek
     {
-        get { return razlikaNaKolikoSeDanaUzimaLek; }
+        get { return daniIzmedjuKonzumiranja; }
         set
         {
-            if (razlikaNaKolikoSeDanaUzimaLek == value) return;
-            razlikaNaKolikoSeDanaUzimaLek = value;
-            RaisePropertyChanged("razlikaNaKolikoSeDanaUzimaLek");
+            if (daniIzmedjuKonzumiranja == value) return;
+            daniIzmedjuKonzumiranja = value;
+            RaisePropertyChanged("daniIzmedjuKonzumiranja");
         }
     }
 
@@ -71,14 +70,14 @@ public class Terapija : INotifyPropertyChanged
         }
     }
 
-    public string Detalji
+    public string Opis
     {
-        get { return detalji; }
+        get { return opis; }
         set
         {
-            if (detalji == value) return;
-            detalji = value;
-            RaisePropertyChanged("detalji");
+            if (opis == value) return;
+            opis = value;
+            RaisePropertyChanged("opis");
         }
     }
 
@@ -94,4 +93,5 @@ public class Terapija : INotifyPropertyChanged
             eh(this, new PropertyChangedEventArgs(propName));
         }
     }
+
 }

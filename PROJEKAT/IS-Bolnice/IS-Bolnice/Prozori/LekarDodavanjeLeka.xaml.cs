@@ -71,7 +71,7 @@ namespace IS_Bolnice.Prozori
             t.VremePocetka = System.DateTime.Now;
             t.VremeKraja = DateTime.Now.AddDays(Int16.Parse(txtTrajanje.Text));
             t.RazlikaNaKolikoSeDanaUzimaLek = comboboxNaKolikoDana.SelectedIndex;
-            t.Detalji = txtDetalji.Text;
+            t.Opis = txtDetalji.Text;
             pomocna.Add(t);
 
         }
