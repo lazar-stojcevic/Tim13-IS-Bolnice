@@ -38,8 +38,6 @@ namespace IS_Bolnice.Prozori
         {
             LekarDodavanjeLeka prozor = new LekarDodavanjeLeka(terapije, jmbgPac);
             prozor.Show();
-
-            
         }
 
         private void Button_ObrisiLek(object sender, RoutedEventArgs e)

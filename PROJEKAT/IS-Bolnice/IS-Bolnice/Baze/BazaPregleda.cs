@@ -11,7 +11,8 @@ public class BazaPregleda
         //Lekar
         Lekar lekar = new Lekar();
         BazaLekara bl = new BazaLekara();
-        List<Lekar> lekari = bl.LekariOpstePrakse();
+        BazaOperacija bazaOperacija = new BazaOperacija();
+        List<Lekar> lekari = bl.SviLekari();
         foreach (Lekar l in lekari)
         {
             if (l.Jmbg.Equals(jmbgLekara))
@@ -23,6 +24,7 @@ public class BazaPregleda
         //Liste
         List<Pregled> validni = new List<Pregled>();
         List<Pregled> zauzeti = PreglediOdredjenogLekara(jmbgLekara);
+        List<Operacija> zauzeteOperacije = bazaOperacija.SveSledeceOperacijeDatogLekara(jmbgLekara);
         List<Pregled> slobodni = new List<Pregled>();
 
         DateTime sutra = DateTime.Now.AddDays(1);
@@ -48,6 +50,7 @@ public class BazaPregleda
         foreach (Pregled predlozeni in slobodni)
         {
             bool isValid = true;
+            //Provera da li lekar ima zakazan pregled u nekom periodu
             foreach (Pregled zakazani in zauzeti)
             {
                 if (predlozeni.VremePocetkaPregleda == zakazani.VremePocetkaPregleda)
@@ -61,6 +64,25 @@ public class BazaPregleda
                     break;
                 }
                 if (predlozeni.VremeKrajaPregleda > zakazani.VremePocetkaPregleda && predlozeni.VremeKrajaPregleda < zakazani.VremeKrajaPregleda)
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+            //Provera da li lekar ima zakazanu operaciju u nekom periodu
+            foreach (Operacija zakazani in zauzeteOperacije)
+            {
+                if (predlozeni.VremePocetkaPregleda == zakazani.VremePocetaOperacije)
+                {
+                    isValid = false;
+                    break;
+                }
+                if (predlozeni.VremePocetkaPregleda > zakazani.VremePocetaOperacije && predlozeni.VremePocetkaPregleda < zakazani.VremeKrajaOperacije)
+                {
+                    isValid = false;
+                    break;
+                }
+                if (predlozeni.VremeKrajaPregleda > zakazani.VremePocetaOperacije && predlozeni.VremeKrajaPregleda < zakazani.VremeKrajaOperacije)
                 {
                     isValid = false;
                     break;
@@ -134,6 +156,7 @@ public class BazaPregleda
                     break;
                 }
             }
+
             if (isValid)
             {
                 validni.Add(predlozeni);

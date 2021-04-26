@@ -16,18 +16,26 @@ namespace IS_Bolnice.Prozori
 {
     public partial class ZakazivanjeOperacije : Window
     {
+        List<Lekar> lekariSpecijalisti = new List<Lekar>();
+        BazaPregleda bp = new BazaPregleda();
+        BazaOperacija bo = new BazaOperacija();
+        List<Operacija> operacije = new List<Operacija>();
         public ZakazivanjeOperacije()
         {
             InitializeComponent();
-            BazaLekara baza = new BazaLekara();
-            foreach (Lekar p in baza.SviLekari())
+            BazaLekara bl = new BazaLekara();
+            List<Lekar> sviLekari = bl.SviLekari();
+            foreach (Lekar p in sviLekari)
             {
                 if (p.Tip.Equals(TipLekara.lekarSpecijalista))
                 {
                     string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
                     listaLekara.Items.Add(podaci);
+                    lekariSpecijalisti.Add(p);
                 }
+                
             }
+
             BazaBolnica bazaBolnica = new BazaBolnica();
             foreach (Bolnica b in bazaBolnica.SveBolnice())
              //TODO: TREBA DA SE DODA PROVERA ZA TRENUTNU BOLNICU
@@ -42,21 +50,22 @@ namespace IS_Bolnice.Prozori
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             BazaOperacija baza = new BazaOperacija();
-            Operacija o = new Operacija();
+            Operacija operacija = operacije.ElementAt(terminiList.SelectedIndex);
             string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
             //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
-            DateTime pocetak = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-            DateTime kraj = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-            kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
-            o.Lekar.Jmbg = idLekara;
-            o.Pacijent.Jmbg = txtOperJmbg.Text;
-            o.Soba.Id = idSale;
-            o.VremePocetaOperacije = pocetak;
-            o.VremeKrajaOperacije = kraj;
-            baza.ZakaziOperaciju(o);
+
+            DateTime pocetak = new DateTime(operacija.VremePocetaOperacije.Year, operacija.VremePocetaOperacije.Month,
+                operacija.VremePocetaOperacije.Day, operacija.VremePocetaOperacije.Hour, operacija.VremePocetaOperacije.Minute, 0);
+            DateTime kraj = new DateTime(operacija.VremeKrajaOperacije.Year, operacija.VremeKrajaOperacije.Month,
+                operacija.VremeKrajaOperacije.Day, operacija.VremeKrajaOperacije.Hour, operacija.VremeKrajaOperacije.Minute, 0);
+            kraj = kraj.AddMinutes(45);
+            operacija.Lekar.Jmbg = idLekara;
+            operacija.Pacijent.Jmbg = txtOperJmbg.Text;
+            operacija.Soba.Id = idSale;
+            operacija.VremePocetaOperacije = pocetak;
+            operacija.VremeKrajaOperacije = kraj;
+            baza.ZakaziOperaciju(operacija);
             MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
@@ -66,78 +75,43 @@ namespace IS_Bolnice.Prozori
             this.Close();
         }
 
- 
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int sati = Int32.Parse(txtHour.Text);
-            sati += 1;
-
-            if (sati > 23)
-                sati = 0;
-
-            if (sati == 0)
+            if (listaLekara.SelectedIndex == -1) { return; } 
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
             {
-                txtHour.Text = "00";
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtHour.Text = sati.ToString();
+                potvrdi.IsEnabled = true;
             }
-        }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min += 1;
+            string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
+            string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+            operacije = bo.PonudjeniSlobodniTerminiLekara(jmbgLekara, idSale);
 
-            if (min > 59)
-                min = 0;
+            terminiList.Items.Clear();
 
-            if (min == 0)
+            foreach (Operacija operacija in operacije)
             {
-                txtMinute.Text = "00";
+                terminiList.Items.Add(operacija.VremePocetaOperacije);
+            }
+
+            if (terminiList.Items.Count != 0)
+            {
+                terminiList.SelectedIndex = 0;
+            }
+
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            {
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtMinute.Text = min.ToString();
+                potvrdi.IsEnabled = true;
             }
-        }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            int sati = Int32.Parse(txtHour.Text);
-            sati -= 1;
-
-            if (sati < 0)
-                sati = 23;
-
-            if (sati == 0)
-            {
-                txtHour.Text = "00";
-            }
-            else
-            {
-                txtHour.Text = sati.ToString();
-            }
-        }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min -= 1;
-
-            if (min < 0)
-                min = 59;
-
-            if (min == 0)
-            {
-                txtMinute.Text = "00";
-            }
-            else
-            {
-                txtMinute.Text = min.ToString();
-            }
         }
     }
 }

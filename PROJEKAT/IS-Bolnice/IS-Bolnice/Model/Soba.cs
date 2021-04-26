@@ -7,15 +7,15 @@ using System;
 
 public class Soba
 {
-   private string id;
-   private bool zauzeta = false;
-   private bool podRenoviranje = false;
-   private RoomType tip;
-   private bool obrisano = false;
-   private int sprat;
-   private double kvadratura;
+    private string id;
+    private bool zauzeta = false;
+    private bool podRenoviranje = false;
+    private RoomType tip;
+    private bool obrisano = false;
+    private int sprat;
+    private double kvadratura;
 
-   public Soba(string id, bool zauzeta, bool podRenoviranje, RoomType tip, bool obrisano, int sprat, double kvadratura)
+    public Soba(string id, bool zauzeta, bool podRenoviranje, RoomType tip, bool obrisano, int sprat, double kvadratura)
     {
         this.id = id;
         this.zauzeta = zauzeta;
@@ -26,9 +26,14 @@ public class Soba
         this.kvadratura = kvadratura;
     }
 
-   public Soba()
+    public Soba()
     {
 
+    }
+
+    public Soba(string idSobe)
+    {
+        this.Id = idSobe;
     }
 
    public bool Renoviraj()

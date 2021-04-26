@@ -9,11 +9,6 @@
     <Grid>
         <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,343,0,0" VerticalAlignment="Top" Width="101"/>
         <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,383,-0.4,0" VerticalAlignment="Top" Width="394">
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Otvori ovu operaciju" Click="Button_OtvoriOperaciju" />
-                </ContextMenu>
-            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -52,7 +47,9 @@
                         <TextBlock Text="{Binding Pacijent.Prezime}" />
                         <TextBlock Text=" " />
                         <TextBlock Text="{Binding Pacijent.Jmbg}" />
-                        <TextBlock Text=" u Prostoriji: TREBA DA SE DODA " />
+                        <TextBlock Text=" u ordinaciji " />
+                        <TextBlock Text= "{Binding Lekar.Ordinacija.Id}" />
+                        <TextBlock Text=" " />
                         <TextBlock Text="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}" />
 
                     </WrapPanel>

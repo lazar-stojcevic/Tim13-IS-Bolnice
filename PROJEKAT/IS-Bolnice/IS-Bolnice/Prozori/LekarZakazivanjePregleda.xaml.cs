@@ -19,6 +19,10 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class LekarZakazivanjePregleda : Window
     {
+        private string jmbgPac;
+        private List<Lekar> lekari = new List<Lekar>();
+        BazaPregleda bp = new BazaPregleda();
+        List<Pregled> pregledi = new List<Pregled>();
         public LekarZakazivanjePregleda()
         {
             InitializeComponent();
@@ -28,36 +32,41 @@ namespace IS_Bolnice.Prozori
                 string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Tip.ToString();
                 listaLekara.Items.Add(podaci);
             }
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            foreach (Bolnica b in bazaBolnica.SveBolnice())
-            //TODO: TREBA DA SE DODA PROVERA ZA TRENUTNU BOLNICU
-            {
-                foreach (Soba s in b.Soba)
-                {
-                    comboBoxSale.Items.Add(s.Id + " " + s.Kvadratura + "m^2" + " " + s.Tip.ToString());
-                }
-            }
+
+            BazaLekara bl = new BazaLekara();
+            lekari = bl.SviLekari();
         }
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
-            BazaPregleda baza = new BazaPregleda();
+            BazaPregleda bazaPregleda = new BazaPregleda();
             Pregled o = new Pregled();
             o.Lekar = new Lekar();
             o.Pacijent = new Pacijent();
 
             string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-            //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
-            DateTime pocetak = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-            DateTime kraj = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-            kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
+
+            foreach (Lekar iterLekar in lekari)
+            {
+                if (iterLekar.Jmbg.Equals(idLekara)){
+                    o.Lekar.Ordinacija = iterLekar.Ordinacija;
+                    break;
+                }
+            }
+
+            //TODO: OVAJ NIJE OPTIMALNO ALI STA SAD
+            Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
+
+            DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
+                //OBAVEZNOOOOOOOOOOOOOOOOOOOOOOOOOOOOO POGLEDATI
+                pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
+            DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
+               pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
             o.Lekar.Jmbg = idLekara;
             o.Pacijent.Jmbg = txtOperJmbg.Text;
             o.VremePocetkaPregleda = pocetak;
             o.VremeKrajaPregleda = kraj;
-            baza.ZakaziPregled(o);
+            bazaPregleda.ZakaziPregled(o);
             MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
@@ -67,76 +76,42 @@ namespace IS_Bolnice.Prozori
             this.Close();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int min = Int32.Parse(txtMinute.Text);
-            min += 1;
-
-            if (min > 59)
-                min = 0;
-
-            if (min == 0)
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
             {
-                txtMinute.Text = "00";
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtMinute.Text = min.ToString();
+                potvrdi.IsEnabled = true;
             }
-        }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min -= 1;
+            string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
+            pregledi = bp.PonudjeniSlobodniPreglediLekara(jmbgLekara);
 
-            if (min < 0)
-                min = 59;
+            terminiList.Items.Clear();
 
-            if (min == 0)
+            foreach (Pregled p in pregledi)
             {
-                txtMinute.Text = "00";
+                terminiList.Items.Add(p.VremePocetkaPregleda);
+            }
+
+            if (terminiList.Items.Count != 0)
+            {
+                terminiList.SelectedIndex = 0;
+            }
+
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            {
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtMinute.Text = min.ToString();
+                potvrdi.IsEnabled = true;
             }
+
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            int sati = Int32.Parse(txtHour.Text);
-            sati -= 1;
-
-            if (sati < 0)
-                sati = 23;
-
-            if (sati == 0)
-            {
-                txtHour.Text = "00";
-            }
-            else
-            {
-                txtHour.Text = sati.ToString();
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            int sati = Int32.Parse(txtHour.Text);
-            sati += 1;
-
-            if (sati > 23)
-                sati = 0;
-
-            if (sati == 0)
-            {
-                txtHour.Text = "00";
-            }
-            else
-            {
-                txtHour.Text = sati.ToString();
-            }
-        }
     }
 }

@@ -64,6 +64,7 @@ public class BazaLekara
                 //DODATO ZA RADNO VREME
                 p.PocetakRadnogVremena = DateTime.Parse(delovi[6]);
                 p.KrajRadnogVremena = DateTime.Parse(delovi[7]);
+                p.Ordinacija = new Soba(delovi[8]);
                 //TREBA DODATI ORDINACIJU
                 ret.Add(p);
             }

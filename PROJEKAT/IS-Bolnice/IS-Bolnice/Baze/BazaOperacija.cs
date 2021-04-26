@@ -5,6 +5,125 @@ using System.IO;
 
 public class BazaOperacija
 {
+    public List<Operacija> SveSledeceOperacijeDatogLekara(string jmbgLekara)
+    {
+        List<Operacija> povratnaVrednost = new List<Operacija>();
+        List<Operacija> sveNaredneOperacijeSvihLekara = SveSledeceOperacije();
+        foreach (Operacija iterOperacija in sveNaredneOperacijeSvihLekara)
+        {
+            if (iterOperacija.Lekar.Jmbg.Equals(jmbgLekara)){
+                povratnaVrednost.Add(iterOperacija);
+            }
+        }
+        return povratnaVrednost;
+    }
+
+    public List<Operacija> PonudjeniSlobodniTerminiLekara(string jmbgLekara, string idSale)
+    {
+        //Baze
+        BazaPregleda  bazaPregleda = new BazaPregleda();
+        BazaLekara bazaLekara = new BazaLekara();
+        BazaBolnica bazaBolnica = new BazaBolnica();
+        //Lekar
+        Lekar lekar = new Lekar();
+        List<Lekar> lekari = bazaLekara.SviLekari();
+        foreach (Lekar l in lekari)
+        {
+            if (l.Jmbg.Equals(jmbgLekara))
+            {
+                lekar = l;
+                break;
+            }
+        }
+        //Liste
+        List<Operacija> validni = new List<Operacija>();
+        List<Pregled> zauzeti = bazaPregleda.PreglediOdredjenogLekara(jmbgLekara);
+        List<Operacija> zauzeteOperacije = SveSledeceOperacijeDatogLekara(jmbgLekara);
+        //OVO JE UZASNO NEOPTIMALNO ALI JE BITNO DA PRORADI PRVO
+        List<Operacija> sveOperacije = SveSledeceOperacije();
+        List<Operacija> slobodni = new List<Operacija>();
+
+        DateTime sutra = DateTime.Now.AddDays(1);
+        for (int i = 0; i < 2; i++)
+        {
+            System.DateTime pocetakIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
+            System.DateTime krajIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+            pocetakIntervala = pocetakIntervala.AddDays(i);
+            krajIntervala = krajIntervala.AddDays(i);
+            krajIntervala = krajIntervala.AddMinutes(-30);
+
+            while (pocetakIntervala <= krajIntervala)
+            {
+                Operacija o = new Operacija();
+                o.Lekar = lekar;
+                o.VremePocetaOperacije = pocetakIntervala;
+                pocetakIntervala = pocetakIntervala.AddMinutes(10);
+                o.VremeKrajaOperacije = o.VremePocetaOperacije.AddMinutes(45);
+                slobodni.Add(o);
+            }
+        }
+
+        foreach (Operacija predlozeni in slobodni)
+        {
+            bool isValid = true;
+            //Provera da li lekar ima zakazan pregled u nekom periodu
+            foreach (Pregled zakazani in zauzeti)
+            {
+                if (predlozeni.VremePocetaOperacije == zakazani.VremePocetkaPregleda)
+                {
+                    isValid = false;
+                    break;
+                }
+                if (predlozeni.VremePocetaOperacije > zakazani.VremePocetkaPregleda && predlozeni.VremePocetaOperacije < zakazani.VremeKrajaPregleda)
+                {
+                    isValid = false;
+                    break;
+                }
+                if (predlozeni.VremeKrajaOperacije > zakazani.VremePocetkaPregleda && predlozeni.VremeKrajaOperacije < zakazani.VremeKrajaPregleda)
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+            //Provera da li lekar ima zakazanu operaciju u nekom periodu
+            foreach (Operacija zakazani in zauzeteOperacije)
+            {
+                if (predlozeni.VremePocetaOperacije == zakazani.VremePocetaOperacije)
+                {
+                    isValid = false;
+                    break;
+                }
+                if (predlozeni.VremePocetaOperacije > zakazani.VremePocetaOperacije && predlozeni.VremePocetaOperacije < zakazani.VremeKrajaOperacije)
+                {
+                    isValid = false;
+                    break;
+                }
+                if (predlozeni.VremeKrajaOperacije > zakazani.VremePocetaOperacije && predlozeni.VremeKrajaOperacije < zakazani.VremeKrajaOperacije)
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+            foreach (Operacija operacija in SveSledeceOperacije())
+            {
+                if (operacija.Soba.Id.Equals(idSale) 
+                    && ((predlozeni.VremePocetaOperacije > operacija.VremePocetaOperacije && predlozeni.VremePocetaOperacije < operacija.VremeKrajaOperacije) 
+                    || (predlozeni.VremeKrajaOperacije > operacija.VremePocetaOperacije && predlozeni.VremeKrajaOperacije < operacija.VremeKrajaOperacije)
+                    || (predlozeni.VremePocetaOperacije == operacija.VremePocetaOperacije)))
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (isValid)
+            {
+                validni.Add(predlozeni);
+            }
+        }
+
+        return validni;
+    }
+
     public List<Operacija> SveSledeceOperacije()
     {
         List<Operacija> ret = new List<Operacija>();
@@ -160,13 +279,8 @@ public class BazaOperacija
                     o.Lekar.Jmbg = delovi[3];
                     o.Soba.Id = delovi[4];
                     ret.Add(o);
-                    Console.WriteLine("USPESNO JE NASAO JEDNU OPERACIJUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
                 }
             }
-        }
-        else
-        {
-            Console.WriteLine("Nista");
         }
         return ret;
 

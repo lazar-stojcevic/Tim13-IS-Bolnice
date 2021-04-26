@@ -235,32 +235,5 @@ namespace IS_Bolnice.Prozori
             prozorZaPregled.ShowDialog();
 
         }
-
-        private void Button_OtvoriOperaciju(object sender, RoutedEventArgs e)
-        {
-            if (listaOperacija.SelectedIndex == -1)
-            {
-                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            Operacija selektovanaOperacija = (Operacija)listaOperacija.SelectedItem;
-            LekarWindow prozorZaPregled = new LekarWindow();
-            prozorZaPregled.Sifra = sifra;
-
-            prozorZaPregled.txtJMBG.Text = selektovanaOperacija.Pacijent.Jmbg;
-            prozorZaPregled.txtIme.Text = selektovanaOperacija.Pacijent.Ime;
-            prozorZaPregled.txtPrz.Text = selektovanaOperacija.Pacijent.Prezime;
-
-            prozorZaPregled.btnPregled.IsEnabled = true;
-            prozorZaPregled.btnOperacija.IsEnabled = true;
-            prozorZaPregled.btnIzvestaj.IsEnabled = true;
-            this.Close();
-
-            prozorZaPregled.ShowDialog();
-
-
-
-        }
-
     }
 }
