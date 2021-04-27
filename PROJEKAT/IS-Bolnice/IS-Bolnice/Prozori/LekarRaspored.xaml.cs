@@ -59,9 +59,7 @@ namespace IS_Bolnice.Prozori
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
-            izmena.kalendar.SelectedDate = datum;
-            izmena.txtHour.Text = vreme.Hour.ToString();
-            izmena.txtMinute.Text = vreme.Minute.ToString();
+            izmena.terminiList.Items.Add(selektovani.VremePocetkaOperacije);
             //OVEJ DEO TREBA MODIFIKOVATI
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;
@@ -135,9 +133,7 @@ namespace IS_Bolnice.Prozori
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
-            izmena.kalendar.SelectedDate = datum;
-            izmena.txtHour.Text = vreme.Hour.ToString();
-            izmena.txtMinute.Text = vreme.Minute.ToString();
+            izmena.terminiList.Items.Add(selektovani.VremePocetkaPregleda);
             //OVEJ DEO TREBA MODIFIKOVATI
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;

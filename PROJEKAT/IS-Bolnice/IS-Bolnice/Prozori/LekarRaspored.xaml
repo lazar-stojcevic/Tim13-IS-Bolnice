@@ -23,7 +23,7 @@
                         <TextBlock Text=" " />
                         <TextBlock Text="{Binding Soba.Id}" />
                         <TextBlock Text=" " />
-                        <TextBlock Text="{Binding VremePocetaOperacije, StringFormat=dd-MM-yyyy HH:mm}" />
+                        <TextBlock Text="{Binding VremePocetkaOperacije, StringFormat=dd-MM-yyyy HH:mm}" />
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

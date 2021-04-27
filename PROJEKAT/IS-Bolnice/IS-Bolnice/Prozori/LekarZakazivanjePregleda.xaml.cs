@@ -78,6 +78,7 @@ namespace IS_Bolnice.Prozori
 
         private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (listaLekara.SelectedIndex == -1) { return; }
             if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
             {
                 potvrdi.IsEnabled = false;

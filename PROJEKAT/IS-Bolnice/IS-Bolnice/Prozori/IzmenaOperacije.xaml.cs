@@ -20,6 +20,11 @@ namespace IS_Bolnice.Prozori
     /// </summary>
     public partial class IzmenaOperacije : Window
     {
+        List<Lekar> lekariSpecijalisti = new List<Lekar>();
+        BazaPregleda bp = new BazaPregleda();
+        BazaOperacija bo = new BazaOperacija();
+        BazaLekara bl = new BazaLekara();
+        List<Operacija> operacije = new List<Operacija>();
 
         public DateTime StariDatum  { get; set; }
         public string StariSat { get; set; }
@@ -28,11 +33,16 @@ namespace IS_Bolnice.Prozori
         public IzmenaOperacije()
         {
             InitializeComponent();
-            BazaLekara baza = new BazaLekara();
-            foreach (Lekar p in baza.SviLekari())
+            List<Lekar> sviLekari = bl.SviLekari();
+            foreach (Lekar p in sviLekari)
             {
-                string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
-                listaLekara.Items.Add(podaci);
+                if (p.Tip.Equals(TipLekara.lekarSpecijalista))
+                {
+                    string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
+                    listaLekara.Items.Add(podaci);
+                    lekariSpecijalisti.Add(p);
+                }
+
             }
             BazaBolnica bazaBolnica = new BazaBolnica();
             foreach (Bolnica b in bazaBolnica.SveBolnice())
@@ -50,33 +60,35 @@ namespace IS_Bolnice.Prozori
             BazaOperacija baza = new BazaOperacija();
             List<Operacija> lista = baza.SveSledeceOperacije();
             File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
-            foreach (Operacija o in lista)
+            foreach (Operacija operacija in lista)
             {
-                if (txtOperJmbg.Text.Equals(o.Pacijent.Jmbg) && o.VremePocetkaOperacije.Hour == Int32.Parse(StariSat) && o.VremePocetkaOperacije.Date.Equals(StariDatum))
+                if (txtOperJmbg.Text.Equals(operacija.Pacijent.Jmbg) && operacija.VremePocetkaOperacije.Hour == Int32.Parse(StariSat) && operacija.VremePocetkaOperacije.Date.Equals(StariDatum))
                 {
                     string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
                     string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+                    Operacija operacijaSelektovana = operacije.ElementAt(terminiList.SelectedIndex);
                     //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
-                    DateTime pocetak = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                        kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-                    DateTime kraj = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                        kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
+                    DateTime pocetak = new DateTime(operacijaSelektovana.VremePocetkaOperacije.Year, operacijaSelektovana.VremePocetkaOperacije.Month,
+                operacijaSelektovana.VremePocetkaOperacije.Day, operacijaSelektovana.VremePocetkaOperacije.Hour, operacijaSelektovana.VremePocetkaOperacije.Minute, 0);
+                    DateTime kraj = new DateTime(operacijaSelektovana.VremeKrajaOperacije.Year, operacijaSelektovana.VremeKrajaOperacije.Month,
+                operacijaSelektovana.VremeKrajaOperacije.Day, operacijaSelektovana.VremeKrajaOperacije.Hour, operacijaSelektovana.VremeKrajaOperacije.Minute, 0);
                     kraj = kraj.AddMinutes(45); //Predpostavka da ce operacija trajati 45 minuta 
-                    o.Lekar.Jmbg = idLekara;
-                    o.Pacijent.Jmbg = txtOperJmbg.Text;
-                    o.Soba.Id = idSale;
-                    o.VremePocetkaOperacije = pocetak;
-                    o.VremeKrajaOperacije = kraj;
-                    baza.ZakaziOperaciju(o);
+
+                    operacija.Lekar.Jmbg = idLekara;
+                    operacija.Pacijent.Jmbg = txtOperJmbg.Text;
+                    operacija.Soba.Id = idSale;
+                    operacija.VremePocetkaOperacije = pocetak;
+                    operacija.VremeKrajaOperacije = kraj;
+
+                    baza.ZakaziOperaciju(operacija);
                 }
                 else
                 {
-                    baza.ZakaziOperaciju(o);
+                    baza.ZakaziOperaciju(operacija);
                 }
             }
-
-            
-
+            MessageBox.Show("Operacijacija uspešno izmenjena", "Izmenjena operacija", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -84,78 +96,44 @@ namespace IS_Bolnice.Prozori
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int sati = Int32.Parse(txtHour.Text);
-            sati += 1;
-
-            if (sati > 23)
-                sati = 0;
-
-            if (sati == 0)
+            if (listaLekara.SelectedIndex == -1) { return; }
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
             {
-                txtHour.Text = "00";
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtHour.Text = sati.ToString();
+                potvrdi.IsEnabled = true;
+            }
+
+            string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
+            string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+            operacije = bo.PonudjeniSlobodniTerminiLekara(jmbgLekara, idSale);
+
+            terminiList.Items.Clear();
+
+            foreach (Operacija operacija in operacije)
+            {
+                terminiList.Items.Add(operacija.VremePocetkaOperacije);
+            }
+
+            if (terminiList.Items.Count != 0)
+            {
+                terminiList.SelectedIndex = 0;
+            }
+
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            {
+                potvrdi.IsEnabled = false;
+            }
+            else
+            {
+                potvrdi.IsEnabled = true;
             }
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            int sati = Int32.Parse(txtHour.Text);
-            sati -= 1;
-
-            if (sati < 0)
-                sati = 23;
-
-            if (sati == 0)
-            {
-                txtHour.Text = "00";
-            }
-            else
-            {
-                txtHour.Text = sati.ToString();
-            }
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min += 1;
-
-            if (min > 59)
-                min = 0;
-
-            if (min == 0)
-            {
-                txtMinute.Text = "00";
-            }
-            else
-            {
-                txtMinute.Text = min.ToString();
-            }
-
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min -= 1;
-
-            if (min < 0)
-                min = 59;
-
-            if (min == 0)
-            {
-                txtMinute.Text = "00";
-            }
-            else
-            {
-                txtMinute.Text = min.ToString();
-            }
-        }
     }
 }

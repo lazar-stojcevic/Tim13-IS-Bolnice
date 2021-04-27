@@ -24,14 +24,19 @@ namespace IS_Bolnice.Prozori
         public string StariSat { get; set; }
         public string StariMinut { get; set; }
 
+        private string jmbgPac;
+        private List<Lekar> lekari = new List<Lekar>();
+        BazaPregleda bp = new BazaPregleda();
+        List<Pregled> pregledi = new List<Pregled>();
         public LekarIzmenaPregleda()
         {
             InitializeComponent();
             BazaLekara baza = new BazaLekara();
-            foreach (Lekar p in baza.SviLekari())
+            foreach (Lekar lekar in baza.SviLekari())
             {
-                string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
+                string podaci = lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg;
                 listaLekara.Items.Add(podaci);
+                lekari.Add(lekar);
             }
             BazaBolnica bazaBolnica = new BazaBolnica();
             foreach (Bolnica b in bazaBolnica.SveBolnice())
@@ -56,12 +61,15 @@ namespace IS_Bolnice.Prozori
                 {
 
                     string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
+                    Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
+
                     //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
-                    DateTime pocetak = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                        kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-                    DateTime kraj = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                        kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
+                    DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
+                        pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
+                    DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
+                       pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
                     kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
+
                     p.Lekar.Jmbg = idLekara;
                     p.Pacijent.Jmbg = txtOperJmbg.Text;
                     p.VremePocetkaPregleda = pocetak;
@@ -73,6 +81,9 @@ namespace IS_Bolnice.Prozori
                     baza.ZakaziPregled(p);
                 }
             }
+            MessageBox.Show("Pregled uspešno izmenjen", "Izmenjen pregled", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -80,76 +91,43 @@ namespace IS_Bolnice.Prozori
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int sati = Int32.Parse(txtHour.Text);
-            sati += 1;
-
-            if (sati > 23)
-                sati = 0;
-
-            if (sati == 0)
+            if (listaLekara.SelectedIndex == -1) { return; }
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
             {
-                txtHour.Text = "00";
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtHour.Text = sati.ToString();
+                potvrdi.IsEnabled = true;
             }
-        }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            int sati = Int32.Parse(txtHour.Text);
-            sati -= 1;
+            string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
+            pregledi = bp.PonudjeniSlobodniPreglediLekara(jmbgLekara);
 
-            if (sati < 0)
-                sati = 23;
+            terminiList.Items.Clear();
 
-            if (sati == 0)
+            foreach (Pregled p in pregledi)
             {
-                txtHour.Text = "00";
+                terminiList.Items.Add(p.VremePocetkaPregleda);
+            }
+
+            if (terminiList.Items.Count != 0)
+            {
+                terminiList.SelectedIndex = 0;
+            }
+
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            {
+                potvrdi.IsEnabled = false;
             }
             else
             {
-                txtHour.Text = sati.ToString();
+                potvrdi.IsEnabled = true;
             }
+
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min += 1;
-
-            if (min > 59)
-                min = 0;
-
-            if (min == 0)
-            {
-                txtMinute.Text = "00";
-            }
-            else
-            {
-                txtMinute.Text = min.ToString();
-            }
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            int min = Int32.Parse(txtMinute.Text);
-            min -= 1;
-
-            if (min < 0)
-                min = 59;
-
-            if (min == 0)
-            {
-                txtMinute.Text = "00";
-            }
-            else
-            {
-                txtMinute.Text = min.ToString();
-            }
-        }
     }
 }
