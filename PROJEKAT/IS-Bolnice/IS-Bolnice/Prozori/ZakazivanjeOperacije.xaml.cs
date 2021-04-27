@@ -55,15 +55,15 @@ namespace IS_Bolnice.Prozori
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
             //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
 
-            DateTime pocetak = new DateTime(operacija.VremePocetaOperacije.Year, operacija.VremePocetaOperacije.Month,
-                operacija.VremePocetaOperacije.Day, operacija.VremePocetaOperacije.Hour, operacija.VremePocetaOperacije.Minute, 0);
+            DateTime pocetak = new DateTime(operacija.VremePocetkaOperacije.Year, operacija.VremePocetkaOperacije.Month,
+                operacija.VremePocetkaOperacije.Day, operacija.VremePocetkaOperacije.Hour, operacija.VremePocetkaOperacije.Minute, 0);
             DateTime kraj = new DateTime(operacija.VremeKrajaOperacije.Year, operacija.VremeKrajaOperacije.Month,
                 operacija.VremeKrajaOperacije.Day, operacija.VremeKrajaOperacije.Hour, operacija.VremeKrajaOperacije.Minute, 0);
             kraj = kraj.AddMinutes(45);
             operacija.Lekar.Jmbg = idLekara;
             operacija.Pacijent.Jmbg = txtOperJmbg.Text;
             operacija.Soba.Id = idSale;
-            operacija.VremePocetaOperacije = pocetak;
+            operacija.VremePocetkaOperacije = pocetak;
             operacija.VremeKrajaOperacije = kraj;
             baza.ZakaziOperaciju(operacija);
             MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -95,7 +95,7 @@ namespace IS_Bolnice.Prozori
 
             foreach (Operacija operacija in operacije)
             {
-                terminiList.Items.Add(operacija.VremePocetaOperacije);
+                terminiList.Items.Add(operacija.VremePocetkaOperacije);
             }
 
             if (terminiList.Items.Count != 0)

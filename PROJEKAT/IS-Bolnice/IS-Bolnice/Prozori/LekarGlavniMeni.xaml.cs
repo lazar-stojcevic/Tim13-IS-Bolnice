@@ -33,7 +33,7 @@ namespace IS_Bolnice.Prozori
                 if (op.Lekar.Jmbg.Equals(Sifra))
                 {
                     /* raspored.listaOperacija.Items.Add("Pacijent: "+op.Pacijent.Ime+" "+op.Pacijent.Prezime+" "+
-                         op.Pacijent.Jmbg +" u prostoriji: "+op.Soba.Tip.ToString()+" "+ op.Soba.Id +" ( "+ op.VremePocetaOperacije.ToString("dd/MM/yyyy HH:mm")+
+                         op.Pacijent.Jmbg +" u prostoriji: "+op.Soba.Tip.ToString()+" "+ op.Soba.Id +" ( "+ op.VremePocetkaOperacije.ToString("dd/MM/yyyy HH:mm")+
                          " - " + op.VremeKrajaOperacije.ToString("HH:mm") + " )"); */
                 }
             BazaPregleda pregledi = new BazaPregleda();

@@ -110,7 +110,7 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1 && operacija.VremePocetaOperacije != null)
+            if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1 && operacija.VremePocetkaOperacije != null)
             {
                 bo.ZakaziOperaciju(operacija);
                 this.Close();
@@ -133,7 +133,7 @@ namespace IS_Bolnice.Prozori
             // unutar liste termin moze da se nalazi samo pocetak i samo kraj termina
             if (termin.Count == 2)
             {
-                operacija.VremePocetaOperacije = termin[0];
+                operacija.VremePocetkaOperacije = termin[0];
                 operacija.VremeKrajaOperacije = termin[1];
                 comboTrajanja.IsEnabled = true;
                 txtTermin.Text = termin[0].ToString();
@@ -143,7 +143,7 @@ namespace IS_Bolnice.Prozori
         private void comboTrajanje_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             double trajanje = (double)comboTrajanja.SelectedItem;
-            operacija.VremeKrajaOperacije = operacija.VremePocetaOperacije.AddHours(trajanje);
+            operacija.VremeKrajaOperacije = operacija.VremePocetkaOperacije.AddHours(trajanje);
         }
     }
 }

@@ -47,9 +47,9 @@ namespace IS_Bolnice.Prozori
             string ime = selektovani.Pacijent.Ime;
             string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
-            DateTime datum = selektovani.VremePocetaOperacije.Date;
+            DateTime datum = selektovani.VremePocetkaOperacije.Date;
             Console.WriteLine(datum);
-            DateTime vreme = selektovani.VremePocetaOperacije;
+            DateTime vreme = selektovani.VremePocetkaOperacije;
 
 
             BazaOperacija baza = new BazaOperacija();
@@ -85,9 +85,9 @@ namespace IS_Bolnice.Prozori
             string ime = selektovani.Pacijent.Ime;
             string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
-            DateTime datum = selektovani.VremePocetaOperacije.Date;
+            DateTime datum = selektovani.VremePocetkaOperacije.Date;
             Console.WriteLine(datum);
-            DateTime vreme = selektovani.VremePocetaOperacije;
+            DateTime vreme = selektovani.VremePocetkaOperacije;
 
 
             BazaOperacija baza = new BazaOperacija();
@@ -95,7 +95,7 @@ namespace IS_Bolnice.Prozori
             File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
             foreach (Operacija o in lista)
             {
-                if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetaOperacije.Hour == vreme.Hour && o.VremePocetaOperacije.Minute == vreme.Minute && o.VremePocetaOperacije.Date.Equals(datum))
+                if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetkaOperacije.Hour == vreme.Hour && o.VremePocetkaOperacije.Minute == vreme.Minute && o.VremePocetkaOperacije.Date.Equals(datum))
                 {
                     //nista
                 }

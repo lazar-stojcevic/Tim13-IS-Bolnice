@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori
             File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
             foreach (Operacija o in lista)
             {
-                if (txtOperJmbg.Text.Equals(o.Pacijent.Jmbg) && o.VremePocetaOperacije.Hour == Int32.Parse(StariSat) && o.VremePocetaOperacije.Date.Equals(StariDatum))
+                if (txtOperJmbg.Text.Equals(o.Pacijent.Jmbg) && o.VremePocetkaOperacije.Hour == Int32.Parse(StariSat) && o.VremePocetkaOperacije.Date.Equals(StariDatum))
                 {
                     string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
                     string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
@@ -65,7 +65,7 @@ namespace IS_Bolnice.Prozori
                     o.Lekar.Jmbg = idLekara;
                     o.Pacijent.Jmbg = txtOperJmbg.Text;
                     o.Soba.Id = idSale;
-                    o.VremePocetaOperacije = pocetak;
+                    o.VremePocetkaOperacije = pocetak;
                     o.VremeKrajaOperacije = kraj;
                     baza.ZakaziOperaciju(o);
                 }

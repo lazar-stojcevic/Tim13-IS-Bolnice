@@ -6,6 +6,14 @@ using System.Linq;
 
 public class BazaPregleda
 {
+    public string fileLocation;
+    private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
+    private static string[] vremenskiFormatiCitanje = new[]
+    {
+        "M/d/yyyy h:mm:ss tt",
+        "M-d-yyyy h:mm:ss tt"
+    };
+
     public List<Pregled> PonudjeniSlobodniPreglediLekara(string jmbgLekara)
     {
         //Lekar
@@ -72,17 +80,17 @@ public class BazaPregleda
             //Provera da li lekar ima zakazanu operaciju u nekom periodu
             foreach (Operacija zakazani in zauzeteOperacije)
             {
-                if (predlozeni.VremePocetkaPregleda == zakazani.VremePocetaOperacije)
+                if (predlozeni.VremePocetkaPregleda == zakazani.VremePocetkaOperacije)
                 {
                     isValid = false;
                     break;
                 }
-                if (predlozeni.VremePocetkaPregleda > zakazani.VremePocetaOperacije && predlozeni.VremePocetkaPregleda < zakazani.VremeKrajaOperacije)
+                if (predlozeni.VremePocetkaPregleda > zakazani.VremePocetkaOperacije && predlozeni.VremePocetkaPregleda < zakazani.VremeKrajaOperacije)
                 {
                     isValid = false;
                     break;
                 }
-                if (predlozeni.VremeKrajaPregleda > zakazani.VremePocetaOperacije && predlozeni.VremeKrajaPregleda < zakazani.VremeKrajaOperacije)
+                if (predlozeni.VremeKrajaPregleda > zakazani.VremePocetkaOperacije && predlozeni.VremeKrajaPregleda < zakazani.VremeKrajaOperacije)
                 {
                     isValid = false;
                     break;
@@ -313,8 +321,10 @@ public class BazaPregleda
             string vremeKraja = items[3];
             pac.Jmbg = jmbgPacijenta;
             p.Pacijent = pac;
-            p.VremePocetkaPregleda = DateTime.Parse(vremePocetka);
-            p.VremeKrajaPregleda = DateTime.Parse(vremeKraja);
+            p.VremePocetkaPregleda = DateTime.ParseExact(vremePocetka, vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+            p.VremeKrajaPregleda = DateTime.ParseExact(vremeKraja, vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
             //dodati broj sobe ovde
             foreach (Lekar l in lekari)
             {
@@ -381,8 +391,8 @@ public class BazaPregleda
 
             //dodati broj sobe lekaru
             //promenjen upis
-            string zakazivanje = jmbgPacijenta + "#" + jmbgLekara + "#" + vremePocetka.ToString() + "#" + vremeKraja.ToString()
-                + "#" + "Broj ordinacije";
+            string zakazivanje = jmbgPacijenta + "#" + jmbgLekara + "#" + vremePocetka.ToString(vremenskiFormatPisanje) 
+                + "#" + vremeKraja.ToString(vremenskiFormatPisanje) + "#" + "Broj ordinacije";
 
             List<string> pregledi = new List<string>();
             pregledi.Add(zakazivanje);
@@ -404,7 +414,8 @@ public class BazaPregleda
             if (p.Lekar.Jmbg != pregled.Lekar.Jmbg || !p.VremePocetkaPregleda.Equals(pregled.VremePocetkaPregleda))
             {
                 // menjanje upisa
-                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString() + "#" + p.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
+                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString(vremenskiFormatPisanje)
+                    + "#" + p.VremeKrajaPregleda.ToString(vremenskiFormatPisanje) + "#" + "brojSobe";
                 lines.Add(zakazivanje);
             }
 
@@ -425,13 +436,15 @@ public class BazaPregleda
         {
             if (p.Lekar.Jmbg != stariPregled.Lekar.Jmbg || !p.VremePocetkaPregleda.Equals(stariPregled.VremePocetkaPregleda))
             {
-                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString() + "#" + p.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
+                string zakazivanje = p.Pacijent.Jmbg + "#" + p.Lekar.Jmbg + "#" + p.VremePocetkaPregleda.ToString(vremenskiFormatPisanje)
+                    + "#" + p.VremeKrajaPregleda.ToString(vremenskiFormatPisanje) + "#" + "brojSobe";
                 lines.Add(zakazivanje);
             }
             else
             {
                 // upisivanje pregleda sa izmenjenim terminom
-                string zakazivanje = noviPregled.Pacijent.Jmbg + "#" + noviPregled.Lekar.Jmbg + "#" + noviPregled.VremePocetkaPregleda.ToString() + "#" + noviPregled.VremeKrajaPregleda.ToString() + "#" + "brojSobe";
+                string zakazivanje = noviPregled.Pacijent.Jmbg + "#" + noviPregled.Lekar.Jmbg + "#" + noviPregled.VremePocetkaPregleda.ToString(vremenskiFormatPisanje)
+                    + "#" + noviPregled.VremeKrajaPregleda.ToString(vremenskiFormatPisanje) + "#" + "brojSobe";
                 lines.Add(zakazivanje);
             }
 
@@ -439,7 +452,4 @@ public class BazaPregleda
 
         File.WriteAllLines(path, lines);
     }
-
-    public string fileLocation;
-
 }

@@ -152,14 +152,14 @@ namespace IS_Bolnice.Prozori
                     Lekar = staraOperacija.Lekar,
                     Pacijent = staraOperacija.Pacijent,
                     Soba = staraOperacija.Soba,
-                    VremePocetaOperacije = staraOperacija.VremePocetaOperacije,
+                    VremePocetkaOperacije = staraOperacija.VremePocetkaOperacije,
                     VremeKrajaOperacije = staraOperacija.VremeKrajaOperacije
                 };
                 Lekar lekar = staraOperacija.Lekar;
 
                 // na prvom mestu je pocetak termina a na drugom kraj termina
                 List<DateTime> termin = new List<DateTime>();
-                termin.Add(staraOperacija.VremePocetaOperacije);
+                termin.Add(staraOperacija.VremePocetkaOperacije);
                 termin.Add(staraOperacija.VremeKrajaOperacije);
 
                 OdredjivanjeTermina ot = new OdredjivanjeTermina(termin, lekar);
@@ -168,9 +168,9 @@ namespace IS_Bolnice.Prozori
                 // unutar liste termin moze da se nalazi samo pocetak i samo kraj termina
                 if (termin.Count == 2)
                 {
-                    novaOperacija.VremePocetaOperacije = termin[0];
-                    TimeSpan trajanje = staraOperacija.VremeKrajaOperacije.Subtract(staraOperacija.VremePocetaOperacije);
-                    novaOperacija.VremeKrajaOperacije = novaOperacija.VremePocetaOperacije.Add(trajanje);
+                    novaOperacija.VremePocetkaOperacije = termin[0];
+                    TimeSpan trajanje = staraOperacija.VremeKrajaOperacije.Subtract(staraOperacija.VremePocetkaOperacije);
+                    novaOperacija.VremeKrajaOperacije = novaOperacija.VremePocetkaOperacije.Add(trajanje);
 
                     bo.IzmeniOperaciju(novaOperacija, staraOperacija);
                     OperacijePacijenta[index] = novaOperacija;

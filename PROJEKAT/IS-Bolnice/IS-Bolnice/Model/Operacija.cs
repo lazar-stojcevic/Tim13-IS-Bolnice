@@ -16,7 +16,7 @@ public class Operacija
 
     public Pacijent Pacijent { get; set; }
     public Lekar Lekar { get; set; } 
-    public DateTime VremePocetaOperacije { get; set; }
+    public DateTime VremePocetkaOperacije { get; set; }
     public DateTime VremeKrajaOperacije { get; set; }
     public Soba Soba { get; set; }
 

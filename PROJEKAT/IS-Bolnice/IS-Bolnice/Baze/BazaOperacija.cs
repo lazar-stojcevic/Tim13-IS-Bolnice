@@ -5,6 +5,14 @@ using System.IO;
 
 public class BazaOperacija
 {
+    public string fileLocation;
+    private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
+    private static string[] vremenskiFormatiCitanje = new[]
+    {
+        "M/d/yyyy h:mm:ss tt",
+        "M-d-yyyy h:mm:ss tt"
+    };
+
     public List<Operacija> SveSledeceOperacijeDatogLekara(string jmbgLekara)
     {
         List<Operacija> povratnaVrednost = new List<Operacija>();
@@ -56,9 +64,9 @@ public class BazaOperacija
             {
                 Operacija o = new Operacija();
                 o.Lekar = lekar;
-                o.VremePocetaOperacije = pocetakIntervala;
+                o.VremePocetkaOperacije = pocetakIntervala;
                 pocetakIntervala = pocetakIntervala.AddMinutes(10);
-                o.VremeKrajaOperacije = o.VremePocetaOperacije.AddMinutes(45);
+                o.VremeKrajaOperacije = o.VremePocetkaOperacije.AddMinutes(45);
                 slobodni.Add(o);
             }
         }
@@ -69,12 +77,12 @@ public class BazaOperacija
             //Provera da li lekar ima zakazan pregled u nekom periodu
             foreach (Pregled zakazani in zauzeti)
             {
-                if (predlozeni.VremePocetaOperacije == zakazani.VremePocetkaPregleda)
+                if (predlozeni.VremePocetkaOperacije == zakazani.VremePocetkaPregleda)
                 {
                     isValid = false;
                     break;
                 }
-                if (predlozeni.VremePocetaOperacije > zakazani.VremePocetkaPregleda && predlozeni.VremePocetaOperacije < zakazani.VremeKrajaPregleda)
+                if (predlozeni.VremePocetkaOperacije > zakazani.VremePocetkaPregleda && predlozeni.VremePocetkaOperacije < zakazani.VremeKrajaPregleda)
                 {
                     isValid = false;
                     break;
@@ -88,17 +96,17 @@ public class BazaOperacija
             //Provera da li lekar ima zakazanu operaciju u nekom periodu
             foreach (Operacija zakazani in zauzeteOperacije)
             {
-                if (predlozeni.VremePocetaOperacije == zakazani.VremePocetaOperacije)
+                if (predlozeni.VremePocetkaOperacije == zakazani.VremePocetkaOperacije)
                 {
                     isValid = false;
                     break;
                 }
-                if (predlozeni.VremePocetaOperacije > zakazani.VremePocetaOperacije && predlozeni.VremePocetaOperacije < zakazani.VremeKrajaOperacije)
+                if (predlozeni.VremePocetkaOperacije > zakazani.VremePocetkaOperacije && predlozeni.VremePocetkaOperacije < zakazani.VremeKrajaOperacije)
                 {
                     isValid = false;
                     break;
                 }
-                if (predlozeni.VremeKrajaOperacije > zakazani.VremePocetaOperacije && predlozeni.VremeKrajaOperacije < zakazani.VremeKrajaOperacije)
+                if (predlozeni.VremeKrajaOperacije > zakazani.VremePocetkaOperacije && predlozeni.VremeKrajaOperacije < zakazani.VremeKrajaOperacije)
                 {
                     isValid = false;
                     break;
@@ -107,9 +115,9 @@ public class BazaOperacija
             foreach (Operacija operacija in SveSledeceOperacije())
             {
                 if (operacija.Soba.Id.Equals(idSale) 
-                    && ((predlozeni.VremePocetaOperacije > operacija.VremePocetaOperacije && predlozeni.VremePocetaOperacije < operacija.VremeKrajaOperacije) 
-                    || (predlozeni.VremeKrajaOperacije > operacija.VremePocetaOperacije && predlozeni.VremeKrajaOperacije < operacija.VremeKrajaOperacije)
-                    || (predlozeni.VremePocetaOperacije == operacija.VremePocetaOperacije)))
+                    && ((predlozeni.VremePocetkaOperacije > operacija.VremePocetkaOperacije && predlozeni.VremePocetkaOperacije < operacija.VremeKrajaOperacije) 
+                    || (predlozeni.VremeKrajaOperacije > operacija.VremePocetkaOperacije && predlozeni.VremeKrajaOperacije < operacija.VremeKrajaOperacije)
+                    || (predlozeni.VremePocetkaOperacije == operacija.VremePocetkaOperacije)))
                 {
                     isValid = false;
                     break;
@@ -141,8 +149,10 @@ public class BazaOperacija
                 Operacija o = new Operacija();
                 string[] delovi = line.Split('#');
                 Console.WriteLine(delovi[0]);
-                o.VremePocetaOperacije = DateTime.Parse(delovi[0]);
-                o.VremeKrajaOperacije = DateTime.Parse(delovi[1]);
+                o.VremePocetkaOperacije = DateTime.ParseExact(delovi[0], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                o.VremeKrajaOperacije = DateTime.ParseExact(delovi[1], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
                 o.Pacijent.Jmbg = delovi[2];
                 foreach (Pacijent p in pacijenti)
                 {
@@ -187,7 +197,7 @@ public class BazaOperacija
 
     public void ZakaziOperaciju(Operacija novaOperacija)
     {
-        string linija = novaOperacija.VremePocetaOperacije.ToString() + "#" + novaOperacija.VremeKrajaOperacije.ToString() + "#" +
+        string linija = novaOperacija.VremePocetkaOperacije.ToString(vremenskiFormatPisanje) + "#" + novaOperacija.VremeKrajaOperacije.ToString(vremenskiFormatPisanje) + "#" +
             novaOperacija.Pacijent.Jmbg + "#" + novaOperacija.Lekar.Jmbg + "#" + novaOperacija.Soba.Id + System.Environment.NewLine;
         File.AppendAllText(@"..\..\Datoteke\operacije.txt", linija);
     }
@@ -201,9 +211,9 @@ public class BazaOperacija
 
         foreach (Operacija o in operacije)
         {
-            if (!(o.Pacijent.Jmbg.Equals(operacija.Pacijent.Jmbg) && o.Soba.Id.Equals(operacija.Soba.Id) && o.VremePocetaOperacije.Equals(operacija.VremePocetaOperacije)))
+            if (!(o.Pacijent.Jmbg.Equals(operacija.Pacijent.Jmbg) && o.Soba.Id.Equals(operacija.Soba.Id) && o.VremePocetkaOperacije.Equals(operacija.VremePocetkaOperacije)))
             {
-                string zakazivanje = o.VremePocetaOperacije.ToString() + "#" + o.VremeKrajaOperacije.ToString() + "#" +
+                string zakazivanje = o.VremePocetkaOperacije.ToString(vremenskiFormatPisanje) + "#" + o.VremeKrajaOperacije.ToString(vremenskiFormatPisanje) + "#" +
                     o.Pacijent.Jmbg + "#" + o.Lekar.Jmbg + "#" + o.Soba.Id;
                 lines.Add(zakazivanje);
             }
@@ -253,8 +263,10 @@ public class BazaOperacija
                 if (delovi[3].Equals(sifra))
                 {
                     Console.WriteLine(delovi[0]);
-                    o.VremePocetaOperacije = DateTime.Parse(delovi[0]);
-                    o.VremeKrajaOperacije = DateTime.Parse(delovi[1]);
+                    o.VremePocetkaOperacije = DateTime.ParseExact(delovi[0], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                    o.VremeKrajaOperacije = DateTime.ParseExact(delovi[1], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
                     o.Pacijent.Jmbg = delovi[2];
                     foreach (Pacijent p in pacijenti)
                     {
@@ -285,7 +297,4 @@ public class BazaOperacija
         return ret;
 
     }
-
-    public string fileLocation;
-
 }

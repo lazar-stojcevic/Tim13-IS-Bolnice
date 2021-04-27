@@ -1,11 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
 public class BazaPacijenata
 {
     private static string fileLocation = @"..\..\Datoteke\pacijenti.txt";
+    private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
+    private static string[] vremenskiFormatiCitanje = new[]
+    {
+        "M/d/yyyy h:mm:ss tt",
+        "M-d-yyyy h:mm:ss tt"
+    };
 
     public List<Pacijent> SviPacijenti()
     {
@@ -110,7 +117,7 @@ public class BazaPacijenata
     {
         string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
             pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
-            pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja + "#";
+            pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja.ToString(vremenskiFormatPisanje) + "#";
 
         // upisivanje liste alergena
         foreach (string s in pacijent.Alergeni)
@@ -158,7 +165,8 @@ public class BazaPacijenata
                 p.Pol = Pol.drugo;
             }
             p.Obrisan = Boolean.Parse(delovi[9]);
-            p.DatumRodjenja = DateTime.Parse(delovi[10]);
+            p.DatumRodjenja = DateTime.ParseExact(delovi[10], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
 
             // lista alergena
             string[] alergeni = delovi[11].Split(',');

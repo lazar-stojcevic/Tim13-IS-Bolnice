@@ -1,9 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 public class BazaLekara
 {
+    private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
+    private static string[] vremenskiFormatiCitanje = new[]
+    {
+        "M/d/yyyy h:mm:ss tt",
+        "M-d-yyyy h:mm:ss tt"
+    };
+
     // metoda izlistava samo lekare opste prakse
     public List<Lekar> LekariOpstePrakse()
     {
@@ -62,8 +70,10 @@ public class BazaLekara
                 p.KorisnickoIme = delovi[4];
                 p.Sifra = delovi[5];
                 //DODATO ZA RADNO VREME
-                p.PocetakRadnogVremena = DateTime.Parse(delovi[6]);
-                p.KrajRadnogVremena = DateTime.Parse(delovi[7]);
+                p.PocetakRadnogVremena = DateTime.ParseExact(delovi[6], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                p.KrajRadnogVremena = DateTime.ParseExact(delovi[7], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
                 p.Ordinacija = new Soba(delovi[8]);
                 //TREBA DODATI ORDINACIJU
                 ret.Add(p);

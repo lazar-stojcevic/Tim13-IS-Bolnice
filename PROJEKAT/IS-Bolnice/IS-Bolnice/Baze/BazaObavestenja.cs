@@ -1,11 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
 public class BazaObavestenja
 {
     private static string fileLocation = @"..\..\Datoteke\obavestenja.txt";
+    private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
+    private static string[] vremenskiFormatiCitanje = new[]
+    {
+        "M/d/yyyy h:mm:ss tt",
+        "M-d-yyyy h:mm:ss tt"
+    };
 
     public List<Obavestenje> SvaObavestenja()
     {
@@ -80,7 +87,8 @@ public class BazaObavestenja
             o.Sifra = delovi[0];
             o.Naslov = delovi[1];
             o.Sadrzaj = delovi[2];
-            o.VremeKreiranja = DateTime.Parse(delovi[3]);
+            o.VremeKreiranja = DateTime.ParseExact(delovi[3], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
 
             obavestenja.Add(o);
         }
@@ -90,7 +98,8 @@ public class BazaObavestenja
     private string ObavestenjeToString(Obavestenje obavestenje)
     {
         // polja unutar txt datoteke se razdvajaju sa "#!^" kako bi bilo skoro nemoguce da se u sadrzaju pojavi ta kombinacija
-        string o = obavestenje.Sifra + "#!^" + obavestenje.Naslov + "#!^" + obavestenje.Sadrzaj + "#!^" + obavestenje.VremeKreiranja;
+        string o = obavestenje.Sifra + "#!^" + obavestenje.Naslov + "#!^" + obavestenje.Sadrzaj + "#!^" 
+            + obavestenje.VremeKreiranja.ToString(vremenskiFormatPisanje);
         return o;
     }
 }
