@@ -1,0 +1,37 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.PrikazSvihPacijenata"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
+        mc:Ignorable="d"
+        Title="Prikaz svih pacijenata" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Držite pritisnuto CTRL ukoliko želite da označite više pacijenata." Grid.Row="0" Grid.ColumnSpan="2"/>
+        <DataGrid Name="dgPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" Grid.ColumnSpan="3"
+                  AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="1*"/>
+                <DataGridTextColumn Header="JMBG" Binding="{Binding Jmbg}" Width="1*"/>
+                <DataGridTextColumn Header="Pol" Binding="{Binding Pol}" Width="0.5*"/>
+                <DataGridTextColumn Header="Datum rođenja" Binding="{Binding DatumRodjenja, StringFormat={}{0:dd/MM/yyyy}}" Width="1*"/>
+                <DataGridTextColumn Header="Broj telefona" Binding="{Binding BrojTelefona}" Width="1*"/>
+                <DataGridTextColumn Header="Izabrani lekar" Binding="{Binding IzabraniLekar, Converter={cvt:LekarToTextConverter}}" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Potvrdi" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Height="40" Width="100" Click="Button_Click_Potvrdi"/>
+        <Button Content="Odustani" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Height="40" Width="100" Click="Button_Click_Odustani"/>
+    </Grid>
+</Window>

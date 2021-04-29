@@ -69,6 +69,7 @@
     <Compile Include="Model\Lek.cs" />
     <Compile Include="Model\Obavestenje.cs" />
     <Compile Include="Model\Sastojak.cs" />
+    <Compile Include="Model\Uloge.cs" />
     <Compile Include="Prozori\DodajOpremuWindow.xaml.cs">
       <DependentUpon>DodajOpremuWindow.xaml</DependentUpon>
     </Compile>
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Prozori\PreraspodelaWindow.xaml.cs">
       <DependentUpon>PreraspodelaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\PrikazSvihPacijenata.xaml.cs">
+      <DependentUpon>PrikazSvihPacijenata.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prozori za pacijenta\OdabirZakazivanja.xaml.cs">
       <DependentUpon>OdabirZakazivanja.xaml</DependentUpon>
@@ -274,6 +278,10 @@
     <Page Include="Prozori\PreraspodelaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\PrikazSvihPacijenata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prozori za pacijenta\OdabirZakazivanja.xaml">
       <SubType>Designer</SubType>

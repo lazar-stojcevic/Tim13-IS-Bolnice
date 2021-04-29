@@ -89,6 +89,8 @@ public class BazaObavestenja
             o.Sadrzaj = delovi[2];
             o.VremeKreiranja = DateTime.ParseExact(delovi[3], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
                                                   DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+            
+            // TODO: dodati za ucitavanje rola kojima je obavestenje namenjeno
 
             obavestenja.Add(o);
         }
@@ -99,7 +101,23 @@ public class BazaObavestenja
     {
         // polja unutar txt datoteke se razdvajaju sa "#!^" kako bi bilo skoro nemoguce da se u sadrzaju pojavi ta kombinacija
         string o = obavestenje.Sifra + "#!^" + obavestenje.Naslov + "#!^" + obavestenje.Sadrzaj + "#!^" 
-            + obavestenje.VremeKreiranja.ToString(vremenskiFormatPisanje);
+            + obavestenje.VremeKreiranja.ToString(vremenskiFormatPisanje) + "#!^";
+
+        // sadrzaj liste se razdvaja sa ":@:" kako bi bilo skoro nemoguce da se u sadrzaju pojavi ta kombinacija
+        foreach (Uloge uloga in obavestenje.Uloge)
+        {
+            o += uloga.ToString() + ":@:";
+        }
+        // brisanje poslednja 3 karaktera
+        o = o.Remove(o.Length - 3, 3);
+        o += "#!^";
+
+        foreach (Pacijent pacijent in obavestenje.OdredjeniPacijenti)
+        {
+            o += pacijent.Jmbg + ":@:";
+        }
+        o = o.Remove(o.Length - 3, 3);
+
         return o;
     }
 }

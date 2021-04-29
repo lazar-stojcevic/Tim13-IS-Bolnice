@@ -4,16 +4,14 @@
 // Purpose: Definition of Class Obavestenje
 
 using System;
+using System.Collections.Generic;
 
 public class Obavestenje
 {
-    private string sifra;
-    private string naslov;
-    private string sadrzaj;
-    private DateTime vremeKreiranja;
-
     public string Sifra { get; set; }
     public string Naslov { get; set; }
     public string Sadrzaj { get; set; }
     public DateTime VremeKreiranja { get; set; }
+    public List<Uloge> Uloge { get; set; }
+    public List<Pacijent> OdredjeniPacijenti { get; set; }
 }

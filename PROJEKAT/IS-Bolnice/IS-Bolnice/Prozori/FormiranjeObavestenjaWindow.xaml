@@ -5,15 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="Formiranje obavestenja" Height="422.508" Width="733.441"
+        Title="Formiranje obavestenja" Height="550" Width="700"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Naslov:" HorizontalAlignment="Left" Margin="38,39,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="txtNaslov" HorizontalAlignment="Left" Height="23" Margin="111,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="564"/>
-        <Label Content="Sadržaj:" HorizontalAlignment="Left" Margin="38,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.307,0.268"/>
-        <TextBox Name="txtSadrzaj" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap" Height="127" Margin="38,133,0,0" VerticalAlignment="Top" Width="637" />
-        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="111,315,0,0" VerticalAlignment="Top" Width="101" Height="38" Click="Button_Click"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="462,315,0,0" VerticalAlignment="Top" Width="92" Height="38" Click="Button_Click_Odustani"/>
+        <Label Content="Naslov:" HorizontalAlignment="Left" FontWeight="Bold" Margin="20,203,0,0" VerticalAlignment="Top" Width="84"/>
+        <TextBox Name="txtNaslov" HorizontalAlignment="Left" Height="23" Margin="20,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="653"/>
+        <Label Content="Sadržaj:" HorizontalAlignment="Left" FontWeight="Bold" Margin="20,261,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.307,0.268" Width="89"/>
+        <TextBox Name="txtSadrzaj" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap" Height="145" Margin="20,287,0,0" VerticalAlignment="Top" Width="653" />
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="111,463,0,0" VerticalAlignment="Top" Width="101" Height="38" Click="Button_Click_Potvrdi"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="470,463,0,0" VerticalAlignment="Top" Width="92" Height="38" Click="Button_Click_Odustani"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="162" Margin="18,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="150"/>
+        <Label Content="Obaveštenje za:" HorizontalAlignment="Left" FontWeight="Bold" Margin="18,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ulogaSve" Content="Sve" HorizontalAlignment="Left" Margin="38,48,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ulogaLekari" Content="Lekare" HorizontalAlignment="Left" Margin="38,78,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ulogaUpravnici" Content="Upravnike" HorizontalAlignment="Left" Margin="38,108,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ulogaSekretari" Content="Sekretare" HorizontalAlignment="Left" Margin="38,138,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ulogaPacijenti" Content="Pacijente" HorizontalAlignment="Left" Margin="38,168,0,0" VerticalAlignment="Top"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="162" Margin="168,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="505"/>
+        <Label Content="Određene pacijente:" HorizontalAlignment="Left" FontWeight="Bold" Margin="183,45,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="dodavanjePacijenata" Content="Dodaj" HorizontalAlignment="Left" Margin="612,49,0,0" VerticalAlignment="Top" Width="46" Click="dodavanjePacijenata_Click"/>
+        <DataGrid x:Name="odabraniPacijenti" ItemsSource="{Binding OdabraniPacijenti}" HorizontalAlignment="Left" Height="112" Margin="183,71,0,0" VerticalAlignment="Top" Width="475"
+                  IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="1*"/>
+                <DataGridTextColumn Header="JMBG" Binding="{Binding Jmbg}" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>
