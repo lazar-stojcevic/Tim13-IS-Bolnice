@@ -76,13 +76,16 @@
     <Compile Include="Prozori\IzmeniOpremuWindow.xaml.cs">
       <DependentUpon>IzmeniOpremuWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarDodavanjeLeka.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarDodavanjeLeka.xaml.cs">
       <DependentUpon>LekarDodavanjeLeka.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarGlavniMeni.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarFrejm.xaml.cs">
+      <DependentUpon>LekarFrejm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarGlavniMeni.xaml.cs">
       <DependentUpon>LekarGlavniMeni.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarIzvestaj.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarIzvestaj.xaml.cs">
       <DependentUpon>LekarIzvestaj.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\NabavkaOpremeWindow.xaml.cs">
@@ -94,7 +97,7 @@
     <Compile Include="Prozori\OpremaWindow.xaml.cs">
       <DependentUpon>OpremaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\PodaciOPacijentu.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\PodaciOPacijentu.xaml.cs">
       <DependentUpon>PodaciOPacijentu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\DodajSobuWindow.xaml.cs">
@@ -112,7 +115,7 @@
     <Compile Include="Prozori\IzmenaObavestenjaWindow.xaml.cs">
       <DependentUpon>IzmenaObavestenjaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\IzmenaOperacije.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\IzmenaOperacije.xaml.cs">
       <DependentUpon>IzmenaOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\IzmenaPacijentaWindow.xaml.cs">
@@ -121,16 +124,16 @@
     <Compile Include="Prozori\IzmeniSobuWindow.xaml.cs">
       <DependentUpon>IzmeniSobuWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarIzmenaPregleda.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarIzmenaPregleda.xaml.cs">
       <DependentUpon>LekarIzmenaPregleda.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarRaspored.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarRaspored.xaml.cs">
       <DependentUpon>LekarRaspored.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarWindow.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarWindow.xaml.cs">
       <DependentUpon>LekarWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\LekarZakazivanjePregleda.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\LekarZakazivanjePregleda.xaml.cs">
       <DependentUpon>LekarZakazivanjePregleda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\PreraspodelaWindow.xaml.cs">
@@ -175,7 +178,7 @@
     <Compile Include="Prozori\UpravnikWindow.xaml.cs">
       <DependentUpon>UpravnikWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\ZakazivanjeOperacije.xaml.cs">
+    <Compile Include="Prozori\Prikaz kod lekara\ZakazivanjeOperacije.xaml.cs">
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
@@ -187,15 +190,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Prozori\LekarDodavanjeLeka.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarDodavanjeLeka.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\LekarGlavniMeni.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarFrejm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\LekarIzvestaj.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarGlavniMeni.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarIzvestaj.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,7 +218,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Prozori\PodaciOPacijentu.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\PodaciOPacijentu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,7 +242,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\IzmenaOperacije.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\IzmenaOperacije.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -259,19 +266,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\LekarIzmenaPregleda.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarIzmenaPregleda.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Prozori\LekarRaspored.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarRaspored.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Prozori\LekarWindow.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\LekarZakazivanjePregleda.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\LekarZakazivanjePregleda.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -335,7 +342,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\ZakazivanjeOperacije.xaml">
+    <Page Include="Prozori\Prikaz kod lekara\ZakazivanjeOperacije.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

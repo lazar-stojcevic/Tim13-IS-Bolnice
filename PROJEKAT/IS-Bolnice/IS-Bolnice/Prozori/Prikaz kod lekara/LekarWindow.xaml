@@ -1,0 +1,67 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        mc:Ignorable="d"
+        Title="LekarWindow" Height="700" Width="400" Background="White">
+    <Grid RenderTransformOrigin="0.501,0.498">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="239*"/>
+            <ColumnDefinition Width="158*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="..\Slike\menu.png" HorizontalAlignment="Left" Height="38" Margin="23,10,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="-0.417,-0.441"/>
+        <Button Content="Učitaj pacijenta" HorizontalAlignment="Left" Height="43" Margin="19.2,52,0,0" VerticalAlignment="Top" Width="109" Click="btnUcitajPacijenta" Grid.Column="1"/>
+        <Label Content="JMBG:" HorizontalAlignment="Left" Margin="27,57,0,0" VerticalAlignment="Top" Width="46"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" x:Name="txtJMBG" HorizontalAlignment="Left" Height="26" Margin="73,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+        <Label Content="Ime:" HorizontalAlignment="Left" Margin="36,98,0,0" VerticalAlignment="Top"/>
+        <Label Content="Prezime:" HorizontalAlignment="Left" Margin="35,129,0,0" VerticalAlignment="Top"/>
+        <TextBox Grid.ColumnSpan="2" x:Name="txtIme" HorizontalAlignment="Left" Height="26" Margin="112,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
+        <TextBox HorizontalAlignment="Left" x:Name="txtPrz" Height="26" Margin="112,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125" Grid.ColumnSpan="2"/>
+
+
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Grid.ColumnSpan="2">
+            <Menu Opacity="0" HorizontalAlignment="Left"  Height="40" Margin="10,4,0,4" Width="44" RenderTransformOrigin="0.519,0.8">
+                <Menu.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="1.19"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Menu.RenderTransform>
+                <MenuItem Height="34" Width="45" RenderTransformOrigin="0.5,0.5">
+                    <MenuItem.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.358"/>
+                            <RotateTransform Angle="-1.277"/>
+                            <TranslateTransform Y="0.194"/>
+                        </TransformGroup>
+                    </MenuItem.RenderTransform>
+                    <MenuItem Header="Uvid u verifikaciju lekova" />
+                    <MenuItem Header="Uvid u inventar po salama" />
+                    <MenuItem Header="Uvid u kalendar" />
+                    <Separator />
+                    <MenuItem Header="Odjavi se" x:Name="subItemOdjava" Click="odjavaClick" />
+                </MenuItem>
+            </Menu>
+        </ToolBarPanel>
+        <Button Content="Zakaži pregled" x:Name="btnPregled" IsEnabled="False" Margin="19.2,107,30,544" Click="btnKreirajPregled" Background="Red" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
+        <Button Content="Zakaži operaciju" x:Name="btnOperacija" IsEnabled="False" Margin="19.2,171,31,477" Click="btnKreirajOperaciju" Background="CadetBlue" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="65.2,565,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="ButtonRaspored_Click">
+            <StackPanel>
+                <Image Source="../../Slike/timetable.png" Height="71" Width="77" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="btnIzvestaj" IsEnabled="False" Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="16,565,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
+            <StackPanel>
+                <Image Source="../../Slike/report.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

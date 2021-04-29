@@ -1,0 +1,36 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarIzvestaj"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        mc:Ignorable="d"
+        Title="LekarIzvestaj" Height="700" Width="400">
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2" Margin="-4,0,-0.4,0">
+        </ToolBarPanel>
+        <Label Content="Izveštaj" FontSize="22" HorizontalAlignment="Left" Margin="53,4,0,0" VerticalAlignment="Top" Height="40" Width="91"/>
+        <Label Content="Tekst izveštaja:" HorizontalAlignment="Left" Margin="34,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,2.194" Width="110"/>
+        <TextBox x:Name="txtAnamneza" HorizontalAlignment="Left" Height="195" Margin="34,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
+        <ListBox x:Name="listaLekova" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="230" Margin="34,349,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Lek.Ime}"></TextBlock>
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Lek.Opis}"></TextBlock>
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding UcestanostKonzumiranja}"></TextBlock>
+                        <TextBlock Text=" puta na dan" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Content="Lekovi:" HorizontalAlignment="Left" Margin="34,321,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.1,2.194" Width="110"/>
+        <Button Content="Dodaj lek" HorizontalAlignment="Left" Height="40" Margin="269,394,0,0" VerticalAlignment="Top" Width="115" Click="Button_DodajLek"/>
+        <Button Content="Obriši" HorizontalAlignment="Left" Height="40" Margin="269,464,0,0" VerticalAlignment="Top" Width="115" Click="Button_ObrisiLek"/>
+        <Button Content="Završi pregled" HorizontalAlignment="Left" Height="52" Margin="105,596,0,0" VerticalAlignment="Top" Width="181" Click="Button_ZavrsiPregled"/>
+
+    </Grid>
+</Window>

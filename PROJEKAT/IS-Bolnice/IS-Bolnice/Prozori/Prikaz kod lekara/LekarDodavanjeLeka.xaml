@@ -1,0 +1,48 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarDodavanjeLeka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        mc:Ignorable="d"
+        Title="LekarDodavanjeLeka" Height="700" Width="400">
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2" Margin="-4,0,-0.4,0">
+        </ToolBarPanel>
+        <Label Content="Dodavanje leka" FontSize="22" HorizontalAlignment="Left" Margin="53,4,0,0" VerticalAlignment="Top" Height="40" Width="163"/>
+
+        <ListView x:Name="listaSvihLekova" HorizontalAlignment="Left" Height="214" VerticalAlignment="Top" Width="338" Margin="29,93,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime leka" Width="250" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Header="Gramaza" Width="88" DisplayMemberBinding="{Binding Opis}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Spisak lekova" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,67,0,0"/>
+        <Label Content="Broj uzimanja lekova na dan:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,327,0,0"/>
+        <Label Content="Trajanje terapije u danima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,361,0,0"/>
+
+        <TextBox HorizontalAlignment="Left" x:Name="txtBrojUzimanja" PreviewTextInput="NumberValidationTextBox" Height="22" Margin="225,331,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+        <TextBox HorizontalAlignment="Left" x:Name="txtTrajanje" PreviewTextInput="NumberValidationTextBox" Height="22" Margin="225,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="53"/>
+
+
+        <Label Content="Dodatni detalji o terapiji:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,439,0,0"/>
+        <TextBox x:Name="txtDetalji" HorizontalAlignment="Left" Height="88" Margin="29,467,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="338"/>
+
+        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="39,585,0,0" VerticalAlignment="Top" Width="149" Height="52" Click="Button_DodajClick"/>
+        <Button Content="Kraj" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Width="149" Height="52" Click="Button_KrajClick"/>
+        <Label Content="Na koliko dana se uzima lek:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,394,0,0"/>
+        <ComboBox SelectedIndex="0" x:Name="comboboxNaKolikoDana" HorizontalAlignment="Left" Margin="225,397,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Svaki dan</ComboBoxItem>
+            <ComboBoxItem>Svaki drugi dan</ComboBoxItem>
+            <ComboBoxItem>Svaki treći dan</ComboBoxItem>
+            <ComboBoxItem>Svaki četvrti dan</ComboBoxItem>
+            <ComboBoxItem>Svaki peti dan</ComboBoxItem>
+            <ComboBoxItem>Svaki šesti dan</ComboBoxItem>
+            <ComboBoxItem>Na nedelju dana</ComboBoxItem>
+        </ComboBox>
+
+
+    </Grid>
+</Window>
