@@ -14,4 +14,10 @@ public class Obavestenje
     public DateTime VremeKreiranja { get; set; }
     public List<Uloge> Uloge { get; set; }
     public List<Pacijent> OdredjeniPacijenti { get; set; }
+
+    public Obavestenje()
+    {
+        Uloge = new List<Uloge>();
+        OdredjeniPacijenti = new List<Pacijent>();
+    }
 }

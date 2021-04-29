@@ -42,7 +42,7 @@ public class BazaPacijenata
         //return NapraviPacijente(linije);
         // odabir i vracanje samo onih pacijenata koji nisu logicki obrisani
         List<Pacijent> sviPacijenti = NapraviPacijente(linije);
-        Pacijent aktuelniPacijenti = new Pacijent();
+        Pacijent aktuelniPacijent = new Pacijent();
 
         foreach (Pacijent p in sviPacijenti)
         {
@@ -50,12 +50,12 @@ public class BazaPacijenata
             {
                 if (p.Jmbg.Equals(jmbg))
                 {
-                    aktuelniPacijenti = p;
-                    return aktuelniPacijenti;
+                    aktuelniPacijent = p;
+                    return aktuelniPacijent;
                 }
             }
         }
-        return aktuelniPacijenti;
+        return aktuelniPacijent;
     }
 
     public void KreirajPacijenta(Pacijent pacijent)
