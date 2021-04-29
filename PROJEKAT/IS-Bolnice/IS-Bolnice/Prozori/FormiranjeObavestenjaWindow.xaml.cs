@@ -55,7 +55,7 @@ namespace IS_Bolnice.Prozori
                 Naslov = tmpNaslov,
                 Sadrzaj = tmpsadrzaj,
                 VremeKreiranja = tmpVremeKreiranja,
-                Uloge = SelektovanaUloga(),
+                Uloge = SelektovaneUloge(),
                 OdredjeniPacijenti = OdabraniPacijenti.ToList()
             };
 
@@ -64,7 +64,7 @@ namespace IS_Bolnice.Prozori
             this.Close();
         }
 
-        private List<Uloge> SelektovanaUloga()
+        private List<Uloge> SelektovaneUloge()
         {
             List<Uloge> obavestenjeZaUloge = new List<Uloge>();
 
