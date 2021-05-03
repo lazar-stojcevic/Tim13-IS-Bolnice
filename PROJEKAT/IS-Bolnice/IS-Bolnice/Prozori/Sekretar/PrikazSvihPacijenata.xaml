@@ -18,7 +18,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Držite pritisnuto CTRL ukoliko želite da označite više pacijenata." Grid.Row="0" Grid.ColumnSpan="2"/>
+        <Label x:Name="pomocniTekst" Content="Držite pritisnuto CTRL ukoliko želite da označite više pacijenata." Grid.Row="0" Grid.ColumnSpan="2"/>
         <DataGrid Name="dgPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" Grid.ColumnSpan="3"
                   AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0">
             <DataGrid.Columns>

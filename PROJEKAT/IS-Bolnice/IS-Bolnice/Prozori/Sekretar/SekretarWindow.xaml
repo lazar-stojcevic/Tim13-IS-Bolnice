@@ -77,6 +77,7 @@
                             <Button Content="Zakaži operaciju" Margin="10" Click="Button_Click_Zakazivanje_Operacije"/>
                             <Button Content="Ažuriraj alergene" Margin="10" Click="Button_Click_Azuriranje_Alergena"/>
                             <Button Content="Prikaz termina" Margin="10" Click="Button_Click_Prikaz_Termina"/>
+                            <Button Content="Hitan termin" Margin="10" Height="40" Click="Button_Click_Hitan_Termin"/>
                         </StackPanel>
                         <DataGrid Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">

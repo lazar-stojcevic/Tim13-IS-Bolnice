@@ -16,10 +16,8 @@ public class BazaPacijenata
 
     public List<Pacijent> SviPacijenti()
     {
-        List<string> linije = new List<string>();
-        linije = File.ReadAllLines(fileLocation).ToList();
+        List<string> linije = File.ReadAllLines(fileLocation).ToList();
 
-        //return NapraviPacijente(linije);
         // odabir i vracanje samo onih pacijenata koji nisu logicki obrisani
         List<Pacijent> sviPacijenti = NapraviPacijente(linije);
         List<Pacijent> aktuelniPacijenti = new List<Pacijent>();
@@ -32,6 +30,18 @@ public class BazaPacijenata
             }
         }
         return aktuelniPacijenti;
+    }
+
+    public Pacijent poslednjiDodat()
+    {
+        List<Pacijent> pacijenti = SviPacijenti();
+        int index = pacijenti.Count() - 1;
+
+        if (index != -1)
+        {
+            return pacijenti[index];
+        }
+        return null;
     }
 
     public Pacijent PacijentSaOvimJMBG(string jmbg)

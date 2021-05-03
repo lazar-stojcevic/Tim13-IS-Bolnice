@@ -172,6 +172,9 @@
     <Compile Include="Prozori\Sekretar\SekretarZakazivanjePregleda.xaml.cs">
       <DependentUpon>SekretarZakazivanjePregleda.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Sekretar\ZakazivanjeHitnogTermina.xaml.cs">
+      <DependentUpon>ZakazivanjeHitnogTermina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\UpravljanjeWindow.xaml.cs">
       <DependentUpon>UpravljanjeWindow.xaml</DependentUpon>
     </Compile>
@@ -331,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Sekretar\SekretarZakazivanjePregleda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Sekretar\ZakazivanjeHitnogTermina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

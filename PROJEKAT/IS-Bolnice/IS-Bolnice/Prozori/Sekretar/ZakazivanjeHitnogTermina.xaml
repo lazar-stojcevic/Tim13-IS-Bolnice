@@ -1,0 +1,57 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Sekretar.ZakazivanjeHitnogTermina"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Sekretar"
+        mc:Ignorable="d"
+        Title="Zakazivanje hitnog termina" Height="450" Width="600"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.6*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Tip termina: " HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"
+               FontWeight="Bold"/>
+        <RadioButton x:Name="rbPregled" Content="Pregled" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        <RadioButton x:Name="rbOperacija" Content="Operacija" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+        <Label Content="Pacijent:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"
+               FontWeight="Bold"/>
+        <TextBox x:Name="odabraniPacijent" Height="25" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1"/>
+        <Button Height="25" Width="60" Content="Postojeći" Grid.Row="1" Grid.Column="3" Click="Button_Click_Postojeci"/>
+        <Button Height="25" Width="60" Content="Gostujući" Grid.Row="1" Grid.Column="4" Click="Button_Click_Gostujuci"/>
+        <Label Content="Oblast lekara:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"
+               FontWeight="Bold"/>
+        <ComboBox Height="25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label Content="Trajanje termina (u satima):" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"
+               FontWeight="Bold"/>
+        <ComboBox x:Name="comboTrajanja" Height="25" Grid.Row="3" Grid.Column="1"/>
+
+        <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5"/>
+        <StackPanel Grid.Row="4" Grid.Column="0">
+            <Label Content="Zauzeti termini:" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <Label Content=""/>
+            <Button Content="Odloži" Width="60"/>
+        </StackPanel>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4">
+            <DataGrid.Columns>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="Potvrdi" Height="30" Width="60" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1"/>
+        <Button Content="Odustani" Height="30" Width="60" Grid.Row="5" Grid.Column="3"/>
+    </Grid>
+</Window>

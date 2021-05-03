@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterOwner">
     <Grid>
         <Label Content="Termini za pacijenta " HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.153,0.707" FontWeight="Bold"/>
-        <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="23" Margin="151,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>
+        <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="25" Margin="151,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>
         <Label Content="Pregledi:" FontWeight="Bold" Margin="10,60,443.6,455.4"/>
         <DataGrid Name="dataGridPregledi" ItemsSource="{Binding PreglediPacijenta}" Margin="10,90,9.6,361" IsReadOnly="True"
                   SelectionMode="Single" AutoGenerateColumns="False">

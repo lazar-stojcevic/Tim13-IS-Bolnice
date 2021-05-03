@@ -47,6 +47,16 @@ namespace IS_Bolnice.Prozori.Sekretar
             Obavestenja = new ObservableCollection<Obavestenje>(bo.SvaObavestenja());
         }
 
+        private void OsvezavanjePrikazaPacijenata()
+        {
+            List<Pacijent> sviPacijenti = bp.SviPacijenti();
+            Pacijenti.Clear();
+            foreach (Pacijent pacijent in sviPacijenti)
+            {
+                Pacijenti.Add(pacijent);
+            }
+        }
+
         private void Button_Click_Novi(object sender, RoutedEventArgs e)
         {
             DodavanjePacijentaWindow dpw = new DodavanjePacijentaWindow(Pacijenti);
@@ -92,8 +102,10 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_NoviGuest(object sender, RoutedEventArgs e)
         {
-            DodavanjeGuestNalogaWindow dgnw = new DodavanjeGuestNalogaWindow(Pacijenti);
+            DodavanjeGuestNalogaWindow dgnw = new DodavanjeGuestNalogaWindow();
             dgnw.ShowDialog();
+            // osvezavanje prikaza pacijenata (da ne mora da se prosledjuje referenca u konstruktor)
+            OsvezavanjePrikazaPacijenata();
         }
 
         private void Button_Click_NovoObavestenje(object sender, RoutedEventArgs e)
@@ -177,6 +189,13 @@ namespace IS_Bolnice.Prozori.Sekretar
                 SekretarZakazivanjeOperacije szo = new SekretarZakazivanjeOperacije(p);
                 szo.ShowDialog();
             }
+        }
+
+        private void Button_Click_Hitan_Termin(object sender, RoutedEventArgs e)
+        {
+            ZakazivanjeHitnogTermina zakazivanjeHitnogTermina = new ZakazivanjeHitnogTermina();
+            zakazivanjeHitnogTermina.ShowDialog();
+            OsvezavanjePrikazaPacijenata();
         }
     }
 }

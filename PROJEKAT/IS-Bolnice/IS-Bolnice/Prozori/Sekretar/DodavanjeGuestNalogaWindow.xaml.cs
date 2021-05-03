@@ -10,14 +10,12 @@ namespace IS_Bolnice.Prozori.Sekretar
     public partial class DodavanjeGuestNalogaWindow : Window
     {
         private BazaPacijenata bp;
-        private ObservableCollection<Pacijent> PacijentiRef;
 
-        public DodavanjeGuestNalogaWindow(ObservableCollection<Pacijent> Pacijenti)
+        public DodavanjeGuestNalogaWindow()
         {
             InitializeComponent();
 
             bp = new BazaPacijenata();
-            PacijentiRef = Pacijenti;
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
@@ -42,7 +40,6 @@ namespace IS_Bolnice.Prozori.Sekretar
             };
 
             bp.KreirajPacijenta(p);
-            PacijentiRef.Add(p);
 
             this.Close();
         }
