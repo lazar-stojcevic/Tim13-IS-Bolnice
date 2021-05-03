@@ -2,7 +2,7 @@
 using System.Windows;
 
 
-namespace IS_Bolnice.Prozori
+namespace IS_Bolnice.Prozori.Sekretar
 {
     /// <summary>
     /// Interaction logic for DodavanjeGuestNalogaWindow.xaml

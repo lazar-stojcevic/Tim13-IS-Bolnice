@@ -103,22 +103,22 @@
     <Compile Include="Prozori\DodajSobuWindow.xaml.cs">
       <DependentUpon>DodajSobuWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\DodavanjeGuestNalogaWindow.xaml.cs">
+    <Compile Include="Prozori\Sekretar\DodavanjeGuestNalogaWindow.xaml.cs">
       <DependentUpon>DodavanjeGuestNalogaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\DodavanjePacijentaWindow.xaml.cs">
+    <Compile Include="Prozori\Sekretar\DodavanjePacijentaWindow.xaml.cs">
       <DependentUpon>DodavanjePacijentaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\FormiranjeObavestenjaWindow.xaml.cs">
+    <Compile Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml.cs">
       <DependentUpon>FormiranjeObavestenjaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\IzmenaObavestenjaWindow.xaml.cs">
+    <Compile Include="Prozori\Sekretar\IzmenaObavestenjaWindow.xaml.cs">
       <DependentUpon>IzmenaObavestenjaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\IzmenaOperacije.xaml.cs">
       <DependentUpon>IzmenaOperacije.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\IzmenaPacijentaWindow.xaml.cs">
+    <Compile Include="Prozori\Sekretar\IzmenaPacijentaWindow.xaml.cs">
       <DependentUpon>IzmenaPacijentaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\IzmeniSobuWindow.xaml.cs">
@@ -139,7 +139,7 @@
     <Compile Include="Prozori\PreraspodelaWindow.xaml.cs">
       <DependentUpon>PreraspodelaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\PrikazSvihPacijenata.xaml.cs">
+    <Compile Include="Prozori\Sekretar\PrikazSvihPacijenata.xaml.cs">
       <DependentUpon>PrikazSvihPacijenata.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prozori za pacijenta\OdabirZakazivanja.xaml.cs">
@@ -157,19 +157,19 @@
     <Compile Include="Prozori\Prozori za pacijenta\ZakazivanjeUOdredjenomTerminu.xaml.cs">
       <DependentUpon>ZakazivanjeUOdredjenomTerminu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\SekretarAzuriranjeAlergena.xaml.cs">
+    <Compile Include="Prozori\Sekretar\SekretarAzuriranjeAlergena.xaml.cs">
       <DependentUpon>SekretarAzuriranjeAlergena.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\SekretarPrikazZakazanihTerminaPacijenta.xaml.cs">
+    <Compile Include="Prozori\Sekretar\SekretarPrikazZakazanihTerminaPacijenta.xaml.cs">
       <DependentUpon>SekretarPrikazZakazanihTerminaPacijenta.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\SekretarWindow.xaml.cs">
+    <Compile Include="Prozori\Sekretar\SekretarWindow.xaml.cs">
       <DependentUpon>SekretarWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\SekretarZakazivanjeOperacije.xaml.cs">
+    <Compile Include="Prozori\Sekretar\SekretarZakazivanjeOperacije.xaml.cs">
       <DependentUpon>SekretarZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\SekretarZakazivanjePregleda.xaml.cs">
+    <Compile Include="Prozori\Sekretar\SekretarZakazivanjePregleda.xaml.cs">
       <DependentUpon>SekretarZakazivanjePregleda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\UpravljanjeWindow.xaml.cs">
@@ -226,19 +226,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\DodavanjeGuestNalogaWindow.xaml">
+    <Page Include="Prozori\Sekretar\DodavanjeGuestNalogaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\DodavanjePacijentaWindow.xaml">
+    <Page Include="Prozori\Sekretar\DodavanjePacijentaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\FormiranjeObavestenjaWindow.xaml">
+    <Page Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\IzmenaObavestenjaWindow.xaml">
+    <Page Include="Prozori\Sekretar\IzmenaObavestenjaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,7 +246,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Prozori\IzmenaPacijentaWindow.xaml">
+    <Page Include="Prozori\Sekretar\IzmenaPacijentaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,7 +286,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Prozori\PrikazSvihPacijenata.xaml">
+    <Page Include="Prozori\Sekretar\PrikazSvihPacijenata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -314,23 +314,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\SekretarAzuriranjeAlergena.xaml">
+    <Page Include="Prozori\Sekretar\SekretarAzuriranjeAlergena.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\SekretarPrikazZakazanihTerminaPacijenta.xaml">
+    <Page Include="Prozori\Sekretar\SekretarPrikazZakazanihTerminaPacijenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\SekretarWindow.xaml">
+    <Page Include="Prozori\Sekretar\SekretarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\SekretarZakazivanjeOperacije.xaml">
+    <Page Include="Prozori\Sekretar\SekretarZakazivanjeOperacije.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\SekretarZakazivanjePregleda.xaml">
+    <Page Include="Prozori\Sekretar\SekretarZakazivanjePregleda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

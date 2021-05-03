@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace IS_Bolnice.Prozori
+namespace IS_Bolnice.Prozori.Sekretar
 {
     /// <summary>
     /// Interaction logic for IzmenaPacijentaWindow.xaml
