@@ -48,6 +48,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         }
 
+        private void validacijaLekovaClick(object sender, RoutedEventArgs e)
+        {
+            Page validacija = new LekarValidacijaLekova(Sifra);
+            this.NavigationService.Navigate(validacija);
+
+        }
+
         public string Sifra { get; set; }
 
 

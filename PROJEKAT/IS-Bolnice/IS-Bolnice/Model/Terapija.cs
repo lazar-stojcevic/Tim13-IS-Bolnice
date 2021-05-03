@@ -66,7 +66,7 @@ public class Terapija : INotifyPropertyChanged
         {
             if (lek == value) return;
             lek = value;
-            RaisePropertyChanged("lek");
+            RaisePropertyChanged("Lek");
         }
     }
 

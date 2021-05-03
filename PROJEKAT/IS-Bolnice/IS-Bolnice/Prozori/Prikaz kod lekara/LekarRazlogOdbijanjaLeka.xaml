@@ -1,0 +1,16 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarRazlogOdbijanjaLeka"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+        mc:Ignorable="d"
+        Title="LekarRazlogOdbijanjaLeka" Height="250" Width="400">
+    <Grid>
+        <Button Content="Pošalji" HorizontalAlignment="Left" Height="40" Margin="28,158,0,0" VerticalAlignment="Top" Width="137"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Height="40" Margin="210,158,0,0" VerticalAlignment="Top" Width="137"/>
+        <TextBox HorizontalAlignment="Left" Height="121" Margin="28,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="319"/>
+        <Label Content="Razlog odbijanja:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,0,0,0"/>
+
+    </Grid>
+</Window>

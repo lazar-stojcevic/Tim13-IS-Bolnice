@@ -12,11 +12,12 @@ public class Lek: INotifyPropertyChanged
    private String sifra;
    private String ime;
    private String opis;
-   private List<String> alergeni;
+   private List<Sastojak> sastojci;
+   private List<Lek> zamenskiLekovi;
    private bool potrebanRecept;
 
     public Lek() {
-        alergeni = new List<string>();
+        sastojci = new List<Sastojak>();
     }
 
     public String Sifra
@@ -52,14 +53,25 @@ public class Lek: INotifyPropertyChanged
         }
     }
 
-    public List<String> Alergeni
+    public List<Lek> ZamenskiLekovi
     {
-        get { return alergeni; }
+        get { return zamenskiLekovi; }
         set
         {
-            if (alergeni == value) return;
-            alergeni = value;
-            RaisePropertyChanged("alergeni");
+            if (zamenskiLekovi == value) return;
+            zamenskiLekovi = value;
+            RaisePropertyChanged("zamenskiLekovi");
+        }
+    }
+
+    public List<Sastojak> Alergeni
+    {
+        get { return sastojci; }
+        set
+        {
+            if (sastojci == value) return;
+            sastojci = value;
+            RaisePropertyChanged("sastojci");
         }
     }
 

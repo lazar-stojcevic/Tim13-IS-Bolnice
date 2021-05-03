@@ -39,7 +39,8 @@ public class BazaLekova
                     {
                         if (!a.Equals(""))
                         {
-                            p.Alergeni.Add(a);
+                            Sastojak s = new Sastojak(a);
+                            p.Alergeni.Add(s);
                         }
                     }
                 }

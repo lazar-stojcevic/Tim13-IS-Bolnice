@@ -2,5 +2,10 @@ using System;
 
 public class Sastojak
 {
-    private string Ime { get; set; }
+    public string Ime { get; set; }
+
+    public Sastojak(string ime)
+    {
+        Ime = ime;
+    }
 }

@@ -38,21 +38,16 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     foreach (Lek lek in lekoviZaPrikaz)
                     {
                         ++i;
-                        foreach (string alergenLek in lek.Alergeni)
+                        foreach (Sastojak alergenLek in lek.Alergeni)
                         {
-                            Console.WriteLine("AAA");
-                            Console.WriteLine(alergen);
-                            Console.WriteLine("AAA");
-                            if (alergenLek.Equals(alergen) && !alergenLek.Equals(""))
-                            {
-                                Console.WriteLine(alergenLek + "            " + alergen);
+                            if (alergenLek.Ime.Equals(alergen) && !alergenLek.Ime.Equals(""))
+                            { 
                                 lekovi.RemoveAt(i);
                             }
                             --i;
                             break;
                         }
                     }
-                    Console.WriteLine(alergen);
                 }
             }
 
