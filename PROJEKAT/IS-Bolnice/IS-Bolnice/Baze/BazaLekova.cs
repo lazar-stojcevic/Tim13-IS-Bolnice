@@ -58,7 +58,8 @@ public class BazaLekova
    
    public void KreirajLek(Lek lek)
    {
-        string novaLinija = System.Environment.NewLine + lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+        List<string> linije = new List<string>();
+        string novaLinija =lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
         if (lek.PotrebanRecept)
         {
             novaLinija += "1#";
@@ -77,20 +78,76 @@ public class BazaLekova
         {
             novaLinija += "nema,";
         }
-        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
-
-        File.AppendAllText(fileLocation, novaLinija);
+        novaLinija.Remove(novaLinija.Length - 1, 1);
+        linije.Add(novaLinija);
+        File.AppendAllLines(fileLocation, linije);
     }
-   
-   public void IzmeniLek(Lek lek)
+
+    public void KreiraNovijLek(Lek lek)
+    {
+        List<string> linije = new List<string>();
+        string novaLinija = lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+        if (lek.PotrebanRecept)
+        {
+            novaLinija += "1#";
+        }
+        else novaLinija += "0#";
+
+
+        if (lek.Alergeni.Count != 0)
+        {
+            foreach (Sastojak sastojak in lek.Alergeni)
+            {
+                novaLinija += sastojak.Ime + ",";
+            }
+        }
+        else
+        {
+            novaLinija += "nema,";
+        }
+        novaLinija.Remove(novaLinija.Length - 1, 1);
+        novaLinija += System.Environment.NewLine;
+        linije.Add(novaLinija);
+        File.AppendAllLines(fileLocation, linije);
+    }
+
+    public void IzmeniLek(Lek lek)
    {
       throw new NotImplementedException();
    }
    
-   public void ObrisiILek(Lek lek)
+   public void ObrisiILek(Lek lekZaBrisanje)
    {
-      throw new NotImplementedException();
-   }
+        List<string> linije = new List<string>();
+        foreach (Lek lek in SviLekovi())
+        {
+            if (!lekZaBrisanje.Sifra.Equals(lek.Sifra))
+            {
+                string novaLinija =lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+                if (lek.PotrebanRecept)
+                {
+                    novaLinija += "1#";
+                }
+                else novaLinija += "0#";
+
+
+                if (lek.Alergeni.Count != 0)
+                {
+                    foreach (Sastojak sastojak in lek.Alergeni)
+                    {
+                        novaLinija += sastojak.Ime + ",";
+                    }
+                }
+                else
+                {
+                    novaLinija += "nema,";
+                }
+                novaLinija = novaLinija.Remove(novaLinija.LastIndexOf(','), 1);
+                linije.Add(novaLinija);
+            }
+        }
+        File.WriteAllLines(fileLocation, linije);
+    }
    
    public string fileLocation = @"..\..\Datoteke\lekovi.txt";
 

@@ -55,8 +55,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         }
 
-        public string Sifra { get; set; }
+        private void Button_UvidUOdobreneLekoveClick(object sender, RoutedEventArgs e)
+        {
+           Page uvidULekove = new LekarUvidUOdobreneLekove();
+           this.NavigationService.Navigate(uvidULekove);
+        }
 
+        public string Sifra { get; set; }
 
     }
 

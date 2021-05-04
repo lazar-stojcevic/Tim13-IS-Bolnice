@@ -1,2 +1,2 @@
-44444#Propranolol#5mg#1#Penicilin,Grinje,Dlake#430-123-456
-12345#Amoxiklav#200mg#1#Penicilin#430-666-999
+5555#Propanolol#5mg#1#Penicilin,Laktoza,#123-430-666-
+4444#Neki nebitni lek#500mg#1#Paracetamol,Laktoza,#123-430-666-

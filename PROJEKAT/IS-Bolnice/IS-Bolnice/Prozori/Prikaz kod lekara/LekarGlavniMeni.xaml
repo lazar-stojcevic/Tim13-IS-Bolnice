@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
         mc:Ignorable="d" Background="White"
         Title="Lekar glavni meni" Height="700" Width="400">
     <Grid>
@@ -13,59 +13,66 @@
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="231,61,0,0" VerticalAlignment="Top" Width="101" Click="ButtonRaspored_Click">
             <StackPanel>
-                <Image Source="../../Slike/timetable.png" Height="78" Width="91" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/timetable.png" Height="73" Width="86" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="54,61,0,0" VerticalAlignment="Top" Width="101" Click="ButtonPregled_Click">
             <StackPanel>
-                <Image Source="../../Slike/pregled.png" Height="75" Width="81" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/pregled.png" Height="68" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="233,181,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,181,0,0" VerticalAlignment="Top" Width="101" >
             <StackPanel>
-                <Image Source="../../Slike/recension.png" Height="80" Width="91" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/recension.png" Height="67" Width="80" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="47,313,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,309,0,0" VerticalAlignment="Top" Width="101" >
             <StackPanel>
-                <Image Source="../../Slike/suitcase.png" Height="75" Width="81" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/suitcase.png" Height="67" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,181,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="57,181,0,0" VerticalAlignment="Top" Width="101" >
             <StackPanel>
-                <Image Source="../../Slike/storage.png" Height="75" Width="81" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/storage.png" Height="64" Width="74" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="233,316,0,0" VerticalAlignment="Top" Width="101"  Click="validacijaLekovaClick">
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="245,312,0,0" VerticalAlignment="Top" Width="101"  Click="validacijaLekovaClick">
             <StackPanel>
-                <Image Source="../../Slike/vitamin.png" Height="75" Width="81" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/dozvola.png" Height="69" Width="81" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="49,443,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,431,0,0" VerticalAlignment="Top" Width="101" >
             <StackPanel>
-                <Image Source="../../Slike/potrosnja.png" Height="75" Width="81" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="../../Slike/potrosnja.png" Height="63" Width="75" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="149,569,0,0" VerticalAlignment="Top" Width="101" Click="odjavaClick" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="243,431,0,0" VerticalAlignment="Top" Width="101" Click="Button_UvidUOdobreneLekoveClick" >
             <StackPanel>
-                <Image Source="../../Slike/logout.png" Height="75" Width="81" RenderTransformOrigin="1.966,0.541"  />
+                <Image Source="../../Slike/vitamin.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="149,551,0,0" VerticalAlignment="Top" Width="101" Click="odjavaClick" >
+            <StackPanel>
+                <Image Source="../../Slike/logout.png" Height="66" Width="72" RenderTransformOrigin="1.966,0.541"  />
             </StackPanel>
         </Button>
         <Label Content="Uvid u raspored" FontSize="15" HorizontalAlignment="Left" Margin="224,144,0,0" VerticalAlignment="Top" Width="131" Height="28"/>
         <Label Content="Pregled" FontSize="15" HorizontalAlignment="Left" Margin="72,148,0,0" VerticalAlignment="Top" Width="59" Height="33"/>
-        <Label Content="Inventar po salama" FontSize="15" HorizontalAlignment="Left" Margin="31,264,0,0" VerticalAlignment="Top" Width="141" Height="33"/>
-        <Label Content="Uvid u recenzije" FontSize="15" HorizontalAlignment="Left" Margin="224,264,0,0" VerticalAlignment="Top" Width="118" Height="33"/>
-        <Label Content="Zahtev za godišnji odmor" FontSize="15" HorizontalAlignment="Left" Margin="9,396,0,0" VerticalAlignment="Top" Width="179" Height="33"/>
-        <Label Content="Validacija lekova" FontSize="15" HorizontalAlignment="Left" Margin="219,396,0,0" VerticalAlignment="Top" Width="118" Height="33"/>
-        <Label Content="Izveštaj o potrošnji" FontSize="15" HorizontalAlignment="Left" Margin="31,531,0,0" VerticalAlignment="Top" Width="141" Height="33"/>
-        <Label Content="Odjavi se" FontSize="15" HorizontalAlignment="Left" Margin="162,657,0,0" VerticalAlignment="Top" Width="72" Height="33"/>
+        <Label Content="Inventar po salama" FontSize="15" HorizontalAlignment="Left" Margin="37,264,0,0" VerticalAlignment="Top" Width="141" Height="33"/>
+        <Label Content="Uvid u recenzije" FontSize="15" HorizontalAlignment="Left" Margin="230,264,0,0" VerticalAlignment="Top" Width="118" Height="33"/>
+        <Label Content="Zahtev za godišnji odmor" FontSize="15" HorizontalAlignment="Left" Margin="27,392,0,0" VerticalAlignment="Top" Width="179" Height="33"/>
+        <Label Content="Validacija lekova" FontSize="15" HorizontalAlignment="Left" Margin="237,392,0,0" VerticalAlignment="Top" Width="118" Height="33"/>
+        <Label Content="Izveštaj o potrošnji" FontSize="15" HorizontalAlignment="Left" Margin="33,511,0,0" VerticalAlignment="Top" Width="141" Height="33"/>
+        <Label Content="Odjavi se" FontSize="15" HorizontalAlignment="Left" Margin="162,631,0,0" VerticalAlignment="Top" Width="72" Height="33"/>
+        <Label Content="Uvid u odobrene lekove" FontSize="15" HorizontalAlignment="Left" Margin="211,511,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
 
 
 

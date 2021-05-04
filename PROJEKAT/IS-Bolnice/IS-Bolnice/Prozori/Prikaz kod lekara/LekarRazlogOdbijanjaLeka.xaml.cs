@@ -33,6 +33,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             OdgovorNaZahtevZaValidaciju odgovor = new OdgovorNaZahtevZaValidaciju();
             odgovor.Obrazlozenje = txtRazlog.Text;
             bazaOdgovora.KreirajOdgovorNaZahtev(odgovor, zahtev);
+            bazaZahtevaZaValidaciju.ObrisiZahtev(zahtev);
             this.Close();
         }
 

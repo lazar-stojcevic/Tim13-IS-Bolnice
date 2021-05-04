@@ -91,8 +91,14 @@
     <Compile Include="Prozori\Prikaz kod lekara\LekarIzvestaj.xaml.cs">
       <DependentUpon>LekarIzvestaj.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarPodaciOLeku.xaml.cs">
+      <DependentUpon>LekarPodaciOLeku.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarRazlogOdbijanjaLeka.xaml.cs">
       <DependentUpon>LekarRazlogOdbijanjaLeka.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarUvidUOdobreneLekove.xaml.cs">
+      <DependentUpon>LekarUvidUOdobreneLekove.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarValidacijaLekova.xaml.cs">
       <DependentUpon>LekarValidacijaLekova.xaml</DependentUpon>
@@ -220,9 +226,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarPodaciOLeku.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarRazlogOdbijanjaLeka.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarUvidUOdobreneLekove.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarValidacijaLekova.xaml">
       <SubType>Designer</SubType>
@@ -527,6 +541,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\sastojci.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\dozvola.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

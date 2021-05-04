@@ -6,10 +6,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 public class BazaZahtevaZaValidacijuLeka
 {
-   private String fileLocation;
+   private String fileLocation = @"..\..\Datoteke\zahteviLekovi.txt";
    
    public List<ZahtevZaValidacijuLeka> SviZahtevi()
    {
@@ -43,6 +44,8 @@ public class BazaZahtevaZaValidacijuLeka
                     string[] alergen = alergeniSvi.Split(',');
                     foreach (string a in alergen)
                     {
+                        if (a.Equals("")) { break; }
+
                         if (!a.Equals(""))
                         {
                             Sastojak s = new Sastojak(a);
@@ -60,6 +63,7 @@ public class BazaZahtevaZaValidacijuLeka
                 {
                     foreach (string id in idLekara)
                     {
+                        if (idLekara.Equals("")) { break; }
                         if (lekarIter.Jmbg.Equals(id))
                         {
                             zahtev.lekariKomeIdeNaValidaciju.Add(lekarIter);
@@ -88,7 +92,30 @@ public class BazaZahtevaZaValidacijuLeka
    
    public void ObrisiZahtev(ZahtevZaValidacijuLeka zahtev)
    {
-      throw new NotImplementedException();
-   }
+        List<ZahtevZaValidacijuLeka> sviZahtevi = SviZahtevi();
+        List<string> zahtevi = new List<string>();
+
+        foreach (ZahtevZaValidacijuLeka iterZahtev in sviZahtevi)
+        {
+            if (!iterZahtev.Lek.Sifra.Equals(zahtev.Lek.Sifra))
+            {
+                string linija = iterZahtev.Lek.Sifra + "#" + iterZahtev.Lek.Ime + "#" + iterZahtev.Lek.Opis + "#";
+                if (iterZahtev.Lek.PotrebanRecept) { linija += "1#"; } else { linija += "0#"; }
+                foreach (Sastojak sastojak in iterZahtev.Lek.Alergeni)
+                {
+                    linija += sastojak.Ime + ",";
+                }
+                linija.Remove(linija.LastIndexOf(','), 1);
+                linija += "#";
+                foreach (Lekar lekar in iterZahtev.lekariKomeIdeNaValidaciju)
+                {
+                    linija += lekar.Jmbg + "-";
+                }
+                linija.Remove(linija.LastIndexOf('-'), 1);
+                zahtevi.Add(linija);
+            }
+        }
+        File.WriteAllLines(fileLocation, zahtevi);
+    }
 
 }

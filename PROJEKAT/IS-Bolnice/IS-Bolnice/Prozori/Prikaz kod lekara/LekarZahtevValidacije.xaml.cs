@@ -21,12 +21,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarZahtevValidacije : Page
     {
         ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka();
+        BazaZahtevaZaValidacijuLeka bazaZahteva = new BazaZahtevaZaValidacijuLeka();
         string sifra;
         public LekarZahtevValidacije(string sifraLeka, string sifraLekara)
         {
             sifra = sifraLekara;
             InitializeComponent();
-            BazaZahtevaZaValidacijuLeka bazaZahteva = new BazaZahtevaZaValidacijuLeka();
             List<ZahtevZaValidacijuLeka> sviZahtevi = bazaZahteva.SviZahtevi();
             foreach (ZahtevZaValidacijuLeka zahtevIter in sviZahtevi)
             {
@@ -64,6 +64,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             BazaLekova bazaLekova = new BazaLekova();
             bazaLekova.KreirajLek(zahtev.Lek);
+            bazaZahteva.ObrisiZahtev(zahtev);
 
             LekarGlavniMeni meni = new LekarGlavniMeni(sifra);
             this.NavigationService.Navigate(meni);
