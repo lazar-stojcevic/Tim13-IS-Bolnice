@@ -7,6 +7,6 @@ using System;
 
 public class OdgovorNaZahtevZaValidaciju
 {
-   private string obrazlozenje;
+   public string Obrazlozenje { get; set; }
 
 }

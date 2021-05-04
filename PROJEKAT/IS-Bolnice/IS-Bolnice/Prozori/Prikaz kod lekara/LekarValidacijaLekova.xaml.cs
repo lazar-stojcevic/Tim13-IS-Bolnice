@@ -20,9 +20,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarValidacijaLekova : Page
     {
+        string sifraLekara;
         public LekarValidacijaLekova(string jmbgLekara)
         {
             InitializeComponent();
+            sifraLekara = jmbgLekara;
             List<ZahtevZaValidacijuLeka> itemSource = new List<ZahtevZaValidacijuLeka>();
 
 
@@ -45,7 +47,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void otvoriLekClick(object sender, RoutedEventArgs e)
         {
-            LekarZahtevValidacije zahtev = new LekarZahtevValidacije();
+            ZahtevZaValidacijuLeka zahtevZaValidaciju = (ZahtevZaValidacijuLeka)listaZahteva.SelectedItem;
+            LekarZahtevValidacije zahtev = new LekarZahtevValidacije(zahtevZaValidaciju.Lek.Sifra, sifraLekara);
+
             this.NavigationService.Navigate(zahtev);
 
         }

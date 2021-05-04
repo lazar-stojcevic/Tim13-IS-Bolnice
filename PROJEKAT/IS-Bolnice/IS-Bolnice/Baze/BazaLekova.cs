@@ -58,8 +58,29 @@ public class BazaLekova
    
    public void KreirajLek(Lek lek)
    {
-      throw new NotImplementedException();
-   }
+        string novaLinija = System.Environment.NewLine + lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+        if (lek.PotrebanRecept)
+        {
+            novaLinija += "1#";
+        }
+        else novaLinija += "0#";
+
+
+        if (lek.Alergeni.Count != 0)
+        {
+            foreach (Sastojak sastojak in lek.Alergeni)
+            {
+                novaLinija += sastojak.Ime + ",";
+            }
+        }
+        else
+        {
+            novaLinija += "nema,";
+        }
+        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+
+        File.AppendAllText(fileLocation, novaLinija);
+    }
    
    public void IzmeniLek(Lek lek)
    {
@@ -71,6 +92,6 @@ public class BazaLekova
       throw new NotImplementedException();
    }
    
-   public string fileLocation;
+   public string fileLocation = @"..\..\Datoteke\lekovi.txt";
 
 }

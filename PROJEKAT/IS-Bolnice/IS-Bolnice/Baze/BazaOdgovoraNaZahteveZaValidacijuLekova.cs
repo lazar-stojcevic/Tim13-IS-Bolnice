@@ -5,19 +5,32 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 public class BazaOdgovoraNaZahteveZaValidacijuLekova
 {
-   private String fileLocation;
+   private String fileLocation = @"..\..\Datoteke\odgovorLekovi.txt";
    
    public List<OdgovorNaZahtevZaValidaciju> SviOdgovoriNaZahteve()
    {
       throw new NotImplementedException();
    }
    
-   public void KreirajOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovor)
+   public void KreirajOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovor, ZahtevZaValidacijuLeka zahtev)
    {
-      throw new NotImplementedException();
+        string novaLinija = zahtev.Lek.Sifra + "#" + zahtev.Lek.Ime + "#" + zahtev.Lek.Opis + "#" + zahtev.Lek.PotrebanRecept + "#";
+        if (zahtev.Lek.Alergeni.Count != 0)
+        {
+            foreach (Sastojak sastojak in zahtev.Lek.Alergeni)
+            {
+                novaLinija += sastojak.Ime + ",";
+            }
+        }
+
+        novaLinija += "#";
+
+        //JOVANA DODAJ KAD UBACIS ZAMENSKE LEKOVI
+        File.AppendAllText(fileLocation, novaLinija);
    }
    
    public void IzmeniOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovorIzmenjen)
