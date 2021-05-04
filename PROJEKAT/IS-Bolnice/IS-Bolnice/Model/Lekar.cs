@@ -15,4 +15,9 @@ public class Lekar : Korisnik
     public Soba Ordinacija { get; set; }
     public DateTime PocetakRadnogVremena { get; set; }
     public DateTime KrajRadnogVremena { get; set; }
+
+    public bool JelLekarOpstePrakse()
+    {
+        return this.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse);
+    }
 }

@@ -29,7 +29,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             foreach (Lekar p in sviLekari)
             {
                 // svi lekari specijalisti
-                if (!p.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
+                if (!p.JelLekarOpstePrakse())
                 {
                     string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
                     listaLekara.Items.Add(podaci);

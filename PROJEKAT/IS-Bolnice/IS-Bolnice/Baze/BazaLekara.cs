@@ -21,7 +21,7 @@ public class BazaLekara
 
         foreach(Lekar l in sviLekari)
         {
-            if(l.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
+            if(l.JelLekarOpstePrakse())
             {
                 LekariOP.Add(l);
             }
@@ -38,13 +38,28 @@ public class BazaLekara
 
         foreach (Lekar l in sviLekari)
         {
-            if (!l.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
+            if (!l.JelLekarOpstePrakse())
             {
                 LekariSpecijalisti.Add(l);
             }
         }
 
         return LekariSpecijalisti;
+    }
+
+    public List<Lekar> LekariOdredjeneOblasti(string trazenaOblast)
+    {
+        List<Lekar> lekariOdredjeneOblasti = new List<Lekar>();
+        List<Lekar> sviLekari = SviLekari();
+
+        foreach (Lekar lekar in sviLekari)
+        {
+            if (lekar.Oblast.Naziv.Equals(trazenaOblast))
+            {
+                lekariOdredjeneOblasti.Add(lekar);
+            }
+        }
+        return lekariOdredjeneOblasti;
     }
 
     public List<Lekar> SviLekari()
