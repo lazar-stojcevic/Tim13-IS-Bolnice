@@ -34,7 +34,7 @@
         <Button Height="25" Width="60" Content="Gostujući" Grid.Row="1" Grid.Column="4" Click="Button_Click_Gostujuci"/>
         <Label Content="Oblast lekara:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"
                FontWeight="Bold"/>
-        <ComboBox Height="25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="comboOblastLekara" Height="25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label Content="Trajanje termina (u satima):" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"
                FontWeight="Bold"/>
         <ComboBox x:Name="comboTrajanja" Height="25" Grid.Row="3" Grid.Column="1"/>

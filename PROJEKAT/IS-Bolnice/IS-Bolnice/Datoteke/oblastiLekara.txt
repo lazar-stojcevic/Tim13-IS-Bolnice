@@ -1,0 +1,7 @@
+opsta
+kardiolog
+hirurg
+neurolog
+psihijatar
+urolog
+oftamolog

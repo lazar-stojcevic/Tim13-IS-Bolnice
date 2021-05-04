@@ -20,9 +20,9 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarZakazivanjeOperacije : Window
     {
-        private BazaLekara bl;
-        private BazaBolnica bb;
-        private BazaOperacija bo;
+        private BazaLekara bazaLekara;
+        private BazaBolnica bazaBolnica;
+        private BazaOperacija bazaOperacija;
         private List<Lekar> lekari;
         private List<Bolnica> bolnice;
         private List<Soba> sobe;
@@ -34,12 +34,12 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             InitializeComponent();
 
-            bl = new BazaLekara();
-            bb = new BazaBolnica();
-            bo = new BazaOperacija();
+            bazaLekara = new BazaLekara();
+            bazaBolnica = new BazaBolnica();
+            bazaOperacija = new BazaOperacija();
 
-            lekari = bl.LekariSpecijalisti();
-            bolnice = bb.SveBolnice();
+            lekari = bazaLekara.LekariSpecijalisti();
+            bolnice = bazaBolnica.SveBolnice();
             sobe = new List<Soba>();
             operacija = new Operacija();
             List<Soba> sveSobe = bolnice[0].Soba; // za sada se podrazumeva da postoji samo jedna bolnica
@@ -112,7 +112,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1 && operacija.VremePocetkaOperacije != null)
             {
-                bo.ZakaziOperaciju(operacija);
+                bazaOperacija.ZakaziOperaciju(operacija);
                 this.Close();
             }
         }

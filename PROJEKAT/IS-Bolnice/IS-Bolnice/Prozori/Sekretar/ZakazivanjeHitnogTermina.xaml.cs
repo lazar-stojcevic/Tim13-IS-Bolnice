@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IS_Bolnice.Baze;
+using IS_Bolnice.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,17 +21,28 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class ZakazivanjeHitnogTermina : Window
     {
-        private Pacijent pacijent;
-        private BazaPacijenata bazaPacijenata;
+        private Pacijent pacijent = new Pacijent();
+        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private BazaOblastiLekara bazaOblastiLekara = new BazaOblastiLekara();
 
         public ZakazivanjeHitnogTermina()
         {
             InitializeComponent();
 
-            pacijent = new Pacijent();
-            bazaPacijenata = new BazaPacijenata();
-
+            PopunjavanjeOblastiLekara();
             PopunjavanjePonudjenihTrajanja();
+        }
+
+        private void PopunjavanjeOblastiLekara()
+        {
+            List<OblastLekara> sveOblastiIzBaze = bazaOblastiLekara.SveOblasti();
+            List<string> sveOblastiZaPrikaz = new List<string>();
+
+            foreach (OblastLekara oblast in sveOblastiIzBaze)
+            {
+                sveOblastiZaPrikaz.Add(oblast.Oblast);
+            }
+            comboOblastLekara.ItemsSource = sveOblastiZaPrikaz;
         }
 
         private void PopunjavanjePonudjenihTrajanja()
