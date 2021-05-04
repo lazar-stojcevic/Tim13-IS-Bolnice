@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IS_Bolnice.Prozori
+namespace IS_Bolnice.Prozori.UpravnikPages
 {
     /// <summary>
-    /// Interaction logic for DodajOpremuWindow.xaml
+    /// Interaction logic for AddOpremuPage.xaml
     /// </summary>
-    public partial class DodajOpremuWindow : Window
+    public partial class AddOpremuPage : Page
     {
-        public DodajOpremuWindow()
+        public AddOpremuPage()
         {
             InitializeComponent();
         }
@@ -29,26 +30,26 @@ namespace IS_Bolnice.Prozori
             Predmet noviPredmet = new Predmet();
             noviPredmet.Id = id_txt.Text;
             noviPredmet.Naziv = naziv_txt.Text;
-            if (tip_opreme_txt.SelectedIndex == 0) {
+            if (tip_opreme_txt.SelectedIndex == 0)
+            {
                 noviPredmet.Tip = TipOpreme.staticka;
             }
-            else {
+            else
+            {
                 noviPredmet.Tip = TipOpreme.dinamicka;
             }
             BazaOpreme baza = new BazaOpreme();
             List<Predmet> lista = baza.SvaOprema();
             lista.Add(noviPredmet);
             baza.KreirajOpremu(lista);
-            UpravljanjeWindow upravljanjeWindow = new UpravljanjeWindow();
-            upravljanjeWindow.Show();
-            this.Close();
+            Page upravljanje = new UpravljanjeOpremomPage();
+            this.NavigationService.Navigate(upravljanje);
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
         {
-            UpravljanjeWindow upravljanjeWindow = new UpravljanjeWindow();
-            upravljanjeWindow.Show();
-            this.Close();
+            Page upravljanje = new UpravljanjeOpremomPage();
+            this.NavigationService.Navigate(upravljanje);
         }
     }
 }

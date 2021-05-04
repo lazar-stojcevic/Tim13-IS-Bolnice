@@ -1,0 +1,36 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.UpravnikPages.EditSalePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.UpravnikPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="EditSalePage" Background="White">
+
+    <Grid>
+        <Label Content="ID sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,172,0,0" VerticalAlignment="Top" Width="153"/>
+        <Label Content="Tip sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,240,0,0" VerticalAlignment="Top" Width="153" RenderTransformOrigin="0.528,1.613"/>
+        <Label Content="Sprat:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,306,0,0" VerticalAlignment="Top" Width="153"/>
+        <Label Content="Kvadratura sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,378,0,0" VerticalAlignment="Top" Width="219"/>
+        <TextBox x:Name="id_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap" Text="Upisite ID sobe" VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="sprat_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,306,0,0" TextWrapping="Wrap" Text="Upisite sprat na kom se soba nalazi" VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="kvadratura_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,378,0,0" TextWrapping="Wrap" Text="Upisite kvadraturu sobe" VerticalAlignment="Top" Width="239"/>
+        <ComboBox x:Name="tip_sobe_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="195,242,0,0" VerticalAlignment="Top" Width="273">
+
+            <ComboBoxItem IsSelected="True">Operaciona sala</ComboBoxItem>
+            <ComboBoxItem>Bolnicka soba</ComboBoxItem>
+            <ComboBoxItem>Ordinacija</ComboBoxItem>
+            <ComboBoxItem>Magacin</ComboBoxItem>
+
+        </ComboBox>
+        <Button x:Name="Izmeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="41,519,0,0" VerticalAlignment="Top" Width="179" Click="Izmeni_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,519,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Label x:Name="label" FontSize="38" Content="Izmena prostorije" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Height="65" Width="321"/>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="DeleteButton_Click" Margin="367,27,32,590">
+            <StackPanel>
+                <Image Source="/Slike/Upravnik/garbage-can.png" Height="65" Width="85" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

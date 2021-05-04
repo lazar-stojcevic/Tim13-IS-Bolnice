@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IS_Bolnice.Prozori
+namespace IS_Bolnice.Prozori.UpravnikPages
 {
     /// <summary>
-    /// Interaction logic for DodajSobuWindow.xaml
+    /// Interaction logic for AddSalePage.xaml
     /// </summary>
-    public partial class DodajSobuWindow : Window
+    public partial class AddSalePage : Page
     {
-        public DodajSobuWindow()
+        public AddSalePage()
         {
             InitializeComponent();
         }
@@ -37,21 +38,24 @@ namespace IS_Bolnice.Prozori
             int flag = 0;
             foreach (Bolnica b in bolnice)
             {
-                foreach (Soba s in b.Soba) {
-                    if (s.Id.Equals(newS.Id)) {
+                foreach (Soba s in b.Soba)
+                {
+                    if (s.Id.Equals(newS.Id))
+                    {
                         if (s.Obrisano == true)
                         {
                             s.Obrisano = false;
                             flag = 1;
                             break;
                         }
-                        else {
+                        else
+                        {
                             MessageBox.Show("Soba sa izabranim ID vec postoji!");
                             flag = 2;
                         }
-                    
+
                     }
-                
+
                 }
                 if (flag == 0)
                 {
@@ -63,16 +67,14 @@ namespace IS_Bolnice.Prozori
                     baza.KreirajBolnicu(b);
                 }
             }
-            UpravnikWindow upravnik = new UpravnikWindow();
-            upravnik.Show();
-            this.Close();
+            Page sale = new SalePage();
+            this.NavigationService.Navigate(sale);
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
         {
-            UpravnikWindow upravnik = new UpravnikWindow();
-            upravnik.Show();
-            this.Close();
+            Page sale = new SalePage();
+            this.NavigationService.Navigate(sale);
         }
     }
 }

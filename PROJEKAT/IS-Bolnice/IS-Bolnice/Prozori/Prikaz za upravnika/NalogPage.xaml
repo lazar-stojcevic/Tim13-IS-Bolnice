@@ -1,0 +1,39 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.UpravnikPages.NalogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.UpravnikPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="NalogPage" Background="White">
+
+    <Grid>
+        <Label x:Name="label" FontSize="40" Content="Moj nalog" HorizontalAlignment="Left" Margin="39,30,0,0" VerticalAlignment="Top"/>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="EditButton_Click" Margin="339,30,60,587">
+            <StackPanel>
+                <Image Source="/Slike/Upravnik/edit.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
+        <Label x:Name="Ime" FontSize="28" Content="Ime" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Prezime" FontSize="28" Content="Prezime" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Mail" FontSize="28" Content="E-mail" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="KorisnickoIme" FontSize="28" Content="Korisnicko ime" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Broj" FontSize="28" Content="Broj telefona" HorizontalAlignment="Left" Margin="10,490,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxKorisnickoIme" FontSize="28" HorizontalAlignment="Left" Height="44" Margin="238,210,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="233"/>
+        <TextBox x:Name="textBoxIme" FontSize="28" HorizontalAlignment="Left" Height="44" Margin="238,284,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="233"/>
+        <TextBox x:Name="textBoxPrezime" FontSize="28" HorizontalAlignment="Left" Height="44" Margin="238,354,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="233"/>
+        <TextBox x:Name="textBoxMail" FontSize="28" HorizontalAlignment="Left" Height="44" Margin="238,424,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="233"/>
+        <TextBox x:Name="textBoxBroj" FontSize="28" HorizontalAlignment="Left" Height="44" Margin="238,494,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="233"/>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="NotificationButton_Click" Margin="57,571,342,46">
+            <StackPanel>
+                <Image Source="/Slike/Upravnik/paper-plane.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="LogoutButton_Click" Margin="339,571,60,46">
+            <StackPanel>
+                <Image Source="/Slike/Upravnik/logout.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>
