@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Model
 {
-    class OblastLekara
+    public class OblastLekara
     {
-        public string Oblast { get; set; }
+        public static readonly string oznakaOpstePrakse = "opsta praksa";
+        public string Naziv { get; set; }
 
         public OblastLekara(string oblast)
         {
-            Oblast = oblast;
+            Naziv = oblast;
         }
     }
 }

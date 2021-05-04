@@ -51,7 +51,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             // formiranje stringa za svakog lekara
             foreach (Lekar l in lekari)
             {
-                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";
+                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Oblast.Naziv + ")";
                 lekariString.Add(lekarString);
             }
 

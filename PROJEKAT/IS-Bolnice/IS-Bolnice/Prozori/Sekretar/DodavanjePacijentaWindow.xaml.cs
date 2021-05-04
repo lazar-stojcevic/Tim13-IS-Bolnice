@@ -28,7 +28,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             lekari = bl.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
             foreach (Lekar l in lekari)
             {
-                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Tip + ")";
+                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Oblast.Naziv + ")";
                 lekariString.Add(lekarString);
             }
             comboLekari.ItemsSource = lekariString;

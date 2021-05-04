@@ -40,7 +40,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             foreach (OblastLekara oblast in sveOblastiIzBaze)
             {
-                sveOblastiZaPrikaz.Add(oblast.Oblast);
+                sveOblastiZaPrikaz.Add(oblast.Naziv);
             }
             comboOblastLekara.ItemsSource = sveOblastiZaPrikaz;
         }

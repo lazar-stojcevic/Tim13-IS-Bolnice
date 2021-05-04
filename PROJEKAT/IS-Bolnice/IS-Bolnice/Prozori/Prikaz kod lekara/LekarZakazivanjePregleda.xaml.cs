@@ -29,7 +29,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             BazaLekara baza = new BazaLekara();
             foreach (Lekar p in baza.SviLekari())
             {
-                string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Tip.ToString();
+                string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Oblast.Naziv;
                 listaLekara.Items.Add(podaci);
             }
 

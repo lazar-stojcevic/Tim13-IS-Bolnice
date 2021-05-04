@@ -1,3 +1,4 @@
+using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,7 +21,7 @@ public class BazaLekara
 
         foreach(Lekar l in sviLekari)
         {
-            if(l.Tip.Equals(TipLekara.lekarOpstePrakse))
+            if(l.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
             {
                 LekariOP.Add(l);
             }
@@ -37,7 +38,7 @@ public class BazaLekara
 
         foreach (Lekar l in sviLekari)
         {
-            if (l.Tip.Equals(TipLekara.lekarSpecijalista))
+            if (!l.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
             {
                 LekariSpecijalisti.Add(l);
             }
@@ -59,14 +60,7 @@ public class BazaLekara
                 p.Jmbg = delovi[0];
                 p.Ime = delovi[1];
                 p.Prezime = delovi[2];
-                if (delovi[3].Equals("0"))
-                {
-                    p.Tip = TipLekara.lekarOpstePrakse;
-                }
-                else
-                {
-                    p.Tip = TipLekara.lekarSpecijalista;
-                }
+                p.Oblast = new OblastLekara(delovi[3]);
                 p.KorisnickoIme = delovi[4];
                 p.Sifra = delovi[5];
                 //DODATO ZA RADNO VREME

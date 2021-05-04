@@ -1,12 +1,12 @@
-123#Micko#Mickovic#1#lekar#123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
-456#Lazar#Lazic#1#laza#laza123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
-789#Milan#Stankovic#1#milan#milan123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#333
-987#Zeljko#Milankovic#1#zeljko#zeljko123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
-654#Nije#Bitno#0#neko#neko123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
-321#Aleksandar#Vucic#1#av#av123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
-420#Nikola#Krajinovic#0#nikola#nikola123#4/30/2021 10:00:00 AM#4/30/2021 6:00:00 PM#111
-430#Nemanja#Tosic#1#nemanja#nemanja123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
-666#Boris#Tadic#1#bora#bora123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#333
-777#Nikola#Nikolic#1#nidza#nidza123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
-888#Bojan#Latinovic#1#bojan#bojan123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
-999#Mitar#Grabuljica#1#mitar#mitar123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
+123#Micko#Mickovic#kardiolog#lekar#123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
+456#Lazar#Lazic#hirurg#laza#laza123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
+789#Milan#Stankovic#neurolog#milan#milan123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#333
+987#Zeljko#Milankovic#psihijatar#zeljko#zeljko123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
+654#Nije#Bitno#opsta praksa#neko#neko123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
+321#Aleksandar#Vucic#urolog#av#av123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
+420#Nikola#Krajinovic#opsta praksa#nikola#nikola123#4/30/2021 10:00:00 AM#4/30/2021 6:00:00 PM#111
+430#Nemanja#Tosic#oftamolog#nemanja#nemanja123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222
+666#Boris#Tadic#kardiolog#bora#bora123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#333
+777#Nikola#Nikolic#hirurg#nidza#nidza123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
+888#Bojan#Latinovic#neurolog#bojan#bojan123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#111
+999#Mitar#Grabuljica#urolog#mitar#mitar123#4/30/2021 6:00:00 AM#4/30/2021 2:00:00 PM#222

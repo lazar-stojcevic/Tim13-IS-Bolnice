@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,7 +37,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             List<Lekar> sviLekari = bl.SviLekari();
             foreach (Lekar p in sviLekari)
             {
-                if (p.Tip.Equals(TipLekara.lekarSpecijalista))
+                // lekari specijalisi
+                if (!p.Oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
                 {
                     string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
                     listaLekara.Items.Add(podaci);
