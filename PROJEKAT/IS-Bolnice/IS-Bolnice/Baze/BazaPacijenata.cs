@@ -130,9 +130,9 @@ public class BazaPacijenata
             pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja.ToString(vremenskiFormatPisanje) + "#";
 
         // upisivanje liste alergena
-        foreach (string s in pacijent.Alergeni)
+        foreach (Sastojak s in pacijent.Alergeni)
         {
-            p += s + ",";
+            p += s.Ime + ",";
         }
         p = p.TrimEnd(',');
 
@@ -184,7 +184,7 @@ public class BazaPacijenata
             {
                 if (!a.Equals(""))
                 {
-                    p.Alergeni.Add(a);
+                    p.Alergeni.Add(new Sastojak(a));
                 }
             }
 

@@ -44,14 +44,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (pacijentKojiJeNaPregledu.Alergeni.Count != 0)
             {
                 int index = 0;
-                foreach (string alergenKodPacijenta in pacijentKojiJeNaPregledu.Alergeni)
+                foreach (Sastojak alergenKodPacijenta in pacijentKojiJeNaPregledu.Alergeni)
                 {
                     foreach (Lek lek in lekoviZaPrikaz)
                     {
                         ++index;
                         foreach (Sastojak alergenLek in lek.Alergeni)
                         {
-                            if (alergenLek.Ime.Equals(alergenKodPacijenta) && !alergenLek.Ime.Equals(""))
+                            if (alergenLek.Ime.Equals(alergenKodPacijenta.Ime) && !alergenLek.Ime.Equals(""))
                             {
                                 sviLekovi.RemoveAt(index);
                             }

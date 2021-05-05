@@ -23,7 +23,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private Pacijent pacijent;
         private BazaPacijenata bp;
 
-        public ObservableCollection<string> AlergeniPacijenta
+        public ObservableCollection<Sastojak> AlergeniPacijenta
         {
             get;
             set;
@@ -38,13 +38,13 @@ namespace IS_Bolnice.Prozori.Sekretar
             this.DataContext = this;
             pacijentTxt.Text = p.Ime + " " + p.Prezime;
 
-            AlergeniPacijenta = new ObservableCollection<string>(p.Alergeni);
+            AlergeniPacijenta = new ObservableCollection<Sastojak>(p.Alergeni);
             lvAlergeni.ItemsSource = AlergeniPacijenta;
         }
 
         private void Button_Click_Dodaj(object sender, RoutedEventArgs e)
         {
-            AlergeniPacijenta.Add(alergenTxt.Text);
+            AlergeniPacijenta.Add(new Sastojak(alergenTxt.Text));
             alergenTxt.Text = "";
         }
 

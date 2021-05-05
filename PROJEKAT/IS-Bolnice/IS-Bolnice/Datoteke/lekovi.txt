@@ -3,4 +3,4 @@
 4#NekiProbiotik#1000mg#0#penicilin
 5#Xanax#10mg#1#nema
 66669#VijagraSrbija#500mg#1#paracetamol,laktoza
-2#Bromazepam#2mg#1#penicilin,gluten,laktoza,skrob,glucerol,
+2#Bromazepam#2mg#1#penicilin,laktoza,glucerol,

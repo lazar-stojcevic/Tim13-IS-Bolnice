@@ -48,16 +48,25 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
             }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
             BazaOperacija baza = new BazaOperacija();
+            Operacija operacija = KreirajNovuOperaciju();
+            baza.ZakaziOperaciju(operacija);
+            MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+        }
+
+        private Operacija KreirajNovuOperaciju()
+        {
             Operacija operacija = operacije.ElementAt(terminiList.SelectedIndex);
             string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
             //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
 
             DateTime pocetak = new DateTime(operacija.VremePocetkaOperacije.Year, operacija.VremePocetkaOperacije.Month,
-                operacija.VremePocetkaOperacije.Day, operacija.VremePocetkaOperacije.Hour, operacija.VremePocetkaOperacije.Minute, 0);
+                operacija.VremePocetkaOperacije.Day, operacija.VremePocetkaOperacije.Hour,
+                operacija.VremePocetkaOperacije.Minute, 0);
             DateTime kraj = new DateTime(operacija.VremeKrajaOperacije.Year, operacija.VremeKrajaOperacije.Month,
                 operacija.VremeKrajaOperacije.Day, operacija.VremeKrajaOperacije.Hour, operacija.VremeKrajaOperacije.Minute, 0);
             kraj = kraj.AddMinutes(45);
@@ -66,10 +75,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             operacija.Soba.Id = idSale;
             operacija.VremePocetkaOperacije = pocetak;
             operacija.VremeKrajaOperacije = kraj;
-            operacija.Hitna = (bool)boxHitno.IsChecked;
-            baza.ZakaziOperaciju(operacija);
-            MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+            operacija.Hitna = (bool) boxHitno.IsChecked;
+            return operacija;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -77,7 +84,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             this.Close();
         }
 
-        private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void liste_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (listaLekara.SelectedIndex == -1) { return; } 
             if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)

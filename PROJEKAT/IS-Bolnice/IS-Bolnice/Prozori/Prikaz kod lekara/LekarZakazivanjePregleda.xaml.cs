@@ -40,16 +40,25 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
             BazaPregleda bazaPregleda = new BazaPregleda();
-            Pregled o = new Pregled();
-            o.Lekar = new Lekar();
-            o.Pacijent = new Pacijent();
+            Pregled noviPregled = KreirajNoviPregled();
+            bazaPregleda.ZakaziPregled(noviPregled);
+            MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+        }
+
+        private Pregled KreirajNoviPregled()
+        {
+            Pregled noviPregled = new Pregled();
+            noviPregled.Lekar = new Lekar();
+            noviPregled.Pacijent = new Pacijent();
 
             string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
 
             foreach (Lekar iterLekar in lekari)
             {
-                if (iterLekar.Jmbg.Equals(idLekara)){
-                    o.Lekar.Ordinacija = iterLekar.Ordinacija;
+                if (iterLekar.Jmbg.Equals(idLekara))
+                {
+                    noviPregled.Lekar.Ordinacija = iterLekar.Ordinacija;
                     break;
                 }
             }
@@ -61,14 +70,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 //OBAVEZNOOOOOOOOOOOOOOOOOOOOOOOOOOOOO POGLEDATI
                 pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
             DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
-               pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
-            o.Lekar.Jmbg = idLekara;
-            o.Pacijent.Jmbg = txtOperJmbg.Text;
-            o.VremePocetkaPregleda = pocetak;
-            o.VremeKrajaPregleda = kraj;
-            bazaPregleda.ZakaziPregled(o);
-            MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+                pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
+            noviPregled.Lekar.Jmbg = idLekara;
+            noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
+            noviPregled.VremePocetkaPregleda = pocetak;
+            noviPregled.VremeKrajaPregleda = kraj;
+            return noviPregled;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

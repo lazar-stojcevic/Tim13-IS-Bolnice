@@ -114,7 +114,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     Pol = tempPol,
                     DatumRodjenja = tempDatumRodjenja,
                     IzabraniLekar = lekar,
-                    Alergeni = new List<string>()
+                    Alergeni = new List<Sastojak>()
                 };
 
                 bp.KreirajPacijenta(p);

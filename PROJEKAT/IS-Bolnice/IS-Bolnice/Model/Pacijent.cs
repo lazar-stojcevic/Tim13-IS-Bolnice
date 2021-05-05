@@ -5,10 +5,10 @@ public class Pacijent : Korisnik
 {
     public Lekar IzabraniLekar { get; set; }
     public bool Guest { get; set; }
-    public List<string> Alergeni { get; set; }
+    public List<Sastojak> Alergeni { get; set; }
 
     public Pacijent() 
     {
-        Alergeni = new List<string>();    
+        Alergeni = new List<Sastojak>();    
     }
 }

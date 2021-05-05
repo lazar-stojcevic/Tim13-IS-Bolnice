@@ -36,9 +36,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             mailTxt.Text = p.EMail;
             if (p.Alergeni.Count != 0)
             {
-                foreach (string alergen in p.Alergeni)
+                foreach (Sastojak alergen in p.Alergeni)
                 {
-                    listaAlergena.Items.Add(alergen);
+                    listaAlergena.Items.Add(alergen.Ime);
                 }
             }
         }
