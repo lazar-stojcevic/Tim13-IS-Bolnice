@@ -60,6 +60,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
             izmena.terminiList.Items.Add(selektovani.VremePocetkaOperacije);
+            izmena.boxHitno.IsChecked = selektovani.Hitna;
             //OVEJ DEO TREBA MODIFIKOVATI
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;

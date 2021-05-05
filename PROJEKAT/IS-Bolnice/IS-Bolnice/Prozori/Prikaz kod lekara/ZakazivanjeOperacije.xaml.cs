@@ -31,7 +31,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 // svi lekari specijalisti
                 if (!p.JelLekarOpstePrakse())
                 {
-                    string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg;
+                    string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Oblast.Naziv;
                     listaLekara.Items.Add(podaci);
                     lekariSpecijalisti.Add(p);
                 }
@@ -66,6 +66,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             operacija.Soba.Id = idSale;
             operacija.VremePocetkaOperacije = pocetak;
             operacija.VremeKrajaOperacije = kraj;
+            operacija.Hitna = (bool)boxHitno.IsChecked;
             baza.ZakaziOperaciju(operacija);
             MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();

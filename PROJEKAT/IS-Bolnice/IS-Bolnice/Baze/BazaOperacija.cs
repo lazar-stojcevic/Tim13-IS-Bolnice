@@ -184,6 +184,13 @@ public class BazaOperacija
                     }
                 }
                 o.Soba.Id = delovi[4];
+
+                if (delovi[5].Equals("True"))
+                {
+                    o.Hitna = true;
+                }
+                else o.Hitna = false;
+
                 ret.Add(o);
             }
         }
@@ -198,7 +205,7 @@ public class BazaOperacija
     public void ZakaziOperaciju(Operacija novaOperacija)
     {
         string linija = novaOperacija.VremePocetkaOperacije.ToString(vremenskiFormatPisanje) + "#" + novaOperacija.VremeKrajaOperacije.ToString(vremenskiFormatPisanje) + "#" +
-            novaOperacija.Pacijent.Jmbg + "#" + novaOperacija.Lekar.Jmbg + "#" + novaOperacija.Soba.Id + System.Environment.NewLine;
+            novaOperacija.Pacijent.Jmbg + "#" + novaOperacija.Lekar.Jmbg + "#" + novaOperacija.Soba.Id + "#" + novaOperacija.Hitna + System.Environment.NewLine;
         File.AppendAllText(@"..\..\Datoteke\operacije.txt", linija);
     }
 
@@ -214,7 +221,7 @@ public class BazaOperacija
             if (!(o.Pacijent.Jmbg.Equals(operacija.Pacijent.Jmbg) && o.Soba.Id.Equals(operacija.Soba.Id) && o.VremePocetkaOperacije.Equals(operacija.VremePocetkaOperacije)))
             {
                 string zakazivanje = o.VremePocetkaOperacije.ToString(vremenskiFormatPisanje) + "#" + o.VremeKrajaOperacije.ToString(vremenskiFormatPisanje) + "#" +
-                    o.Pacijent.Jmbg + "#" + o.Lekar.Jmbg + "#" + o.Soba.Id;
+                    o.Pacijent.Jmbg + "#" + o.Lekar.Jmbg + "#" + o.Soba.Id + "#" + o.Hitna;
                 lines.Add(zakazivanje);
             }
 
@@ -290,6 +297,13 @@ public class BazaOperacija
                     }
                     o.Lekar.Jmbg = delovi[3];
                     o.Soba.Id = delovi[4];
+
+                    if (delovi[5].Equals("True"))
+                    {
+                        o.Hitna = true;
+                    }
+                    else o.Hitna = false;
+
                     ret.Add(o);
                 }
             }

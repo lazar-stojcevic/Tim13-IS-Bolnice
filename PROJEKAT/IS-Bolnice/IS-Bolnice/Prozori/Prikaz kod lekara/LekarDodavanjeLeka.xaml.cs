@@ -21,54 +21,65 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarDodavanjeLeka : Window
     {
-        ObservableCollection<Terapija> pomocna = new ObservableCollection<Terapija>();
+        ObservableCollection<Terapija> sveZadateTerapije = new ObservableCollection<Terapija>();
+        BazaLekova bazaLekova = new BazaLekova();
+        BazaPacijenata bazaPacijenata = new BazaPacijenata();
         public LekarDodavanjeLeka(ObservableCollection<Terapija> terapija, string jmbgPacijenta)
         {
-            BazaLekova bazaLekova = new BazaLekova();
-            BazaPacijenata bazaPacijenata = new BazaPacijenata();
-            List<Lek> lekovi = bazaLekova.SviLekovi();
-            List<Lek> lekoviZaPrikaz = bazaLekova.SviLekovi();
-            Pacijent p = bazaPacijenata.PacijentSaOvimJMBG(jmbgPacijenta);
+            List<Lek> sviLekovi = bazaLekova.SviLekovi();
 
-            if(p.Alergeni.Count != 0)
+            PrikazLekovaNaKojePacijentNijeAlergican(jmbgPacijenta, sviLekovi);
+
+            InitializeComponent();
+            listaSvihLekova.ItemsSource = sviLekovi;
+            sveZadateTerapije = terapija;
+
+        }
+
+        private void PrikazLekovaNaKojePacijentNijeAlergican(string jmbgPacijenta, List<Lek> sviLekovi)
+        {
+            List<Lek> lekoviZaPrikaz = bazaLekova.SviLekovi();
+            Pacijent pacijentKojiJeNaPregledu = bazaPacijenata.PacijentSaOvimJMBG(jmbgPacijenta);
+
+            if (pacijentKojiJeNaPregledu.Alergeni.Count != 0)
             {
-                int i = 0;
-                foreach (string alergen in p.Alergeni)
+                int index = 0;
+                foreach (string alergenKodPacijenta in pacijentKojiJeNaPregledu.Alergeni)
                 {
                     foreach (Lek lek in lekoviZaPrikaz)
                     {
-                        ++i;
+                        ++index;
                         foreach (Sastojak alergenLek in lek.Alergeni)
                         {
-                            if (alergenLek.Ime.Equals(alergen) && !alergenLek.Ime.Equals(""))
-                            { 
-                                lekovi.RemoveAt(i);
+                            if (alergenLek.Ime.Equals(alergenKodPacijenta) && !alergenLek.Ime.Equals(""))
+                            {
+                                sviLekovi.RemoveAt(index);
                             }
-                            --i;
+
+                            --index;
                             break;
                         }
                     }
                 }
             }
-
-            InitializeComponent();
-            listaSvihLekova.ItemsSource = lekovi;
-            pomocna = terapija;
-
         }
 
         private void Button_DodajClick(object sender, RoutedEventArgs e)
         {
+            DodajNovuTerapiju();
+        }
+
+        private void DodajNovuTerapiju()
+        {
             Terapija t = new Terapija();
-            Lek l = (Lek)listaSvihLekova.SelectedItem;
+            Lek l = (Lek) listaSvihLekova.SelectedItem;
             t.Lek = l;
             t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
             t.VremePocetka = System.DateTime.Now;
             t.VremeKraja = DateTime.Now.AddDays(Int16.Parse(txtTrajanje.Text));
             t.RazlikaNaKolikoSeDanaUzimaLek = comboboxNaKolikoDana.SelectedIndex;
             t.Opis = txtDetalji.Text;
-            pomocna.Add(t);
-
+            sveZadateTerapije.Add(t);
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

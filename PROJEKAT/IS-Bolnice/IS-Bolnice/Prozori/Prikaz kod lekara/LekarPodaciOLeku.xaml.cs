@@ -64,5 +64,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             this.NavigationService.GoBack();
         }
+
+        private void Button_ClickDodaj(object sender, RoutedEventArgs e)
+        {
+            LekarDodavanjeSastojaka dodavanjeSastojaka = new LekarDodavanjeSastojaka(listSastojci);
+            dodavanjeSastojaka.Show();
+        }
+
+        private void Button_ClickUkloni(object sender, RoutedEventArgs e)
+        {
+            if (listSastojci.SelectedIndex != -1)
+                listSastojci.Items.RemoveAt(listSastojci.SelectedIndex);
+
+        }
     }
 }

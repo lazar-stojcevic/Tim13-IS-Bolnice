@@ -19,5 +19,6 @@ public class Operacija
     public DateTime VremePocetkaOperacije { get; set; }
     public DateTime VremeKrajaOperacije { get; set; }
     public Soba Soba { get; set; }
+    public Boolean Hitna { get; set; }
 
 }

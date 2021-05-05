@@ -28,6 +28,8 @@
         <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,135,0,0" VerticalAlignment="Top" Width="196" Grid.ColumnSpan="2"/>
         <ComboBox x:Name="comboBoxSale" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,166,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="lekariList_SelectionChanged"/>
         <ComboBox x:Name="terminiList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="10,462,0,0" VerticalAlignment="Top" Width="374"/>
+        <Label FontSize="15" Grid.ColumnSpan="2" Content="HITNO :" HorizontalAlignment="Left" Height="28" Margin="10,519,0,0" VerticalAlignment="Top" Width="69"/>
+        <CheckBox x:Name="boxHitno" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,528,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
 
     </Grid>
 </Window>
