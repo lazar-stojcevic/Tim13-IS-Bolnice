@@ -64,6 +64,7 @@
     <Compile Include="Baze\BazaLekova.cs" />
     <Compile Include="Baze\BazaObavestenja.cs" />
     <Compile Include="Baze\BazaOblastiLekara.cs" />
+    <Compile Include="Baze\BazaOcena.cs" />
     <Compile Include="Baze\BazaOdgovoraNaZahteveZaValidacijuLekova.cs" />
     <Compile Include="Baze\BazaOpreme.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Model\OblastLekara.cs" />
     <Compile Include="Model\OdgovorNaZahtevZaValidaciju.cs" />
     <Compile Include="Model\Sastojak.cs" />
+    <Compile Include="Model\Survery.cs" />
     <Compile Include="Model\Uloge.cs" />
     <Compile Include="Model\ZahtevZaValidacijuLeka.cs" />
     <Compile Include="Prozori\OdredjivanjeTermina.xaml.cs">
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\UpravnikWindow.xaml.cs">
       <DependentUpon>UpravnikWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prozori za pacijenta\FormaZaPopunjavanjeAnkete.xaml.cs">
+      <DependentUpon>FormaZaPopunjavanjeAnkete.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Sekretar\DodavanjeGuestNalogaWindow.xaml.cs">
       <DependentUpon>DodavanjeGuestNalogaWindow.xaml</DependentUpon>
@@ -292,6 +297,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\UpravnikWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prozori za pacijenta\FormaZaPopunjavanjeAnkete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -556,6 +565,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\izmene.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\Ocene.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

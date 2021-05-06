@@ -66,12 +66,12 @@
                     Height="70" Click="prikaziBtn_Click"/>
                     <!--Oceni lekara-->
                     <Button
-                    x:Name="oceniBtn"
+                    x:Name="anketaBtn"
                     FontSize="16"
-                    Content="Oceni lekara"
+                    Content="Anketa"
                     Grid.Row="2"
                     Margin="10"
-                    Height="70"/>
+                    Height="70" Click="anketaBtn_Click"/>
                 </Grid>
 
                 <!--Dogmad desna strana-->
