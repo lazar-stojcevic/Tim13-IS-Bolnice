@@ -20,64 +20,90 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarAzuriranjeAlergena : Window
     {
-        private Pacijent pacijent;
-        private BazaPacijenata bp;
-
+        private Pacijent pacijentRef;
+        private BazaPacijenata bazaPacijenata;
+        private BazaSastojaka bazaSastojaka;
+        private ObservableCollection<string> MoguciAlergeniZaDodavanje;
         public ObservableCollection<Sastojak> AlergeniPacijenta
         {
             get;
             set;
         }
 
-        public SekretarAzuriranjeAlergena(Pacijent p)
+        public SekretarAzuriranjeAlergena(Pacijent pacijent)
         {
             InitializeComponent();
-            bp = new BazaPacijenata();
-            pacijent = p;
+            bazaPacijenata = new BazaPacijenata();
+            bazaSastojaka = new BazaSastojaka();
+            pacijentRef = pacijent;
 
             this.DataContext = this;
-            pacijentTxt.Text = p.Ime + " " + p.Prezime;
+            pacijentTxt.Text = pacijent.Ime + " " + pacijent.Prezime;
 
-            AlergeniPacijenta = new ObservableCollection<Sastojak>(p.Alergeni);
-            lvAlergeni.ItemsSource = AlergeniPacijenta;
+            AlergeniPacijenta = new ObservableCollection<Sastojak>(pacijent.Alergeni);
+            MoguciAlergeniZaDodavanje = new ObservableCollection<string>();
+            AzuriranjeMogucihAlergenaZaDodavanje();
+        }
+
+        private void AzuriranjeMogucihAlergenaZaDodavanje()
+        {
+            List<Sastojak> sviSastojci = bazaSastojaka.SviSastojci();
+            MoguciAlergeniZaDodavanje.Clear();
+            foreach (Sastojak sastojak in sviSastojci)
+            {
+                if (!PacijentPosedujeAlergen(sastojak))
+                {
+                    MoguciAlergeniZaDodavanje.Add(sastojak.Ime);
+                }
+            }
+            comboAlergeni.ItemsSource = MoguciAlergeniZaDodavanje;
+        }
+
+        private bool PacijentPosedujeAlergen(Sastojak sastojak)
+        {
+            foreach (Sastojak pacijentovAlergen in AlergeniPacijenta)
+            {
+                if (sastojak.Isti(pacijentovAlergen))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void Button_Click_Dodaj(object sender, RoutedEventArgs e)
         {
-            AlergeniPacijenta.Add(new Sastojak(alergenTxt.Text));
-            alergenTxt.Text = "";
+            string imeSastojka = (string)comboAlergeni.SelectedItem;
+            if (imeSastojka != null)
+            {
+                AlergeniPacijenta.Add(new Sastojak(imeSastojka));
+            }
+            comboAlergeni.SelectedIndex = -1;
+            AzuriranjeMogucihAlergenaZaDodavanje();
         }
 
         private void Button_Click_Obrisi(object sender, RoutedEventArgs e)
         {
-            int index = lvAlergeni.SelectedIndex;
+            int index = dgAlergeni.SelectedIndex;
             if (index != -1)
             {
                 AlergeniPacijenta.RemoveAt(index);
             }
+            comboAlergeni.SelectedIndex = -1;
+            AzuriranjeMogucihAlergenaZaDodavanje();
         }
 
-        private void alergenTxt_GotFocus(object sender, RoutedEventArgs e)
+        private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            if (alergenTxt.Text.Equals("Unos novog alergena"))
-            {
-                alergenTxt.Text = "";
-            }  
-        }
-
-        private void alergenTxt_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (alergenTxt.Text.Equals(""))
-            {
-                alergenTxt.Text = "Unos novog alergena";
-            }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            pacijent.Alergeni = AlergeniPacijenta.ToList();
+            pacijentRef.Alergeni = AlergeniPacijenta.ToList();
             // u ovom slucaju se nikada nece menjati jmbg pa je moguce staviti istu instancu za oba parametra
-            bp.IzmeniPacijenta(pacijent, pacijent);
+            bazaPacijenata.IzmeniPacijenta(pacijentRef, pacijentRef);
+            Close();
+        }
+
+        private void Button_Click_Odustani(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

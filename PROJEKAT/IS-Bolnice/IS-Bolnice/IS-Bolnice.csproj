@@ -67,6 +67,7 @@
     <Compile Include="Baze\BazaOpreme.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
+    <Compile Include="Konverteri\SastojakToTextConverter.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />

@@ -8,4 +8,9 @@ public class Sastojak
     {
         Ime = ime;
     }
+
+    public bool Isti(Sastojak sastojak)
+    {
+        return Ime.Equals(sastojak.Ime);
+    }
 }
