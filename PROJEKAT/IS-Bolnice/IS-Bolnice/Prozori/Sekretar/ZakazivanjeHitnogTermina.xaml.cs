@@ -106,28 +106,25 @@ namespace IS_Bolnice.Prozori.Sekretar
             return odabraniPacijent != null && comboOblastLekara.SelectedIndex != -1 && comboTrajanja.SelectedIndex != -1;
         }
 
-        private DateTime NajbliziSlobodanTermin()
-        {
-            DateTime najbliziTermin = DateTime.Now;
-            while (najbliziTermin.Minute % 5 != 0)
-            {
-                najbliziTermin = najbliziTermin.AddMinutes(1);
-            }
-            return najbliziTermin;
-        }
-
         private void ZakazivanjePregleda()
         {
-            //TODO : dovrsiti i refaktorisati
-            DateTime pocetakTermina = NajbliziSlobodanTermin();
-            DateTime krajTermina = pocetakTermina.AddHours((double)comboTrajanja.SelectedItem);
-
-            BazaLekara bazaLekara = new BazaLekara();
-            List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti((string)comboOblastLekara.SelectedItem);
+            OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
+            double trajanjeTermina = (double)comboTrajanja.SelectedItem;
             BazaPregleda bazaPregleda = new BazaPregleda();
-
-            Pregled pregled = new Pregled(odabraniPacijent, sviLekariOdredjeneOblasti[0], pocetakTermina, krajTermina);
-            bazaPregleda.ZakaziPregled(pregled);
+            List<Pregled> slobodniPregledi = bazaPregleda.SlobodniPreglediLekaraOdredjeneOblasti(oblastLekara, trajanjeTermina);
+            if (slobodniPregledi != null)
+            {
+                Pregled pregled = slobodniPregledi[0];
+                pregled.Pacijent = odabraniPacijent;
+                bazaPregleda.ZakaziPregled(pregled);
+            }
+            else
+            {
+                // TODO : umesto ovoga treba popuniti termine koji se mogu odloziti
+                string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
+                MessageBox.Show(message);
+            }
+            
             Close();
         }
 

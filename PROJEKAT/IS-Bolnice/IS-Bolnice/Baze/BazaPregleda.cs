@@ -20,6 +20,75 @@ public class BazaPregleda
     private BazaOperacija bazaOperacija = new BazaOperacija();
 
     private static int BROJ_DANA_ZA_ZAKAZIVANJE_PREGLEDA = 4;
+    private static int BROJ_MINUTA_ZA_HITAN_TERMIN = 60;
+
+    public List<Pregled> SlobodniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, double trajanjePregleda)
+    {
+        List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
+
+        foreach (Lekar lekar in sviLekariOdredjeneOblasti)
+        {
+            List<Pregled> slobodniTerminiLekara = DobaviSlobodneTermineLekaraSaTrajanjem(lekar, trajanjePregleda);
+            if (slobodniTerminiLekara.Count() > 0)
+            {
+                return slobodniTerminiLekara;
+            }
+        }
+        return null;
+    }
+
+    // TRAJANJE TERMINA PREGLEDA JE IZRAZENO U SATIMA
+    private List<Pregled> DobaviSlobodneTermineLekaraSaTrajanjem(Lekar lekar, double trajanjePregleda)
+    {
+        // TODO: ODRADITI REFAKTORISANJE!!!!!!
+        List<Pregled> sviSkorasnjiTermini = new List<Pregled>();
+        DateTime najbliziTermin = NajbliziTermin();
+
+        for (int i = 0; i < BROJ_MINUTA_ZA_HITAN_TERMIN; i += 5)
+        {
+            DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
+
+            Pregled pregled = new Pregled();
+            pregled.Lekar = lekar;
+            pregled.VremePocetkaPregleda = pocetakTermina;
+            pregled.VremeKrajaPregleda = pregled.VremePocetkaPregleda.AddHours(trajanjePregleda);
+            sviSkorasnjiTermini.Add(pregled);
+        }
+
+        List<Pregled> terminiURadnomVremenu = new List<Pregled>();
+
+        DateTime pocetakRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
+        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + 1, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+        foreach (Pregled pregled in sviSkorasnjiTermini)
+        {
+            if (pocetakRadnogVremena <= pregled.VremePocetkaPregleda && krajRadnogVremena >= pregled.VremeKrajaPregleda)
+            {
+                terminiURadnomVremenu.Add(pregled);
+            }
+        }
+
+        List<Pregled> slobodniTermini = new List<Pregled>();
+        foreach (Pregled pregled in terminiURadnomVremenu)
+        {
+            if (!TerminSePreklapaKodLekara(lekar.Jmbg, pregled))
+            {
+                slobodniTermini.Add(pregled);
+            }
+        }
+
+        return slobodniTermini;
+    }
+
+    private DateTime NajbliziTermin()
+    {
+        DateTime najbliziTermin = DateTime.Now;
+        najbliziTermin = najbliziTermin.AddMinutes(1);
+        while (najbliziTermin.Minute % 5 != 0)
+        {
+            najbliziTermin = najbliziTermin.AddMinutes(1);
+        }
+        return najbliziTermin;
+    }
 
     //OVA METODA VRACA LISTU SLOBODNIH PREGLEDA KOJI MOGU DA SE ZAKAZU KOD PROSLEDJENOG LEKARA
     public List<Pregled> PonudjeniSlobodniPreglediLekara(string jmbgLekara)
@@ -30,7 +99,7 @@ public class BazaPregleda
 
         foreach (Pregled predlozeniPregled in ListaSlobodnihTerminaPregledaTokomRadnogVremenaLekara(lekar))
         {
-            if (FiltriranjeSlobodnihTerminaLekara(jmbgLekara, predlozeniPregled))
+            if (TerminSePreklapaKodLekara(jmbgLekara, predlozeniPregled))
             {
                 validni.Add(predlozeniPregled);
             }
@@ -73,51 +142,55 @@ public class BazaPregleda
     {
         if (predlozeniPregled.VremePocetkaPregleda == zakazaniPregled.VremePocetkaPregleda)
         {
-            return false;
+            return true;
         }
         if (predlozeniPregled.VremePocetkaPregleda > zakazaniPregled.VremePocetkaPregleda && predlozeniPregled.VremePocetkaPregleda < zakazaniPregled.VremeKrajaPregleda)
         {
-            return false;
+            return true;
         }
         if (predlozeniPregled.VremeKrajaPregleda > zakazaniPregled.VremePocetkaPregleda && predlozeniPregled.VremeKrajaPregleda < zakazaniPregled.VremeKrajaPregleda)
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public bool PreklapanjeTerminaOperacija(Pregled predlozeniPregled, Operacija zakazanaOperacija)
     {
         if (predlozeniPregled.VremePocetkaPregleda == zakazanaOperacija.VremePocetkaOperacije)
         {
-            return false;
+            return true;
         }
         if (predlozeniPregled.VremePocetkaPregleda > zakazanaOperacija.VremePocetkaOperacije && predlozeniPregled.VremePocetkaPregleda < zakazanaOperacija.VremeKrajaOperacije)
         {
-            return false;
+            return true;
         }
         if (predlozeniPregled.VremeKrajaPregleda > zakazanaOperacija.VremePocetkaOperacije && predlozeniPregled.VremeKrajaPregleda < zakazanaOperacija.VremeKrajaOperacije)
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public bool FiltriranjeSlobodnihTerminaLekara(string jmbgLekara, Pregled predlozeniPregled)
+    public bool TerminSePreklapaKodLekara(string jmbgLekara, Pregled predlozeniPregled)
     {
-        bool isValid = true;
-
         foreach (Pregled zakazaniPregled in SviBuduciPreglediKojeLekarIma(jmbgLekara))
         {
-            isValid = PreklapanjeTerminaPregleda(predlozeniPregled, zakazaniPregled);
+            if (PreklapanjeTerminaPregleda(predlozeniPregled, zakazaniPregled))
+            {
+                return true;
+            }
         }
 
         foreach (Operacija zakazanaOperacija in bazaOperacija.SveSledeceOperacijeDatogLekara(jmbgLekara))
         {
-            isValid = PreklapanjeTerminaOperacija(predlozeniPregled, zakazanaOperacija);
+            if (PreklapanjeTerminaOperacija(predlozeniPregled, zakazanaOperacija))
+            {
+                return true;
+            }
         }
 
-        return isValid;
+        return false;
     }
 
     //PREDLAZE TERMINE ZA IZMENU, SREDITI PROSLEDJENOG LEKARA DA IMA TACNO RADNO VREME
@@ -283,7 +356,7 @@ public class BazaPregleda
 
         foreach (Pregled p in SviPregledi())
         {
-            if (p.Lekar.Jmbg.Equals(jmbgLekara) && p.VremePocetkaPregleda > DateTime.Now)
+            if (p.Lekar.Jmbg.Equals(jmbgLekara) && p.VremeKrajaPregleda > DateTime.Now)
             {
                 pregledi.Add(p);
             }

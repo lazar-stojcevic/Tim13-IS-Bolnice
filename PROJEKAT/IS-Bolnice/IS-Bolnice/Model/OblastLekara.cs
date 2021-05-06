@@ -15,5 +15,10 @@ namespace IS_Bolnice.Model
         {
             Naziv = oblast;
         }
+
+        public bool Jednako(OblastLekara prosledjenaOblast)
+        {
+            return prosledjenaOblast.Naziv.Equals(Naziv);
+        }
     }
 }
