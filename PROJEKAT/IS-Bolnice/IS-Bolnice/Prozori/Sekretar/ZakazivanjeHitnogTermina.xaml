@@ -29,7 +29,7 @@
         <RadioButton x:Name="rbOperacija" Content="Operacija" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
         <Label Content="Pacijent:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"
                FontWeight="Bold"/>
-        <TextBox x:Name="odabraniPacijent" Height="25" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="odabraniPacijentTxt" Height="25" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1"/>
         <Button Height="25" Width="60" Content="Postojeći" Grid.Row="1" Grid.Column="3" Click="Button_Click_Postojeci"/>
         <Button Height="25" Width="60" Content="Gostujući" Grid.Row="1" Grid.Column="4" Click="Button_Click_Gostujuci"/>
         <Label Content="Oblast lekara:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"
@@ -45,13 +45,13 @@
             <Label Content=""/>
             <Button Content="Odloži" Width="60"/>
         </StackPanel>
-        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Margin="0.4,46.8,22.6,47" Grid.RowSpan="3">
             <DataGrid.Columns>
 
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Potvrdi" Height="30" Width="60" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1"/>
-        <Button Content="Odustani" Height="30" Width="60" Grid.Row="5" Grid.Column="3"/>
+        <Button Content="Potvrdi" Height="30" Width="60" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" Click="Button_Click_Potvrdi"/>
+        <Button Content="Odustani" Height="30" Width="60" Grid.Row="5" Grid.Column="3" Click="Button_Click_Odustani"/>
     </Grid>
 </Window>

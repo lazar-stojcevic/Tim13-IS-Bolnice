@@ -14,6 +14,16 @@ public class Operacija
         this.Soba = new Soba();
     }
 
+    public Operacija(Pacijent pacijent, Lekar lekar, DateTime vremePocetkaOperacije, DateTime vremeKrajaOperacije, Soba soba, Boolean hitna)
+    {
+        Pacijent = pacijent;
+        Lekar = lekar;
+        VremePocetkaOperacije = vremePocetkaOperacije;
+        VremeKrajaOperacije = vremeKrajaOperacije;
+        Soba = soba;
+        Hitna = hitna;
+    }
+
     public Pacijent Pacijent { get; set; }
     public Lekar Lekar { get; set; } 
     public DateTime VremePocetkaOperacije { get; set; }

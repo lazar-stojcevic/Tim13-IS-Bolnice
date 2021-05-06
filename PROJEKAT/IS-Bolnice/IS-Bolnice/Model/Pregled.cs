@@ -13,4 +13,12 @@ public class Pregled
     public Lekar Lekar { get; set; }
     public DateTime VremePocetkaPregleda { get; set; }
     public DateTime VremeKrajaPregleda { get; set; }
+
+    public Pregled(Pacijent pacijent, Lekar lekar, DateTime vremePocetkaPregleda, DateTime vremeKrajaPregleda)
+    {
+        Pacijent = pacijent;
+        Lekar = lekar;
+        VremePocetkaPregleda = vremePocetkaPregleda;
+        VremeKrajaPregleda = vremeKrajaPregleda;
+    }
 }

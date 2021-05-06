@@ -21,7 +21,7 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class ZakazivanjeHitnogTermina : Window
     {
-        private Pacijent pacijent = new Pacijent();
+        private Pacijent odabraniPacijent = new Pacijent();
         private BazaPacijenata bazaPacijenata = new BazaPacijenata();
         private BazaOblastiLekara bazaOblastiLekara = new BazaOblastiLekara();
 
@@ -57,15 +57,15 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void UpdateTextBox()
         {
-            if (pacijent != null)
+            if (odabraniPacijent != null)
             {
-                odabraniPacijent.Text = pacijent.Ime + " " + pacijent.Prezime + " (JMBG: " + pacijent.Jmbg + ")";
+                odabraniPacijentTxt.Text = odabraniPacijent.Ime + " " + odabraniPacijent.Prezime + " (JMBG: " + odabraniPacijent.Jmbg + ")";
             }
         }
 
         private void Button_Click_Postojeci(object sender, RoutedEventArgs e)
         {
-            PrikazSvihPacijenata prikazSvihPacijenata = new PrikazSvihPacijenata(pacijent);
+            PrikazSvihPacijenata prikazSvihPacijenata = new PrikazSvihPacijenata(odabraniPacijent);
             prikazSvihPacijenata.ShowDialog();
             UpdateTextBox();
         }
@@ -75,8 +75,77 @@ namespace IS_Bolnice.Prozori.Sekretar
             DodavanjeGuestNalogaWindow dodavanjeGostujuceg = new DodavanjeGuestNalogaWindow();
             dodavanjeGostujuceg.ShowDialog();
             // u slucaju dodavanja gostujuceg uzima se poslednji iz baze
-            pacijent = bazaPacijenata.poslednjiDodat();
+            odabraniPacijent = bazaPacijenata.poslednjiDodat();
             UpdateTextBox();
+        }
+
+        private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
+        {
+            if (!ValidnoPopunjenaPolja())
+            {
+                return;
+            }
+
+            if ((bool)rbPregled.IsChecked)
+            {
+                ZakazivanjePregleda();
+            }
+            else if ((bool)rbOperacija.IsChecked)
+            {
+
+            }
+            else
+            {
+                string message = "Odaberite tip termina!";
+                MessageBox.Show(message);
+            }
+        }
+
+        private bool ValidnoPopunjenaPolja()
+        {
+            return odabraniPacijent != null && comboOblastLekara.SelectedIndex != -1 && comboTrajanja.SelectedIndex != -1;
+        }
+
+        private DateTime NajbliziSlobodanTermin()
+        {
+            DateTime najbliziTermin = DateTime.Now;
+            while (najbliziTermin.Minute % 5 != 0)
+            {
+                najbliziTermin = najbliziTermin.AddMinutes(1);
+            }
+            return najbliziTermin;
+        }
+
+        private void ZakazivanjePregleda()
+        {
+            //TODO : dovrsiti i refaktorisati
+            DateTime pocetakTermina = NajbliziSlobodanTermin();
+            DateTime krajTermina = pocetakTermina.AddHours((double)comboTrajanja.SelectedItem);
+
+            BazaLekara bazaLekara = new BazaLekara();
+            List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti((string)comboOblastLekara.SelectedItem);
+            BazaPregleda bazaPregleda = new BazaPregleda();
+
+            Pregled pregled = new Pregled(odabraniPacijent, sviLekariOdredjeneOblasti[0], pocetakTermina, krajTermina);
+            bazaPregleda.ZakaziPregled(pregled);
+            Close();
+        }
+
+        private void ZakazivanjeOperacije()
+        {
+            //TODO : dovrsiti i refaktorisati
+            //DateTime pocetakTermina = NajbliziTermin();
+            //DateTime krajTermina = pocetakTermina.AddHours((double)comboTrajanja.SelectedItem);
+            //BazaBolnica bazaBolnica = new BazaBolnica();
+            
+            //BazaLekara bazaLekara = new BazaLekara();
+            //List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti((string)comboOblastLekara.SelectedItem);
+            //BazaOperacija bazaOperacija = new BazaOperacija(odabraniPacijent, sviLekariOdredjeneOblasti[0], pocetakTermina, krajTermina, );
+        }
+
+        private void Button_Click_Odustani(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
