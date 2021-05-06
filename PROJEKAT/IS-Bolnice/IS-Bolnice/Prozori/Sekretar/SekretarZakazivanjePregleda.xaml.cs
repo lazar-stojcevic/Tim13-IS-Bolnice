@@ -102,7 +102,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             odabirTermina.IsEnabled = true;
 
             Lekar lekar = lekari[comboLekari.SelectedIndex];
-            List<Pregled> pregledi = bpreg.PreglediOdredjenogLekara(lekar.Jmbg);
+            List<Pregled> pregledi = bpreg.SviBuduciPreglediKojeLekarIma(lekar.Jmbg);
             PreglediLekara.Clear();
 
             // provera za checkbox da li treba da ostane oznacen

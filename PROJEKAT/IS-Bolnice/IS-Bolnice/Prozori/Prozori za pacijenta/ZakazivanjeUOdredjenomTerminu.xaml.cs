@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Baze;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,11 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {
     public partial class ZakazivanjeUOdredjenomTerminu : Window
     {
-        string jmbgPac;
+        private string jmbgPac;
+
+        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private BazaIzmena bazaIzmena = new BazaIzmena();
+
         public ZakazivanjeUOdredjenomTerminu(string jmbgPacijenta)
         {
             InitializeComponent();
@@ -110,7 +115,6 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             {
                 Pregled pregled = new Pregled();
                 Pacijent pacijent = new Pacijent();
-                BazaPregleda bp = new BazaPregleda();
 
                 System.DateTime pocetakPregleda = new System.DateTime(piker.Year, piker.Month, piker.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0, 0);
                 DateTime krajPregleda = pocetakPregleda.AddMinutes(30);
@@ -120,27 +124,33 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 pregled.VremePocetkaPregleda = pocetakPregleda;
                 pregled.VremeKrajaPregleda = krajPregleda;
 
-                if (bp.PacijentImaZakazanPregled(pregled))
+                if (bazaIzmena.IsPatientMalicious(pregled.Pacijent))
                 {
-                    string message = "Već imate zakazani pregled u tom terminu";
-                    MessageBox.Show(message);
+                    MessageBox.Show("Izvinjavamo se, ali previše puta ste vršili izmene tokom protekle nedelje");
                 }
                 else
                 {
-                    if (bp.ZakazivanjePregledaUTerminu(pregled))
+                    if (bazaPregleda.PacijentImaZakazanPregled(pregled))
                     {
-                        string message = "Uspešno ste zakazali pregled";
+                        string message = "Već imate zakazani pregled u tom terminu";
                         MessageBox.Show(message);
-                        this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Za uneseni termin su svi lekari zauzeti");
+                        if (bazaPregleda.ZakazivanjePregledaUTerminu(pregled))
+                        {
+                            string message = "Uspešno ste zakazali pregled";
+                            MessageBox.Show(message);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Za uneseni termin su svi lekari zauzeti");
+                        }
                     }
                 }
 
             }
-
         }
 
         private void Odustani_Click(object sender, RoutedEventArgs e)

@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
         {
             BazaPregleda baza = new BazaPregleda();
-            List<Pregled> lista = baza.SviSledeciPregledi();
+            List<Pregled> lista = baza.SviPregledi();
             File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
 
             foreach (Pregled p in lista)

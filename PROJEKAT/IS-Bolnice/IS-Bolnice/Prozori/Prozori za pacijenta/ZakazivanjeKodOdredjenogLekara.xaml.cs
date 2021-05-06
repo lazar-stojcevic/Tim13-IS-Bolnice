@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Baze;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,13 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
     public partial class ZakazivanjeKodOdredjenogLekara : Window
     {
         private string jmbgPac;
+
         private List<Lekar> lekari = new List<Lekar>();
-        BazaPregleda bp = new BazaPregleda();
-        List<Pregled> pregledi = new List<Pregled>();
+        private List<Pregled> pregledi = new List<Pregled>();
+
+        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private BazaIzmena bazaIzmena = new BazaIzmena();
+
         public ZakazivanjeKodOdredjenogLekara(string jmbgPacijenta)
         {
             InitializeComponent();
@@ -38,21 +43,31 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
         {
-            Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
             Pacijent pacijent = new Pacijent();
             pacijent.Jmbg = jmbgPac;
+
+            Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
             pregled.Pacijent = pacijent;
-            if (bp.PacijentImaZakazanPregled(pregled))
+
+            if (bazaIzmena.IsPatientMalicious(pregled.Pacijent))
             {
-                string message = "Već imate zakazan pregled u tom terminu";
+                string message = "Izvinjavamo se, ali previše puta ste vršili izmene tokom protekle nedelje";
                 MessageBox.Show(message);
             }
             else
             {
-                bp.ZakaziPregled(pregled);
-                string message = "Uspešno ste zakazali pregled";
-                MessageBox.Show(message);
-                this.Close();
+                if (bazaPregleda.PacijentImaZakazanPregled(pregled))
+                {
+                    string message = "Već imate zakazan pregled u tom terminu";
+                    MessageBox.Show(message);
+                }
+                else
+                {
+                    bazaPregleda.ZakaziPregled(pregled);
+                    string message = "Uspešno ste zakazali pregled";
+                    MessageBox.Show(message);
+                    this.Close();
+                }
             }
 
         }
@@ -75,7 +90,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
             string jmbgLekara = lekari.ElementAt(lekariList.SelectedIndex).Jmbg;
 
-            pregledi = bp.PonudjeniSlobodniPreglediLekara(jmbgLekara);
+            pregledi = bazaPregleda.PonudjeniSlobodniPreglediLekara(jmbgLekara);
 
             terminiList.Items.Clear();
 
@@ -87,10 +102,12 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
         private void terminiList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (terminiList.SelectedIndex == -1 || lekariList.SelectedIndex == -1) {
+            if (terminiList.SelectedIndex == -1 || lekariList.SelectedIndex == -1)
+            {
                 potvrdi.IsEnabled = false;
             }
-            else {
+            else
+            {
                 potvrdi.IsEnabled = true;
             }
         }

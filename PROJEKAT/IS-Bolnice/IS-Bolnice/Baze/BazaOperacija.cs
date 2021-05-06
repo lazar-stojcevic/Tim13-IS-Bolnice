@@ -45,7 +45,7 @@ public class BazaOperacija
         }
         //Liste
         List<Operacija> validni = new List<Operacija>();
-        List<Pregled> zauzeti = bazaPregleda.PreglediOdredjenogLekara(jmbgLekara);
+        List<Pregled> zauzeti = bazaPregleda.SviBuduciPreglediKojeLekarIma(jmbgLekara);
         List<Operacija> zauzeteOperacije = SveSledeceOperacijeDatogLekara(jmbgLekara);
         //OVO JE UZASNO NEOPTIMALNO ALI JE BITNO DA PRORADI PRVO
         List<Operacija> sveOperacije = SveSledeceOperacije();

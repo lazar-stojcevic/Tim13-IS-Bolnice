@@ -32,7 +32,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             //pregledi = new BazaPregleda();
             List<Operacija> op = operacije.SveSledeceOperacijeZaLekara(id);
             listaOperacija.ItemsSource = op;
-            List<Pregled> pr = pregledi.PreglediOdredjenogLekara(id);
+            List<Pregled> pr = pregledi.SviBuduciPreglediKojeLekarIma(id);
             listaPregleda.ItemsSource = pr;
         }
 
@@ -127,7 +127,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             DateTime vreme = selektovani.VremePocetkaPregleda;
 
             BazaPregleda baza = new BazaPregleda();
-            List<Pregled> pregledi = baza.SviSledeciPregledi();
+            List<Pregled> pregledi = baza.SviPregledi();
 
             LekarIzmenaPregleda izmena = new LekarIzmenaPregleda();
 
@@ -165,7 +165,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
 
             BazaPregleda baza = new BazaPregleda();
-            List<Pregled> lista = baza.SviSledeciPregledi();
+            List<Pregled> lista = baza.SviPregledi();
             File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
             foreach (Pregled p in lista)
             {
@@ -179,7 +179,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 }
             }
 
-            List<Pregled> pr = pregledi.PreglediOdredjenogLekara(sifra);
+            List<Pregled> pr = pregledi.SviBuduciPreglediKojeLekarIma(sifra);
             listaPregleda.ItemsSource = pr;
 
         }

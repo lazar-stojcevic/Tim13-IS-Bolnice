@@ -91,7 +91,7 @@ namespace IS_Bolnice.Prozori
                 string message = "Uspešno ste zakazali pregled";
                 MessageBox.Show(message);
 
-                listView.ItemsSource = bp.PreglediOdredjenogPacijenta(stariPregled.Pacijent.Jmbg);
+                listView.ItemsSource = bp.SviBuduciPreglediKojePacijentIma(stariPregled.Pacijent.Jmbg);
                 
                 this.Close();
             }
@@ -121,11 +121,11 @@ namespace IS_Bolnice.Prozori
             if (comboLekari.SelectedIndex != -1)
             {
                 Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
-                pregledi = bp.slobodniTerminiZaIzmenu(lekar, datum);
+                pregledi = bp.SlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
             {
-                pregledi = bp.slobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
+                pregledi = bp.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
             }
 
             listTermina.Items.Clear();
@@ -153,11 +153,11 @@ namespace IS_Bolnice.Prozori
             if (comboDani.SelectedIndex != -1)
             {
                 Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
-                pregledi = bp.slobodniTerminiZaIzmenu(lekar, datum);
+                pregledi = bp.SlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
             {
-                pregledi = bp.slobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
+                pregledi = bp.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
             }
 
             listTermina.Items.Clear();
