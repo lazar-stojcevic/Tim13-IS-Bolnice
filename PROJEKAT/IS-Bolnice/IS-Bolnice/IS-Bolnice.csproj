@@ -93,6 +93,9 @@
     <Compile Include="Prozori\Prikaz kod lekara\LekarDodavanjeSastojaka.xaml.cs">
       <DependentUpon>LekarDodavanjeSastojaka.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarDodavanjeZamenskogLeka.xaml.cs">
+      <DependentUpon>LekarDodavanjeZamenskogLeka.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarFrejm.xaml.cs">
       <DependentUpon>LekarFrejm.xaml</DependentUpon>
     </Compile>
@@ -256,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarDodavanjeSastojaka.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarDodavanjeZamenskogLeka.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

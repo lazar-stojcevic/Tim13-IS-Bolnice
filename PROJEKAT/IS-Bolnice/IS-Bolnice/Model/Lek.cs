@@ -18,6 +18,7 @@ public class Lek: INotifyPropertyChanged
 
     public Lek() {
         sastojci = new List<Sastojak>();
+        zamenskiLekovi = new List<Lek>();
     }
 
     public Lek(string sifraLeka, string imeLeka, string opisLeka, List<Sastojak> sastojciLeka, List<Lek> zamenskiLekoviLeka, bool lekuPotrebanRecept)

@@ -22,8 +22,15 @@
         <TextBox x:Name="txtGramaza" HorizontalAlignment="Left" Height="30" Margin="117,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
         <ListBox x:Name="listSastojci" HorizontalAlignment="Left" Height="106" Margin="117,231,0,0" VerticalAlignment="Top" Width="259"/>
         <Label Content="Sastojci:" HorizontalAlignment="Left" Height="25" Margin="23,231,0,0" VerticalAlignment="Top" Width="58"/>
-        <ListBox x:Name="listZamesnski" HorizontalAlignment="Left" Height="106" Margin="117,358,0,0" VerticalAlignment="Top" Width="259"/>
-        <Label Content="Zamenski lekovi:" FontSize="11" HorizontalAlignment="Left" Height="25" Margin="23,358,0,0" VerticalAlignment="Top" Width="89"/>
+        <ListView x:Name="listZamesnski" HorizontalAlignment="Left" Height="106" Margin="117,358,0,0" VerticalAlignment="Top" Width="259">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Šifra" Width="80" DisplayMemberBinding="{Binding Sifra}" />
+                    <GridViewColumn Header="Ime" Width="173" DisplayMemberBinding="{Binding Ime}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+            <Label Content="Zamenski lekovi:" FontSize="11" HorizontalAlignment="Left" Height="25" Margin="23,358,0,0" VerticalAlignment="Top" Width="89"/>
         <Label Content="Potreban recept:" FontSize="13" HorizontalAlignment="Left" Height="32" Margin="23,507,0,0" VerticalAlignment="Top" Width="108"/>
         <CheckBox x:Name="boxRecept" Content="" HorizontalAlignment="Left" Height="23" Margin="136,516,0,0" VerticalAlignment="Top" Width="17"/>
         <Button Content="Potvrdi" HorizontalAlignment="Left" Height="45" Margin="27,546,0,0" VerticalAlignment="Top" Width="154" Click="Button_Potvrdi"/>

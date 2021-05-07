@@ -51,6 +51,7 @@ public class BazaLekova
                     string[] zameskiLek = zamenskiLekoviSvi.Split('/');
                     foreach (string deo in zameskiLek)
                     {
+                        if (deo.Equals("")) continue;
                         Lek lek = new Lek(deo);
                         p.ZamenskiLekovi.Add(lek);
                     }
@@ -66,35 +67,45 @@ public class BazaLekova
         }
         return ret;
     }
-   
+
    public void KreirajLek(Lek lek)
    {
-        List<string> linije = new List<string>();
-        string novaLinija =lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
-        if (lek.PotrebanRecept)
-        {
-            novaLinija += "1#";
-        }
-        else novaLinija += "0#";
+       List<string> linije = new List<string>();
+       string novaLinija = lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+       if (lek.PotrebanRecept)
+       {
+           novaLinija += "1#";
+       }
+       else novaLinija += "0#";
 
 
-        if (lek.Alergeni.Count != 0)
-        {
-            foreach (Sastojak sastojak in lek.Alergeni)
-            {
-                novaLinija += sastojak.Ime + ",";
-            }
-        }
-        else
-        {
-            novaLinija += "nema,";
-        }
-        novaLinija.Remove(novaLinija.Length - 1, 1);
-        linije.Add(novaLinija);
-        File.AppendAllLines(fileLocation, linije);
+       if (lek.Alergeni.Count != 0)
+       {
+           foreach (Sastojak sastojak in lek.Alergeni)
+           {
+               novaLinija += sastojak.Ime + ",";
+           }
+       }
+       else
+       {
+           novaLinija += "nema,";
+       }
+
+       novaLinija += "#";
+       if (lek.ZamenskiLekovi.Count != 0)
+       {
+           foreach (Lek lekIter in lek.ZamenskiLekovi)
+           {
+               novaLinija += lekIter.Sifra + "/";
+           }
+       }
+
+       novaLinija.Remove(novaLinija.Length - 1, 1);
+       linije.Add(novaLinija);
+       File.AppendAllLines(fileLocation, linije);
     }
 
-    public void KreiraNovijLek(Lek lek)
+    public void KreiraNoviLek(Lek lek)
     {
         string novaLinija = System.Environment.NewLine + lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
         if (lek.PotrebanRecept)
@@ -162,6 +173,18 @@ public class BazaLekova
                     novaLinija += "nema,";
                 }
                 novaLinija = novaLinija.Remove(novaLinija.LastIndexOf(','), 1);
+
+                if (lek.ZamenskiLekovi.Count != 0)
+                {
+                    foreach (Lek zamenskiLek in lek.ZamenskiLekovi)
+                    {
+                        novaLinija = novaLinija + zamenskiLek.Sifra + "/";
+                    }
+                    novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+                }
+
+                novaLinija = novaLinija.Remove(novaLinija.LastIndexOf('/'), 1);
+
                 linije.Add(novaLinija);
             }
         }

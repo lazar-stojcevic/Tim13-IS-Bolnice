@@ -44,13 +44,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 listSastojci.Items.Add(sastojak.Ime);
             }
             txtSifra.Text = zahtev.Lek.Sifra;
-            /* ZA SAD NISMO DODALI ZAMENSKE LEKOVE
-            foreach (Lek iter in zahtev.Lek.ZamenskiLekovi)
-            {
 
-                listZamesnski.Items.Add(iter.Sifra + "  " + iter.Ime);
-            }*/
-            boxRecept.IsChecked = zahtev.Lek.PotrebanRecept;
+            listZamesnski.ItemsSource = zahtev.Lek.ZamenskiLekovi;
 
         }
 

@@ -23,6 +23,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     {
         BazaLekova bazaLekova = new BazaLekova();
         ObservableCollection<Lek> sviLekovi;
+        ObservableCollection<Lek> zamensnkiLekovi = new ObservableCollection<Lek>();
         Lek lekStari;
         Lek lek = new Lek();
         public LekarPodaciOLeku(Lek odabraniLek, ObservableCollection<Lek> lekovi)
@@ -33,10 +34,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             txtSifra.Text = odabraniLek.Sifra;
             txtIme.Text = odabraniLek.Ime;
             txtGramaza.Text = odabraniLek.Opis;
+            listZamesnski.ItemsSource = zamensnkiLekovi;
+            boxRecept.IsChecked = odabraniLek.PotrebanRecept;
 
             foreach (Sastojak sastojak in odabraniLek.Alergeni)
             {
                 listSastojci.Items.Add(sastojak.Ime);
+            }
+
+            foreach (Lek zamenskiLek in odabraniLek.ZamenskiLekovi)
+            {
+                foreach (Lek lek in sviLekovi)
+                {
+                    if (lek.Sifra.Equals(zamenskiLek.Sifra))
+                    {
+                        zamenskiLek.Ime = lek.Ime;
+                    }
+                }
+                zamensnkiLekovi.Add(zamenskiLek);
             }
 
         }
@@ -52,7 +67,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 lek.Alergeni.Add(new Sastojak(linija));
             }
 
+            foreach (Lek zamesni in listZamesnski.Items)
+            {
+                lek.ZamenskiLekovi.Add(zamesni);
+            }
+
             lek.PotrebanRecept = boxRecept.IsEnabled;
+
             sviLekovi.Remove(lekStari);
             sviLekovi.Add(lek);
 
@@ -76,6 +97,20 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (listSastojci.SelectedIndex != -1)
                 listSastojci.Items.RemoveAt(listSastojci.SelectedIndex);
 
+        }
+
+        private void Button_ClickUkloniZamenski(object sender, RoutedEventArgs e)
+        {
+            if (listZamesnski.SelectedIndex != -1)
+            {
+                zamensnkiLekovi.RemoveAt(listZamesnski.SelectedIndex);
+            }
+        }
+
+        private void Button_ClickDodajZamenski(object sender, RoutedEventArgs e)
+        {
+            LekarDodavanjeZamenskogLeka dodavanje = new LekarDodavanjeZamenskogLeka(zamensnkiLekovi, lekStari.Sifra);
+            dodavanje.Show();
         }
     }
 }

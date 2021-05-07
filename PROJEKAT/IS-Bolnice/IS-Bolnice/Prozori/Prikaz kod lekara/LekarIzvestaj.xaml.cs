@@ -22,7 +22,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarIzvestaj : Window
     {
-
+        BazaIzvestaja baza = new BazaIzvestaja();
         ObservableCollection<Terapija> terapije = new ObservableCollection<Terapija>();
         string jmbgPac;
         string jmbgLek;
@@ -62,7 +62,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 string imeIPrezimePacijenta = p.Ime + " " + p.Prezime;
                 string datumRodjenjaPacijenta = p.DatumRodjenja.ToString("dd MM yyyy");
                 string danasniDatum = DateTime.Now.ToString("dd MM yyyy");
-                int brojRecepta = 0;
+                int brojRecepta = new Random().Next(0, 50000);
 
                 foreach (Terapija ter in terapije)
                 {
@@ -78,21 +78,27 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             string textIzvestaja = KreirajTextIzvestaja();
 
-            BazaIzvestaja baza = new BazaIzvestaja();
             baza.KreirajIzvestaj(textIzvestaja);
         }
 
         private string KreirajTextIzvestaja()
         {
-            string textIzvestaja;
-            textIzvestaja = txtAnamneza.Text.Replace("\n", "%%%"); //Nisam siguran da li treba ova linija
-            textIzvestaja = jmbgLek + "#" + jmbgPac + "#" + textIzvestaja + "#" + DateTime.Now.Date + "#";
+            string textIzvestaja = KreirajPocetakTekstaIzvestaja();
+
             foreach (Terapija jednaTerapija in terapije)
             {
                 textIzvestaja += GenerisanjeTekstaJedneTerapije(jednaTerapija);
             }
 
             textIzvestaja = textIzvestaja + Environment.NewLine;
+            return textIzvestaja;
+        }
+
+        private string KreirajPocetakTekstaIzvestaja()
+        {
+            string textIzvestaja;
+            textIzvestaja = txtAnamneza.Text.Replace("\n", "%%%");
+            textIzvestaja = jmbgLek + "#" + jmbgPac + "#" + textIzvestaja + "#" + DateTime.Now.Date + "#";
             return textIzvestaja;
         }
 
@@ -126,7 +132,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             IspisNaReceptuNaKolikoDanaSeLekUzima(stringFormat, ter, graphicsImage);
 
-            broj++;
+            ++broj;
             bitmap.Save(@"..\..\Recepti\noviRecept" + jmbgPac + "_(" + broj + ").bmp");
         }
 
@@ -181,34 +187,33 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             switch (ter.RazlikaNaKolikoSeDanaUzimaLek)
             {
                 case 0:
-                    graphicsImage.DrawString("Svaki dan", new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
-                        new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki dan",stringFormat, graphicsImage);
                     break;
                 case 1:
-                    graphicsImage.DrawString("Svaki drugi dan", new Font("arail", 12),
-                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki drugi dan", stringFormat, graphicsImage);
                     break;
                 case 2:
-                    graphicsImage.DrawString("Svaki treći dan", new Font("arail", 12),
-                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki treći dan", stringFormat, graphicsImage);
                     break;
                 case 3:
-                    graphicsImage.DrawString("Svaki čevrti dan", new Font("arail", 12),
-                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki četvrti dan", stringFormat, graphicsImage);
                     break;
                 case 4:
-                    graphicsImage.DrawString("Svaki peti dan", new Font("arail", 12),
-                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki peti dan", stringFormat, graphicsImage);
                     break;
                 case 5:
-                    graphicsImage.DrawString("Svaki šesti dan", new Font("arail", 12),
-                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki šesti dan", stringFormat, graphicsImage);
                     break;
                 default:
-                    graphicsImage.DrawString("Na svakih nedelju dana", new Font("arail", 12),
-                        new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 410), stringFormat);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Na svakih nedelju dana", stringFormat, graphicsImage);
                     break;
             }
+        }
+
+        private static void IscrtavanjeNaKolikoSeDanaIzimaLek(string text, StringFormat stringFormat, Graphics graphicsImage)
+        {
+            graphicsImage.DrawString(text, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
+                new System.Drawing.Point(80, 410), stringFormat);
         }
     }
 }

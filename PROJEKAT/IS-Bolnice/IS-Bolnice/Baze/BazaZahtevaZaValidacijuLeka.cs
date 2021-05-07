@@ -21,6 +21,7 @@ public class BazaZahtevaZaValidacijuLeka
 
         if (File.Exists(@"..\..\Datoteke\zahteviLekovi.txt"))
         {
+            BazaLekova bazaLekova = new BazaLekova();
             string[] lines = File.ReadAllLines(@"..\..\Datoteke\zahteviLekovi.txt");
             foreach (string line in lines)
             {
@@ -61,6 +62,13 @@ public class BazaZahtevaZaValidacijuLeka
                     foreach (string deo in zameskiLek)
                     {
                         Lek lek = new Lek(deo);
+                        foreach (Lek lekIter in bazaLekova.SviLekovi())
+                        {
+                            if (deo.Equals(lekIter.Sifra))
+                            {
+                                lek.Ime = lekIter.Ime;
+                            }
+                        }
                         p.ZamenskiLekovi.Add(lek);
                     }
                 }
@@ -93,7 +101,7 @@ public class BazaZahtevaZaValidacijuLeka
    
    public void KreirajZahtev(ZahtevZaValidacijuLeka zahtev)
    {
-        string novaLinija = System.Environment.NewLine + zahtev.Lek.Sifra + "#" + zahtev.Lek.Ime + "#" + zahtev.Lek.Opis + "#";
+        string novaLinija = zahtev.Lek.Sifra + "#" + zahtev.Lek.Ime + "#" + zahtev.Lek.Opis + "#";
         if (zahtev.Lek.PotrebanRecept)
         {
             novaLinija += "1#";
@@ -156,6 +164,14 @@ public class BazaZahtevaZaValidacijuLeka
                 }
                 linija.Remove(linija.LastIndexOf(','), 1);
                 linija += "#";
+                if (iterZahtev.Lek.ZamenskiLekovi.Count != 0)
+                    foreach (Lek lek in iterZahtev.Lek.ZamenskiLekovi)
+                    {
+                        linija += lek.Sifra + "/";
+                    }
+                linija.Remove(linija.LastIndexOf('/'), 1);
+                linija += "#";
+
                 foreach (Lekar lekar in iterZahtev.lekariKomeIdeNaValidaciju)
                 {
                     linija += lekar.Jmbg + "-";
