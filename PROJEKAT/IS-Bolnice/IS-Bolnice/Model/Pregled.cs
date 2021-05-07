@@ -21,4 +21,12 @@ public class Pregled
         VremePocetkaPregleda = vremePocetkaPregleda;
         VremeKrajaPregleda = vremeKrajaPregleda;
     }
+
+    public Pregled(Pregled pregled)
+    {
+        Pacijent = pregled.Pacijent;
+        Lekar = pregled.Lekar;
+        VremePocetkaPregleda = pregled.VremePocetkaPregleda;
+        VremeKrajaPregleda = pregled.VremeKrajaPregleda;
+    }
 }

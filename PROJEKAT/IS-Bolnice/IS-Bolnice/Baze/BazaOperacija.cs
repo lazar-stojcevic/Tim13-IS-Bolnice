@@ -32,7 +32,62 @@ public class BazaOperacija
                 return skorasnjeOperacijeLekara;
             }
         }
-        return skorasnjeOperacijeLekara;
+        return SortiranjeTerminaPoMogucstvuOdlaganja(skorasnjeOperacijeLekara);
+    }
+
+    private List<Operacija> SortiranjeTerminaPoMogucstvuOdlaganja(List<Operacija> operacije)
+    {
+        List<int> vremenaOdlaganja = new List<int>();
+
+        foreach (Operacija operacija in operacije)
+        {
+            Operacija odlozenaOperacija = new Operacija(operacija);
+
+            int vremeOdlaganja = 10;
+            while (!MozeDaSeZakaze(odlozenaOperacija))
+            {
+                odlozenaOperacija.VremePocetkaOperacije = odlozenaOperacija.VremePocetkaOperacije.AddMinutes(vremeOdlaganja);
+                odlozenaOperacija.VremeKrajaOperacije = odlozenaOperacija.VremeKrajaOperacije.AddMinutes(vremeOdlaganja);
+                vremeOdlaganja += 10;
+            }
+            vremenaOdlaganja.Add(vremeOdlaganja);
+        }
+        return SortirajOperacijePoVremenuOdlaganja(operacije, vremenaOdlaganja);
+    }
+
+    private List<Operacija> SortirajOperacijePoVremenuOdlaganja(List<Operacija> operacije, List<int> odlaganja)
+    {
+        for (int i = 0; i < odlaganja.Count - 1; i++)
+        {
+            for (int j = 0; j < odlaganja.Count - i - 1; j++)
+            {
+                if (odlaganja[j] > odlaganja[j + 1])
+                {
+                    int temp = odlaganja[j];
+                    odlaganja[j] = odlaganja[j + 1];
+                    odlaganja[j + 1] = temp;
+
+                    Operacija tempOperacija = operacije[j];
+                    operacije[j] = operacije[j + 1];
+                    operacije[j + 1] = tempOperacija;
+                }
+            }
+        }
+        return operacije;
+    }
+
+    private bool MozeDaSeZakaze(Operacija operacija)
+    {
+        if (TerminSePreklapaKodLekara(operacija.Lekar.Jmbg, operacija))
+        {
+            return false;
+        }
+        if (!OperacijaURadnomVremenuLekara(operacija.Lekar, operacija))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private List<Operacija> OperacijeNarednihSatVremena(List<Operacija> operacije)
@@ -118,6 +173,22 @@ public class BazaOperacija
             }
         }
         return operacijeURadnomVremenu;
+    }
+
+    private bool OperacijaURadnomVremenuLekara(Lekar lekar, Operacija operacija)
+    {
+        // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
+        int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
+        DateTime danOperacije = operacija.VremePocetkaOperacije;
+
+        DateTime pocetakRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
+        DateTime krajRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day + razlika, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+
+        if (pocetakRadnogVremena <= operacija.VremePocetkaOperacije && krajRadnogVremena >= operacija.VremeKrajaOperacije)
+        {
+            return true;
+        }
+        return false;
     }
 
     private List<Operacija> SlobodneOperacijeLekara(Lekar lekar, List<Operacija> operacije)
@@ -383,8 +454,24 @@ public class BazaOperacija
 
         File.WriteAllLines(path, lines);
     }
-   
-   public void IzmeniOperaciju(Operacija novaOperacija, Operacija staraOperacija)
+
+    public void OdloziOperaciju(Operacija pomeranaOperacija)
+    {
+        Operacija operacijaZaOtkazivanje = new Operacija(pomeranaOperacija);
+
+        double vremeOdlaganja = 10;
+        do
+        {
+            pomeranaOperacija.VremePocetkaOperacije = pomeranaOperacija.VremePocetkaOperacije.AddMinutes(vremeOdlaganja);
+            pomeranaOperacija.VremeKrajaOperacije = pomeranaOperacija.VremeKrajaOperacije.AddMinutes(vremeOdlaganja);
+            vremeOdlaganja += 10;
+        } while (!MozeDaSeZakaze(pomeranaOperacija));
+
+        OtkaziOperaciju(operacijaZaOtkazivanje);
+        ZakaziOperaciju(pomeranaOperacija);
+    }
+
+    public void IzmeniOperaciju(Operacija novaOperacija, Operacija staraOperacija)
    {
         OtkaziOperaciju(staraOperacija);
         ZakaziOperaciju(novaOperacija);

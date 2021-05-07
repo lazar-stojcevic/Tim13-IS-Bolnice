@@ -24,6 +24,16 @@ public class Operacija
         Hitna = hitna;
     }
 
+    public Operacija(Operacija operacija)
+    {
+        Pacijent = operacija.Pacijent;
+        Lekar = operacija.Lekar;
+        VremePocetkaOperacije = operacija.VremePocetkaOperacije;
+        VremeKrajaOperacije = operacija.VremeKrajaOperacije;
+        Soba = operacija.Soba;
+        Hitna = operacija.Hitna;
+    }
+
     public Pacijent Pacijent { get; set; }
     public Lekar Lekar { get; set; } 
     public DateTime VremePocetkaOperacije { get; set; }

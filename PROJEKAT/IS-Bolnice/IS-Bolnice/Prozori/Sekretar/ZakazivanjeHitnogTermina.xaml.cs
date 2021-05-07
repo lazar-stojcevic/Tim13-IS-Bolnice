@@ -70,6 +70,15 @@ namespace IS_Bolnice.Prozori.Sekretar
             comboTrajanja.ItemsSource = trajanja;
         }
 
+        private void OsvezavanjePrikazaZauzetihTermina(OblastLekara oblastLekara)
+        {
+            BazaPregleda bazaPregleda = new BazaPregleda();
+            BazaOperacija bazaOperacija = new BazaOperacija();
+
+            OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+            OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
+        }
+
         private void OsvezavanjePrikazaZauzetihPregleda(List<Pregled> zauzetiPregledi)
         {
             PreglediZaOdlaganje.Clear();
@@ -159,7 +168,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
                 MessageBox.Show(message);
-                OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+                OsvezavanjePrikazaZauzetihTermina(oblastLekara);
             }
         }
 
@@ -184,7 +193,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
                 MessageBox.Show(message);
-                OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
+                OsvezavanjePrikazaZauzetihTermina(oblastLekara);
             }
         }
 
@@ -193,42 +202,34 @@ namespace IS_Bolnice.Prozori.Sekretar
             Close();
         }
 
-        private void Button_Click_Odlozi(object sender, RoutedEventArgs e)
+        private void Button_Click_Odlozi_Pregled(object sender, RoutedEventArgs e)
         {
-            if ((bool)rbPregled.IsChecked && ValidnoPopunjenaPolja())
+            if (dgPregledi.SelectedItems.Count > 0)
             {
                 BazaPregleda bazaPregleda = new BazaPregleda();
                 for (int i = 0; i < dgPregledi.SelectedItems.Count; i++)
                 {
                     Pregled pregledZaOdlaganje = (Pregled)dgPregledi.SelectedItems[i];
-                    bazaPregleda.OtkaziPregled(pregledZaOdlaganje);
+                    bazaPregleda.OdloziPregled(pregledZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
                 OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
             }
-            else if ((bool)rbOperacija.IsChecked && ValidnoPopunjenaPolja())
+        }
+
+        private void Button_Click_Odlozi_Operaciju(object sender, RoutedEventArgs e)
+        {
+            if (dgOperacije.SelectedItems.Count > 0)
             {
                 BazaOperacija bazaOperacija = new BazaOperacija();
                 for (int i = 0; i < dgOperacije.SelectedItems.Count; i++)
                 {
                     Operacija operacijaZaOdlaganje = (Operacija)dgOperacije.SelectedItems[i];
-                    bazaOperacija.OtkaziOperaciju(operacijaZaOdlaganje);
+                    bazaOperacija.OdloziOperaciju(operacijaZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
                 OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
             }
-        }
-
-        private void rbPregled_Checked(object sender, RoutedEventArgs e)
-        {
-            dgPregledi.Visibility = Visibility.Visible;
-            dgOperacije.Visibility = Visibility.Hidden;
-        }
-
-        private void rbOperacija_Checked(object sender, RoutedEventArgs e)
-        {
-            dgPregledi.Visibility = Visibility.Hidden;
-            dgOperacije.Visibility = Visibility.Visible;
         }
     }
 }

@@ -26,18 +26,18 @@ public class BazaPregleda
     public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast)
     {
         List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
-        List<Pregled> skorasnjiPreglediLekara = new List<Pregled>();
+        List<Pregled> skorasnjiZauzetiPreglediLekara = new List<Pregled>();
 
         foreach (Lekar lekar in sviLekariOdredjeneOblasti)
         {
             List<Pregled> naredniPreglediLekara = SviBuduciPreglediKojeLekarIma(lekar.Jmbg);
-            skorasnjiPreglediLekara.AddRange(PreglediNarednihSatVremena(naredniPreglediLekara));
-            if (skorasnjiPreglediLekara.Count() > DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA)
+            skorasnjiZauzetiPreglediLekara.AddRange(PreglediNarednihSatVremena(naredniPreglediLekara));
+            if (skorasnjiZauzetiPreglediLekara.Count() > DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA)
             {
-                return skorasnjiPreglediLekara;
+                return skorasnjiZauzetiPreglediLekara;
             }
         }
-        return skorasnjiPreglediLekara;
+        return SortiranjeTerminaPoMogucstvuOdlaganja(skorasnjiZauzetiPreglediLekara);
     }
 
     private List<Pregled> PreglediNarednihSatVremena(List<Pregled> pregledi)
@@ -53,6 +53,47 @@ public class BazaPregleda
             }
         }
         return preglediNarednihSatVremena;
+    }
+
+    private List<Pregled> SortiranjeTerminaPoMogucstvuOdlaganja(List<Pregled> pregledi)
+    {
+        List<int> vremenaOdlaganja = new List<int>();
+
+        foreach (Pregled pregled in pregledi)
+        {
+            Pregled odlozeniPregled = new Pregled(pregled);
+
+            int vremeOdlaganja = 10;
+            while (!MozeDaSeZakaze(odlozeniPregled))
+            {
+                odlozeniPregled.VremePocetkaPregleda = odlozeniPregled.VremePocetkaPregleda.AddMinutes(vremeOdlaganja);
+                odlozeniPregled.VremeKrajaPregleda = odlozeniPregled.VremeKrajaPregleda.AddMinutes(vremeOdlaganja);
+                vremeOdlaganja += 10;
+            }
+            vremenaOdlaganja.Add(vremeOdlaganja);
+        }
+        return SortirajPregledePoVremenuOdlaganja(pregledi, vremenaOdlaganja);
+    }
+
+    private List<Pregled> SortirajPregledePoVremenuOdlaganja(List<Pregled> pregledi, List<int> odlaganja)
+    {
+        for (int i = 0; i < odlaganja.Count - 1; i++)
+        {
+            for (int j = 0; j < odlaganja.Count - i - 1; j++)
+            {
+                if (odlaganja[j] > odlaganja[j + 1])
+                {
+                    int temp = odlaganja[j];
+                    odlaganja[j] = odlaganja[j + 1];
+                    odlaganja[j + 1] = temp;
+
+                    Pregled tempPregled = pregledi[j];
+                    pregledi[j] = pregledi[j + 1];
+                    pregledi[j + 1] = tempPregled;
+                }
+            }
+        }
+        return pregledi;
     }
 
     public List<Pregled> SlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, double trajanjePregleda)
@@ -474,31 +515,37 @@ public class BazaPregleda
         return pregledi;
     }
 
-    public void ZakaziPregled(Pregled noviPregled)
+    private bool MozeDaSeZakaze(Pregled noviPregled)
     {
-        bool isValid = true;
         foreach (Pregled zakazani in SviPregledi())
         {
             if (noviPregled.Lekar.Jmbg == zakazani.Lekar.Jmbg)
             {
                 if (zakazani.VremePocetkaPregleda == noviPregled.VremePocetkaPregleda)
                 {
-                    isValid = false;
-                    break;
+                    return false;
                 }
                 else if (noviPregled.VremePocetkaPregleda > zakazani.VremePocetkaPregleda && noviPregled.VremePocetkaPregleda < zakazani.VremeKrajaPregleda)
                 {
-                    isValid = false;
-                    break;
+                    return false;
                 }
                 else if (zakazani.VremePocetkaPregleda < noviPregled.VremeKrajaPregleda && noviPregled.VremeKrajaPregleda < zakazani.VremeKrajaPregleda)
                 {
-                    isValid = false;
-                    break;
+                    return false;
                 }
             }
         }
-        if (!isValid)
+        if (TerminSePreklapaKodLekara(noviPregled.Lekar.Jmbg, noviPregled))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void ZakaziPregled(Pregled noviPregled)
+    {
+        if (!MozeDaSeZakaze(noviPregled))
         {
             Console.WriteLine("Neko je zauzeo termin u medjuvremenu");
         }
@@ -529,6 +576,22 @@ public class BazaPregleda
 
         }
         File.WriteAllLines(fileLocation, redoviZaUpisUDatoteku);
+    }
+
+    public void OdloziPregled(Pregled pomeraniPregled)
+    {
+        Pregled pregledZaOtkazivanje = new Pregled(pomeraniPregled);
+
+        double vremeOdlaganja = 10;
+        do
+        {
+            pomeraniPregled.VremePocetkaPregleda = pomeraniPregled.VremePocetkaPregleda.AddMinutes(vremeOdlaganja);
+            pomeraniPregled.VremeKrajaPregleda = pomeraniPregled.VremeKrajaPregleda.AddMinutes(vremeOdlaganja);
+            vremeOdlaganja += 10;
+        } while (!MozeDaSeZakaze(pomeraniPregled));
+
+        OtkaziPregled(pregledZaOtkazivanje);
+        ZakaziPregled(pomeraniPregled);
     }
 
     public void IzmeniPregled(Pregled noviPregled, Pregled stariPregled)
