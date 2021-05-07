@@ -2,6 +2,7 @@
 using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +26,24 @@ namespace IS_Bolnice.Prozori.Sekretar
         private BazaPacijenata bazaPacijenata = new BazaPacijenata();
         private BazaOblastiLekara bazaOblastiLekara = new BazaOblastiLekara();
 
+        public ObservableCollection<Pregled> PreglediZaOdlaganje
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Operacija> OperacijeZaOdlaganje
+        {
+            get;
+            set;
+        }
+
         public ZakazivanjeHitnogTermina()
         {
             InitializeComponent();
-
+            this.DataContext = this;
+            PreglediZaOdlaganje = new ObservableCollection<Pregled>();
+            OperacijeZaOdlaganje = new ObservableCollection<Operacija>();
             PopunjavanjeOblastiLekara();
             PopunjavanjePonudjenihTrajanja();
         }
@@ -53,6 +68,24 @@ namespace IS_Bolnice.Prozori.Sekretar
                 trajanja.Add(i);
             }
             comboTrajanja.ItemsSource = trajanja;
+        }
+
+        private void OsvezavanjePrikazaZauzetihPregleda(List<Pregled> zauzetiPregledi)
+        {
+            PreglediZaOdlaganje.Clear();
+            foreach (Pregled pregled in zauzetiPregledi)
+            {
+                PreglediZaOdlaganje.Add(pregled);
+            }
+        }
+
+        private void OsvezavanjePrikazaZauzetihOperacija (List<Operacija> zauzeteOperacije)
+        {
+            OperacijeZaOdlaganje.Clear();
+            foreach(Operacija operacija in zauzeteOperacije)
+            {
+                OperacijeZaOdlaganje.Add(operacija);
+            }
         }
 
         private void UpdateTextBox()
@@ -92,7 +125,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             }
             else if ((bool)rbOperacija.IsChecked)
             {
-
+                ZakazivanjeOperacije();
             }
             else
             {
@@ -111,38 +144,91 @@ namespace IS_Bolnice.Prozori.Sekretar
             OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
             double trajanjeTermina = (double)comboTrajanja.SelectedItem;
             BazaPregleda bazaPregleda = new BazaPregleda();
-            List<Pregled> slobodniPregledi = bazaPregleda.SlobodniPreglediLekaraOdredjeneOblasti(oblastLekara, trajanjeTermina);
+            List<Pregled> slobodniPregledi = bazaPregleda.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, trajanjeTermina);
+            
             if (slobodniPregledi != null)
             {
                 Pregled pregled = slobodniPregledi[0];
                 pregled.Pacijent = odabraniPacijent;
                 bazaPregleda.ZakaziPregled(pregled);
+                string message = "Uspesno zakazan termin";
+                MessageBox.Show(message);
+                Close();
             }
             else
             {
-                // TODO : umesto ovoga treba popuniti termine koji se mogu odloziti
                 string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
                 MessageBox.Show(message);
+                OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
             }
-            
-            Close();
         }
 
         private void ZakazivanjeOperacije()
         {
-            //TODO : dovrsiti i refaktorisati
-            //DateTime pocetakTermina = NajbliziTermin();
-            //DateTime krajTermina = pocetakTermina.AddHours((double)comboTrajanja.SelectedItem);
-            //BazaBolnica bazaBolnica = new BazaBolnica();
-            
-            //BazaLekara bazaLekara = new BazaLekara();
-            //List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti((string)comboOblastLekara.SelectedItem);
-            //BazaOperacija bazaOperacija = new BazaOperacija(odabraniPacijent, sviLekariOdredjeneOblasti[0], pocetakTermina, krajTermina, );
+            OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
+            double trajanjeTermina = (double)comboTrajanja.SelectedItem;
+            BazaOperacija bazaOperacija = new BazaOperacija();
+            List<Operacija> slobodneOperacije = bazaOperacija.SlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, trajanjeTermina);
+
+            if (slobodneOperacije != null)
+            {
+                Operacija operacija = slobodneOperacije[0];
+                operacija.Pacijent = odabraniPacijent;
+                bazaOperacija.ZakaziOperaciju(operacija);
+
+                string message = "Uspesno zakazan termin";
+                MessageBox.Show(message);
+                Close();
+            }
+            else
+            {
+                string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
+                MessageBox.Show(message);
+                OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
+            }
         }
 
         private void Button_Click_Odustani(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Button_Click_Odlozi(object sender, RoutedEventArgs e)
+        {
+            if ((bool)rbPregled.IsChecked && ValidnoPopunjenaPolja())
+            {
+                BazaPregleda bazaPregleda = new BazaPregleda();
+                for (int i = 0; i < dgPregledi.SelectedItems.Count; i++)
+                {
+                    Pregled pregledZaOdlaganje = (Pregled)dgPregledi.SelectedItems[i];
+                    bazaPregleda.OtkaziPregled(pregledZaOdlaganje);
+                }
+                OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
+                OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+            }
+            else if ((bool)rbOperacija.IsChecked && ValidnoPopunjenaPolja())
+            {
+                BazaOperacija bazaOperacija = new BazaOperacija();
+                for (int i = 0; i < dgOperacije.SelectedItems.Count; i++)
+                {
+                    Operacija operacijaZaOdlaganje = (Operacija)dgOperacije.SelectedItems[i];
+                    bazaOperacija.OtkaziOperaciju(operacijaZaOdlaganje);
+                }
+                OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
+                OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
+            }
+        }
+
+        private void rbPregled_Checked(object sender, RoutedEventArgs e)
+        {
+            dgPregledi.Visibility = Visibility.Visible;
+            dgOperacije.Visibility = Visibility.Hidden;
+        }
+
+        private void rbOperacija_Checked(object sender, RoutedEventArgs e)
+        {
+            dgPregledi.Visibility = Visibility.Hidden;
+            dgOperacije.Visibility = Visibility.Visible;
         }
     }
 }

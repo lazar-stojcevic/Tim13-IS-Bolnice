@@ -146,6 +146,24 @@ public class Soba
       }
    }
 
+    public bool Dostupna()
+    {
+        if (obrisano || PodRenoviranje || podRenoviranje)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool Jednaka(Soba soba)
+    {
+        if (Id.Equals(soba.Id))
+        {
+            return true;
+        }
+        return false;
+    }
+
     public string Id { get; set; }
     public bool Zauzeta { get; set; }
     public bool PodRenoviranje { get; set; }

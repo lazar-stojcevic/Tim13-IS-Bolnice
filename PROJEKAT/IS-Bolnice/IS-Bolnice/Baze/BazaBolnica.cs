@@ -118,6 +118,22 @@ public class BazaBolnica
    {
       throw new NotImplementedException();
    }
+
+    public List<Soba> SveOperacioneSaleOveBolnice()
+    {
+        List<Bolnica> bolnice = SveBolnice();
+        List<Soba> sveSobe = bolnice[0].Soba; // za sada se podrazumeva da postoji samo jedna bolnica
+        List<Soba> operacioneSale = new List<Soba>();
+
+        foreach (Soba soba in sveSobe)
+        {
+            if (soba.Tip.Equals(RoomType.operacionaSala) && !soba.Obrisano)
+            {
+                operacioneSale.Add(soba);
+            }
+        }
+        return operacioneSale;
+    }
    
    public string fileLocation = @"..\..\Datoteke\bolnice.txt";
 
