@@ -50,7 +50,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void LekoviMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            Page lekovi = new LekoviPage();
+            this.frame.NavigationService.Navigate(lekovi);
         }
     }
 }

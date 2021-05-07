@@ -20,6 +20,31 @@ public class Lek: INotifyPropertyChanged
         sastojci = new List<Sastojak>();
     }
 
+    public Lek(string sifraLeka, string imeLeka, string opisLeka, List<Sastojak> sastojciLeka, List<Lek> zamenskiLekoviLeka, bool lekuPotrebanRecept)
+    {
+        Sifra = sifraLeka;
+        Ime = imeLeka;
+        Opis = opisLeka;
+        Alergeni = sastojciLeka;
+        ZamenskiLekovi = zamenskiLekoviLeka;
+        PotrebanRecept = lekuPotrebanRecept;
+    }
+
+    public Lek(string sifra)
+    {
+        Sifra = sifra;
+    }
+
+    public Lek(string sifraLeka, string imeLeka, string opisLeka, bool lekuPotrebanRecept)
+    {
+        Sifra = sifraLeka;
+        Ime = imeLeka;
+        Opis = opisLeka;
+        Alergeni = new List<Sastojak>();
+        ZamenskiLekovi = new List<Lek>();
+        PotrebanRecept = lekuPotrebanRecept;
+    }
+
     public String Sifra
     {
         get { return sifra; }

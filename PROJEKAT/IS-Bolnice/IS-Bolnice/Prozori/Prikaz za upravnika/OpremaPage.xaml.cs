@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Prozori.Prikaz_za_upravnika;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,17 +34,15 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void NabavkaButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Page nabavka = new NabavkaOpremePage();
+            this.NavigationService.Navigate(nabavka);
         }
 
-        private void PreraspodelaStatickeButton_Click(object sender, RoutedEventArgs e)
+
+        private void PreraspodelaButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void PreraspodelaDinamickeButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            Page preraspodela = new PrepaspodelaOpremePage();
+            this.NavigationService.Navigate(preraspodela);
         }
     }
 }

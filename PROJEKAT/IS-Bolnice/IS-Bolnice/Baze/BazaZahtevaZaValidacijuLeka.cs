@@ -54,11 +54,22 @@ public class BazaZahtevaZaValidacijuLeka
                     }
                 }
 
+                string zamenskiLekoviSvi = delovi[5];
+                if (!zamenskiLekoviSvi.Equals(""))
+                {
+                    string[] zameskiLek = zamenskiLekoviSvi.Split('/');
+                    foreach (string deo in zameskiLek)
+                    {
+                        Lek lek = new Lek(deo);
+                        p.ZamenskiLekovi.Add(lek);
+                    }
+                }
+
                 Console.WriteLine(line);
                 ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka();
                 zahtev.Lek = p;
 
-                string[] idLekara = delovi[5].Split('-');
+                string[] idLekara = delovi[6].Split('-');
                 foreach (Lekar lekarIter in sviLekari)
                 {
                     foreach (string id in idLekara)
@@ -82,8 +93,46 @@ public class BazaZahtevaZaValidacijuLeka
    
    public void KreirajZahtev(ZahtevZaValidacijuLeka zahtev)
    {
-      throw new NotImplementedException();
-   }
+        string novaLinija = System.Environment.NewLine + zahtev.Lek.Sifra + "#" + zahtev.Lek.Ime + "#" + zahtev.Lek.Opis + "#";
+        if (zahtev.Lek.PotrebanRecept)
+        {
+            novaLinija += "1#";
+        }
+        else novaLinija += "0#";
+
+
+        if (zahtev.Lek.Alergeni.Count != 0)
+        {
+            foreach (Sastojak sastojak in zahtev.Lek.Alergeni)
+            {
+                novaLinija += sastojak.Ime + ",";
+            }
+        }
+        else
+        {
+            novaLinija += "nema,";
+        }
+        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+
+        novaLinija = novaLinija + "#";
+        if (zahtev.Lek.ZamenskiLekovi.Count != 0)
+        {
+            foreach (Lek zamenskiLek in zahtev.Lek.ZamenskiLekovi)
+            {
+                novaLinija = novaLinija + zamenskiLek.Sifra + "/";
+            }
+            novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+        }
+
+        novaLinija = novaLinija + "#";
+        foreach (Lekar lekar in zahtev.lekariKomeIdeNaValidaciju)
+        {
+            novaLinija = novaLinija + lekar.Jmbg + "-";
+        }
+        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+
+        File.AppendAllText(fileLocation, novaLinija);
+    }
    
    public void IzmeniZahtev(ZahtevZaValidacijuLeka zahtevZaValidaciju)
    {

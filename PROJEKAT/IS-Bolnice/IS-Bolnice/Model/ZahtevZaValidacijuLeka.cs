@@ -16,4 +16,9 @@ public class ZahtevZaValidacijuLeka
         lekariKomeIdeNaValidaciju = new List<Lekar>();
     }
 
+    public ZahtevZaValidacijuLeka(Lek noviLek, List<Lekar> lekari)
+    {
+        lekariKomeIdeNaValidaciju = lekari;
+        Lek = noviLek;
+    }
 }

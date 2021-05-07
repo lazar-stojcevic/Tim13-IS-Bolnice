@@ -45,6 +45,17 @@ public class BazaLekova
                     }
                 }
 
+                string zamenskiLekoviSvi = delovi[5];
+                if (!zamenskiLekoviSvi.Equals(""))
+                {
+                    string[] zameskiLek = zamenskiLekoviSvi.Split('/');
+                    foreach (string deo in zameskiLek)
+                    {
+                        Lek lek = new Lek(deo);
+                        p.ZamenskiLekovi.Add(lek);
+                    }
+                }
+
                 Console.WriteLine(line);
                 ret.Add(p);
             }
@@ -85,8 +96,7 @@ public class BazaLekova
 
     public void KreiraNovijLek(Lek lek)
     {
-        List<string> linije = new List<string>();
-        string novaLinija = lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+        string novaLinija = System.Environment.NewLine + lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
         if (lek.PotrebanRecept)
         {
             novaLinija += "1#";
@@ -105,10 +115,19 @@ public class BazaLekova
         {
             novaLinija += "nema,";
         }
-        novaLinija.Remove(novaLinija.Length - 1, 1);
-        novaLinija += System.Environment.NewLine;
-        linije.Add(novaLinija);
-        File.AppendAllLines(fileLocation, linije);
+        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+
+        novaLinija = novaLinija + "#";
+        if (lek.ZamenskiLekovi.Count != 0)
+        {
+            foreach (Lek zamenskiLek in lek.ZamenskiLekovi)
+            {
+                novaLinija = novaLinija + zamenskiLek.Sifra + "/";
+            }
+            novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+        }
+        File.AppendAllText(fileLocation, novaLinija);
+
     }
 
     public void IzmeniLek(Lek lek)

@@ -39,16 +39,8 @@ public class BazaBolnica
                     {
                         s.Zauzeta = true;
                     }
-                    if (ds[2] == "False")
-                    {
-                        s.PodRenoviranje = false;
-                    }
-                    else
-                    {
-                        s.PodRenoviranje = true;
-                    }
-                    s.Tip = (RoomType)Enum.Parse(typeof(RoomType), ds[3]);
-                    if (ds[4] == "False")
+                    s.Tip = (RoomType)Enum.Parse(typeof(RoomType), ds[2]);
+                    if (ds[3] == "False")
                     {
                         s.Obrisano = false;
                     }
@@ -56,18 +48,8 @@ public class BazaBolnica
                     {
                         s.Obrisano = true;
                     }
-                    s.Sprat = Int32.Parse(ds[5]);
-                    s.Kvadratura = Double.Parse(ds[6]);
-                    string[] predmeti = ds[7].Split('$');
-                    foreach (string dp in predmeti)
-                    {
-                        if (dp.Equals("")) break;
-                        string[] deo = dp.Split('-');
-                        Predmet p = new Predmet();
-                        p.Id = deo[0];
-                        p.Kolicina = Int32.Parse(deo[1]);
-                        s.AddPredmet(p);
-                    }
+                    s.Sprat = Int32.Parse(ds[4]);
+                    s.Kvadratura = Double.Parse(ds[5]);
                     b.AddSoba(s);
                 }
 
@@ -80,6 +62,37 @@ public class BazaBolnica
             MessageBox.Show("Nista");
         }
         return ret;
+
+    }
+
+    public List<Soba> GetSobe()
+    {
+        List<Bolnica> bolnice = SveBolnice();
+        foreach (Bolnica b in bolnice)
+        {
+            return b.Soba;
+        }
+        List<Soba> sobe = new List<Soba>();
+        return sobe;
+    }
+
+    public Soba GetMagacin()
+    {
+        Soba soba = new Soba();
+        List<Bolnica> bolnice = SveBolnice();
+        foreach (Bolnica b in bolnice)
+        {
+            foreach (Soba s in b.Soba)
+            {
+                if (s.Tip == RoomType.magacin)
+                {
+                    soba = s;
+                    break;
+                }
+            }
+        }
+
+        return soba;
     }
 
     public void KreirajBolnicu(Bolnica novaBolnica)
@@ -91,13 +104,7 @@ public class BazaBolnica
             niz[0] = novaBolnica.Ime + "#" + novaBolnica.Adresa + "#" + novaBolnica.EMail + "#" + novaBolnica.BrojTelefona + "#";
             foreach (Soba s in novaBolnica.Soba)
             {
-                niz[0] = niz[0] + s.Id + "/" + s.Zauzeta + "/" + s.PodRenoviranje + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "/";
-                foreach (Predmet p in s.Predmet)
-                {
-
-                    niz[0] = niz[0] + p.Id + "-" + p.Kolicina + "$";
-                }
-                niz[0] = niz[0] + "%";
+                niz[0] = niz[0] + s.Id + "/" + s.Zauzeta + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "%";
             }
             niz[0] = niz[0] + "#";
             File.WriteAllLines(fileLocation, niz);

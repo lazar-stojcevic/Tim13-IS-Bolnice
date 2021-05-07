@@ -1,2 +1,4 @@
-5555#Propanolol#5mg#1#Penicilin,Laktoza,#123-430-666-
-4444#Neki nebitni lek#500mg#1#Paracetamol,Laktoza,#123-430-666-
+5555#Propanolol#5mg#1#Penicilin,Laktoza#123-430-666
+4444#Neki nebitni lek#500mg#1#Paracetamol,Laktoza#123-430-666
+
+520#Ksalol#10mg opasno jako#1#penicilin,silicijum-dioksid#5/1#123-430-999-777

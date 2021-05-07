@@ -49,7 +49,24 @@ public class BazaSastojaka
    
    public void ObrisiSastojak(Sastojak sastojak)
    {
-      throw new NotImplementedException();
-   }
+        if (File.Exists(fileLocation))
+        {
+            List<string> nazivSastojka = new List<string>();
+            List<Sastojak> sastojci = SviSastojci();
+            foreach (Sastojak s in sastojci)
+            {
+                if (!s.Ime.Equals(sastojak.Ime))
+                {
+                    nazivSastojka.Add(s.Ime);
+                }
+            }
+            File.WriteAllLines(fileLocation, nazivSastojka);
+        }
+        else
+        {
+
+            MessageBox.Show("Nista");
+        }
+    }
 
 }

@@ -67,6 +67,8 @@
     <Compile Include="Baze\BazaOcena.cs" />
     <Compile Include="Baze\BazaOdgovoraNaZahteveZaValidacijuLekova.cs" />
     <Compile Include="Baze\BazaOpreme.cs" />
+    <Compile Include="Baze\BazaRenovacija.cs" />
+    <Compile Include="Baze\BazaSadrzaja.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
@@ -76,6 +78,8 @@
     <Compile Include="Model\Obavestenje.cs" />
     <Compile Include="Model\OblastLekara.cs" />
     <Compile Include="Model\OdgovorNaZahtevZaValidaciju.cs" />
+    <Compile Include="Model\Renovacija.cs" />
+    <Compile Include="Model\SadrzajSobe.cs" />
     <Compile Include="Model\Sastojak.cs" />
     <Compile Include="Model\Survery.cs" />
     <Compile Include="Model\Uloge.cs" />
@@ -116,11 +120,23 @@
     <Compile Include="Prozori\Prikaz kod lekara\PodaciOPacijentu.xaml.cs">
       <DependentUpon>PodaciOPacijentu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\AddLekPage.xaml.cs">
+      <DependentUpon>AddLekPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\AddLekPage2.xaml.cs">
+      <DependentUpon>AddLekPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\AddLekPage3.xaml.cs">
+      <DependentUpon>AddLekPage3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\AddOpremuPage.xaml.cs">
       <DependentUpon>AddOpremuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\AddSalePage.xaml.cs">
       <DependentUpon>AddSalePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\AddSastojakWindow.xaml.cs">
+      <DependentUpon>AddSastojakWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\EditOpremuPage.xaml.cs">
       <DependentUpon>EditOpremuPage.xaml</DependentUpon>
@@ -128,14 +144,29 @@
     <Compile Include="Prozori\Prikaz za upravnika\EditSalePage.xaml.cs">
       <DependentUpon>EditSalePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\EditSastojakWindow.xaml.cs">
+      <DependentUpon>EditSastojakWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\LekoviPage.xaml.cs">
+      <DependentUpon>LekoviPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\NabavkaOpremePage.xaml.cs">
+      <DependentUpon>NabavkaOpremePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\NalogPage.xaml.cs">
       <DependentUpon>NalogPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\OpremaPage.xaml.cs">
       <DependentUpon>OpremaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\PrepaspodelaOpremePage.xaml.cs">
+      <DependentUpon>PrepaspodelaOpremePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\SalePage.xaml.cs">
       <DependentUpon>SalePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\SastojciPage.xaml.cs">
+      <DependentUpon>SastojciPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\UpravljanjeOpremomPage.xaml.cs">
       <DependentUpon>UpravljanjeOpremomPage.xaml</DependentUpon>
@@ -264,11 +295,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\AddLekPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\AddLekPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\AddLekPage3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\AddOpremuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\AddSalePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\AddSastojakWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -280,6 +327,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\EditSastojakWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\LekoviPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\NabavkaOpremePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\NalogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -288,7 +347,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\PrepaspodelaOpremePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\SalePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\SastojciPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -477,7 +544,6 @@
     <Resource Include="Slike\timetable.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Datoteke\bolnice.txt" />
     <Resource Include="Datoteke\operacije.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -568,6 +634,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\Ocene.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\zahteviLekovi.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\sadrzajiSoba.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\bolnice.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,21 +21,14 @@
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="PreraspodelaStatickeButton_Click" Margin="79,370,320,247">
-            <StackPanel>
-                <Image Source="/Slike/Upravnik/medical-stretcher.png" Height="90" Width="95" />
-            </StackPanel>
-        </Button>
-
-        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="PreraspodelaDinamickeButton_Click" Margin="299,370,100,247">
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="PreraspodelaButton_Click" Margin="210,377,189,240">
             <StackPanel>
                 <Image Source="/Slike/Upravnik/delivery-box.png" Height="80" Width="95" />
             </StackPanel>
         </Button>
         <TextBlock x:Name="textBlock1" FontFamily="Verdana" FontWeight="Bold" FontSize="28" HorizontalAlignment="Left" Margin="41,226,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Upravljanje opremom" VerticalAlignment="Top" Height="83" Width="185"/>
         <TextBlock x:Name="textBlock2" FontFamily="Verdana" FontWeight="Bold" FontSize="28" HorizontalAlignment="Left" Margin="266,226,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Nabavka opreme" VerticalAlignment="Top" Height="83" Width="185"/>
-        <TextBlock x:Name="textBlock3" FontFamily="Verdana" FontWeight="Bold" FontSize="28" HorizontalAlignment="Left" Margin="28,482,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Preraspodela statičke opreme" VerticalAlignment="Top" Height="108" Width="211"/>
-        <TextBlock x:Name="textBlock4" FontFamily="Verdana" FontWeight="Bold" FontSize="28" HorizontalAlignment="Left" Margin="244,482,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Preraspodela dinamičke opreme" VerticalAlignment="Top" Height="108" Width="211"/>
+        <TextBlock x:Name="textBlock4" FontFamily="Verdana" FontWeight="Bold" FontSize="28" HorizontalAlignment="Left" Margin="155,489,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Preraspodela opreme" VerticalAlignment="Top" Height="108" Width="211"/>
     </Grid>
 
 </Page>

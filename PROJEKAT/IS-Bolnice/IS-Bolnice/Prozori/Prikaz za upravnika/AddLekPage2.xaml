@@ -1,0 +1,21 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.AddLekPage2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="AddLekPage2" Background="White">
+
+    <Grid>
+        <ListBox x:Name="listBox_sastojci" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="158" Margin="36,191,0,0" VerticalAlignment="Top" Width="432"/>
+        <ListBox x:Name="listBox" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="152" Margin="36,425,0,0" VerticalAlignment="Top" Width="432"/>
+        <Label Content="Sastojci leka:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,139,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Zamenski lekovi:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,373,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label x:Name="label" FontSize="38" Content="Dodavanje leka" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="65" Width="278"/>
+        <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="41,614,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,614,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Button x:Name="Sastojci_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Sastojci" HorizontalAlignment="Left" Height="50" Margin="284,136,0,0" VerticalAlignment="Top" Width="184" Click="Sastojci_btn_Click"/>
+    </Grid>
+</Page>
