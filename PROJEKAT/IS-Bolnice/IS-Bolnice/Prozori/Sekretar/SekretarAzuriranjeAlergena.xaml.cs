@@ -21,8 +21,8 @@ namespace IS_Bolnice.Prozori.Sekretar
     public partial class SekretarAzuriranjeAlergena : Window
     {
         private Pacijent pacijentRef;
-        private BazaPacijenata bazaPacijenata;
-        private BazaSastojaka bazaSastojaka;
+        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private BazaSastojaka bazaSastojaka = new BazaSastojaka();
         private ObservableCollection<string> MoguciAlergeniZaDodavanje;
         public ObservableCollection<Sastojak> AlergeniPacijenta
         {
@@ -33,15 +33,13 @@ namespace IS_Bolnice.Prozori.Sekretar
         public SekretarAzuriranjeAlergena(Pacijent pacijent)
         {
             InitializeComponent();
-            bazaPacijenata = new BazaPacijenata();
-            bazaSastojaka = new BazaSastojaka();
-            pacijentRef = pacijent;
-
+             
             this.DataContext = this;
-            pacijentTxt.Text = pacijent.Ime + " " + pacijent.Prezime;
-
+            pacijentRef = pacijent;
             AlergeniPacijenta = new ObservableCollection<Sastojak>(pacijent.Alergeni);
             MoguciAlergeniZaDodavanje = new ObservableCollection<string>();
+
+            pacijentTxt.Text = pacijent.Ime + " " + pacijent.Prezime;
             AzuriranjeMogucihAlergenaZaDodavanje();
         }
 

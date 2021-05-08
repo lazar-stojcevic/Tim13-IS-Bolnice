@@ -210,7 +210,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 for (int i = 0; i < dgPregledi.SelectedItems.Count; i++)
                 {
                     Pregled pregledZaOdlaganje = (Pregled)dgPregledi.SelectedItems[i];
-                    bazaPregleda.OdloziPregled(pregledZaOdlaganje);
+                    bazaPregleda.OdloziPregledStoPre(pregledZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
                 OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));

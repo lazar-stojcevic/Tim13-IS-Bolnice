@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 public class Obavestenje
 {
-    public string Sifra { get; set; }
+    public string Id { get; set; }
     public string Naslov { get; set; }
     public string Sadrzaj { get; set; }
     public DateTime VremeKreiranja { get; set; }

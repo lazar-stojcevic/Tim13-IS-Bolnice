@@ -124,7 +124,7 @@ public class BazaObavestenja
 
         foreach (Obavestenje o in obavestenja)
         {
-            if (obavestenjeIzmenjeno.Sifra.Equals(o.Sifra))
+            if (obavestenjeIzmenjeno.Id.Equals(o.Id))
             {
                 obavestenjaString.Add(ObavestenjeToString(obavestenjeIzmenjeno));
             }
@@ -146,7 +146,7 @@ public class BazaObavestenja
 
         foreach (Obavestenje o in obavestenja)
         {
-            if (obavestenje.Sifra.Equals(o.Sifra))
+            if (obavestenje.Id.Equals(o.Id))
             {
                 // samo se preskoci upisivanje
             }
@@ -168,7 +168,7 @@ public class BazaObavestenja
             string[] delovi = linija.Split(lineSeparator, StringSplitOptions.None);
 
             Obavestenje o = new Obavestenje();
-            o.Sifra = delovi[0];
+            o.Id = delovi[0];
             o.Naslov = delovi[1];
             o.Sadrzaj = delovi[2];
             o.VremeKreiranja = DateTime.ParseExact(delovi[3], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
@@ -215,7 +215,7 @@ public class BazaObavestenja
     private string ObavestenjeToString(Obavestenje obavestenje)
     {
         // polja unutar txt datoteke se razdvajaju sa "#!^" kako bi bilo skoro nemoguce da se u sadrzaju pojavi ta kombinacija
-        string o = obavestenje.Sifra + "#!^" + obavestenje.Naslov + "#!^" + obavestenje.Sadrzaj + "#!^" 
+        string o = obavestenje.Id + "#!^" + obavestenje.Naslov + "#!^" + obavestenje.Sadrzaj + "#!^" 
             + obavestenje.VremeKreiranja.ToString(vremenskiFormatPisanje) + "#!^";
 
         // sadrzaj liste se razdvaja sa ":@:" kako bi bilo skoro nemoguce da se u sadrzaju pojavi ta kombinacija

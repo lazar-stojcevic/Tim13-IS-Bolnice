@@ -20,9 +20,8 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarPrikazZakazanihTerminaPacijenta : Window
     {
-        private Pacijent pacijent;
-        private BazaPregleda bp;
-        private BazaOperacija bo;
+        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private BazaOperacija bazaOperacija = new BazaOperacija();
 
         public ObservableCollection<Pregled> PreglediPacijenta
         {
@@ -39,16 +38,13 @@ namespace IS_Bolnice.Prozori.Sekretar
         public SekretarPrikazZakazanihTerminaPacijenta(Pacijent p)
         {
             InitializeComponent();
-            bp = new BazaPregleda();
-            bo = new BazaOperacija();
 
-            pacijent = p;
             this.DataContext = this;
 
             pacijentTxt.Text = p.Ime + " " + p.Prezime;
 
-            PreglediPacijenta = new ObservableCollection<Pregled>(bp.SviBuduciPreglediKojePacijentIma(p.Jmbg));
-            OperacijePacijenta = new ObservableCollection<Operacija>(bo.SveSledeceOperacijeZaPacijenta(p));
+            PreglediPacijenta = new ObservableCollection<Pregled>(bazaPregleda.SviBuduciPreglediKojePacijentIma(p.Jmbg));
+            OperacijePacijenta = new ObservableCollection<Operacija>(bazaOperacija.SveSledeceOperacijeZaPacijenta(p));
         }
 
         private void Button_Click_Otkazi_Pregled(object sender, RoutedEventArgs e)
@@ -67,7 +63,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bp.OtkaziPregled(pregled);
+                        bazaPregleda.OtkaziPregled(pregled);
                         PreglediPacijenta.Remove(pregled);
                         break;
 
@@ -94,7 +90,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bo.OtkaziOperaciju(operacija);
+                        bazaOperacija.OtkaziOperaciju(operacija);
                         OperacijePacijenta.Remove(operacija);
                         break;
 
@@ -113,13 +109,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 Pregled stariPregled = PreglediPacijenta[index];
                 Lekar lekar = stariPregled.Lekar;
 
-                Pregled noviPregled = new Pregled
-                {
-                    Lekar = stariPregled.Lekar,
-                    Pacijent = stariPregled.Pacijent,
-                    VremePocetkaPregleda = stariPregled.VremePocetkaPregleda,
-                    VremeKrajaPregleda = stariPregled.VremeKrajaPregleda
-                };
+                Pregled noviPregled = new Pregled(stariPregled);
 
                 // na prvom mestu je pocetak termina a na drugom kraj termina
                 List < DateTime > termin = new List<DateTime>();
@@ -135,7 +125,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     noviPregled.VremePocetkaPregleda = termin[0];
                     noviPregled.VremeKrajaPregleda = termin[1];
 
-                    bp.IzmeniPregled(noviPregled, stariPregled);
+                    bazaPregleda.IzmeniPregled(noviPregled, stariPregled);
                     PreglediPacijenta[index] = noviPregled;
                 }
             }
@@ -147,14 +137,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (index != -1)
             {
                 Operacija staraOperacija = OperacijePacijenta[index];
-                Operacija novaOperacija = new Operacija
-                {
-                    Lekar = staraOperacija.Lekar,
-                    Pacijent = staraOperacija.Pacijent,
-                    Soba = staraOperacija.Soba,
-                    VremePocetkaOperacije = staraOperacija.VremePocetkaOperacije,
-                    VremeKrajaOperacije = staraOperacija.VremeKrajaOperacije
-                };
+                Operacija novaOperacija = new Operacija(staraOperacija);
                 Lekar lekar = staraOperacija.Lekar;
 
                 // na prvom mestu je pocetak termina a na drugom kraj termina
@@ -172,7 +155,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     TimeSpan trajanje = staraOperacija.VremeKrajaOperacije.Subtract(staraOperacija.VremePocetkaOperacije);
                     novaOperacija.VremeKrajaOperacije = novaOperacija.VremePocetkaOperacije.Add(trajanje);
 
-                    bo.IzmeniOperaciju(novaOperacija, staraOperacija);
+                    bazaOperacija.IzmeniOperaciju(novaOperacija, staraOperacija);
                     OperacijePacijenta[index] = novaOperacija;
                 }
             }

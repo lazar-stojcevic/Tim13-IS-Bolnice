@@ -578,7 +578,7 @@ public class BazaPregleda
         File.WriteAllLines(fileLocation, redoviZaUpisUDatoteku);
     }
 
-    public void OdloziPregled(Pregled pomeraniPregled)
+    public void OdloziPregledStoPre(Pregled pomeraniPregled)
     {
         Pregled pregledZaOtkazivanje = new Pregled(pomeraniPregled);
 

@@ -17,7 +17,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class IzmenaObavestenjaWindow : Window
     {
-        private BazaObavestenja bo;
+        private BazaObavestenja bazaObavestenja = new BazaObavestenja();
         private Obavestenje odabranoObavestenje;
         private ObservableCollection<Obavestenje> ObavestenjaRef;
 
@@ -32,7 +32,6 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
             this.DataContext = this;
 
-            bo = new BazaObavestenja();
             odabranoObavestenje = obavestenje;
             ObavestenjaRef = Obavestenja;
             OdabraniPacijenti = new ObservableCollection<Pacijent>(obavestenje.OdredjeniPacijenti);
@@ -110,7 +109,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             Obavestenje obavestenje = new Obavestenje
             {
-                Sifra = odabranoObavestenje.Sifra,  // uvek ce imati pocetnu sifru
+                Id = odabranoObavestenje.Id,  // uvek ce imati pocetni Id
                 Naslov = txtNaslov.Text,
                 Sadrzaj = txtSadrzaj.Text,
                 VremeKreiranja = odabranoObavestenje.VremeKreiranja, // uvek ce imati inicijalno vreme kreiranja
@@ -118,7 +117,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 OdredjeniPacijenti = OdabraniPacijenti.ToList()
             };
 
-            bo.IzmeniObavestenje(obavestenje);
+            bazaObavestenja.IzmeniObavestenje(obavestenje);
             // osvezavanje liste
             int i = ObavestenjaRef.IndexOf(odabranoObavestenje);
             if (i != -1)
