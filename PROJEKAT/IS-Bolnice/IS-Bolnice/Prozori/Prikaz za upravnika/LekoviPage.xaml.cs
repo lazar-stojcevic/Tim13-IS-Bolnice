@@ -47,7 +47,16 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            BazaLekova bazaLekova = new BazaLekova();
+            string[] podaciOLeku = listBox.SelectedItem.ToString().Split(' ');
+            Page editPage = new EditBrisanjePage(bazaLekova.GetLek(podaciOLeku[1]));
+            this.NavigationService.Navigate(editPage);
+        }
 
+        private void OdgovoriButton_Click(object sender, RoutedEventArgs e)
+        {
+            Page odgovoriNaZahteve = new OdgovoriNaZahteveLekoviPage();
+            this.NavigationService.Navigate(odgovoriNaZahteve);
         }
     }
 }

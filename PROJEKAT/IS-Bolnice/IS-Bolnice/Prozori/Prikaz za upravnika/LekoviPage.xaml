@@ -17,5 +17,11 @@
             </StackPanel>
         </Button>
 
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="OdgovoriButton_Click" Margin="338,29,61,588">
+        <StackPanel>
+            <Image Source="/IS-Bolnice;component/Slike/Upravnik/paper-plane.png" Height="68" Width="91" />
+        </StackPanel>
+        </Button>
+
     </Grid>
 </Page>

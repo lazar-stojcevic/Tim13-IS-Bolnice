@@ -1,0 +1,25 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.EditBrisanjePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="EditBrisanjePage" Background="White">
+
+    <Grid>
+        <Button Background="#FFF" BorderThickness="0" Click="DeleteAddButton_Click" Margin="172,117,174,444">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Upravnik/garbage-can.png" Height="90" Width="100" />
+            </StackPanel>
+        </Button>
+        <Button Background="#FFF" BorderThickness="0" Click="EditButton_Click" Margin="172,426,174,135">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Upravnik/edit.png" Height="90" Width="100" />
+            </StackPanel>
+        </Button>
+        <Label Content="Obriši lek" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="172,280,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Izmeni lek" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="172,570,0,0" VerticalAlignment="Top" Width="210"/>
+    </Grid>
+</Page>

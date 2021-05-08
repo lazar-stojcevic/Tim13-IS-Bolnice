@@ -7,6 +7,16 @@ using System;
 
 public class OdgovorNaZahtevZaValidaciju
 {
-   public string Obrazlozenje { get; set; }
+    public string Obrazlozenje { get; set; }
+
+    public Lek Lek { get; set; }
+
+    public OdgovorNaZahtevZaValidaciju() { }
+
+    public OdgovorNaZahtevZaValidaciju(Lek lek, string obrazlozenje)
+    {
+        Lek = lek;
+        Obrazlozenje = obrazlozenje;
+    }
 
 }

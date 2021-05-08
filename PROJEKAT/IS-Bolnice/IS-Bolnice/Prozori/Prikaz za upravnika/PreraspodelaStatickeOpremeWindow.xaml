@@ -1,0 +1,18 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.PreraspodelaStatickeOpremeWindow"
+        mc:Ignorable="d"
+        Title="Preraspodela staticke opreme" Height="300" Width="500" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Label Content="Izaberite datum pomeranja opreme:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="32,23,0,0" VerticalAlignment="Top" Width="425"/>
+        <DatePicker FontSize="26" x:Name="datePicker_pocetak"  Margin= "113,78,91.6,128.4" SelectedDate="{x:Static System:DateTime.Now}" />
+        <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="30,181,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="273,181,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+
+    </Grid>
+</Window>

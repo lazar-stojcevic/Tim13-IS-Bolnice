@@ -26,6 +26,8 @@ namespace IS_Bolnice
 
         private void btnLogin_Click_1(object sender, RoutedEventArgs e)
         {
+            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
+            bazaSadrzaja.IzvrsiTransport();
             string korisnik = txtUserId.Text;
             string sifra = txtPassword.Password;
             BazaUpravnika baza1 = new BazaUpravnika();

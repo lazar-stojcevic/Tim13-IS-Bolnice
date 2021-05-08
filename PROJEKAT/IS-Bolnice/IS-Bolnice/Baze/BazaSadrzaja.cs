@@ -5,12 +5,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
 public class BazaSadrzaja
 {
-   public List<SadrzajSobe> SviSadrzaji()
+
+    private static string vremenskiFormatPisanje = "M/d/yyyy";
+    private static string[] vremenskiFormatiCitanje = new[]
+    {
+        "M/d/yyyy",
+        "M-d-yyyy"
+    };
+
+    public List<SadrzajSobe> SviSadrzaji()
    {
         List<SadrzajSobe> ret = new List<SadrzajSobe>();
         if (File.Exists(fileLocation))
@@ -42,12 +51,62 @@ public class BazaSadrzaja
         if (!niz[3].Equals(""))
         {
             novaSoba.Id = niz[4];
-            s = new SadrzajSobe(soba, predmet, Int32.Parse(niz[2]), DateTime.Parse(niz[3]), novaSoba);
+            s = new SadrzajSobe(soba, predmet, Int32.Parse(niz[2]), DateTime.ParseExact(niz[3], vremenskiFormatiCitanje, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal), novaSoba);
         }
         else {
             s = new SadrzajSobe(soba.Id, predmet.Id, Int32.Parse(niz[2]));
         }
         return s;
+    }
+
+    public List<SadrzajSobe> SadrzajiUPrenosu()
+    {
+        List<SadrzajSobe> sviSadrzaji = SviSadrzaji();
+        List<SadrzajSobe> sadrzajiUPrenosu = new List<SadrzajSobe>();
+        foreach (SadrzajSobe sadrzaj in sviSadrzaji)
+        {
+            if (sadrzaj.NovaSoba != null)
+            {
+                sadrzajiUPrenosu.Add(sadrzaj);
+            }
+        }
+        return sadrzajiUPrenosu;
+    }
+
+    public void IzvrsiTransport()
+    {
+        List<SadrzajSobe> sadrzaji = SadrzajiUPrenosu();
+        foreach (SadrzajSobe sadrzaj in sadrzaji)
+        {
+            if (sadrzaj.DatumPremestanja < DateTime.UtcNow)
+            {
+                if (!DodajOpremuNaStanje(sadrzaj))
+                {
+                    SadrzajSobe noviSadrzaj = new SadrzajSobe(sadrzaj.NovaSoba.Id, sadrzaj.Predmet.Id, sadrzaj.Kolicina);
+                    KreirajSadrzaj(noviSadrzaj);
+                }
+                ObrisiSadrzaj(sadrzaj);
+
+            }
+        }
+    }
+
+    public bool DodajOpremuNaStanje(SadrzajSobe sadrzajUPrenosu)
+    {
+        bool opremaPostojiUProstoriji = false;
+        List<SadrzajSobe> novaSoba = GetSadrzajSobe(sadrzajUPrenosu.NovaSoba.Id);
+        foreach (SadrzajSobe sadrzaj in novaSoba)
+        {
+            if (sadrzaj.Predmet.Id.Equals(sadrzajUPrenosu.Predmet.Id))
+            {
+                sadrzaj.Kolicina += sadrzajUPrenosu.Kolicina;
+                IzmeniSadrzaj(sadrzaj);
+                opremaPostojiUProstoriji = true;
+                break;
+            }
+
+        }
+        return opremaPostojiUProstoriji;
     }
 
     public List<SadrzajSobe> GetSadrzajSobe(string idSobe) {
@@ -82,7 +141,7 @@ public class BazaSadrzaja
         string tekst = sadrzaj.Soba.Id + "#" + sadrzaj.Predmet.Id + "#" + sadrzaj.Kolicina + "#";
         if (sadrzaj.DatumPremestanja.Year != 0001)
         {
-            tekst = tekst + sadrzaj.DatumPremestanja.ToString() + "#";
+            tekst = tekst + sadrzaj.DatumPremestanja.ToString(vremenskiFormatPisanje) + "#";
         }
         if (sadrzaj.NovaSoba != null) { 
             tekst= tekst+sadrzaj.NovaSoba.Id; 
@@ -94,9 +153,12 @@ public class BazaSadrzaja
    {
         List<SadrzajSobe> listaSadrzaja = SviSadrzaji();
         foreach (SadrzajSobe s in listaSadrzaja) {
-            if (s.Soba.Id.Equals(sadrzaj.Soba.Id) && s.Predmet.Id.Equals(sadrzaj.Predmet.Id)) {
+            if (s.Soba.Id.Equals(sadrzaj.Soba.Id) && s.Predmet.Id.Equals(sadrzaj.Predmet.Id) && s.NovaSoba == null) {
                 ObrisiSadrzaj(s);
-                KreirajSadrzaj(sadrzaj);
+                if (sadrzaj.Kolicina > 0)
+                {
+                    KreirajSadrzaj(sadrzaj);
+                }
                 break;
             }
         }

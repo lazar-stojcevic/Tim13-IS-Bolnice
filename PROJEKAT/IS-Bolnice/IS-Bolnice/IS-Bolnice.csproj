@@ -141,6 +141,15 @@
     <Compile Include="Prozori\Prikaz za upravnika\AddSastojakWindow.xaml.cs">
       <DependentUpon>AddSastojakWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\EditBrisanjePage.xaml.cs">
+      <DependentUpon>EditBrisanjePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\EditLekPage1.xaml.cs">
+      <DependentUpon>EditLekPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\EditLekPage2.xaml.cs">
+      <DependentUpon>EditLekPage2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\EditOpremuPage.xaml.cs">
       <DependentUpon>EditOpremuPage.xaml</DependentUpon>
     </Compile>
@@ -159,11 +168,20 @@
     <Compile Include="Prozori\Prikaz za upravnika\NalogPage.xaml.cs">
       <DependentUpon>NalogPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\OdgovoriNaZahteveLekoviPage.xaml.cs">
+      <DependentUpon>OdgovoriNaZahteveLekoviPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\OdgovorNaZahtevLekPage.xaml.cs">
+      <DependentUpon>OdgovorNaZahtevLekPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\OpremaPage.xaml.cs">
       <DependentUpon>OpremaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\PrepaspodelaOpremePage.xaml.cs">
       <DependentUpon>PrepaspodelaOpremePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\PreraspodelaStatickeOpremeWindow.xaml.cs">
+      <DependentUpon>PreraspodelaStatickeOpremeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\SalePage.xaml.cs">
       <DependentUpon>SalePage.xaml</DependentUpon>
@@ -326,6 +344,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\EditBrisanjePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\EditLekPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\EditLekPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\EditOpremuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -350,11 +380,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\OdgovoriNaZahteveLekoviPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\OdgovorNaZahtevLekPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\OpremaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\PrepaspodelaOpremePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\PreraspodelaStatickeOpremeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -650,6 +692,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\bolnice.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\odgovorLekovi.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

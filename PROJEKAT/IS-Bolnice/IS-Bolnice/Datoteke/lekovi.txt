@@ -1,7 +1,7 @@
-1#Bensedin#3mg#1#penicilin,grinje,dlake#2#
-3#Brufen#500mg#1#nema#4/2#
-4#NekiProbiotik#1000mg#0#penicilin#5/1#
-5#Xanax#10mg#1#nema#1/2#
-66669#VijagraSrbija#500mg#1#paracetamol,laktoza##
-2#Bromazepam#2mg#1#penicilin,laktoza,glucerol#1/5#
-520#Ksalol#10mg opasno jako#1#penicilin,silicijum-dioksid,#5/1/
+1#Bensedin#3mg#1#penicilin,grinje,dlake#2
+3#Brufen#500mg#1#nema#4/2
+4#NekiProbiotik#1000mg#0#penicilin#5/1
+5#Xanax#10mg#1#nema#1/2
+2#Bromazepam#2mg#1#penicilin,laktoza,glucerol#1/5
+520#Ksalol#10mg#1#penicilin,silicijum-dioksid,#5/1/
+5552#Amoksiklav#100mg#0#penicilin,gluten,glucerol,#3/1/

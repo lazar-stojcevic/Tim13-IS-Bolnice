@@ -1,0 +1,19 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.OdgovorNaZahtevLekPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="OdgovorNaZahtevLekPage" Background="White">
+
+    <Grid>
+        <Label x:Name="label" FontSize="40" Content="Izmeni lek po odgovoru" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
+        <Label Content="Obrazlozenje za odbijanje leka:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,115,0,0" VerticalAlignment="Top" Width="396"/>
+        <TextBox ScrollViewer.CanContentScroll="True" x:Name="opis_txt" FontSize="24" HorizontalAlignment="Left" Height="294" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="458"/>
+        <Button x:Name="Promeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Promeni" HorizontalAlignment="Left" Height="50" Margin="41,549,0,0" VerticalAlignment="Top" Width="179" Click="Promeni_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,549,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+
+    </Grid>
+</Page>

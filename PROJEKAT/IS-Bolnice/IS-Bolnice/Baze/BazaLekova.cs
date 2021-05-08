@@ -68,7 +68,20 @@ public class BazaLekova
         return ret;
     }
 
-   public void KreirajLek(Lek lek)
+    public Lek GetLek(string sifraLeka)
+    {
+        List<Lek> lekovi = SviLekovi();
+        foreach (Lek lek in lekovi)
+        {
+            if (lek.Sifra.Equals(sifraLeka))
+            {
+                return lek;
+            }
+        }
+        return new Lek();
+    }
+
+    public void KreirajLek(Lek lek)
    {
        List<string> linije = new List<string>();
        string novaLinija = lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
@@ -143,8 +156,9 @@ public class BazaLekova
 
     public void IzmeniLek(Lek lek)
    {
-      throw new NotImplementedException();
-   }
+        ObrisiILek(lek);
+        KreirajLek(lek);
+    }
    
    public void ObrisiILek(Lek lekZaBrisanje)
    {
@@ -173,7 +187,7 @@ public class BazaLekova
                     novaLinija += "nema,";
                 }
                 novaLinija = novaLinija.Remove(novaLinija.LastIndexOf(','), 1);
-
+                novaLinija = novaLinija + "#";
                 if (lek.ZamenskiLekovi.Count != 0)
                 {
                     foreach (Lek zamenskiLek in lek.ZamenskiLekovi)
@@ -183,7 +197,6 @@ public class BazaLekova
                     novaLinija = novaLinija.Remove(novaLinija.Length - 1);
                 }
 
-                novaLinija = novaLinija.Remove(novaLinija.LastIndexOf('/'), 1);
 
                 linije.Add(novaLinija);
             }
