@@ -61,6 +61,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 {
                     bazaRenovacija.KreirajRenovaciju(renovacija);
                     RenoviranjeOprema();
+                    this.NavigationService.GoBack();
                 }
             }
         }
@@ -82,6 +83,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             if (!postojiZakazanTermin) {
                 bazaRenovacija.KreirajRenovaciju(renovacija);
                 RenoviranjeOprema();
+                this.NavigationService.GoBack();
             }
 
         }
