@@ -31,9 +31,7 @@ public class BazaSastojaka
    {
         if (File.Exists(fileLocation))
         {
-            List<string> nazivSastojka = new List<string>();
-            nazivSastojka.Add(sastojak.Ime);
-            File.AppendAllLines(fileLocation, nazivSastojka);
+            File.AppendAllText(fileLocation, sastojak.Ime);
         }
         else
         {

@@ -334,6 +334,7 @@ public class BazaPregleda
             bool isValid = true;
             foreach (Pregled zakazani in SviBuduciPreglediKojeLekarIma(l.Jmbg))
             {
+                // TODO : refaktorisati (moze se pozvati metoda PreklapanjeTerminaPregleda(Pregled predlozeniPregled, Pregled zakazaniPregled) )
                 if (predlozeni.VremePocetkaPregleda == zakazani.VremePocetkaPregleda)
                 {
                     isValid = false;
