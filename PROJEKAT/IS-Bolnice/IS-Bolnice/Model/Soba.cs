@@ -4,6 +4,8 @@
 // Purpose: Definition of Class Soba
 
 using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 
 public class Soba
 {
@@ -64,6 +66,33 @@ public class Soba
         {
             return true;
         }
+        return false;
+    }
+
+    public bool TrenutnoPodRenoviranjem()
+    {
+        BazaRenovacija bazaRenovacija = new BazaRenovacija();
+        List<Renovacija> renovacijeSobe = bazaRenovacija.SveRenovacijeJedneSobe(this);
+
+        foreach (Renovacija renovacija in renovacijeSobe)
+        {
+            if (PoklapanjeTerminaRenovacije(renovacija))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool PoklapanjeTerminaRenovacije(Renovacija renovacija)
+    {
+        DateTime trenutnoVreme = DateTime.Now;
+        if (renovacija.DatumPocetka <= trenutnoVreme && renovacija.DatumKraja >= trenutnoVreme)
+        {
+            return true;
+        }
+
         return false;
     }
 

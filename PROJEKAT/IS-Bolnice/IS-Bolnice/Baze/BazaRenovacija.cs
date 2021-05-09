@@ -40,6 +40,22 @@ public class BazaRenovacija
         return ret;
     }
 
+    public List<Renovacija> SveRenovacijeJedneSobe(Soba soba)
+    {
+        List<Renovacija> sveRenovacije = SveRenovacije();
+        List<Renovacija> renovacijeJedneSobe = new List<Renovacija>();
+
+        foreach (Renovacija renovacija in sveRenovacije)
+        {
+            if (renovacija.ProstorijaZaRenoviranje.Jednaka(soba))
+            {
+                renovacijeJedneSobe.Add(renovacija);
+            }
+        }
+
+        return renovacijeJedneSobe;
+    }
+
     public Renovacija ParseFromString(string line)
     {
 

@@ -517,8 +517,7 @@ public class BazaPregleda
             {
                 if (p.Pacijent.Jmbg.Equals(pacijent.Jmbg))
                 {
-                    p.Pacijent.Prezime = pacijent.Prezime;
-                    p.Pacijent.Ime = pacijent.Ime;
+                    p.Pacijent = pacijent;
                     break;
                 }
             }

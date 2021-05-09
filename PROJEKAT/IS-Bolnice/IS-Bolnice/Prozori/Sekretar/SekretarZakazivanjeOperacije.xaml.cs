@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
@@ -40,18 +30,8 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             lekari = bazaLekara.LekariSpecijalisti();
             bolnice = bazaBolnica.SveBolnice();
-            sobe = new List<Soba>();
+            sobe = bazaBolnica.SveOperacioneSaleOveBolnice();
             operacija = new Operacija();
-            List<Soba> sveSobe = bolnice[0].Soba; // za sada se podrazumeva da postoji samo jedna bolnica
-
-            foreach(Soba s in sveSobe)
-            {
-                // samo operacione sale koje nisu obrisane i koje se trenutno ne renoviraju
-                if (!(s.PodRenoviranje || s.Obrisano) && (s.Tip == RoomType.operacionaSala))
-                {
-                    sobe.Add(s);
-                }
-            }
 
             pacijent = p;
             operacija.Pacijent = p;
@@ -110,7 +90,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1 && operacija.VremePocetkaOperacije != null)
+            if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1)
             {
                 bazaOperacija.ZakaziOperaciju(operacija);
                 this.Close();

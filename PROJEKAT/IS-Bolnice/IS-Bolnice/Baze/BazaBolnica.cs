@@ -146,7 +146,7 @@ public class BazaBolnica
 
         foreach (Soba soba in sveSobe)
         {
-            if (soba.Tip.Equals(RoomType.operacionaSala) && !soba.Obrisano)
+            if (soba.Tip.Equals(RoomType.operacionaSala) && !soba.Obrisano && !soba.TrenutnoPodRenoviranjem())
             {
                 operacioneSale.Add(soba);
             }

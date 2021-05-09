@@ -396,8 +396,7 @@ public class BazaOperacija
                 {
                     if (o.Pacijent.Jmbg.Equals(p.Jmbg))
                     {
-                        o.Pacijent.Prezime = p.Prezime;
-                        o.Pacijent.Ime = p.Ime;
+                        o.Pacijent = p;
                         break;
                     }
                 }
@@ -408,8 +407,8 @@ public class BazaOperacija
                     {
                         if (delovi[4].Equals(s.Id))
                         {
-                            o.Soba.Tip = s.Tip;
-                            o.Soba.Id = s.Id;
+                            o.Soba = s;
+                            break;
                         }
                     }
                 }
