@@ -1,0 +1,30 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+      xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.RenoviranjePage"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="RenoviranjePage" Background="White">
+
+    <Grid>
+        <Label x:Name="label" FontSize="38" Content="Renoviranje prostorije" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Height="65" Width="387"/>
+        <Label Content="Izaberite datum početka:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,158,0,0" VerticalAlignment="Top" Width="311"/>
+        <Label Content="Izaberite datum kraja:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,287,0,0" VerticalAlignment="Top" Width="311"/>
+        <DatePicker BorderThickness="5" FontSize="26" x:Name="datePicker_pocetak"  Margin= "108,213,103,439" SelectedDate="{x:Static System:DateTime.Now}"/>
+        <DatePicker BorderThickness="5" FontSize="26" x:Name="datePicker_kraj" Margin= "108,371,103,281" SelectedDate="{x:Static System:DateTime.Now}"/>
+        <Label Content="Oprema se:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,461,0,0" VerticalAlignment="Top" Width="146"/>
+        <ComboBox x:Name="comboBox_oprema" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="202,463,0,0" VerticalAlignment="Top" Width="273" >
+
+            <ComboBoxItem IsSelected="True" Content="Baca"/>
+            <ComboBoxItem Content="Prebacuje u magacin"/>
+            <ComboBoxItem Content="Ostavlja u prostoriji"/>
+
+        </ComboBox>
+        <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="48,589,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="291,589,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+
+    </Grid>
+</Page>

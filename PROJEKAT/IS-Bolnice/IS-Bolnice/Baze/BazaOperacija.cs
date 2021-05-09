@@ -120,6 +120,20 @@ public class BazaOperacija
         return null;
     }
 
+    public List<Operacija> SveOperacijeUOdabranojSali(string idSale)
+    {
+        List<Operacija> sveOperacije = SveSledeceOperacije();
+        List<Operacija> operacijeUOdabranojSali = new List<Operacija>();
+        foreach (Operacija operacija in sveOperacije)
+        {
+            if (operacija.Soba.Id.Equals(idSale))
+            {
+                operacijeUOdabranojSali.Add(operacija);
+            }
+        }
+        return operacijeUOdabranojSali;
+    }
+
     // TRAJANJE TERMINA PREGLEDA JE IZRAZENO U SATIMA
     private List<Operacija> SlobodneHitneOperacijeLekaraSaTrajanjem(Lekar lekar, double trajanjePregleda)
     {

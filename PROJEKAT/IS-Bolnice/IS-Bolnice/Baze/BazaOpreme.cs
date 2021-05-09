@@ -22,23 +22,8 @@ public class BazaOpreme
                     string[] delovi = line.Split('#');
                     p.Id = delovi[0];
                     p.Naziv = delovi[1];
-                    if (delovi[3].Equals("0"))
-                    {
-                        p.Tip = TipOpreme.staticka;
-                    }
-                    else
-                    {
-                        p.Tip = TipOpreme.dinamicka;
-                    }
-                    if (delovi[2] == "False")
-                    {
-                        p.Obrisano = false;
-                    }
-                    else
-                    {
-                        p.Obrisano = true;
-                    }
-
+                    p.Tip = ParseStringToTip(delovi[3]);
+                    p.Obrisano = ParseStringToBool(delovi[2]);
                     ret.Add(p);
                 }
             }
@@ -49,6 +34,29 @@ public class BazaOpreme
             }
             return ret;
         }
+
+    public TipOpreme ParseStringToTip(string tekst) {
+        if (tekst.Equals("0"))
+        {
+            return TipOpreme.staticka;
+        }
+        else
+        {
+            return TipOpreme.dinamicka;
+        }
+    }
+
+    public bool ParseStringToBool(string tekst)
+    {
+        if (tekst.Equals("False"))
+        { 
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
         public Predmet GetPredmet(string idOpreme)
         {
@@ -65,27 +73,14 @@ public class BazaOpreme
             return predmet;
         }
 
-        public void KreirajOpremu(List<Predmet> predmeti)
+        public void KreirajOpremu(Predmet predmet)
         {
             if (File.Exists(fileLocation))
             {
                 List<string> tekst = new List<string>();
-                string oprema;
-                foreach (Predmet p in predmeti)
-                {
-                    oprema = p.Id + "#" + p.Naziv + "#" + p.Obrisano + "#";
-                    if (p.Tip == TipOpreme.staticka)
-                    {
-                        oprema = oprema + "0#";
-                    }
-                    else
-                    {
-                        oprema = oprema + "1#";
-                    }
-                    tekst.Add(oprema);
-                }
-
-                File.WriteAllLines(fileLocation, tekst);
+                string oprema = ParseToString(predmet);
+                tekst.Add(oprema);
+                File.AppendAllLines(fileLocation, tekst);
             }
             else
             {
@@ -94,14 +89,36 @@ public class BazaOpreme
             }
         }
 
+        public string ParseToString(Predmet predmet) {
+            string oprema = predmet.Id + "#" + predmet.Naziv + "#" + predmet.Obrisano + "#";
+            if (predmet.Tip == TipOpreme.staticka)
+            {
+                oprema = oprema + "0#";
+            }
+            else
+            {
+                oprema = oprema + "1#";
+            }
+            return oprema;
+        }
+
         public void IzmeniOpremu(Predmet predmet)
         {
-            throw new NotImplementedException();
+            ObrisiOpremu(predmet);
+            KreirajOpremu(predmet);
         }
 
         public void ObrisiOpremu(Predmet predmet)
         {
-            throw new NotImplementedException();
+            List<Predmet> svaOprema = SvaOprema();
+            List<string> tekst = new List<string>();
+            foreach (Predmet oprema in svaOprema) {
+                if (!oprema.Id.Equals(predmet.Id)) {
+                    string linija = ParseToString(oprema);
+                    tekst.Add(linija);
+                }
+            }
+            File.WriteAllLines(fileLocation, tekst);
         }
 
 

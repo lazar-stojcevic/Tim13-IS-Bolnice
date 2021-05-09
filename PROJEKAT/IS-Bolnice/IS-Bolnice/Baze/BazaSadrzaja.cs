@@ -39,6 +39,16 @@ public class BazaSadrzaja
         return ret;
     }
 
+    public bool PostojiOpremaUBolnici(string idPredmeta) {
+        List<SadrzajSobe> sadrzajSoba = SviSadrzaji();
+        foreach (SadrzajSobe sadrzaj in sadrzajSoba) {
+            if (sadrzaj.Predmet.Id.Equals(idPredmeta)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public SadrzajSobe ParseFromString(string line) {
 
         string[] niz = line.Split('#');
@@ -59,7 +69,7 @@ public class BazaSadrzaja
         return s;
     }
 
-    public List<SadrzajSobe> SadrzajiUPrenosu()
+    private List<SadrzajSobe> SadrzajiUPrenosu()
     {
         List<SadrzajSobe> sviSadrzaji = SviSadrzaji();
         List<SadrzajSobe> sadrzajiUPrenosu = new List<SadrzajSobe>();
@@ -91,7 +101,7 @@ public class BazaSadrzaja
         }
     }
 
-    public bool DodajOpremuNaStanje(SadrzajSobe sadrzajUPrenosu)
+    private bool DodajOpremuNaStanje(SadrzajSobe sadrzajUPrenosu)
     {
         bool opremaPostojiUProstoriji = false;
         List<SadrzajSobe> novaSoba = GetSadrzajSobe(sadrzajUPrenosu.NovaSoba.Id);
@@ -114,7 +124,7 @@ public class BazaSadrzaja
         List<SadrzajSobe> sadrzajSobe = new List<SadrzajSobe>();
         List<SadrzajSobe> sadrzajSvihSoba = SviSadrzaji() ;
         foreach (SadrzajSobe sadrzaj in sadrzajSvihSoba) {
-            if (sadrzaj.Soba.Id.Equals(idSobe)) {
+            if (sadrzaj.Soba.Id.Equals(idSobe) && sadrzaj.NovaSoba == null) {
                 sadrzajSobe.Add(sadrzaj);
             }
         }

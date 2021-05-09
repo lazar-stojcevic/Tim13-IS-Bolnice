@@ -6,3 +6,4 @@
 6#sto#True#0#
 100#stapic#True#1#
 55#stolica#True#0#
+15#spric#False#1#

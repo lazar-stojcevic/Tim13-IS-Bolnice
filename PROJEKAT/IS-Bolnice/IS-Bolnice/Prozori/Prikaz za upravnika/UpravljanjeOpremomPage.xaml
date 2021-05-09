@@ -22,5 +22,6 @@
                 <Image Source="/Slike/Upravnik/heart.png" Height="68" Width="91" />
             </StackPanel>
         </Button>
+        <TextBox x:Name="search" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="279,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" TextChanged="search_TextChanged"/>
     </Grid>
 </Page>

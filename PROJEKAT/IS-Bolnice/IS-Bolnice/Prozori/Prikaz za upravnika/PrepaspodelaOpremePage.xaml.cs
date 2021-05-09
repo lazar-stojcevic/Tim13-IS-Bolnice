@@ -124,7 +124,7 @@ namespace IS_Bolnice.Prozori
             {
                 if (predmet.Predmet.Id.Equals(GetIDOpreme(smer)))
                 {
-                    if (predmet.Kolicina > Int32.Parse(textBox.Text))
+                    if (predmet.Kolicina >= Int32.Parse(textBox.Text))
                     {
                         predmet.Kolicina = predmet.Kolicina - Int32.Parse(textBox.Text);
                         bazaSadrzaja.IzmeniSadrzaj(predmet);

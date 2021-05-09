@@ -30,7 +30,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             Predmet noviPredmet = new Predmet();
             noviPredmet.Id = id_txt.Text;
             noviPredmet.Naziv = naziv_txt.Text;
-            if (tip_opreme_txt.SelectedIndex == 0)
+            if (tip_opreme_txt.SelectedIndex == 1)
             {
                 noviPredmet.Tip = TipOpreme.staticka;
             }
@@ -39,9 +39,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 noviPredmet.Tip = TipOpreme.dinamicka;
             }
             BazaOpreme baza = new BazaOpreme();
-            List<Predmet> lista = baza.SvaOprema();
-            lista.Add(noviPredmet);
-            baza.KreirajOpremu(lista);
+            baza.KreirajOpremu(noviPredmet);
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);
         }

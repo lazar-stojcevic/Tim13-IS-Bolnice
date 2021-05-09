@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Baze\BazaBolnica.cs" />
     <Compile Include="Baze\BazaIzmena.cs" />
     <Compile Include="Baze\BazaIzvestaja.cs" />
     <Compile Include="Baze\BazaLekova.cs" />
@@ -182,6 +183,9 @@
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\PreraspodelaStatickeOpremeWindow.xaml.cs">
       <DependentUpon>PreraspodelaStatickeOpremeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\RenoviranjePage.xaml.cs">
+      <DependentUpon>RenoviranjePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\SalePage.xaml.cs">
       <DependentUpon>SalePage.xaml</DependentUpon>
@@ -400,6 +404,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\RenoviranjePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\SalePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -530,7 +538,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Baze\BazaBolnica.cs" />
     <Compile Include="Baze\BazaLekara.cs" />
     <Compile Include="Baze\BazaOperacija.cs" />
     <Compile Include="Baze\BazaPacijenata.cs" />
@@ -695,6 +702,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\odgovorLekovi.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\renoviranje.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

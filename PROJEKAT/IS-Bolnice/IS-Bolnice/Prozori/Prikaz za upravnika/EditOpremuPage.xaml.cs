@@ -24,28 +24,34 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         {
             InitializeComponent();
             id_txt.Text = selectedID;
+            BazaOpreme baza = new BazaOpreme();
+            Predmet izmenjenPredmet = baza.GetPredmet(selectedID);
+            naziv_txt.Text = izmenjenPredmet.Naziv;
+            if (izmenjenPredmet.Tip == TipOpreme.dinamicka)
+            {
+                tip_opreme_txt.SelectedIndex = 0;
+            }
+            else {
+                tip_opreme_txt.SelectedIndex = 1;
+            }
+
         }
 
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
             BazaOpreme baza = new BazaOpreme();
             List<Predmet> lista = baza.SvaOprema();
-            foreach (Predmet p in lista)
+            Predmet izmenjenPredmet = baza.GetPredmet(id_txt.Text);
+            izmenjenPredmet.Naziv = naziv_txt.Text;
+            if (tip_opreme_txt.SelectedIndex == 1)
             {
-                if (p.Id == id_txt.Text)
-                {
-                    p.Naziv = naziv_txt.Text;
-                    if (tip_opreme_txt.SelectedIndex == 0)
-                    {
-                        p.Tip = TipOpreme.staticka;
-                    }
-                    else
-                    {
-                        p.Tip = TipOpreme.dinamicka;
-                    }
-                }
+                izmenjenPredmet.Tip = TipOpreme.staticka;
             }
-            baza.KreirajOpremu(lista);
+            else
+            {
+                izmenjenPredmet.Tip = TipOpreme.dinamicka;
+            }
+            baza.IzmeniOpremu(izmenjenPredmet);
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);
         }
@@ -58,33 +64,26 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            /*MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete opremu?", "", MessageBoxButton.YesNo);
+            MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete opremu?", "", MessageBoxButton.YesNo);
             if (resultat == MessageBoxResult.Yes)
             {
                 BazaOpreme baza = new BazaOpreme();
-                List<Predmet> predmeti = new List<Predmet>();
-                predmeti = baza.SvaOprema();
-                string tekst = (string)lvDataBindin.SelectedItem;
-                string[] niz = tekst.Split(' ');
-                if (!this.CheckNumber(niz[1]))
+                BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
+                List<Predmet> lista = baza.SvaOprema();
+                Predmet izmenjenPredmet = baza.GetPredmet(id_txt.Text);
+                if (!bazaSadrzaja.PostojiOpremaUBolnici(id_txt.Text))
                 {
-                    foreach (Predmet p in predmeti)
-                    {
-                        if (p.Id.Equals(niz[1]))
-                        {
-                            p.Obrisano = true;
-                            break;
-                        }
-
-                    }
-                    baza.KreirajOpremu(predmeti);
+                    izmenjenPredmet.Obrisano = true;
+                    baza.IzmeniOpremu(izmenjenPredmet);
  
                 }
                 else
                 {
                     MessageBox.Show("Oprema postoji na stanju, ne može biti obrisana!");
                 }
-            }*/
+            }
+            Page upravljanje = new UpravljanjeOpremomPage();
+            this.NavigationService.Navigate(upravljanje);
         }
     }
 }

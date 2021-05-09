@@ -48,22 +48,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bool svaOpremaSelektovana = false;
-            TipOpreme tip = TipOpreme.dinamicka;
-            switch (tip_opreme_txt.SelectedIndex)
-            {
-                case 0:
-                    svaOpremaSelektovana = true;
-                    break;
-                case 1:
-                    svaOpremaSelektovana = false;
-                    tip = TipOpreme.dinamicka;
-                    break;
-                default:
-                    svaOpremaSelektovana = false;
-                    tip = TipOpreme.staticka;
-                    break;
-            }
+            bool svaOpremaSelektovana = SelectovanaSvaOprema();
+            TipOpreme tip = SelektovaniTipOpreme();
             BazaOpreme baza = new BazaOpreme();
             List<Predmet> predmeti = new List<Predmet>();
             predmeti = baza.SvaOprema();
@@ -118,6 +104,24 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 MessageBox.Show("Nije selektovan deo opreme za nabavku");
             }
         }
+        private bool SelectovanaSvaOprema()
+        {
+            if (tip_opreme_txt.SelectedIndex == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private TipOpreme SelektovaniTipOpreme()
+        {
+            if (tip_opreme_txt.SelectedIndex == 2)
+            {
+                return TipOpreme.staticka;
+            }
+            return TipOpreme.dinamicka;
+        }
+
 
         private bool OpremaPostojiUMagaciju(List<SadrzajSobe> sadrzajSobe) {
             bool postoji = false;
@@ -151,6 +155,23 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BazaOpreme baza = new BazaOpreme();
+            List<Predmet> predmeti = new List<Predmet>();
+            predmeti = baza.SvaOprema();
+            List<string> tekst = new List<string>();
+            foreach (Predmet predmet in predmeti)
+            {
+
+                if (predmet.Obrisano == false && predmet.Naziv.ToLower().Contains(search.Text.ToLower()))
+                {
+                    tekst.Add("ID: " + predmet.Id + " Naziv: " + predmet.Naziv + " Tip: " + predmet.Tip);
+                }
+            }
+            listBox.ItemsSource = tekst;
         }
     }
 }

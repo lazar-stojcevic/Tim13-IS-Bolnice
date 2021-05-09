@@ -7,8 +7,17 @@ using System;
 
 public class Renovacija
 {
-   private DateTime datumPocetka;
-   private DateTime datumKraja;
-   private bool hitno;
+    public DateTime DatumPocetka { get; set; }
+    public DateTime DatumKraja { get; set; }
+
+    public Soba ProstorijaZaRenoviranje { get; set; }
+
+    public Renovacija() { }
+
+    public Renovacija(DateTime datumPocetak, DateTime datumKraja, Soba prostorija) {
+        DatumPocetka = datumPocetak;
+        DatumKraja = datumKraja;
+        ProstorijaZaRenoviranje = prostorija;
+    }
 
 }

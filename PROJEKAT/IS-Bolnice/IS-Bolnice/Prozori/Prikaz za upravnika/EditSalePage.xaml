@@ -24,12 +24,17 @@
             <ComboBoxItem>Magacin</ComboBoxItem>
 
         </ComboBox>
-        <Button x:Name="Izmeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="41,519,0,0" VerticalAlignment="Top" Width="179" Click="Izmeni_btn_Click"/>
-        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,519,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Button x:Name="Izmeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="41,476,0,0" VerticalAlignment="Top" Width="179" Click="Izmeni_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,476,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
         <Label x:Name="label" FontSize="38" Content="Izmena prostorije" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Height="65" Width="321"/>
-        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="DeleteButton_Click" Margin="367,27,32,590">
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="DeleteButton_Click" Margin="195,569,204,48">
             <StackPanel>
                 <Image Source="/Slike/Upravnik/garbage-can.png" Height="65" Width="85" />
+            </StackPanel>
+        </Button>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="RenoviranjeButton_Click" Margin="367,27,32,590">
+            <StackPanel>
+                <Image Source="/Slike/Upravnik/renovation.png" Height="65" Width="85" />
             </StackPanel>
         </Button>
     </Grid>

@@ -139,6 +139,19 @@ public class BazaPregleda
         return sviSkorasnjiPregledi;
     }
 
+    public List<Pregled> SviPreglediUOdabranojSobi(string idSobe)
+    {
+        List<Pregled> preglediUSobi = new List<Pregled>();
+        foreach (Pregled pregled in SviPregledi())
+        {
+            if (pregled.Lekar.Ordinacija.Id.Equals(idSobe))
+            {
+                preglediUSobi.Add(pregled);
+            }
+        }
+        return preglediUSobi;
+    }
+
     private List<Pregled> SviTerminiURadnomVremenuLekara(Lekar lekar, List<Pregled> pregledi)
     {
         DateTime najbliziTermin = NajbliziTermin();
