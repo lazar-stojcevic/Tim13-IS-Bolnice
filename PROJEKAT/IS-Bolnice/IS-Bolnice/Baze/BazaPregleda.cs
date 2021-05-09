@@ -205,7 +205,7 @@ public class BazaPregleda
 
         foreach (Pregled predlozeniPregled in ListaSlobodnihTerminaPregledaTokomRadnogVremenaLekara(lekar))
         {
-            if (TerminSePreklapaKodLekara(jmbgLekara, predlozeniPregled))
+            if (!TerminSePreklapaKodLekara(jmbgLekara, predlozeniPregled))
             {
                 validni.Add(predlozeniPregled);
             }
