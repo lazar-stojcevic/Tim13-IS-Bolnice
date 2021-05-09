@@ -157,11 +157,14 @@ public class BazaPregleda
         DateTime najbliziTermin = NajbliziTermin();
         List<Pregled> preglediURadnomVremenu = new List<Pregled>();
 
-        // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
-        int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
+        int brojDanaRada = 0;
+        if (!RadnoVremeLekaraUJednomDanu(lekar))
+        {
+            brojDanaRada = 1;   // tada lekar radi i sutradan
+        }
 
         DateTime pocetakRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + razlika, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + brojDanaRada, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
         foreach (Pregled pregled in pregledi)
         {
             if (pocetakRadnogVremena <= pregled.VremePocetkaPregleda && krajRadnogVremena >= pregled.VremeKrajaPregleda)
@@ -170,6 +173,19 @@ public class BazaPregleda
             }
         }
         return preglediURadnomVremenu;
+    }
+
+    private bool RadnoVremeLekaraUJednomDanu(Lekar lekar)
+    {
+        // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
+        int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
+        if (razlika != 0)
+        {
+            // ako se radno vreme ne zavrsava istog dana tada on radi i u narednom danu
+            return false;
+        }
+
+        return true;
     }
 
     private List<Pregled> SlobodniPreglediLekara(Lekar lekar, List<Pregled> pregledi)

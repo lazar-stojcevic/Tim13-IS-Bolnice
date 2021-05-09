@@ -65,7 +65,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             BazaOperacija bazaOperacija = new BazaOperacija();
 
             OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
-            OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
+            OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
         }
 
         private void OsvezavanjePrikazaZauzetihPregleda(List<Pregled> zauzetiPregledi)
@@ -217,7 +217,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     bazaOperacija.OdloziOperaciju(operacijaZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
-                OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteHitneOperacijeLekaraOdredjeneOblasti(oblastLekara));
+                OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
             }
         }
     }

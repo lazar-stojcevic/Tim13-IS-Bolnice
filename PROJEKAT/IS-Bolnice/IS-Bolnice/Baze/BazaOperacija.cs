@@ -18,7 +18,7 @@ public class BazaOperacija
     private static int BROJ_MINUTA_ZA_HITAN_TERMIN = 60;
     private static int DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA = 6;
 
-    public List<Operacija> ZauzeteHitneOperacijeLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast)
+    public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara prosledjenaOblast)
     {
         List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
         List<Operacija> skorasnjeOperacijeLekara = new List<Operacija>();
@@ -26,7 +26,8 @@ public class BazaOperacija
         foreach (Lekar lekar in sviLekariOdredjeneOblasti)
         {
             List<Operacija> naredneOperacijeLekara = SveSledeceOperacijeZaLekara(lekar.Jmbg);
-            skorasnjeOperacijeLekara.AddRange(OperacijeNarednihSatVremena(naredneOperacijeLekara));
+            List<Operacija> operacijeKojeNisuHitne = SveOperacijeKojeNisuHitne(naredneOperacijeLekara);
+            skorasnjeOperacijeLekara.AddRange(OperacijeNarednihSatVremena(operacijeKojeNisuHitne));
             if (skorasnjeOperacijeLekara.Count > DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA)
             {
                 return skorasnjeOperacijeLekara;
@@ -74,6 +75,21 @@ public class BazaOperacija
             }
         }
         return operacije;
+    }
+
+    private List<Operacija> SveOperacijeKojeNisuHitne(List<Operacija> operacije)
+    {
+        List<Operacija> operacijeKojeNisuHitne = new List<Operacija>();
+
+        foreach (Operacija operacija in operacije)
+        {
+            if (!operacija.Hitna)
+            {
+                operacijeKojeNisuHitne.Add(operacija);
+            }
+        }
+
+        return operacijeKojeNisuHitne;
     }
 
     private bool MozeDaSeZakaze(Operacija operacija)
@@ -174,11 +190,14 @@ public class BazaOperacija
         DateTime najbliziTermin = NajbliziTermin();
         List<Operacija> operacijeURadnomVremenu = new List<Operacija>();
 
-        // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
-        int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
+        int brojDanaRada = 0;
+        if (!RadnoVremeLekaraUJednomDanu(lekar))
+        {
+            brojDanaRada = 1;   // tada lekar radi i sutradan
+        }
 
         DateTime pocetakRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + razlika, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + brojDanaRada, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
         foreach (Operacija operacija in operacije)
         {
             if (pocetakRadnogVremena <= operacija.VremePocetkaOperacije && krajRadnogVremena >= operacija.VremeKrajaOperacije)
@@ -189,14 +208,31 @@ public class BazaOperacija
         return operacijeURadnomVremenu;
     }
 
-    private bool OperacijaURadnomVremenuLekara(Lekar lekar, Operacija operacija)
+    private bool RadnoVremeLekaraUJednomDanu(Lekar lekar)
     {
         // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
         int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
+        if (razlika != 0)
+        {
+            // ako se radno vreme ne zavrsava istog dana tada on radi i u narednom danu
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool OperacijaURadnomVremenuLekara(Lekar lekar, Operacija operacija)
+    {
+        int brojDanaRada = 0;
+        if (!RadnoVremeLekaraUJednomDanu(lekar))
+        {
+            brojDanaRada = 1;   // tada lekar radi i sutradan
+        }
+
         DateTime danOperacije = operacija.VremePocetkaOperacije;
 
         DateTime pocetakRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day + razlika, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+        DateTime krajRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day + brojDanaRada, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
 
         if (pocetakRadnogVremena <= operacija.VremePocetkaOperacije && krajRadnogVremena >= operacija.VremeKrajaOperacije)
         {
