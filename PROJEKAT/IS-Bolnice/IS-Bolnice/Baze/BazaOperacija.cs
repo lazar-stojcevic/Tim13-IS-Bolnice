@@ -506,7 +506,7 @@ public class BazaOperacija
 
         return operacije;
     }
-    /* OVO NE RADI
+    
     public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
     {
         List<Operacija> sledeceOperacije = new List<Operacija>();
@@ -520,8 +520,8 @@ public class BazaOperacija
         }
         return sledeceOperacije;
     }
-    */
     
+    /*
     public List<Operacija> SveSledeceOperacijeZaLekara(string sifra)
     {
         List<Operacija> ret = new List<Operacija>();
@@ -579,5 +579,5 @@ public class BazaOperacija
         }
         return ret;
     }
-
+    */
 }
