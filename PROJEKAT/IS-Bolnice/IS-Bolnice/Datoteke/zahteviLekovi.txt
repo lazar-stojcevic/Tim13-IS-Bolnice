@@ -1,2 +1,1 @@
-5555#Propanolol#5mg#1#Penicilin,Laktoza,#1/2/#123-430-666-
-4444#Neki nebitni lek#500mg#1#Paracetamol,Laktoza,#1/#123-430-666-
+4444#Neki nebitni lek#500mg#1#Paracetamol,Laktoza,#1//#123-430-666-

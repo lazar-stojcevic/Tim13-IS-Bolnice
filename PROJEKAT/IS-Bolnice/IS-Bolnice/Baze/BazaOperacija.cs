@@ -301,9 +301,7 @@ public class BazaOperacija
     public List<Operacija> PonudjeniSlobodniTerminiLekara(string jmbgLekara, string idSale)
     {
         //Baze
-        BazaPregleda  bazaPregleda = new BazaPregleda();
         BazaLekara bazaLekara = new BazaLekara();
-        BazaBolnica bazaBolnica = new BazaBolnica();
         //Lekar
         Lekar lekar = new Lekar();
         List<Lekar> lekari = bazaLekara.SviLekari();
@@ -337,6 +335,7 @@ public class BazaOperacija
                 o.VremePocetkaOperacije = pocetakIntervala;
                 pocetakIntervala = pocetakIntervala.AddMinutes(10);
                 o.VremeKrajaOperacije = o.VremePocetkaOperacije.AddMinutes(45);
+                o.Soba = new Soba(idSale);
                 slobodni.Add(o);
             }
         }
@@ -410,6 +409,7 @@ public class BazaOperacija
                         if (delovi[4].Equals(s.Id))
                         {
                             o.Soba.Tip = s.Tip;
+                            o.Soba.Id = s.Id;
                         }
                     }
                 }
@@ -506,7 +506,7 @@ public class BazaOperacija
 
         return operacije;
     }
-
+    /* OVO NE RADI
     public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
     {
         List<Operacija> sledeceOperacije = new List<Operacija>();
@@ -520,13 +520,12 @@ public class BazaOperacija
         }
         return sledeceOperacije;
     }
-
-    /*
+    */
+    
     public List<Operacija> SveSledeceOperacijeZaLekara(string sifra)
     {
         List<Operacija> ret = new List<Operacija>();
         BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        BazaBolnica bazaBolnica = new BazaBolnica();
         List<Bolnica> bolnice = bazaBolnica.SveBolnice();
         List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
         if (File.Exists(@"..\..\Datoteke\operacije.txt"))
@@ -580,5 +579,5 @@ public class BazaOperacija
         }
         return ret;
     }
-    */
+
 }
