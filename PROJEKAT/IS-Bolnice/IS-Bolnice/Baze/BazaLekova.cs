@@ -12,63 +12,82 @@ public class BazaLekova
    public List<Lek> SviLekovi()
    {
         List<Lek> ret = new List<Lek>();
-        if (File.Exists(@"..\..\Datoteke\lekovi.txt"))
-        {
-            string[] lines = File.ReadAllLines(@"..\..\Datoteke\lekovi.txt");
-            foreach (string line in lines)
-            {
-                Lek p = new Lek();
-                string[] delovi = line.Split('#');
-                p.Sifra = delovi[0];
-                p.Ime = delovi[1];
-                p.Opis = delovi[2];
-                if (delovi[3].Equals("1"))
-                {
-                    p.PotrebanRecept = true;
-                }
-                else
-                {
-                    p.PotrebanRecept = false;
-                }
-
-                string alergeniSvi = delovi[4];
-                if (!alergeniSvi.Equals("")) 
-                 {
-                    string[] alergen = alergeniSvi.Split(',');
-                    foreach (string a in alergen)
-                    {
-                        if (!a.Equals(""))
-                        {
-                            Sastojak s = new Sastojak(a);
-                            p.Alergeni.Add(s);
-                        }
-                    }
-                }
-
-                string zamenskiLekoviSvi = delovi[5];
-                if (!zamenskiLekoviSvi.Equals(""))
-                {
-                    string[] zameskiLek = zamenskiLekoviSvi.Split('/');
-                    foreach (string deo in zameskiLek)
-                    {
-                        if (deo.Equals("")) continue;
-                        Lek lek = new Lek(deo);
-                        p.ZamenskiLekovi.Add(lek);
-                    }
-                }
-
-                Console.WriteLine(line);
-                ret.Add(p);
-            }
-        }
-        else
-        {
-            Console.WriteLine("Nista");
-        }
+        KreirajLekove(ret);
+       
         return ret;
     }
 
-    public Lek GetLek(string sifraLeka)
+   private static void KreirajLekove(List<Lek> ret)
+   {
+       if (File.Exists(@"..\..\Datoteke\lekovi.txt"))
+       {
+           string[] lines = File.ReadAllLines(@"..\..\Datoteke\lekovi.txt");
+           foreach (string line in lines)
+           {
+               Lek p = new Lek();
+               string[] delovi = line.Split('#');
+
+               p.Sifra = delovi[0];
+               p.Ime = delovi[1];
+               p.Opis = delovi[2];
+
+               PostaviDaLiJePotrebanRecept(delovi, p);
+
+               KreirajAlergene(delovi, p);
+
+               KreirajZamenskeLekove(delovi, p);
+
+               Console.WriteLine(line);
+               ret.Add(p);
+           }
+       }
+   }
+
+   private static void PostaviDaLiJePotrebanRecept(string[] delovi, Lek p)
+   {
+       if (delovi[3].Equals("1"))
+       {
+           p.PotrebanRecept = true;
+       }
+       else
+       {
+           p.PotrebanRecept = false;
+       }
+   }
+
+   private static void KreirajAlergene(string[] delovi, Lek p)
+   {
+       string alergeniSvi = delovi[4];
+       if (!alergeniSvi.Equals(""))
+       {
+           string[] alergen = alergeniSvi.Split(',');
+           foreach (string a in alergen)
+           {
+               if (!a.Equals(""))
+               {
+                   Sastojak s = new Sastojak(a);
+                   p.Alergeni.Add(s);
+               }
+           }
+       }
+   }
+
+   private static void KreirajZamenskeLekove(string[] delovi, Lek p)
+   {
+       string zamenskiLekoviSvi = delovi[5];
+       if (!zamenskiLekoviSvi.Equals(""))
+       {
+           string[] zameskiLek = zamenskiLekoviSvi.Split('/');
+           foreach (string deo in zameskiLek)
+           {
+               if (deo.Equals("")) continue;
+               Lek lek = new Lek(deo);
+               p.ZamenskiLekovi.Add(lek);
+           }
+       }
+   }
+
+   public Lek GetLek(string sifraLeka)
     {
         List<Lek> lekovi = SviLekovi();
         foreach (Lek lek in lekovi)
