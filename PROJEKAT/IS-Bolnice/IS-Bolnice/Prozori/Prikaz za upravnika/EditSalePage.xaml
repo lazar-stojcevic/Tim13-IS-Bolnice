@@ -13,7 +13,7 @@
         <Label Content="Tip sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,240,0,0" VerticalAlignment="Top" Width="153" RenderTransformOrigin="0.528,1.613"/>
         <Label Content="Sprat:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,306,0,0" VerticalAlignment="Top" Width="153"/>
         <Label Content="Kvadratura sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,378,0,0" VerticalAlignment="Top" Width="219"/>
-        <TextBox x:Name="id_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap" Text="Upisite ID sobe" VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="id_txt" IsReadOnly="True" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap" Text="Upisite ID sobe" VerticalAlignment="Top" Width="239"/>
         <TextBox x:Name="sprat_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,306,0,0" TextWrapping="Wrap" Text="Upisite sprat na kom se soba nalazi" VerticalAlignment="Top" Width="239"/>
         <TextBox x:Name="kvadratura_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,378,0,0" TextWrapping="Wrap" Text="Upisite kvadraturu sobe" VerticalAlignment="Top" Width="239"/>
         <ComboBox x:Name="tip_sobe_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="195,242,0,0" VerticalAlignment="Top" Width="273">

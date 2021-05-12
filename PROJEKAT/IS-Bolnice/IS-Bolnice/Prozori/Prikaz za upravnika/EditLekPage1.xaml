@@ -12,7 +12,7 @@
         <Label x:Name="label" FontSize="38" Content="Izmena leka" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="65" Width="383"/>
         <Label Content="ID leka:" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="10,104,0,0" VerticalAlignment="Top" Width="210"/>
         <Label Content="Naziv leka:" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="10,205,0,0" VerticalAlignment="Top" Width="210"/>
-        <TextBox x:Name="id_txt" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,104,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239" TextChanged="id_txt_TextChanged"/>
+        <TextBox x:Name="id_txt" IsReadOnly="True" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,104,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239" TextChanged="id_txt_TextChanged"/>
         <TextBox x:Name="naziv_txt" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="naziv_txt_TextChanged"/>
         <Label Content="Opis leka:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,283,0,0" VerticalAlignment="Top" Width="210"/>
         <TextBox x:Name="opis_txt" FontSize="28" HorizontalAlignment="Left" Height="106" Margin="21,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="447" TextChanged="opis_txt_TextChanged"/>
