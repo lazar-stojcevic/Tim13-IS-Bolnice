@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="SekretarAzuriranjeAlergena" Height="450" Width="500">
+        Title="SekretarAzuriranjeAlergena" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Alergeni za pacijenta " HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.153,0.707" FontWeight="Bold"/>
         <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="23" Margin="151,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>

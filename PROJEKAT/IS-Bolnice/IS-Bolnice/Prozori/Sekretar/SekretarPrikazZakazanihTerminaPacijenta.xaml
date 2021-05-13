@@ -7,7 +7,7 @@
         xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
         mc:Ignorable="d"
         Title="Prikaz termina" Height="650" Width="600"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Termini za pacijenta " HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.153,0.707" FontWeight="Bold"/>
         <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="25" Margin="151,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>

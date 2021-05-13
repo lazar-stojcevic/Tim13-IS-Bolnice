@@ -11,12 +11,42 @@
     <Grid>
         <StackPanel>
             <Menu>
-                <MenuItem Header="Meni1"/>
+                <MenuItem Header="Kreiranje">
+                    <MenuItem Header="Novi pacijent" ToolTip="Dodavanje novog pacijenta" Click="MenuItem_Click_Novi_Pacijent"></MenuItem>
+                    <MenuItem Header="Novi gostujući nalog" ToolTip="Dodavanje guest naloga za paciejnta" Click="MenuItem_Click_Novi_Gostujuci"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Novo obaveštenje" ToolTip="Dodavanje novog obaveštenja" Click="MenuItem_Click_Novo_Obavestenje"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Novi lek" ToolTip="Dodavanje novog leka"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Izmena">
+                    <MenuItem Header="Izmeni pacijenta" ToolTip="Izmena selektovanog pacijenta" Click="MenuItem_Click_Izmeni_Pacijenta"></MenuItem>
+                    <MenuItem Header="Ažuriraj alergene" ToolTip="Ažuriranje alergena izabranog pacijenta" Click="MenuItem_Click_Azuriraj_Alergene"></MenuItem>
+                    <MenuItem Header="Obriši pacijenta" ToolTip="Brisanje selektovanog pacijenta" Click="MenuItem_Click_Obrisi_Pacijenta"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Izmeni obaveštenje" ToolTip="Izmena selektovanog obaveštenja" Click="MenuItem_Click_Izmeni_Obavestenje"></MenuItem>
+                    <MenuItem Header="Obriši obaveštenje" ToolTip="Brisanje selektovanog obaveštenja" Click="MenuItem_Click_Obrisi_Obavestenje"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Ukidanje leka-zahtev"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Termini">
+                    <MenuItem Header="Prikaz termina" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="MenuItem_Click_Prikaz_Termina"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Izvršenje">
+                    <MenuItem Header="Naplata"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Pomoć">
+                    <MenuItem Header="Tutorijal"></MenuItem>
+                </MenuItem>
             </Menu>
             <ToolBar>
-                <Button Content="Guest" />
+                <Button Content="Novi pacijent" BorderBrush="Black" ToolTip="Dodavanje novog pacijenta" Click="ToolBar_Button_Click_Novi_Pacijent"></Button>
+                <Label></Label>
+                <Button Content="Guest" BorderBrush="Black" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="ToolBar_Button_Click_Novi_Guest_Pacijent"></Button>
+                <Label></Label>
+                <Button Content="Novo obaveštenje" BorderBrush="Black" ToolTip="Dodavanje novog obaveštenja" Click="ToolBar_Button_Click_Novo_Obavestenje"></Button>
             </ToolBar>
-            <TabControl Height="555" Margin="0,0,-0.4,0">
+            <TabControl Height="525" Margin="0,0,-0.4,0">
                 <TabItem Header="Početna">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -29,11 +59,11 @@
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="20" HorizontalAlignment="Left" Margin="10"/>
                         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <Button Content="Dodaj" Margin="5" Width="40" Height="30" Click="Button_Click_NovoObavestenje"/>
-                            <Button Content="Izmeni" Margin="5" Width="40" Height="30" Click="Button_Click_IzmenaObavestenja"/>
-                            <Button Content="Obrisi" Margin="5" Width="40" Height="30" Click="Button_Click_BrisanjeObavestenja"/>
+                            <Button Content="Dodaj" Margin="5" Width="40" Height="30" ToolTip="Dodavanje novog obaveštenja" Click="Button_Click_NovoObavestenje"/>
+                            <Button Content="Izmeni" Margin="5" Width="40" Height="30" ToolTip="Izmena selektovanog obaveštenja" Click="Button_Click_IzmenaObavestenja"/>
+                            <Button Content="Obrisi" Margin="5" Width="40" Height="30" ToolTip="Brisanje selektovanog obaveštenja" Click="Button_Click_BrisanjeObavestenja"/>
                         </StackPanel>
-                        <ListView Margin="0,0,0,184.2" Name="obavestenjaDataBinding" ItemsSource="{Binding Obavestenja}"
+                        <ListView Margin="0,0.2,0,9.8" Name="obavestenjaDataBinding" ItemsSource="{Binding Obavestenja}"
                                   Grid.Row="1" Grid.Column="1" >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -67,17 +97,17 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Content="Novi pacijent" Width="130" Height="48" Click="Button_Click_Novi"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="Izmeni pacijenta" Width="130" Height="48" Click="Button_Click_Izmeni"/>
-                        <Button Grid.Row="0" Grid.Column="2" Content="Obriši pacijenta" Width="130" Height="48" Click="Button_Click_Obrisi"/>
-                        <Button Grid.Row="0" Grid.Column="3" Content="Guest nalog" Width="130" Height="48" Click="Button_Click_NoviGuest"/>
+                        <Button Grid.Row="0" Grid.Column="0" Content="Novi pacijent" Width="130" Height="48" ToolTip="Dodavanje novog pacijenta" Click="Button_Click_Novi"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Izmeni pacijenta" Width="130" Height="48" ToolTip="Izmena selektovanog pacijenta" Click="Button_Click_Izmeni"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="Obriši pacijenta" Width="130" Height="48" ToolTip="Brisanje selektovanog pacijenta" Click="Button_Click_Obrisi"/>
+                        <Button Grid.Row="0" Grid.Column="3" Content="Guest nalog" Width="130" Height="48" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="Button_Click_NoviGuest"/>
                         <TextBox Grid.Row="0" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
                         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
-                            <Button Content="Zakaži pregled" Margin="10" Click="Button_Click_Zakazivanje_Pregleda"/>
-                            <Button Content="Zakaži operaciju" Margin="10" Click="Button_Click_Zakazivanje_Operacije"/>
-                            <Button Content="Ažuriraj alergene" Margin="10" Click="Button_Click_Azuriranje_Alergena"/>
-                            <Button Content="Prikaz termina" Margin="10" Click="Button_Click_Prikaz_Termina"/>
-                            <Button Content="Hitan termin" Margin="10" Height="40" Click="Button_Click_Hitan_Termin"/>
+                            <Button Content="Zakaži pregled" Margin="10" ToolTip="Zakazivanje pregleda za izabranog pacijenta" Click="Button_Click_Zakazivanje_Pregleda"/>
+                            <Button Content="Zakaži operaciju" Margin="10" ToolTip="Zakazivanje operacije za izabranog pacijenta" Click="Button_Click_Zakazivanje_Operacije"/>
+                            <Button Content="Ažuriraj alergene" Margin="10" ToolTip="Ažuriranje alergena izabranog pacijenta" Click="Button_Click_Azuriranje_Alergena"/>
+                            <Button Content="Prikaz termina" Margin="10" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="Button_Click_Prikaz_Termina"/>
+                            <Button Content="Hitan termin" Margin="10" ToolTip="Zakazivanje hitnog termina" Height="40" Click="Button_Click_Hitan_Termin"/>
                         </StackPanel>
                         <DataGrid Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
@@ -93,6 +123,9 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
+                <TabItem Header="Prostorije"></TabItem>
+                <TabItem Header="Lekari"></TabItem>
+                <TabItem Header="Lekovi"></TabItem>
             </TabControl>
         </StackPanel>
     </Grid>

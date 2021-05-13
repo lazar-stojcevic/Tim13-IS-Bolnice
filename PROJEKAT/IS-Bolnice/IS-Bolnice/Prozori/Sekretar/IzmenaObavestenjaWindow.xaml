@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="Izmena obaveštenja" Height="550" Width="700">
+        Title="Izmena obaveštenja" Height="550" Width="700"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Naslov:" HorizontalAlignment="Left" FontWeight="Bold" Margin="20,203,0,0" VerticalAlignment="Top" Width="84"/>
         <TextBox Name="txtNaslov" HorizontalAlignment="Left" Height="23" Margin="20,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="653"/>

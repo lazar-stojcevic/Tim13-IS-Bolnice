@@ -14,15 +14,13 @@ namespace IS_Bolnice.Prozori.Sekretar
         private BazaPacijenata bp;
         private BazaLekara bl;
         private List<Lekar> lekari;
-        private ObservableCollection<Pacijent> PacijentiRef;
 
-        public DodavanjePacijentaWindow(ObservableCollection<Pacijent> Pacijenti)
+        public DodavanjePacijentaWindow()
         {
             InitializeComponent();
 
             bp = new BazaPacijenata();
             bl = new BazaLekara();
-            PacijentiRef = Pacijenti;
 
             List<string> lekariString = new List<string>();
             lekari = bl.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
@@ -118,7 +116,6 @@ namespace IS_Bolnice.Prozori.Sekretar
                 };
 
                 bp.KreirajPacijenta(p);
-                PacijentiRef.Add(p);
 
                 this.Close();
             }

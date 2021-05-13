@@ -7,7 +7,7 @@
         xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
         mc:Ignorable="d"
         Title="Zakazivanje operacije" Height="600" Width="600"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <!--Vreme-->
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="137" Margin="40,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>

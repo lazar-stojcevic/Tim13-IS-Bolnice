@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
         mc:Ignorable="d"
-        Title="Prikaz svih pacijenata" Height="450" Width="800">
+        Title="Prikaz svih pacijenata" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

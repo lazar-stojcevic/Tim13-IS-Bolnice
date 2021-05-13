@@ -1,5 +1,4 @@
--1032817374#!^Novo obavestenje#!^Pozdrav. Neko novo obaveštenje ovde sada piše.#!^3-31-2021 10:00:51 PM#!^#!^
-1354007716#!^Trece zvanično obaveštenje#!^Ovo je obavestenje koje sluzi da ga samo obrisem.#!^3-31-2021 10:27:32 PM#!^#!^
--1180118593#!^Promena naslova#!^Normalan tekst#!^4-4-2021 5:46:26 PM#!^#!^
+-1032817374#!^Novo obavestenje#!^Pozdrav. Neko novo obaveštenje ovde sada piše.#!^3-31-2021 10:00:51 PM#!^Upravnici#!^
+-1180118593#!^Promena naslova#!^Normalan tekst#!^4-4-2021 5:46:26 PM#!^Lekari:@:Upravnici:@:Sekretari:@:Pacijenti#!^
 -777093625#!^Obavestenje za 4 pacijenta#!^Izmena sadrzaja obavestenja.#!^4-29-2021 3:36:49 PM#!^#!^32132133321:@:98897973232:@:31234123432:@:1234567891024
 -391470386#!^Obavestenje za odredjene role#!^Ovo je neko obavestenje za odredjene role#!^4-29-2021 3:43:52 PM#!^Lekari:@:Pacijenti:@:Upravnici#!^
