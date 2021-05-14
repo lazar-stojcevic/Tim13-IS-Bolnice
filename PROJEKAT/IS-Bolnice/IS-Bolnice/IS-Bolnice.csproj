@@ -706,5 +706,27 @@
   <ItemGroup>
     <Resource Include="Datoteke\renoviranje.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\add_patient_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\add_patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\edit_patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\delete_patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\add_guest_patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\delete_message.png" />
+    <Resource Include="Slike\Sekretar\edit_message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\add_message.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

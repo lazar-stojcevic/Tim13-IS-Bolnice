@@ -8,24 +8,34 @@
         mc:Ignorable="d"
         Title="SekretarWindow" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Image x:Key="slikaDodavanjePacijenta" Source="/Slike/Sekretar/add_patient.png"></Image>
+        <Image x:Key="slikaDodavanjePacijentaMala" Source="/Slike/Sekretar/add_patient_small.png"></Image>
+        <Image x:Key="slikaIzmenaPacijenta" Source="/Slike/Sekretar/edit_patient.png"></Image>
+        <Image x:Key="slikaBrisanjePacijenta" Source="/Slike/Sekretar/delete_patient.png"></Image>
+        <Image x:Key="slikaDodavanjeGuest" Source="/Slike/Sekretar/add_guest_patient.png"></Image>
+        <Image x:Key="slikaDodavanjeObavestenja" Source="/Slike/Sekretar/add_message.png"></Image>
+        <Image x:Key="slikaIzmenaObavestenja" Source="/Slike/Sekretar/edit_message.png"></Image>
+        <Image x:Key="slikaBrisanjeObavestenja" Source="/Slike/Sekretar/delete_message.png"></Image>
+    </Window.Resources>
     <Grid>
         <StackPanel>
             <Menu>
                 <MenuItem Header="Kreiranje">
-                    <MenuItem Header="Novi pacijent" ToolTip="Dodavanje novog pacijenta" Click="MenuItem_Click_Novi_Pacijent"></MenuItem>
-                    <MenuItem Header="Novi gostujući nalog" ToolTip="Dodavanje guest naloga za paciejnta" Click="MenuItem_Click_Novi_Gostujuci"></MenuItem>
+                    <MenuItem Header="Novi pacijent" Icon="{StaticResource slikaDodavanjePacijenta}" ToolTip="Dodavanje novog pacijenta" Click="MenuItem_Click_Novi_Pacijent"></MenuItem>
+                    <MenuItem Header="Novi gostujući nalog" Icon="{StaticResource slikaDodavanjeGuest}" ToolTip="Dodavanje guest naloga za paciejnta" Click="MenuItem_Click_Novi_Gostujuci"></MenuItem>
                     <Separator></Separator>
-                    <MenuItem Header="Novo obaveštenje" ToolTip="Dodavanje novog obaveštenja" Click="MenuItem_Click_Novo_Obavestenje"></MenuItem>
+                    <MenuItem Header="Novo obaveštenje" Icon="{StaticResource slikaDodavanjeObavestenja}" ToolTip="Dodavanje novog obaveštenja" Click="MenuItem_Click_Novo_Obavestenje"></MenuItem>
                     <Separator></Separator>
                     <MenuItem Header="Novi lek" ToolTip="Dodavanje novog leka"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Izmena">
-                    <MenuItem Header="Izmeni pacijenta" ToolTip="Izmena selektovanog pacijenta" Click="MenuItem_Click_Izmeni_Pacijenta"></MenuItem>
+                    <MenuItem Header="Izmeni pacijenta" Icon="{StaticResource slikaIzmenaPacijenta}" ToolTip="Izmena selektovanog pacijenta" Click="MenuItem_Click_Izmeni_Pacijenta"></MenuItem>
                     <MenuItem Header="Ažuriraj alergene" ToolTip="Ažuriranje alergena izabranog pacijenta" Click="MenuItem_Click_Azuriraj_Alergene"></MenuItem>
-                    <MenuItem Header="Obriši pacijenta" ToolTip="Brisanje selektovanog pacijenta" Click="MenuItem_Click_Obrisi_Pacijenta"></MenuItem>
+                    <MenuItem Header="Obriši pacijenta" Icon="{StaticResource slikaBrisanjePacijenta}" ToolTip="Brisanje selektovanog pacijenta" Click="MenuItem_Click_Obrisi_Pacijenta"></MenuItem>
                     <Separator></Separator>
-                    <MenuItem Header="Izmeni obaveštenje" ToolTip="Izmena selektovanog obaveštenja" Click="MenuItem_Click_Izmeni_Obavestenje"></MenuItem>
-                    <MenuItem Header="Obriši obaveštenje" ToolTip="Brisanje selektovanog obaveštenja" Click="MenuItem_Click_Obrisi_Obavestenje"></MenuItem>
+                    <MenuItem Header="Izmeni obaveštenje" Icon="{StaticResource slikaIzmenaObavestenja}" ToolTip="Izmena selektovanog obaveštenja" Click="MenuItem_Click_Izmeni_Obavestenje"></MenuItem>
+                    <MenuItem Header="Obriši obaveštenje" Icon="{StaticResource slikaBrisanjeObavestenja}" ToolTip="Brisanje selektovanog obaveštenja" Click="MenuItem_Click_Obrisi_Obavestenje"></MenuItem>
                     <Separator></Separator>
                     <MenuItem Header="Ukidanje leka-zahtev"></MenuItem>
                 </MenuItem>
@@ -40,11 +50,15 @@
                 </MenuItem>
             </Menu>
             <ToolBar>
-                <Button Content="Novi pacijent" BorderBrush="Black" ToolTip="Dodavanje novog pacijenta" Click="ToolBar_Button_Click_Novi_Pacijent"></Button>
+                <Button Content="{StaticResource slikaDodavanjePacijentaMala}" ToolTip="Dodavanje novog pacijenta" Click="ToolBar_Button_Click_Novi_Pacijent"></Button>
                 <Label></Label>
-                <Button Content="Guest" BorderBrush="Black" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="ToolBar_Button_Click_Novi_Guest_Pacijent"></Button>
+                <Button ToolTip="Dodavanje novog gostujućeg pacijenta" Click="ToolBar_Button_Click_Novi_Guest_Pacijent">
+                    <Image Source="/Slike/Sekretar/add_guest_patient.png" Height="24" Width="24"></Image>
+                </Button>
                 <Label></Label>
-                <Button Content="Novo obaveštenje" BorderBrush="Black" ToolTip="Dodavanje novog obaveštenja" Click="ToolBar_Button_Click_Novo_Obavestenje"></Button>
+                <Button ToolTip="Dodavanje novog obaveštenja" Click="ToolBar_Button_Click_Novo_Obavestenje">
+                    <Image Source="/Slike/Sekretar/add_message.png" Height="24" Width="24"></Image>
+                </Button>
             </ToolBar>
             <TabControl Height="525" Margin="0,0,-0.4,0">
                 <TabItem Header="Početna">
@@ -59,9 +73,12 @@
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="20" HorizontalAlignment="Left" Margin="10"/>
                         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <Button Content="Dodaj" Margin="5" Width="40" Height="30" ToolTip="Dodavanje novog obaveštenja" Click="Button_Click_NovoObavestenje"/>
-                            <Button Content="Izmeni" Margin="5" Width="40" Height="30" ToolTip="Izmena selektovanog obaveštenja" Click="Button_Click_IzmenaObavestenja"/>
-                            <Button Content="Obrisi" Margin="5" Width="40" Height="30" ToolTip="Brisanje selektovanog obaveštenja" Click="Button_Click_BrisanjeObavestenja"/>
+                            <Button Content="{StaticResource slikaDodavanjeObavestenja}" Background="White" BorderThickness="0" ToolTip="Dodavanje novog obaveštenja" Click="Button_Click_NovoObavestenje"/>
+                            <Label></Label>
+                            <Button Content="{StaticResource slikaIzmenaObavestenja}" Background="White" BorderThickness="0"  ToolTip="Izmena selektovanog obaveštenja" Click="Button_Click_IzmenaObavestenja"/>
+                            <Label></Label>
+                            <Button Content="{StaticResource slikaBrisanjeObavestenja}" Background="White" BorderThickness="0" ToolTip="Brisanje selektovanog obaveštenja" Click="Button_Click_BrisanjeObavestenja"/>
+                            <Label></Label>
                         </StackPanel>
                         <ListView Margin="0,0.2,0,9.8" Name="obavestenjaDataBinding" ItemsSource="{Binding Obavestenja}"
                                   Grid.Row="1" Grid.Column="1" >
@@ -97,10 +114,14 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Content="Novi pacijent" Width="130" Height="48" ToolTip="Dodavanje novog pacijenta" Click="Button_Click_Novi"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="Izmeni pacijenta" Width="130" Height="48" ToolTip="Izmena selektovanog pacijenta" Click="Button_Click_Izmeni"/>
-                        <Button Grid.Row="0" Grid.Column="2" Content="Obriši pacijenta" Width="130" Height="48" ToolTip="Brisanje selektovanog pacijenta" Click="Button_Click_Obrisi"/>
-                        <Button Grid.Row="0" Grid.Column="3" Content="Guest nalog" Width="130" Height="48" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="Button_Click_NoviGuest"/>
+                        <Button Grid.Row="0" Grid.Column="0" Content="{StaticResource slikaDodavanjePacijenta}" HorizontalAlignment="Center" Background="White" 
+                                BorderThickness="0" ToolTip="Dodavanje novog pacijenta" Click="Button_Click_Novi"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="{StaticResource slikaIzmenaPacijenta}" HorizontalAlignment="Center" Background="White"
+                                BorderThickness="0" ToolTip="Izmena selektovanog pacijenta" Click="Button_Click_Izmeni"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="{StaticResource slikaBrisanjePacijenta}" HorizontalAlignment="Center" Background="White"
+                                BorderThickness="0" ToolTip="Brisanje selektovanog pacijenta" Click="Button_Click_Obrisi"/>
+                        <Button Grid.Row="0" Grid.Column="3" Content="{StaticResource slikaDodavanjeGuest}" HorizontalAlignment="Center" Background="White"
+                                BorderThickness="0" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="Button_Click_NoviGuest"/>
                         <TextBox Grid.Row="0" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
                         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
                             <Button Content="Zakaži pregled" Margin="10" ToolTip="Zakazivanje pregleda za izabranog pacijenta" Click="Button_Click_Zakazivanje_Pregleda"/>
