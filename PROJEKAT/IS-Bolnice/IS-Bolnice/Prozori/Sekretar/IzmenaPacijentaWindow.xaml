@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
         mc:Ignorable="d"
-        Title="IzmenaPacijentaWindow" Height="450" Width="800"
+        Title="IzmenaPacijentaWindow" Height="650" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,3.6,0">
         <WrapPanel Orientation="Horizontal" Margin="38,42,49.6,10">
@@ -36,6 +36,8 @@
             <Label Content="Lozinka:*" Width="300"/>
             <PasswordBox Width="300" Name="txtLozinka" PasswordChanged="txtLozinka_PasswordChanged"/>
             <Label Content="" Width="100" Height="100"/>
+            <CheckBox x:Name="CbBlokiran" Content="Blokiran"></CheckBox>
+            <Label Content="" Width="700"></Label>
             <Button Name="dugmePotvrdi" Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi"/>
             <Label Content="" Width="200"/>
             <Button Content="Odustani" Height="50" Width="100" Click="Button_Click_Odustani"/>

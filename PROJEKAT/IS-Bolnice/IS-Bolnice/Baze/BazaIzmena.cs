@@ -43,11 +43,16 @@ namespace IS_Bolnice.Baze
         {
             List<string> lines = new List<string>();
 
-            string formatOfchangeForWriting = change.JmbgOfPatient + "#" + GetFormatedDateForWriting(change.DateOfChange);
+            string formatOfchangeForWriting = ChangeToString(change);
 
             lines.Add(formatOfchangeForWriting);
 
             File.AppendAllLines(fileLocation, lines);
+        }
+
+        private string ChangeToString(Change change)
+        {
+            return change.JmbgOfPatient + "#" + GetFormatedDateForWriting(change.DateOfChange);
         }
 
         public List<Change> ReadAllChanges()
@@ -89,6 +94,32 @@ namespace IS_Bolnice.Baze
         public String GetFormatedDateForWriting(DateTime date)
         {
             return date.ToString(timeFormatForWriting);
+        }
+
+        private void WriteAllChangesInFile(List<Change> changes)
+        {
+            List<String> changesString = new List<string>();
+            foreach (Change change in changes)
+            {
+                changesString.Add(ChangeToString(change));
+            }
+            File.WriteAllLines(fileLocation, changesString);
+        }
+
+        public void UnblockPatient(Pacijent patient)
+        {
+            List<Change> allChanges = ReadAllChanges();
+            List<Change> filteredChanges = new List<Change>();
+
+            foreach (Change change in allChanges)
+            {
+                if (!IsJmbgEquals(change, patient))
+                {
+                    filteredChanges.Add(change);
+                }
+            }
+
+            WriteAllChangesInFile(filteredChanges);
         }
 
         public bool IsPatientMalicious(Pacijent patient)

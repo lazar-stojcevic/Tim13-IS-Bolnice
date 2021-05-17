@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using IS_Bolnice.Baze;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
@@ -158,6 +159,13 @@ namespace IS_Bolnice.Prozori.Sekretar
                 if (i != -1)
                 {
                     PacijentiRef[i] = p;
+                }
+
+                // ako nije oznaceno da je blokiran poziva se metoda za odblokiranje
+                if (!(bool)CbBlokiran.IsChecked)
+                {
+                    BazaIzmena bi = new BazaIzmena();
+                    bi.UnblockPatient(p);
                 }
 
                 this.Close();
