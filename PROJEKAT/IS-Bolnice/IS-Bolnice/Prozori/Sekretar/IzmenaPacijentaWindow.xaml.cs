@@ -14,6 +14,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private Pacijent pacijent;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
         private BazaPacijenata bp;
         private BazaLekara bl;
+        private BazaIzmena bazaIzmena = new BazaIzmena();
         private List<Lekar> lekari;
         private ObservableCollection<Pacijent> PacijentiRef;
 
@@ -80,6 +81,12 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             txtKorisnickoIme.Text = p.KorisnickoIme;
             txtLozinka.Password = p.Sifra;
+
+            // ako je blokiran cekira se check box
+            if (bazaIzmena.IsPatientMalicious(p))
+            {
+                CbBlokiran.IsChecked = true;
+            }
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
@@ -95,7 +102,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 MessageBoxButton btnMessageBox = MessageBoxButton.OK;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
             }
             else
             {
@@ -164,8 +171,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 // ako nije oznaceno da je blokiran poziva se metoda za odblokiranje
                 if (!(bool)CbBlokiran.IsChecked)
                 {
-                    BazaIzmena bi = new BazaIzmena();
-                    bi.UnblockPatient(p);
+                    bazaIzmena.UnblockPatient(p);
                 }
 
                 this.Close();
