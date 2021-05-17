@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Baze;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,13 @@ namespace IS_Bolnice.Prozori
     public partial class PacijentIzmenaTermina : Window
     {
         private List<Lekar> lekari;
+        private ListView listView;
+
         private List<Pregled> pregledi = new List<Pregled>();
         private Pregled stariPregled = new Pregled();
-        private ListView listView;
-        private BazaPregleda bp = new BazaPregleda();
+
+        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private BazaIzmena bazaIzmena = new BazaIzmena();
 
         public PacijentIzmenaTermina(string jmbgPacijenta, string jmbgLekara, DateTime datum, ListView lv)
         {
@@ -79,21 +83,29 @@ namespace IS_Bolnice.Prozori
             noviPregled.Pacijent = pacijent;
             noviPregled.Lekar = lekari.ElementAt(comboLekari.SelectedIndex);
 
-            if (bp.PacijentImaZakazanPregled(noviPregled))
+            if (bazaIzmena.IsPatientMalicious(pacijent))
             {
-                string message = "Već imate zakazan pregled u tom terminu";
+                string message = "Izvinjavamo se, ali previše puta ste vršili izmene tokom protekle nedelje";
                 MessageBox.Show(message);
             }
             else
             {
-                bp.IzmeniPregled(noviPregled, stariPregled);
+                if (bazaPregleda.PacijentImaZakazanPregled(noviPregled))
+                {
+                    string message = "Već imate zakazan pregled u tom terminu";
+                    MessageBox.Show(message);
+                }
+                else
+                {
+                    bazaPregleda.IzmeniPregled(noviPregled, stariPregled);
 
-                string message = "Uspešno ste zakazali pregled";
-                MessageBox.Show(message);
+                    string message = "Uspešno ste zakazali pregled";
+                    MessageBox.Show(message);
 
-                listView.ItemsSource = bp.SviBuduciPreglediKojePacijentIma(stariPregled.Pacijent.Jmbg);
-                
-                this.Close();
+                    listView.ItemsSource = bazaPregleda.SviBuduciPreglediKojePacijentIma(stariPregled.Pacijent.Jmbg);
+
+                    this.Close();
+                }
             }
         }
 
@@ -121,11 +133,11 @@ namespace IS_Bolnice.Prozori
             if (comboLekari.SelectedIndex != -1)
             {
                 Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
-                pregledi = bp.SlobodniTerminiZaIzmenu(lekar, datum);
+                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
             {
-                pregledi = bp.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
+                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
             }
 
             listTermina.Items.Clear();
@@ -138,10 +150,12 @@ namespace IS_Bolnice.Prozori
 
         private void comboLekari_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboLekari.SelectedIndex == -1 || comboDani.SelectedIndex == -1 || listTermina.SelectedIndex == -1) {
+            if (comboLekari.SelectedIndex == -1 || comboDani.SelectedIndex == -1 || listTermina.SelectedIndex == -1)
+            {
                 btnPotvrdi.IsEnabled = false;
             }
-            else {
+            else
+            {
                 btnPotvrdi.IsEnabled = true;
             }
 
@@ -153,11 +167,11 @@ namespace IS_Bolnice.Prozori
             if (comboDani.SelectedIndex != -1)
             {
                 Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
-                pregledi = bp.SlobodniTerminiZaIzmenu(lekar, datum);
+                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
             {
-                pregledi = bp.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
+                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
             }
 
             listTermina.Items.Clear();
