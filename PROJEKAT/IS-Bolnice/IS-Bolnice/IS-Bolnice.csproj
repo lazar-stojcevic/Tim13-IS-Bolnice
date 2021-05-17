@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Baze\BazaBolnica.cs" />
+    <Compile Include="Baze\BazaHospitalizacija.cs" />
     <Compile Include="Baze\BazaIzmena.cs" />
     <Compile Include="Baze\BazaIzvestaja.cs" />
     <Compile Include="Baze\BazaLekova.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Change.cs" />
+    <Compile Include="Model\Hospitalizacija.cs" />
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />
     <Compile Include="Model\Obavestenje.cs" />
