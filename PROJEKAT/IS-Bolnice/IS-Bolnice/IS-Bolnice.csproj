@@ -108,8 +108,17 @@
     <Compile Include="Prozori\Prikaz kod lekara\LekarIzvestaj.xaml.cs">
       <DependentUpon>LekarIzvestaj.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarKreiranjeHospitalizacije.xaml.cs">
+      <DependentUpon>LekarKreiranjeHospitalizacije.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarPodaciOLeku.xaml.cs">
       <DependentUpon>LekarPodaciOLeku.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarPrikazSvihHospitalizacija.xaml.cs">
+      <DependentUpon>LekarPrikazSvihHospitalizacija.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarProduzenjeHospitalizacije.xaml.cs">
+      <DependentUpon>LekarProduzenjeHospitalizacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarRazlogOdbijanjaLeka.xaml.cs">
       <DependentUpon>LekarRazlogOdbijanjaLeka.xaml</DependentUpon>
@@ -302,9 +311,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarKreiranjeHospitalizacije.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarPodaciOLeku.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarPrikazSvihHospitalizacija.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarProduzenjeHospitalizacije.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarRazlogOdbijanjaLeka.xaml">
       <SubType>Designer</SubType>
@@ -729,6 +750,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\Sekretar\add_message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\hospital-bed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

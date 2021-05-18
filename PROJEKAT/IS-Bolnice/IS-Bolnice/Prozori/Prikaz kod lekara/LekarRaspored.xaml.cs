@@ -227,6 +227,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             prozorZaPregled.btnPregled.IsEnabled = true;
             prozorZaPregled.btnOperacija.IsEnabled = true;
             prozorZaPregled.btnIzvestaj.IsEnabled = true;
+            prozorZaPregled.btnHospitalizacija.IsEnabled = true;
             this.NavigationService.Navigate(prozorZaPregled);
 
         }

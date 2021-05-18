@@ -63,5 +63,7 @@
                 <Image Source="../../Slike/report.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
             </StackPanel>
         </Button>
+
+        <Button Content="Hospitalizacija" x:Name="btnHospitalizacija" IsEnabled="False" Margin="19.2,239,31,409" Click="btnKreirajHospitalizaciju" Background="CadetBlue" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
     </Grid>
 </Page>

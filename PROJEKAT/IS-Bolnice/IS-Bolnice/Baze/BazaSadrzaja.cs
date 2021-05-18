@@ -49,6 +49,20 @@ public class BazaSadrzaja
         return false;
     }
 
+    public int BrojKrevetaUSobi(string idSobe)
+    {
+        List<SadrzajSobe> operemaUSObi = GetSadrzajSobe(idSobe);
+        foreach (SadrzajSobe predmet in operemaUSObi)
+        {
+            if (predmet.Predmet.Id.Equals("1111"))
+            {
+                return predmet.Kolicina;
+            }
+        }
+
+        return 0;
+    }
+
     public SadrzajSobe ParseFromString(string line) {
 
         string[] niz = line.Split('#');

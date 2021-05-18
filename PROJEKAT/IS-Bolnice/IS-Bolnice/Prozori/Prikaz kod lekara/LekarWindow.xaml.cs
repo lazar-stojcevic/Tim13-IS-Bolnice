@@ -57,6 +57,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     btnOperacija.IsEnabled = true;
                     btnPregled.IsEnabled = true;
                     btnIzvestaj.IsEnabled = true;
+                    btnHospitalizacija.IsEnabled = true;
                     nasao = true;
                 }
                 else
@@ -71,6 +72,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     btnOperacija.IsEnabled = false;
                     btnPregled.IsEnabled = false;
                     btnIzvestaj.IsEnabled = false;
+                    btnHospitalizacija.IsEnabled = false;
                 }
 
             }
@@ -111,6 +113,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         }
 
         public string Sifra { get; set; }
+
+        private void btnKreirajHospitalizaciju(object sender, RoutedEventArgs e)
+        {
+            LekarKreiranjeHospitalizacije kreiranjeHospitalizacije = new LekarKreiranjeHospitalizacije(txtJMBG.Text);
+            this.NavigationService.Navigate(kreiranjeHospitalizacije);
+        }
     }
 
 

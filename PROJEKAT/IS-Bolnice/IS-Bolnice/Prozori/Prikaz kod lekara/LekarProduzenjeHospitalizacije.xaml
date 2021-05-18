@@ -1,0 +1,16 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarProduzenjeHospitalizacije"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+        mc:Ignorable="d"
+        Title="Produženje hospitalizacije" Height="200" Width="300">
+    <Grid>
+        <DatePicker x:Name="datumProduzenja" HorizontalAlignment="Left" Height="31" Margin="10,29,0,0" VerticalAlignment="Top" Width="274"/>
+        <Label Content="kraj hospitalizacije:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="51" Margin="10,109,0,0" VerticalAlignment="Top" Width="133" Click="ButtonClick_Produzi"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Height="51" Margin="151,109,0,0" VerticalAlignment="Top" Width="133" Click="ButtonClickOdustati"/>
+
+    </Grid>
+</Window>
