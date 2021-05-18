@@ -23,88 +23,57 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         public SalePage()
         {
             InitializeComponent();
-            List<Soba> lista = new List<Soba>();
-            List<Bolnica> bolnice = new List<Bolnica>();
-            BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolnice();
-            foreach (Bolnica b in bolnice)
-            {
-                foreach (Soba s in b.Soba)
-                {
+            BazaBolnica bazaBolnica = new BazaBolnica();
+            listBox.ItemsSource = ParseSobaToString(bazaBolnica.GetSobe());
+        }
 
-                    if (s.Obrisano == false)
-                    {
-                        lista.Add(s);
-
-                    }
-                }
-
-            }
+        private List<string> ParseSobaToString(List<Soba> sobe) {
 
             List<string> tekst = new List<string>();
-            foreach (Soba s in lista)
+            foreach (Soba s in sobe)
             {
-                if (s.Obrisano == false)
+
+                if (s.Obrisano == false && (SveProstorijeSuSelektovanje() || s.Tip == SelektovaniTipProstorije()))
                 {
                     tekst.Add("ID: " + s.Id + " Sprat: " + s.Sprat.ToString() + " Tip: " + s.Tip);
+
                 }
             }
-            listBox.ItemsSource = tekst;
+            return tekst;
+
+           
+        }
+
+        private bool SveProstorijeSuSelektovanje() {
+            switch (tip_sale_txt.SelectedIndex)
+            {
+                case 0:
+                    return true;
+               
+                default:
+                    return false;
+                   
+            }
+        }
+
+        private RoomType SelektovaniTipProstorije() {
+            switch (tip_sale_txt.SelectedIndex)
+            {
+                case 1:
+                    return RoomType.operacionaSala;
+                case 2:
+                    return RoomType.bolnickaSoba;
+                case 3:
+                    return RoomType.ordinacija;
+                default:
+                    return RoomType.magacin;
+            }
         }
 
         private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bool sveProstijeSelektovane = false;
-            RoomType tip = RoomType.bolnickaSoba;
-            switch (tip_sale_txt.SelectedIndex) {
-                case 0:
-                    sveProstijeSelektovane = true;
-                    break;
-                case 1:
-                    sveProstijeSelektovane = false;
-                    tip = RoomType.operacionaSala;
-                    break;
-                case 2:
-                    sveProstijeSelektovane = false;
-                    tip = RoomType.bolnickaSoba;
-                    break;
-                case 3:
-                    sveProstijeSelektovane = false;
-                    tip = RoomType.ordinacija;
-                    break;
-                default:
-                    sveProstijeSelektovane = false;
-                    tip = RoomType.magacin;
-                    break;
-            }
-           
-            List<Soba> lista = new List<Soba>();
-            List<Bolnica> bolnice = new List<Bolnica>();
             BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolnice();
-            foreach (Bolnica b in bolnice)
-            {
-                foreach (Soba s in b.Soba)
-                {
-
-                    if (s.Obrisano == false && (sveProstijeSelektovane == true || s.Tip == tip))
-                    {
-                        lista.Add(s);
-
-                    }
-                }
-
-            }
-
-            List<string> tekst = new List<string>();
-            foreach (Soba s in lista)
-            {
-                if (s.Obrisano == false)
-                {
-                    tekst.Add("ID: " + s.Id + " Sprat: " + s.Sprat.ToString() + " Tip: " + s.Tip);
-                }
-            }
-            listBox.ItemsSource = tekst;
+            listBox.ItemsSource = ParseSobaToString(baza.GetSobe());
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

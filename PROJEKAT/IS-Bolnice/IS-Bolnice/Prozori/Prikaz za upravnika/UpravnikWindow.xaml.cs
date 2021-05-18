@@ -53,5 +53,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             Page lekovi = new LekoviPage();
             this.frame.NavigationService.Navigate(lekovi);
         }
+
+        private void RenoviranjeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Page renoviranje = new RenoviranjeSpajanjePage();
+            this.frame.NavigationService.Navigate(renoviranje);
+        }
     }
 }

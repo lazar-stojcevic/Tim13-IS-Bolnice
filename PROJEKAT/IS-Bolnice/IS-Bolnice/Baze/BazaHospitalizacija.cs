@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace Repozitorijumi
+namespace IS_Bolnice.Baze
 {
    public class BazaHospitalizacija
    {
@@ -45,6 +45,17 @@ namespace Repozitorijumi
               }
           }
           return ret;
+        }
+
+        public List<Hospitalizacija> GetHospitalizacijeZaSobu(string sobaID) {
+
+            List<Hospitalizacija> hospitalizacije = new List<Hospitalizacija>();
+            foreach (Hospitalizacija hospIter in SveHospitalizacije()) {
+                if (hospIter.Soba.Id.Equals(sobaID)) {
+                    hospitalizacije.Add(hospIter);
+                }
+            }
+            return hospitalizacije;
         }
       
       public bool KreirajHospitalizaciju(Hospitalizacija hospitalizacija)

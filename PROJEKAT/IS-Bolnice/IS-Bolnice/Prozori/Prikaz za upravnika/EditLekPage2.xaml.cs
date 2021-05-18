@@ -119,20 +119,21 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 bazaLekova.IzmeniLek(noviLek);
             }
             else {
-                bazaLekova.KreirajLek(noviLek);
                 OdgovorNaZahtevZaValidaciju odgovorNaZahtev = new OdgovorNaZahtevZaValidaciju(noviLek, null);
                 bazaOdgovora.ObrisiOdgovorNaZahtev(odgovorNaZahtev);
+                AddLekPage3 addLekareZaZahtev = new AddLekPage3(noviLek);
+                this.NavigationService.Navigate(addLekareZaZahtev);
             }
             if (kreiranjeIzmena)
             {
                 Page lekovi = new LekoviPage();
                 this.NavigationService.Navigate(lekovi);
             }
-            else
+            /*else
             {
                 Page odgovoriNaZahteve = new OdgovoriNaZahteveLekoviPage();
                 this.NavigationService.Navigate(odgovoriNaZahteve);
-            }
+            }*/
         }
 
         private void listBox_sastojci_SelectionChanged(object sender, SelectionChangedEventArgs e)

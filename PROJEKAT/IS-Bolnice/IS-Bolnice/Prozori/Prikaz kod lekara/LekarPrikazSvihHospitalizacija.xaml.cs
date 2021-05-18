@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Baze;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Repozitorijumi;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {

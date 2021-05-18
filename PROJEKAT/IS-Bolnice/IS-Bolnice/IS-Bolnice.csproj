@@ -198,11 +198,17 @@
     <Compile Include="Prozori\Prikaz za upravnika\RenoviranjePage.xaml.cs">
       <DependentUpon>RenoviranjePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\RenoviranjeSpajanjePage.xaml.cs">
+      <DependentUpon>RenoviranjeSpajanjePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\SalePage.xaml.cs">
       <DependentUpon>SalePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\SastojciPage.xaml.cs">
       <DependentUpon>SastojciPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\SpajanjePage.xaml.cs">
+      <DependentUpon>SpajanjePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\UpravljanjeOpremomPage.xaml.cs">
       <DependentUpon>UpravljanjeOpremomPage.xaml</DependentUpon>
@@ -431,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\RenoviranjeSpajanjePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\SalePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -438,6 +448,10 @@
     <Page Include="Prozori\Prikaz za upravnika\SastojciPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\SpajanjePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\UpravljanjeOpremomPage.xaml">
       <Generator>MSBuild:Compile</Generator>
