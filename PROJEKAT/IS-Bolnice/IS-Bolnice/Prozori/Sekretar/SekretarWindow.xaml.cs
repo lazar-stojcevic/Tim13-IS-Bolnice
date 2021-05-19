@@ -9,10 +9,23 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarWindow : Window
     {
-        private BazaObavestenja bo;
-        private BazaPacijenata bp;
+        private BazaObavestenja bazaObavestenja;
+        private BazaPacijenata bazaPacijenata;
+        private BazaLekara bazaLekara;
 
         public ObservableCollection<Pacijent> Pacijenti
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Lekar> LekariOpstePrakse
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Lekar> LekariSpecijalisti
         {
             get;
             set;
@@ -29,16 +42,19 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
             this.DataContext = this;
 
-            bp = new BazaPacijenata();
-            bo = new BazaObavestenja();
+            bazaPacijenata = new BazaPacijenata();
+            bazaObavestenja = new BazaObavestenja();
+            bazaLekara = new BazaLekara();
 
-            Pacijenti = new ObservableCollection<Pacijent>(bp.SviPacijenti());
-            Obavestenja = new ObservableCollection<Obavestenje>(bo.SvaObavestenja());
+            Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
+            LekariOpstePrakse = new ObservableCollection<Lekar>(bazaLekara.LekariOpstePrakse());
+            LekariSpecijalisti = new ObservableCollection<Lekar>(bazaLekara.LekariSpecijalisti());
+            Obavestenja = new ObservableCollection<Obavestenje>(bazaObavestenja.SvaObavestenja());
         }
 
         private void OsvezavanjePrikazaPacijenata()
         {
-            List<Pacijent> sviPacijenti = bp.SviPacijenti();
+            List<Pacijent> sviPacijenti = bazaPacijenata.SviPacijenti();
             Pacijenti.Clear();
             foreach (Pacijent pacijent in sviPacijenti)
             {
@@ -87,7 +103,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bp.ObrisiPacijenta(p);
+                        bazaPacijenata.ObrisiPacijenta(p);
                         Pacijenti.Remove(p);
                         break;
 
@@ -130,7 +146,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bo.ObrisiObavestenje(o);
+                        bazaObavestenja.ObrisiObavestenje(o);
                         Obavestenja.Remove(o);
                         break;
 
@@ -316,6 +332,28 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void ToolBar_Button_Click_Novo_Obavestenje(object sender, RoutedEventArgs e)
         {
             DodavanjeObavestenja();
+        }
+
+        private void Button_Click_Radno_Vreme_Lekara_Opste(object sender, RoutedEventArgs e)
+        {
+            int index = dgLekariOpstePrakse.SelectedIndex;
+            if (index != -1)
+            {
+                Lekar lekar = LekariOpstePrakse[index];
+                RadnoVremeLekara rvl = new RadnoVremeLekara(lekar);
+                rvl.ShowDialog();
+            }
+        }
+
+        private void Button_Click_Radno_Vreme_Lekara_Specijaliste(object sender, RoutedEventArgs e)
+        {
+            int index = dgLekariSpecijalisti.SelectedIndex;
+            if (index != -1)
+            {
+                Lekar lekar = LekariSpecijalisti[index];
+                RadnoVremeLekara rvl = new RadnoVremeLekara(lekar);
+                rvl.ShowDialog();
+            }
         }
     }
 }
