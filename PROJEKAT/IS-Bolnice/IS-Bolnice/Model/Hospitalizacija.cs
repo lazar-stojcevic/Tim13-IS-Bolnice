@@ -4,19 +4,71 @@
 // Purpose: Definition of Class Hospitalizacija
 
 using System;
+using System.ComponentModel;
 
-public class Hospitalizacija
+public class Hospitalizacija :INotifyPropertyChanged
 {
-   private DateTime pocetakHospitalizacije;
-   private DateTime krajHospitalizacije;
-   
-   public Soba soba;
-   
-   /// <summary>
-   /// Property for Soba
-   /// </summary>
-   /// <pdGenerated>Default opposite class property</pdGenerated>
-   public Soba Soba
+    private DateTime pocetakHospitalizacije;
+    private DateTime krajHospitalizacije;
+
+    private Soba soba;
+
+    private Pacijent pacijent;
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public Hospitalizacija(string idPacijenta, string idSobe, DateTime krajHospitalizacije)
+    {
+        PocetakHospitalizacije = DateTime.Now;
+        KrajHospitalizacije = krajHospitalizacije;
+
+        Soba = new Soba();
+        Soba.Id = idSobe;
+
+        Pacijent = new Pacijent();
+        Pacijent.Jmbg = idPacijenta;
+    }
+
+    public Hospitalizacija()
+    {
+        Soba = new Soba();
+        Pacijent = new Pacijent();
+    }
+
+    /// <summary>
+    /// Property for Soba
+    /// </summary>
+    /// <pdGenerated>Default opposite class property</pdGenerated>
+
+    public DateTime PocetakHospitalizacije
+    {
+        get
+        {
+            return pocetakHospitalizacije;
+        }
+        set
+        {
+            if (pocetakHospitalizacije == value) return;
+            pocetakHospitalizacije = value;
+            RaisePropertyChanged("pocetakHospitalizacije");
+        }
+    }
+
+    public DateTime KrajHospitalizacije
+    {
+        get
+        {
+            return krajHospitalizacije;
+        }
+        set
+        {
+            if (krajHospitalizacije == value) return;
+            krajHospitalizacije = value;
+            RaisePropertyChanged("krajHospitalizacije");
+        }
+    }
+
+    public Soba Soba
    {
       get
       {
@@ -24,9 +76,31 @@ public class Hospitalizacija
       }
       set
       {
-         this.soba = value;
-      }
+          if (soba == value) return;
+          soba = value;
+          RaisePropertyChanged("soba");
+        }
    }
-   public Pacijent pacijent;
+   public Pacijent Pacijent
+   {
+       get
+       {
+           return pacijent;
+       }
+       set
+       {
+           if (pacijent == value) return;
+           pacijent = value;
+           RaisePropertyChanged("pacijent");
+        }
+   }
 
+   private void RaisePropertyChanged(string propName)
+   {
+       PropertyChangedEventHandler eh = PropertyChanged;
+       if (eh != null)
+       {
+           eh(this, new PropertyChangedEventArgs(propName));
+       }
+   }
 }

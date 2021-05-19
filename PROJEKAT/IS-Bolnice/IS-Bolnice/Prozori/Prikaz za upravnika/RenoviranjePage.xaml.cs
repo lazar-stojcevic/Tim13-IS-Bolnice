@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Baze;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 {
                     RenoviranjeOperacioneSale();
                 }
+                else if (selektovanaSoba.Tip == RoomType.bolnickaSoba) {
+                    RenovirajBolnickuSobu();
+                }
                 else {
                     RenoviranjeProstorije();
                 }
@@ -55,7 +59,25 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             {
                 if (operacija.VremePocetkaOperacije > renovacija.DatumPocetka && operacija.VremeKrajaOperacije < renovacija.DatumKraja)
                 {
-                    MessageBox.Show("Postoje zakazani pregledi! Odaberite drugi period!");
+                    MessageBox.Show("Postoje zakazane operacije! Odaberite drugi period!");
+                }
+                else
+                {
+                    bazaRenovacija.KreirajRenovaciju(renovacija);
+                    RenoviranjeOprema();
+                    this.NavigationService.GoBack();
+                }
+            }
+        }
+
+        private void RenovirajBolnickuSobu() {
+            BazaRenovacija bazaRenovacija = new BazaRenovacija();
+            BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
+            Renovacija renovacija = MakeRenovacija();
+            foreach (Hospitalizacija hospitalizacija in bazaHospitalizacija.GetHospitalizacijeZaSobu(selektovanaSoba.Id)) {
+                if (hospitalizacija.PocetakHospitalizacije > renovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < renovacija.DatumKraja)
+                {
+                    MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
                 }
                 else
                 {

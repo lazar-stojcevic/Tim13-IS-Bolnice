@@ -1,0 +1,30 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarPrikazSvihHospitalizacija"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+      mc:Ignorable="d" Background="White"
+      Title="Prikaz svih hospitalizacija" Height="700" Width="400">
+
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+
+        <Label Content="Hospitalizacije" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0"/>
+        <ListView x:Name="listaHospitalizacija" HorizontalAlignment="Left" Height="395" Margin="10,79,0,0" VerticalAlignment="Top" Width="380">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="JMBG" Width="100" DisplayMemberBinding="{Binding Pacijent.Jmbg}" />
+                    <GridViewColumn Header="Prezime" Width="100" DisplayMemberBinding="{Binding Pacijent.Prezime}"/>
+                    <GridViewColumn Header="Soba" Width="30" DisplayMemberBinding="{Binding Soba.Id}"/>
+                    <GridViewColumn Header="Početak" Width="75" DisplayMemberBinding="{Binding PocetakHospitalizacije}"/>
+                    <GridViewColumn Header="Kraj" Width="75" DisplayMemberBinding="{Binding KrajHospitalizacije}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Produži" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="12,522,0,0" Height="42" Click="ButtonClick_Produzi"/>
+        <Button Content="Otpusti" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="138,522,0,0" Height="42" Click="ButtonClick_Otpusti"/>
+        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="264,522,0,0" Height="42" Click="ButtonClick_Nazad"/>
+
+    </Grid>
+</Page>

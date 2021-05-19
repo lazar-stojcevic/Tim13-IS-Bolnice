@@ -63,6 +63,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         public string Sifra { get; set; }
 
+        private void Button_UvidUHospitalizacijeClick(object sender, RoutedEventArgs e)
+        {
+            LekarPrikazSvihHospitalizacija sveHospitalizacije = new LekarPrikazSvihHospitalizacija();
+            NavigationService.Navigate(sveHospitalizacije);
+        }
     }
 
 }

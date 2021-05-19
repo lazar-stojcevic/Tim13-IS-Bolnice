@@ -3,7 +3,6 @@
 4#NekiProbiotik#1000mg#0#penicilin#5/1
 5#Xanax#10mg#1#nema#1/2
 2#Bromazepam#2mg#1#penicilin,laktoza,glucerol#1/5
-5555#Propanolol#5mg#1#Penicilin,Laktoza#1/2
 5552#Amoksiklav#100mg#1#penicilin,silicijum-dioksid#1/2
 4444#Neki nebitni lek#500mg#1#Paracetamol,Laktoza#1
 520#Ksalol#10mg#1#penicilin,silicijum-dioksid,laktoza,#5/1/5552/

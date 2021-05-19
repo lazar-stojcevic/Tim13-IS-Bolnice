@@ -7,3 +7,4 @@
 100#stapic#True#1#
 55#stolica#True#0#
 15#spric#False#1#
+1111#Krevet#False#1#

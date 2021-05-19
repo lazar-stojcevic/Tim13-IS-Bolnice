@@ -59,7 +59,7 @@
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="149,551,0,0" VerticalAlignment="Top" Width="101" Click="odjavaClick" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,549,0,0" VerticalAlignment="Top" Width="101" Click="odjavaClick" >
             <StackPanel>
                 <Image Source="../../Slike/logout.png" Height="66" Width="72" RenderTransformOrigin="1.966,0.541"  />
             </StackPanel>
@@ -71,8 +71,14 @@
         <Label Content="Zahtev za godišnji odmor" FontSize="15" HorizontalAlignment="Left" Margin="27,392,0,0" VerticalAlignment="Top" Width="179" Height="33"/>
         <Label Content="Validacija lekova" FontSize="15" HorizontalAlignment="Left" Margin="237,392,0,0" VerticalAlignment="Top" Width="118" Height="33"/>
         <Label Content="Izveštaj o potrošnji" FontSize="15" HorizontalAlignment="Left" Margin="33,511,0,0" VerticalAlignment="Top" Width="141" Height="33"/>
-        <Label Content="Odjavi se" FontSize="15" HorizontalAlignment="Left" Margin="162,631,0,0" VerticalAlignment="Top" Width="72" Height="33"/>
+        <Label Content="Odjavi se" FontSize="15" HorizontalAlignment="Left" Margin="252,629,0,0" VerticalAlignment="Top" Width="72" Height="33"/>
         <Label Content="Uvid u odobrene lekove" FontSize="15" HorizontalAlignment="Left" Margin="211,511,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,549,0,0" VerticalAlignment="Top" Width="101" Click="Button_UvidUHospitalizacijeClick" >
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/hospital-bed.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+        <Label Content="Uvid u hospitalizacije" FontSize="15" HorizontalAlignment="Left" Margin="27,629,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
 
 
 

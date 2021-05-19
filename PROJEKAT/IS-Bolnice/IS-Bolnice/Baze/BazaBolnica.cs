@@ -31,6 +31,13 @@ public class BazaBolnica
 
     }
 
+    public Bolnica GetBolnica() {
+        foreach (Bolnica bolnicaIter in SveBolnice()) {
+            return bolnicaIter;
+        }
+        return new Bolnica();
+    }
+
     public Bolnica ParseStringToBolnica(string podaciOSobi)
     {
         Bolnica b = new Bolnica();
