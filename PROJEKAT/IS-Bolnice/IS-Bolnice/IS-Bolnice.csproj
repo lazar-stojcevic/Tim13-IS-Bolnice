@@ -69,6 +69,7 @@
     <Compile Include="Baze\BazaOcena.cs" />
     <Compile Include="Baze\BazaOdgovoraNaZahteveZaValidacijuLekova.cs" />
     <Compile Include="Baze\BazaOpreme.cs" />
+    <Compile Include="Baze\BazaRadnogVremena.cs" />
     <Compile Include="Baze\BazaRenovacija.cs" />
     <Compile Include="Baze\BazaSadrzaja.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
@@ -81,11 +82,13 @@
     <Compile Include="Model\Obavestenje.cs" />
     <Compile Include="Model\OblastLekara.cs" />
     <Compile Include="Model\OdgovorNaZahtevZaValidaciju.cs" />
+    <Compile Include="Model\RadnoVremeLekara.cs" />
     <Compile Include="Model\Renovacija.cs" />
     <Compile Include="Model\SadrzajSobe.cs" />
     <Compile Include="Model\Sastojak.cs" />
     <Compile Include="Model\Survery.cs" />
     <Compile Include="Model\Uloge.cs" />
+    <Compile Include="Model\VremenskiInterval.cs" />
     <Compile Include="Model\ZahtevZaValidacijuLeka.cs" />
     <Compile Include="Prozori\OdredjivanjeTermina.xaml.cs">
       <DependentUpon>OdredjivanjeTermina.xaml</DependentUpon>

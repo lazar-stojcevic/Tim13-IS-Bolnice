@@ -187,20 +187,14 @@ public class BazaOperacija
 
     private List<Operacija> SviTerminiURadnomVremenuLekara(Lekar lekar, List<Operacija> operacije)
     {
-        DateTime najbliziTermin = NajbliziTermin();
         List<Operacija> operacijeURadnomVremenu = new List<Operacija>();
 
-        int brojDanaRada = 0;
-        if (!RadnoVremeLekaraUJednomDanu(lekar))
-        {
-            brojDanaRada = 1;   // tada lekar radi i sutradan
-        }
-
-        DateTime pocetakRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + brojDanaRada, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
         foreach (Operacija operacija in operacije)
         {
-            if (pocetakRadnogVremena <= operacija.VremePocetkaOperacije && krajRadnogVremena >= operacija.VremeKrajaOperacije)
+            // TODO: obrisati ovo formiranje intervala i u operaciju dodati polje za interval
+            VremenskiInterval termin = new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
+            
+            if (lekar.TerminURadnomVremenuLekara(termin))
             {
                 operacijeURadnomVremenu.Add(operacija);
             }
@@ -208,33 +202,12 @@ public class BazaOperacija
         return operacijeURadnomVremenu;
     }
 
-    private bool RadnoVremeLekaraUJednomDanu(Lekar lekar)
-    {
-        // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
-        int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
-        if (razlika != 0)
-        {
-            // ako se radno vreme ne zavrsava istog dana tada on radi i u narednom danu
-            return false;
-        }
-
-        return true;
-    }
-
     private bool OperacijaURadnomVremenuLekara(Lekar lekar, Operacija operacija)
     {
-        int brojDanaRada = 0;
-        if (!RadnoVremeLekaraUJednomDanu(lekar))
-        {
-            brojDanaRada = 1;   // tada lekar radi i sutradan
-        }
+        // TODO: obrisati ovo formiranje intervala i u pregled dodati polje za interval
+        VremenskiInterval termin = new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
 
-        DateTime danOperacije = operacija.VremePocetkaOperacije;
-
-        DateTime pocetakRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(danOperacije.Year, danOperacije.Month, danOperacije.Day + brojDanaRada, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
-
-        if (pocetakRadnogVremena <= operacija.VremePocetkaOperacije && krajRadnogVremena >= operacija.VremeKrajaOperacije)
+        if (lekar.TerminURadnomVremenuLekara(termin))
         {
             return true;
         }
@@ -358,8 +331,8 @@ public class BazaOperacija
         DateTime sutra = DateTime.Now.AddDays(1);
         for (int i = 0; i < 2; i++)
         {
-            System.DateTime pocetakIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-            System.DateTime krajIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+            System.DateTime pocetakIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
+            System.DateTime krajIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
             pocetakIntervala = pocetakIntervala.AddDays(i);
             krajIntervala = krajIntervala.AddDays(i);
             krajIntervala = krajIntervala.AddMinutes(-30);

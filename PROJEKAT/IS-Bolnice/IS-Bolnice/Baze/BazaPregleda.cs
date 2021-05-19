@@ -154,38 +154,19 @@ public class BazaPregleda
 
     private List<Pregled> SviTerminiURadnomVremenuLekara(Lekar lekar, List<Pregled> pregledi)
     {
-        DateTime najbliziTermin = NajbliziTermin();
         List<Pregled> preglediURadnomVremenu = new List<Pregled>();
 
-        int brojDanaRada = 0;
-        if (!RadnoVremeLekaraUJednomDanu(lekar))
-        {
-            brojDanaRada = 1;   // tada lekar radi i sutradan
-        }
-
-        DateTime pocetakRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(najbliziTermin.Year, najbliziTermin.Month, najbliziTermin.Day + brojDanaRada, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
         foreach (Pregled pregled in pregledi)
         {
-            if (pocetakRadnogVremena <= pregled.VremePocetkaPregleda && krajRadnogVremena >= pregled.VremeKrajaPregleda)
+            // TODO: obrisati ovo formiranje intervala i u pregled dodati polje za interval
+            VremenskiInterval termin = new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);
+            
+            if (lekar.TerminURadnomVremenuLekara(termin))
             {
                 preglediURadnomVremenu.Add(pregled);
             }
         }
         return preglediURadnomVremenu;
-    }
-
-    private bool RadnoVremeLekaraUJednomDanu(Lekar lekar)
-    {
-        // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
-        int razlika = lekar.KrajRadnogVremena.Day - lekar.PocetakRadnogVremena.Day;
-        if (razlika != 0)
-        {
-            // ako se radno vreme ne zavrsava istog dana tada on radi i u narednom danu
-            return false;
-        }
-
-        return true;
     }
 
     private List<Pregled> SlobodniPreglediLekara(Lekar lekar, List<Pregled> pregledi)
@@ -238,8 +219,8 @@ public class BazaPregleda
 
         for (int i = 0; i < BROJ_DANA_ZA_ZAKAZIVANJE_PREGLEDA; i++)
         {
-            System.DateTime pocetakIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-            System.DateTime krajIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+            System.DateTime pocetakIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
+            System.DateTime krajIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
 
             pocetakIntervala = pocetakIntervala.AddDays(i);
             krajIntervala = krajIntervala.AddDays(i);
@@ -331,8 +312,8 @@ public class BazaPregleda
             }
         }
 
-        System.DateTime pocetakIntervala = new System.DateTime(datum.Year, datum.Month, datum.Day, lekar.PocetakRadnogVremena.Hour, lekar.PocetakRadnogVremena.Minute, 0, 0);
-        System.DateTime krajIntervala = new System.DateTime(datum.Year, datum.Month, datum.Day, lekar.KrajRadnogVremena.Hour, lekar.KrajRadnogVremena.Minute, 0, 0);
+        System.DateTime pocetakIntervala = new System.DateTime(datum.Year, datum.Month, datum.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
+        System.DateTime krajIntervala = new System.DateTime(datum.Year, datum.Month, datum.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
         krajIntervala = krajIntervala.AddMinutes(-30);
 
         while (pocetakIntervala <= krajIntervala)
@@ -412,9 +393,9 @@ public class BazaPregleda
         {
             //FORMIRANJE RADNOG VREMENA LEKARA ZA DAN PROSLEDJENOG PREGLEDA
             System.DateTime pocetakRadnogVremena = new System.DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month, pregled.VremePocetkaPregleda.Day,
-                l.PocetakRadnogVremena.Hour, l.PocetakRadnogVremena.Minute, 0, 0);
+                l.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, l.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
             System.DateTime krajRadnogVremena = new System.DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month, pregled.VremePocetkaPregleda.Day,
-                l.KrajRadnogVremena.Hour, l.KrajRadnogVremena.Minute, 0, 0);
+                l.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, l.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
 
             //AKO PREGLED UPADA U RADNO VREME POREDI SE SA OSTALIM PREGLEDIMA ZBOG PREKLAPANJA
             if (pregled.VremePocetkaPregleda >= pocetakRadnogVremena && pregled.VremeKrajaPregleda <= krajRadnogVremena)

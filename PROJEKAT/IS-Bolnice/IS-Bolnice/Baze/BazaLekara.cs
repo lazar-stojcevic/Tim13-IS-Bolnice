@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using IS_Bolnice.Baze;
 
 public class BazaLekara
 {
+    private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
     private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
     private static string[] vremenskiFormatiCitanje = new[]
     {
@@ -78,12 +80,8 @@ public class BazaLekara
                 p.Oblast = new OblastLekara(delovi[3]);
                 p.KorisnickoIme = delovi[4];
                 p.Sifra = delovi[5];
-                //DODATO ZA RADNO VREME
-                p.PocetakRadnogVremena = DateTime.ParseExact(delovi[6], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-                p.KrajRadnogVremena = DateTime.ParseExact(delovi[7], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-                p.Ordinacija = new Soba(delovi[8]);
+                p.RadnoVreme = bazaRadnogVremena.RadnoVremeOdredjenogLekara(delovi[0]);
+                p.Ordinacija = new Soba(delovi[6]);
                 //TREBA DODATI ORDINACIJU
                 ret.Add(p);
             }
