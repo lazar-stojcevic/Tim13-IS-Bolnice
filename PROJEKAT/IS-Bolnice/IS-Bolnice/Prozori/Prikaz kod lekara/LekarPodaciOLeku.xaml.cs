@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,10 +22,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarPodaciOLeku : Page
     {
-        BazaLekova bazaLekova = new BazaLekova();
+        LekKontroler lekKontroler = new LekKontroler();
         ObservableCollection<Lek> sviLekovi;
         ObservableCollection<Lek> zamensnkiLekovi = new ObservableCollection<Lek>();
-        Lek lekStari;
+        Lek lekStari = new Lek();
         Lek lek = new Lek();
         public LekarPodaciOLeku(Lek odabraniLek, ObservableCollection<Lek> lekovi)
         {
@@ -77,8 +78,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             sviLekovi.Remove(lekStari);
             sviLekovi.Add(lek);
 
-            bazaLekova.ObrisiILek(lekStari);
-            bazaLekova.KreirajLek(lek);
+            lekKontroler.ObrisiLek(lekStari);
+            lekKontroler.KreirajLek(lek);
         }
 
         private void Button_ClickNazad(object sender, RoutedEventArgs e)

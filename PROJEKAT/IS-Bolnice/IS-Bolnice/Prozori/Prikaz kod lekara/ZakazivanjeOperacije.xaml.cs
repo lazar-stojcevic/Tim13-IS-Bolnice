@@ -12,20 +12,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
     public partial class ZakazivanjeOperacije : Window
     {
         List<Lekar> lekariSpecijalisti = new List<Lekar>();
-        BazaPregleda bp = new BazaPregleda();
-        BazaOperacija bo = new BazaOperacija();
+        OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
         List<Operacija> operacije = new List<Operacija>();
         public ZakazivanjeOperacije()
         {
             InitializeComponent();
-            BazaLekara bl = new BazaLekara();
-            List<Lekar> sviLekari = bl.SviLekari();
+            List<Lekar> sviLekari = lekarKontroler.GetSviLekari();
             foreach (Lekar p in sviLekari)
             {
                 // svi lekari specijalisti
@@ -38,21 +38,16 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 
             }
 
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            foreach (Bolnica b in bazaBolnica.SveBolnice())
+            foreach(Soba s in new BolnicaKontroler().GetSveOperacioneSale())
             {
-                foreach(Soba s in b.Soba)
-                {
                     comboBoxSale.Items.Add(s.Id + " " + s.Kvadratura+ "m^2"+" "+ s.Tip.ToString());
-                }
             }
-            }
+        }
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
-            BazaOperacija baza = new BazaOperacija();
             Operacija operacija = KreirajNovuOperaciju();
-            baza.ZakaziOperaciju(operacija);
+            operacijaKontroler.ZakaziOperaciju(operacija);
             MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
@@ -98,7 +93,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
-            operacije = bo.PonudjeniSlobodniTerminiLekara(jmbgLekara, idSale);
+            operacije = lekarKontroler.GetDostupniTerminiZaLekaraIDatuProstoriju(jmbgLekara, idSale);
 
             terminiList.Items.Clear();
 

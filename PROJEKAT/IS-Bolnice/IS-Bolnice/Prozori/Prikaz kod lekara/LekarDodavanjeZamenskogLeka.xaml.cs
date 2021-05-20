@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,19 +22,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarDodavanjeZamenskogLeka : Window
     {
         private ObservableCollection<Lek> zamenskiLekovi = new ObservableCollection<Lek>();
-        private BazaLekova bazaLekova = new BazaLekova();
         private List<Lek> lekoviZaPrikaz = new List<Lek>();
+        private LekKontroler lekKontroler = new LekKontroler();
         public LekarDodavanjeZamenskogLeka(ObservableCollection<Lek> zamenski, string sifraTrenutnogLeka)
         {
             InitializeComponent();
             zamenskiLekovi = zamenski;
-            lekoviZaPrikaz = bazaLekova.SviLekovi();
+            lekoviZaPrikaz = lekKontroler.GetSviLekovi();
             int i = 0;
-            foreach (Lek lek in bazaLekova.SviLekovi())
+            foreach (Lek lek in lekKontroler.GetSviLekovi())
             {
                 foreach (Lek zalenskiLek in zamenski)
                 {
-                    //Console.WriteLine(sifraTrenutnogLeka + "  +++++++       " + zalenskiLek.Sifra);
                     if (zalenskiLek.Sifra.Equals(lek.Sifra) || lek.Sifra.Equals(sifraTrenutnogLeka))
                     {
                         lekoviZaPrikaz.RemoveAt(i);

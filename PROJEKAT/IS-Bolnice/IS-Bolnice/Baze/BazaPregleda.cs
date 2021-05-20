@@ -142,7 +142,7 @@ public class BazaPregleda
     public List<Pregled> SviPreglediUOdabranojSobi(string idSobe)
     {
         List<Pregled> preglediUSobi = new List<Pregled>();
-        foreach (Pregled pregled in SviPregledi())
+        foreach (Pregled pregled in SviBuduciPregledi())
         {
             if (pregled.Lekar.Ordinacija.Id.Equals(idSobe))
             {
@@ -384,7 +384,7 @@ public class BazaPregleda
 
     public bool ZakazivanjePregledaUTerminu(Pregled pregled)
     {
-        List<Pregled> sviPregledi = SviPregledi();
+        List<Pregled> sviPregledi = SviBuduciPregledi();
         BazaLekara bl = new BazaLekara();
         List<Lekar> lekari = bl.LekariOpstePrakse();
 
@@ -441,7 +441,7 @@ public class BazaPregleda
     {
         List<Pregled> pregledi = new List<Pregled>();
 
-        foreach (Pregled pregled in SviPregledi())
+        foreach (Pregled pregled in SviBuduciPregledi())
         {
             if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta) && pregled.VremePocetkaPregleda > DateTime.Now)
             {
@@ -458,7 +458,7 @@ public class BazaPregleda
     {
         List<Pregled> pregledi = new List<Pregled>();
 
-        foreach (Pregled p in SviPregledi())
+        foreach (Pregled p in SviBuduciPregledi())
         {
             if (p.Lekar.Jmbg.Equals(jmbgLekara) && p.VremeKrajaPregleda > DateTime.Now)
             {
@@ -470,7 +470,7 @@ public class BazaPregleda
     }
 
     //OPTIMIZOVATI KOD
-    public List<Pregled> SviPregledi()
+    public List<Pregled> SviBuduciPregledi()
     {
         BazaLekara bl = new BazaLekara();
 
@@ -519,6 +519,11 @@ public class BazaPregleda
                 }
             }
 
+            if (p.VremePocetkaPregleda < DateTime.Now.AddHours(-1))
+            {
+                continue;
+            }
+
             pregledi.Add(p);
         }
 
@@ -527,7 +532,7 @@ public class BazaPregleda
 
     private bool MozeDaSeZakaze(Pregled noviPregled)
     {
-        foreach (Pregled zakazani in SviPregledi())
+        foreach (Pregled zakazani in SviBuduciPregledi())
         {
             if (noviPregled.Lekar.Jmbg == zakazani.Lekar.Jmbg)
             {
@@ -576,7 +581,7 @@ public class BazaPregleda
     {
         List<string> redoviZaUpisUDatoteku = new List<string>();
 
-        foreach (Pregled pregled in SviPregledi())
+        foreach (Pregled pregled in SviBuduciPregledi())
         {
             if (pregled.Lekar.Jmbg != pregledZaBrisanje.Lekar.Jmbg || !pregled.VremePocetkaPregleda.Equals(pregledZaBrisanje.VremePocetkaPregleda))
             {
@@ -608,7 +613,7 @@ public class BazaPregleda
     {
         List<string> redoviZaUpisUDatoteku = new List<string>();
 
-        foreach (Pregled pregled in SviPregledi())
+        foreach (Pregled pregled in SviBuduciPregledi())
         {
             if (pregled.Lekar.Jmbg != stariPregled.Lekar.Jmbg || !pregled.VremePocetkaPregleda.Equals(stariPregled.VremePocetkaPregleda))
             {
@@ -626,10 +631,18 @@ public class BazaPregleda
         File.WriteAllLines(fileLocation, redoviZaUpisUDatoteku);
     }
 
-    public string FormatPisanjaPregleda(Pregled pregled)
-    {
+    public string FormatPisanjaPregleda(Pregled pregled){
+        foreach (Lekar lekar in bazaLekara.SviLekari())
+        {
+            if (lekar.Jmbg.Equals(pregled.Lekar.Jmbg))
+            {
+                pregled.Lekar.Ordinacija = lekar.Ordinacija;
+                break;
+            }
+        }
+    
         return pregled.Pacijent.Jmbg + "#" + pregled.Lekar.Jmbg + "#" + pregled.VremePocetkaPregleda.ToString(vremenskiFormatPisanje)
-            + "#" + pregled.VremeKrajaPregleda.ToString(vremenskiFormatPisanje) + "#" + "Broj ordinacije";
+            + "#" + pregled.VremeKrajaPregleda.ToString(vremenskiFormatPisanje) + "#" + pregled.Lekar.Ordinacija.Id;
     }
 
     public Lekar PronadjiLekara(string jmbgLekara)

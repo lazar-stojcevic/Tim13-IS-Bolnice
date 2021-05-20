@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,12 +22,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarUvidUOdobreneLekove : Page
     {
-        BazaLekova bazaLekova = new BazaLekova();
+        private LekKontroler lekKontroler = new LekKontroler();
         ObservableCollection<Lek> lekovi = new ObservableCollection<Lek>();
         public LekarUvidUOdobreneLekove()
         {
             InitializeComponent();
-            foreach (Lek lek in bazaLekova.SviLekovi())
+            foreach (Lek lek in lekKontroler.GetSviLekovi())
             {
                 lekovi.Add(lek);
             }

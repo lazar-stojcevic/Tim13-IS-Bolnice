@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,13 +22,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarZahtevValidacije : Page
     {
         ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka();
-        BazaZahtevaZaValidacijuLeka bazaZahteva = new BazaZahtevaZaValidacijuLeka();
+        private ZahtevZaValidacijuKontroler zahtevZaValidacijuKontroler = new ZahtevZaValidacijuKontroler();
         string sifra;
         public LekarZahtevValidacije(string sifraLeka, string sifraLekara)
         {
             sifra = sifraLekara;
             InitializeComponent();
-            List<ZahtevZaValidacijuLeka> sviZahtevi = bazaZahteva.SviZahtevi();
+            List<ZahtevZaValidacijuLeka> sviZahtevi = zahtevZaValidacijuKontroler.GetSviZaValidacijuLeka();
             foreach (ZahtevZaValidacijuLeka zahtevIter in sviZahtevi)
             {
                 if (zahtevIter.Lek.Sifra.Equals(sifraLeka))
@@ -57,9 +58,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_Potvrdi(object sender, RoutedEventArgs e)
         {
-            BazaLekova bazaLekova = new BazaLekova();
-            bazaLekova.KreirajLek(zahtev.Lek);
-            bazaZahteva.ObrisiZahtev(zahtev);
+            LekKontroler lekKontroler = new LekKontroler();
+            lekKontroler.KreirajLek(zahtev.Lek);
+
+            zahtevZaValidacijuKontroler.ObrisiZahtev(zahtev);
 
             LekarGlavniMeni meni = new LekarGlavniMeni(sifra);
             this.NavigationService.Navigate(meni);

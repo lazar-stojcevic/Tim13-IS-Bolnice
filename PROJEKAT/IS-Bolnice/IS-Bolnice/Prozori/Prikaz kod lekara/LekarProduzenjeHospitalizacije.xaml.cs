@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,6 +22,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarProduzenjeHospitalizacije : Window
     {
         private Hospitalizacija hospitalizacija;
+        private HospitalizacijaKontroler hospitalizacijaKontroler = new HospitalizacijaKontroler();
         public LekarProduzenjeHospitalizacije(Hospitalizacija hospitalizacijaZaIzmenu)
         {
             InitializeComponent();
@@ -31,10 +33,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void ButtonClick_Produzi(object sender, RoutedEventArgs e)
         {
-            BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
-            bazaHospitalizacija.ObrisiHospitalizaciju(hospitalizacija);
+            hospitalizacijaKontroler.ObrisiHospitalizaciju(hospitalizacija);
             hospitalizacija.KrajHospitalizacije = datumProduzenja.SelectedDate.Value;
-            bazaHospitalizacija.KreirajHospitalizaciju(hospitalizacija);
+            hospitalizacijaKontroler.KreirajHospitalizaciju(hospitalizacija);
 
             MessageBox.Show("Hospitalizacije uspešno produžena", "Produžena hospitalizacija",
                 MessageBoxButton.OK);

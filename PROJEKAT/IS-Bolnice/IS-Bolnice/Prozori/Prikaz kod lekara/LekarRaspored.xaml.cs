@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,18 +22,17 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarRaspored : Page
     {
-        private BazaOperacija operacije = new BazaOperacija();
-        private BazaPregleda pregledi = new BazaPregleda();
         private string sifra;
+
+        private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
+        PregledKontroler pregledKontroler = new PregledKontroler();
         public LekarRaspored(string id)
         {
             InitializeComponent();
             sifra = id;
-            //operacije = new BazaOperacija();
-            //pregledi = new BazaPregleda();
-            List<Operacija> op = operacije.SveSledeceOperacijeZaLekara(id);
+            List<Operacija> op = operacijaKontroler.SveSledeceOperacijeZaLekara(id);
             listaOperacija.ItemsSource = op;
-            List<Pregled> pr = pregledi.SviBuduciPreglediKojeLekarIma(id);
+            List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(id);
             listaPregleda.ItemsSource = pr;
         }
 
@@ -51,10 +51,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             Console.WriteLine(datum);
             DateTime vreme = selektovani.VremePocetkaOperacije;
 
-
-            BazaOperacija baza = new BazaOperacija();
-            List<Operacija> operacije = baza.SveSledeceOperacije();
-            string izListe = listaOperacija.SelectedItem.ToString();
             IzmenaOperacije izmena = new IzmenaOperacije();
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
@@ -81,38 +77,27 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
 
             Operacija selektovani = (Operacija)listaOperacija.SelectedItem;
-            string ime = selektovani.Pacijent.Ime;
-            string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
             DateTime datum = selektovani.VremePocetkaOperacije.Date;
-            Console.WriteLine(datum);
             DateTime vreme = selektovani.VremePocetkaOperacije;
 
-
-            BazaOperacija baza = new BazaOperacija();
-            List<Operacija> lista = baza.SveSledeceOperacije();
-            File.WriteAllText(@"..\..\Datoteke\operacije.txt", String.Empty);
+            List<Operacija> lista = operacijaKontroler.GetSveSledeceOperacije();
+            //TODO: UVEDI BINDING POD HITNO
             foreach (Operacija o in lista)
             {
                 if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetkaOperacije.Hour == vreme.Hour && o.VremePocetkaOperacije.Minute == vreme.Minute && o.VremePocetkaOperacije.Date.Equals(datum))
                 {
-                    //nista
-                }
-                else
-                {
-                    baza.ZakaziOperaciju(o);
+                    operacijaKontroler.OtkaziOperaciju(o);
                 }
             }
 
-            List<Operacija> op = operacije.SveSledeceOperacijeZaLekara(sifra);
+            List<Operacija> op = operacijaKontroler.SveSledeceOperacijeZaLekara(sifra);
             listaOperacija.ItemsSource = op;
 
         }
 
         private void Button_IzmeniPregled(object sender, RoutedEventArgs e)
         {
-            CultureInfo provider = CultureInfo.InvariantCulture;
-
             if (listaPregleda.SelectedIndex == -1) { 
                 MessageBox.Show("Nista nije selektovano","Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -123,11 +108,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
             DateTime datum = selektovani.VremePocetkaPregleda.Date;
-            Console.WriteLine(datum);
             DateTime vreme = selektovani.VremePocetkaPregleda;
-
-            BazaPregleda baza = new BazaPregleda();
-            List<Pregled> pregledi = baza.SviPregledi();
 
             LekarIzmenaPregleda izmena = new LekarIzmenaPregleda();
 
@@ -164,22 +145,17 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             DateTime vreme = selektovani.VremePocetkaPregleda;
 
 
-            BazaPregleda baza = new BazaPregleda();
-            List<Pregled> lista = baza.SviPregledi();
-            File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
+            List<Pregled> lista = pregledKontroler.GetSviBuduciPregledi();
             foreach (Pregled p in lista)
             {
                 if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == vreme.Hour && p.VremePocetkaPregleda.Minute == vreme.Minute && p.VremePocetkaPregleda.Date.Equals(datum.Date) && jmbgLekara.Equals(p.Lekar.Jmbg))
                 {
-                    //nista
-                }
-                else
-                {
-                    baza.ZakaziPregled(p);
+                    pregledKontroler.OtkaziPregled(p);
+                    break;
                 }
             }
 
-            List<Pregled> pr = pregledi.SviBuduciPreglediKojeLekarIma(sifra);
+            List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
             listaPregleda.ItemsSource = pr;
 
         }

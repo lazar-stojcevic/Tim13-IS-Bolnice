@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -24,7 +25,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public string StariSat { get; set; }
         public string StariMinut { get; set; }
 
-        private string jmbgPac;
+        private LekarKontroler lekarKontroler = new LekarKontroler();
+        private BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
+        private PregledKontroler pregledKontroler = new PregledKontroler();
+
         private List<Lekar> lekari = new List<Lekar>();
         BazaPregleda bp = new BazaPregleda();
         List<Pregled> pregledi = new List<Pregled>();
@@ -32,55 +36,39 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             InitializeComponent();
             BazaLekara baza = new BazaLekara();
-            foreach (Lekar lekar in baza.SviLekari())
+            foreach (Lekar lekar in lekarKontroler.GetSviLekari())
             {
                 string podaci = lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg;
                 listaLekara.Items.Add(podaci);
                 lekari.Add(lekar);
             }
             BazaBolnica bazaBolnica = new BazaBolnica();
-            foreach (Bolnica b in bazaBolnica.SveBolnice())
-            // TODO: TREBA DA SE DODA PROVERA ZA TRENUTNU BOLNICU
-            {
-                foreach (Soba s in b.Soba)
+            
+                foreach (Soba s in bolnicaKontroler.GetSveSveSobeZaPregled())
                 {
                     comboBoxSale.Items.Add(s.Id + " " + s.Kvadratura + "m^2" + " " + s.Tip.ToString());
                 }
-            }
+            
         }
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
         {
-            BazaPregleda baza = new BazaPregleda();
-            List<Pregled> lista = baza.SviPregledi();
-            File.WriteAllText(@"..\..\Datoteke\pregledi.txt", String.Empty);
+            Pregled noviPregled = new Pregled();
+            string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
+            Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
 
-            foreach (Pregled p in lista)
-            {
-                if (txtOperJmbg.Text.Equals(p.Pacijent.Jmbg) && p.VremePocetkaPregleda.Hour == Int32.Parse(StariSat) && p.VremePocetkaPregleda.Date.Equals(StariDatum))
-                {
+            DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
+                pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
+            DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
+                pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
+            kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
 
-                    string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-                    Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
+            noviPregled.Lekar.Jmbg = idLekara;
+            noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
+            noviPregled.VremePocetkaPregleda = pocetak;
+            noviPregled.VremeKrajaPregleda = kraj;
+            pregledKontroler.IzmeniPregled(StariDatum, StariSat, StariMinut, noviPregled);
 
-                    //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
-                    DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
-                        pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
-                    DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
-                       pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
-                    kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
-
-                    p.Lekar.Jmbg = idLekara;
-                    p.Pacijent.Jmbg = txtOperJmbg.Text;
-                    p.VremePocetkaPregleda = pocetak;
-                    p.VremeKrajaPregleda = kraj;
-                    baza.ZakaziPregled(p);
-                }
-                else
-                {
-                    baza.ZakaziPregled(p);
-                }
-            }
             MessageBox.Show("Pregled uspešno izmenjen", "Izmenjen pregled", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
 
@@ -104,11 +92,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
 
             string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
-            pregledi = bp.PonudjeniSlobodniPreglediLekara(jmbgLekara);
 
+            pregledi = pregledKontroler.PonudjeniSlobodniTerminiLekara(jmbgLekara);
             terminiList.Items.Clear();
 
-            foreach (Pregled p in pregledi)
+            foreach (Pregled p in pregledKontroler.PonudjeniSlobodniTerminiLekara(jmbgLekara))
             {
                 terminiList.Items.Add(p.VremePocetkaPregleda);
             }

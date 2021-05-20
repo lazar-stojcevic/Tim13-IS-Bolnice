@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -28,8 +29,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             List<ZahtevZaValidacijuLeka> itemSource = new List<ZahtevZaValidacijuLeka>();
 
 
-            BazaZahtevaZaValidacijuLeka bz = new BazaZahtevaZaValidacijuLeka();
-            List<ZahtevZaValidacijuLeka> zahteviZaValidacijuLeka = bz.SviZahtevi();
+            ZahtevZaValidacijuKontroler zahteviZaValidacijuKontroler = new ZahtevZaValidacijuKontroler();
+            List<ZahtevZaValidacijuLeka> zahteviZaValidacijuLeka = zahteviZaValidacijuKontroler.GetSviZaValidacijuLeka();
             foreach (ZahtevZaValidacijuLeka zahtev in zahteviZaValidacijuLeka)
             {
                 foreach (Lekar lekar in zahtev.lekariKomeIdeNaValidaciju)

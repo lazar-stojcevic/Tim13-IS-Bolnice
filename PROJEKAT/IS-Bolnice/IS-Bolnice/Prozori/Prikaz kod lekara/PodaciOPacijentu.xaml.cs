@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,8 +22,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     {
         public PodaciOPacijentu(string jmbg)
         {
-            BazaPacijenata baza = new BazaPacijenata();
-            Pacijent p = baza.PacijentSaOvimJMBG(jmbg);
+            PacijentKontroler pacijentKontroler = new PacijentKontroler();
+            Pacijent p = pacijentKontroler.GetPacijentSaOvimJMBG(jmbg);
             InitializeComponent();
 
             //TODO: saznaj bolji nacin da ovo sredis

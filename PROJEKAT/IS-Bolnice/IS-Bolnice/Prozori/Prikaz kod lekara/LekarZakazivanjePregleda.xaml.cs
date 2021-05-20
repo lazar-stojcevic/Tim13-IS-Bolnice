@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -19,29 +20,28 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarZakazivanjePregleda : Window
     {
-        private string jmbgPac;
         private List<Lekar> lekari = new List<Lekar>();
-        BazaPregleda bp = new BazaPregleda();
+
+        private PregledKontroler pregledKontroler = new PregledKontroler();
+
         List<Pregled> pregledi = new List<Pregled>();
         public LekarZakazivanjePregleda()
         {
             InitializeComponent();
-            BazaLekara baza = new BazaLekara();
-            foreach (Lekar p in baza.SviLekari())
+            LekarKontroler lekarKontroler = new LekarKontroler();
+            foreach (Lekar lekar in lekarKontroler.GetSviLekari())
             {
-                string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Oblast.Naziv;
+                string podaci = lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg + " " + lekar.Oblast.Naziv;
                 listaLekara.Items.Add(podaci);
             }
 
-            BazaLekara bl = new BazaLekara();
-            lekari = bl.SviLekari();
+            lekari = lekarKontroler.GetSviLekari();
         }
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
-            BazaPregleda bazaPregleda = new BazaPregleda();
             Pregled noviPregled = KreirajNoviPregled();
-            bazaPregleda.ZakaziPregled(noviPregled);
+            pregledKontroler.ZakaziPregled(noviPregled);
             MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
@@ -96,7 +96,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
 
             string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
-            pregledi = bp.PonudjeniSlobodniPreglediLekara(jmbgLekara);
+            pregledi = pregledKontroler.PonudjeniSlobodniTerminiLekara(jmbgLekara);
 
             terminiList.Items.Clear();
 

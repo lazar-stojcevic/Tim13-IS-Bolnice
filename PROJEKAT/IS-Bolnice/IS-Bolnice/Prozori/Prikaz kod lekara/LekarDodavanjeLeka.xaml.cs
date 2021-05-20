@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -22,24 +23,22 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarDodavanjeLeka : Window
     {
         ObservableCollection<Terapija> sveZadateTerapije = new ObservableCollection<Terapija>();
-        BazaLekova bazaLekova = new BazaLekova();
-        BazaPacijenata bazaPacijenata = new BazaPacijenata();
+
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private LekKontroler lekKontroler = new LekKontroler();
         public LekarDodavanjeLeka(ObservableCollection<Terapija> terapija, string jmbgPacijenta)
         {
-            List<Lek> sviLekovi = bazaLekova.SviLekovi();
-
+            List<Lek> sviLekovi = lekKontroler.GetSviLekovi();
             PrikazLekovaNaKojePacijentNijeAlergican(jmbgPacijenta, sviLekovi);
-
             InitializeComponent();
             listaSvihLekova.ItemsSource = sviLekovi;
             sveZadateTerapije = terapija;
-
         }
 
         private void PrikazLekovaNaKojePacijentNijeAlergican(string jmbgPacijenta, List<Lek> sviLekovi)
         {
-            List<Lek> lekoviZaPrikaz = bazaLekova.SviLekovi();
-            Pacijent pacijentKojiJeNaPregledu = bazaPacijenata.PacijentSaOvimJMBG(jmbgPacijenta);
+            List<Lek> lekoviZaPrikaz = lekKontroler.GetSviLekovi();
+            Pacijent pacijentKojiJeNaPregledu = pacijentKontroler.GetPacijentSaOvimJMBG(jmbgPacijenta);
 
             if (pacijentKojiJeNaPregledu.Alergeni.Count != 0)
             {

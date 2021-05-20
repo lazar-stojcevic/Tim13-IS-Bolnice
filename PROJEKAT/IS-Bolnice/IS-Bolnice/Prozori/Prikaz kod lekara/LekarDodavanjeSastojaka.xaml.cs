@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -20,11 +21,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarDodavanjeSastojaka : Window
     {
         private ListBox lista = new ListBox();
-        private BazaSastojaka bazaSastojaka = new BazaSastojaka();
+        private SastojakKontroler sastojakKontroler = new SastojakKontroler();
         public LekarDodavanjeSastojaka(ListBox listaSastojaka)
         {
             InitializeComponent();
-            foreach (Sastojak iter in bazaSastojaka.SviSastojci())
+            foreach (Sastojak iter in sastojakKontroler.GetSviSastojci())
             {
                 bool vecPostoji = false;
                 foreach (string sastojak in listaSastojaka.Items)

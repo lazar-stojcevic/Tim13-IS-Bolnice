@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Drawing;
+using IS_Bolnice.Kontroleri;
 
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
@@ -22,7 +23,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarIzvestaj : Window
     {
-        BazaIzvestaja baza = new BazaIzvestaja();
+        IzvestajKontroler izvestajKontroler = new IzvestajKontroler();
         ObservableCollection<Terapija> terapije = new ObservableCollection<Terapija>();
         string jmbgPac;
         string jmbgLek;
@@ -56,7 +57,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
 
-                Pacijent p = new BazaPacijenata().PacijentSaOvimJMBG(jmbgPac);
+                Pacijent p = new PacijentKontroler().GetPacijentSaOvimJMBG(jmbgPac);
 
                 string imeBolnice = "Super bolnica";
                 string imeIPrezimePacijenta = p.Ime + " " + p.Prezime;
@@ -78,7 +79,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             string textIzvestaja = KreirajTextIzvestaja();
 
-            baza.KreirajIzvestaj(textIzvestaja);
+            izvestajKontroler.KreirajIzvestaj(textIzvestaja);
         }
 
         private string KreirajTextIzvestaja()

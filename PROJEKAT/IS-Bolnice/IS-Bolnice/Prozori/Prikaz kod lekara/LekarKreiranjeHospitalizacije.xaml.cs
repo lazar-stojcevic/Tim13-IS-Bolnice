@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,20 +22,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarKreiranjeHospitalizacije : Page
     {
-        private List<Soba> listaSvihSoba = new List<Soba>();
+        private BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
         public LekarKreiranjeHospitalizacije(string sifra)
         {
             InitializeComponent();
             txtJMBG.Text = sifra;
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            foreach (Bolnica b in bazaBolnica.SveBolnice())
-            {
-                foreach (Soba s in b.Soba)
-                {
-                    if (!s.Zauzeta && s.Tip.Equals(RoomType.bolnickaSoba))
-                        listaSvihSoba.Add(s);
-                }
-            }
+            List<Soba> listaSvihSoba = bolnicaKontroler.GetSveSobeZaHospitalizaciju();
+            
             datumKraja.SelectedDate = DateTime.Today.AddDays(1);
             listaSoba.ItemsSource = listaSvihSoba;
         }
@@ -46,8 +40,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 Soba soba = (Soba) listaSoba.SelectedItem;
                 Hospitalizacija hos = new Hospitalizacija(txtJMBG.Text, soba.Id, datumKraja.SelectedDate.Value);
 
-                BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
-                if (bazaHospitalizacija.KreirajHospitalizaciju(hos))
+                if (new HospitalizacijaKontroler().KreirajHospitalizaciju(hos))
                 {
                     MessageBox.Show("Pacijent poslan na hospitalizaciju", "Kreirana hospitalizacija",
                         MessageBoxButton.OK);

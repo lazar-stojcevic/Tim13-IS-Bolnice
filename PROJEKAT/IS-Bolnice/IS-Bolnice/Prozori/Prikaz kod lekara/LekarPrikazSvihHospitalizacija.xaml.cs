@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -23,10 +24,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarPrikazSvihHospitalizacija : Page
     {
         private ObservableCollection<Hospitalizacija> sveHospitalizacije = new ObservableCollection<Hospitalizacija>();
+        private HospitalizacijaKontroler hospitalizacijaKontroler = new HospitalizacijaKontroler();
         public LekarPrikazSvihHospitalizacija()
         {
-            BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
-            foreach (Hospitalizacija hospitalizacija in bazaHospitalizacija.SveHospitalizacije())
+            foreach (Hospitalizacija hospitalizacija in hospitalizacijaKontroler.GetSveHospitalizacije())
             {
                 sveHospitalizacije.Add(hospitalizacija);
             }
@@ -56,8 +57,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 return;
             }
 
-            BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
-            bazaHospitalizacija.ObrisiHospitalizaciju(sveHospitalizacije.ElementAt(listaHospitalizacija.SelectedIndex));
+            hospitalizacijaKontroler.ObrisiHospitalizaciju(sveHospitalizacije.ElementAt(listaHospitalizacija.SelectedIndex));
 
             sveHospitalizacije.RemoveAt(listaHospitalizacija.SelectedIndex);
         }

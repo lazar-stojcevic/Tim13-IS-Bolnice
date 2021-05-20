@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -47,8 +48,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void btnUcitajPacijenta(object sender, RoutedEventArgs e)
         {
             bool nasao = false;
-            BazaPacijenata baza = new BazaPacijenata();
-            foreach (Pacijent p in baza.SviPacijenti())
+            PacijentKontroler pacijentKontroler = new PacijentKontroler();
+            //TODO OVO BI BILO LEPO DA SE URADI MALO ELEGANTNIJE
+            foreach (Pacijent p in pacijentKontroler.GetSviPacijenti())
             {
                 if (txtJMBG.Text.Equals(p.Jmbg))
                 {

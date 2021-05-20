@@ -74,6 +74,17 @@
     <Compile Include="Baze\BazaSadrzaja.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
+    <Compile Include="Kontroleri\BolnicaKontroler.cs" />
+    <Compile Include="Kontroleri\HospitalizacijaKontroler.cs" />
+    <Compile Include="Kontroleri\IzvestajKontroler.cs" />
+    <Compile Include="Kontroleri\LekarKontroler.cs" />
+    <Compile Include="Kontroleri\LekKontroler.cs" />
+    <Compile Include="Kontroleri\OdgovoriNaZahtevZaValidacijeKontroler.cs" />
+    <Compile Include="Kontroleri\OperacijaKontroler.cs" />
+    <Compile Include="Kontroleri\PacijentKontroler.cs" />
+    <Compile Include="Kontroleri\PregledKontroler.cs" />
+    <Compile Include="Kontroleri\SastojakKontroler.cs" />
+    <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Change.cs" />
     <Compile Include="Model\Hospitalizacija.cs" />
@@ -298,6 +309,17 @@
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
+    <Compile Include="Servisi\BolnicaServis.cs" />
+    <Compile Include="Servisi\HospitalizacijaServis.cs" />
+    <Compile Include="Servisi\IzvestajServis.cs" />
+    <Compile Include="Servisi\LekarServis.cs" />
+    <Compile Include="Servisi\LekServis.cs" />
+    <Compile Include="Servisi\OdgovorNaZahtevZaValidacijuServis.cs" />
+    <Compile Include="Servisi\OperacijaServis.cs" />
+    <Compile Include="Servisi\PacijentServis.cs" />
+    <Compile Include="Servisi\PregledServis.cs" />
+    <Compile Include="Servisi\SastojakServis.cs" />
+    <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
     <Page Include="Prozori\OdredjivanjeTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

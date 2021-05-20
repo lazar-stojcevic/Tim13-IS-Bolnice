@@ -7,7 +7,11 @@ using System;
 
 public class Pregled
 {
-    public Pregled() { }
+    public Pregled()
+    {
+        Lekar = new Lekar();
+        Pacijent = new Pacijent();
+    }
 
     public Pacijent Pacijent { get; set; }
     public Lekar Lekar { get; set; }

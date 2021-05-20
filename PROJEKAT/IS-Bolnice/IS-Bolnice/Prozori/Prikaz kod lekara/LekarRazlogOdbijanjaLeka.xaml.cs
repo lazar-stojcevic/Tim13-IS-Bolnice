@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -21,6 +22,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     {
         BazaZahtevaZaValidacijuLeka bazaZahtevaZaValidaciju = new BazaZahtevaZaValidacijuLeka();
         BazaOdgovoraNaZahteveZaValidacijuLekova bazaOdgovora = new BazaOdgovoraNaZahteveZaValidacijuLekova();
+
+        private ZahtevZaValidacijuKontroler zahtevZaValidacijuKontroler = new ZahtevZaValidacijuKontroler();
+
+        private OdgovoriNaZahtevZaValidacijeKontroler odgovorNaValidacijeKontroler =
+            new OdgovoriNaZahtevZaValidacijeKontroler();
+
         ZahtevZaValidacijuLeka zahtev;
         public LekarRazlogOdbijanjaLeka(ZahtevZaValidacijuLeka zahtevPoslat)
         {
@@ -32,8 +39,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             OdgovorNaZahtevZaValidaciju odgovor = new OdgovorNaZahtevZaValidaciju();
             odgovor.Obrazlozenje = txtRazlog.Text;
-            bazaOdgovora.KreirajOdgovorNaZahtev(odgovor, zahtev);
-            bazaZahtevaZaValidaciju.ObrisiZahtev(zahtev);
+            odgovorNaValidacijeKontroler.KreirajOdgovorNaZahtevZaValidaciju(odgovor, zahtev);
+            zahtevZaValidacijuKontroler.ObrisiZahtev(zahtev);
             this.Close();
         }
 
