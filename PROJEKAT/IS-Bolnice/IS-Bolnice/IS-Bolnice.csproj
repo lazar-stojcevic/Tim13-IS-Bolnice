@@ -242,8 +242,8 @@
     <Compile Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml.cs">
       <DependentUpon>FormiranjeObavestenjaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prozori\Sekretar\GodisniOdmorLekara.xaml.cs">
-      <DependentUpon>GodisniOdmorLekara.xaml</DependentUpon>
+    <Compile Include="Prozori\Sekretar\SlobodniDaniLekara.xaml.cs">
+      <DependentUpon>SlobodniDaniLekara.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Sekretar\IzmenaObavestenjaWindow.xaml.cs">
       <DependentUpon>IzmenaObavestenjaWindow.xaml</DependentUpon>
@@ -301,6 +301,9 @@
     </Compile>
     <Compile Include="Prozori\Sekretar\SekretarZakazivanjePregleda.xaml.cs">
       <DependentUpon>SekretarZakazivanjePregleda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Sekretar\VanredniRadLekara.xaml.cs">
+      <DependentUpon>VanredniRadLekara.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Sekretar\ZakazivanjeHitnogTermina.xaml.cs">
       <DependentUpon>ZakazivanjeHitnogTermina.xaml</DependentUpon>
@@ -508,7 +511,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Prozori\Sekretar\GodisniOdmorLekara.xaml">
+    <Page Include="Prozori\Sekretar\SlobodniDaniLekara.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -601,6 +604,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Sekretar\SekretarZakazivanjePregleda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Sekretar\VanredniRadLekara.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

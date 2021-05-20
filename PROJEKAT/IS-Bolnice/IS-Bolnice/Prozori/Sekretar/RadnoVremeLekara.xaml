@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Sekretar"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Podešavanje radnog vremena lekara" Height="450" Width="500">
+        Title="Podešavanje radnog vremena lekara" Height="500" Width="520"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
@@ -19,25 +22,53 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Radno vreme lekara:" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"/>
-        <TextBox x:Name="tbLekar" Height="25" Width="170" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1"/>
-        <Label Content="Redovno radno vreme lekara:" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"></Label>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-            <Label Content="Vreme početka:   "/>
-            <ComboBox x:Name="cbSatiPocetak" Width="50"/>
-            <Label Content="h"></Label>
-            <ComboBox x:Name="cbMinutiPocetak" Width="50"/>
-            <Label Content="min"></Label>
-        </StackPanel>
+        <Label Content="Radno vreme za lekara:" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Margin="29.6,24,0,58.6" Height="23" Grid.Column="1"/>
+        <TextBox x:Name="tbLekar" Height="25" Width="170" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,22,30.4,58.6"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1">
-            <Label Content="Vreme kraja:        "></Label>
-            <ComboBox x:Name="cbSatiKraj" Width="50" SelectionChanged="cbSatiKraj_SelectionChanged"/>
-            <Label Content="h"></Label>
-            <ComboBox x:Name="cbMinutiKraj" Width="50"/>
-            <Label Content="min"></Label>
-        </StackPanel>
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="Redovno radno vreme:" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"></Label>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="1" Grid.Column="1" Content="Vreme početka radnog vremena:   "/>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" x:Name="cbSatiPocetak" Height="25" Width="50" SelectionChanged="cbSatiPocetak_SelectionChanged"/>
+                <Label Content="h"></Label>
+                <ComboBox x:Name="cbMinutiPocetak" Height="25" Width="50" SelectionChanged="cbMinutiPocetak_SelectionChanged"/>
+                <Label Content="min"></Label>
+            </StackPanel>
 
-        <Button Content="Godišnji odmor" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Click="Button_Click_Godisnji"></Button>
+            <Label Content="Trajanje radnog vremena:" Grid.Row="3" Grid.Column="1"></Label>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox x:Name="cbSatiTrajanje" Height="25" Width="50" SelectionChanged="cbSatiTrajanje_SelectionChanged"/>
+                <Label Content="h                        "></Label>
+            </StackPanel>
+        </Grid>
+
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Grid.Row="3" Grid.Column="1"/>
+        <Label Content="Slobodni dani u nedelji:" FontWeight="Bold" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"></Label>
+        <CheckBox x:Name="boxPonedeljak" Content="Ponedeljak" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,56"/>
+        <CheckBox x:Name="boxUtorak" Content="Utorak" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="140,0,0,56"/>
+        <CheckBox x:Name="boxSreda" Content="Sreda" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="230.6,0,0,56"/>
+        <CheckBox x:Name="boxCetvrtak" Content="Četvrtak" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="310.6,0,0,56"/>
+        <CheckBox x:Name="boxPetak" Content="Petak" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,22.2"/>
+        <CheckBox x:Name="boxSubota" Content="Subota" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="140,0,0,22"/>
+        <CheckBox x:Name="boxNedelja" Content="Nedelja" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="230,0,0,22"/>
+
+        <Button Content="Potvrdi" Width="92" Height="32" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click_Potvrdi"/>
+        <Button Content="Odustani" Width="92" Height="32" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_Odustani"/>
+
+        <Button Content="Slobodni dani" Width="92" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="0" Click="Button_Click_Slobodni_Dani" Margin="49.6,0,0,7.6" Grid.Column="1"/>
+        <Button Content="Vanredni rad" Width="92" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,50.4,7.6" Click="Button_Click_Vanredni_Rad"/>
     </Grid>
 </Window>

@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using IS_Bolnice.Baze;
+using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class RadnoVremeLekara : Window
     {
         private Lekar selektovaniLekar;
+        private readonly int INTERVAL_MINUTA_RADNOG_VREMENA = 10;
+        private bool napravljenaIzmena = false;
+        private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
 
         public RadnoVremeLekara(Lekar lekar)
         {
@@ -27,6 +23,60 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             PopuniComboBoxSati();
             PopuniComboBoxMinuta();
+            PodesavanjeRedovnogRadnogVremena();
+            PodesavanjeComboBoxevaSlobodnihDana();
+        }
+
+        private void PodesavanjeRedovnogRadnogVremena()
+        {
+            DateTime pocetak = selektovaniLekar.RadnoVreme.StandardnoRadnoVreme.Pocetak;
+            DateTime kraj = selektovaniLekar.RadnoVreme.StandardnoRadnoVreme.Kraj;
+
+            int satiPocetkaRadnogVremena = pocetak.Hour;
+            cbSatiPocetak.SelectedValue = satiPocetkaRadnogVremena;
+
+            int minutiPocetkaRadnogVremena = pocetak.Minute;
+            if (minutiPocetkaRadnogVremena % INTERVAL_MINUTA_RADNOG_VREMENA == 0)
+            {
+                cbMinutiPocetak.SelectedValue = minutiPocetkaRadnogVremena;
+            }
+
+            TimeSpan interval = kraj.Subtract(pocetak);
+            int trajanjeRadnogVremena = interval.Hours;
+            cbSatiTrajanje.SelectedValue = trajanjeRadnogVremena;
+        }
+
+        private void PodesavanjeComboBoxevaSlobodnihDana()
+        {
+            foreach (DayOfWeek slobodanDan in selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji)
+            {
+                switch (slobodanDan)
+                {
+                    case DayOfWeek.Monday:
+                        boxPonedeljak.IsChecked = true;
+                        break;
+                    case DayOfWeek.Tuesday:
+                        boxUtorak.IsChecked = true;
+                        break;
+                    case DayOfWeek.Wednesday:
+                        boxSreda.IsChecked = true;
+                        break;
+                    case DayOfWeek.Thursday:
+                        boxCetvrtak.IsChecked = true;
+                        break;
+                    case DayOfWeek.Friday:
+                        boxPetak.IsChecked = true;
+                        break;
+                    case DayOfWeek.Saturday:
+                        boxSubota.IsChecked = true;
+                        break;
+                    case DayOfWeek.Sunday:
+                        boxNedelja.IsChecked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private void PopuniComboBoxSati()
@@ -38,7 +88,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             }
 
             cbSatiPocetak.ItemsSource = trajanja.GetRange(0, 24);
-            cbSatiKraj.ItemsSource = trajanja.GetRange(1, 24);
+            cbSatiTrajanje.ItemsSource = trajanja.GetRange(1, 24);
         }
 
         private void PopuniComboBoxMinuta()
@@ -50,29 +100,138 @@ namespace IS_Bolnice.Prozori.Sekretar
             }
 
             cbMinutiPocetak.ItemsSource = trajanja;
-            cbMinutiKraj.ItemsSource = trajanja;
-
             cbMinutiPocetak.SelectedIndex = 0;
-            cbMinutiKraj.SelectedIndex = 0;
         }
 
-        private void Button_Click_Godisnji(object sender, RoutedEventArgs e)
+        private void Button_Click_Slobodni_Dani(object sender, RoutedEventArgs e)
         {
-            GodisniOdmorLekara gol = new GodisniOdmorLekara(selektovaniLekar);
-            gol.ShowDialog();
+            SlobodniDaniLekara sdl = new SlobodniDaniLekara(selektovaniLekar);
+            sdl.ShowDialog();
         }
 
-        private void cbSatiKraj_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click_Vanredni_Rad(object sender, RoutedEventArgs e)
         {
-            if ((int)cbSatiKraj.SelectedValue == 24)
+            VanredniRadLekara vrl = new VanredniRadLekara(selektovaniLekar);
+            vrl.ShowDialog();
+        }
+
+        private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
+        {
+            if (napravljenaIzmena)
             {
-                cbMinutiKraj.SelectedIndex = 0;
-                cbMinutiKraj.IsEnabled = false;
+                AzurirajRadnoVremeLekara();
+            }
+
+            AzurirajSlobodneDaneLekara();
+            bazaRadnogVremena.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
+            Close();
+        }
+
+        private void Button_Click_Odustani(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void AzurirajRadnoVremeLekara()
+        {
+            int satiPocetkaRadnogVremena = (int) cbSatiPocetak.SelectedValue;
+            int minutiPocetkaRadnogVremena = (int) cbMinutiPocetak.SelectedValue;
+            int satiTrajanjaRadnogVremena = (int) cbSatiTrajanje.SelectedValue;
+
+            DateTime pocetakRadnogVremena = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
+                satiPocetkaRadnogVremena, minutiPocetkaRadnogVremena, 0, 0);
+            DateTime krajRadnogVremena = pocetakRadnogVremena.AddHours(satiTrajanjaRadnogVremena);
+
+            VremenskiInterval radnoVreme = new VremenskiInterval(pocetakRadnogVremena, krajRadnogVremena);
+            selektovaniLekar.RadnoVreme.StandardnoRadnoVreme = radnoVreme;
+        }
+
+        private void AzurirajSlobodneDaneLekara()
+        {
+            if ((bool) boxPonedeljak.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Monday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Monday);
             }
             else
             {
-                cbMinutiKraj.IsEnabled = true;
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Monday);
             }
+
+            if ((bool) boxUtorak.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Tuesday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Tuesday);
+            }
+            else
+            {
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Tuesday);
+            }
+
+            if ((bool) boxSreda.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Wednesday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Wednesday);
+            }
+            else
+            {
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Wednesday);
+            }
+
+            if ((bool) boxCetvrtak.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Thursday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Thursday);
+            }
+            else
+            {
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Thursday);
+            }
+
+            if ((bool) boxPetak.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Friday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Friday);
+            }
+            else
+            {
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Friday);
+            }
+
+            if ((bool) boxSubota.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Saturday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Saturday);
+            }
+            else
+            {
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Saturday);
+            }
+
+            if ((bool) boxNedelja.IsChecked)
+            {
+                if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Sunday))
+                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Sunday);
+            }
+            else
+            {
+                selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Remove(DayOfWeek.Sunday);
+            }
+        }
+
+        private void cbSatiPocetak_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            napravljenaIzmena = true;
+        }
+
+        private void cbMinutiPocetak_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            napravljenaIzmena = true;
+        }
+
+        private void cbSatiTrajanje_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            napravljenaIzmena = true;
         }
     }
 }

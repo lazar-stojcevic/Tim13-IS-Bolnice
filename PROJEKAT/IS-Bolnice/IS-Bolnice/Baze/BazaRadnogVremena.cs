@@ -36,7 +36,8 @@ namespace IS_Bolnice.Baze
                     Id = delovi[0],
                     StandardnoRadnoVreme = NapraviVremenskiInterval(delovi[1]),
                     VanrednaRadnaVremena = NapraviVanrednaRadnaVremena(delovi[2]),
-                    SlobodniDani = NapraviSlobodneDane(delovi[3])
+                    SlobodniDani = NapraviSlobodneDane(delovi[3]),
+                    SlobodniDaniUNedelji = NapraviSlobodneDaneUNedelji(delovi[4])
                 };
                 radnaVremena.Add(radnoVremeLekara);
             }
@@ -82,7 +83,7 @@ namespace IS_Bolnice.Baze
 
             List<DateTime> slobodniDani = new List<DateTime>();
 
-            string[] delovi = slobodniDaniString.Split('!');
+            string[] delovi = slobodniDaniString.Split(',');
             foreach (string deo in delovi)
             {
                 DateTime datum = DateTime.ParseExact(deo, vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
@@ -91,6 +92,32 @@ namespace IS_Bolnice.Baze
             }
 
             return slobodniDani;
+        }
+
+        private List<DayOfWeek> NapraviSlobodneDaneUNedelji(string slobodniDaniUNedeljiString)
+        {
+            List<DayOfWeek> slobodniDaniUNedelji = new List<DayOfWeek>();
+
+            if (slobodniDaniUNedeljiString.Equals(""))
+            {
+                return slobodniDaniUNedelji;
+            }
+
+            string[] delovi = slobodniDaniUNedeljiString.Split(',');
+            foreach (string deo in delovi)
+            {
+                try
+                {
+                    slobodniDaniUNedelji.Add((DayOfWeek)Enum.Parse(typeof(DayOfWeek), deo));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Došlo je do greške prilikom parsiranja enuma za dane u nedelji.");
+                    throw;
+                }
+            }
+
+            return slobodniDaniUNedelji;
         }
 
         private string RadnoVremeToString(RadnoVremeLekara radnoVreme)
@@ -111,6 +138,14 @@ namespace IS_Bolnice.Baze
             foreach (DateTime slobodanDan in radnoVreme.SlobodniDani)
             {
                 radnoVremePisanje += slobodanDan.ToString(vremenskiFormatPisanje) + ",";
+            }
+            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
+            radnoVremePisanje += "#";
+
+            // upisivanje liste slobodnih dana u nedelji
+            foreach (DayOfWeek slobodanDanUNedelji in radnoVreme.SlobodniDaniUNedelji)
+            {
+                radnoVremePisanje += slobodanDanUNedelji.ToString() + ",";
             }
             radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
 

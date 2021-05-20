@@ -50,6 +50,14 @@ public class Lekar : Korisnik
             }
         }
 
+        foreach (DayOfWeek danUNedelji in this.RadnoVreme.SlobodniDaniUNedelji)
+        {
+            if (danUNedelji == termin.Pocetak.DayOfWeek || danUNedelji == termin.Kraj.DayOfWeek)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 
