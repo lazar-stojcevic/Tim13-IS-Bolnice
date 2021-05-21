@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {

@@ -814,5 +814,8 @@
   <ItemGroup>
     <Resource Include="Slike\hospital-bed.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\hospital.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
