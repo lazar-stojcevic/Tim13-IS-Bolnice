@@ -794,12 +794,6 @@
     <Resource Include="Datoteke\renoviranje.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\Sekretar\add_patient_small.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Slike\Sekretar\add_patient.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Slike\Sekretar\edit_patient.png" />
   </ItemGroup>
   <ItemGroup>
@@ -820,6 +814,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\Sekretar\hospital.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\add_patient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\payment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\help.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

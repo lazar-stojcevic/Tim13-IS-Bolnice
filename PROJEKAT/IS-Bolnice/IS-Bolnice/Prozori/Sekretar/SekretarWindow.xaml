@@ -12,21 +12,20 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Image x:Key="slikaDodavanjePacijenta" Source="/Slike/Sekretar/add_patient.png"></Image>
-        <Image x:Key="slikaDodavanjePacijentaMala" Source="/Slike/Sekretar/add_patient_small.png"></Image>
         <Image x:Key="slikaIzmenaPacijenta" Source="/Slike/Sekretar/edit_patient.png"></Image>
         <Image x:Key="slikaBrisanjePacijenta" Source="/Slike/Sekretar/delete_patient.png"></Image>
         <Image x:Key="slikaDodavanjeGuest" Source="/Slike/Sekretar/add_guest_patient.png"></Image>
         <Image x:Key="slikaDodavanjeObavestenja" Source="/Slike/Sekretar/add_message.png"></Image>
         <Image x:Key="slikaIzmenaObavestenja" Source="/Slike/Sekretar/edit_message.png"></Image>
         <Image x:Key="slikaBrisanjeObavestenja" Source="/Slike/Sekretar/delete_message.png"></Image>
-        <Image x:Key="slikaBolnice" Source="/Slike/Sekretar/hospital.jpg"></Image>
+        <Image x:Key="naplata" Source="/Slike/Sekretar/payment.png"></Image>
 
         <system:DateTime x:Key="DateTime"
                          x:Shared="False" />
         <Storyboard x:Key="Storyboard">
             <!--Use keyframe animation to update datetime -->
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DataContext"
-                                           Duration="0:1:0"
+                                           Duration="0:0:5"
                                            RepeatBehavior="Forever"
                                            AutoReverse="False">
                 <DiscreteObjectKeyFrame KeyTime="50%"
@@ -68,14 +67,17 @@
                 <MenuItem Header="Prikaz termina" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="MenuItem_Click_Prikaz_Termina"></MenuItem>
             </MenuItem>
             <MenuItem Header="Izvršenje">
-                <MenuItem Header="Naplata"></MenuItem>
+                <MenuItem Header="Naplata" Icon="{StaticResource naplata}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Pomoć">
                 <MenuItem Header="Tutorijal"></MenuItem>
             </MenuItem>
         </Menu>
+        <!--ToolBar-->
         <ToolBar Grid.Row="1">
-            <Button Content="{StaticResource slikaDodavanjePacijentaMala}" ToolTip="Dodavanje novog pacijenta" Click="ToolBar_Button_Click_Novi_Pacijent"></Button>
+            <Button ToolTip="Dodavanje novog pacijenta" Click="ToolBar_Button_Click_Novi_Pacijent">
+                <Image Source="/Slike/Sekretar/add_patient.png" Height="24" Width="24"></Image>
+            </Button>
             <Label></Label>
             <Button ToolTip="Dodavanje novog gostujućeg pacijenta" Click="ToolBar_Button_Click_Novi_Guest_Pacijent">
                 <Image Source="/Slike/Sekretar/add_guest_patient.png" Height="24" Width="24"></Image>
@@ -83,6 +85,17 @@
             <Label></Label>
             <Button ToolTip="Dodavanje novog obaveštenja" Click="ToolBar_Button_Click_Novo_Obavestenje">
                 <Image Source="/Slike/Sekretar/add_message.png" Height="24" Width="24"></Image>
+            </Button>
+            <Label></Label>
+            <Separator></Separator>
+            <Label></Label>
+            <Button ToolTip="Naplata usluga">
+                <Image Source="/Slike/Sekretar/payment.png" Height="24" Width="24"></Image>
+            </Button>
+        </ToolBar>
+        <ToolBar Grid.Row="1" HorizontalAlignment="Right" ToolBarTray.IsLocked="True">
+            <Button ToolTip="Pomoć">
+                <Image Source="/Slike/Sekretar/help.png" Height="24" Width="24"></Image>
             </Button>
         </ToolBar>
         <!-- Status bar -->
@@ -108,13 +121,14 @@
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="0.01*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
+
 
                     <Grid Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.3*"/>
                             <RowDefinition Height="1.6*"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
@@ -127,49 +141,72 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Row="1" Grid.Column="0" Height="60" Width="60" Source="/Slike/Sekretar/hospital.jpg"></Image>
-                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Bolnica Zdravo" VerticalAlignment="Center" Foreground="DodgerBlue" FontSize="30" FontWeight="Medium"></Label>
-                        <Label Grid.Row="2" Grid.Column="0" Content="Adresa:   " FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Grid.Row="2" Grid.Column="1" Content="Adresa bolnice 32" VerticalAlignment="Center"></Label>
-                        <Label Grid.Row="3" Grid.Column="0" Content="Kontakt:" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                        <Label Grid.Row="4" Grid.Column="0" Content="Broj telefona:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                        <Label Grid.Row="4" Grid.Column="1" Content="060/98-765-43" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                        <Label Grid.Row="4" Grid.Column="0" Content="Fiksni:            " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <Label Grid.Row="4" Grid.Column="1" Content="021/000-000" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <Label Grid.Row="4" Grid.Column="0" Content="eMail:             " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                        <Label Grid.Row="4" Grid.Column="1" Content="zdavoBolnica@bolnica.com" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="0" Grid.Column="0" Height="60" Width="60" Source="/Slike/Sekretar/hospital.jpg"></Image>
+                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Bolnica Zdravo" VerticalAlignment="Center" Foreground="DodgerBlue" FontSize="30" FontWeight="Medium"></Label>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Adresa:   " FontSize="15" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="1" Content="Adresa bolnice 32" VerticalAlignment="Bottom"></Label>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Kontakt:" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Broj telefona:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        <Label Grid.Row="3" Grid.Column="1" Content="060/98-765-43" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Fiksni:            " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <Label Grid.Row="3" Grid.Column="1" Content="021/000-000" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="eMail:             " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        <Label Grid.Row="3" Grid.Column="1" Content="zdavoBolnica@bolnica.com" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     </Grid>
 
+                    <Rectangle Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Fill="Black"></Rectangle>
+
                     <!-- DEO ZA OBAVESTENJA-->
-                    <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="20" HorizontalAlignment="Left" Margin="10"/>
-                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Button Content="{StaticResource slikaDodavanjeObavestenja}" Background="White" BorderThickness="0" ToolTip="Dodavanje novog obaveštenja" Click="Button_Click_NovoObavestenje"/>
-                        <Label></Label>
-                        <Button Content="{StaticResource slikaIzmenaObavestenja}" Background="White" BorderThickness="0"  ToolTip="Izmena selektovanog obaveštenja" Click="Button_Click_IzmenaObavestenja"/>
-                        <Label></Label>
-                        <Button Content="{StaticResource slikaBrisanjeObavestenja}" Background="White" BorderThickness="0" ToolTip="Brisanje selektovanog obaveštenja" Click="Button_Click_BrisanjeObavestenja"/>
-                        <Label></Label>
-                    </StackPanel>
-                    <ListView Margin="0,0.2,0,9.8" Name="obavestenjaDataBinding" ItemsSource="{Binding Obavestenja}"
-                                  Grid.Row="1" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
-                        <ListView.ItemTemplate>
-                            <DataTemplate DataType="data:Obavestenje">
-                                <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Naslov}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Sadrzaj}" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding VremeKreiranja, StringFormat={}{0:HH:mm   dd/MM/yyyy }}" FontWeight="Bold" />
-                                </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="10*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Obaveštenja:" FontWeight="Bold" FontSize="20"></Label>
+                        <TextBox Grid.Row="1" Grid.Column="0" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                 Text="pretraga" Foreground="Gray"/>
+                        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Button Background="White" BorderThickness="0" ToolTip="Dodavanje novog obaveštenja" 
+                                    Click="Button_Click_NovoObavestenje" Padding="5">
+                                <Image Source="/Slike/Sekretar/add_message.png"></Image>
+                            </Button>
+
+                            <Button Background="White" BorderThickness="0" ToolTip="Izmena selektovanog obaveštenja"
+                                    Click="Button_Click_IzmenaObavestenja" Padding="5">
+                                <Image Source="/Slike/Sekretar/edit_message.png"></Image>
+                            </Button>
+
+                            <Button Background="White" BorderThickness="0" ToolTip="Brisanje selektovanog obaveštenja" 
+                                    Click="Button_Click_BrisanjeObavestenja" Padding="5">
+                                <Image Source="/Slike/Sekretar/delete_message.png"></Image>
+                            </Button>
+
+                        </StackPanel>
+                        <ListView Name="obavestenjaDataBinding" ItemsSource="{Binding Obavestenja}"
+                                  Grid.Row="2" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
+                            <ListView.ItemTemplate>
+                                <DataTemplate DataType="data:Obavestenje">
+                                    <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Naslov}" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding Sadrzaj}" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding VremeKreiranja, StringFormat={}{0:HH:mm   dd/MM/yyyy }}" FontWeight="Bold" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Pacijenti">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="9*"/>
@@ -182,24 +219,38 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Content="{StaticResource slikaDodavanjePacijenta}" HorizontalAlignment="Center" Background="White" 
-                                BorderThickness="0" ToolTip="Dodavanje novog pacijenta" Click="Button_Click_Novi"/>
-                    <Button Grid.Row="0" Grid.Column="1" Content="{StaticResource slikaIzmenaPacijenta}" HorizontalAlignment="Center" Background="White"
-                                BorderThickness="0" ToolTip="Izmena selektovanog pacijenta" Click="Button_Click_Izmeni"/>
-                    <Button Grid.Row="0" Grid.Column="2" Content="{StaticResource slikaBrisanjePacijenta}" HorizontalAlignment="Center" Background="White"
-                                BorderThickness="0" ToolTip="Brisanje selektovanog pacijenta" Click="Button_Click_Obrisi"/>
-                    <Button Grid.Row="0" Grid.Column="3" Content="{StaticResource slikaDodavanjeGuest}" HorizontalAlignment="Center" Background="White"
-                                BorderThickness="0" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="Button_Click_NoviGuest"/>
-                    <TextBox Grid.Row="0" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
-                        <Button Content="Zakaži pregled" Margin="10" ToolTip="Zakazivanje pregleda za izabranog pacijenta" Click="Button_Click_Zakazivanje_Pregleda"/>
-                        <Button Content="Zakaži operaciju" Margin="10" ToolTip="Zakazivanje operacije za izabranog pacijenta" Click="Button_Click_Zakazivanje_Operacije"/>
-                        <Button Content="Ažuriraj alergene" Margin="10" ToolTip="Ažuriranje alergena izabranog pacijenta" Click="Button_Click_Azuriranje_Alergena"/>
-                        <Button Content="Prikaz termina" Margin="10" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="Button_Click_Prikaz_Termina"/>
-                        <Button Content="Hitan termin" Margin="10" ToolTip="Zakazivanje hitnog termina" Height="40" Click="Button_Click_Hitan_Termin"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="Hitan termin" Width="80" Height="35" ToolTip="Zakazivanje hitnog termina" Click="Button_Click_Hitan_Termin"/>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal">
+                        <Button Background="White" BorderThickness="0" ToolTip="Dodavanje novog pacijenta" Click="Button_Click_Novi">
+                            <Image Source="/Slike/Sekretar/add_patient.png"></Image>
+                        </Button>
+                        <Label Content="          "></Label>
+                        <Button Background="White" BorderThickness="0" ToolTip="Izmena selektovanog pacijenta" Click="Button_Click_Izmeni">
+                            <Image Source="/Slike/Sekretar/edit_patient.png"></Image>
+                        </Button>
+                        <Label Content="          "></Label>
+                        <Button Background="White" BorderThickness="0" ToolTip="Brisanje selektovanog pacijenta" Click="Button_Click_Obrisi">
+                            <Image Source="/Slike/Sekretar/delete_patient.png"></Image>
+                        </Button>
+                        <Label Content="          "></Label>
+                        <Button Background="White" BorderThickness="0" ToolTip="Dodavanje novog gostujućeg pacijenta" Click="Button_Click_NoviGuest">
+                            <Image Source="/Slike/Sekretar/add_guest_patient.png"></Image>
+                        </Button>
+                        <Label Content="          "></Label>
+                        <Button Background="White" BorderThickness="0" ToolTip="Naplata usluga">
+                            <Image Source="/Slike/Sekretar/payment.png"></Image>
+                        </Button>
+                    </StackPanel>
+                    <TextBox Grid.Row="1" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
+                        <Button Content="Zakaži pregled" Margin="10" Height="30" ToolTip="Zakazivanje pregleda za izabranog pacijenta" Click="Button_Click_Zakazivanje_Pregleda"/>
+                        <Button Content="Zakaži operaciju" Margin="10" Height="35" ToolTip="Zakazivanje operacije za izabranog pacijenta" Click="Button_Click_Zakazivanje_Operacije"/>
+                        <Button Content="Ažuriraj alergene" Margin="10" Height="35" ToolTip="Ažuriranje alergena izabranog pacijenta" Click="Button_Click_Azuriranje_Alergena"/>
+                        <Button Content="Prikaz termina" Margin="10" Height="35" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="Button_Click_Prikaz_Termina"/>
                     </StackPanel>
                     <DataGrid Name="dataGridPacijenti" ItemsSource="{Binding Pacijenti}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
+                  SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
                             <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="1*"/>
