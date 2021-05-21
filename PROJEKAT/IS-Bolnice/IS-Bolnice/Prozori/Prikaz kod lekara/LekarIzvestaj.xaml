@@ -31,6 +31,22 @@
         <Button Content="Dodaj lek" HorizontalAlignment="Left" Height="40" Margin="269,394,0,0" VerticalAlignment="Top" Width="115" Click="Button_DodajLek"/>
         <Button Content="Obriši" HorizontalAlignment="Left" Height="40" Margin="269,464,0,0" VerticalAlignment="Top" Width="115" Click="Button_ObrisiLek"/>
         <Button Content="Završi pregled" HorizontalAlignment="Left" Height="52" Margin="105,596,0,0" VerticalAlignment="Top" Width="181" Click="Button_ZavrsiPregled"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="311,12,0,0" VerticalAlignment="Top" Width="69"  Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="238" Margin="29,31,0,0" Stroke="Red" VerticalAlignment="Top" Width="355"/>
+            <Label Foreground="Red"  Content="Tekst koji će se ispisati u izveštaj" HorizontalAlignment="Left" Height="31" Margin="45,223,0,0" VerticalAlignment="Top" Width="189"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="258" Margin="10,274,0,0" Stroke="Red" VerticalAlignment="Top" Width="251"/>
+            <Label Foreground="Red"  Content="Lista svih prepirasih lekova" HorizontalAlignment="Left" Height="32" Margin="10,504,0,0" VerticalAlignment="Top" Width="209"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="77" Margin="260,406,0,0" Stroke="Red" VerticalAlignment="Top" Width="134"/>
+            <Label Foreground="Red"  Content="Obriši selektovani lek" HorizontalAlignment="Left" Height="33" Margin="261,450,-2,0" VerticalAlignment="Top" Width="135"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="77" Margin="260,330,0,0" Stroke="Red" VerticalAlignment="Top" Width="134"/>
+            <Label Foreground="Red"  Content="Dodavanje nove terapije" HorizontalAlignment="Left" Height="33" Margin="257,376,-16,0" VerticalAlignment="Top" Width="153"/>
+
+        </Grid>
 
     </Grid>
 </Window>

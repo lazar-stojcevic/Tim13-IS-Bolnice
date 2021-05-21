@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Raspored"  Height="700" Width="400" Background="White">
     <Grid>
-        <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,343,0,0" VerticalAlignment="Top" Width="101"/>
-        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,383,-0.4,0" VerticalAlignment="Top" Width="394">
+        <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,375,0,0" VerticalAlignment="Top" Width="101"/>
+        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,415,0,0" VerticalAlignment="Top" Width="394">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -28,11 +28,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="146,578,0,0" VerticalAlignment="Top" Width="101" Click="Button_ClickObrisi"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,578,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniOperaciju" />
-        <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="9,29,0,0" VerticalAlignment="Top" Width="101"/>
-        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="284,578,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
-        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,76,0,0" VerticalAlignment="Top" Width="394">
+        <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="146,610,0,0" VerticalAlignment="Top" Width="101" Click="Button_ClickObrisi"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,610,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniOperaciju" />
+        <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="9,61,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,610,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
+        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,108,0,0" VerticalAlignment="Top" Width="394">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Otvori ovaj pregled" Click="Button_OtvoriPregled" />
@@ -56,9 +56,33 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Obriši" Height="54" Margin="145,271,147.6,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="9,271,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniPregled" />
-        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,271,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijentaPr"/>
+        <Button Content="Obriši" Height="54" Margin="145,303,148,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="9,303,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniPregled" />
+        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,303,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijentaPr"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
+        <Label Content="Podaci o leku" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="144"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="193" Margin="2,57,0,0" Stroke="Red" VerticalAlignment="Top" Width="392"/>
+            <Label Foreground="Red"  Content="Svi budući pregledi" HorizontalAlignment="Left" Height="31" Margin="142,214,0,0" VerticalAlignment="Top" Width="113"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="65" Margin="2,250,0,0" Stroke="Red" VerticalAlignment="Top" Width="253"/>
+            <Label Foreground="Red"  Content="Upravljanje selektovanim pregledom" HorizontalAlignment="Left" Height="32" Margin="1,311,0,0" VerticalAlignment="Top" Width="209"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="181" Margin="2,367,-2,0" Stroke="Red" VerticalAlignment="Top" Width="394"/>
+            <Label Foreground="Red"  Content="Sve buduće operacije" HorizontalAlignment="Left" Height="33" Margin="131,513,0,0" VerticalAlignment="Top" Width="124"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="68" Margin="0,551,0,0" Stroke="Red" VerticalAlignment="Top" Width="255"/>
+            <Label Foreground="Red"  Content="Upravljanje selektovanom operacijom" HorizontalAlignment="Left" Height="32" Margin="0,615,0,-28" VerticalAlignment="Top" Width="208"/>
+
+            <Rectangle  HorizontalAlignment="Left" Height="65" Margin="277,250,0,0" Stroke="Red" VerticalAlignment="Top" Width="113"/>
+            <Label Foreground="Red"  Content="Pacijent selektovanog pregleda" HorizontalAlignment="Left" Height="32" Margin="225,310,-6,0" VerticalAlignment="Top" Width="175"/>
+            <Rectangle  HorizontalAlignment="Left" Height="65" Margin="277,554,0,0" Stroke="Red" VerticalAlignment="Top" Width="113"/>
+            <Label Foreground="Red"  Content="Pacijent selektovane operacije" HorizontalAlignment="Left" Height="32" Margin="231,620,-12,-33" VerticalAlignment="Top" Width="175"/>
+
+
+        </Grid>
 
     </Grid>
 </Page>

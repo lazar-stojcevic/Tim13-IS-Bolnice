@@ -37,7 +37,22 @@
 
         <Button Content="Dodaj" HorizontalAlignment="Left" Height="29" Margin="29,389,0,0" VerticalAlignment="Top" Width="46" Click="Button_ClickDodajZamenski"/>
         <Button Content="Ukloni" HorizontalAlignment="Left" Height="29" Margin="29,425,0,0" VerticalAlignment="Top" Width="46" Click="Button_ClickUkloniZamenski"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="157" Margin="94,22,0,0" Stroke="Red" VerticalAlignment="Top" Width="295"/>
+            <Label Foreground="Red"  Content="Osnovni podaci o leku" HorizontalAlignment="Left" Height="31" Margin="115,150,0,0" VerticalAlignment="Top" Width="145"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="116" Margin="12,184,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Sastojci na koje bi pacijent mogao biti alergičan" HorizontalAlignment="Left" Height="32" Margin="118,277,0,0" VerticalAlignment="Top" Width="271"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="137" Margin="12,303,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Lekovi koji mogu zameni trenutni lek" HorizontalAlignment="Left" Height="26" Margin="135,406,0,0" VerticalAlignment="Top" Width="240"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="36" Margin="10,457,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Da li je za lek potreban recept?" HorizontalAlignment="Left" Height="32" Margin="8,437,0,0" VerticalAlignment="Top" Width="284"/>
+
+        </Grid>
 
 
     </Grid>

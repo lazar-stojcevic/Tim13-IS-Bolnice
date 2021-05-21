@@ -13,23 +13,46 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--Vreme-->
-        <TextBlock Text="Početak operacije:" Margin="10,432,274.6,214.4" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Početak operacije:" Margin="10,434,274.6,212.4" Grid.ColumnSpan="2"/>
 
         <Button IsEnabled="false" x:Name="potvrdi" Content="Zakaži" HorizontalAlignment="Left" Height="35" Margin="10,617,0,0" VerticalAlignment="Top" Width="176" Click="Button_ClickZakazi" Grid.ColumnSpan="2"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="212,617,0,0" VerticalAlignment="Top" Width="172" Height="35" Click="Button_Click_1" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperPrz" Height="33" Margin="128,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperIme" Height="33" Margin="128,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperJmbg" Height="33" Margin="128,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
-        <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,44,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
-        <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
-        <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,80,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="132" Margin="10,282,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged"/>
-        <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,251,0,0" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
-        <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,135,0,0" VerticalAlignment="Top" Width="196" Grid.ColumnSpan="2"/>
-        <ComboBox x:Name="comboBoxSale" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,166,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged"/>
-        <ComboBox x:Name="terminiList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="10,462,0,0" VerticalAlignment="Top" Width="374"/>
-        <Label FontSize="15" Grid.ColumnSpan="2" Content="HITNO :" HorizontalAlignment="Left" Height="28" Margin="10,519,0,0" VerticalAlignment="Top" Width="69"/>
-        <CheckBox x:Name="boxHitno" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,528,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperPrz" Height="33" Margin="128,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperIme" Height="33" Margin="128,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperJmbg" Height="33" Margin="128,148,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
+        <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,106,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
+        <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,72,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
+        <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,142,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="102" Margin="10,318,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged"/>
+        <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,287,0,0" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
+        <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,197,0,0" VerticalAlignment="Top" Width="196" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="comboBoxSale" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,228,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged"/>
+        <ComboBox x:Name="terminiList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="10,464,0,0" VerticalAlignment="Top" Width="374"/>
+        <Label FontSize="15" Grid.ColumnSpan="2" Content="HITNO :" HorizontalAlignment="Left" Height="28" Margin="10,561,0,0" VerticalAlignment="Top" Width="69"/>
+        <CheckBox x:Name="boxHitno" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,570,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,-4.4,0" Grid.ColumnSpan="2"/>
+        <Label Content="Zakazivanje operacije" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216" Grid.ColumnSpan="2"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Grid.ColumnSpan="2" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+        <TextBox HorizontalAlignment="Left" Height="29" Margin="229,513,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155" Grid.ColumnSpan="2"/>
+        <Label Content="Dužina trajanja operacije u minutima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,513,0,0" Width="219" Grid.ColumnSpan="2"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-4.4,0" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2">
+            <Rectangle  HorizontalAlignment="Left" Height="137" Margin="118,12,0,0" Stroke="Red" VerticalAlignment="Top" Width="266"/>
+            <Label Foreground="Red"  Content="Osnovni podaci pacijenta" HorizontalAlignment="Left" Height="31" Margin="191,122,0,0" VerticalAlignment="Top" Width="145"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="67" Margin="10,154,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="ID operacione sale i njena kvadratura" HorizontalAlignment="Left" Height="32" Margin="97,195,0,0" VerticalAlignment="Top" Width="209"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="130" Margin="10,228,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Svi lekari specijalisti i njihove specijalizacije" HorizontalAlignment="Left" Height="33" Margin="148,325,0,0" VerticalAlignment="Top" Width="240"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="66" Margin="10,379,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Dostupni termini za selektovanu prostoriju i lekara" HorizontalAlignment="Left" Height="32" Margin="104,413,0,0" VerticalAlignment="Top" Width="284"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="56" Margin="10,497,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Da li operacija može da se odloži (čekirano - NE / nije čekirano DA)" HorizontalAlignment="Left" Height="28" Margin="10,497,0,0" VerticalAlignment="Top" Width="374"/>
+
+        </Grid>
 
     </Grid>
 </Window>

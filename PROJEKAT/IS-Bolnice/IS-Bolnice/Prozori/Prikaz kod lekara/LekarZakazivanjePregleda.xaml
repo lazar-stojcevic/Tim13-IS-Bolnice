@@ -9,19 +9,19 @@
         Title="LekarZakazivanjePregleda" Height="700" Width="400">
     <Grid>
         <!--Vreme-->
-        <TextBlock Text="Početak pregleda:" Margin="10,474,274.6,172.4"/>
+        <TextBlock Text="Početak pregleda:" Margin="10,496,274.6,150.4"/>
 
         <Button IsEnabled="false" x:Name="potvrdi" Content="Zakaži" HorizontalAlignment="Left" Height="35" Margin="10,617,0,0" VerticalAlignment="Top" Width="176" Click="Button_ClickZakazi"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="212,617,0,0" VerticalAlignment="Top" Width="172" Height="35" Click="Button_Click_1"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperPrz" Height="33" Margin="128,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperIme" Height="33" Margin="128,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperJmbg" Height="33" Margin="128,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
-        <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,44,0,0" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" VerticalAlignment="Top" Width="144"/>
-        <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,80,0,0" VerticalAlignment="Top" Width="144"/>
-        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="273" Margin="10,169,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="lekariList_SelectionChanged"/>
-        <Label Content="Lekar kod koga se zakazuje pregled:" HorizontalAlignment="Left" Height="26" Margin="10,143,0,0" VerticalAlignment="Top" Width="198"/>
-        <Grid Margin="0,427,-0.4,139.4">
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperPrz" Height="33" Margin="128,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperIme" Height="33" Margin="128,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
+        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperJmbg" Height="33" Margin="128,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
+        <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,102,0,0" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,68,0,0" VerticalAlignment="Top" Width="144"/>
+        <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,138,0,0" VerticalAlignment="Top" Width="144"/>
+        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="218" Margin="10,227,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="lekariList_SelectionChanged"/>
+        <Label Content="Lekar kod koga se zakazuje pregled:" HorizontalAlignment="Left" Height="26" Margin="10,201,0,0" VerticalAlignment="Top" Width="198"/>
+        <Grid Margin="0,449,-0.4,117.4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="43*"/>
                 <RowDefinition Height="0*"/>
@@ -35,7 +35,23 @@
 
             </Grid.ColumnDefinitions>
         </Grid>
-        <ComboBox x:Name="terminiList" HorizontalAlignment="Left" Height="26" Margin="10,498,0,0" VerticalAlignment="Top" Width="374"/>
+        <ComboBox x:Name="terminiList" HorizontalAlignment="Left" Height="26" Margin="10,520,0,0" VerticalAlignment="Top" Width="374"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,-4.4,0"/>
+        <Label Content="Zakazivanje pregleda" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216"/>
+
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="317,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="137" Margin="118,4,0,0" Stroke="Red" VerticalAlignment="Top" Width="266"/>
+            <Label Foreground="Red"  Content="Osnovni podaci pacijenta" HorizontalAlignment="Left" Height="31" Margin="217,116,0,0" VerticalAlignment="Top" Width="145"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="262" Margin="10,152,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Svi lekari specijalisti i njihove specijalizacije" HorizontalAlignment="Left" Height="33" Margin="143,388,0,0" VerticalAlignment="Top" Width="240"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="58" Margin="10,445,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Dostupni termini za selektovanu prostoriju i lekara" HorizontalAlignment="Left" Height="32" Margin="106,449,0,0" VerticalAlignment="Top" Width="284"/>
+
+        </Grid>
 
 
     </Grid>

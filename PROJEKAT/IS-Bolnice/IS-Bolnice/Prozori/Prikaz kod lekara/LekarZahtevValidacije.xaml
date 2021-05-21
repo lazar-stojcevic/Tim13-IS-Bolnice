@@ -30,11 +30,32 @@
                 </GridView>
             </ListView.View>
         </ListView>
-            <Label Content="Zamenski lekovi:" FontSize="11" HorizontalAlignment="Left" Height="25" Margin="23,358,0,0" VerticalAlignment="Top" Width="89"/>
+        <Label Content="Zamenski lekovi:" FontSize="11" HorizontalAlignment="Left" Height="25" Margin="23,358,0,0" VerticalAlignment="Top" Width="89"/>
         <Label Content="Potreban recept:" FontSize="13" HorizontalAlignment="Left" Height="32" Margin="23,507,0,0" VerticalAlignment="Top" Width="108"/>
         <CheckBox x:Name="boxRecept" Content="" HorizontalAlignment="Left" Height="23" Margin="136,516,0,0" VerticalAlignment="Top" Width="17"/>
         <Button Content="Potvrdi" HorizontalAlignment="Left" Height="45" Margin="27,546,0,0" VerticalAlignment="Top" Width="154" Click="Button_Potvrdi"/>
         <Button Content="Odbij" HorizontalAlignment="Left" Height="45" Margin="222,546,0,0" VerticalAlignment="Top" Width="154" Click="Button_ClickOdbij"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="157" Margin="94,22,0,0" Stroke="Red" VerticalAlignment="Top" Width="295"/>
+            <Label Foreground="Red"  Content="Osnovni podaci o leku" HorizontalAlignment="Left" Height="31" Margin="115,150,0,0" VerticalAlignment="Top" Width="145"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="116" Margin="12,184,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Sastojci na koje bi pacijent mogao biti alergičan" HorizontalAlignment="Left" Height="32" Margin="118,277,0,0" VerticalAlignment="Top" Width="271"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="137" Margin="12,303,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Lekovi koji mogu zameni trenutni lek" HorizontalAlignment="Left" Height="26" Margin="135,406,0,0" VerticalAlignment="Top" Width="240"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="31" Margin="10,457,0,0" Stroke="Red" VerticalAlignment="Top" Width="153"/>
+            <Label Foreground="Red"  Content="Da li je za lek potreban recept?" HorizontalAlignment="Left" Height="32" Margin="8,437,0,0" VerticalAlignment="Top" Width="284"/>
+            <Rectangle HorizontalAlignment="Left" Height="51" Margin="12,493,0,0" Stroke="Red" VerticalAlignment="Top" Width="180"/>
+            <Label Foreground="Red"  Content="Potvrdi ovaj zahtev" HorizontalAlignment="Left" Height="32" Margin="45,547,0,0" VerticalAlignment="Top" Width="118"/>
+            <Label Foreground="Red"  Content="Odbij zahtev i pošalji nazad na korekciju" HorizontalAlignment="Left" Height="32" Margin="180,544,-12,0" VerticalAlignment="Top" Width="226"/>
+            <Rectangle HorizontalAlignment="Left" Height="51" Margin="206,493,0,0" Stroke="Red" VerticalAlignment="Top" Width="180"/>
+
+        </Grid>
+
 
     </Grid>
 </Page>

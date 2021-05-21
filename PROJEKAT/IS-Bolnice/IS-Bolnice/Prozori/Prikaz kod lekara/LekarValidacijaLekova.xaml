@@ -16,12 +16,22 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Ime leka" Width="250" DisplayMemberBinding="{Binding Lek.Ime}" />
-                    <GridViewColumn Header="Gramaza" Width="119" DisplayMemberBinding="{Binding Lek.Opis}"/>
+                    <GridViewColumn Header="Gramaza" Width="132" DisplayMemberBinding="{Binding Lek.Opis}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Button Content="Otvori" HorizontalAlignment="Left" Height="43" Margin="6,577,0,0" VerticalAlignment="Top" Width="186" Click="otvoriLekClick"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Height="43" Margin="206,577,0,0" VerticalAlignment="Top" Width="186"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="506" Margin="-2,10,0,0" Stroke="Red" VerticalAlignment="Top" Width="396"/>
+            <Label Foreground="Red"  Content="Svi zahtevi za validaciju lekova" HorizontalAlignment="Left" Height="31" Margin="10,480,0,0" VerticalAlignment="Top" Width="174"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="65" Margin="0,516,0,0" Stroke="Red" VerticalAlignment="Top" Width="205"/>
+            <Label Foreground="Red"  Content="Otvori selektovani zahtev za validaciju" HorizontalAlignment="Left" Height="32" Margin="-2,578,0,0" VerticalAlignment="Top" Width="211"/>
+
+        </Grid>
 
     </Grid>
 </Page>

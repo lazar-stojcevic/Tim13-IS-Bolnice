@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
         Title="LekarDodavanjeLeka" Height="700" Width="400">
+
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2" Margin="-4,0,-0.4,0">
         </ToolBarPanel>
@@ -42,7 +43,19 @@
             <ComboBoxItem>Svaki šesti dan</ComboBoxItem>
             <ComboBoxItem>Na nedelju dana</ComboBoxItem>
         </ComboBox>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="319,14,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="239" Margin="23,20,0,0" Stroke="Red" VerticalAlignment="Top" Width="361"/>
+            <Label Foreground="Red"  Content="Svi lekovi na koje pacijent nije alergičan" HorizontalAlignment="Left" Height="31" Margin="25,-4,0,0" VerticalAlignment="Top" Width="223"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="97" Margin="10,277,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Podaci konzumiranju leka" HorizontalAlignment="Left" Height="33" Margin="8,255,0,0" VerticalAlignment="Top" Width="240"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="135" Margin="10,391,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="Dodatne informacije o terapiji u koliko je potrebno" HorizontalAlignment="Left" Height="32" Margin="36,473,0,0" VerticalAlignment="Top" Width="284"/>
+
+        </Grid>
 
     </Grid>
 </Window>

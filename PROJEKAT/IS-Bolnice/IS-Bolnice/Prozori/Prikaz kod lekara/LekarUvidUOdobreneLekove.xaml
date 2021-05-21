@@ -11,6 +11,7 @@
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
         <Label Content="Odobreni lekovi" FontSize="22" HorizontalAlignment="Left" Margin="23,4,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
+        <Label Content="Svi odabrani lekovi:" FontSize="14" HorizontalAlignment="Left" Margin="3,44,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
 
         <ListView x:Name="listaLekova" HorizontalAlignment="Left" Height="488" Margin="6,71,0,0" VerticalAlignment="Top" Width="370">
             <ListView.View>
@@ -23,6 +24,16 @@
         </ListView>
         <Button Content="Izmeni" HorizontalAlignment="Left" Height="45" Margin="10,587,0,0" VerticalAlignment="Top" Width="176" Click="Button_IzmeniClick"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Height="45" Margin="204,587,0,0" VerticalAlignment="Top" Width="172" Click="Button_OdustaniClick"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="500" Margin="6,14,0,0" Stroke="Red" VerticalAlignment="Top" Width="378"/>
+            <Label Foreground="Red"  Content="Osnovi podaci svih odobrenih lekova u bolnici" HorizontalAlignment="Left" Height="31" Margin="10,509,0,0" VerticalAlignment="Top" Width="255"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="65" Margin="6,533,0,0" Stroke="Red" VerticalAlignment="Top" Width="184"/>
+            <Label Foreground="Red"  Content="Izmeni podatke selektovanog leka" HorizontalAlignment="Left" Height="32" Margin="2,592,0,-5" VerticalAlignment="Top" Width="201"/>
+
+        </Grid>
 
     </Grid>
 </Page>

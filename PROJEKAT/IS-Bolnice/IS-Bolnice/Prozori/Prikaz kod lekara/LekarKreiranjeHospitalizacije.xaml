@@ -27,6 +27,19 @@
         <Button Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="220,548,0,0" VerticalAlignment="Top" Width="170" Click="ButtonClick_Odustani"/>
         <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="25" Margin="10,69,0,0" VerticalAlignment="Top" Width="106"/>
         <TextBox x:Name="txtJMBG" IsReadOnly="True" HorizontalAlignment="Left" Height="36" Margin="10,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+            <Rectangle  HorizontalAlignment="Left" Height="90" Margin="10,24,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
+            <Label Foreground="Red"  Content="JMBG pacijenta za koji se šalje na hospitalizaciju" HorizontalAlignment="Left" Height="31" Margin="10,83,0,0" VerticalAlignment="Top" Width="275" RenderTransformOrigin="0.503,0.358"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="247" Margin="10,148,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
+            <Label Foreground="Red"  Content="Podaci o svim sobama sa slobodnim krevetima" HorizontalAlignment="Left" Height="32" Margin="10,365,0,0" VerticalAlignment="Top" Width="262"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="96" Margin="8,402,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
+            <Label Foreground="Red"  Content="Datum do kada će trajati hospiralizacija" HorizontalAlignment="Left" Height="33" Margin="10,465,0,0" VerticalAlignment="Top" Width="240"/>
+
+        </Grid>
 
     </Grid>
 </Page>

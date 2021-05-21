@@ -92,5 +92,15 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             this.Close();
         }
 
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            help.Opacity = 1;
+        }
+
+        private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
+        {
+            help.Opacity = 0;
+        }
+
     }
 }
