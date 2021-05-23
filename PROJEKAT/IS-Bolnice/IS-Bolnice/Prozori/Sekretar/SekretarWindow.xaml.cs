@@ -10,9 +10,9 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarWindow : Window
     {
-        private BazaObavestenja bazaObavestenja;
-        private BazaPacijenata bazaPacijenata;
-        private BazaLekara bazaLekara;
+        private BazaObavestenja bazaObavestenja = new BazaObavestenja();
+        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private BazaLekara bazaLekara = new BazaLekara();
 
         public ObservableCollection<Pacijent> Pacijenti
         {
@@ -42,10 +42,6 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             InitializeComponent();
             this.DataContext = this;
-
-            bazaPacijenata = new BazaPacijenata();
-            bazaObavestenja = new BazaObavestenja();
-            bazaLekara = new BazaLekara();
 
             Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
             LekariOpstePrakse = new ObservableCollection<Lekar>(bazaLekara.LekariOpstePrakse());

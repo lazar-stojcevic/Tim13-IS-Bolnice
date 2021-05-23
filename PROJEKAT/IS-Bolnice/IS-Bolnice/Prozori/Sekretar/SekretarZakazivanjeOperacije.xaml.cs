@@ -10,11 +10,10 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarZakazivanjeOperacije : Window
     {
-        private BazaLekara bazaLekara;
-        private BazaBolnica bazaBolnica;
-        private BazaOperacija bazaOperacija;
+        private BazaLekara bazaLekara = new BazaLekara();
+        private BazaBolnica bazaBolnica = new BazaBolnica();
+        private BazaOperacija bazaOperacija = new BazaOperacija();
         private List<Lekar> lekari;
-        private List<Bolnica> bolnice;
         private List<Soba> sobe;
         private Pacijent pacijent;
         private Operacija operacija;
@@ -24,18 +23,17 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             InitializeComponent();
 
-            bazaLekara = new BazaLekara();
-            bazaBolnica = new BazaBolnica();
-            bazaOperacija = new BazaOperacija();
-
             lekari = bazaLekara.LekariSpecijalisti();
-            bolnice = bazaBolnica.SveBolnice();
             sobe = bazaBolnica.SveOperacioneSaleOveBolnice();
             operacija = new Operacija();
 
             pacijent = p;
             operacija.Pacijent = p;
+            PopunjavanjePoljaPrikaza();
+        }
 
+        private void PopunjavanjePoljaPrikaza()
+        {
             txtIme.Text = pacijent.Ime;
             txtPrezime.Text = pacijent.Prezime;
             txtJmbg.Text = pacijent.Jmbg;

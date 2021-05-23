@@ -6,13 +6,10 @@ using System.Windows.Controls;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
-    /// <summary>
-    /// Interaction logic for SekretarZakazivanjePregleda.xaml
-    /// </summary>
     public partial class SekretarZakazivanjePregleda : Window
     {
-        private BazaPregleda bpreg;
-        private BazaLekara bl;
+        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private BazaLekara bazaLekara = new BazaLekara();
         private List<Lekar> lekari;
         private Pacijent pacijent;
 
@@ -27,12 +24,14 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             this.DataContext = this;
-            bl = new BazaLekara();
-            bpreg = new BazaPregleda();
-            lekari = bl.LekariOpstePrakse();
+            lekari = bazaLekara.LekariOpstePrakse();
             PreglediLekara = new ObservableCollection<Pregled>();
             pacijent = p;
+            PopunjavanjePoljaPrikaza();
+        }
 
+        private void PopunjavanjePoljaPrikaza()
+        {
             txtIme.Text = pacijent.Ime;
             txtPrezime.Text = pacijent.Prezime;
             txtJmbg.Text = pacijent.Jmbg;
@@ -78,7 +77,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 Pregled pregled = PreglediLekara[index];
                 pregled.Pacijent = pacijent;
-                bpreg.ZakaziPregled(pregled);
+                bazaPregleda.ZakaziPregled(pregled);
                 this.Close();
             }
         }
@@ -93,7 +92,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             odabirTermina.IsEnabled = true;
 
             Lekar lekar = lekari[comboLekari.SelectedIndex];
-            List<Pregled> pregledi = bpreg.SviBuduciPreglediKojeLekarIma(lekar.Jmbg);
+            List<Pregled> pregledi = bazaPregleda.SviBuduciPreglediKojeLekarIma(lekar.Jmbg);
             PreglediLekara.Clear();
 
             // provera za checkbox da li treba da ostane oznacen

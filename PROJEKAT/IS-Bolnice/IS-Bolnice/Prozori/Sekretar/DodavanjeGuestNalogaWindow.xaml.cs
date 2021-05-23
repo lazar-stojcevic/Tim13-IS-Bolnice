@@ -3,18 +3,13 @@
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
-    /// <summary>
-    /// Interaction logic for DodavanjeGuestNalogaWindow.xaml
-    /// </summary>
     public partial class DodavanjeGuestNalogaWindow : Window
     {
-        private BazaPacijenata bp;
+        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
 
         public DodavanjeGuestNalogaWindow()
         {
             InitializeComponent();
-
-            bp = new BazaPacijenata();
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
@@ -23,22 +18,9 @@ namespace IS_Bolnice.Prozori.Sekretar
             string tempPrezime = txtPrezime.Text;
             string tempJmbg = txtJMBG.Text;
 
-            Pacijent p = new Pacijent
-            {
-                Jmbg = tempJmbg,
-                KorisnickoIme = "",
-                Sifra = "",
-                Ime = tempIme,
-                Prezime = tempPrezime,
-                BrojTelefona = "",
-                EMail = "",
-                Adresa = "",
-                Pol = Pol.drugo,
-                IzabraniLekar = null,
-                Guest = true
-            };
-
-            bp.KreirajPacijenta(p);
+            Pacijent noviGuestPacijent = new Pacijent(tempJmbg, tempIme, tempPrezime);
+            noviGuestPacijent.Guest = true;
+            bazaPacijenata.KreirajPacijenta(noviGuestPacijent);
 
             this.Close();
         }

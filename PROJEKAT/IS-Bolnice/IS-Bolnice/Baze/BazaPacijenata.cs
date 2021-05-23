@@ -208,4 +208,30 @@ public class BazaPacijenata
         return pacijenti;
     }
 
+    public bool JedinstvenoKorisnickoIme(string korisnickoIme)
+    {
+        foreach (Pacijent p in SviPacijenti())
+        {
+            if (p.KorisnickoIme.Equals(korisnickoIme))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool JedinstvenJmbgPacijenta(string jmbg)
+    {
+        foreach (Pacijent p in SviPacijenti())
+        {
+            if (p.Jmbg.Equals(jmbg))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

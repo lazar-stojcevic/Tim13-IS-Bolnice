@@ -6,24 +6,23 @@ using System.Windows;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
-    /// <summary>
-    /// Interaction logic for DodavanjePacijentaWindow.xaml
-    /// </summary>
     public partial class DodavanjePacijentaWindow : Window
     {
-        private BazaPacijenata bp;
-        private BazaLekara bl;
+        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private BazaLekara bazaLekara = new BazaLekara();
         private List<Lekar> lekari;
 
         public DodavanjePacijentaWindow()
         {
             InitializeComponent();
 
-            bp = new BazaPacijenata();
-            bl = new BazaLekara();
+            PopunjavanjeListeLekaraZaOdabir();
+        }
 
+        private void PopunjavanjeListeLekaraZaOdabir()
+        {
             List<string> lekariString = new List<string>();
-            lekari = bl.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
+            lekari = bazaLekara.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
             foreach (Lekar l in lekari)
             {
                 string lekarString = l.Ime + " " + l.Prezime + " (" + l.Oblast.Naziv + ")";
@@ -43,14 +42,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!popunjenaObaveznaPolja())
             {
                 dugmePotvrdi.IsEnabled = false;
-
-                string sMessageBoxText = "Nisu popunjena sva obavezna polja!";
-                string sCaption = "Upozorenje";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBox.Show("Nisu popunjena sva obavezna polja!");
             }
             else
             {
@@ -115,7 +107,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     Alergeni = new List<Sastojak>()
                 };
 
-                bp.KreirajPacijenta(p);
+                bazaPacijenata.KreirajPacijenta(p);
 
                 this.Close();
             }
@@ -156,23 +148,11 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
         {
-            List<Pacijent> pacijenti = bp.SviPacijenti();
             string tempJmbg = txtJMBG.Text;
-
-            foreach (Pacijent p in pacijenti)
+            if (!bazaPacijenata.JedinstvenJmbgPacijenta(tempJmbg))
             {
-                if (p.Jmbg.Equals(tempJmbg))
-                {
-                    dugmePotvrdi.IsEnabled = false;
-
-                    string sMessageBoxText = "Uneti JMBG već postoji u sistemu!";
-                    string sCaption = "Upozorenje";
-
-                    MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                    MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-                    MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                }
+                dugmePotvrdi.IsEnabled = false;
+                MessageBox.Show("Uneti JMBG već postoji u sistemu!");
             }
         }
 
@@ -186,23 +166,11 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
         {
-            List<Pacijent> pacijenti = bp.SviPacijenti();
             string tempKorisnickoIme = txtKorisnickoIme.Text;
-
-            foreach (Pacijent p in pacijenti)
+            if (!bazaPacijenata.JedinstvenoKorisnickoIme(tempKorisnickoIme))
             {
-                if (p.KorisnickoIme.Equals(tempKorisnickoIme))
-                {
-                    dugmePotvrdi.IsEnabled = false;
-
-                    string sMessageBoxText = "Uneto korisničko ime već postoji u sistemu!";
-                    string sCaption = "Upozorenje";
-
-                    MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                    MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-                    MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                }
+                dugmePotvrdi.IsEnabled = false;
+                MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");
             }
         }
 

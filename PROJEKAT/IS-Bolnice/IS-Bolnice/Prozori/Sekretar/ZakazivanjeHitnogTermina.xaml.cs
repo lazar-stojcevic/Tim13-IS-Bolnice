@@ -6,9 +6,6 @@ using System.Windows;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
-    /// <summary>
-    /// Interaction logic for ZakazivanjeHitnogTermina.xaml
-    /// </summary>
     public partial class ZakazivanjeHitnogTermina : Window
     {
         private Pacijent odabraniPacijent = new Pacijent();

@@ -11,4 +11,13 @@ public class Pacijent : Korisnik
     {
         Alergeni = new List<Sastojak>();    
     }
+
+    public Pacijent(string jmbg, string ime, string prezime)
+    {
+        Jmbg = jmbg;
+        Ime = ime;
+        Prezime = prezime;
+        Pol = Pol.neodredjen;
+        Alergeni = new List<Sastojak>();
+    }
 }

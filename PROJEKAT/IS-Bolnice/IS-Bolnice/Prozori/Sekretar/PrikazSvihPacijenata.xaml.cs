@@ -8,7 +8,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class PrikazSvihPacijenata : Window
     {
-        private BazaPacijenata bp;
+        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
         private Pacijent odabraniPacijentRef;
         private ObservableCollection<Pacijent> odabraniPacijentiRef;
         public ObservableCollection<Pacijent> Pacijenti
@@ -22,8 +22,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             this.DataContext = this;
-            bp = new BazaPacijenata();
-            Pacijenti = new ObservableCollection<Pacijent>(bp.SviPacijenti());
+            Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
             odabraniPacijentRef = pacijent;
 
             dgPacijenti.SelectionMode = DataGridSelectionMode.Single;
@@ -36,8 +35,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             this.DataContext = this;
-            bp = new BazaPacijenata();
-            Pacijenti = new ObservableCollection<Pacijent>(bp.SviPacijenti());
+            bazaPacijenata = new BazaPacijenata();
+            Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
 
             odabraniPacijentiRef = odabraniPacijenti;
         }
