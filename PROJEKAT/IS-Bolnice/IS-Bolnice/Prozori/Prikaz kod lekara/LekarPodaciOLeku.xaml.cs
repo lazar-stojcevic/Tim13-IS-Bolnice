@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -59,27 +60,32 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_Izmeni(object sender, RoutedEventArgs e)
         {
-            lek.Sifra = txtSifra.Text;
-            lek.Ime = txtIme.Text;
-            lek.Opis = txtGramaza.Text;
-            lek.Alergeni.Clear();
-            foreach (string linija in listSastojci.Items)
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da promenite podatke o leku?", "Izmena leka", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                lek.Alergeni.Add(new Sastojak(linija));
+
+                lek.Sifra = txtSifra.Text;
+                lek.Ime = txtIme.Text;
+                lek.Opis = txtGramaza.Text;
+                lek.Alergeni.Clear();
+                foreach (string linija in listSastojci.Items)
+                {
+                    lek.Alergeni.Add(new Sastojak(linija));
+                }
+
+                foreach (Lek zamesni in listZamesnski.Items)
+                {
+                    lek.ZamenskiLekovi.Add(zamesni);
+                }
+
+                lek.PotrebanRecept = boxRecept.IsEnabled;
+
+                sviLekovi.Remove(lekStari);
+                sviLekovi.Add(lek);
+
+                lekKontroler.ObrisiLek(lekStari);
+                lekKontroler.KreirajLek(lek);
             }
-
-            foreach (Lek zamesni in listZamesnski.Items)
-            {
-                lek.ZamenskiLekovi.Add(zamesni);
-            }
-
-            lek.PotrebanRecept = boxRecept.IsEnabled;
-
-            sviLekovi.Remove(lekStari);
-            sviLekovi.Add(lek);
-
-            lekKontroler.ObrisiLek(lekStari);
-            lekKontroler.KreirajLek(lek);
         }
 
         private void Button_ClickNazad(object sender, RoutedEventArgs e)

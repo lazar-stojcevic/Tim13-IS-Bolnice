@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Drawing;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
@@ -43,35 +44,41 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ObrisiLek(object sender, RoutedEventArgs e)
         {
-            terapije.Remove((Terapija)listaLekova.SelectedItem);
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da obrišete ovaj lek", "Brisanje leka", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                terapije.Remove((Terapija)listaLekova.SelectedItem);
+            }
+            
         }
 
         private void Button_ZavrsiPregled(object sender, RoutedEventArgs e)
         {
-            //Zapisivanje izvestaja u txt datoteku lekar#pacijent#anamneza#datumRodjenjaPacijenta#Lekovi sa terapijom
-
-            SacuvajIzvestaj();
-
-            if (terapije.Count != 0)
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigirsni da želida završite pregled", "Kraj pregleda", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Near;
-
-                Pacijent p = new PacijentKontroler().GetPacijentSaOvimJMBG(jmbgPac);
-
-                string imeBolnice = "Super bolnica";
-                string imeIPrezimePacijenta = p.Ime + " " + p.Prezime;
-                string datumRodjenjaPacijenta = p.DatumRodjenja.ToString("dd MM yyyy");
-                string danasniDatum = DateTime.Now.ToString("dd MM yyyy");
-                int brojRecepta = new Random().Next(0, 50000);
-
-                foreach (Terapija ter in terapije)
+                if (terapije.Count != 0)
                 {
-                    if (!ter.Lek.PotrebanRecept) { continue; }
-                    KreirajReceptZaStampanje(imeBolnice, stringFormat, imeIPrezimePacijenta, datumRodjenjaPacijenta, danasniDatum, ter, ref brojRecepta);
+                    StringFormat stringFormat = new StringFormat();
+                    stringFormat.Alignment = StringAlignment.Near;
+
+                    Pacijent p = new PacijentKontroler().GetPacijentSaOvimJMBG(jmbgPac);
+
+                    string imeBolnice = "Super bolnica";
+                    string imeIPrezimePacijenta = p.Ime + " " + p.Prezime;
+                    string datumRodjenjaPacijenta = p.DatumRodjenja.ToString("dd MM yyyy");
+                    string danasniDatum = DateTime.Now.ToString("dd MM yyyy");
+                    int brojRecepta = new Random().Next(0, 50000);
+
+                    foreach (Terapija ter in terapije)
+                    {
+                        if (!ter.Lek.PotrebanRecept) { continue; }
+                        KreirajReceptZaStampanje(imeBolnice, stringFormat, imeIPrezimePacijenta, datumRodjenjaPacijenta, danasniDatum, ter, ref brojRecepta);
+                    }
                 }
+                this.Close();
             }
-            this.Close();
+            
 
         }
 

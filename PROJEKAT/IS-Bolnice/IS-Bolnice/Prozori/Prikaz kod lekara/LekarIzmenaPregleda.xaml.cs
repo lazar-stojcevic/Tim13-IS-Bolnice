@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -53,30 +54,37 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
         {
-            Pregled noviPregled = new Pregled();
-            string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-            Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena pregleda", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Pregled noviPregled = new Pregled();
+                string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
+                Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
 
-            DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
-                pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
-            DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
-                pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);
-            kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
+                DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
+                    pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour,
+                    pregled.VremePocetkaPregleda.Minute, 0);
+                DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
+                    pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute,
+                    0);
+                kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
 
-            noviPregled.Lekar.Jmbg = idLekara;
-            noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
-            noviPregled.VremePocetkaPregleda = pocetak;
-            noviPregled.VremeKrajaPregleda = kraj;
-            pregledKontroler.IzmeniPregled(StariDatum, StariSat, StariMinut, noviPregled);
-
-            MessageBox.Show("Pregled uspešno izmenjen", "Izmenjen pregled", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
-
+                noviPregled.Lekar.Jmbg = idLekara;
+                noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
+                noviPregled.VremePocetkaPregleda = pocetak;
+                noviPregled.VremeKrajaPregleda = kraj;
+                pregledKontroler.IzmeniPregled(StariDatum, StariSat, StariMinut, noviPregled);
+                this.Close();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da napustite izmenu operacije, premene se neće sačuvati!", "Izmena pregleda", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)

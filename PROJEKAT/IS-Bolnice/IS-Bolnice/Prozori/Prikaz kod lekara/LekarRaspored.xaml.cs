@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -75,33 +76,38 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
-            Operacija selektovani = (Operacija)listaOperacija.SelectedItem;
-            string jmbg = selektovani.Pacijent.Jmbg;
-            DateTime datum = selektovani.VremePocetkaOperacije.Date;
-            DateTime vreme = selektovani.VremePocetkaOperacije;
-
-            List<Operacija> lista = operacijaKontroler.GetSveSledeceOperacije();
-            //TODO: UVEDI BINDING POD HITNO
-            foreach (Operacija o in lista)
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete ovu operaciju?", "Otkazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetkaOperacije.Hour == vreme.Hour && o.VremePocetkaOperacije.Minute == vreme.Minute && o.VremePocetkaOperacije.Date.Equals(datum))
+                Operacija selektovani = (Operacija) listaOperacija.SelectedItem;
+                string jmbg = selektovani.Pacijent.Jmbg;
+                DateTime datum = selektovani.VremePocetkaOperacije.Date;
+                DateTime vreme = selektovani.VremePocetkaOperacije;
+
+                List<Operacija> lista = operacijaKontroler.GetSveSledeceOperacije();
+                //TODO: UVEDI BINDING POD HITNO
+                foreach (Operacija o in lista)
                 {
-                    operacijaKontroler.OtkaziOperaciju(o);
+                    if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetkaOperacije.Hour == vreme.Hour &&
+                        o.VremePocetkaOperacije.Minute == vreme.Minute && o.VremePocetkaOperacije.Date.Equals(datum))
+                    {
+                        operacijaKontroler.OtkaziOperaciju(o);
+                    }
                 }
+
+
+                List<Operacija> op = operacijaKontroler.SveSledeceOperacijeZaLekara(sifra);
+                listaOperacija.ItemsSource = op;
             }
-
-            List<Operacija> op = operacijaKontroler.SveSledeceOperacijeZaLekara(sifra);
-            listaOperacija.ItemsSource = op;
-
         }
 
         private void Button_IzmeniPregled(object sender, RoutedEventArgs e)
         {
             if (listaPregleda.SelectedIndex == -1) { 
-                MessageBox.Show("Nista nije selektovano","Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Nista nije selektovano","Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
             Pregled selektovani = (Pregled)listaPregleda.SelectedItem;
             //string[] delovi = selektovani.Split(' ');
             string ime = selektovani.Pacijent.Ime;
@@ -135,29 +141,34 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            CultureInfo provider = CultureInfo.InvariantCulture;
 
-            Pregled selektovani = (Pregled)listaPregleda.SelectedItem;
-            string jmbg = selektovani.Pacijent.Jmbg;
-            string jmbgLekara = selektovani.Lekar.Jmbg;
-            DateTime datum = selektovani.VremePocetkaPregleda.Date;
-            Console.WriteLine(datum);
-            DateTime vreme = selektovani.VremePocetkaPregleda;
-
-
-            List<Pregled> lista = pregledKontroler.GetSviBuduciPregledi();
-            foreach (Pregled p in lista)
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete ovaj pregled?", "Otkazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == vreme.Hour && p.VremePocetkaPregleda.Minute == vreme.Minute && p.VremePocetkaPregleda.Date.Equals(datum.Date) && jmbgLekara.Equals(p.Lekar.Jmbg))
+
+                Pregled selektovani = (Pregled) listaPregleda.SelectedItem;
+                string jmbg = selektovani.Pacijent.Jmbg;
+                string jmbgLekara = selektovani.Lekar.Jmbg;
+                DateTime datum = selektovani.VremePocetkaPregleda.Date;
+                Console.WriteLine(datum);
+                DateTime vreme = selektovani.VremePocetkaPregleda;
+
+
+                List<Pregled> lista = pregledKontroler.GetSviBuduciPregledi();
+                foreach (Pregled p in lista)
                 {
-                    pregledKontroler.OtkaziPregled(p);
-                    break;
+                    if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == vreme.Hour &&
+                        p.VremePocetkaPregleda.Minute == vreme.Minute &&
+                        p.VremePocetkaPregleda.Date.Equals(datum.Date) && jmbgLekara.Equals(p.Lekar.Jmbg))
+                    {
+                        pregledKontroler.OtkaziPregled(p);
+                        break;
+                    }
                 }
+
+                List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
+                listaPregleda.ItemsSource = pr;
             }
-
-            List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
-            listaPregleda.ItemsSource = pr;
-
         }
 
         private void Button_VidiPacijenta(object sender, RoutedEventArgs e)

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -37,19 +38,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             if (listaSoba.SelectedIndex != -1)
             {
-                Soba soba = (Soba) listaSoba.SelectedItem;
-                Hospitalizacija hos = new Hospitalizacija(txtJMBG.Text, soba.Id, datumKraja.SelectedDate.Value);
+                MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite postali pacijenta na hospitalizaciju?", "Kreiranje hospitalizacije", "Da", "Ne", MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
 
-                if (new HospitalizacijaKontroler().KreirajHospitalizaciju(hos))
-                {
-                    MessageBox.Show("Pacijent poslan na hospitalizaciju", "Kreirana hospitalizacija",
-                        MessageBoxButton.OK);
-                    NavigationService.GoBack();
-                }
-                else
-                {
-                    MessageBox.Show("Pacijent je već na hospitalizaciji", "Nije kreirana hospitalizacija",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    Soba soba = (Soba) listaSoba.SelectedItem;
+                    Hospitalizacija hos = new Hospitalizacija(txtJMBG.Text, soba.Id, datumKraja.SelectedDate.Value);
+
+                    if (new HospitalizacijaKontroler().KreirajHospitalizaciju(hos))
+                    {
+                        MessageBox.Show("Pacijent poslan na hospitalizaciju", "Kreirana hospitalizacija",
+                            MessageBoxButton.OK);
+                        NavigationService.GoBack();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pacijent je već na hospitalizaciji", "Nije kreirana hospitalizacija",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
@@ -62,7 +68,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void ButtonClick_Odustani(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da napustite kreiranje hospitalizacije!", "Kreiranje hospitalizacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                NavigationService.GoBack();
+            }
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)

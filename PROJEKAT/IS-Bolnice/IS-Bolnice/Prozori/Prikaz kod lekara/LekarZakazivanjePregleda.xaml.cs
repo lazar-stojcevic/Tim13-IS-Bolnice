@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -40,10 +41,16 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
-            Pregled noviPregled = KreirajNoviPregled();
-            pregledKontroler.ZakaziPregled(noviPregled);
-            MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro selektovali sve podatke?", "Zakazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+
+                Pregled noviPregled = KreirajNoviPregled();
+                pregledKontroler.ZakaziPregled(noviPregled);
+                MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                this.Close();
+            }
         }
 
         private Pregled KreirajNoviPregled()
@@ -80,7 +87,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li želida da odustanete od zakazivanje pregleda?", "Zakazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)

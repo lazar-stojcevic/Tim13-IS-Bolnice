@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -65,7 +66,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_DodajClick(object sender, RoutedEventArgs e)
         {
-            DodajNovuTerapiju();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli svi podatke terapije?", "Dodavanje terapije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                DodajNovuTerapiju();
+            }
         }
 
         private void DodajNovuTerapiju()
@@ -89,8 +94,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_KrajClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste definisali sve terapije?", "Dodavanje terapije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
+
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {

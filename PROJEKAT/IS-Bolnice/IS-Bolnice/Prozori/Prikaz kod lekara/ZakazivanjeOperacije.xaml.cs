@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -46,10 +47,15 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
-            Operacija operacija = KreirajNovuOperaciju();
-            operacijaKontroler.ZakaziOperaciju(operacija);
-            MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve vrednosti?", "Zakazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Operacija operacija = KreirajNovuOperaciju();
+                operacijaKontroler.ZakaziOperaciju(operacija);
+                MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                this.Close();
+            }
         }
 
         private Operacija KreirajNovuOperaciju()
@@ -76,7 +82,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da odustanete od zakazivanje operacije?", "Zakazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void liste_SelectionChanged(object sender, SelectionChangedEventArgs e)

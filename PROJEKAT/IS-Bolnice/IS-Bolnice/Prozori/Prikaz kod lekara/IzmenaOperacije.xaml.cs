@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Servisi;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -52,34 +53,39 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
         {
-            //TODO NAPRAVI DTO KLASU
-            Operacija novaOperacija = new Operacija();
-            string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-            string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
-            Operacija operacijaSelektovana = operacije.ElementAt(terminiList.SelectedIndex);
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena operacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Operacija novaOperacija = new Operacija();
+                string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
+                string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+                Operacija operacijaSelektovana = operacije.ElementAt(terminiList.SelectedIndex);
 
-            DateTime pocetak = new DateTime(operacijaSelektovana.VremePocetkaOperacije.Year, operacijaSelektovana.VremePocetkaOperacije.Month,
-                operacijaSelektovana.VremePocetkaOperacije.Day, operacijaSelektovana.VremePocetkaOperacije.Hour, operacijaSelektovana.VremePocetkaOperacije.Minute, 0);
-            DateTime kraj = new DateTime(operacijaSelektovana.VremeKrajaOperacije.Year, operacijaSelektovana.VremeKrajaOperacije.Month,
-                operacijaSelektovana.VremeKrajaOperacije.Day, operacijaSelektovana.VremeKrajaOperacije.Hour, operacijaSelektovana.VremeKrajaOperacije.Minute, 0);
-            kraj = kraj.AddMinutes(45); //Predpostavka da ce operacija trajati 45 minuta 
-            //TODO: UBACI POLJE ZA DUZINU OPERACIJE
-            novaOperacija.Lekar.Jmbg = idLekara;
-            novaOperacija.Pacijent.Jmbg = txtOperJmbg.Text;
-            novaOperacija.Soba.Id = idSale;
-            novaOperacija.VremePocetkaOperacije = pocetak;
-            novaOperacija.VremeKrajaOperacije = kraj;
-            novaOperacija.Hitna = (bool)boxHitno.IsChecked;
+                DateTime pocetak = new DateTime(operacijaSelektovana.VremePocetkaOperacije.Year, operacijaSelektovana.VremePocetkaOperacije.Month,
+                    operacijaSelektovana.VremePocetkaOperacije.Day, operacijaSelektovana.VremePocetkaOperacije.Hour, operacijaSelektovana.VremePocetkaOperacije.Minute, 0);
+                DateTime kraj = new DateTime(operacijaSelektovana.VremeKrajaOperacije.Year, operacijaSelektovana.VremeKrajaOperacije.Month,
+                    operacijaSelektovana.VremeKrajaOperacije.Day, operacijaSelektovana.VremeKrajaOperacije.Hour, operacijaSelektovana.VremeKrajaOperacije.Minute, 0);
+                kraj = kraj.AddMinutes(45); //Predpostavka da ce operacija trajati 45 minuta 
+                //TODO: UBACI POLJE ZA DUZINU OPERACIJE
+                novaOperacija.Lekar.Jmbg = idLekara;
+                novaOperacija.Pacijent.Jmbg = txtOperJmbg.Text;
+                novaOperacija.Soba.Id = idSale;
+                novaOperacija.VremePocetkaOperacije = pocetak;
+                novaOperacija.VremeKrajaOperacije = kraj;
+                novaOperacija.Hitna = (bool)boxHitno.IsChecked;
 
-            operacijaKontroler.IzmeniOperaciju(StariDatum, StariSat, StariMinut, novaOperacija);
+                operacijaKontroler.IzmeniOperaciju(StariDatum, StariSat, StariMinut, novaOperacija);
 
-            MessageBox.Show("Operacijacija uspešno izmenjena", "Izmenjena operacija", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da napustite izmenu operacije, premene se neće sačuvati!", "Izmena operacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)

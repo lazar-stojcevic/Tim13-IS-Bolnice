@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -39,13 +40,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         }
 
         private void odjavaClick(object sender, RoutedEventArgs e)
-        { 
-            
-
-            MainWindow prijava = new MainWindow();
-            Application.Current.Windows[0].Close();
-            prijava.ShowDialog();
-
+        {
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da se odjavite?", "Odjava", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow prijava = new MainWindow();
+                Application.Current.Windows[0].Close();
+                prijava.ShowDialog();
+            }
         }
 
         private void validacijaLekovaClick(object sender, RoutedEventArgs e)

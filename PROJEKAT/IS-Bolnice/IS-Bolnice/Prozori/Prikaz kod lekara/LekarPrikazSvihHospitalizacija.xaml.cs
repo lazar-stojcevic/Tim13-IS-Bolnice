@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -56,10 +57,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     MessageBoxButton.OK);
                 return;
             }
+            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otpustite pacijenta kući?!", "Otpuštanje sa hospitalizacije", "Da", "Ne", MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                hospitalizacijaKontroler.ObrisiHospitalizaciju(sveHospitalizacije.ElementAt(listaHospitalizacija.SelectedIndex));
 
-            hospitalizacijaKontroler.ObrisiHospitalizaciju(sveHospitalizacije.ElementAt(listaHospitalizacija.SelectedIndex));
+                sveHospitalizacije.RemoveAt(listaHospitalizacija.SelectedIndex);
+            }
 
-            sveHospitalizacije.RemoveAt(listaHospitalizacija.SelectedIndex);
         }
 
         private void ButtonClick_Nazad(object sender, RoutedEventArgs e)
