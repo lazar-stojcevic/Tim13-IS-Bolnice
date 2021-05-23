@@ -827,5 +827,14 @@
   <ItemGroup>
     <Resource Include="Slike\Sekretar\help.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\operacija.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\zakazivanjepregleda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\hospitalizacija.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

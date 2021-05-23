@@ -71,5 +71,20 @@ namespace IS_Bolnice.Servisi
             return sviPregledi;
         }
 
+        public Pregled GetSledeciPregledKodLekara(string jmbg)
+        {
+            Pregled sledeciPregled = new Pregled();
+            sledeciPregled.VremePocetkaPregleda = DateTime.MaxValue;
+            foreach (Pregled pregled in GetSviBuduciPreglediLekara(jmbg))
+            {
+                if (pregled.VremePocetkaPregleda < sledeciPregled.VremePocetkaPregleda)
+                {
+                    sledeciPregled = pregled;
+                }
+            }
+
+            return sledeciPregled;
+        }
+
     }
 }

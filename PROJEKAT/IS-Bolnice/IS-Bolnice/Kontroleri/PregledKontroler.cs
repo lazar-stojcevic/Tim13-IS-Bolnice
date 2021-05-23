@@ -40,5 +40,10 @@ namespace IS_Bolnice.Kontroleri
         {
             return pregledServis.GetSviBuduciPreglediLekara(jmbg);
         }
+
+        public Pregled GetSledeciPregledKodLekara(string jmbg)
+        {
+            return pregledServis.GetSledeciPregledKodLekara(jmbg);
+        }
     }
 }

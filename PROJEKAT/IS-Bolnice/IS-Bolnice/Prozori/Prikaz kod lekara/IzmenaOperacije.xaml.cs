@@ -37,7 +37,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public IzmenaOperacije()
         {
             InitializeComponent();
-            List<Lekar> sviLekari = lekarKontroler.GetSviLekari();
+            List<Lekar> sviLekari = lekarKontroler.GetSviLekariSpecijalisti();
             foreach (Lekar p in sviLekari)
             {
                     string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Oblast.Naziv;

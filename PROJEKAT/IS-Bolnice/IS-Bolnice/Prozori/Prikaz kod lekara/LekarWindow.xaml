@@ -13,14 +13,16 @@
             <ColumnDefinition Width="158*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="..\Slike\menu.png" HorizontalAlignment="Left" Height="38" Margin="23,10,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="-0.417,-0.441"/>
-        <Button Content="Učitaj pacijenta" HorizontalAlignment="Left" Height="43" Margin="19.2,52,0,0" VerticalAlignment="Top" Width="109" Click="btnUcitajPacijenta" Grid.Column="1"/>
+        <Label Content="Pregled" FontSize="22" HorizontalAlignment="Left" Margin="23,4,0,0" VerticalAlignment="Top" Height="40" Width="83"/>
+
+
+        <Button Content="Učitaj pregled" HorizontalAlignment="Left" Height="51" Margin="19.2,52,0,0" VerticalAlignment="Top" Width="126" Click="btnUcitajPacijenta" Grid.Column="1"/>
         <Label Content="JMBG:" HorizontalAlignment="Left" Margin="27,57,0,0" VerticalAlignment="Top" Width="46"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" Grid.ColumnSpan="2" x:Name="txtJMBG" HorizontalAlignment="Left" Height="26" Margin="73,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+        <TextBox IsReadOnly="True" PreviewTextInput="NumberValidationTextBox" x:Name="txtJMBG" HorizontalAlignment="Left" Height="26" Margin="73,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="152"/>
         <Label Content="Ime:" HorizontalAlignment="Left" Margin="36,98,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime:" HorizontalAlignment="Left" Margin="35,129,0,0" VerticalAlignment="Top"/>
-        <TextBox Grid.ColumnSpan="2" x:Name="txtIme" HorizontalAlignment="Left" Height="26" Margin="112,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
-        <TextBox HorizontalAlignment="Left" x:Name="txtPrz" Height="26" Margin="112,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125" Grid.ColumnSpan="2"/>
+        <TextBox IsReadOnly="True" x:Name="txtIme" HorizontalAlignment="Left" Height="26" Margin="100,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
+        <TextBox IsReadOnly="True" IsEnabled="False" HorizontalAlignment="Left" x:Name="txtPrz" Height="26" Margin="100,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
 
 
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Grid.ColumnSpan="2">
@@ -50,21 +52,55 @@
                 </MenuItem>
             </Menu>
         </ToolBarPanel>
-        <Button Content="Zakaži pregled" x:Name="btnPregled" IsEnabled="False" Margin="19.2,107,30,544" Click="btnKreirajPregled" Background="Red" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
-        <Button Content="Zakaži operaciju" x:Name="btnOperacija" IsEnabled="False" Margin="19.2,171,31,477" Click="btnKreirajOperaciju" Background="CadetBlue" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="65.2,565,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="ButtonRaspored_Click">
+        <Button Background="#FFF"  BorderThickness="0" ToolTip="Vidi raspored"  HorizontalAlignment="Left" Height="80" Margin="65.2,565,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="ButtonRaspored_Click">
             <StackPanel>
                 <Image Source="../../Slike/timetable.png" Height="71" Width="77" />
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnIzvestaj" IsEnabled="False" Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="16,565,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
+        <Button x:Name="btnIzvestaj" IsEnabled="False" Background="#FFF" ToolTip="Pisanje izveštaja" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="16,565,0,0" VerticalAlignment="Top" Width="80" Click="ButtonIzvestaj_Click">
             <StackPanel>
                 <Image Source="../../Slike/report.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
             </StackPanel>
         </Button>
 
-        <Button Content="Hospitalizacija" x:Name="btnHospitalizacija" IsEnabled="False" Margin="19.2,239,31,409" Click="btnKreirajHospitalizaciju" Background="CadetBlue" Foreground="Black" BorderBrush="White" Grid.Column="1"/>
-        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="74.2,12,0,0" VerticalAlignment="Top" Width="69" Grid.Column="1"/>
+        <Button x:Name="btnOperacija" IsEnabled="False" Background="#FFF" ToolTip="Zakaži operaciju" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="115,566,0,0" VerticalAlignment="Top" Width="80" Click="btnKreirajOperaciju">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/operacija.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="btnPregled" IsEnabled="False" Background="#FFF" ToolTip="Zakaži pregled" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="213,566,0,0" VerticalAlignment="Top" Width="80" Click="btnKreirajPregled" Grid.ColumnSpan="2">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/zakazivanjepregleda.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="btnHospitalizacija" IsEnabled="False" Background="#FFF" ToolTip="Pošalji na hospitalizaciju" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="63.2,471,0,0" VerticalAlignment="Top" Width="80" Click="btnKreirajHospitalizaciju" Grid.Column="1">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/hospitalizacija.png" Height="71" Width="77" RenderTransformOrigin="0.536,0.5" />
+            </StackPanel>
+        </Button>
+
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="74.2,12,0,0" VerticalAlignment="Top" Width="69" Grid.Column="1" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
+        <Button x:Name="btnPodaci" Content="Više o pacijentu" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Left" Height="51" Margin="19.2,130,0,0" VerticalAlignment="Top" Width="126" Click="ButtonClick_ViseOPacijentu"/>
+
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="642" Margin="6,48,0,0" VerticalAlignment="Top" Width="394" Grid.ColumnSpan="2">
+            <Rectangle  HorizontalAlignment="Left" Height="143" Margin="10,0,0,0" Stroke="Red" VerticalAlignment="Top" Width="207"/>
+            <Label Foreground="Red"  Content="Podaci o pacijentu učitanog pregleda" HorizontalAlignment="Left" Height="31" Margin="10,109,0,0" VerticalAlignment="Top" Width="207" RenderTransformOrigin="0.503,0.358"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="78" Margin="222,0,0,0" Stroke="Red" VerticalAlignment="Top" Width="162"/>
+            <Label FontSize="10" Foreground="Red"  Content="Započni sledeći zakazani pregled" HorizontalAlignment="Left" Height="32" Margin="225,53,0,0" VerticalAlignment="Top" Width="169"/>
+
+            <Rectangle   HorizontalAlignment="Left" Height="206" Margin="10,413,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
+            <Label Foreground="Red"  Content="Datum do kada će trajati hospiralizacija" HorizontalAlignment="Left" Height="33" Margin="32,452,0,0" VerticalAlignment="Top" Width="240"/>
+
+            <Rectangle HorizontalAlignment="Left" Height="78" Margin="222,79,0,0" Stroke="Red" VerticalAlignment="Top" Width="162"/>
+            <Label FontSize="11" Foreground="Red"  Content="Svi podaci o učitanom pacijentu" HorizontalAlignment="Left" Height="32" Margin="221,132,-10,0" VerticalAlignment="Top" Width="183"/>
+
+        </Grid>
+        
     </Grid>
+
+
 </Page>

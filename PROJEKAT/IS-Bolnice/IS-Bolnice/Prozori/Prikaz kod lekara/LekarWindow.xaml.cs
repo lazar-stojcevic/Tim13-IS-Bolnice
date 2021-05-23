@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -47,6 +48,33 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void btnUcitajPacijenta(object sender, RoutedEventArgs e)
         {
+            PregledKontroler kontroler = new PregledKontroler();
+            Pregled pregled = kontroler.GetSledeciPregledKodLekara(Sifra);
+            if (pregled.VremePocetkaPregleda.Equals(DateTime.MaxValue))
+            {
+                MessageBox.Show("Ne postoji ni jedan zakazan pregled kod Vas", "Ne postoji pregled",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+                btnOperacija.IsEnabled = false;
+                btnPregled.IsEnabled = false;
+                btnIzvestaj.IsEnabled = false;
+                btnHospitalizacija.IsEnabled = false;
+                btnPodaci.IsEnabled = false;
+
+            }else
+            {
+               //B Console.WriteLine(DateTime.MaxValue + "  AAA   " + pregled.VremePocetkaPregleda);
+                txtJMBG.Text = pregled.Pacijent.Jmbg;
+                txtIme.Text = pregled.Pacijent.Ime;
+                txtPrz.Text = pregled.Pacijent.Prezime;
+                btnOperacija.IsEnabled = true;
+                btnPregled.IsEnabled = true;
+                btnIzvestaj.IsEnabled = true;
+                btnHospitalizacija.IsEnabled = true;
+                btnPodaci.IsEnabled = true;
+            }
+
+            /*
             bool nasao = false;
             PacijentKontroler pacijentKontroler = new PacijentKontroler();
             //TODO OVO BI BILO LEPO DA SE URADI MALO ELEGANTNIJE
@@ -82,6 +110,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             { 
                 MessageBox.Show("Ne postoji pacijent sa unetim jmbg-om", "Probaj ponovo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            */
         }
 
         private void ButtonRaspored_Click(object sender, RoutedEventArgs e)
@@ -120,6 +149,22 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             LekarKreiranjeHospitalizacije kreiranjeHospitalizacije = new LekarKreiranjeHospitalizacije(txtJMBG.Text);
             this.NavigationService.Navigate(kreiranjeHospitalizacije);
+        }
+
+        private void ButtonClick_ViseOPacijentu(object sender, RoutedEventArgs e)
+        {
+            PodaciOPacijentu podaci = new PodaciOPacijentu(txtJMBG.Text);
+            podaci.Show();
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            help.Opacity = 1;
+        }
+
+        private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
+        {
+            help.Opacity = 0;
         }
     }
 
