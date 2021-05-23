@@ -46,26 +46,17 @@ public class BazaPacijenata
 
     public Pacijent PacijentSaOvimJMBG(string jmbg)
     {
-        List<string> linije = new List<string>();
-        linije = File.ReadAllLines(fileLocation).ToList();
-
-        //return NapraviPacijente(linije);
-        // odabir i vracanje samo onih pacijenata koji nisu logicki obrisani
-        List<Pacijent> sviPacijenti = NapraviPacijente(linije);
-        Pacijent aktuelniPacijent = new Pacijent();
-
-        foreach (Pacijent p in sviPacijenti)
+        foreach (Pacijent p in SviPacijenti())
         {
             if (p.Obrisan == false)
             {
                 if (p.Jmbg.Equals(jmbg))
                 {
-                    aktuelniPacijent = p;
-                    return aktuelniPacijent;
+                    return p;
                 }
             }
         }
-        return aktuelniPacijent;
+        return null;
     }
 
     public void KreirajPacijenta(Pacijent pacijent)
