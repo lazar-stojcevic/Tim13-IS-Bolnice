@@ -28,10 +28,8 @@
             SelectionMode="Single" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding Lekar, Converter={cvt:LekarToTextConverter}}" />
-                <!--ISPRAVITI IME POCETA-->
                 <DataGridTextColumn Header="Početak pregleda" Width="1*" Binding="{Binding VremePocetkaOperacije, StringFormat=\{0:HH:mm\}}"/>
                 <DataGridTextColumn Header="Kraj pregleda" Width="1*" Binding="{Binding VremeKrajaOperacije, StringFormat=\{0:HH:mm\}}"/>
-                <!--ISPRAVITI IME POCETA-->
                 <DataGridTextColumn Header="Datum pregleda" Width="1*" Binding="{Binding VremePocetkaOperacije, StringFormat=\{0:dd.MM.yyyy\}}"/>
             </DataGrid.Columns>
         </DataGrid>

@@ -26,6 +26,11 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.GetSveSledeveOperacijePacijenta(jmbgPacijenta);
         }
 
+        public List<Operacija> GetSveSledeceOperacijeSobe(string idSale)
+        {
+            return operacijaServis.GetSveSledeceOperacijeSobe(idSale);
+        }
+
         public bool IzmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
             return operacijaServis.izmeniOperaciju(stariDatum, stariSat, stariMinut, novaOperacija);

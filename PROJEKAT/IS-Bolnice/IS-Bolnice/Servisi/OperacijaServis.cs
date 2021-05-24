@@ -31,6 +31,20 @@ namespace IS_Bolnice.Servisi
             return operacijePacijenta;
         }
 
+        public List<Operacija> GetSveSledeceOperacijeSobe(string idSale)
+        {
+            List<Operacija> operacijeSale = new List<Operacija>();
+            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
+            {
+                if (operacija.Soba.Id.Equals(idSale))
+                {
+                    operacijeSale.Add(operacija);
+                }
+            }
+
+            return operacijeSale;
+        }
+
         public bool izmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
             BazaOperacija baza = new BazaOperacija();

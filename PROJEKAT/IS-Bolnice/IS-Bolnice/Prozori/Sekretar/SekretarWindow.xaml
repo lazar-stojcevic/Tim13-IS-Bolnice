@@ -269,9 +269,9 @@
                         <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="4*"/>
+                        <RowDefinition Height="0.2*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="4*"/>
-                        <RowDefinition Height="1*"/>
                         <RowDefinition Height="0.5*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -288,11 +288,11 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Label Content="Inventar i oprema za: " Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"
+                    <Label Content="Inventar i oprema za prostoriju: " Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"
                            FontWeight="Bold" FontSize="15"/>
                     <Label x:Name="labelImeSelektovaneSobe" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"
                            FontSize="15"/>
-                    <DataGrid x:Name="dgOpremaSelektovaneSale" IsReadOnly="True"
+                    <DataGrid x:Name="dgOpremaSelektovaneSobe" IsReadOnly="True"
                               SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="3">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Predmet.Id}" Width="0.5*"/>
@@ -301,16 +301,32 @@
                             <DataGridTextColumn Header="Tip opreme" Binding="{Binding Predmet.Tip}" Width="1*"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Label x:Name="labelZaTermineSobe" Content="Zakazani termini za prostoriju: " Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           FontWeight="Bold" FontSize="15" Visibility="Hidden"/>
+                    <Label x:Name="labelImeSelektovaneSobe2" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"
+                           FontSize="15"/>
+                    <DataGrid x:Name="dgOperacijeSelektovaneSobe" IsReadOnly="True" Visibility="Hidden"
+                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="5" Grid.Column="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Lekar" Binding="{Binding Lekar, Converter={cvt:LekarToTextConverter}}" Width="1*"/>
+                            <DataGridTextColumn Header="Prostorija" Binding="{Binding Soba.Id}" Width="1*"/>
+                            <DataGridTextColumn Header="Početak termina" Binding="{Binding VremePocetkaOperacije, StringFormat=\{0:HH:mm\}}" Width="1*"/>
+                            <DataGridTextColumn Header="Kraj termina" Binding="{Binding VremeKrajaOperacije, StringFormat=\{0:HH:mm\}}" Width="1*"/>
+                            <DataGridTextColumn Header="Datum termina" Binding="{Binding VremePocetkaOperacije, StringFormat=\{0:dd.MM.yyyy\}}" Width="1*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Lekari">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.3*"/>
                         <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1.3*"/>
+                        <RowDefinition Height="0.3*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.1*"/>
@@ -319,8 +335,12 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
+
+                    <Rectangle Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Fill="#FFF4F4F5"  Stroke="Black"/>
+                    <Label Content="Lekari opšte prakse:" FontWeight="Bold" FontSize="15" Grid.Row="1" Grid.Column="1"
+                           VerticalAlignment="Center"></Label>
                     <DataGrid x:Name="dgLekariOpstePrakse" IsReadOnly="True" ItemsSource="{Binding LekariOpstePrakse}"
-                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Margin="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
                             <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="1*"/>
@@ -328,11 +348,14 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Radno vreme" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"
+                    <Button Content="Radno vreme" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="92" Height="32"
                             VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Opste"></Button>
 
+                    <Rectangle Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Fill="#FFF4F4F5"  Stroke="Black"/>
+                    <Label Content="Lekari specijalisti:" FontWeight="Bold" FontSize="15" Grid.Row="1" Grid.Column="3"
+                           VerticalAlignment="Center"></Label>
                     <DataGrid x:Name="dgLekariSpecijalisti" IsReadOnly="True" ItemsSource="{Binding LekariSpecijalisti}"
-                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2">
+                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Margin="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Ime" Binding="{Binding Ime}" Width="1*"/>
                             <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}" Width="1*"/>
@@ -341,7 +364,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Radno vreme" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"
+                    <Button Content="Radno vreme" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" Width="92" Height="32"
                             VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Specijaliste"></Button>
                 </Grid>
             </TabItem>

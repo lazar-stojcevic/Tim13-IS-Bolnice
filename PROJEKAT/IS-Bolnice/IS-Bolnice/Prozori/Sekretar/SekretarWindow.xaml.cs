@@ -400,7 +400,28 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void AzurirajPrikazOpisaSobe(Soba selektovanaSoba)
         {
             labelImeSelektovaneSobe.Content = selektovanaSoba.Id;
-            dgOpremaSelektovaneSale.ItemsSource = sadrzajSobeKontroler.GetSadrzajSobe(selektovanaSoba.Id);
+            dgOpremaSelektovaneSobe.ItemsSource = sadrzajSobeKontroler.GetSadrzajSobe(selektovanaSoba.Id);
+
+            if (selektovanaSoba.Tip == RoomType.operacionaSala)
+            {
+                OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
+                dgOperacijeSelektovaneSobe.ItemsSource = operacijaKontroler.GetSveSledeceOperacijeSobe(selektovanaSoba.Id);
+                labelImeSelektovaneSobe2.Content = selektovanaSoba.Id;
+                dgOperacijeSelektovaneSobe.Visibility = Visibility.Visible;
+                labelZaTermineSobe.Visibility = Visibility.Visible;
+                labelImeSelektovaneSobe2.Visibility = Visibility.Visible;
+            }
+            else if (selektovanaSoba.Tip == RoomType.ordinacija)
+            {
+                PregledKontroler pregledKontroler = new PregledKontroler();
+                //dgPreglediSelektovaneSobe = pregledKontroler.GetSviBuduciPreglediSobe();
+            }
+            else
+            {
+                labelZaTermineSobe.Visibility = Visibility.Hidden;
+                labelImeSelektovaneSobe2.Visibility = Visibility.Hidden;
+                dgOperacijeSelektovaneSobe.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
