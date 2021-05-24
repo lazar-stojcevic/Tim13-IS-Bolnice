@@ -16,9 +16,24 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.GetSveSledeceOperacije();
         }
 
+        public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
+        {
+            return operacijaServis.SveSledeceOperacijeZaLekara(jmbgLekara);
+        }
+
+        public List<Operacija> GetSveSledeveOperacijePacijenta(string jmbgPacijenta)
+        {
+            return operacijaServis.GetSveSledeveOperacijePacijenta(jmbgPacijenta);
+        }
+
         public bool IzmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
             return operacijaServis.izmeniOperaciju(stariDatum, stariSat, stariMinut, novaOperacija);
+        }
+
+        public void IzmeniOperaciju(Operacija nova, Operacija stara)
+        {
+            operacijaServis.IzmeniOperaciju(nova, stara);
         }
 
         public void ZakaziOperaciju(Operacija operacija)
@@ -29,11 +44,6 @@ namespace IS_Bolnice.Kontroleri
         public void OtkaziOperaciju(Operacija operacija)
         {
             operacijaServis.OtkaziOperaciju(operacija);
-        }
-
-        public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
-        {
-           return operacijaServis.SveSledeceOperacijeZaLekara(jmbgLekara);
         }
     }
 }

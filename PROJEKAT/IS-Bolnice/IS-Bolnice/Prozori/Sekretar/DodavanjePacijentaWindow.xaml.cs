@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Servisi;
 
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class DodavanjePacijentaWindow : Window
     {
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        private BazaLekara bazaLekara = new BazaLekara();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
         private List<Lekar> lekari;
 
         public DodavanjePacijentaWindow()
@@ -22,7 +24,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void PopunjavanjeListeLekaraZaOdabir()
         {
             List<string> lekariString = new List<string>();
-            lekari = bazaLekara.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
+            lekari = lekarKontroler.GetSviLekariOpstePrakse(); // samo lekari opste prakse mogu biti izabrani lekari
             foreach (Lekar l in lekari)
             {
                 string lekarString = l.Ime + " " + l.Prezime + " (" + l.Oblast.Naziv + ")";
@@ -107,7 +109,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     Alergeni = new List<Sastojak>()
                 };
 
-                bazaPacijenata.KreirajPacijenta(p);
+                pacijentKontroler.KreirajPacijenta(p);
 
                 this.Close();
             }
@@ -149,7 +151,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
         {
             string tempJmbg = txtJMBG.Text;
-            if (!bazaPacijenata.JedinstvenJmbgPacijenta(tempJmbg))
+            if (!pacijentKontroler.JedinstvenJmbgPacijenta(tempJmbg))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneti JMBG već postoji u sistemu!");
@@ -167,7 +169,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
         {
             string tempKorisnickoIme = txtKorisnickoIme.Text;
-            if (!bazaPacijenata.JedinstvenoKorisnickoIme(tempKorisnickoIme))
+            if (!pacijentKontroler.JedinstvenoKorisnickoIme(tempKorisnickoIme))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");

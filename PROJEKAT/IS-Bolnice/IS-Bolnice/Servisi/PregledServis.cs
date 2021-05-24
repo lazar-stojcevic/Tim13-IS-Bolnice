@@ -19,7 +19,24 @@ namespace IS_Bolnice.Servisi
             return bazaPregleda.SviBuduciPregledi();
         }
 
-        public bool izmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
+        public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
+        {
+            List<Pregled> pregledi = new List<Pregled>();
+
+            foreach (Pregled pregled in bazaPregleda.SviBuduciPregledi())
+            {
+                if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta))
+                {
+                    pregledi.Add(pregled);
+                }
+            }
+
+            pregledi.Sort((x, y) => x.VremePocetkaPregleda.CompareTo(y.VremePocetkaPregleda));
+
+            return pregledi;
+        }
+
+        public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
         {
             BazaPregleda baza = new BazaPregleda();
             List<Pregled> lista = baza.SviBuduciPregledi();
@@ -35,6 +52,11 @@ namespace IS_Bolnice.Servisi
                 }
             }
             return false;
+        }
+
+        public void IzmeniPregled(Pregled novi, Pregled stari)
+        {
+            bazaPregleda.IzmeniPregled(novi, stari);
         }
 
         public List<Pregled> GetSlobodniTerminiLekara(string jmbgLekara)

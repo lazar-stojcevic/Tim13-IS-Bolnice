@@ -16,9 +16,24 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.GetSviBuduciPregledi();
         }
 
+        public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
+        {
+            return pregledServis.GetSviBuduciPreglediPacijenta(jmbgPacijenta);
+        }
+
+        public List<Pregled> GetSviBuduciPreglediLekara(string jmbg)
+        {
+            return pregledServis.GetSviBuduciPreglediLekara(jmbg);
+        }
+
+        public Pregled GetSledeciPregledKodLekara(string jmbg)
+        {
+            return pregledServis.GetSledeciPregledKodLekara(jmbg);
+        }
+
         public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
         {
-            return pregledServis.izmeniPregled(stariDatum, stariSat, stariMinut, noviPregled);
+            return pregledServis.IzmeniPregled(stariDatum, stariSat, stariMinut, noviPregled);
         }
 
         public List<Pregled> PonudjeniSlobodniTerminiLekara(string jmbgLekara)
@@ -36,14 +51,9 @@ namespace IS_Bolnice.Kontroleri
             pregledServis.ZakaziPregled(pregled);
         }
 
-        public List<Pregled> GetSviBuduciPreglediLekara(string jmbg)
+        public void IzmeniPregled(Pregled novi, Pregled stari)
         {
-            return pregledServis.GetSviBuduciPreglediLekara(jmbg);
-        }
-
-        public Pregled GetSledeciPregledKodLekara(string jmbg)
-        {
-            return pregledServis.GetSledeciPregledKodLekara(jmbg);
+            pregledServis.IzmeniPregled(novi, stari);
         }
     }
 }

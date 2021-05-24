@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
-    /// <summary>
-    /// Interaction logic for IzmenaPacijentaWindow.xaml
-    /// </summary>
     public partial class IzmenaPacijentaWindow : Window
     {
         private Pacijent pacijentZaIzmenu;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        private BazaLekara bazaLekara = new BazaLekara();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
         private BazaIzmena bazaIzmena = new BazaIzmena();
         private List<Lekar> lekari;
         private ObservableCollection<Pacijent> PacijentiRef;
@@ -23,7 +21,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             pacijentZaIzmenu = p;
-            lekari = bazaLekara.LekariOpstePrakse();    // samo lekari opste prakse mogu biti izabrani lekari
+            lekari = lekarKontroler.GetSviLekariOpstePrakse();  // samo lekari opste prakse mogu biti izabrani lekari
             PacijentiRef = Pacijenti;
             PopunjvanjePoljaZaPrikaz();
         }
@@ -155,7 +153,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 };
 
                 // p je pacijent sa izmenjenim informacijama, a "pacijent" predstavlja selektovanog pacijenta (bitno ukoliko ima potreba da se promeni JMBG)
-                bazaPacijenata.IzmeniPacijenta(p, pacijentZaIzmenu);
+                pacijentKontroler.IzmeniPacijenta(p, pacijentZaIzmenu);
                 // osvezavanje liste
                 int i = PacijentiRef.IndexOf(pacijentZaIzmenu);
                 if (i != -1)
@@ -214,7 +212,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
         {
             string tempJmbg = txtJMBG.Text;
-            if (!bazaPacijenata.JedinstvenJmbgPacijenta(tempJmbg))
+            if (!pacijentKontroler.JedinstvenJmbgPacijenta(tempJmbg))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneti JMBG već postoji u sistemu!");
@@ -232,7 +230,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
         {
             string tempKorisnickoIme = txtKorisnickoIme.Text;
-            if (!bazaPacijenata.JedinstvenoKorisnickoIme(tempKorisnickoIme))
+            if (!pacijentKontroler.JedinstvenoKorisnickoIme(tempKorisnickoIme))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");

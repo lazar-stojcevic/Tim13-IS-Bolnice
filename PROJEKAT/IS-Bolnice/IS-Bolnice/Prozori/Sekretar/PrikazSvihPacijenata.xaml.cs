@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class PrikazSvihPacijenata : Window
     {
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private Pacijent odabraniPacijentRef;
         private ObservableCollection<Pacijent> odabraniPacijentiRef;
         public ObservableCollection<Pacijent> Pacijenti
@@ -22,7 +23,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             this.DataContext = this;
-            Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
+            Pacijenti = new ObservableCollection<Pacijent>(pacijentKontroler.GetSviPacijenti());
             odabraniPacijentRef = pacijent;
 
             dgPacijenti.SelectionMode = DataGridSelectionMode.Single;
@@ -35,8 +36,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             this.DataContext = this;
-            bazaPacijenata = new BazaPacijenata();
-            Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
+            Pacijenti = new ObservableCollection<Pacijent>(pacijentKontroler.GetSviPacijenti());
 
             odabraniPacijentiRef = odabraniPacijenti;
         }

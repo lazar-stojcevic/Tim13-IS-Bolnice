@@ -1,11 +1,12 @@
 ﻿using System.Windows;
+using IS_Bolnice.Kontroleri;
 
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class DodavanjeGuestNalogaWindow : Window
     {
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
 
         public DodavanjeGuestNalogaWindow()
         {
@@ -20,7 +21,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             Pacijent noviGuestPacijent = new Pacijent(tempJmbg, tempIme, tempPrezime);
             noviGuestPacijent.Guest = true;
-            bazaPacijenata.KreirajPacijenta(noviGuestPacijent);
+            pacijentKontroler.KreirajPacijenta(noviGuestPacijent);
 
             this.Close();
         }

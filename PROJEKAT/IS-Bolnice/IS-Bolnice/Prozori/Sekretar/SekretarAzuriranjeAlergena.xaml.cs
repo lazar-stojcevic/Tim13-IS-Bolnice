@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
@@ -11,8 +12,8 @@ namespace IS_Bolnice.Prozori.Sekretar
     public partial class SekretarAzuriranjeAlergena : Window
     {
         private Pacijent pacijentRef;
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        private BazaSastojaka bazaSastojaka = new BazaSastojaka();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private SastojakKontroler sastojakKontroler = new SastojakKontroler();
         private ObservableCollection<string> MoguciAlergeniZaDodavanje;
         public ObservableCollection<Sastojak> AlergeniPacijenta
         {
@@ -35,7 +36,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void AzuriranjeMogucihAlergenaZaDodavanje()
         {
-            List<Sastojak> sviSastojci = bazaSastojaka.SviSastojci();
+            List<Sastojak> sviSastojci = sastojakKontroler.GetSviSastojci();
             MoguciAlergeniZaDodavanje.Clear();
             foreach (Sastojak sastojak in sviSastojci)
             {
@@ -85,7 +86,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             pacijentRef.Alergeni = AlergeniPacijenta.ToList();
             // u ovom slucaju se nikada nece menjati jmbg pa je moguce staviti istu instancu za oba parametra
-            bazaPacijenata.IzmeniPacijenta(pacijentRef, pacijentRef);
+            pacijentKontroler.IzmeniPacijenta(pacijentRef, pacijentRef);
             Close();
         }
 

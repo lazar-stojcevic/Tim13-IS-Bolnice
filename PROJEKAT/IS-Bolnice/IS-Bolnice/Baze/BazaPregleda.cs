@@ -437,13 +437,14 @@ public class BazaPregleda
         return false;
     }
 
+    // TODO OBRISATI OVO JER VEC POSTOJI U SERVISU
     public List<Pregled> SviBuduciPreglediKojePacijentIma(string jmbgPacijenta)
     {
         List<Pregled> pregledi = new List<Pregled>();
 
         foreach (Pregled pregled in SviBuduciPregledi())
         {
-            if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta) && pregled.VremePocetkaPregleda > DateTime.Now)
+            if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta))
             {
                 pregledi.Add(pregled);
             }
@@ -519,12 +520,10 @@ public class BazaPregleda
                 }
             }
 
-            if (p.VremePocetkaPregleda < DateTime.Now.AddHours(-1))
+            if (p.VremePocetkaPregleda > DateTime.Now.AddHours(-1))
             {
-                continue;
+                pregledi.Add(p);
             }
-
-            pregledi.Add(p);
         }
 
         return pregledi;

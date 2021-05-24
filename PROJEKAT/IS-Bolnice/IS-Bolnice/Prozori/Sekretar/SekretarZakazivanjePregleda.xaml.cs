@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class SekretarZakazivanjePregleda : Window
     {
-        private BazaPregleda bazaPregleda = new BazaPregleda();
-        private BazaLekara bazaLekara = new BazaLekara();
+        private PregledKontroler pregledKontroler = new PregledKontroler();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
         private List<Lekar> lekari;
         private Pacijent pacijent;
 
@@ -24,7 +25,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
 
             this.DataContext = this;
-            lekari = bazaLekara.LekariOpstePrakse();
+            lekari = lekarKontroler.GetSviLekari();
             PreglediLekara = new ObservableCollection<Pregled>();
             pacijent = p;
             PopunjavanjePoljaPrikaza();
@@ -77,7 +78,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 Pregled pregled = PreglediLekara[index];
                 pregled.Pacijent = pacijent;
-                bazaPregleda.ZakaziPregled(pregled);
+                pregledKontroler.ZakaziPregled(pregled);
                 this.Close();
             }
         }
@@ -92,7 +93,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             odabirTermina.IsEnabled = true;
 
             Lekar lekar = lekari[comboLekari.SelectedIndex];
-            List<Pregled> pregledi = bazaPregleda.SviBuduciPreglediKojeLekarIma(lekar.Jmbg);
+            List<Pregled> pregledi = pregledKontroler.GetSviBuduciPreglediLekara(lekar.Jmbg);
             PreglediLekara.Clear();
 
             // provera za checkbox da li treba da ostane oznacen

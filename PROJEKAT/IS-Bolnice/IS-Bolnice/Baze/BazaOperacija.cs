@@ -438,7 +438,10 @@ public class BazaOperacija
                 }
                 else o.Hitna = false;
 
-                ret.Add(o);
+                if (o.VremePocetkaOperacije > DateTime.Now.AddHours(-1))
+                {
+                    ret.Add(o);
+                }
             }
         }
         else
@@ -498,23 +501,7 @@ public class BazaOperacija
         OtkaziOperaciju(staraOperacija);
         ZakaziOperaciju(novaOperacija);
    }
-   
-   public List<Operacija> SveSledeceOperacijeZaPacijenta(Pacijent pacijent)
-   {
-        List<Operacija> operacije = new List<Operacija>();
-        List<Operacija> sveOperacije = SveSledeceOperacije();
 
-        foreach (Operacija o in sveOperacije)
-        {
-            if (o.Pacijent.Jmbg.Equals(pacijent.Jmbg) && o.VremeKrajaOperacije > DateTime.Now)
-            {
-                operacije.Add(o);
-            }
-        }
-
-        return operacije;
-    }
-    
     public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
     {
         List<Operacija> sledeceOperacije = new List<Operacija>();
@@ -528,64 +515,4 @@ public class BazaOperacija
         }
         return sledeceOperacije;
     }
-    
-    /*
-    public List<Operacija> SveSledeceOperacijeZaLekara(string sifra)
-    {
-        List<Operacija> ret = new List<Operacija>();
-        BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        List<Bolnica> bolnice = bazaBolnica.SveBolnice();
-        List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
-        if (File.Exists(@"..\..\Datoteke\operacije.txt"))
-        {
-            string[] lines = File.ReadAllLines(@"..\..\Datoteke\operacije.txt");
-            foreach (string line in lines)
-            {
-                Operacija o = new Operacija();
-                string[] delovi = line.Split('#');
-                Console.WriteLine(delovi[3] + "                           " + sifra);
-                if (delovi[3].Equals(sifra))
-                {
-                    Console.WriteLine(delovi[0]);
-                    o.VremePocetkaOperacije = DateTime.ParseExact(delovi[0], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-                    o.VremeKrajaOperacije = DateTime.ParseExact(delovi[1], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-                    o.Pacijent.Jmbg = delovi[2];
-                    foreach (Pacijent p in pacijenti)
-                    {
-                        if (o.Pacijent.Jmbg.Equals(p.Jmbg))
-                        {
-                            o.Pacijent.Prezime = p.Prezime;
-                            o.Pacijent.Ime = p.Ime;
-                            break;
-                        }
-                    }
-
-                    foreach (Bolnica bolnica in bolnice)
-                    {
-                        foreach (Soba s in bolnica.Soba)
-                        {
-                            if (delovi[4].Equals(s.Id))
-                            {
-                                o.Soba.Tip = s.Tip;
-                            }
-                        }
-                    }
-                    o.Lekar.Jmbg = delovi[3];
-                    o.Soba.Id = delovi[4];
-
-                    if (delovi[5].Equals("True"))
-                    {
-                        o.Hitna = true;
-                    }
-                    else o.Hitna = false;
-
-                    ret.Add(o);
-                }
-            }
-        }
-        return ret;
-    }
-    */
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
@@ -10,8 +11,8 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarPrikazZakazanihTerminaPacijenta : Window
     {
-        private BazaPregleda bazaPregleda = new BazaPregleda();
-        private BazaOperacija bazaOperacija = new BazaOperacija();
+        private PregledKontroler pregledKontroler = new PregledKontroler();
+        private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
 
         public ObservableCollection<Pregled> PreglediPacijenta
         {
@@ -33,8 +34,8 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             pacijentTxt.Text = p.Ime + " " + p.Prezime;
 
-            PreglediPacijenta = new ObservableCollection<Pregled>(bazaPregleda.SviBuduciPreglediKojePacijentIma(p.Jmbg));
-            OperacijePacijenta = new ObservableCollection<Operacija>(bazaOperacija.SveSledeceOperacijeZaPacijenta(p));
+            PreglediPacijenta = new ObservableCollection<Pregled>(pregledKontroler.GetSviBuduciPreglediPacijenta(p.Jmbg));
+            OperacijePacijenta = new ObservableCollection<Operacija>(operacijaKontroler.GetSveSledeveOperacijePacijenta(p.Jmbg));
         }
 
         private void Button_Click_Otkazi_Pregled(object sender, RoutedEventArgs e)
@@ -53,7 +54,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bazaPregleda.OtkaziPregled(pregled);
+                        pregledKontroler.OtkaziPregled(pregled);
                         PreglediPacijenta.Remove(pregled);
                         break;
 
@@ -80,7 +81,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bazaOperacija.OtkaziOperaciju(operacija);
+                        operacijaKontroler.OtkaziOperaciju(operacija);
                         OperacijePacijenta.Remove(operacija);
                         break;
 
@@ -115,7 +116,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     noviPregled.VremePocetkaPregleda = termin[0];
                     noviPregled.VremeKrajaPregleda = termin[1];
 
-                    bazaPregleda.IzmeniPregled(noviPregled, stariPregled);
+                    pregledKontroler.IzmeniPregled(noviPregled, stariPregled);
                     PreglediPacijenta[index] = noviPregled;
                 }
             }
@@ -145,7 +146,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     TimeSpan trajanje = staraOperacija.VremeKrajaOperacije.Subtract(staraOperacija.VremePocetkaOperacije);
                     novaOperacija.VremeKrajaOperacije = novaOperacija.VremePocetkaOperacije.Add(trajanje);
 
-                    bazaOperacija.IzmeniOperaciju(novaOperacija, staraOperacija);
+                    operacijaKontroler.IzmeniOperaciju(novaOperacija, staraOperacija);
                     OperacijePacijenta[index] = novaOperacija;
                 }
             }

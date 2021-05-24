@@ -836,5 +836,6 @@
   <ItemGroup>
     <Resource Include="Slike\hospitalizacija.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

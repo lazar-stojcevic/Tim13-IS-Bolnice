@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
@@ -10,9 +11,9 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarZakazivanjeOperacije : Window
     {
-        private BazaLekara bazaLekara = new BazaLekara();
-        private BazaBolnica bazaBolnica = new BazaBolnica();
-        private BazaOperacija bazaOperacija = new BazaOperacija();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
+        private BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
+        private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
         private List<Lekar> lekari;
         private List<Soba> sobe;
         private Pacijent pacijent;
@@ -23,8 +24,8 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             InitializeComponent();
 
-            lekari = bazaLekara.LekariSpecijalisti();
-            sobe = bazaBolnica.SveOperacioneSaleOveBolnice();
+            lekari = lekarKontroler.GetSviLekariSpecijalisti();
+            sobe = bolnicaKontroler.GetSveOperacioneSale();
             operacija = new Operacija();
 
             pacijent = p;
@@ -90,7 +91,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1)
             {
-                bazaOperacija.ZakaziOperaciju(operacija);
+                operacijaKontroler.ZakaziOperaciju(operacija);
                 this.Close();
             }
         }

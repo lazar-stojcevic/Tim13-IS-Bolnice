@@ -16,6 +16,21 @@ namespace IS_Bolnice.Servisi
             return bazaOperacija.SveSledeceOperacije();
         }
 
+        public List<Operacija> GetSveSledeveOperacijePacijenta(string jmbgPacijenta)
+        {
+            List<Operacija> operacijePacijenta = new List<Operacija>();
+
+            foreach (Operacija o in bazaOperacija.SveSledeceOperacije())
+            {
+                if (o.Pacijent.Jmbg.Equals(jmbgPacijenta))
+                {
+                    operacijePacijenta.Add(o);
+                }
+            }
+
+            return operacijePacijenta;
+        }
+
         public bool izmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
             BazaOperacija baza = new BazaOperacija();
@@ -32,6 +47,11 @@ namespace IS_Bolnice.Servisi
                 }
             }
             return false;
+        }
+
+        public void IzmeniOperaciju(Operacija nova, Operacija stara)
+        {
+            bazaOperacija.IzmeniOperaciju(nova, stara);
         }
 
         public void ZakaziOperaciju(Operacija operacija)

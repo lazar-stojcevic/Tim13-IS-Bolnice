@@ -20,5 +20,25 @@ namespace IS_Bolnice.Kontroleri
         {
             return pacijentServis.GetSviPacijenti();
         }
+
+        public void KreirajPacijenta(Pacijent potencijalniPacijent)
+        {
+            pacijentServis.KreirajPacijenta(potencijalniPacijent);
+        }
+
+        public void IzmeniPacijenta(Pacijent izmenjen, Pacijent pocetni)
+        {
+            pacijentServis.IzmeniPacijenta(izmenjen, pocetni);
+        }
+
+        public bool JedinstvenJmbgPacijenta(string jmbg)
+        {
+            return pacijentServis.JedinstvenJmbgPacijenta(jmbg);
+        }
+
+        public bool JedinstvenoKorisnickoIme(string korisnickoIme)
+        {
+            return pacijentServis.JedinstvenoKorisnickoIme(korisnickoIme);
+        }
     }
 }
