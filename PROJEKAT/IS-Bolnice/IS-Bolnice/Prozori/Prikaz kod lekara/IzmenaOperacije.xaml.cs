@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -53,6 +54,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
         {
+            if (txtDuzina.Text.Equals(""))
+            {
+                MessageBox.Show("Niste uneli dužinu trajanje operacije", "Dužina trajanja operacije",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena operacije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -65,8 +73,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     operacijaSelektovana.VremePocetkaOperacije.Day, operacijaSelektovana.VremePocetkaOperacije.Hour, operacijaSelektovana.VremePocetkaOperacije.Minute, 0);
                 DateTime kraj = new DateTime(operacijaSelektovana.VremeKrajaOperacije.Year, operacijaSelektovana.VremeKrajaOperacije.Month,
                     operacijaSelektovana.VremeKrajaOperacije.Day, operacijaSelektovana.VremeKrajaOperacije.Hour, operacijaSelektovana.VremeKrajaOperacije.Minute, 0);
-                kraj = kraj.AddMinutes(45); //Predpostavka da ce operacija trajati 45 minuta 
-                //TODO: UBACI POLJE ZA DUZINU OPERACIJE
+                try
+                {
+                    kraj = kraj.AddMinutes(Int32.Parse(txtDuzina.Text));
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Niste validno uneli dužinu trajanje operacije", "Dužina trajanja operacije",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                kraj = kraj.AddMinutes(Int32.Parse(txtDuzina.Text));
+
                 novaOperacija.Lekar.Jmbg = idLekara;
                 novaOperacija.Pacijent.Jmbg = txtOperJmbg.Text;
                 novaOperacija.Soba.Id = idSale;
@@ -103,7 +121,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
 
-            operacije = lekarKontroler.GetDostupniTerminiZaLekaraIDatuProstoriju(jmbgLekara, idSale);
+            operacije = lekarKontroler.GetDostupniTerminiZaLekaraIDatuProstoriju(jmbgLekara, idSale,Int16.Parse(txtDuzina.Text));
             terminiList.Items.Clear();
 
             foreach (Operacija operacija in operacije)
@@ -135,6 +153,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

@@ -307,69 +307,6 @@ public class BazaOperacija
         return povratnaVrednost;
     }
 
-    public List<Operacija> PonudjeniSlobodniTerminiLekara(string jmbgLekara, string idSale)
-    {
-        //Baze
-        BazaLekara bazaLekara = new BazaLekara();
-        //Lekar
-        Lekar lekar = new Lekar();
-        List<Lekar> lekari = bazaLekara.SviLekari();
-        foreach (Lekar l in lekari)
-        {
-            if (l.Jmbg.Equals(jmbgLekara))
-            {
-                lekar = l;
-                break;
-            }
-        }
-        //Liste
-        List<Operacija> validni = new List<Operacija>();
-        //OVO JE UZASNO NEOPTIMALNO ALI JE BITNO DA PRORADI PRVO
-        List<Operacija> sveOperacije = SveSledeceOperacije();
-        List<Operacija> slobodni = new List<Operacija>();
-
-        DateTime sutra = DateTime.Now.AddDays(1);
-        for (int i = 0; i < 2; i++)
-        {
-            System.DateTime pocetakIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
-            System.DateTime krajIntervala = new System.DateTime(sutra.Year, sutra.Month, sutra.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
-            pocetakIntervala = pocetakIntervala.AddDays(i);
-            krajIntervala = krajIntervala.AddDays(i);
-            krajIntervala = krajIntervala.AddMinutes(-30);
-
-            while (pocetakIntervala <= krajIntervala)
-            {
-                Operacija o = new Operacija();
-                o.Lekar = lekar;
-                o.VremePocetkaOperacije = pocetakIntervala;
-                pocetakIntervala = pocetakIntervala.AddMinutes(10);
-                o.VremeKrajaOperacije = o.VremePocetkaOperacije.AddMinutes(45);
-                o.Soba = new Soba(idSale);
-                slobodni.Add(o);
-            }
-        }
-
-        foreach (Operacija predlozeni in slobodni)
-        {
-            //Provera da li lekar ima zakazan pregled u nekom periodu
-            bool isValid = !TerminSePreklapaKodLekara(jmbgLekara, predlozeni);
-
-            foreach (Operacija operacija in SveSledeceOperacije())
-            {
-                if (PreklapanjeTerminaUSali(idSale, predlozeni, operacija))
-                {
-                    isValid = false;
-                    break;
-                }
-            }
-            if (isValid)
-            {
-                validni.Add(predlozeni);
-            }
-        }
-
-        return validni;
-    }
 
     private static bool PreklapanjeTerminaUSali(string idSale, Operacija predlozeni, Operacija operacija)
     {

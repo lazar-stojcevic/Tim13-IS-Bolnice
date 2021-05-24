@@ -22,7 +22,7 @@
         <Label Content="Ime:" HorizontalAlignment="Left" Margin="36,98,0,0" VerticalAlignment="Top"/>
         <Label Content="Prezime:" HorizontalAlignment="Left" Margin="35,129,0,0" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" x:Name="txtIme" HorizontalAlignment="Left" Height="26" Margin="100,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
-        <TextBox IsReadOnly="True" IsEnabled="False" HorizontalAlignment="Left" x:Name="txtPrz" Height="26" Margin="100,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
+        <TextBox IsReadOnly="True"  HorizontalAlignment="Left" x:Name="txtPrz" Height="26" Margin="100,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="125"/>
 
 
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Grid.ColumnSpan="2">

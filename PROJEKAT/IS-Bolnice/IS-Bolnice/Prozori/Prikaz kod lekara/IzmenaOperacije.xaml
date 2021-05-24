@@ -51,7 +51,7 @@
 
         </Grid>
 
-        <TextBox HorizontalAlignment="Left" Height="29" Margin="229,489,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155"/>
+        <TextBox x:Name="txtDuzina" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="29" Margin="229,489,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155"/>
         <Label Content="Dužina trajanja operacije u minutima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,489,0,0" Width="219"/>
 
 

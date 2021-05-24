@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,6 +48,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
         {
+            if (txtDuzina.Text.Equals(""))
+            {
+                MessageBox.Show("Niste uneli dužinu trajanje operacije", "Dužina trajanja operacije",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve vrednosti?", "Zakazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -68,9 +76,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             DateTime pocetak = new DateTime(operacija.VremePocetkaOperacije.Year, operacija.VremePocetkaOperacije.Month,
                 operacija.VremePocetkaOperacije.Day, operacija.VremePocetkaOperacije.Hour,
                 operacija.VremePocetkaOperacije.Minute, 0);
-            DateTime kraj = new DateTime(operacija.VremeKrajaOperacije.Year, operacija.VremeKrajaOperacije.Month,
-                operacija.VremeKrajaOperacije.Day, operacija.VremeKrajaOperacije.Hour, operacija.VremeKrajaOperacije.Minute, 0);
-            kraj = kraj.AddMinutes(45);
+            DateTime kraj = new DateTime(operacija.VremePocetkaOperacije.Year, operacija.VremePocetkaOperacije.Month,
+                operacija.VremePocetkaOperacije.Day, operacija.VremePocetkaOperacije.Hour, operacija.VremePocetkaOperacije.Minute, 0);
+            kraj = kraj.AddMinutes(Int16.Parse(txtDuzina.Text));
             operacija.Lekar.Jmbg = idLekara;
             operacija.Pacijent.Jmbg = txtOperJmbg.Text;
             operacija.Soba.Id = idSale;
@@ -91,8 +99,22 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void liste_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listaLekara.SelectedIndex == -1) { return; } 
-            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            PostavljanjeParametara();
+        }
+
+        private void TxtDuzina_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PostavljanjeParametara();
+        }
+
+        private void PostavljanjeParametara()
+        {
+            if (listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
+            {
+                return;
+            }
+
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
             {
                 potvrdi.IsEnabled = false;
             }
@@ -103,7 +125,17 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
-            operacije = lekarKontroler.GetDostupniTerminiZaLekaraIDatuProstoriju(jmbgLekara, idSale);
+            try
+            {
+                operacije = lekarKontroler.GetDostupniTerminiZaLekaraIDatuProstoriju(jmbgLekara, idSale,
+                    Int32.Parse(txtDuzina.Text));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Niste validno uneli dužinu trajanja operacije", "Dužina trajanja operacije",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             terminiList.Items.Clear();
 
@@ -125,8 +157,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
                 potvrdi.IsEnabled = true;
             }
-
         }
+
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
@@ -137,6 +169,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             help.Opacity = 0;
         }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+       
     }
 
 }
