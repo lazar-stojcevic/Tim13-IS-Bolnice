@@ -160,6 +160,39 @@ public class BazaOperacija
         return slobodniTermini;
     }
 
+    // TRAJANJE TERMINA PREGLEDA JE IZRAZENO U MINUTIMA
+    public List<Operacija> SlobodneOperacijeLekaraUNarednomPeriodu(Lekar lekar, int trajanjePregleda, string idSale)
+    {
+        List<Operacija> sviSkorasnjiTermini = SviPredloziSkorasnjihOperacija2(lekar, trajanjePregleda, idSale);
+        List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+        List<Operacija> slobodniTermini = SlobodneOperacijeLekara(lekar, terminiURadnomVremenu);
+
+        return slobodniTermini;
+    }
+
+    private List<Operacija> SviPredloziSkorasnjihOperacija2(Lekar lekar, int trajanjeOperacije, string idSale)
+    {
+        List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
+        DateTime najbliziTermin = NajbliziTermin();
+        
+
+        for (int i = 0; i < 7200; i += 10)
+        {
+            DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
+
+            Operacija operacija = new Operacija()
+            {
+                Lekar = lekar,
+                VremePocetkaOperacije = pocetakTermina,
+                VremeKrajaOperacije = pocetakTermina.AddMinutes(trajanjeOperacije),
+                Soba = bazaBolnica.GetSobaById(idSale),
+                Hitna = true
+            };
+                sveSkorasnjeOperacije.Add(operacija);
+        }
+        return sveSkorasnjeOperacije;
+    }
+
     private List<Operacija> SviPredloziSkorasnjihOperacija(Lekar lekar, double trajanjeOperacije)
     {
         List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
@@ -177,7 +210,7 @@ public class BazaOperacija
                     VremePocetkaOperacije = pocetakTermina,
                     VremeKrajaOperacije = pocetakTermina.AddHours(trajanjeOperacije),
                     Soba = sala,
-                    Hitna = true
+                    Hitna = false
                 };
                 sveSkorasnjeOperacije.Add(operacija);
             }
@@ -232,7 +265,7 @@ public class BazaOperacija
         BazaPregleda bazaPregleda = new BazaPregleda();
         foreach (Pregled zakazaniPregled in bazaPregleda.SviBuduciPreglediKojeLekarIma(jmbgLekara))
         {
-            if (PreklapanjeTerminaPregleda(predlozenaOperacija, zakazaniPregled))
+            if (PreklapanjeTerminaOperacijeSaPregledom(predlozenaOperacija, zakazaniPregled))
             {
                 return true;
             }
@@ -249,37 +282,61 @@ public class BazaOperacija
         return false;
     }
 
-    private bool PreklapanjeTerminaPregleda(Operacija predlozenaOperacija, Pregled zakazaniPregled)
+    private bool PreklapanjeTerminaOperacijeSaPregledom(Operacija predlozenaOperacija, Pregled zakazaniPregled)
     {
-        if (predlozenaOperacija.VremePocetkaOperacije == zakazaniPregled.VremePocetkaPregleda)
+        if ((predlozenaOperacija.VremePocetkaOperacije <= zakazaniPregled.VremePocetkaPregleda) &&
+            (predlozenaOperacija.VremeKrajaOperacije >= zakazaniPregled.VremePocetkaPregleda))
         {
             return true;
         }
-        if (predlozenaOperacija.VremePocetkaOperacije > zakazaniPregled.VremePocetkaPregleda && predlozenaOperacija.VremePocetkaOperacije < zakazaniPregled.VremeKrajaPregleda)
+
+        if ((predlozenaOperacija.VremePocetkaOperacije <= zakazaniPregled.VremePocetkaPregleda) &&
+            (zakazaniPregled.VremeKrajaPregleda <= predlozenaOperacija.VremeKrajaOperacije))
         {
             return true;
         }
-        if (predlozenaOperacija.VremeKrajaOperacije > zakazaniPregled.VremePocetkaPregleda && predlozenaOperacija.VremeKrajaOperacije < zakazaniPregled.VremeKrajaPregleda)
+
+        if ((zakazaniPregled.VremePocetkaPregleda <= predlozenaOperacija.VremePocetkaOperacije) &&
+            (predlozenaOperacija.VremeKrajaOperacije) <= zakazaniPregled.VremeKrajaPregleda)
         {
             return true;
         }
+
+        if ((zakazaniPregled.VremePocetkaPregleda <= predlozenaOperacija.VremePocetkaOperacije) &&
+            (zakazaniPregled.VremeKrajaPregleda >= predlozenaOperacija.VremePocetkaOperacije))
+        {
+            return true;
+        }
+
         return false;
     }
 
     private bool PreklapanjeTerminaOperacija(Operacija predlozenaOperacija, Operacija zakazanaOperacija)
     {
-        if (predlozenaOperacija.VremePocetkaOperacije == zakazanaOperacija.VremePocetkaOperacije)
+        if ((predlozenaOperacija.VremePocetkaOperacije <= zakazanaOperacija.VremePocetkaOperacije) &&
+            (predlozenaOperacija.VremeKrajaOperacije >= zakazanaOperacija.VremePocetkaOperacije))
         {
             return true;
         }
-        if (predlozenaOperacija.VremePocetkaOperacije > zakazanaOperacija.VremePocetkaOperacije && predlozenaOperacija.VremePocetkaOperacije < zakazanaOperacija.VremeKrajaOperacije)
+
+        if ((predlozenaOperacija.VremePocetkaOperacije <= zakazanaOperacija.VremePocetkaOperacije) &&
+            (zakazanaOperacija.VremeKrajaOperacije <= predlozenaOperacija.VremeKrajaOperacije))
         {
             return true;
         }
-        if (predlozenaOperacija.VremeKrajaOperacije > zakazanaOperacija.VremePocetkaOperacije && predlozenaOperacija.VremeKrajaOperacije < zakazanaOperacija.VremeKrajaOperacije)
+
+        if ((zakazanaOperacija.VremePocetkaOperacije <= predlozenaOperacija.VremePocetkaOperacije) &&
+            (predlozenaOperacija.VremeKrajaOperacije) <= zakazanaOperacija.VremeKrajaOperacije)
         {
             return true;
         }
+
+        if ((zakazanaOperacija.VremePocetkaOperacije <= predlozenaOperacija.VremePocetkaOperacije) &&
+            (zakazanaOperacija.VremeKrajaOperacije >= predlozenaOperacija.VremePocetkaOperacije))
+        {
+            return true;
+        }
+
         return false;
     }
 

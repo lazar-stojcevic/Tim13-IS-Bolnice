@@ -31,14 +31,14 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.GetSledeciPregledKodLekara(jmbg);
         }
 
+        public List<Pregled> GetDostupniTerminiPregledaLekara(Lekar lekar)
+        {
+            return pregledServis.GetDostupniTerminiPregledaLekara(lekar);
+        }
+
         public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
         {
             return pregledServis.IzmeniPregled(stariDatum, stariSat, stariMinut, noviPregled);
-        }
-
-        public List<Pregled> PonudjeniSlobodniTerminiLekara(string jmbgLekara)
-        {
-            return pregledServis.GetSlobodniTerminiLekara(jmbgLekara);
         }
 
         public void OtkaziPregled(Pregled pregled)

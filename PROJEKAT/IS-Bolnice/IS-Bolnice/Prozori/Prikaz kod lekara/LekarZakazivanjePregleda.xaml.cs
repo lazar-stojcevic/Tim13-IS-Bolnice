@@ -106,8 +106,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 potvrdi.IsEnabled = true;
             }
 
-            string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
-            pregledi = pregledKontroler.PonudjeniSlobodniTerminiLekara(jmbgLekara);
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekari.ElementAt(listaLekara.SelectedIndex));
 
             terminiList.Items.Clear();
 

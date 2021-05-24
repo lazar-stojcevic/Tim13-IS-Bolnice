@@ -45,6 +45,14 @@ namespace IS_Bolnice.Servisi
             return operacijeSale;
         }
 
+        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
+        {
+            BazaLekara bazaLekara = new BazaLekara();
+            Lekar lekar = bazaLekara.DobaviLekara(jmbgLekara);
+            BazaOperacija bazaOperacija = new BazaOperacija();
+            return bazaOperacija.SlobodneOperacijeLekaraUNarednomPeriodu(lekar, duzinaTrajanja, idSale);
+        }
+
         public bool izmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
             BazaOperacija baza = new BazaOperacija();

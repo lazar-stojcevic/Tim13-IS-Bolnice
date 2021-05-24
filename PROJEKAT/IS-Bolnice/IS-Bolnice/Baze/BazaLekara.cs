@@ -93,6 +93,19 @@ public class BazaLekara
         return ret;
     }
 
+    public Lekar DobaviLekara(string jmbgLekara)
+    {
+        foreach (Lekar lekar in SviLekari())
+        {
+            if (lekar.Jmbg.Equals(jmbgLekara))
+            {
+                return lekar;
+            }
+        }
+
+        return null;
+    }
+
     public void KreirajLekara(Lekar noviLekar)
    {
       throw new NotImplementedException();

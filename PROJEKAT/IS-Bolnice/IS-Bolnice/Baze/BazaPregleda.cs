@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 
 public class BazaPregleda
 {
@@ -22,6 +23,7 @@ public class BazaPregleda
     private static int BROJ_DANA_ZA_ZAKAZIVANJE_PREGLEDA = 4;
     private static int BROJ_MINUTA_ZA_HITAN_TERMIN = 60;
     private static int DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA = 6;
+    private static int MINUTI_TRAJANJA_PREGLEDA = 45;
 
     public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast)
     {
@@ -121,6 +123,38 @@ public class BazaPregleda
         return slobodniTermini;
     }
 
+    // TRAJANJE TERMINA PREGLEDA JE IZRAZENO U MINUTIMA
+    public List<Pregled> SlobodniPreglediLekaraUNarednomPeriodu(Lekar lekar)
+    {
+        List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda2(lekar);
+        List<Pregled> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+        List<Pregled> slobodniTermini = SlobodniPreglediLekara(lekar, terminiURadnomVremenu);
+
+        return slobodniTermini;
+    }
+
+    private List<Pregled> SviPredloziSkorasnjihPregleda2(Lekar lekar)
+    {
+        List<Pregled> sviSkorasnjiPregledi = new List<Pregled>();
+        DateTime najbliziTermin = NajbliziTermin();
+
+
+        for (int i = 0; i < 7200; i += 10)
+        {
+            DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
+
+            Pregled pregled = new Pregled()
+            {
+                Lekar = lekar,
+                VremePocetkaPregleda = pocetakTermina,
+                VremeKrajaPregleda = pocetakTermina.AddMinutes(MINUTI_TRAJANJA_PREGLEDA)
+            };
+            sviSkorasnjiPregledi.Add(pregled);
+        }
+        return sviSkorasnjiPregledi;
+    }
+
+    // TODO REFAKTORISATI (RAZLIKA OD 2 JE U TOME STO OVA UZIMA SAMO ZA PRVIH 60MIN)
     private List<Pregled> SviPredloziSkorasnjihPregleda(Lekar lekar, double trajanjePregleda)
     {
         List<Pregled> sviSkorasnjiPregledi = new List<Pregled>();
@@ -243,35 +277,59 @@ public class BazaPregleda
 
     public bool PreklapanjeTerminaPregleda(Pregled predlozeniPregled, Pregled zakazaniPregled)
     {
-        if (predlozeniPregled.VremePocetkaPregleda == zakazaniPregled.VremePocetkaPregleda)
+        if ((predlozeniPregled.VremePocetkaPregleda <= zakazaniPregled.VremePocetkaPregleda) &&
+            (predlozeniPregled.VremeKrajaPregleda >= zakazaniPregled.VremePocetkaPregleda))
         {
             return true;
         }
-        if (predlozeniPregled.VremePocetkaPregleda > zakazaniPregled.VremePocetkaPregleda && predlozeniPregled.VremePocetkaPregleda < zakazaniPregled.VremeKrajaPregleda)
+
+        if ((predlozeniPregled.VremePocetkaPregleda <= zakazaniPregled.VremePocetkaPregleda) &&
+            (zakazaniPregled.VremeKrajaPregleda <= predlozeniPregled.VremeKrajaPregleda))
         {
             return true;
         }
-        if (predlozeniPregled.VremeKrajaPregleda > zakazaniPregled.VremePocetkaPregleda && predlozeniPregled.VremeKrajaPregleda < zakazaniPregled.VremeKrajaPregleda)
+
+        if ((zakazaniPregled.VremePocetkaPregleda <= predlozeniPregled.VremePocetkaPregleda) &&
+            (predlozeniPregled.VremeKrajaPregleda) <= zakazaniPregled.VremeKrajaPregleda)
         {
             return true;
         }
+
+        if ((zakazaniPregled.VremePocetkaPregleda <= predlozeniPregled.VremePocetkaPregleda) &&
+            (zakazaniPregled.VremeKrajaPregleda >= predlozeniPregled.VremePocetkaPregleda))
+        {
+            return true;
+        }
+
         return false;
     }
 
-    public bool PreklapanjeTerminaOperacija(Pregled predlozeniPregled, Operacija zakazanaOperacija)
+    public bool PreklapanjeTerminaPregledaSaOperacijom(Pregled predlozeniPregled, Operacija zakazanaOperacija)
     {
-        if (predlozeniPregled.VremePocetkaPregleda == zakazanaOperacija.VremePocetkaOperacije)
+        if ((predlozeniPregled.VremePocetkaPregleda <= zakazanaOperacija.VremePocetkaOperacije) &&
+            (predlozeniPregled.VremeKrajaPregleda >= zakazanaOperacija.VremePocetkaOperacije))
         {
             return true;
         }
-        if (predlozeniPregled.VremePocetkaPregleda > zakazanaOperacija.VremePocetkaOperacije && predlozeniPregled.VremePocetkaPregleda < zakazanaOperacija.VremeKrajaOperacije)
+
+        if ((predlozeniPregled.VremePocetkaPregleda <= zakazanaOperacija.VremePocetkaOperacije) &&
+            (zakazanaOperacija.VremeKrajaOperacije <= predlozeniPregled.VremeKrajaPregleda))
         {
             return true;
         }
-        if (predlozeniPregled.VremeKrajaPregleda > zakazanaOperacija.VremePocetkaOperacije && predlozeniPregled.VremeKrajaPregleda < zakazanaOperacija.VremeKrajaOperacije)
+
+        if ((zakazanaOperacija.VremePocetkaOperacije <= predlozeniPregled.VremePocetkaPregleda) &&
+            (predlozeniPregled.VremeKrajaPregleda) <= zakazanaOperacija.VremeKrajaOperacije)
         {
             return true;
         }
+
+        if ((zakazanaOperacija.VremePocetkaOperacije <= predlozeniPregled.VremePocetkaPregleda) &&
+            (zakazanaOperacija.VremeKrajaOperacije >= predlozeniPregled.VremePocetkaPregleda))
+        {
+            return true;
+        }
+
         return false;
     }
 
@@ -287,7 +345,7 @@ public class BazaPregleda
 
         foreach (Operacija zakazanaOperacija in bazaOperacija.SveSledeceOperacijeDatogLekara(jmbgLekara))
         {
-            if (PreklapanjeTerminaOperacija(predlozeniPregled, zakazanaOperacija))
+            if (PreklapanjeTerminaPregledaSaOperacijom(predlozeniPregled, zakazanaOperacija))
             {
                 return true;
             }

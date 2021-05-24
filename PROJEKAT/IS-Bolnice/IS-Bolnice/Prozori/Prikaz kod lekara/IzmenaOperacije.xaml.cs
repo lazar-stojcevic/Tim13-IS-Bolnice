@@ -121,7 +121,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
 
-            operacije = lekarKontroler.GetDostupniTerminiZaLekaraIDatuProstoriju(jmbgLekara, idSale,Int16.Parse(txtDuzina.Text));
+            operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale,
+                Int32.Parse(txtDuzina.Text));
             terminiList.Items.Clear();
 
             foreach (Operacija operacija in operacije)

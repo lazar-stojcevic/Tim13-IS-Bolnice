@@ -101,10 +101,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
 
-            pregledi = pregledKontroler.PonudjeniSlobodniTerminiLekara(jmbgLekara);
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekari.ElementAt(listaLekara.SelectedIndex));
             terminiList.Items.Clear();
 
-            foreach (Pregled p in pregledKontroler.PonudjeniSlobodniTerminiLekara(jmbgLekara))
+            foreach (Pregled p in pregledi)
             {
                 terminiList.Items.Add(p.VremePocetkaPregleda);
             }

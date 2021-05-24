@@ -25,10 +25,5 @@ namespace IS_Bolnice.Kontroleri
         {
             return lekarServis.GetSviLekariSpecijalisti();
         }
-
-        public List<Operacija> GetDostupniTerminiZaLekaraIDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
-        {
-            return lekarServis.dostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale, duzinaTrajanja);
-        }
     }
 }
