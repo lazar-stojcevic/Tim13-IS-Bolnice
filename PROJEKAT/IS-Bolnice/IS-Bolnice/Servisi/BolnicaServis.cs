@@ -9,6 +9,12 @@ namespace IS_Bolnice.Servisi
     class BolnicaServis
     {
         private BazaBolnica bazaBolnica = new BazaBolnica();
+
+        public List<Soba> GetSveSobe()
+        {
+            return bazaBolnica.GetSobe();
+        }
+
         public List<Soba> GetSveOperacioneSale()
         {
             List<Soba> sveOperacioneSale = new List<Soba>();

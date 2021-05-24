@@ -263,7 +263,46 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Prostorije"></TabItem>
+            <TabItem Header="Prostorije">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dgSale" IsReadOnly="True" ItemsSource="{Binding SveSobeBolnice}"
+                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" SelectionChanged="dgSale_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Prostorije" Binding="{Binding Id}" Width="1*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="Inventar i oprema za: " Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           FontWeight="Bold" FontSize="15"/>
+                    <Label x:Name="labelImeSelektovaneSobe" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"
+                           FontSize="15"/>
+                    <DataGrid x:Name="dgOpremaSelektovaneSale" IsReadOnly="True"
+                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Predmet.Id}" Width="0.5*"/>
+                            <DataGridTextColumn Header="Naziv" Binding="{Binding Predmet.Naziv}" Width="1*"/>
+                            <DataGridTextColumn Header="Količina" Binding="{Binding Kolicina}" Width="1*"/>
+                            <DataGridTextColumn Header="Tip opreme" Binding="{Binding Predmet.Tip}" Width="1*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
             <TabItem Header="Lekari">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -306,7 +345,42 @@
                             VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Specijaliste"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Lekovi"></TabItem>
+            <TabItem Header="Lekovi">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Aktuelni lekovi u ustanovi:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                           VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    <TextBox Text="pretraga" Foreground="Gray" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                               HorizontalAlignment="Right" Height="20" Width="100"></TextBox>
+                    <DataGrid x:Name="dgLekovi" IsReadOnly="True" ItemsSource="{Binding SviLekovi}"
+                              SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" SelectionChanged="dgLekovi_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Šifra" Binding="{Binding Sifra}" Width="1*"/>
+                            <DataGridTextColumn Header="Naziv" Binding="{Binding Ime}" Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="Opis leka: " Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           FontWeight="Bold" FontSize="15"/>
+                    <Label x:Name="labelImeSelektovanogLeka" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontWeight="Bold" FontSize="15"/>
+
+                    <TextBox x:Name="tbOpisSelektovanogLeka" Grid.Row="2" Grid.Column="3" Grid.RowSpan="2"></TextBox>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

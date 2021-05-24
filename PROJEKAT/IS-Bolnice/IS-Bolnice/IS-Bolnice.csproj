@@ -89,6 +89,7 @@
     <Compile Include="Kontroleri\PacijentKontroler.cs" />
     <Compile Include="Kontroleri\PregledKontroler.cs" />
     <Compile Include="Kontroleri\RadnoVremeKontroler.cs" />
+    <Compile Include="Kontroleri\SadrzajSobeKontroler.cs" />
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Servisi\PacijentServis.cs" />
     <Compile Include="Servisi\PregledServis.cs" />
     <Compile Include="Servisi\RadnoVremeServis.cs" />
+    <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
     <Page Include="Prozori\OdredjivanjeTermina.xaml">

@@ -11,6 +11,11 @@ namespace IS_Bolnice.Kontroleri
     {
         private BolnicaServis bolnicaServis = new BolnicaServis();
 
+        public List<Soba> GetSveSobe()
+        {
+            return bolnicaServis.GetSveSobe();
+        }
+
         public List<Soba> GetSveOperacioneSale()
         {
             return bolnicaServis.GetSveOperacioneSale();

@@ -14,6 +14,9 @@ namespace IS_Bolnice.Prozori.Sekretar
         private ObavestenjeKontroler obavestenjeKontroler = new ObavestenjeKontroler();
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
+        private LekKontroler lekKontroler = new LekKontroler();
+        private BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
+        private SadrzajSobeKontroler sadrzajSobeKontroler = new SadrzajSobeKontroler();
 
         public ObservableCollection<Pacijent> Pacijenti
         {
@@ -39,6 +42,18 @@ namespace IS_Bolnice.Prozori.Sekretar
             set;
         }
 
+        public ObservableCollection<Lek> SviLekovi
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Soba> SveSobeBolnice
+        {
+            get;
+            set;
+        }
+
         public SekretarWindow()
         {
             InitializeComponent();
@@ -48,6 +63,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             LekariOpstePrakse = new ObservableCollection<Lekar>(lekarKontroler.GetSviLekariOpstePrakse());
             LekariSpecijalisti = new ObservableCollection<Lekar>(lekarKontroler.GetSviLekariSpecijalisti());
             Obavestenja = new ObservableCollection<Obavestenje>(obavestenjeKontroler.GetSvaSortiranaObavestenja());
+            SviLekovi = new ObservableCollection<Lek>(lekKontroler.GetSviLekovi());
+            SveSobeBolnice = new ObservableCollection<Soba>(bolnicaKontroler.GetSveSobe());
         }
 
         private void OsvezavanjePrikazaPacijenata()
@@ -352,6 +369,38 @@ namespace IS_Bolnice.Prozori.Sekretar
                 RadnoVremeLekara rvl = new RadnoVremeLekara(lekar);
                 rvl.ShowDialog();
             }
+        }
+
+        private void dgLekovi_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            int index = dgLekovi.SelectedIndex;
+            if (index != -1)
+            {
+                Lek selektovaniLek = SviLekovi[index];
+                AzurirajPrikazOpisaLeka(selektovaniLek);
+            }
+        }
+
+        private void AzurirajPrikazOpisaLeka(Lek selektovaniLek)
+        {
+            labelImeSelektovanogLeka.Content = selektovaniLek.Ime;
+            tbOpisSelektovanogLeka.Text = selektovaniLek.Opis;
+        }
+
+        private void dgSale_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            int index = dgSale.SelectedIndex;
+            if (index != -1)
+            {
+                Soba selektovanaSoba = SveSobeBolnice[index];
+                AzurirajPrikazOpisaSobe(selektovanaSoba);
+            }
+        }
+
+        private void AzurirajPrikazOpisaSobe(Soba selektovanaSoba)
+        {
+            labelImeSelektovaneSobe.Content = selektovanaSoba.Id;
+            dgOpremaSelektovaneSale.ItemsSource = sadrzajSobeKontroler.GetSadrzajSobe(selektovanaSoba.Id);
         }
     }
 }
