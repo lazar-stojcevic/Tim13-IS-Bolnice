@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
@@ -12,7 +13,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private Lekar selektovaniLekar;
         private readonly int INTERVAL_MINUTA_RADNOG_VREMENA = 10;
         private bool napravljenaIzmena = false;
-        private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
+        private RadnoVremeKontroler radnoVremeKontroler = new RadnoVremeKontroler();
 
         public RadnoVremeLekara(Lekar lekar)
         {
@@ -123,7 +124,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             }
 
             AzurirajSlobodneDaneLekara();
-            bazaRadnogVremena.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
+            radnoVremeKontroler.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
             Close();
         }
 

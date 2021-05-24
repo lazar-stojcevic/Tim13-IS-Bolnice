@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class IzmenaObavestenjaWindow : Window
     {
-        private BazaObavestenja bazaObavestenja = new BazaObavestenja();
+        private ObavestenjeKontroler obavestenjeKontroler = new ObavestenjeKontroler();
         private Obavestenje odabranoObavestenje;
         private ObservableCollection<Obavestenje> ObavestenjaRef;
 
@@ -109,7 +110,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 OdredjeniPacijenti = OdabraniPacijenti.ToList()
             };
 
-            bazaObavestenja.IzmeniObavestenje(obavestenje);
+            obavestenjeKontroler.IzmeniObavestenje(obavestenje);
             // osvezavanje liste
             int i = ObavestenjaRef.IndexOf(odabranoObavestenje);
             if (i != -1)

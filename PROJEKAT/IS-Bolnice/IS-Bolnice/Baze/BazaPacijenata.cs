@@ -32,18 +32,6 @@ public class BazaPacijenata
         return aktuelniPacijenti;
     }
 
-    public Pacijent poslednjiDodat()
-    {
-        List<Pacijent> pacijenti = SviPacijenti();
-        int index = pacijenti.Count() - 1;
-
-        if (index != -1)
-        {
-            return pacijenti[index];
-        }
-        return null;
-    }
-
     public Pacijent PacijentSaOvimJMBG(string jmbg)
     {
         foreach (Pacijent p in SviPacijenti())

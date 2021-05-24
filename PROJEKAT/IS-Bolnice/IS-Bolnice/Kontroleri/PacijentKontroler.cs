@@ -21,6 +21,11 @@ namespace IS_Bolnice.Kontroleri
             return pacijentServis.GetSviPacijenti();
         }
 
+        public Pacijent GetPoslednjiDodat()
+        {
+            return pacijentServis.GetPoslednjiDodat();
+        }
+
         public void KreirajPacijenta(Pacijent potencijalniPacijent)
         {
             pacijentServis.KreirajPacijenta(potencijalniPacijent);
@@ -29,6 +34,11 @@ namespace IS_Bolnice.Kontroleri
         public void IzmeniPacijenta(Pacijent izmenjen, Pacijent pocetni)
         {
             pacijentServis.IzmeniPacijenta(izmenjen, pocetni);
+        }
+
+        public void ObrisiPacijenta(Pacijent pacijent)
+        {
+            pacijentServis.ObrisiPacijenta(pacijent);
         }
 
         public bool JedinstvenJmbgPacijenta(string jmbg)

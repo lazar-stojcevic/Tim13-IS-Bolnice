@@ -27,6 +27,18 @@ namespace IS_Bolnice.Servisi
             return bazaPacijenata.SviPacijenti();
         }
 
+        public Pacijent GetPoslednjiDodat()
+        {
+            List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
+            int index = pacijenti.Count() - 1;
+
+            if (index != -1)
+            {
+                return pacijenti[index];
+            }
+            return null;
+        }
+
         public void KreirajPacijenta(Pacijent potencijalniPacijent)
         {
             bazaPacijenata.KreirajPacijenta(potencijalniPacijent);
@@ -35,6 +47,11 @@ namespace IS_Bolnice.Servisi
         public void IzmeniPacijenta(Pacijent izmenjen, Pacijent pocetni)
         {
             bazaPacijenata.IzmeniPacijenta(izmenjen, pocetni);
+        }
+
+        public void ObrisiPacijenta(Pacijent pacijent)
+        {
+            bazaPacijenata.ObrisiPacijenta(pacijent);
         }
 
         public bool JedinstvenJmbgPacijenta(string jmbg)

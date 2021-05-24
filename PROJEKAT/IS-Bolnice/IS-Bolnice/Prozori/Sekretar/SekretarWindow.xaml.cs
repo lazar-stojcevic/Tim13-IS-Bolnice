@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
@@ -10,9 +11,9 @@ namespace IS_Bolnice.Prozori.Sekretar
     /// </summary>
     public partial class SekretarWindow : Window
     {
-        private BazaObavestenja bazaObavestenja = new BazaObavestenja();
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        private BazaLekara bazaLekara = new BazaLekara();
+        private ObavestenjeKontroler obavestenjeKontroler = new ObavestenjeKontroler();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
 
         public ObservableCollection<Pacijent> Pacijenti
         {
@@ -43,15 +44,15 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
             this.DataContext = this;
 
-            Pacijenti = new ObservableCollection<Pacijent>(bazaPacijenata.SviPacijenti());
-            LekariOpstePrakse = new ObservableCollection<Lekar>(bazaLekara.LekariOpstePrakse());
-            LekariSpecijalisti = new ObservableCollection<Lekar>(bazaLekara.LekariSpecijalisti());
-            Obavestenja = new ObservableCollection<Obavestenje>(bazaObavestenja.SvaObavestenja());
+            Pacijenti = new ObservableCollection<Pacijent>(pacijentKontroler.GetSviPacijenti());
+            LekariOpstePrakse = new ObservableCollection<Lekar>(lekarKontroler.GetSviLekariOpstePrakse());
+            LekariSpecijalisti = new ObservableCollection<Lekar>(lekarKontroler.GetSviLekariSpecijalisti());
+            Obavestenja = new ObservableCollection<Obavestenje>(obavestenjeKontroler.GetSvaSortiranaObavestenja());
         }
 
         private void OsvezavanjePrikazaPacijenata()
         {
-            List<Pacijent> sviPacijenti = bazaPacijenata.SviPacijenti();
+            List<Pacijent> sviPacijenti = pacijentKontroler.GetSviPacijenti();
             Pacijenti.Clear();
             foreach (Pacijent pacijent in sviPacijenti)
             {
@@ -100,7 +101,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bazaPacijenata.ObrisiPacijenta(p);
+                        pacijentKontroler.ObrisiPacijenta(p);
                         Pacijenti.Remove(p);
                         break;
 
@@ -143,7 +144,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        bazaObavestenja.ObrisiObavestenje(o);
+                        obavestenjeKontroler.ObrisiObavestenje(o);
                         Obavestenja.Remove(o);
                         break;
 

@@ -3,14 +3,15 @@ using IS_Bolnice.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class ZakazivanjeHitnogTermina : Window
     {
         private Pacijent odabraniPacijent = new Pacijent();
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        private BazaOblastiLekara bazaOblastiLekara = new BazaOblastiLekara();
+        private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private OblastLekaraKontroler oblastLekaraKontroler = new OblastLekaraKontroler();
 
         public ObservableCollection<Pregled> PreglediZaOdlaganje
         {
@@ -36,7 +37,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void PopunjavanjeOblastiLekara()
         {
-            List<OblastLekara> sveOblastiIzBaze = bazaOblastiLekara.SveOblasti();
+            List<OblastLekara> sveOblastiIzBaze = oblastLekaraKontroler.GetSveOblastiLekara();
             List<string> sveOblastiZaPrikaz = new List<string>();
 
             foreach (OblastLekara oblast in sveOblastiIzBaze)
@@ -103,8 +104,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             DodavanjeGuestNalogaWindow dodavanjeGostujuceg = new DodavanjeGuestNalogaWindow();
             dodavanjeGostujuceg.ShowDialog();
             // u slucaju dodavanja gostujuceg uzima se poslednji iz baze
-            odabraniPacijent = bazaPacijenata.poslednjiDodat();
-            UpdateTextBox();
+            odabraniPacijent = pacijentKontroler.GetPoslednjiDodat();
+            if (odabraniPacijent != null)
+            {
+                UpdateTextBox();
+            }
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)

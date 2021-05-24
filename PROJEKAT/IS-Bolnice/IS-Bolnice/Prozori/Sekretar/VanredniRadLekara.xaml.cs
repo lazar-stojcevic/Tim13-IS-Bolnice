@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
@@ -10,7 +11,7 @@ namespace IS_Bolnice.Prozori.Sekretar
     public partial class VanredniRadLekara : Window
     {
         private Lekar selektovaniLekar;
-        private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
+        private RadnoVremeKontroler radnoVremeKontroler = new RadnoVremeKontroler();
 
         public ObservableCollection<VremenskiInterval> VanrednaRadnaVremenaLekara
         {
@@ -93,7 +94,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             VremenskiInterval vanrednoRadnoVreme = new VremenskiInterval(pocetak, kraj);
             selektovaniLekar.RadnoVreme.VanrednaRadnaVremena.Add(vanrednoRadnoVreme);
-            bazaRadnogVremena.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
+            radnoVremeKontroler.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
             
             OsvezavanjePrikazaVanrednihRadnihDana();
         }

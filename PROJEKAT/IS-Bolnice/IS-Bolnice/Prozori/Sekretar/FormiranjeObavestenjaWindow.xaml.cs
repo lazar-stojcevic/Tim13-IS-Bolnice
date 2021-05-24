@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class FormiranjeObavestenjaWindow : Window
     {
-        private BazaObavestenja bazaObavestenja = new BazaObavestenja();
+        private ObavestenjeKontroler obavestenjeKontroler = new ObavestenjeKontroler();
         private ObservableCollection<Obavestenje> ObavestenjaRef;
 
         public ObservableCollection<Pacijent> OdabraniPacijenti 
@@ -49,7 +50,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 OdredjeniPacijenti = OdabraniPacijenti.ToList()
             };
 
-            bazaObavestenja.KreirajObavestenje(obavestenje);
+            obavestenjeKontroler.KreirajObavestenje(obavestenje);
             ObavestenjaRef.Add(obavestenje);
             this.Close();
         }

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Servisi;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class SlobodniDaniLekara : Window
     {
         private Lekar selektovaniLekar;
-        private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
+        private RadnoVremeKontroler radnoVremeKontroler = new RadnoVremeKontroler();
 
         public ObservableCollection<DateTime> PrikazSlobodnihDanaLekara
         {
@@ -72,7 +74,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 selektovaniLekar.RadnoVreme.SlobodniDani.Add(pocetak.AddDays(i));
             }
 
-            bazaRadnogVremena.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
+            radnoVremeKontroler.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
             MessageBox.Show("Uspešno kreiran godišnji odmor!");
             OsvezavanjePrikazaSlobodnihDana();
         }
