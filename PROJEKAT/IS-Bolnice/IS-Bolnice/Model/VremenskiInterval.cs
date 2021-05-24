@@ -24,5 +24,34 @@ namespace IS_Bolnice.Model
 
             return false;
         }
+
+        public bool DaLiSePreklapaSa(VremenskiInterval drugi)
+        {
+            if ((this.Pocetak <= drugi.Pocetak) &&
+                (this.Kraj >= drugi.Pocetak))
+            {
+                return true;
+            }
+
+            if ((this.Pocetak <= drugi.Pocetak) &&
+                (drugi.Kraj <= this.Kraj))
+            {
+                return true;
+            }
+
+            if ((drugi.Pocetak <= this.Pocetak) &&
+                (this.Kraj) <= drugi.Kraj)
+            {
+                return true;
+            }
+
+            if ((drugi.Pocetak <= this.Pocetak) &&
+                (drugi.Kraj >= this.Pocetak))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

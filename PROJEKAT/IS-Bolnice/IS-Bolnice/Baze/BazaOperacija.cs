@@ -389,7 +389,6 @@ public class BazaOperacija
             {
                 Operacija o = new Operacija();
                 string[] delovi = line.Split('#');
-                Console.WriteLine(delovi[0]);
                 o.VremePocetkaOperacije = DateTime.ParseExact(delovi[0], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
                                                   DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
                 o.VremeKrajaOperacije = DateTime.ParseExact(delovi[1], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,

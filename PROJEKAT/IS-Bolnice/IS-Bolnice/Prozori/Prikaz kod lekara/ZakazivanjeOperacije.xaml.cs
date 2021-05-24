@@ -127,8 +127,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
             try
             {
-                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale,
-                    Int32.Parse(txtDuzina.Text));
+                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale,Int32.Parse(txtDuzina.Text));
             }
             catch (Exception e)
             {

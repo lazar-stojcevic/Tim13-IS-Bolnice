@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,11 +48,54 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
         {
-            BazaLekara bazaLekara = new BazaLekara();
-            Lekar lekar = bazaLekara.DobaviLekara(jmbgLekara);
+            Lekar lekar = new BazaLekara().DobaviLekara(jmbgLekara);
             BazaOperacija bazaOperacija = new BazaOperacija();
-            return bazaOperacija.SlobodneOperacijeLekaraUNarednomPeriodu(lekar, duzinaTrajanja, idSale);
+            return SlobodneOperacijeLekaraUNarednomPeriodu(lekar, duzinaTrajanja, idSale);
         }
+
+        public List<Operacija> SlobodneOperacijeLekaraUNarednomPeriodu(Lekar lekar, int trajanjePregleda, string idSale)
+        {
+            List<Operacija> sviSkorasnjiTermini = SviPredloziTerminaOperacije(lekar, trajanjePregleda, idSale);
+            List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+            List<Operacija> slobodniTermini = SlobodneOperacijeLekara(lekar, terminiURadnomVremenu, idSale);
+
+            return slobodniTermini;
+        }
+
+        private List<Operacija> SviPredloziTerminaOperacije(Lekar lekar, int trajanjeOperacije, string idSale)
+        {
+            List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
+            DateTime najbliziTermin = NajbliziTermin();
+
+
+            for (int i = 0; i < 7200; i += 10)
+            {
+                DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
+
+                Operacija operacija = new Operacija()
+                {
+                    Lekar = lekar,
+                    VremePocetkaOperacije = pocetakTermina,
+                    VremeKrajaOperacije = pocetakTermina.AddMinutes(trajanjeOperacije),
+                    Soba = new BazaBolnica().GetSobaById(idSale),
+                    Hitna = true
+                };
+                sveSkorasnjeOperacije.Add(operacija);
+            }
+            return sveSkorasnjeOperacije;
+        }
+
+        private DateTime NajbliziTermin()
+        {
+            DateTime najbliziTermin = DateTime.Now;
+            najbliziTermin = najbliziTermin.AddMinutes(1);
+            while (najbliziTermin.Minute % 5 != 0)
+            {
+                najbliziTermin = najbliziTermin.AddMinutes(1);
+            }
+            return najbliziTermin;
+        }
+
 
         public bool izmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
@@ -69,6 +113,99 @@ namespace IS_Bolnice.Servisi
                 }
             }
             return false;
+        }
+
+        private List<Operacija> SviTerminiURadnomVremenuLekara(Lekar lekar, List<Operacija> operacije)
+        {
+            List<Operacija> operacijeURadnomVremenu = new List<Operacija>();
+
+            foreach (Operacija operacija in operacije)
+            {
+                // TODO: obrisati ovo formiranje intervala i u operaciju dodati polje za interval
+                VremenskiInterval termin = new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
+
+                if (lekar.TerminURadnomVremenuLekara(termin))
+                {
+                    operacijeURadnomVremenu.Add(operacija);
+                }
+            }
+            return operacijeURadnomVremenu;
+        }
+
+        private List<Operacija> SlobodneOperacijeLekara(Lekar lekar, List<Operacija> operacije, string idSale)
+        {
+            List<Operacija> slobodniTermini = new List<Operacija>();
+            foreach (Operacija operacija in operacije)
+            {
+                if (!TerminSePreklapaKodLekara(lekar.Jmbg, operacija, idSale))
+                {
+                    slobodniTermini.Add(operacija);
+                }
+            }
+            return slobodniTermini;
+        }
+
+        private bool TerminSePreklapaKodLekara(string jmbgLekara, Operacija predlozenaOperacija, string idSale)
+        {
+            BazaPregleda bazaPregleda = new BazaPregleda();
+
+            VremenskiInterval drugiTermin = new VremenskiInterval(predlozenaOperacija.VremePocetkaOperacije,
+                predlozenaOperacija.VremeKrajaOperacije);
+
+            foreach (Pregled zakazaniPregled in bazaPregleda.SviBuduciPreglediKojeLekarIma(jmbgLekara))
+            {
+                VremenskiInterval prviTermin = new VremenskiInterval(zakazaniPregled.VremePocetkaPregleda,
+                    zakazaniPregled.VremeKrajaPregleda);
+
+                if (PreklapanjeTermina(prviTermin, drugiTermin))
+                {
+                    return true;
+                }
+            }
+
+            foreach (Operacija zakazanaOperacija in SveSledeceOperacijeZaLekara(jmbgLekara))
+            {
+                VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
+                    zakazanaOperacija.VremeKrajaOperacije);
+
+                if (PreklapanjeTermina(prviTermin,drugiTermin))
+                {
+                    return true;
+                }
+               
+            }
+
+            foreach (Operacija zakazanaOperacija in SveOperacijeUSali(idSale))
+            {
+                VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
+                    zakazanaOperacija.VremeKrajaOperacije);
+
+                if (PreklapanjeTermina(prviTermin, drugiTermin))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
+        public List<Operacija> SveOperacijeUSali(string idSale)
+        {
+            List<Operacija> operacijeUSali = new List<Operacija>();
+            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
+            {
+                if (operacija.Soba.Equals(idSale))
+                {
+                    operacijeUSali.Add(operacija);
+                }
+            }
+
+            return operacijeUSali;
+        }
+        
+        public bool PreklapanjeTermina(VremenskiInterval predlozen, VremenskiInterval upitan)
+        {
+            return predlozen.DaLiSePreklapaSa(upitan);
         }
 
         public void IzmeniOperaciju(Operacija nova, Operacija stara)
