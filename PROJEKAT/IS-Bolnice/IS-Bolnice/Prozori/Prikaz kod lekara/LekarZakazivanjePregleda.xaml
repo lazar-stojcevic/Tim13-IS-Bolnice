@@ -19,7 +19,18 @@
         <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,102,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,68,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,138,0,0" VerticalAlignment="Top" Width="144"/>
-        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="218" Margin="10,227,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="lekariList_SelectionChanged"/>
+
+        <ListView x:Name="listaLekara" HorizontalAlignment="Left" Height="218" Margin="10,227,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="lekariList_SelectionChanged">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Ime" Width="80" DisplayMemberBinding="{Binding Ime}" />
+                <GridViewColumn Header="Prezime" Width="110" DisplayMemberBinding="{Binding Prezime}"/>
+                <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Jmbg}"/>
+                <GridViewColumn Header="Oblast" Width="105" DisplayMemberBinding="{Binding Oblast.Naziv}"/>
+            </GridView>
+        </ListView.View>
+        </ListView>
+
         <Label Content="Lekar kod koga se zakazuje pregled:" HorizontalAlignment="Left" Height="26" Margin="10,201,0,0" VerticalAlignment="Top" Width="198"/>
         <Grid Margin="0,449,-0.4,117.4">
             <Grid.RowDefinitions>

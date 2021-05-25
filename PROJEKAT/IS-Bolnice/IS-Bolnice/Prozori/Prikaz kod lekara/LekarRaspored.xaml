@@ -8,54 +8,42 @@
         Title="Raspored"  Height="700" Width="400" Background="White">
     <Grid>
         <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,375,0,0" VerticalAlignment="Top" Width="101"/>
-        <ListBox x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,415,0,0" VerticalAlignment="Top" Width="394">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Pacijent: " />
-                        <TextBlock Text="{Binding Pacijent.Ime}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Pacijent.Prezime}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Pacijent.Jmbg}" />
-                        <TextBlock Text=" u Prostoriji: " />
-                        <TextBlock Text="{Binding Soba.Tip}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Soba.Id}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding VremePocetkaOperacije, StringFormat=dd-MM-yyyy HH:mm}" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
+        <ListView x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,415,0,0" VerticalAlignment="Top" Width="394">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime" Width="60" DisplayMemberBinding="{Binding Pacijent.Ime}" />
+                    <GridViewColumn Header="Prezime" Width="90" DisplayMemberBinding="{Binding Pacijent.Prezime}"/>
+                    <GridViewColumn Header="Id pacijenta" Width="90" DisplayMemberBinding="{Binding Pacijent.Jmbg}"/>
+                    <GridViewColumn Header="Id sale" Width="40" DisplayMemberBinding="{Binding Soba.Id}"/>
+                    <GridViewColumn Header="Početak" Width="105" DisplayMemberBinding="{Binding VremePocetkaOperacije, StringFormat=dd-MM-yyyy HH:mm}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="146,610,0,0" VerticalAlignment="Top" Width="101" Click="Button_ClickObrisi"/>
         <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,610,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniOperaciju" />
         <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="9,61,0,0" VerticalAlignment="Top" Width="101"/>
         <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,610,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
-        <ListBox x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,108,0,0" VerticalAlignment="Top" Width="394">
+        <ListView x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,108,0,0" VerticalAlignment="Top" Width="394">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Otvori ovaj pregled" Click="Button_OtvoriPregled" />
                 </ContextMenu>
             </ListBox.ContextMenu>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Pacijent: " />
-                        <TextBlock Text="{Binding Pacijent.Ime}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Pacijent.Prezime}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Pacijent.Jmbg}" />
-                        <TextBlock Text=" u ordinaciji " />
-                        <TextBlock Text= "{Binding Lekar.Ordinacija.Id}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}" />
 
-                    </WrapPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime" Width="70" DisplayMemberBinding="{Binding Pacijent.Ime}" />
+                    <GridViewColumn Header="Prezime" Width="100" DisplayMemberBinding="{Binding Pacijent.Prezime}"/>
+                    <GridViewColumn Header="Id" Width="90" DisplayMemberBinding="{Binding Pacijent.Jmbg}"/>
+                    <GridViewColumn Header="Početak" Width="105" DisplayMemberBinding="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}"/>
+
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
+
         <Button Content="Obriši" Height="54" Margin="145,303,148,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
         <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="9,303,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniPregled" />
         <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,303,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijentaPr"/>

@@ -20,11 +20,31 @@
         <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,96,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,62,0,0" VerticalAlignment="Top" Width="144"/>
         <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,132,0,0" VerticalAlignment="Top" Width="144"/>
-        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="105" Margin="10,303,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="lekariList_SelectionChanged"/>
+
+        <ListView x:Name="listaLekara" HorizontalAlignment="Left" Height="105" Margin="10,303,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="liste_SelectionChanged">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Ime" Width="80" DisplayMemberBinding="{Binding Ime}" />
+                <GridViewColumn Header="Prezime" Width="110" DisplayMemberBinding="{Binding Prezime}"/>
+                <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Jmbg}"/>
+                <GridViewColumn Header="Oblast" Width="105" DisplayMemberBinding="{Binding Oblast.Naziv}"/>
+
+            </GridView>
+        </ListView.View>
+        </ListView>
+
         <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,277,0,0" VerticalAlignment="Top" Width="176"/>
         <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,187,0,0" VerticalAlignment="Top" Width="196"/>
-        <ComboBox x:Name="comboBoxSale" HorizontalAlignment="Left" Height="22" Margin="10,218,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="lekariList_SelectionChanged"/>
-        <ComboBox x:Name="terminiList" HorizontalAlignment="Left" Height="29" Margin="10,441,0,0" VerticalAlignment="Top" Width="374"/>
+
+        <ComboBox x:Name="comboBoxSale" HorizontalAlignment="Left" Height="22" Margin="10,218,0,0" VerticalAlignment="Top" Width="374" SelectionChanged="liste_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                        <TextBlock Text="{Binding }" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+            <ComboBox x:Name="terminiList" HorizontalAlignment="Left" Height="29" Margin="10,441,0,0" VerticalAlignment="Top" Width="374"/>
         <Label FontSize="15" Content="HITNO :" HorizontalAlignment="Left" Height="28" Margin="10,553,0,0" VerticalAlignment="Top" Width="69"/>
         <CheckBox x:Name="boxHitno" Content="CheckBox" HorizontalAlignment="Left" Margin="88,562,0,0" VerticalAlignment="Top" Height="19" Width="14"/>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="-3,0,-1.4,0"/>
@@ -51,7 +71,7 @@
 
         </Grid>
 
-        <TextBox x:Name="txtDuzina" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="29" Margin="229,489,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155"/>
+        <TextBox x:Name="txtDuzina" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="29" Margin="229,489,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155" LostFocus="TxtDuzina_LostFocus"/>
         <Label Content="Dužina trajanja operacije u minutima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,489,0,0" Width="219"/>
 
 

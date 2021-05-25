@@ -38,18 +38,15 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public IzmenaOperacije()
         {
             InitializeComponent();
-            List<Lekar> sviLekari = lekarKontroler.GetSviLekariSpecijalisti();
-            foreach (Lekar p in sviLekari)
-            {
-                    string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Oblast.Naziv;
-                    listaLekara.Items.Add(podaci);
-                    lekariSpecijalisti.Add(p);
-            }
-            foreach (Soba s in bolnicaKontroler.GetSveOperacioneSale()) 
-            {
-                comboBoxSale.Items.Add(s.Id + " " + s.Kvadratura + "m^2" + " " + s.Tip.ToString());
-            }
-            
+
+
+            List<Lekar> lekariSpecijalisti = lekarKontroler.GetSviLekariSpecijalisti();
+            listaLekara.ItemsSource = lekariSpecijalisti;
+           
+
+            List<Soba> sveOperacioneSale = bolnicaKontroler.GetSveOperacioneSale();
+            comboBoxSale.ItemsSource = sveOperacioneSale;
+
         }
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
@@ -65,8 +62,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (result == MessageBoxResult.Yes)
             {
                 Operacija novaOperacija = new Operacija();
-                string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-                string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+                Lekar lekar = (Lekar)listaLekara.SelectedItem;
+                string idLekara = lekar.Jmbg;
+
+                Soba soba = (Soba)comboBoxSale.SelectionBoxItem;
+                string idSale = soba.Id;
                 Operacija operacijaSelektovana = operacije.ElementAt(terminiList.SelectedIndex);
 
                 DateTime pocetak = new DateTime(operacijaSelektovana.VremePocetkaOperacije.Year, operacijaSelektovana.VremePocetkaOperacije.Month,
@@ -94,6 +94,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
                 operacijaKontroler.IzmeniOperaciju(StariDatum, StariSat, StariMinut, novaOperacija);
 
+                this.Close();
+
             }
         }
 
@@ -106,10 +108,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
         }
 
-        private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void liste_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listaLekara.SelectedIndex == -1) { return; }
-            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            PostavljanjeParametara();
+        }
+
+        private void TxtDuzina_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PostavljanjeParametara();
+        }
+
+        private void PostavljanjeParametara()
+        {
+            if (listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
+            {
+                return;
+            }
+
+            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
             {
                 potvrdi.IsEnabled = false;
             }
@@ -118,11 +134,23 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 potvrdi.IsEnabled = true;
             }
 
-            string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
-            string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
+            string jmbgLekara = lekar.Jmbg;
 
-            operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale,
-                Int32.Parse(txtDuzina.Text));
+            Soba soba = (Soba)comboBoxSale.SelectionBoxItem;
+            string idSale = soba.Id;
+
+            try
+            {
+                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale, Int32.Parse(txtDuzina.Text));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Niste validno uneli dužinu trajanja operacije", "Dužina trajanja operacije",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             terminiList.Items.Clear();
 
             foreach (Operacija operacija in operacije)
@@ -143,7 +171,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
                 potvrdi.IsEnabled = true;
             }
-
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)

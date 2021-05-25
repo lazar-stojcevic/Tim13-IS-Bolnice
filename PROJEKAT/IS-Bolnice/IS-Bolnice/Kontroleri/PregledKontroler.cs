@@ -55,5 +55,6 @@ namespace IS_Bolnice.Kontroleri
         {
             pregledServis.IzmeniPregled(novi, stari);
         }
+
     }
 }

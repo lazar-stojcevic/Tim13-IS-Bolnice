@@ -23,11 +23,32 @@
         <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,106,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
         <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,72,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
         <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,142,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="listaLekara" HorizontalAlignment="Left" Height="102" Margin="10,318,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged"/>
-        <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,287,0,0" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
+
+        <ListView x:Name="listaLekara" HorizontalAlignment="Left" Height="102" Margin="10,318,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime" Width="80" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Header="Prezime" Width="110" DisplayMemberBinding="{Binding Prezime}"/>
+                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Jmbg}"/>
+                    <GridViewColumn Header="Oblast" Width="105" DisplayMemberBinding="{Binding Oblast.Naziv}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+            <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,287,0,0" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
         <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,197,0,0" VerticalAlignment="Top" Width="196" Grid.ColumnSpan="2"/>
-        <ComboBox x:Name="comboBoxSale" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,228,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged"/>
+
+        <ComboBox x:Name="comboBoxSale" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,228,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged">
+        <ComboBox.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding }" />
+            </DataTemplate>
+        </ComboBox.ItemTemplate>
+
+        </ComboBox>
+
         <ComboBox x:Name="terminiList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="10,464,0,0" VerticalAlignment="Top" Width="374"/>
+
         <Label FontSize="15" Grid.ColumnSpan="2" Content="HITNO :" HorizontalAlignment="Left" Height="28" Margin="10,561,0,0" VerticalAlignment="Top" Width="69"/>
         <CheckBox x:Name="boxHitno" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,570,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,-4.4,0" Grid.ColumnSpan="2"/>

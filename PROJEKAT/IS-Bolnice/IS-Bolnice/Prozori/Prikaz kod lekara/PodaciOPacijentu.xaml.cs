@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
 
@@ -18,7 +19,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// <summary>
     /// Interaction logic for PodaciOPacijentu.xaml
     /// </summary>
-    public partial class PodaciOPacijentu : Window
+    public partial class PodaciOPacijentu : Page
     {
         public PodaciOPacijentu(string jmbg)
         {
@@ -42,6 +43,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     listaAlergena.Items.Add(alergen.Ime);
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            IstorijaBolesti istorijaBolesti = new IstorijaBolesti(jmbgTxt.Text);
+            NavigationService.Navigate(istorijaBolesti);
+
         }
     }
 }

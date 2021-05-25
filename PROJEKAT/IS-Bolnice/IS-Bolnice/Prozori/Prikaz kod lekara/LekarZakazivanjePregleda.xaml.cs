@@ -21,8 +21,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarZakazivanjePregleda : Window
     {
-        private List<Lekar> lekari = new List<Lekar>();
-
         private PregledKontroler pregledKontroler = new PregledKontroler();
 
         List<Pregled> pregledi = new List<Pregled>();
@@ -30,13 +28,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             InitializeComponent();
             LekarKontroler lekarKontroler = new LekarKontroler();
-            foreach (Lekar lekar in lekarKontroler.GetSviLekari())
-            {
-                string podaci = lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg + " " + lekar.Oblast.Naziv;
-                listaLekara.Items.Add(podaci);
-            }
-
-            lekari = lekarKontroler.GetSviLekari();
+            listaLekara.ItemsSource = lekarKontroler.GetSviLekari();
+          
         }
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
@@ -59,8 +52,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             noviPregled.Lekar = new Lekar();
             noviPregled.Pacijent = new Pacijent();
 
-            string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
+            string idLekara = lekar.Jmbg;
+            noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
+            /*
             foreach (Lekar iterLekar in lekari)
             {
                 if (iterLekar.Jmbg.Equals(idLekara))
@@ -69,6 +64,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     break;
                 }
             }
+            */
 
             //TODO: OVAJ NIJE OPTIMALNO ALI STA SAD
             Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
@@ -106,7 +102,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 potvrdi.IsEnabled = true;
             }
 
-            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekari.ElementAt(listaLekara.SelectedIndex));
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekar);
 
             terminiList.Items.Clear();
 

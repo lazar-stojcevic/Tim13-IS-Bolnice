@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Documents;
 
 public class Soba
@@ -94,6 +95,11 @@ public class Soba
         }
 
         return false;
+    }
+
+    public override string ToString()
+    {
+        return Id + " " + Kvadratura + "m^2 " + "Sprat: " + Sprat;
     }
 
     public string Id { get; set; }

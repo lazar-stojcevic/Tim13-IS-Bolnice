@@ -147,6 +147,9 @@
     <Compile Include="Prozori\OdredjivanjeTermina.xaml.cs">
       <DependentUpon>OdredjivanjeTermina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\IstorijaBolesti.xaml.cs">
+      <DependentUpon>IstorijaBolesti.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarDodavanjeLeka.xaml.cs">
       <DependentUpon>LekarDodavanjeLeka.xaml</DependentUpon>
     </Compile>
@@ -379,6 +382,10 @@
     <Page Include="Prozori\OdredjivanjeTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\IstorijaBolesti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarDodavanjeLeka.xaml">
       <SubType>Designer</SubType>

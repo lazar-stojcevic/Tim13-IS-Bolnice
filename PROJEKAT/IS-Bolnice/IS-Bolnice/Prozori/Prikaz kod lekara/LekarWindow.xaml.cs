@@ -154,7 +154,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ButtonClick_ViseOPacijentu(object sender, RoutedEventArgs e)
         {
             PodaciOPacijentu podaci = new PodaciOPacijentu(txtJMBG.Text);
-            podaci.Show();
+            NavigationService.Navigate(podaci);
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)

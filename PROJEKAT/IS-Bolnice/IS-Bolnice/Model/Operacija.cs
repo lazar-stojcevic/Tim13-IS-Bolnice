@@ -4,9 +4,18 @@
 // Purpose: Definition of Class Operacija
 
 using System;
+using System.ComponentModel;
 
-public class Operacija
+public class Operacija : INotifyPropertyChanged
 {
+
+    private Pacijent pacijent;
+    private Lekar lekar;
+    private DateTime vremePocetkaOperacije;
+    private DateTime vremeKrajaOperacije;
+    private Soba soba;
+    private Boolean hitna;
+
     public Operacija()
     {
         this.Pacijent = new Pacijent();
@@ -34,11 +43,79 @@ public class Operacija
         Hitna = operacija.Hitna;
     }
 
-    public Pacijent Pacijent { get; set; }
-    public Lekar Lekar { get; set; } 
-    public DateTime VremePocetkaOperacije { get; set; }
-    public DateTime VremeKrajaOperacije { get; set; }
-    public Soba Soba { get; set; }
-    public Boolean Hitna { get; set; }
+    public Pacijent Pacijent
+    {
+        get { return pacijent; }
+        set
+        {
+            if (pacijent == value) return;
+            pacijent = value;
+            RaisePropertyChanged("pacijent");
+        }
+    }
 
+    public Lekar Lekar
+    {
+        get { return lekar; }
+        set
+        {
+            if (lekar == value) return;
+            lekar = value;
+            RaisePropertyChanged("lekar");
+        }
+    }
+
+    public DateTime VremePocetkaOperacije
+    {
+        get { return vremePocetkaOperacije; }
+        set
+        {
+            if (vremePocetkaOperacije == value) return;
+            vremePocetkaOperacije = value;
+            RaisePropertyChanged("vremePocetkaOperacije");
+        }
+    }
+
+    public DateTime VremeKrajaOperacije
+    {
+        get { return vremeKrajaOperacije; }
+        set
+        {
+            if (vremeKrajaOperacije == value) return;
+            vremeKrajaOperacije = value;
+            RaisePropertyChanged("vremeKrajaOperacije");
+        }
+    }
+
+    public Soba Soba
+    {
+        get { return soba; }
+        set
+        {
+            if (soba == value) return;
+            soba = value;
+            RaisePropertyChanged("soba");
+        }
+    }
+
+    public Boolean Hitna
+    {
+        get { return hitna; }
+        set
+        {
+            if (hitna == value) return;
+            hitna = value;
+            RaisePropertyChanged("hitna");
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    private void RaisePropertyChanged(string propName)
+    {
+        PropertyChangedEventHandler eh = PropertyChanged;
+        if (eh != null)
+        {
+            eh(this, new PropertyChangedEventArgs(propName));
+        }
+    }
 }

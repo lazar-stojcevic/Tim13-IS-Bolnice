@@ -27,23 +27,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public ZakazivanjeOperacije()
         {
             InitializeComponent();
-            List<Lekar> sviLekari = lekarKontroler.GetSviLekari();
-            foreach (Lekar p in sviLekari)
-            {
-                // svi lekari specijalisti
-                if (!p.JelLekarOpstePrakse())
-                {
-                    string podaci = p.Ime + " " + p.Prezime + " " + p.Jmbg + " " + p.Oblast.Naziv;
-                    listaLekara.Items.Add(podaci);
-                    lekariSpecijalisti.Add(p);
-                }
-                
-            }
+            List<Lekar> lekariSpecijalisti = lekarKontroler.GetSviLekariSpecijalisti();
+            listaLekara.ItemsSource = lekariSpecijalisti;
 
-            foreach(Soba s in new BolnicaKontroler().GetSveOperacioneSale())
-            {
-                    comboBoxSale.Items.Add(s.Id + " " + s.Kvadratura+ "m^2"+" "+ s.Tip.ToString());
-            }
+            List<Soba> sveOperacioneSale = new BolnicaKontroler().GetSveOperacioneSale();
+            comboBoxSale.ItemsSource = sveOperacioneSale;
         }
 
         private void Button_ClickZakazi(object sender, RoutedEventArgs e)
@@ -69,8 +57,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private Operacija KreirajNovuOperaciju()
         {
             Operacija operacija = operacije.ElementAt(terminiList.SelectedIndex);
-            string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
-            string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
+            string idLekara = lekar.Jmbg;
+
+            Soba soba = (Soba)comboBoxSale.SelectionBoxItem;
+            string idSale = soba.Id;
             //TODO: OVAJ DEO MORA DA SE VALIDIRA ALI ZA SAD JE OK
 
             DateTime pocetak = new DateTime(operacija.VremePocetkaOperacije.Year, operacija.VremePocetkaOperacije.Month,
@@ -123,8 +114,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 potvrdi.IsEnabled = true;
             }
 
-            string jmbgLekara = lekariSpecijalisti.ElementAt(listaLekara.SelectedIndex).Jmbg;
-            string idSale = comboBoxSale.SelectedItem.ToString().Split(' ')[0];
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
+            string jmbgLekara = lekar.Jmbg;
+
+            Soba soba = (Soba)comboBoxSale.SelectionBoxItem;
+            string idSale = soba.Id;
+
             try
             {
                 operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale,Int32.Parse(txtDuzina.Text));

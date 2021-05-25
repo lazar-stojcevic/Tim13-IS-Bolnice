@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -27,14 +28,28 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
         PregledKontroler pregledKontroler = new PregledKontroler();
+
+        ObservableCollection<Operacija> opKolekcija = new ObservableCollection<Operacija>();
+
+        ObservableCollection<Pregled> preglediKolekcija = new ObservableCollection<Pregled>();
         public LekarRaspored(string id)
         {
             InitializeComponent();
             sifra = id;
-            List<Operacija> op = operacijaKontroler.GetSveSledeceOperacijeLekara(id);
-            listaOperacija.ItemsSource = op;
+            List<Operacija> sveSledeceOperacije = operacijaKontroler.GetSveSledeceOperacijeLekara(id);
+            foreach (Operacija operacija in sveSledeceOperacije)
+            {
+                opKolekcija.Add(operacija);
+            }
+            listaOperacija.ItemsSource = opKolekcija;
+
+
             List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(id);
-            listaPregleda.ItemsSource = pr;
+            foreach (Pregled pregled in pr)
+            {
+                preglediKolekcija.Add(pregled);
+            }
+            listaPregleda.ItemsSource = preglediKolekcija;
         }
 
         private void Button_IzmeniOperaciju(object sender, RoutedEventArgs e)
@@ -51,14 +66,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             DateTime datum = selektovani.VremePocetkaOperacije.Date;
             Console.WriteLine(datum);
             DateTime vreme = selektovani.VremePocetkaOperacije;
-
+            //TODO napravi lepi kostruktor
             IzmenaOperacije izmena = new IzmenaOperacije();
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
             izmena.terminiList.Items.Add(selektovani.VremePocetkaOperacije);
             izmena.boxHitno.IsChecked = selektovani.Hitna;
-            //OVEJ DEO TREBA MODIFIKOVATI
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;
             izmena.StariSat = vreme.Hour.ToString();
@@ -66,6 +80,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             izmena.StariDatum = datum;
 
             izmena.ShowDialog();
+
+            List<Operacija> op = operacijaKontroler.GetSveSledeceOperacijeLekara(sifra);
+            opKolekcija.Clear();
+            foreach (Operacija operacija in op)
+            {
+                opKolekcija.Add(operacija);
+            }
 
         }
 
@@ -80,24 +101,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (result == MessageBoxResult.Yes)
             {
                 Operacija selektovani = (Operacija) listaOperacija.SelectedItem;
-                string jmbg = selektovani.Pacijent.Jmbg;
-                DateTime datum = selektovani.VremePocetkaOperacije.Date;
-                DateTime vreme = selektovani.VremePocetkaOperacije;
-
-                List<Operacija> lista = operacijaKontroler.GetSveSledeceOperacije();
-                //TODO: UVEDI BINDING POD HITNO
-                foreach (Operacija o in lista)
-                {
-                    if (o.Pacijent.Jmbg.Equals(jmbg) && o.VremePocetkaOperacije.Hour == vreme.Hour &&
-                        o.VremePocetkaOperacije.Minute == vreme.Minute && o.VremePocetkaOperacije.Date.Equals(datum))
-                    {
-                        operacijaKontroler.OtkaziOperaciju(o);
-                    }
-                }
-
-
-                List<Operacija> op = operacijaKontroler.GetSveSledeceOperacijeLekara(sifra);
-                listaOperacija.ItemsSource = op;
+                operacijaKontroler.OtkaziOperaciju(selektovani);
+                opKolekcija.Remove(selektovani);
+               
             }
         }
 
@@ -109,7 +115,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
 
             Pregled selektovani = (Pregled)listaPregleda.SelectedItem;
-            //string[] delovi = selektovani.Split(' ');
             string ime = selektovani.Pacijent.Ime;
             string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
@@ -123,13 +128,19 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             izmena.txtOperJmbg.Text = jmbg;
             izmena.terminiList.Items.Add(selektovani.VremePocetkaPregleda);
             //OVEJ DEO TREBA MODIFIKOVATI
-            izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;
             izmena.StariSat = vreme.Hour.ToString();
             izmena.StariMinut = vreme.Minute.ToString();
             izmena.StariDatum = datum;
 
             izmena.ShowDialog();
+
+            List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
+            preglediKolekcija.Clear();
+            foreach (Pregled pregled in pr)
+            {
+                preglediKolekcija.Add(pregled);
+            }
 
 
         }
@@ -145,29 +156,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete ovaj pregled?", "Otkazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-
                 Pregled selektovani = (Pregled) listaPregleda.SelectedItem;
-                string jmbg = selektovani.Pacijent.Jmbg;
-                string jmbgLekara = selektovani.Lekar.Jmbg;
-                DateTime datum = selektovani.VremePocetkaPregleda.Date;
-                Console.WriteLine(datum);
-                DateTime vreme = selektovani.VremePocetkaPregleda;
-
-
-                List<Pregled> lista = pregledKontroler.GetSviBuduciPregledi();
-                foreach (Pregled p in lista)
-                {
-                    if (p.Pacijent.Jmbg.Equals(jmbg) && p.VremePocetkaPregleda.Hour == vreme.Hour &&
-                        p.VremePocetkaPregleda.Minute == vreme.Minute &&
-                        p.VremePocetkaPregleda.Date.Equals(datum.Date) && jmbgLekara.Equals(p.Lekar.Jmbg))
-                    {
-                        pregledKontroler.OtkaziPregled(p);
-                        break;
-                    }
-                }
-
-                List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
-                listaPregleda.ItemsSource = pr;
+                pregledKontroler.OtkaziPregled(selektovani);
+                preglediKolekcija.Remove(selektovani);
             }
         }
 
@@ -180,7 +171,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
             Operacija selektovana = (Operacija)listaOperacija.SelectedItem;
             PodaciOPacijentu pod = new PodaciOPacijentu(selektovana.Pacijent.Jmbg);
-            pod.ShowDialog();
+            NavigationService.Navigate(pod);
         }
 
         private void Button_VidiPacijentaPr(object sender, RoutedEventArgs e)
@@ -192,7 +183,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
             Pregled selektovana = (Pregled)listaPregleda.SelectedItem;
             PodaciOPacijentu pod = new PodaciOPacijentu(selektovana.Pacijent.Jmbg);
-            pod.ShowDialog();
+            NavigationService.Navigate(pod);
 
         }
 
@@ -205,7 +196,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             }
             Pregled selektovanPregled = (Pregled)listaPregleda.SelectedItem;
             LekarWindow prozorZaPregled = new LekarWindow(sifra);
-            //prozorZaPregled.Sifra = sifra;
+            //TODO napravi lepi konstruktor
 
             prozorZaPregled.txtJMBG.Text = selektovanPregled.Pacijent.Jmbg;
             prozorZaPregled.txtIme.Text = selektovanPregled.Pacijent.Ime;

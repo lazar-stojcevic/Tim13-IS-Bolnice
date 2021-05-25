@@ -26,30 +26,15 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public string StariSat { get; set; }
         public string StariMinut { get; set; }
 
-        private LekarKontroler lekarKontroler = new LekarKontroler();
-        private BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
         private PregledKontroler pregledKontroler = new PregledKontroler();
 
-        private List<Lekar> lekari = new List<Lekar>();
-        BazaPregleda bp = new BazaPregleda();
         List<Pregled> pregledi = new List<Pregled>();
         public LekarIzmenaPregleda()
         {
             InitializeComponent();
-            BazaLekara baza = new BazaLekara();
-            foreach (Lekar lekar in lekarKontroler.GetSviLekari())
-            {
-                string podaci = lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg;
-                listaLekara.Items.Add(podaci);
-                lekari.Add(lekar);
-            }
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            
-                foreach (Soba s in bolnicaKontroler.GetSveSveSobeZaPregled())
-                {
-                    comboBoxSale.Items.Add(s.Id + " " + s.Kvadratura + "m^2" + " " + s.Tip.ToString());
-                }
-            
+            LekarKontroler lekarKontroler = new LekarKontroler();
+            listaLekara.ItemsSource = lekarKontroler.GetSviLekari();
+
         }
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)
@@ -57,8 +42,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena pregleda", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
+                Lekar lekar = (Lekar)listaLekara.SelectedItem;
+                string idLekara = lekar.Jmbg;
+
                 Pregled noviPregled = new Pregled();
-                string idLekara = listaLekara.SelectedItem.ToString().Split(' ')[2];
+                noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
                 Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
 
                 DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
@@ -99,9 +87,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 potvrdi.IsEnabled = true;
             }
 
-            string jmbgLekara = lekari.ElementAt(listaLekara.SelectedIndex).Jmbg;
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
 
-            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekari.ElementAt(listaLekara.SelectedIndex));
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekar);
             terminiList.Items.Clear();
 
             foreach (Pregled p in pregledi)

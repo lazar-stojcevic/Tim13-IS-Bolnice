@@ -685,7 +685,8 @@ public class BazaPregleda
             }
 
         }
-        File.WriteAllLines(fileLocation, redoviZaUpisUDatoteku);
+        OtkaziPregled(stariPregled);
+       ZakaziPregled(noviPregled);
     }
 
     public string FormatPisanjaPregleda(Pregled pregled){

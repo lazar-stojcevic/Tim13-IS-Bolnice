@@ -4,6 +4,8 @@
 // Purpose: Definition of Class Pregled
 
 using System;
+using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Model;
 
 public class Pregled
 {
@@ -32,5 +34,15 @@ public class Pregled
         Lekar = pregled.Lekar;
         VremePocetkaPregleda = pregled.VremePocetkaPregleda;
         VremeKrajaPregleda = pregled.VremeKrajaPregleda;
+    }
+
+    public Pregled(string idLekara, Pacijent pacijent, DateTime datum, OblastLekara oblast)
+    {
+        Lekar = new Lekar();
+        Pacijent = new Pacijent();
+        Lekar.Jmbg = idLekara;
+        Lekar.Oblast = oblast;
+        Pacijent = pacijent;
+        VremePocetkaPregleda = datum;
     }
 }
