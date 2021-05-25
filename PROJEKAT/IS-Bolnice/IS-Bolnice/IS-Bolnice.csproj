@@ -165,6 +165,9 @@
     <Compile Include="Prozori\Prikaz kod lekara\LekarGlavniMeni.xaml.cs">
       <DependentUpon>LekarGlavniMeni.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarInventarPoSalama.xaml.cs">
+      <DependentUpon>LekarInventarPoSalama.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarIzvestaj.xaml.cs">
       <DependentUpon>LekarIzvestaj.xaml</DependentUpon>
     </Compile>
@@ -186,11 +189,17 @@
     <Compile Include="Prozori\Prikaz kod lekara\LekarUvidUOdobreneLekove.xaml.cs">
       <DependentUpon>LekarUvidUOdobreneLekove.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarUvidURecenzije.xaml.cs">
+      <DependentUpon>LekarUvidURecenzije.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarValidacijaLekova.xaml.cs">
       <DependentUpon>LekarValidacijaLekova.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarZahtevValidacije.xaml.cs">
       <DependentUpon>LekarZahtevValidacije.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarZahtevZaGodisnji.xaml.cs">
+      <DependentUpon>LekarZahtevZaGodisnji.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\PodaciOPacijentu.xaml.cs">
       <DependentUpon>PodaciOPacijentu.xaml</DependentUpon>
@@ -407,6 +416,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarInventarPoSalama.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarIzvestaj.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -435,11 +448,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarUvidURecenzije.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarValidacijaLekova.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarZahtevValidacije.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarZahtevZaGodisnji.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,19 +23,19 @@
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,181,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,181,0,0" VerticalAlignment="Top" Width="101" Click="Button_VidiRecenzije" >
             <StackPanel>
                 <Image Source="../../Slike/recension.png" Height="67" Width="80" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,309,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,309,0,0" VerticalAlignment="Top" Width="101" Click="ButtonClick_Godisnji" >
             <StackPanel>
                 <Image Source="../../Slike/suitcase.png" Height="67" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="57,181,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="57,181,0,0" VerticalAlignment="Top" Width="101" Click="ButtonClick_InventarPoSalama" >
             <StackPanel>
                 <Image Source="../../Slike/storage.png" Height="64" Width="74" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>

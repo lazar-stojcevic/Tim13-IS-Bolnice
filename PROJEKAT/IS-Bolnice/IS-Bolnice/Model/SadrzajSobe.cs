@@ -33,6 +33,14 @@ public class SadrzajSobe
         NovaSoba = novaSoba;
     }
 
+    public SadrzajSobe(Soba soba, Predmet predmet, int kolicina)
+    {
+
+        Kolicina = kolicina;
+        Soba = soba;
+        Predmet = predmet;
+    }
+
     public SadrzajSobe() { }
 
 }

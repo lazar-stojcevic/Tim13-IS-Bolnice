@@ -1,0 +1,49 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarZahtevZaGodisnji"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="400" Background="White"
+      Title="LekarZahtevZaGodisnji">
+
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+
+        <Label Content="Zahtev za godišnji" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,10,0,0"/>
+        <Label Content="Broj preostalih slobodnih dana:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,74,0,0"/>
+        <TextBox x:Name="PreostaliDani" IsReadOnly="True" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" Height="26" Margin="207,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="64"/>
+        <Label Content="Vreme početka odsustva:" HorizontalAlignment="Left" Height="30" Margin="14,136,0,0" VerticalAlignment="Top" Width="148"/>
+
+        <Label Content="Vreme kraja odsustva:" HorizontalAlignment="Left" Height="30" Margin="14,210,0,0" VerticalAlignment="Top" Width="148"/>
+
+        <DatePicker x:Name="pocetak" DisplayDateStart="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Height="34" Margin="167,137,0,0" VerticalAlignment="Top" Width="223">
+        <DatePicker.Resources>
+            <Style TargetType="DatePickerTextBox">
+                <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+        </DatePicker.Resources>
+        </DatePicker>
+
+        <DatePicker x:Name="kraj" DisplayDateStart="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Height="34" Margin="167,206,0,0" VerticalAlignment="Top" Width="223">
+        <DatePicker.Resources>
+            <Style TargetType="DatePickerTextBox">
+                <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+        </DatePicker.Resources>
+        </DatePicker>
+
+        <Label Content="Opis:" HorizontalAlignment="Left" Height="32" Margin="14,257,0,0" VerticalAlignment="Top" Width="178"/>
+        <TextBox HorizontalAlignment="Left" Height="283" Margin="14,294,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="364"/>
+
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Height="48" Margin="25,619,0,0" VerticalAlignment="Top" Width="163" Click="ButtonClick_Povrdi"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Height="48" Margin="207,619,0,0" VerticalAlignment="Top" Width="163" Click="ButtonClick_Odustani"/>
+
+
+
+
+
+    </Grid>
+</Page>

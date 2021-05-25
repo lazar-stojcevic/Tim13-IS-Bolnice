@@ -139,6 +139,8 @@ namespace IS_Bolnice.Baze
             survery.Patient = bazaPacijenata.PacijentSaOvimJMBG(items[4]);
             survery.Hospital = hospital;
             survery.Hospital.Ime = items[5];
+            survery.Doctor = new Lekar();
+            survery.Doctor.Jmbg = "aaa"; //OVO SAM SREDIO OVAKO, TI POSLE POPRAVI
             return survery;
         }
 

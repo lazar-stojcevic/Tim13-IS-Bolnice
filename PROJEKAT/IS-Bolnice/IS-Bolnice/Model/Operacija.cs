@@ -5,6 +5,7 @@
 
 using System;
 using System.ComponentModel;
+using IS_Bolnice.Model;
 
 public class Operacija : INotifyPropertyChanged
 {
@@ -31,6 +32,16 @@ public class Operacija : INotifyPropertyChanged
         VremeKrajaOperacije = vremeKrajaOperacije;
         Soba = soba;
         Hitna = hitna;
+    }
+
+    public Operacija(string idLekara, Pacijent pacijent, DateTime datum, OblastLekara oblast)
+    {
+        Lekar = new Lekar();
+        Pacijent = new Pacijent();
+        Lekar.Jmbg = idLekara;
+        Lekar.Oblast = oblast;
+        Pacijent = pacijent;
+        VremePocetkaOperacije = datum;
     }
 
     public Operacija(Operacija operacija)

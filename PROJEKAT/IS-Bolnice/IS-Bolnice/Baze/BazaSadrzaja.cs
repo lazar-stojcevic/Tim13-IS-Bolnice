@@ -68,8 +68,10 @@ public class BazaSadrzaja
         string[] niz = line.Split('#');
         Soba soba = new Soba();
         soba.Id = niz[0];
-        Predmet predmet = new Predmet();
-        predmet.Id = niz[1];
+        BazaOpreme bazaOpreme = new BazaOpreme();
+        Predmet predmet = bazaOpreme.GetPredmet(niz[1]);
+        //predmet.Id = niz[1];
+        //predmet.Naziv = new BazaOpreme().GetPredmet(predmet.Id).Naziv;
         Soba novaSoba = new Soba();
         SadrzajSobe s;
         if (!niz[3].Equals(""))
@@ -78,7 +80,7 @@ public class BazaSadrzaja
             s = new SadrzajSobe(soba, predmet, Int32.Parse(niz[2]), DateTime.ParseExact(niz[3], vremenskiFormatiCitanje, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal), novaSoba);
         }
         else {
-            s = new SadrzajSobe(soba.Id, predmet.Id, Int32.Parse(niz[2]));
+            s = new SadrzajSobe(soba, predmet, Int32.Parse(niz[2]));
         }
         return s;
     }

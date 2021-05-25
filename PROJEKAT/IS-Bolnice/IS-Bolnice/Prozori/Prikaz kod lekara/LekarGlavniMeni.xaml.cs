@@ -70,6 +70,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             LekarPrikazSvihHospitalizacija sveHospitalizacije = new LekarPrikazSvihHospitalizacija();
             NavigationService.Navigate(sveHospitalizacije);
         }
+
+        private void ButtonClick_InventarPoSalama(object sender, RoutedEventArgs e)
+        {
+            LekarInventarPoSalama inventarPoSalama = new LekarInventarPoSalama();
+            NavigationService.Navigate(inventarPoSalama);
+        }
+
+        private void Button_VidiRecenzije(object sender, RoutedEventArgs e)
+        {
+            LekarUvidURecenzije recenzije = new LekarUvidURecenzije(Sifra);
+            NavigationService.Navigate(recenzije);
+        }
+
+        private void ButtonClick_Godisnji(object sender, RoutedEventArgs e)
+        {
+            LekarZahtevZaGodisnji zahtevZaGodisnji = new LekarZahtevZaGodisnji();
+            NavigationService.Navigate(zahtevZaGodisnji);
+        }
     }
 
 }

@@ -1,0 +1,34 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarUvidURecenzije"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="400" Background="White"
+      Title="LekarUvidURecenzije">
+
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+
+        <Label Content="Uvid u recencije" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0"/>
+        <ListView x:Name="listaRecenzija" HorizontalAlignment="Left" Height="561" Margin="12,75,0,0" VerticalAlignment="Top" Width="378">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Opis" Width="265" DisplayMemberBinding="{Binding Comment}" />
+                    <GridViewColumn Header="Ocena" Width="50" DisplayMemberBinding="{Binding Rating}"/>
+                    <GridViewColumn Header="Vise" Width="53">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="40" x:Name="OpenFile" Content="..." Click="Open_OnClick"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+    </Grid>
+</Page>

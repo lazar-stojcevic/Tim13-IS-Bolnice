@@ -1,0 +1,41 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarInventarPoSalama"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="400"
+      Background="White" Title="LekarInventarPoSalama">
+
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+
+        <Label Content="Inventar po salama" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="56,8,0,0"/>
+
+        <Label Content="Sala za uvid:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,64,0,0"/>
+
+        <ComboBox x:Name="listaSoba" HorizontalAlignment="Left" Height="31" Margin="12,94,0,0" VerticalAlignment="Top" Width="378" SelectionChanged="PromenaSelekcije">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding }" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+
+        <Label Content="Inventar:" HorizontalAlignment="Left" Height="32" Margin="12,145,0,0" VerticalAlignment="Top" Width="70"/>
+        <ListView x:Name="inventar" HorizontalAlignment="Left" Height="465" Margin="12,182,0,0" VerticalAlignment="Top" Width="378">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="90" DisplayMemberBinding="{Binding Predmet.Id}" />
+                    <GridViewColumn Header="Ime opreme" Width="195" DisplayMemberBinding="{Binding Predmet.Naziv}"/>
+                    <GridViewColumn Header="Količina" Width="80" DisplayMemberBinding="{Binding Kolicina}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+    </Grid>
+</Page>
