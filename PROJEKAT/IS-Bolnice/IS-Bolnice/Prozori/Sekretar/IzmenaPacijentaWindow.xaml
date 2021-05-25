@@ -4,43 +4,63 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="IzmenaPacijentaWindow" Height="650" Width="800"
-        WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,3.6,0">
-        <WrapPanel Orientation="Horizontal" Margin="38,42,49.6,10">
-            <Label Content="Ime:*" Width="300"/>
-            <TextBox Width="300" Name="txtIme" TextChanged="txtIme_TextChanged"/>
-            <Label Content="Prezime:*" Width="300"/>
-            <TextBox Width="300" Name="txtPrezime" TextChanged="txtPrezime_TextChanged"/>
-            <Label Content="JMBG:*" Width="300"/>
-            <TextBox Width="300" Name="txtJMBG" TextChanged="txtJMBG_TextChanged" LostFocus="txtJMBG_LostFocus"/>
-            <Label Content="Adresa stanovanja:" Width="300"/>
-            <TextBox Width="300" Name="txtAdresa"/>
-            <Label Content="Broj telefona:" Width="300"/>
-            <TextBox Width="300" Name="txtBrTelefona"/>
-            <Label Content="eMail:" Width="300"/>
-            <TextBox Width="300" Name="txtEMail"/>
-            <Label Content="Pol:" Width="300"/>
-            <ComboBox Width="300" Name="comboPol">
-                <ComboBoxItem IsSelected="True">Muški</ComboBoxItem>
-                <ComboBoxItem>Ženski</ComboBoxItem>
-                <ComboBoxItem>Drugo</ComboBoxItem>
-            </ComboBox>
-            <Label Content="Datum rodjenja:" Width="300"/>
-            <DatePicker Width="300" Name="datum"/>
-            <Label Content="Izabrani lekar:" Width="300"/>
-            <ComboBox Width="300" Name="comboLekari"/>
-            <Label Content="Korisničko ime:*" Width="300"/>
-            <TextBox Width="300" Name="txtKorisnickoIme" LostFocus="txtKorisnickoIme_LostFocus" TextChanged="txtKorisnickoIme_TextChanged"/>
-            <Label Content="Lozinka:*" Width="300"/>
-            <PasswordBox Width="300" Name="txtLozinka" PasswordChanged="txtLozinka_PasswordChanged"/>
-            <Label Content="" Width="100" Height="100"/>
-            <CheckBox x:Name="CbBlokiran" Content="Blokiran"></CheckBox>
-            <Label Content="" Width="700"></Label>
-            <Button Name="dugmePotvrdi" Content="Potvrdi" Height="50" Width="100" Click="Button_Click_Potvrdi"/>
-            <Label Content="" Width="200"/>
-            <Button Content="Odustani" Height="50" Width="100" Click="Button_Click_Odustani"/>
-        </WrapPanel>
+        Title="IzmenaPacijentaWindow" Height="670" Width="550"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,20,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,64,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,108,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,152,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,196,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,240,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,284,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,328,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,372,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,425,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,469,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="45" Width="370" Margin="95,513,0,0" Stroke="Gray" VerticalAlignment="Top"/>
+
+        <Label Content="Ime:*" HorizontalAlignment="Left" Margin="100,30,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Prezime:*" HorizontalAlignment="Left" Margin="100,75,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="JMBG:*" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Adresa stanovanja:" HorizontalAlignment="Left" Margin="100,165,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Broj telefona:" HorizontalAlignment="Left" Margin="100,210,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="eMail:" HorizontalAlignment="Left" Margin="100,253,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Pol:" HorizontalAlignment="Left" Margin="100,296,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Datum rođenja:" HorizontalAlignment="Left" Margin="100,340,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Izabrani lekar:" HorizontalAlignment="Left" Margin="100,385,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Korisničko ime:*" HorizontalAlignment="Left" Margin="100,435,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Lozinka:*" HorizontalAlignment="Left" Margin="100,480,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,30,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" TextChanged="txtIme_TextChanged"/>
+        <TextBox x:Name="txtPrezime" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,75,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" TextChanged="txtPrezime_TextChanged"/>
+        <TextBox x:Name="txtJMBG" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,120,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" LostFocus="txtJMBG_LostFocus" TextChanged="txtJMBG_TextChanged"/>
+        <TextBox x:Name="txtAdresa" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,165,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBrTelefona" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,210,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEMail" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,253,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboPol" HorizontalAlignment="Left" Margin="250,296,0,0" VerticalAlignment="Top" Width="200">
+            <ComboBoxItem IsSelected="True">Muški</ComboBoxItem>
+            <ComboBoxItem>Ženski</ComboBoxItem>
+            <ComboBoxItem>Drugo</ComboBoxItem>
+        </ComboBox>
+        <DatePicker x:Name="datum" HorizontalAlignment="Left" Margin="250,340,0,0" VerticalAlignment="Top" Width="200"
+                    SelectedDate="{x:Static System:DateTime.Now}"/>
+        <ComboBox x:Name="comboLekari" HorizontalAlignment="Left" Margin="250,385,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="txtKorisnickoIme" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,435,0,0"
+                 TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="txtKorisnickoIme_LostFocus" TextChanged="txtKorisnickoIme_TextChanged"/>
+        <PasswordBox x:Name="txtLozinka" Height="23" Width="200" HorizontalAlignment="Left" Margin="250,480,0,0" 
+                     VerticalAlignment="Top" PasswordChanged="txtLozinka_PasswordChanged"/>
+        <CheckBox x:Name="CbBlokiran" Content="Blokiran" FontWeight="Bold" HorizontalAlignment="Left" Margin="100,528,0,0" VerticalAlignment="Top"/>
+
+        <Button x:Name="dugmePotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Margin="95,580,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Potvrdi"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="373,580,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Odustani"/>
     </Grid>
 </Window>
