@@ -373,7 +373,7 @@ public class BazaOperacija
                             || (predlozeni.VremePocetkaOperacije == operacija.VremePocetkaOperacije));
     }
 
-    public List<Operacija> SveSledeceOperacije()
+    public List<Operacija> SveOperacije()
     {
         List<Operacija> ret = new List<Operacija>();
         BazaPacijenata bazaPacijenata = new BazaPacijenata();
@@ -431,10 +431,8 @@ public class BazaOperacija
                 }
                 else o.Hitna = false;
 
-                if (o.VremePocetkaOperacije > DateTime.Now.AddHours(-1))
-                {
-                    ret.Add(o);
-                }
+
+                ret.Add(o);
             }
         }
         else
@@ -442,7 +440,20 @@ public class BazaOperacija
             Console.WriteLine("Nista");
         }
         return ret;
+    }
 
+    public List<Operacija> SveSledeceOperacije()
+    {
+        List<Operacija> ret = new List<Operacija>();
+        foreach (Operacija operacija in SveOperacije())
+        {
+            if (operacija.VremePocetkaOperacije > DateTime.Now.AddHours(-1))
+            {
+                ret.Add(operacija);
+            }
+        }
+
+        return ret;
     }
 
     public void ZakaziOperaciju(Operacija novaOperacija)

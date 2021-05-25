@@ -5,17 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Sekretar"
         xmlns:konverteri="clr-namespace:IS_Bolnice.Konverteri"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Prikaz zauzetosti lekara opste prakse" Height="650" Width="600"
+        Title="Prikaz zauzetosti lekara opste prakse" Height="660" Width="600"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Grid>
-        <Label Content="Zauzetost za lekara" FontWeight="Bold" HorizontalAlignment="Left" Margin="13,25,0,0" VerticalAlignment="Top"
+        <Label Content="Zauzetost za lekara" FontWeight="Bold" HorizontalAlignment="Left" Margin="13,21,0,0" VerticalAlignment="Top"
                FontSize="15"/>
-        <Label Content="Budući pregledi:" FontWeight="Bold" HorizontalAlignment="Left" Margin="14,74,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox x:Name="txtLekar" HorizontalAlignment="Left" Height="25" Margin="160,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"
+        <Label Content="Budući pregledi:" FontWeight="Bold" HorizontalAlignment="Left" Margin="14,72,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox x:Name="txtLekar" HorizontalAlignment="Left" Height="25" Margin="160,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"
                  VerticalContentAlignment="Center" IsReadOnly="True"/>
         <DataGrid Name="dgPregledi" ItemsSource="{Binding PreglediSelektovanogLekara}" IsReadOnly="True"
-                  SelectionMode="Single" AutoGenerateColumns="False" Margin="10,111,9.6,199">
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="10,106,9.6,234.4">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding Lekar, Converter={konverteri:LekarToTextConverter}}" />
                 <DataGridTextColumn Header="Početak pregleda" Width="1*" Binding="{Binding VremePocetkaPregleda, StringFormat={}{0:HH:mm}}"/>
@@ -23,6 +25,17 @@
                 <DataGridTextColumn Header="Datum pregleda" Width="1*" Binding="{Binding VremePocetkaPregleda, StringFormat={}{0:dd.MM.yyyy}}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Generiši izveštaj" HorizontalAlignment="Left" Margin="41,562,0,0" VerticalAlignment="Top" Width="92" Height="32"/>
+
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="155" Margin="10,451,0,0" Stroke="Black" VerticalAlignment="Top" Width="564"/>
+
+        <Button Content="Generiši izveštaj" HorizontalAlignment="Left" Margin="238,564,0,0" VerticalAlignment="Top" Width="92" Height="32" Click="Button_Click_Generisanje_PDF_Izvestaja"/>
+        <Label Content="Generisanje izveštaja zauzetosti lekara za određeni vremenski period:" FontWeight="Bold" HorizontalAlignment="Left" FontSize="15"
+               Margin="14,419,0,0" VerticalAlignment="Top"/>
+        <Label Content="Datum početka:" FontWeight="Bold" HorizontalAlignment="Left" Margin="119,473,0,0" VerticalAlignment="Top"/>
+        <Label Content="Datum kraja:" FontWeight="Bold" HorizontalAlignment="Left" Margin="119,520,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePicker_pocetak" SelectedDate="{x:Static System:DateTime.Now}" HorizontalAlignment="Left"
+                    Margin="260,475,0,0" VerticalAlignment="Top" Width="180"/>
+        <DatePicker x:Name="datePicker_kraj" SelectedDate="{x:Static System:DateTime.Now}" HorizontalAlignment="Left" 
+                    Margin="260,522,0,0" VerticalAlignment="Top" Width="180"/>
     </Grid>
 </Window>

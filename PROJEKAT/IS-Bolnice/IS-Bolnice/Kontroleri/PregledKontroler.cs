@@ -11,9 +11,18 @@ namespace IS_Bolnice.Kontroleri
     {
         private PregledServis pregledServis = new PregledServis();
 
+        public List<Pregled> GetSviPregledi()
+        {
+            return pregledServis.GetsviPregledi();
+        }
         public List<Pregled> GetSviBuduciPregledi()
         {
             return pregledServis.GetSviBuduciPregledi();
+        }
+
+        public List<Pregled> GetSviPreglediLekara(string jmbgLekara)
+        {
+            return pregledServis.GetSviPreglediLekara(jmbgLekara);
         }
 
         public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)

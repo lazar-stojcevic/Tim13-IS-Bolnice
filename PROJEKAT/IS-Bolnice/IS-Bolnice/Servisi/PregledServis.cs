@@ -17,6 +17,26 @@ namespace IS_Bolnice.Servisi
         {
             bazaPregleda.ZakaziPregled(pregled);
         }
+
+        public List<Pregled> GetsviPregledi()
+        {
+            return bazaPregleda.SviPregledi();
+        }
+
+        public List<Pregled> GetSviPreglediLekara(string jmbgLekara)
+        {
+            List<Pregled> sviPreglediLekara = new List<Pregled>();
+            foreach (Pregled pregled in bazaPregleda.SviPregledi())
+            {
+                if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
+                {
+                    sviPreglediLekara.Add(pregled);
+                }
+            }
+
+            return sviPreglediLekara;
+        }
+
         public List<Pregled> GetSviBuduciPregledi()
         {
             return bazaPregleda.SviBuduciPregledi();

@@ -11,11 +11,19 @@ namespace IS_Bolnice.Kontroleri
     {
         private OperacijaServis operacijaServis = new OperacijaServis();
 
+        public List<Operacija> GetSveOperacije()
+        {
+            return operacijaServis.GetSveOperacije();
+        }
         public List<Operacija> GetSveSledeceOperacije()
         {
             return operacijaServis.GetSveSledeceOperacije();
         }
 
+        public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
+        {
+            return operacijaServis.GetSveOperacijeLekara(jmbgLekara);
+        }
         public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
         {
             return operacijaServis.GetSveSledeceOperacijeLekara(jmbgLekara);

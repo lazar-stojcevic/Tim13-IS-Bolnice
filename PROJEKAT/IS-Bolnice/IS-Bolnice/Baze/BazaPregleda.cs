@@ -528,8 +528,7 @@ public class BazaPregleda
         return pregledi;
     }
 
-    //OPTIMIZOVATI KOD
-    public List<Pregled> SviBuduciPregledi()
+    public List<Pregled> SviPregledi()
     {
         BazaLekara bl = new BazaLekara();
 
@@ -556,9 +555,9 @@ public class BazaPregleda
             pac.Jmbg = jmbgPacijenta;
             p.Pacijent = pac;
             p.VremePocetkaPregleda = DateTime.ParseExact(vremePocetka, vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
             p.VremeKrajaPregleda = DateTime.ParseExact(vremeKraja, vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
             //dodati broj sobe ovde
             foreach (Lekar l in lekari)
             {
@@ -578,13 +577,25 @@ public class BazaPregleda
                 }
             }
 
-            if (p.VremePocetkaPregleda > DateTime.Now.AddHours(-1))
+            pregledi.Add(p);
+            }
+
+        return pregledi;
+    }
+
+    //OPTIMIZOVATI KOD
+    public List<Pregled> SviBuduciPregledi()
+    {
+        List<Pregled> sviBuduciPregledi = new List<Pregled>();
+        foreach (Pregled pregled in SviPregledi())
+        {
+            if (pregled.VremePocetkaPregleda > DateTime.Now.AddHours(-1))
             {
-                pregledi.Add(p);
+                sviBuduciPregledi.Add(pregled);
             }
         }
 
-        return pregledi;
+        return sviBuduciPregledi;
     }
 
     private bool MozeDaSeZakaze(Pregled noviPregled)

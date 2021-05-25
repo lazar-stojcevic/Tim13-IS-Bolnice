@@ -12,6 +12,11 @@ namespace IS_Bolnice.Servisi
     {
         private BazaOperacija bazaOperacija = new BazaOperacija();
 
+        public List<Operacija> GetSveOperacije()
+        {
+            return bazaOperacija.SveOperacije();
+        }
+
         public List<Operacija> GetSveSledeceOperacije()
         {
             return bazaOperacija.SveSledeceOperacije();
@@ -44,6 +49,19 @@ namespace IS_Bolnice.Servisi
             }
 
             return operacijeSale;
+        }
+
+        public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
+        {
+            List<Operacija> ret = new List<Operacija>();
+            foreach (Operacija operacija in bazaOperacija.SveOperacije())
+            {
+                if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
+                {
+                    ret.Add(operacija);
+                }
+            }
+            return ret;
         }
         public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
         {

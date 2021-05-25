@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             Close();
         }
 
-        private bool Validno(DateTime pocetak, DateTime kraj)
+        private bool ValidnoUnesenDatum(DateTime pocetak, DateTime kraj)
         {
             return (pocetak <= kraj) && pocetak > DateTime.Now;
         }
@@ -61,7 +61,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             DateTime pocetak = DateTime.Parse(datePicker_pocetak.SelectedDate.ToString());
             DateTime kraj = DateTime.Parse(datePicker_kraj.SelectedDate.ToString());
-            if (!Validno(pocetak, kraj))
+            if (!ValidnoUnesenDatum(pocetak, kraj))
             {
                 MessageBox.Show("Nevalidan unos datuma godišnjeg odmora.");
                 return;
