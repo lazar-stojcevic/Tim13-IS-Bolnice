@@ -31,7 +31,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             InitializeComponent();
             sifra = id;
-            List<Operacija> op = operacijaKontroler.SveSledeceOperacijeZaLekara(id);
+            List<Operacija> op = operacijaKontroler.GetSveSledeceOperacijeLekara(id);
             listaOperacija.ItemsSource = op;
             List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(id);
             listaPregleda.ItemsSource = pr;
@@ -96,7 +96,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 }
 
 
-                List<Operacija> op = operacijaKontroler.SveSledeceOperacijeZaLekara(sifra);
+                List<Operacija> op = operacijaKontroler.GetSveSledeceOperacijeLekara(sifra);
                 listaOperacija.ItemsSource = op;
             }
         }

@@ -348,8 +348,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Radno vreme" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="92" Height="32"
-                            VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Opste"></Button>
+                    <Button Content="Radno vreme" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Width="92" Height="32"
+                            VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Opste" Margin="11,0,0,5"></Button>
+                    <Button Content="Zauzetost lekara" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Width="92" Height="32"
+                            VerticalAlignment="Center" Margin="0,0,11,5" Click="Button_Click_Zauzetost_Lekara_Opste_Prakse"/>
 
                     <Rectangle Grid.Row="1" Grid.Column="3" Grid.RowSpan="4" Fill="#FFF4F4F5"  Stroke="Black"/>
                     <Label Content="Lekari specijalisti:" FontWeight="Bold" FontSize="15" Grid.Row="1" Grid.Column="3"
@@ -364,8 +366,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Radno vreme" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" Width="92" Height="32"
-                            VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Specijaliste"></Button>
+                    <Button Content="Radno vreme" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left" Width="92" Height="32"
+                            VerticalAlignment="Center" Click="Button_Click_Radno_Vreme_Lekara_Specijaliste" Margin="11,0,0,5"></Button>
+                    <Button Content="Zauzetost lekara" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Right" Width="92" Height="32"
+                            VerticalAlignment="Center" Margin="0,0,11,5" Click="Button_Click_Zauzetost_Lekara_Specijaliste"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Lekovi">

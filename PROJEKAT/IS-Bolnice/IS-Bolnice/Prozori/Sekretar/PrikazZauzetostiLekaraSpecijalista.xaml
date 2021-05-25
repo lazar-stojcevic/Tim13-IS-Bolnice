@@ -1,0 +1,39 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Sekretar.PrikazZauzetostiLekaraSpecijalista"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Sekretar"
+        xmlns:konverteri="clr-namespace:IS_Bolnice.Konverteri"
+        mc:Ignorable="d"
+        Title="Prikaz zauzetosti lekara opste prakse" Height="650" Width="600"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Zauzetost za lekara" FontWeight="Bold" HorizontalAlignment="Left" Margin="13,25,0,0" VerticalAlignment="Top"
+               FontSize="15"/>
+        <Label Content="Budući pregledi:" FontWeight="Bold" HorizontalAlignment="Left" Margin="14,74,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox x:Name="txtLekar" HorizontalAlignment="Left" Height="25" Margin="160,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"
+                 VerticalContentAlignment="Center" IsReadOnly="True"/>
+        <DataGrid Name="dgPregledi" ItemsSource="{Binding PreglediSelektovanogLekara}" IsReadOnly="True"
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="10,111,9.6,319">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding Lekar, Converter={konverteri:LekarToTextConverter}}" />
+                <DataGridTextColumn Header="Početak termina" Width="1*" Binding="{Binding VremePocetkaPregleda, StringFormat={}{0:HH:mm}}"/>
+                <DataGridTextColumn Header="Kraj termina" Width="1*" Binding="{Binding VremeKrajaPregleda, StringFormat={}{0:HH:mm}}"/>
+                <DataGridTextColumn Header="Datum termina" Width="1*" Binding="{Binding VremePocetkaPregleda, StringFormat={}{0:dd.MM.yyyy}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Generiši izveštaj" HorizontalAlignment="Left" Margin="41,562,0,0" VerticalAlignment="Top" Width="92" Height="32"/>
+        <Label Content="Buduće operacije:" FontWeight="Bold" HorizontalAlignment="Left" Margin="14,316,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <DataGrid Name="dgOperacije" ItemsSource="{Binding OperacijeSelektovanogLekara}" Margin="10,350,9.6,80" IsReadOnly="True"
+                  SelectionMode="Single" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding Lekar, Converter={konverteri:LekarToTextConverter}}" />
+                <DataGridTextColumn Header="Prostorija" Width="1*" Binding="{Binding Soba.Id}"/>
+                <DataGridTextColumn Header="Početak termina" Width="1*" Binding="{Binding VremePocetkaOperacije, StringFormat=\{0:HH:mm\}}"/>
+                <DataGridTextColumn Header="Kraj termina" Width="1*" Binding="{Binding VremeKrajaOperacije, StringFormat=\{0:HH:mm\}}"/>
+                <DataGridTextColumn Header="Datum termina" Width="1*" Binding="{Binding VremePocetkaOperacije, StringFormat=\{0:dd.MM.yyyy\}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

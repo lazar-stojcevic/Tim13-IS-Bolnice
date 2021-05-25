@@ -97,7 +97,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             PreglediLekara.Clear();
 
             // provera za checkbox da li treba da ostane oznacen
-            if (checkBoxLekar.IsChecked == true && !lekar.Jmbg.Equals(pacijent.IzabraniLekar.Jmbg))
+            if (pacijent.IzabraniLekar == null)
+            {
+                checkBoxLekar.IsChecked = false;
+            }
+            else if (checkBoxLekar.IsChecked == true && !lekar.Jmbg.Equals(pacijent.IzabraniLekar.Jmbg))
             {
                 checkBoxLekar.IsChecked = false;
             }

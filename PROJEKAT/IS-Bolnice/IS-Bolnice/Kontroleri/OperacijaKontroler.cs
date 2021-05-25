@@ -16,9 +16,9 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.GetSveSledeceOperacije();
         }
 
-        public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
+        public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
         {
-            return operacijaServis.SveSledeceOperacijeZaLekara(jmbgLekara);
+            return operacijaServis.GetSveSledeceOperacijeLekara(jmbgLekara);
         }
 
         public List<Operacija> GetSveSledeveOperacijePacijenta(string jmbgPacijenta)

@@ -45,6 +45,18 @@ namespace IS_Bolnice.Servisi
 
             return operacijeSale;
         }
+        public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
+        {
+            List<Operacija> ret = new List<Operacija>();
+            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
+            {
+                if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
+                {
+                    ret.Add(operacija);
+                }
+            }
+            return ret;
+        }
 
         public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
         {
@@ -163,7 +175,7 @@ namespace IS_Bolnice.Servisi
                 }
             }
 
-            foreach (Operacija zakazanaOperacija in SveSledeceOperacijeZaLekara(jmbgLekara))
+            foreach (Operacija zakazanaOperacija in GetSveSledeceOperacijeLekara(jmbgLekara))
             {
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
                     zakazanaOperacija.VremeKrajaOperacije);
@@ -221,19 +233,6 @@ namespace IS_Bolnice.Servisi
         public void OtkaziOperaciju(Operacija operacija)
         {
             bazaOperacija.OtkaziOperaciju(operacija);
-        }
-
-        public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
-        {
-            List<Operacija> ret = new List<Operacija>();
-            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
-            {
-                if (operacija.Lekar.Jmbg.Equals(jmbgLekara) && operacija.VremePocetkaOperacije > DateTime.Now)
-                {
-                    ret.Add(operacija);
-                }
-            }
-            return ret;
         }
     }
 }

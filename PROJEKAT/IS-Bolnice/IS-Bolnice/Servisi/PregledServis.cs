@@ -39,6 +39,20 @@ namespace IS_Bolnice.Servisi
             return pregledi;
         }
 
+        public List<Pregled> GetSviBuduciPreglediLekara(string jmbgLekara)
+        {
+            List<Pregled> sviPregledi = new List<Pregled>();
+            foreach (Pregled pregled in bazaPregleda.SviBuduciPregledi())
+            {
+                if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
+                {
+                    sviPregledi.Add(pregled);
+                }
+            }
+
+            return sviPregledi;
+        }
+
         public List<Pregled> GetDostupniTerminiPregledaLekara(Lekar lekar)
         {
             return SlobodniPreglediLekaraUNarednomPeriodu(lekar);
@@ -194,20 +208,6 @@ namespace IS_Bolnice.Servisi
         public void OtkaziPregled(Pregled pregled)
         {
             bazaPregleda.OtkaziPregled(pregled);
-        }
-
-        public List<Pregled> GetSviBuduciPreglediLekara(string jmbgLekara)
-        {
-            List<Pregled> sviPregledi = new List<Pregled>();
-            foreach (Pregled pregled in bazaPregleda.SviBuduciPregledi())
-            {
-                if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
-                {
-                    sviPregledi.Add(pregled);
-                }
-            }
-
-            return sviPregledi;
         }
 
         public Pregled GetSledeciPregledKodLekara(string jmbg)
