@@ -11,6 +11,8 @@ namespace IS_Bolnice.Servisi
     class OperacijaServis
     {
         private BazaOperacija bazaOperacija = new BazaOperacija();
+        private static int DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA = 6;
+        private static int BROJ_MINUTA_ZA_HITAN_TERMIN = 60;
 
         public List<Operacija> GetSveOperacije()
         {
@@ -162,12 +164,13 @@ namespace IS_Bolnice.Servisi
             return operacijeURadnomVremenu;
         }
 
+        // TODO: VIDETI DA LI JE UOPSTE POTREBAN idSale
         private List<Operacija> SlobodneOperacijeLekara(Lekar lekar, List<Operacija> operacije, string idSale)
         {
             List<Operacija> slobodniTermini = new List<Operacija>();
             foreach (Operacija operacija in operacije)
             {
-                if (!TerminSePreklapaKodLekara(lekar.Jmbg, operacija, idSale))
+                if (!TerminSePreklapaKodLekaraISale(lekar.Jmbg, operacija, idSale))
                 {
                     slobodniTermini.Add(operacija);
                 }
@@ -175,7 +178,20 @@ namespace IS_Bolnice.Servisi
             return slobodniTermini;
         }
 
-        private bool TerminSePreklapaKodLekara(string jmbgLekara, Operacija predlozenaOperacija, string idSale)
+        private List<Operacija> SlobodneOperacijeLekara2(Lekar lekar, List<Operacija> operacije)
+        {
+            List<Operacija> slobodniTermini = new List<Operacija>();
+            foreach (Operacija operacija in operacije)
+            {
+                if (!TerminSePreklapaKodLekaraISale(lekar.Jmbg, operacija, operacija.Soba.Id))
+                {
+                    slobodniTermini.Add(operacija);
+                }
+            }
+            return slobodniTermini;
+        }
+
+        private bool TerminSePreklapaKodLekaraISale(string jmbgLekara, Operacija predlozenaOperacija, string idSale)
         {
             BazaPregleda bazaPregleda = new BazaPregleda();
 
@@ -251,6 +267,179 @@ namespace IS_Bolnice.Servisi
         public void OtkaziOperaciju(Operacija operacija)
         {
             bazaOperacija.OtkaziOperaciju(operacija);
+        }
+
+        public void OdloziOperaciju(Operacija pomeranaOperacija)
+        {
+            Operacija operacijaZaOtkazivanje = new Operacija(pomeranaOperacija);
+
+            double vremeOdlaganja = 10;
+            do
+            {
+                pomeranaOperacija.VremePocetkaOperacije = pomeranaOperacija.VremePocetkaOperacije.AddMinutes(vremeOdlaganja);
+                pomeranaOperacija.VremeKrajaOperacije = pomeranaOperacija.VremeKrajaOperacije.AddMinutes(vremeOdlaganja);
+                vremeOdlaganja += 10;
+            } while (!MozeDaSeZakaze(pomeranaOperacija));
+
+            OtkaziOperaciju(operacijaZaOtkazivanje);
+            ZakaziOperaciju(pomeranaOperacija);
+        }
+
+        private bool MozeDaSeZakaze(Operacija operacija)
+        {
+            VremenskiInterval vremenskiInterval =
+                new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
+            if (!operacija.Lekar.TerminURadnomVremenuLekara(vremenskiInterval))
+            {
+                return false;
+            }
+
+            if (TerminSePreklapaKodLekaraISale(operacija.Lekar.Jmbg, operacija, operacija.Soba.Id))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara prosledjenaOblast)
+        {
+            BazaLekara bazaLekara = new BazaLekara();
+            List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
+            List<Operacija> skorasnjeOperacijeLekara = new List<Operacija>();
+
+            foreach (Lekar lekar in sviLekariOdredjeneOblasti)
+            {
+                List<Operacija> naredneOperacijeLekara = GetSveSledeceOperacijeLekara(lekar.Jmbg);
+                List<Operacija> operacijeKojeNisuHitne = SveOperacijeKojeNisuHitne(naredneOperacijeLekara);
+                skorasnjeOperacijeLekara.AddRange(OperacijeNarednihSatVremena(operacijeKojeNisuHitne));
+                if (skorasnjeOperacijeLekara.Count > DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA)
+                {
+                    return skorasnjeOperacijeLekara;
+                }
+            }
+            return SortiranjeTerminaPoMogucstvuOdlaganja(skorasnjeOperacijeLekara);
+        }
+
+        private List<Operacija> SortiranjeTerminaPoMogucstvuOdlaganja(List<Operacija> operacije)
+        {
+            List<int> vremenaOdlaganja = new List<int>();
+
+            foreach (Operacija operacija in operacije)
+            {
+                Operacija odlozenaOperacija = new Operacija(operacija);
+
+                int vremeOdlaganja = 10;
+                while (!MozeDaSeZakaze(odlozenaOperacija))
+                {
+                    odlozenaOperacija.VremePocetkaOperacije = odlozenaOperacija.VremePocetkaOperacije.AddMinutes(vremeOdlaganja);
+                    odlozenaOperacija.VremeKrajaOperacije = odlozenaOperacija.VremeKrajaOperacije.AddMinutes(vremeOdlaganja);
+                    vremeOdlaganja += 10;
+                }
+                vremenaOdlaganja.Add(vremeOdlaganja);
+            }
+            return SortirajOperacijePoVremenuOdlaganja(operacije, vremenaOdlaganja);
+        }
+
+        private List<Operacija> SortirajOperacijePoVremenuOdlaganja(List<Operacija> operacije, List<int> odlaganja)
+        {
+            for (int i = 0; i < odlaganja.Count - 1; i++)
+            {
+                for (int j = 0; j < odlaganja.Count - i - 1; j++)
+                {
+                    if (odlaganja[j] > odlaganja[j + 1])
+                    {
+                        int temp = odlaganja[j];
+                        odlaganja[j] = odlaganja[j + 1];
+                        odlaganja[j + 1] = temp;
+
+                        Operacija tempOperacija = operacije[j];
+                        operacije[j] = operacije[j + 1];
+                        operacije[j + 1] = tempOperacija;
+                    }
+                }
+            }
+            return operacije;
+        }
+
+        private List<Operacija> SveOperacijeKojeNisuHitne(List<Operacija> operacije)
+        {
+            List<Operacija> operacijeKojeNisuHitne = new List<Operacija>();
+
+            foreach (Operacija operacija in operacije)
+            {
+                if (!operacija.Hitna)
+                {
+                    operacijeKojeNisuHitne.Add(operacija);
+                }
+            }
+
+            return operacijeKojeNisuHitne;
+        }
+
+
+        private List<Operacija> OperacijeNarednihSatVremena(List<Operacija> operacije)
+        {
+            List<Operacija> operacijeiNarednihSatVremena = new List<Operacija>();
+            DateTime trenutnoVreme = DateTime.Now;
+            DateTime vremeZaSatVremena = trenutnoVreme.AddHours(1);
+            foreach (Operacija operacija in operacije)
+            {
+                if (operacija.VremePocetkaOperacije <= vremeZaSatVremena)
+                {
+                    operacijeiNarednihSatVremena.Add(operacija);
+                }
+            }
+            return operacijeiNarednihSatVremena;
+        }
+
+        public List<Operacija> SlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaOperacije)
+        {
+            BazaLekara bazaLekara = new BazaLekara();
+            foreach (Lekar lekar in bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
+            {
+                List<Operacija> slobodniTerminiLekara = SlobodneHitneOperacijeLekaraSaTrajanjem(lekar, minutiTrajanjaOperacije);
+                if (slobodniTerminiLekara.Count > 0)
+                {
+                    return slobodniTerminiLekara;
+                }
+            }
+            return null;
+        }
+
+        private List<Operacija> SlobodneHitneOperacijeLekaraSaTrajanjem(Lekar lekar, int minutiTrajanjaOperacije)
+        {
+            List<Operacija> sviSkorasnjiTermini = SviPredloziHitnihOperacija(lekar, minutiTrajanjaOperacije);
+            List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+            List<Operacija> slobodniTermini = SlobodneOperacijeLekara2(lekar, terminiURadnomVremenu);
+
+            return slobodniTermini;
+        }
+
+        private List<Operacija> SviPredloziHitnihOperacija(Lekar lekar, int minutiTrajanjaOperacije)
+        {
+            BazaBolnica bazaBolnica = new BazaBolnica();
+            List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
+            DateTime najbliziTermin = NajbliziTermin();
+
+            for (int i = 0; i < BROJ_MINUTA_ZA_HITAN_TERMIN; i += 10)
+            {
+                DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
+
+                foreach (Soba sala in bazaBolnica.SveOperacioneSaleOveBolnice())
+                {
+                    Operacija operacija = new Operacija()
+                    {
+                        Lekar = lekar,
+                        VremePocetkaOperacije = pocetakTermina,
+                        VremeKrajaOperacije = pocetakTermina.AddMinutes(minutiTrajanjaOperacije),
+                        Soba = sala,
+                        Hitna = true
+                    };
+                    sveSkorasnjeOperacije.Add(operacija);
+                }
+            }
+            return sveSkorasnjeOperacije;
         }
     }
 }

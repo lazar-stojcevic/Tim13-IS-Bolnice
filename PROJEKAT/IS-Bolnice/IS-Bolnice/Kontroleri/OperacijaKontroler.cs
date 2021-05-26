@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Model;
 using IS_Bolnice.Servisi;
 
 namespace IS_Bolnice.Kontroleri
@@ -62,6 +63,22 @@ namespace IS_Bolnice.Kontroleri
         public void OtkaziOperaciju(Operacija operacija)
         {
             operacijaServis.OtkaziOperaciju(operacija);
+        }
+
+        public void OdloziOperaciju(Operacija pomeranaOperacija)
+        {
+            operacijaServis.OdloziOperaciju(pomeranaOperacija);
+        }
+
+        public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara oblastLekara)
+        {
+            return operacijaServis.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara);
+        }
+
+        public List<Operacija> SlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara oblastLekara,
+            int minutiTrajanjaOperacije)
+        {
+            return operacijaServis.SlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaOperacije);
         }
     }
 }
