@@ -11,6 +11,7 @@ namespace IS_Bolnice.Prozori.Sekretar
     {
         private Pacijent odabraniPacijent = new Pacijent();
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private PregledKontroler pregledKontroler = new PregledKontroler();
         private OblastLekaraKontroler oblastLekaraKontroler = new OblastLekaraKontroler();
 
         public ObservableCollection<Pregled> PreglediZaOdlaganje
@@ -62,7 +63,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             BazaPregleda bazaPregleda = new BazaPregleda();
             BazaOperacija bazaOperacija = new BazaOperacija();
 
-            OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+            OsvezavanjePrikazaZauzetihPregleda(pregledKontroler.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
             OsvezavanjePrikazaZauzetihOperacija(bazaOperacija.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
         }
 
@@ -141,15 +142,16 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void ZakazivanjePregleda()
         {
             OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
-            double trajanjeTermina = (double)comboTrajanja.SelectedItem;
-            BazaPregleda bazaPregleda = new BazaPregleda();
-            List<Pregled> slobodniPregledi = bazaPregleda.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, trajanjeTermina);
-            
+            double satiTrajanjaTermina = (double)comboTrajanja.SelectedItem;
+            int minutiTrajanjaTermina = (int) (satiTrajanjaTermina * 60);
+            List<Pregled> slobodniPregledi =
+                pregledKontroler.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
+
             if (slobodniPregledi != null)
             {
                 Pregled pregled = slobodniPregledi[0];
                 pregled.Pacijent = odabraniPacijent;
-                bazaPregleda.ZakaziPregled(pregled);
+                pregledKontroler.ZakaziPregled(pregled);
                 string message = "Uspesno zakazan termin";
                 MessageBox.Show(message);
                 Close();
@@ -200,10 +202,10 @@ namespace IS_Bolnice.Prozori.Sekretar
                 for (int i = 0; i < dgPregledi.SelectedItems.Count; i++)
                 {
                     Pregled pregledZaOdlaganje = (Pregled)dgPregledi.SelectedItems[i];
-                    bazaPregleda.OdloziPregledStoPre(pregledZaOdlaganje);
+                    pregledKontroler.OdloziPregledStoPre(pregledZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
-                OsvezavanjePrikazaZauzetihPregleda(bazaPregleda.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+                OsvezavanjePrikazaZauzetihPregleda(pregledKontroler.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Model;
 using IS_Bolnice.Servisi;
 
 namespace IS_Bolnice.Kontroleri
@@ -55,6 +56,11 @@ namespace IS_Bolnice.Kontroleri
             pregledServis.OtkaziPregled(pregled);
         }
 
+        public void OdloziPregledStoPre(Pregled pregledZaOdlaganje)
+        {
+            pregledServis.OdloziPregledStoPre(pregledZaOdlaganje);
+        }
+
         public void ZakaziPregled(Pregled pregled)
         {
             pregledServis.ZakaziPregled(pregled);
@@ -63,6 +69,16 @@ namespace IS_Bolnice.Kontroleri
         public void IzmeniPregled(Pregled novi, Pregled stari)
         {
             pregledServis.IzmeniPregled(novi, stari);
+        }
+
+        public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara)
+        {
+            return pregledServis.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara);
+        }
+
+        public List<Pregled> SlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara, int minutiTrajanjaTermina)
+        {
+            return pregledServis.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
         }
 
     }

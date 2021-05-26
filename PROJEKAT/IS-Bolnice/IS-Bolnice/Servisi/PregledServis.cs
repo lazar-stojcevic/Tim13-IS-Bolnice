@@ -10,6 +10,7 @@ namespace IS_Bolnice.Servisi
     class PregledServis
     {
         private static int MINUTI_TRAJANJA_PREGLEDA = 45;
+        private static int DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA = 6;
 
         private BazaPregleda bazaPregleda = new BazaPregleda();
 
@@ -17,10 +18,56 @@ namespace IS_Bolnice.Servisi
         {
             bazaPregleda.ZakaziPregled(pregled);
         }
+        public void IzmeniPregled(Pregled novi, Pregled stari)
+        {
+            bazaPregleda.IzmeniPregled(novi, stari);
+        }
+
+        public void OtkaziPregled(Pregled pregled)
+        {
+            bazaPregleda.OtkaziPregled(pregled);
+        }
+        public void OdloziPregledStoPre(Pregled pomeraniPregled)
+        {
+            Pregled pregledZaOtkazivanje = new Pregled(pomeraniPregled);
+
+            double vremeOdlaganja = 10;
+            do
+            {
+                pomeraniPregled.VremePocetkaPregleda = pomeraniPregled.VremePocetkaPregleda.AddMinutes(vremeOdlaganja);
+                pomeraniPregled.VremeKrajaPregleda = pomeraniPregled.VremeKrajaPregleda.AddMinutes(vremeOdlaganja);
+                vremeOdlaganja += 10;
+            } while (!MozeDaSeZakaze(pomeraniPregled));
+
+            OtkaziPregled(pregledZaOtkazivanje);
+            ZakaziPregled(pomeraniPregled);
+        }
+
+        private bool MozeDaSeZakaze(Pregled noviPregled)
+        {
+            VremenskiInterval vremenskiIntervalNovogPregleda =
+                new VremenskiInterval(noviPregled.VremePocetkaPregleda, noviPregled.VremeKrajaPregleda);
+
+            if (!noviPregled.Lekar.TerminURadnomVremenuLekara(vremenskiIntervalNovogPregleda))
+            {
+                return false;
+            }
+            if (TerminSePreklapaKodLekara(noviPregled.Lekar.Jmbg, noviPregled))
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public List<Pregled> GetsviPregledi()
         {
             return bazaPregleda.SviPregledi();
+        }
+
+        public List<Pregled> GetSviBuduciPregledi()
+        {
+            return bazaPregleda.SviBuduciPregledi();
         }
 
         public List<Pregled> GetSviPreglediLekara(string jmbgLekara)
@@ -35,11 +82,6 @@ namespace IS_Bolnice.Servisi
             }
 
             return sviPreglediLekara;
-        }
-
-        public List<Pregled> GetSviBuduciPregledi()
-        {
-            return bazaPregleda.SviBuduciPregledi();
         }
 
         public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
@@ -80,20 +122,20 @@ namespace IS_Bolnice.Servisi
 
         public List<Pregled> SlobodniPreglediLekaraUNarednomPeriodu(Lekar lekar)
         {
-            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar);
+            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar, MINUTI_TRAJANJA_PREGLEDA, 7200);
             List<Pregled> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
             List<Pregled> slobodniTermini = SlobodniPreglediLekara(lekar, terminiURadnomVremenu);
 
             return slobodniTermini;
         }
 
-        private List<Pregled> SviPredloziSkorasnjihPregleda(Lekar lekar)
+        private List<Pregled> SviPredloziSkorasnjihPregleda(Lekar lekar, int minutiTrajanjaPregleda, int minutiIntervalaPredlaganja)
         {
             List<Pregled> sviSkorasnjiPregledi = new List<Pregled>();
             DateTime najbliziTermin = NajbliziTermin();
 
 
-            for (int i = 0; i < 7200; i += 10)
+            for (int i = 0; i < minutiIntervalaPredlaganja; i += 10)
             {
                 DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
 
@@ -101,7 +143,7 @@ namespace IS_Bolnice.Servisi
                 {
                     Lekar = lekar,
                     VremePocetkaPregleda = pocetakTermina,
-                    VremeKrajaPregleda = pocetakTermina.AddMinutes(MINUTI_TRAJANJA_PREGLEDA)
+                    VremeKrajaPregleda = pocetakTermina.AddMinutes(minutiTrajanjaPregleda)
                 };
                 sviSkorasnjiPregledi.Add(pregled);
             }
@@ -159,7 +201,7 @@ namespace IS_Bolnice.Servisi
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazaniPregled.VremePocetkaPregleda,
                     zakazaniPregled.VremeKrajaPregleda);
 
-                if (PreklapanjeTermina(prviTermin, drugiTermin))
+                if (prviTermin.DaLiSePreklapaSa(drugiTermin))
                 {
                     return true;
                 }
@@ -171,7 +213,7 @@ namespace IS_Bolnice.Servisi
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
                     zakazanaOperacija.VremeKrajaOperacije);
 
-                if (PreklapanjeTermina(prviTermin, drugiTermin))
+                if (prviTermin.DaLiSePreklapaSa(drugiTermin))
                 {
                     return true;
                 }
@@ -195,13 +237,6 @@ namespace IS_Bolnice.Servisi
             return pregledi;
         }
 
-        public bool PreklapanjeTermina(VremenskiInterval predlozen, VremenskiInterval upitan)
-        {
-            return predlozen.DaLiSePreklapaSa(upitan);
-        }
-
-
-
         public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
         {
             BazaPregleda baza = new BazaPregleda();
@@ -220,16 +255,6 @@ namespace IS_Bolnice.Servisi
             return false;
         }
 
-        public void IzmeniPregled(Pregled novi, Pregled stari)
-        {
-            bazaPregleda.IzmeniPregled(novi, stari);
-        }
-
-        public void OtkaziPregled(Pregled pregled)
-        {
-            bazaPregleda.OtkaziPregled(pregled);
-        }
-
         public Pregled GetSledeciPregledKodLekara(string jmbg)
         {
             Pregled sledeciPregled = new Pregled();
@@ -245,5 +270,101 @@ namespace IS_Bolnice.Servisi
             return sledeciPregled;
         }
 
+        public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast)
+        {
+            BazaLekara bazaLekara = new BazaLekara();
+            List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
+            List<Pregled> skorasnjiZauzetiPreglediLekara = new List<Pregled>();
+
+            foreach (Lekar lekar in sviLekariOdredjeneOblasti)
+            {
+                List<Pregled> naredniPreglediLekara = SviBuduciPreglediKojeLekarIma(lekar.Jmbg);
+                skorasnjiZauzetiPreglediLekara.AddRange(PreglediNarednihSatVremena(naredniPreglediLekara));
+                if (skorasnjiZauzetiPreglediLekara.Count() > DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA)
+                {
+                    return skorasnjiZauzetiPreglediLekara;
+                }
+            }
+            return SortiranjeTerminaPoMogucstvuOdlaganja(skorasnjiZauzetiPreglediLekara);
+        }
+
+        private List<Pregled> PreglediNarednihSatVremena(List<Pregled> pregledi)
+        {
+            List<Pregled> preglediNarednihSatVremena = new List<Pregled>();
+            DateTime trenutnoVreme = DateTime.Now;
+            DateTime vremeZaSatVremena = trenutnoVreme.AddHours(1);
+            foreach (Pregled pregled in pregledi)
+            {
+                if (pregled.VremePocetkaPregleda <= vremeZaSatVremena)
+                {
+                    preglediNarednihSatVremena.Add(pregled);
+                }
+            }
+            return preglediNarednihSatVremena;
+        }
+
+        private List<Pregled> SortiranjeTerminaPoMogucstvuOdlaganja(List<Pregled> pregledi)
+        {
+            List<int> vremenaOdlaganja = new List<int>();
+
+            foreach (Pregled pregled in pregledi)
+            {
+                Pregled odlozeniPregled = new Pregled(pregled);
+
+                int vremeOdlaganja = 10;
+                while (!MozeDaSeZakaze(odlozeniPregled))
+                {
+                    odlozeniPregled.VremePocetkaPregleda = odlozeniPregled.VremePocetkaPregleda.AddMinutes(vremeOdlaganja);
+                    odlozeniPregled.VremeKrajaPregleda = odlozeniPregled.VremeKrajaPregleda.AddMinutes(vremeOdlaganja);
+                    vremeOdlaganja += 10;
+                }
+                vremenaOdlaganja.Add(vremeOdlaganja);
+            }
+            return SortirajPregledePoVremenuOdlaganja(pregledi, vremenaOdlaganja);
+        }
+        private List<Pregled> SortirajPregledePoVremenuOdlaganja(List<Pregled> pregledi, List<int> odlaganja)
+        {
+            for (int i = 0; i < odlaganja.Count - 1; i++)
+            {
+                for (int j = 0; j < odlaganja.Count - i - 1; j++)
+                {
+                    if (odlaganja[j] > odlaganja[j + 1])
+                    {
+                        int temp = odlaganja[j];
+                        odlaganja[j] = odlaganja[j + 1];
+                        odlaganja[j + 1] = temp;
+
+                        Pregled tempPregled = pregledi[j];
+                        pregledi[j] = pregledi[j + 1];
+                        pregledi[j + 1] = tempPregled;
+                    }
+                }
+            }
+            return pregledi;
+        }
+
+        public List<Pregled> SlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaPregleda)
+        {
+            BazaLekara bazaLekara = new BazaLekara();
+
+            foreach (Lekar lekar in bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
+            {
+                List<Pregled> slobodniTerminiLekara = SlobodniHitniPreglediLekaraSaTrajanjem(lekar, minutiTrajanjaPregleda);
+                if (slobodniTerminiLekara.Count() > 0)
+                {
+                    return slobodniTerminiLekara;
+                }
+            }
+            return null;
+        }
+
+        private List<Pregled> SlobodniHitniPreglediLekaraSaTrajanjem(Lekar lekar, int minutiTrajanjePregleda)
+        {
+            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar, minutiTrajanjePregleda, 60);
+            List<Pregled> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+            List<Pregled> slobodniTermini = SlobodniPreglediLekara(lekar, terminiURadnomVremenu);
+
+            return slobodniTermini;
+        }
     }
 }
