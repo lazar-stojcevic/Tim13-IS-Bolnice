@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Servisi
@@ -90,6 +91,19 @@ namespace IS_Bolnice.Servisi
             }
 
             return sviPreglediLekara;
+        }
+
+        public List<Pregled> GetSviBuduciPreglediSobe(string idSobe)
+        {
+            List<Pregled> preglediUSobi = new List<Pregled>();
+            foreach (Pregled pregled in GetSviBuduciPregledi())
+            {
+                if (pregled.Lekar.Ordinacija.Id.Equals(idSobe))
+                {
+                    preglediUSobi.Add(pregled);
+                }
+            }
+            return preglediUSobi;
         }
 
         public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
@@ -211,7 +225,7 @@ namespace IS_Bolnice.Servisi
 
             }
 
-            foreach (Operacija zakazanaOperacija in new BazaOperacija().SveSledeceOperacijeDatogLekara(jmbgLekara))
+            foreach (Operacija zakazanaOperacija in new OperacijaKontroler().GetSveSledeceOperacijeLekara(jmbgLekara))
             {
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
                     zakazanaOperacija.VremeKrajaOperacije);

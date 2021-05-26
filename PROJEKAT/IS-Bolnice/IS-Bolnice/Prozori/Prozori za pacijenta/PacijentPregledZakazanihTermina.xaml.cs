@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori
 {
@@ -20,12 +21,13 @@ namespace IS_Bolnice.Prozori
         private string jmbgPac;
 
         BazaPregleda bp = new BazaPregleda();
+        private PregledKontroler pregledKontroler = new PregledKontroler();
         public PacijentPregledZakazanihTermina(string jmbgPacijenta)
         {
             InitializeComponent();
             jmbgPac = jmbgPacijenta;
 
-            lvPregledi.ItemsSource = bp.SviBuduciPreglediKojePacijentIma(jmbgPacijenta);
+            lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(jmbgPacijenta);
         }
 
         private void obrisiTermin_Click(object sender, RoutedEventArgs e)
@@ -39,7 +41,7 @@ namespace IS_Bolnice.Prozori
             p.Pacijent = pac;
 
             bp.OtkaziPregled(p);
-            lvPregledi.ItemsSource = bp.SviBuduciPreglediKojePacijentIma(jmbgPac);
+            lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(jmbgPac);
         }
 
         private void izadji_Click(object sender, RoutedEventArgs e)

@@ -39,7 +39,7 @@ namespace IS_Bolnice.Servisi
             return operacijePacijenta;
         }
 
-        public List<Operacija> GetSveSledeceOperacijeSobe(string idSale)
+        public List<Operacija> GetSveSledeceOperacijeSale(string idSale)
         {
             List<Operacija> operacijeSale = new List<Operacija>();
             foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
@@ -65,6 +65,7 @@ namespace IS_Bolnice.Servisi
             }
             return ret;
         }
+
         public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
         {
             List<Operacija> ret = new List<Operacija>();
@@ -89,7 +90,7 @@ namespace IS_Bolnice.Servisi
         {
             List<Operacija> sviSkorasnjiTermini = SviPredloziTerminaOperacije(lekar, trajanjePregleda, idSale);
             List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
-            List<Operacija> slobodniTermini = SlobodneOperacijeLekara(lekar, terminiURadnomVremenu, idSale);
+            List<Operacija> slobodniTermini = SlobodneOperacijeLekara(terminiURadnomVremenu);
 
             return slobodniTermini;
         }
@@ -164,13 +165,12 @@ namespace IS_Bolnice.Servisi
             return operacijeURadnomVremenu;
         }
 
-        // TODO: VIDETI DA LI JE UOPSTE POTREBAN idSale
-        private List<Operacija> SlobodneOperacijeLekara(Lekar lekar, List<Operacija> operacije, string idSale)
+        private List<Operacija> SlobodneOperacijeLekara(List<Operacija> operacije)
         {
             List<Operacija> slobodniTermini = new List<Operacija>();
             foreach (Operacija operacija in operacije)
             {
-                if (!TerminSePreklapaKodLekaraISale(lekar.Jmbg, operacija, idSale))
+                if (!TerminSePreklapaKodLekaraISale(operacija))
                 {
                     slobodniTermini.Add(operacija);
                 }
@@ -178,27 +178,14 @@ namespace IS_Bolnice.Servisi
             return slobodniTermini;
         }
 
-        private List<Operacija> SlobodneOperacijeLekara2(Lekar lekar, List<Operacija> operacije)
-        {
-            List<Operacija> slobodniTermini = new List<Operacija>();
-            foreach (Operacija operacija in operacije)
-            {
-                if (!TerminSePreklapaKodLekaraISale(lekar.Jmbg, operacija, operacija.Soba.Id))
-                {
-                    slobodniTermini.Add(operacija);
-                }
-            }
-            return slobodniTermini;
-        }
-
-        private bool TerminSePreklapaKodLekaraISale(string jmbgLekara, Operacija predlozenaOperacija, string idSale)
+        private bool TerminSePreklapaKodLekaraISale(Operacija predlozenaOperacija)
         {
             BazaPregleda bazaPregleda = new BazaPregleda();
 
             VremenskiInterval drugiTermin = new VremenskiInterval(predlozenaOperacija.VremePocetkaOperacije,
                 predlozenaOperacija.VremeKrajaOperacije);
 
-            foreach (Pregled zakazaniPregled in bazaPregleda.SviBuduciPreglediKojeLekarIma(jmbgLekara))
+            foreach (Pregled zakazaniPregled in bazaPregleda.SviBuduciPreglediKojeLekarIma(predlozenaOperacija.Lekar.Jmbg))
             {
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazaniPregled.VremePocetkaPregleda,
                     zakazaniPregled.VremeKrajaPregleda);
@@ -209,7 +196,7 @@ namespace IS_Bolnice.Servisi
                 }
             }
 
-            foreach (Operacija zakazanaOperacija in GetSveSledeceOperacijeLekara(jmbgLekara))
+            foreach (Operacija zakazanaOperacija in GetSveSledeceOperacijeLekara(predlozenaOperacija.Lekar.Jmbg))
             {
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
                     zakazanaOperacija.VremeKrajaOperacije);
@@ -221,7 +208,7 @@ namespace IS_Bolnice.Servisi
                
             }
 
-            foreach (Operacija zakazanaOperacija in SveOperacijeUSali(idSale))
+            foreach (Operacija zakazanaOperacija in GetSveSledeceOperacijeSale(predlozenaOperacija.Soba.Id))
             {
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazanaOperacija.VremePocetkaOperacije,
                     zakazanaOperacija.VremeKrajaOperacije);
@@ -235,19 +222,6 @@ namespace IS_Bolnice.Servisi
             return false;
         }
         
-        public List<Operacija> SveOperacijeUSali(string idSale)
-        {
-            List<Operacija> operacijeUSali = new List<Operacija>();
-            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
-            {
-                if (operacija.Soba.Equals(idSale))
-                {
-                    operacijeUSali.Add(operacija);
-                }
-            }
-
-            return operacijeUSali;
-        }
         
         public bool PreklapanjeTermina(VremenskiInterval predlozen, VremenskiInterval upitan)
         {
@@ -294,7 +268,7 @@ namespace IS_Bolnice.Servisi
                 return false;
             }
 
-            if (TerminSePreklapaKodLekaraISale(operacija.Lekar.Jmbg, operacija, operacija.Soba.Id))
+            if (TerminSePreklapaKodLekaraISale(operacija))
             {
                 return false;
             }
@@ -411,7 +385,7 @@ namespace IS_Bolnice.Servisi
         {
             List<Operacija> sviSkorasnjiTermini = SviPredloziHitnihOperacija(lekar, minutiTrajanjaOperacije);
             List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
-            List<Operacija> slobodniTermini = SlobodneOperacijeLekara2(lekar, terminiURadnomVremenu);
+            List<Operacija> slobodniTermini = SlobodneOperacijeLekara(terminiURadnomVremenu);
 
             return slobodniTermini;
         }

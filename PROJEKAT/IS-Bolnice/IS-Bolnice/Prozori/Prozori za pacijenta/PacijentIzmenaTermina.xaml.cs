@@ -104,7 +104,7 @@ namespace IS_Bolnice.Prozori
                     string message = "Uspešno ste zakazali pregled";
                     MessageBox.Show(message);
 
-                    listView.ItemsSource = bazaPregleda.SviBuduciPreglediKojePacijentIma(stariPregled.Pacijent.Jmbg);
+                    listView.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(stariPregled.Pacijent.Jmbg);
 
                     this.Close();
                 }

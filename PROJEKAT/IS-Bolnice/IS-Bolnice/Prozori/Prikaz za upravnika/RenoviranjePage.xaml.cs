@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -53,9 +54,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void RenoviranjeOperacioneSale() {
             BazaOperacija bazaOperacija = new BazaOperacija();
+            OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
             BazaRenovacija bazaRenovacija = new BazaRenovacija();
             Renovacija renovacija = MakeRenovacija();
-            foreach (Operacija operacija in bazaOperacija.SveOperacijeUOdabranojSali(selektovanaSoba.Id))
+            foreach (Operacija operacija in operacijaKontroler.GetSveSledeceOperacijeSale(selektovanaSoba.Id))
             {
                 if (operacija.VremePocetkaOperacije > renovacija.DatumPocetka && operacija.VremeKrajaOperacije < renovacija.DatumKraja)
                 {
@@ -88,12 +90,14 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             }
         }
 
-        private void RenoviranjeProstorije() {
+        private void RenoviranjeProstorije()
+        {
+            PregledKontroler pregledKontroler = new PregledKontroler();
             BazaPregleda bazaPregleda = new BazaPregleda();
             BazaRenovacija bazaRenovacija = new BazaRenovacija();
             Renovacija renovacija = MakeRenovacija();
             bool postojiZakazanTermin = false;
-            foreach (Pregled pregled in bazaPregleda.SviPreglediUOdabranojSobi(selektovanaSoba.Id))
+            foreach (Pregled pregled in pregledKontroler.GetSviBuduciPreglediSobe(selektovanaSoba.Id))
             {
                 if (pregled.VremePocetkaPregleda > renovacija.DatumPocetka && pregled.VremePocetkaPregleda < renovacija.DatumKraja)
                 {

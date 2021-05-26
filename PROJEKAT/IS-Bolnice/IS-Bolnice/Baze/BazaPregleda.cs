@@ -19,20 +19,6 @@ public class BazaPregleda
     private BazaIzmena bazaIzmena = new BazaIzmena();
     private BazaLekara bazaLekara = new BazaLekara();
 
-
-    public List<Pregled> SviPreglediUOdabranojSobi(string idSobe)
-    {
-        List<Pregled> preglediUSobi = new List<Pregled>();
-        foreach (Pregled pregled in SviBuduciPregledi())
-        {
-            if (pregled.Lekar.Ordinacija.Id.Equals(idSobe))
-            {
-                preglediUSobi.Add(pregled);
-            }
-        }
-        return preglediUSobi;
-    }
-
     //PREDLAZE TERMINE ZA IZMENU, SREDITI PROSLEDJENOG LEKARA DA IMA TACNO RADNO VREME
     public List<Pregled> SlobodniTerminiZaIzmenu(Lekar l, DateTime datum)
     {
@@ -93,24 +79,6 @@ public class BazaPregleda
         }
 
         return validni;
-    }
-
-    // TODO OBRISATI OVO JER VEC POSTOJI U SERVISU
-    public List<Pregled> SviBuduciPreglediKojePacijentIma(string jmbgPacijenta)
-    {
-        List<Pregled> pregledi = new List<Pregled>();
-
-        foreach (Pregled pregled in SviBuduciPregledi())
-        {
-            if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta))
-            {
-                pregledi.Add(pregled);
-            }
-        }
-
-        pregledi.Sort((x, y) => x.VremePocetkaPregleda.CompareTo(y.VremePocetkaPregleda));
-
-        return pregledi;
     }
 
     public List<Pregled> SviBuduciPreglediKojeLekarIma(string jmbgLekara)

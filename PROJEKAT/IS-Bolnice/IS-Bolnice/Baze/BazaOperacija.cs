@@ -13,35 +13,6 @@ public class BazaOperacija
         "M/d/yyyy h:mm:ss tt",
         "M-d-yyyy h:mm:ss tt"
     };
-    
-    public List<Operacija> SveOperacijeUOdabranojSali(string idSale)
-    {
-        List<Operacija> sveOperacije = SveSledeceOperacije();
-        List<Operacija> operacijeUOdabranojSali = new List<Operacija>();
-        foreach (Operacija operacija in sveOperacije)
-        {
-            if (operacija.Soba.Id.Equals(idSale))
-            {
-                operacijeUOdabranojSali.Add(operacija);
-            }
-        }
-        return operacijeUOdabranojSali;
-    }
-
-
-    public List<Operacija> SveSledeceOperacijeDatogLekara(string jmbgLekara)
-    {
-        List<Operacija> povratnaVrednost = new List<Operacija>();
-        List<Operacija> sveNaredneOperacijeSvihLekara = SveSledeceOperacije();
-        foreach (Operacija iterOperacija in sveNaredneOperacijeSvihLekara)
-        {
-            if (iterOperacija.Lekar.Jmbg.Equals(jmbgLekara)){
-                povratnaVrednost.Add(iterOperacija);
-            }
-        }
-        return povratnaVrednost;
-    }
-
 
     public List<Operacija> SveOperacije()
     {

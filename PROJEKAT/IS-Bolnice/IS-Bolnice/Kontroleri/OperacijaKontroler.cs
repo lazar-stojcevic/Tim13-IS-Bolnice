@@ -35,9 +35,9 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.GetSveSledeveOperacijePacijenta(jmbgPacijenta);
         }
 
-        public List<Operacija> GetSveSledeceOperacijeSobe(string idSale)
+        public List<Operacija> GetSveSledeceOperacijeSale(string idSale)
         {
-            return operacijaServis.GetSveSledeceOperacijeSobe(idSale);
+            return operacijaServis.GetSveSledeceOperacijeSale(idSale);
         }
 
         public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)

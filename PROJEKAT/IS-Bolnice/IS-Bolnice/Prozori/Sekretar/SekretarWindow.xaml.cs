@@ -405,7 +405,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (selektovanaSoba.Tip == RoomType.operacionaSala)
             {
                 OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
-                dgOperacijeSelektovaneSobe.ItemsSource = operacijaKontroler.GetSveSledeceOperacijeSobe(selektovanaSoba.Id);
+                dgOperacijeSelektovaneSobe.ItemsSource = operacijaKontroler.GetSveSledeceOperacijeSale(selektovanaSoba.Id);
                 labelImeSelektovaneSobe2.Content = selektovanaSoba.Id;
                 dgOperacijeSelektovaneSobe.Visibility = Visibility.Visible;
                 labelZaTermineSobe.Visibility = Visibility.Visible;
