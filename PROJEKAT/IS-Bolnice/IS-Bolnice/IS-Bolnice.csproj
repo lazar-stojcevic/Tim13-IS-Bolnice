@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Baze\BazaBelezaka.cs" />
     <Compile Include="Baze\BazaBolnica.cs" />
     <Compile Include="Baze\BazaHospitalizacija.cs" />
     <Compile Include="Baze\BazaIzmena.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Baze\BazaSadrzaja.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
+    <Compile Include="Kontroleri\BelezkeKontroler.cs" />
     <Compile Include="Kontroleri\BolnicaKontroler.cs" />
     <Compile Include="Kontroleri\HospitalizacijaKontroler.cs" />
     <Compile Include="Kontroleri\IzvestajKontroler.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
+    <Compile Include="Model\Belezka.cs" />
     <Compile Include="Model\Change.cs" />
     <Compile Include="Model\Hospitalizacija.cs" />
     <Compile Include="Model\Izvestaj.cs" />
@@ -288,6 +291,15 @@
     <Compile Include="Prozori\Prozori za pacijenta\FormaZaPopunjavanjeAnkete.xaml.cs">
       <DependentUpon>FormaZaPopunjavanjeAnkete.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prozori za pacijenta\IzmenaBelezke.xaml.cs">
+      <DependentUpon>IzmenaBelezke.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prozori za pacijenta\KreiranjeBelezke.xaml.cs">
+      <DependentUpon>KreiranjeBelezke.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prozori za pacijenta\Obavestenje.xaml.cs">
+      <DependentUpon>Obavestenje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\DodavanjeGuestNalogaWindow.xaml.cs">
       <DependentUpon>DodavanjeGuestNalogaWindow.xaml</DependentUpon>
     </Compile>
@@ -373,6 +385,7 @@
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
+    <Compile Include="Servisi\BelezkeServis.cs" />
     <Compile Include="Servisi\BolnicaServis.cs" />
     <Compile Include="Servisi\HospitalizacijaServis.cs" />
     <Compile Include="Servisi\IzvestajServis.cs" />
@@ -577,6 +590,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prozori za pacijenta\FormaZaPopunjavanjeAnkete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prozori za pacijenta\IzmenaBelezke.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prozori za pacijenta\KreiranjeBelezke.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prozori za pacijenta\Obavestenje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -922,6 +947,8 @@
   <ItemGroup>
     <Resource Include="Slike\hospitalizacija.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Datoteke\belezke.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

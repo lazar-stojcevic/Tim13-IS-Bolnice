@@ -52,5 +52,12 @@ namespace IS_Bolnice
             FormaZaPopunjavanjeAnkete fzpa = new FormaZaPopunjavanjeAnkete(items[2]);
             fzpa.ShowDialog();
         }
+
+        private void obavestenjaBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string[] items = imeKorisnika.Text.Split();
+            Obavestenje o = new Obavestenje(items[2]);
+            o.ShowDialog();
+        }
     }
 }
