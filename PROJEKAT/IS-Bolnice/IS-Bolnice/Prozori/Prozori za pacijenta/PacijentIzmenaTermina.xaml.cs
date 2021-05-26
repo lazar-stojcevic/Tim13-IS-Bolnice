@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori
 {
@@ -23,6 +24,7 @@ namespace IS_Bolnice.Prozori
         private List<Pregled> pregledi = new List<Pregled>();
         private Pregled stariPregled = new Pregled();
 
+        private PregledKontroler pregledKontroler = new PregledKontroler();
         private BazaPregleda bazaPregleda = new BazaPregleda();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
@@ -90,7 +92,7 @@ namespace IS_Bolnice.Prozori
             }
             else
             {
-                if (bazaPregleda.PacijentImaZakazanPregled(noviPregled))
+                if (pregledKontroler.PacijentImaZakazanPregled(noviPregled))
                 {
                     string message = "Već imate zakazan pregled u tom terminu";
                     MessageBox.Show(message);

@@ -25,5 +25,10 @@ namespace IS_Bolnice.Kontroleri
         {
             return lekarServis.GetSviLekariSpecijalisti();
         }
+
+        public Lekar GetLekar(string jmbgLekara)
+        {
+            return lekarServis.GetLekar(jmbgLekara);
+        }
     }
 }

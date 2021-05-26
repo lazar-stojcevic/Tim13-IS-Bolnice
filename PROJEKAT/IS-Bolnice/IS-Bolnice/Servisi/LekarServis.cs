@@ -41,5 +41,10 @@ namespace IS_Bolnice.Servisi
         {
             return bazaLekara.SviLekari();
         }
+
+        public Lekar GetLekar(string jmbgLekara)
+        {
+            return bazaLekara.DobaviLekara(jmbgLekara);
+        }
     }
 }

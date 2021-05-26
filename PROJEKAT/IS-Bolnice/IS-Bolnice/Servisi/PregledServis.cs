@@ -9,14 +9,22 @@ namespace IS_Bolnice.Servisi
 {
     class PregledServis
     {
-        private static int MINUTI_TRAJANJA_PREGLEDA = 45;
-        private static int DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA = 6;
+        private readonly int MINUTI_TRAJANJA_PREGLEDA = 45;
+        private readonly int DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA = 6;
+        private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_PREGLEDA_LEKARU = 7200;
+        private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_HITNIH_PREGLEDA = 60;
 
         private BazaPregleda bazaPregleda = new BazaPregleda();
 
-        public void ZakaziPregled(Pregled pregled)
+        public bool ZakaziPregled(Pregled pregled)
         {
-            bazaPregleda.ZakaziPregled(pregled);
+            if (MozeDaSeZakaze(pregled))
+            {
+                bazaPregleda.ZakaziPregled(pregled);
+                return true;
+            }
+
+            return false;
         }
         public void IzmeniPregled(Pregled novi, Pregled stari)
         {
@@ -115,14 +123,9 @@ namespace IS_Bolnice.Servisi
             return sviPregledi;
         }
 
-        public List<Pregled> GetDostupniTerminiPregledaLekara(Lekar lekar)
+        public List<Pregled> GetDostupniTerminiPregledaLekaraUNarednomPeriodu(Lekar lekar)
         {
-            return SlobodniPreglediLekaraUNarednomPeriodu(lekar);
-        }
-
-        public List<Pregled> SlobodniPreglediLekaraUNarednomPeriodu(Lekar lekar)
-        {
-            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar, MINUTI_TRAJANJA_PREGLEDA, 7200);
+            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar, MINUTI_TRAJANJA_PREGLEDA, MINUTI_INTERVALA_ZA_PREDLAGANJE_PREGLEDA_LEKARU);
             List<Pregled> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
             List<Pregled> slobodniTermini = SlobodniPreglediLekara(lekar, terminiURadnomVremenu);
 
@@ -360,11 +363,30 @@ namespace IS_Bolnice.Servisi
 
         private List<Pregled> SlobodniHitniPreglediLekaraSaTrajanjem(Lekar lekar, int minutiTrajanjePregleda)
         {
-            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar, minutiTrajanjePregleda, 60);
+            List<Pregled> sviSkorasnjiTermini = SviPredloziSkorasnjihPregleda(lekar, minutiTrajanjePregleda, MINUTI_INTERVALA_ZA_PREDLAGANJE_HITNIH_PREGLEDA);
             List<Pregled> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
             List<Pregled> slobodniTermini = SlobodniPreglediLekara(lekar, terminiURadnomVremenu);
 
             return slobodniTermini;
+        }
+
+        //PROVERA DA LI PACIJENT VEC IMA ZAKAZANI PREGLED U TOM TERMINU
+        public bool PacijentImaZakazanPregled(Pregled pregledZaProveru)
+        {
+            VremenskiInterval intervalPregledaZaProveru =
+                new VremenskiInterval(pregledZaProveru.VremePocetkaPregleda, pregledZaProveru.VremeKrajaPregleda);
+
+            foreach (Pregled pregled in GetSviBuduciPreglediPacijenta(pregledZaProveru.Pacijent.Jmbg))
+            {
+                VremenskiInterval intervalPregleda =
+                    new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);
+                if (intervalPregledaZaProveru.DaLiSePreklapaSa(intervalPregleda))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

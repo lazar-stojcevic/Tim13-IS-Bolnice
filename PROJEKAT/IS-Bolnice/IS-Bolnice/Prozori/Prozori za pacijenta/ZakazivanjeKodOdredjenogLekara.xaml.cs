@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {
@@ -22,6 +23,8 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         private List<Lekar> lekari = new List<Lekar>();
         private List<Pregled> pregledi = new List<Pregled>();
 
+        private PregledKontroler pregledKontroler = new PregledKontroler();
+        private LekarKontroler lekarKontroler = new LekarKontroler();
         private BazaPregleda bazaPregleda = new BazaPregleda();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
@@ -56,7 +59,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             }
             else
             {
-                if (bazaPregleda.PacijentImaZakazanPregled(pregled))
+                if (pregledKontroler.PacijentImaZakazanPregled(pregled))
                 {
                     string message = "Već imate zakazan pregled u tom terminu";
                     MessageBox.Show(message);
@@ -90,7 +93,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
             string jmbgLekara = lekari.ElementAt(lekariList.SelectedIndex).Jmbg;
 
-            pregledi = bazaPregleda.PonudjeniSlobodniPreglediLekara(jmbgLekara);
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekarKontroler.GetLekar(jmbgLekara));
 
             terminiList.Items.Clear();
 

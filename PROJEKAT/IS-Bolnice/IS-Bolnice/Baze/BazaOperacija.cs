@@ -160,18 +160,4 @@ public class BazaOperacija
         OtkaziOperaciju(staraOperacija);
         ZakaziOperaciju(novaOperacija);
    }
-
-    public List<Operacija> SveSledeceOperacijeZaLekara(string jmbgLekara)
-    {
-        List<Operacija> sledeceOperacije = new List<Operacija>();
-
-        foreach (Operacija operacija in SveSledeceOperacije())
-        {
-            if (operacija.Lekar.Jmbg.Equals(jmbgLekara) && operacija.VremeKrajaOperacije > DateTime.Now)
-            {
-                sledeceOperacije.Add(operacija);
-            }
-        }
-        return sledeceOperacije;
-    }
 }

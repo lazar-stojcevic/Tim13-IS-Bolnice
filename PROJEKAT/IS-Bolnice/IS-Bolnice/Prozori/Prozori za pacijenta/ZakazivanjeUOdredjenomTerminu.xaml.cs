@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {
@@ -19,6 +20,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
     {
         private string jmbgPac;
 
+        private PregledKontroler pregledKontroler = new PregledKontroler();
         private BazaPregleda bazaPregleda = new BazaPregleda();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
@@ -130,14 +132,14 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 }
                 else
                 {
-                    if (bazaPregleda.PacijentImaZakazanPregled(pregled))
+                    if (pregledKontroler.PacijentImaZakazanPregled(pregled))
                     {
                         string message = "Već imate zakazani pregled u tom terminu";
                         MessageBox.Show(message);
                     }
                     else
                     {
-                        if (bazaPregleda.ZakazivanjePregledaUTerminu(pregled))
+                        if (pregledKontroler.ZakaziPregled(pregled))
                         {
                             string message = "Uspešno ste zakazali pregled";
                             MessageBox.Show(message);

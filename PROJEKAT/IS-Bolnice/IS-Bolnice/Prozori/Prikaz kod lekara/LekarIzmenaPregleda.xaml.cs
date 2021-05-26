@@ -89,7 +89,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             Lekar lekar = (Lekar)listaLekara.SelectedItem;
 
-            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekara(lekar);
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
             terminiList.Items.Clear();
 
             foreach (Pregled p in pregledi)

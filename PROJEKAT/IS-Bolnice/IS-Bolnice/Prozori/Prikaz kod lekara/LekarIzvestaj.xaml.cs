@@ -112,10 +112,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private static string GenerisanjeTekstaJedneTerapije(Terapija ter)
         {
-            return ter.Lek.Sifra + "$$" + ter.Lek.Ime + "$$" + ter.Lek.Opis + "$$" +
-                   ter.RazlikaNaKolikoSeDanaUzimaLek + "$$"
-                   + ter.UcestanostKonzumiranja + "$$" + ter.VremePocetka + "$$" +
-                   ter.VremeKraja + "$$" + ter.Opis + "$$$";
+            return ter.Lek.Sifra + "$" + ter.Lek.Ime + "$" + ter.Lek.Opis + "$" +
+                   ter.RazlikaNaKolikoSeDanaUzimaLek + "$"
+                   + ter.UcestanostKonzumiranja + "$" + ter.VremePocetka + "$" +
+                   ter.VremeKraja + "$" + ter.Opis + "&";
         }
 
         private void KreirajReceptZaStampanje(string imeBolnice, StringFormat stringFormat, string imePacijenta, string datumRodjenjaPacijenta,

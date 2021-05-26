@@ -41,9 +41,9 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.GetSledeciPregledKodLekara(jmbg);
         }
 
-        public List<Pregled> GetDostupniTerminiPregledaLekara(Lekar lekar)
+        public List<Pregled> GetDostupniTerminiPregledaLekaraUNarednomPeriodu(Lekar lekar)
         {
-            return pregledServis.GetDostupniTerminiPregledaLekara(lekar);
+            return pregledServis.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
         }
 
         public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
@@ -61,9 +61,9 @@ namespace IS_Bolnice.Kontroleri
             pregledServis.OdloziPregledStoPre(pregledZaOdlaganje);
         }
 
-        public void ZakaziPregled(Pregled pregled)
+        public bool ZakaziPregled(Pregled pregled)
         {
-            pregledServis.ZakaziPregled(pregled);
+            return pregledServis.ZakaziPregled(pregled);
         }
 
         public void IzmeniPregled(Pregled novi, Pregled stari)
@@ -81,5 +81,9 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
         }
 
+        public bool PacijentImaZakazanPregled(Pregled pregledZaProveru)
+        {
+            return pregledServis.PacijentImaZakazanPregled(pregledZaProveru);
+        }
     }
 }
