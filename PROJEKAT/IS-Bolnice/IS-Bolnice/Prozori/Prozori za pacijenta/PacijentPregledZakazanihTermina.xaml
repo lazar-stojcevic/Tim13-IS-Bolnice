@@ -15,19 +15,22 @@
                         <GridViewColumn Header="Ime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Ime}" />
                         <GridViewColumn Header="Prezime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Prezime}" />
                         <GridViewColumn Header="Pocetak pregleda" Width="150" DisplayMemberBinding="{Binding VremePocetkaPregleda}"/>
+                        <GridViewColumn Header="Ordinacija" Width="150"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
-        <Grid Height="100" Margin="20">
+        <Grid Height="100" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="obrisiTermin" Margin="10" Content="Obrisi termin" FontSize="20" Click="obrisiTermin_Click" IsEnabled="False"/>
-            <Button Grid.Column="1" x:Name="izmeniTermin" Margin="10" Content="Izmeni termin" FontSize="20" Click="izmeniTermin_Click" IsEnabled="False"/>
-            <Button Grid.Column="2" x:Name="izadji" Margin="10" Content="Izadji iz prikaza" FontSize="20" Click="izadji_Click"/>
+            <Button Grid.Column="0" x:Name="obrisiTermin" Margin="5" Content="Obriši termin" FontSize="20" Click="obrisiTermin_Click" IsEnabled="False"/>
+            <Button Grid.Column="1" x:Name="izmeniTermin" Margin="5" Content="Izmeni termin" FontSize="20" Click="izmeniTermin_Click" IsEnabled="False"/>
+            <Button Grid.Column="3" x:Name="izadji" Margin="5" Content="Izađi iz prikaza" FontSize="20" Click="izadji_Click"/>
+            <Button Grid.Column="2" x:Name="Izvestaj" Margin="5" Content="Izveštaji" FontSize="20" Click="Izvestaj_Click"/>
         </Grid>
     </StackPanel>
 </Window>

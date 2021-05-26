@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Prozori.Prozori_za_pacijenta;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,6 +68,12 @@ namespace IS_Bolnice.Prozori
                 obrisiTermin.IsEnabled = true;
                 izmeniTermin.IsEnabled = true;
             }
+        }
+
+        private void Izvestaj_Click(object sender, RoutedEventArgs e)
+        {
+            PrikazIzvestaja pi = new PrikazIzvestaja(jmbgPac);
+            pi.ShowDialog();
         }
     }
 }

@@ -300,6 +300,9 @@
     <Compile Include="Prozori\Prozori za pacijenta\Obavestenje.xaml.cs">
       <DependentUpon>Obavestenje.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prozori za pacijenta\PrikazIzvestaja.xaml.cs">
+      <DependentUpon>PrikazIzvestaja.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\DodavanjeGuestNalogaWindow.xaml.cs">
       <DependentUpon>DodavanjeGuestNalogaWindow.xaml</DependentUpon>
     </Compile>
@@ -602,6 +605,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prozori za pacijenta\Obavestenje.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prozori za pacijenta\PrikazIzvestaja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -949,6 +956,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\belezke.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Datoteke\izvestaji.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

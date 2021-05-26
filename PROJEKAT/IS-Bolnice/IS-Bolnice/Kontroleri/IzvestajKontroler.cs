@@ -15,5 +15,10 @@ namespace IS_Bolnice.Kontroleri
         {
             izvestajServis.KreirajIzvestaj(textIzvestaja);
         }
+
+        public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)
+        {
+            return izvestajServis.SviIzvestajiPacijenta(jmbgPacijenta);
+        }
     }
 }

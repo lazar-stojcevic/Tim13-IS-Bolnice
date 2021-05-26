@@ -1,8 +1,3 @@
-// File:    Terapija.cs
-// Author:  Matija
-// Created: 31 March, 2021 16:32:11
-// Purpose: Definition of Class Terapija
-
 using System;
 using System.ComponentModel;
 
