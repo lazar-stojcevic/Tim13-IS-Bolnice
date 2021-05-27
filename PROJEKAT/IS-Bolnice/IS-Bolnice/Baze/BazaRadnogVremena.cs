@@ -37,7 +37,8 @@ namespace IS_Bolnice.Baze
                     StandardnoRadnoVreme = NapraviVremenskiInterval(delovi[1]),
                     VanrednaRadnaVremena = NapraviVanrednaRadnaVremena(delovi[2]),
                     SlobodniDani = NapraviSlobodneDane(delovi[3]),
-                    SlobodniDaniUNedelji = NapraviSlobodneDaneUNedelji(delovi[4])
+                    SlobodniDaniUNedelji = NapraviSlobodneDaneUNedelji(delovi[4]),
+                    PreostaliSlobodniDaniUGodini = Int32.Parse(delovi[5])
                 };
                 radnaVremena.Add(radnoVremeLekara);
             }
@@ -148,6 +149,10 @@ namespace IS_Bolnice.Baze
                 radnoVremePisanje += slobodanDanUNedelji.ToString() + ",";
             }
             radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
+            radnoVremePisanje += "#";
+
+            // upisivanje preostalih slobodnih dana u godini
+            radnoVremePisanje += radnoVreme.PreostaliSlobodniDaniUGodini.ToString();
 
             return radnoVremePisanje;
         }

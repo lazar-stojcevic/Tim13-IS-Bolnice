@@ -33,7 +33,12 @@
         </DataGrid>
 
         <Rectangle Fill="#FFF4F4F5"  Stroke="Black" Grid.Row="3" Grid.Column="1"/>
-        <Label Content="Kreiraj godišnji odmor:" FontWeight="Bold" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Height="25" Margin="0.2,0.4,0.4,0"/>
+        <Label Content="Kreiraj godišnji odmor:" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Height="25" Margin="0.2,0.4,0.4,0"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Label Content="Preostalo " Height="25"/>
+            <Label x:Name="labelPreostaliDani"></Label>
+            <Label Content=" dana"></Label>
+        </StackPanel>
         <Label Content="Izaberite datum početka:" Grid.Column="1" HorizontalAlignment="Left" Margin="10.2,37.6,0,0" Grid.Row="3" VerticalAlignment="Top"/>
         <DatePicker x:Name="datePicker_pocetak" BorderThickness="5" VerticalAlignment="Center" SelectedDate="{x:Static System:DateTime.Now}" Grid.Row="3" Grid.Column="1" Margin="158.2,34.6,10.4,110.6" Height="30" Width="180"/>
         <Label Content="Izaberite poslednji dan:" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Margin="10.2,0,0,56.6" Height="26" Width="133"/>

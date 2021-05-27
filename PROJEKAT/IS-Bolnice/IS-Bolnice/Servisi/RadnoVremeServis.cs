@@ -16,5 +16,81 @@ namespace IS_Bolnice.Servisi
         {
             bazaRadnogVremena.IzmeniRadnoVreme(radnoVreme);
         }
+
+        // ne racunaju se dani u nedelji koji su mu neradni
+        public int PreracunajBrojIskoriscenihSlobodnihDanaLekara(string jmbgLekara, List<DateTime> noviSlobodniDani)
+        {
+            RadnoVremeLekara radnoVremeLekara = bazaRadnogVremena.RadnoVremeOdredjenogLekara(jmbgLekara);
+
+            int iskorisceniSlobodniDani = 0;
+            foreach (var dan in noviSlobodniDani)
+            {
+                if (!radnoVremeLekara.SlobodniDaniUNedelji.Contains(dan.DayOfWeek))
+                {
+                    iskorisceniSlobodniDani += 1;
+                }
+            }
+
+            return iskorisceniSlobodniDani;
+        }
+
+        public bool PreklapanjeIntervalaGodisnjegOdmoraLekara(List<DateTime> potencijalniSlobodniDani, string jmbgLekara)
+        {
+            foreach (var slobodanDan in bazaRadnogVremena.RadnoVremeOdredjenogLekara(jmbgLekara).SlobodniDani)
+            {
+                foreach (var pot in potencijalniSlobodniDani)
+                {
+                    if (pot.Day == slobodanDan.Day)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool PreklapanjeIntervalaGodisnjegOdmoraSaObavezamaLekara(VremenskiInterval intervalGodisnjegOdmora,
+            string jmbgLekara)
+        {
+            if (PreklapanjeIntervalaSaPregledimaLekara(intervalGodisnjegOdmora, jmbgLekara)) return true;
+
+            if (PreklapanjeIntervalaSaOperacijamaLekara(intervalGodisnjegOdmora, jmbgLekara)) return true;
+
+            return false;
+        }
+
+        private bool PreklapanjeIntervalaSaOperacijamaLekara(VremenskiInterval intervalGodisnjegOdmora,
+            string jmbgLekara)
+        {
+            OperacijaServis operacijaServis = new OperacijaServis();
+            foreach (var operacija in operacijaServis.GetSveSledeceOperacijeLekara(jmbgLekara))
+            {
+                VremenskiInterval intervalOperacije =
+                    new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
+                if (intervalGodisnjegOdmora.DaLiSePreklapaSa(intervalOperacije))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool PreklapanjeIntervalaSaPregledimaLekara(VremenskiInterval intervalGodisnjegOdmora, string jmbgLekara)
+        {
+            PregledServis pregledServis = new PregledServis();
+            foreach (var pregled in pregledServis.SviBuduciPreglediKojeLekarIma(jmbgLekara))
+            {
+                VremenskiInterval intervalPregleda =
+                    new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);
+                if (intervalGodisnjegOdmora.DaLiSePreklapaSa(intervalPregleda))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

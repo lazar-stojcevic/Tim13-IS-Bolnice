@@ -11,11 +11,14 @@ namespace IS_Bolnice.Model
         public List<DateTime> SlobodniDani { get; set; }
         public List<DayOfWeek> SlobodniDaniUNedelji { get; set; }
 
+        public int PreostaliSlobodniDaniUGodini { get; set; }
+
         public RadnoVremeLekara()
         {
             VanrednaRadnaVremena = new List<VremenskiInterval>();
             SlobodniDani = new List<DateTime>();
             SlobodniDaniUNedelji = new List<DayOfWeek>();
+            PreostaliSlobodniDaniUGodini = 30;
         }
 
         public bool PripadaLekaru(string jmbg)

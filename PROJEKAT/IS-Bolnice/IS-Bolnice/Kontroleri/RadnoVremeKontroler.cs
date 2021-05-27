@@ -16,5 +16,25 @@ namespace IS_Bolnice.Kontroleri
         {
             radnoVremeServis.IzmeniRadnoVreme(radnoVreme);
         }
+
+        public int PreracunajBrojIskoriscenihSlobodnihDanaLekara(string jmbgLekara, List<DateTime> noviSlobodniDani)
+        {
+            return radnoVremeServis.PreracunajBrojIskoriscenihSlobodnihDanaLekara(jmbgLekara, noviSlobodniDani);
+        }
+
+        public bool PreklapanjeIntervalaGodisnjegOdmoraLekara(List<DateTime> potencijalniSlobodniDani, string jmbgLekara)
+        {
+            return radnoVremeServis.PreklapanjeIntervalaGodisnjegOdmoraLekara(potencijalniSlobodniDani, jmbgLekara);
+        }
+
+        public bool PreklapanjeIntervalaGodisnjegOdmoraSaObavezamaLekara(List<DateTime> daniGodisnjegOdmora,
+            string jmbgLekara)
+        {
+            int poslednji = daniGodisnjegOdmora.Count - 1;
+            VremenskiInterval intervalGodisnjegOdmora =
+                new VremenskiInterval(daniGodisnjegOdmora[0], daniGodisnjegOdmora[poslednji]);
+            return radnoVremeServis.PreklapanjeIntervalaGodisnjegOdmoraSaObavezamaLekara(intervalGodisnjegOdmora,
+                jmbgLekara);
+        }
     }
 }
