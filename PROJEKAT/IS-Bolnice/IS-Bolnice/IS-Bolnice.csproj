@@ -313,6 +313,12 @@
     <Compile Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml.cs">
       <DependentUpon>FormiranjeObavestenjaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Sekretar\NaplacivanjeUsluga.xaml.cs">
+      <DependentUpon>NaplacivanjeUsluga.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Sekretar\PrikazUsluga.xaml.cs">
+      <DependentUpon>PrikazUsluga.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\PrikazZauzetostiLekaraOpstePrakse.xaml.cs">
       <DependentUpon>PrikazZauzetostiLekaraOpstePrakse.xaml</DependentUpon>
     </Compile>
@@ -623,6 +629,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Sekretar\NaplacivanjeUsluga.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Sekretar\PrikazUsluga.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

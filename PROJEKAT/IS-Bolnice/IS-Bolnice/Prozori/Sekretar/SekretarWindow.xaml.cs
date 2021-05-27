@@ -445,5 +445,16 @@ namespace IS_Bolnice.Prozori.Sekretar
                 pzls.ShowDialog();
             }
         }
+
+        private void Button_Click_Naplata_Usluga(object sender, RoutedEventArgs e)
+        {
+            int index = dataGridPacijenti.SelectedIndex;
+            if (index != -1)
+            {
+                Pacijent pacijent = Pacijenti[index];
+                NaplacivanjeUsluga nu = new NaplacivanjeUsluga(pacijent);
+                nu.ShowDialog();
+            }
+        }
     }
 }

@@ -50,8 +50,8 @@
                 <MenuItem Header="Novi gostujući nalog" Icon="{StaticResource slikaDodavanjeGuest}" ToolTip="Dodavanje guest naloga za paciejnta" Click="MenuItem_Click_Novi_Gostujuci"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Novo obaveštenje" Icon="{StaticResource slikaDodavanjeObavestenja}" ToolTip="Dodavanje novog obaveštenja" Click="MenuItem_Click_Novo_Obavestenje"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="Novi lek" ToolTip="Dodavanje novog leka"></MenuItem>
+                <!--<Separator></Separator>
+                <MenuItem Header="Novi lek" ToolTip="Dodavanje novog leka"></MenuItem>-->
             </MenuItem>
             <MenuItem Header="Izmena">
                 <MenuItem Header="Izmeni pacijenta" Icon="{StaticResource slikaIzmenaPacijenta}" ToolTip="Izmena selektovanog pacijenta" Click="MenuItem_Click_Izmeni_Pacijenta"></MenuItem>
@@ -60,14 +60,14 @@
                 <Separator></Separator>
                 <MenuItem Header="Izmeni obaveštenje" Icon="{StaticResource slikaIzmenaObavestenja}" ToolTip="Izmena selektovanog obaveštenja" Click="MenuItem_Click_Izmeni_Obavestenje"></MenuItem>
                 <MenuItem Header="Obriši obaveštenje" Icon="{StaticResource slikaBrisanjeObavestenja}" ToolTip="Brisanje selektovanog obaveštenja" Click="MenuItem_Click_Obrisi_Obavestenje"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="Ukidanje leka-zahtev"></MenuItem>
+                <!--<Separator></Separator>
+                <MenuItem Header="Ukidanje leka-zahtev"></MenuItem>-->
             </MenuItem>
             <MenuItem Header="Termini">
                 <MenuItem Header="Prikaz termina" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="MenuItem_Click_Prikaz_Termina"></MenuItem>
             </MenuItem>
             <MenuItem Header="Izvršenje">
-                <MenuItem Header="Naplata" Icon="{StaticResource naplata}"></MenuItem>
+                <MenuItem Header="Naplata" Icon="{StaticResource naplata}" Click="Button_Click_Naplata_Usluga"></MenuItem>
             </MenuItem>
             <MenuItem Header="Pomoć">
                 <MenuItem Header="Tutorijal"></MenuItem>
@@ -89,7 +89,7 @@
             <Label></Label>
             <Separator></Separator>
             <Label></Label>
-            <Button ToolTip="Naplata usluga">
+            <Button ToolTip="Naplata usluga" Click="Button_Click_Naplata_Usluga">
                 <Image Source="/Slike/Sekretar/payment.png" Height="24" Width="24"></Image>
             </Button>
         </ToolBar>
@@ -151,7 +151,7 @@
                         <Label Grid.Row="3" Grid.Column="1" Content="060/98-765-43" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <Label Grid.Row="3" Grid.Column="0" Content="Fiksni:            " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         <Label Grid.Row="3" Grid.Column="1" Content="021/000-000" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <Label Grid.Row="3" Grid.Column="0" Content="eMail:             " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content=" eMail:            " FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                         <Label Grid.Row="3" Grid.Column="1" Content="zdavoBolnica@bolnica.com" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     </Grid>
 
@@ -167,8 +167,8 @@
                         <Grid.ColumnDefinitions>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="Obaveštenja:" FontWeight="Bold" FontSize="20"></Label>
-                        <TextBox Grid.Row="1" Grid.Column="0" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center"
-                                 Text="pretraga" Foreground="Gray"/>
+                        <!--<TextBox Grid.Row="1" Grid.Column="0" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                 Text="pretraga" Foreground="Gray"/>-->
                         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal">
                             <Button Background="White" BorderThickness="0" ToolTip="Dodavanje novog obaveštenja" 
                                     Click="Button_Click_NovoObavestenje" Padding="5">
@@ -238,7 +238,7 @@
                             <Image Source="/Slike/Sekretar/add_guest_patient.png"></Image>
                         </Button>
                         <Label Content="          "></Label>
-                        <Button Background="White" BorderThickness="0" ToolTip="Naplata usluga">
+                        <Button Background="White" BorderThickness="0" ToolTip="Naplata usluga" Click="Button_Click_Naplata_Usluga">
                             <Image Source="/Slike/Sekretar/payment.png"></Image>
                         </Button>
                     </StackPanel>
