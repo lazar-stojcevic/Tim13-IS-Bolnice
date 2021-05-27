@@ -40,15 +40,5 @@ namespace IS_Bolnice.Kontroleri
         {
             pacijentServis.ObrisiPacijenta(pacijent);
         }
-
-        public bool JedinstvenJmbgPacijenta(string jmbg)
-        {
-            return pacijentServis.JedinstvenJmbgPacijenta(jmbg);
-        }
-
-        public bool JedinstvenoKorisnickoIme(string korisnickoIme)
-        {
-            return pacijentServis.JedinstvenoKorisnickoIme(korisnickoIme);
-        }
     }
 }

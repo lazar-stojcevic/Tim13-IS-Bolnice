@@ -53,31 +53,5 @@ namespace IS_Bolnice.Servisi
         {
             bazaPacijenata.ObrisiPacijenta(pacijent);
         }
-
-        public bool JedinstvenJmbgPacijenta(string jmbg)
-        {
-            foreach (Pacijent p in bazaPacijenata.SviPacijenti())
-            {
-                if (p.Jmbg.Equals(jmbg))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public bool JedinstvenoKorisnickoIme(string korisnickoIme)
-        {
-            foreach (Pacijent p in bazaPacijenata.SviPacijenti())
-            {
-                if (p.KorisnickoIme.Equals(korisnickoIme))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 }

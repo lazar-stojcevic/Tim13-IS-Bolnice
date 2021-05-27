@@ -12,6 +12,7 @@ namespace IS_Bolnice.Prozori.Sekretar
     {
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
+        private KorisnikKontroler korisnikKontroler = new KorisnikKontroler();
         private List<Lekar> lekari;
 
         public DodavanjePacijentaWindow()
@@ -151,7 +152,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
         {
             string tempJmbg = txtJMBG.Text;
-            if (!pacijentKontroler.JedinstvenJmbgPacijenta(tempJmbg))
+            if (!korisnikKontroler.JedinstvenJmbgKorisnika(tempJmbg))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneti JMBG već postoji u sistemu!");
@@ -169,7 +170,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
         {
             string tempKorisnickoIme = txtKorisnickoIme.Text;
-            if (!pacijentKontroler.JedinstvenoKorisnickoIme(tempKorisnickoIme))
+            if (!korisnikKontroler.JedinstvenoKorisnickoImeKorisnika(tempKorisnickoIme))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");

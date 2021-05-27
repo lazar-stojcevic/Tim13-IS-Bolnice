@@ -11,6 +11,7 @@ namespace IS_Bolnice.Prozori.Sekretar
     {
         private Pacijent pacijentZaIzmenu;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private KorisnikKontroler korisnikKontroler = new KorisnikKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
         private BazaIzmena bazaIzmena = new BazaIzmena();
         private List<Lekar> lekari;
@@ -211,8 +212,8 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void txtJMBG_LostFocus(object sender, RoutedEventArgs e)
         {
-            string tempJmbg = txtJMBG.Text;
-            if (!pacijentKontroler.JedinstvenJmbgPacijenta(tempJmbg))
+            string tempNoviJmbg = txtJMBG.Text;
+            if (!korisnikKontroler.JedinstvenNoviJmbgKorisnika(tempNoviJmbg, pacijentZaIzmenu.Jmbg))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneti JMBG već postoji u sistemu!");
@@ -229,8 +230,8 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void txtKorisnickoIme_LostFocus(object sender, RoutedEventArgs e)
         {
-            string tempKorisnickoIme = txtKorisnickoIme.Text;
-            if (!pacijentKontroler.JedinstvenoKorisnickoIme(tempKorisnickoIme))
+            string tempNovoKorisnickoIme = txtKorisnickoIme.Text;
+            if (!korisnikKontroler.JedinstvenoNovoKorisnickoImeKroisnika(tempNovoKorisnickoIme, pacijentZaIzmenu.KorisnickoIme))
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");
