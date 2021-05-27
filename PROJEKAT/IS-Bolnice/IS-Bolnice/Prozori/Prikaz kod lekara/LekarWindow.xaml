@@ -13,7 +13,7 @@
             <ColumnDefinition Width="158*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Pregled" FontSize="22" HorizontalAlignment="Left" Margin="23,4,0,0" VerticalAlignment="Top" Height="40" Width="83"/>
+        <Label Content="   Pregled" FontSize="22" HorizontalAlignment="Left" Margin="23,4,0,0" VerticalAlignment="Top" Height="40" Width="113"/>
 
 
         <Button Content="Učitaj pregled" HorizontalAlignment="Left" Height="51" Margin="19.2,52,0,0" VerticalAlignment="Top" Width="126" Click="btnUcitajPacijenta" Grid.Column="1"/>
@@ -99,7 +99,12 @@
             <Label FontSize="11" Foreground="Red"  Content="Svi podaci o učitanom pacijentu" HorizontalAlignment="Left" Height="32" Margin="221,132,-10,0" VerticalAlignment="Top" Width="183"/>
 
         </Grid>
-        
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+
     </Grid>
 
 

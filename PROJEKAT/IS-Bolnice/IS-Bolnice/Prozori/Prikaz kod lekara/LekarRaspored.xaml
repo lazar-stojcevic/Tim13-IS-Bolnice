@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Raspored"  Height="700" Width="400" Background="White">
     <Grid>
+
         <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,375,0,0" VerticalAlignment="Top" Width="101"/>
 
         <ListView x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,415,0,0" VerticalAlignment="Top" Width="394">
@@ -41,7 +42,7 @@
 
                 </GridView>
             </ListView.View>
-            
+
         </ListView>
 
         <Button Content="Obriši" Height="54" Margin="145,303,148,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
@@ -51,7 +52,7 @@
         <Label Content="Podaci o leku" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="144"/>
         <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
-        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="618" Margin="0,52,0,0" VerticalAlignment="Top" Width="394">
             <Rectangle  HorizontalAlignment="Left" Height="193" Margin="2,57,0,0" Stroke="Red" VerticalAlignment="Top" Width="392"/>
             <Label Foreground="Red"  Content="Svi budući pregledi" HorizontalAlignment="Left" Height="31" Margin="142,214,0,0" VerticalAlignment="Top" Width="113"/>
 
@@ -71,6 +72,11 @@
 
 
         </Grid>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

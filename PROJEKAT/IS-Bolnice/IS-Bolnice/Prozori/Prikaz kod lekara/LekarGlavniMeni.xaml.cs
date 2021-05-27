@@ -88,6 +88,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             LekarZahtevZaGodisnji zahtevZaGodisnji = new LekarZahtevZaGodisnji();
             NavigationService.Navigate(zahtevZaGodisnji);
         }
+
+        private void ButtonObavestenja_Click(object sender, RoutedEventArgs e)
+        {
+            LekarObavestenja lekarObavestenja = new LekarObavestenja();
+            NavigationService.Navigate(lekarObavestenja);
+        }
     }
 
 }

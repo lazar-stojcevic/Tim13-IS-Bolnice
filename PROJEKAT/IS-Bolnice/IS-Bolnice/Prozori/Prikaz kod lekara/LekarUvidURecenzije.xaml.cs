@@ -48,21 +48,15 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Open_OnClick(object sender, RoutedEventArgs e)
         {
-            /*
-            if (listaRecenzija.SelectedIndex != -1)
-            {
-                Survery recenzija = (Survery) listaRecenzija.SelectedItem;
-                MessageBox.Show(recenzija.Comment, "Recenzija");
-            }
-            */
-
             Button button = sender as Button;
             Survery recenzija = button.DataContext as Survery;
             MessageBox.Show(recenzija.Comment, "Recenzija");
-
-
         }
 
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 
     

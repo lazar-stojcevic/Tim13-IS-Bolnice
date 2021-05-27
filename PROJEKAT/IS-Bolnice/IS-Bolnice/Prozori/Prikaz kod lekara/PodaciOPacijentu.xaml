@@ -29,6 +29,11 @@
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,-4.4,0"/>
         <Label Content="Podaci o pacijentu" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216"/>
         <Button Content="Vidi istoriju bolesti" HorizontalAlignment="Left" Height="49" Margin="117,582,0,0" VerticalAlignment="Top" Width="154" Click="Button_Click"/>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

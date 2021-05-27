@@ -10,7 +10,7 @@
 
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
-        <Label Content="Kreiranje hospitalizacije" FontSize="22" HorizontalAlignment="Left" Margin="23,4,0,0" VerticalAlignment="Top" Height="40" Width="237"/>
+        <Label Content="Kreiranje hospitalizacije" FontSize="22" HorizontalAlignment="Left" Margin="47,4,0,0" VerticalAlignment="Top" Height="40" Width="237"/>
         <DatePicker DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="datumKraja"  HorizontalAlignment="Left" Height="35" Margin="10,480,0,0" VerticalAlignment="Top" Width="380"/>
         <Label Content="Kraj hospitalizacije:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,447,0,0" Width="139"/>
         <ListView x:Name="listaSoba" HorizontalAlignment="Left" Height="215" Margin="10,227,0,0" VerticalAlignment="Top" Width="380">
@@ -40,6 +40,11 @@
             <Label Foreground="Red"  Content="Datum do kada će trajati hospiralizacija" HorizontalAlignment="Left" Height="33" Margin="10,465,0,0" VerticalAlignment="Top" Width="240"/>
 
         </Grid>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Margin="2,5,0,653" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

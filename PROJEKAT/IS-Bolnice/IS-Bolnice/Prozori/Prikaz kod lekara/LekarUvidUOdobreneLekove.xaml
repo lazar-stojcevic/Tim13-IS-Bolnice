@@ -10,7 +10,7 @@
 
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
-        <Label Content="Odobreni lekovi" FontSize="22" HorizontalAlignment="Left" Margin="23,4,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
+        <Label Content="Odobreni lekovi" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
         <Label Content="Svi odabrani lekovi:" FontSize="14" HorizontalAlignment="Left" Margin="3,44,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
 
         <ListView x:Name="listaLekova" HorizontalAlignment="Left" Height="488" Margin="6,71,0,0" VerticalAlignment="Top" Width="370">
@@ -34,6 +34,11 @@
             <Label Foreground="Red"  Content="Izmeni podatke selektovanog leka" HorizontalAlignment="Left" Height="32" Margin="2,592,0,-5" VerticalAlignment="Top" Width="201"/>
 
         </Grid>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Margin="2,5,0,653" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

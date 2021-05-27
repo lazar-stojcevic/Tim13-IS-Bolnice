@@ -1,11 +1,11 @@
-﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarIzvestaj"
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarIzvestaj"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="LekarIzvestaj" Height="700" Width="400">
+        Title="LekarIzvestaj" Height="700" Width="400" Background="White">
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2" Margin="-4,0,-0.4,0">
         </ToolBarPanel>
@@ -47,6 +47,11 @@
             <Label Foreground="Red"  Content="Dodavanje nove terapije" HorizontalAlignment="Left" Height="33" Margin="257,376,-16,0" VerticalAlignment="Top" Width="153"/>
 
         </Grid>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
     </Grid>
-</Window>
+</Page>

@@ -976,5 +976,11 @@
   <ItemGroup>
     <Resource Include="Datoteke\izvestaji.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\email.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

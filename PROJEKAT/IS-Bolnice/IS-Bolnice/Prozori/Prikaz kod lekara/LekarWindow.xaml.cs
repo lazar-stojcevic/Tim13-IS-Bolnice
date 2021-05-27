@@ -133,7 +133,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             string jmbgPacijenta = txtJMBG.Text;
             LekarIzvestaj izvestaj = new LekarIzvestaj(jmbgPacijenta, Sifra);
-            izvestaj.Show();
+            NavigationService.Navigate(izvestaj);
 
         }
 
@@ -165,6 +165,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 

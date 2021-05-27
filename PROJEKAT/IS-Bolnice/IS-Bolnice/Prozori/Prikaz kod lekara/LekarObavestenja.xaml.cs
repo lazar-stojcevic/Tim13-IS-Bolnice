@@ -13,30 +13,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
     /// <summary>
-    /// Interaction logic for LekarInventarPoSalama.xaml
+    /// Interaction logic for LekarObavestenja.xaml
     /// </summary>
-    public partial class LekarInventarPoSalama : Page
+    public partial class LekarObavestenja : Page
     {
-        public LekarInventarPoSalama()
+        public LekarObavestenja()
         {
             InitializeComponent();
-            List<Soba> listaSvihSoba = new BolnicaKontroler().GetSveSobe();
-            listaSoba.ItemsSource = listaSvihSoba;
-            /*
-            List<SadrzajSobe> sadrzajiSobe = new List<SadrzajSobe>();
-            inventar.ItemsSource = sadrzajiSobe;
-            */
+            ObavestenjeKontroler obavestenjeKontroler = new ObavestenjeKontroler();
+            List<Obavestenje> listaObavestenja = obavestenjeKontroler.GetSvaSortiranaObavestenja();
+
+            listaObaveštenja.ItemsSource = listaObavestenja;
+
         }
 
-        private void PromenaSelekcije(object sender, SelectionChangedEventArgs e)
+        private void Open_OnClick(object sender, RoutedEventArgs e)
         {
-            Soba soba = (Soba) listaSoba.SelectedItem;
-            List<SadrzajSobe> sadrzaj = new SadrzajSobeKontroler().GetSadrzajSobe(soba.Id);
-            inventar.ItemsSource = sadrzaj;
+            Button button = sender as Button;
+            Obavestenje recenzija = button.DataContext as Obavestenje;
+            MessageBox.Show(recenzija.Sadrzaj, "Obaveštenje");
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

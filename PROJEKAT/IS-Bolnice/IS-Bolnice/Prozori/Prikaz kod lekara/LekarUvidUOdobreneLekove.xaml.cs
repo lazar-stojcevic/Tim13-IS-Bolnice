@@ -56,5 +56,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             help.Opacity = 0;
         }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

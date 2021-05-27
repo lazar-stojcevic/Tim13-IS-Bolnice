@@ -45,5 +45,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             listaOperacija.ItemsSource = operacije;
         }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

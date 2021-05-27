@@ -22,7 +22,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// <summary>
     /// Interaction logic for LekarIzvestaj.xaml
     /// </summary>
-    public partial class LekarIzvestaj : Window
+    public partial class LekarIzvestaj : Page
     {
         IzvestajKontroler izvestajKontroler = new IzvestajKontroler();
         ObservableCollection<Terapija> terapije = new ObservableCollection<Terapija>();
@@ -76,7 +76,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                         KreirajReceptZaStampanje(imeBolnice, stringFormat, imeIPrezimePacijenta, datumRodjenjaPacijenta, danasniDatum, ter, ref brojRecepta);
                     }
                 }
-                this.Close();
+
+                LekarGlavniMeni glavniMeni = new LekarGlavniMeni(jmbgLek);
+                NavigationService.Navigate(glavniMeni);
             }
             
 
@@ -232,6 +234,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

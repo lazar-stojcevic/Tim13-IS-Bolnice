@@ -79,7 +79,15 @@
             </StackPanel>
         </Button>
         <Label Content="Uvid u hospitalizacije" FontSize="15" HorizontalAlignment="Left" Margin="27,629,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
-        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69"/>
+        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="265,12,0,0" VerticalAlignment="Top" Width="69"/>
+
+        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="341,0,0,657" VerticalAlignment="Bottom" Width="47" Click="ButtonObavestenja_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/email.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+
+
 
 
 

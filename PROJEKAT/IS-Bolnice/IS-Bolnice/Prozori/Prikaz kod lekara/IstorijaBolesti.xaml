@@ -31,6 +31,11 @@
         </ListView>
         <Button Content="Više" HorizontalAlignment="Left" Height="44" Margin="226,327,0,0" VerticalAlignment="Top" Width="164"/>
         <Button Content="Više" HorizontalAlignment="Left" Height="44" Margin="226,636,0,0" VerticalAlignment="Top" Width="164"/>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
 
 
