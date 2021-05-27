@@ -233,9 +233,15 @@ namespace IS_Bolnice.Servisi
             bazaOperacija.IzmeniOperaciju(nova, stara);
         }
 
-        public void ZakaziOperaciju(Operacija operacija)
+        public bool ZakaziOperaciju(Operacija operacija)
         {
-            bazaOperacija.ZakaziOperaciju(operacija);
+            if (MozeDaSeZakaze(operacija))
+            {
+                bazaOperacija.ZakaziOperaciju(operacija);
+                return true;
+            }
+
+            return false;
         }
 
         public void OtkaziOperaciju(Operacija operacija)

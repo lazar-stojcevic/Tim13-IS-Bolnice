@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Sekretar
@@ -31,6 +32,22 @@ namespace IS_Bolnice.Prozori.Sekretar
             PopunjavanjePoljaPrikaza();
         }
 
+        private void OsvezavanjeListeSlobodnihPregledaPoTerminu()
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                PreglediLekara.Clear();
+                foreach (var pregled in pregledKontroler.SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu())
+                {
+                    PreglediLekara.Add(pregled);
+                }
+            }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+        }
         private void PopunjavanjePoljaPrikaza()
         {
             txtIme.Text = pacijent.Ime;
@@ -78,8 +95,15 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 Pregled pregled = PreglediLekara[index];
                 pregled.Pacijent = pacijent;
-                pregledKontroler.ZakaziPregled(pregled);
-                this.Close();
+                if (pregledKontroler.ZakaziPregled(pregled))
+                {
+                    MessageBox.Show("Uspešno zakazan pregled.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Termin ne može da se zakaže");
+                }
             }
         }
 
@@ -106,29 +130,21 @@ namespace IS_Bolnice.Prozori.Sekretar
                 checkBoxLekar.IsChecked = false;
             }
 
-            int i = 0;
-            DateTime trenutnoVreme = DateTime.Now;
-            while (i < 5)
+            if ((bool) rbLekar.IsChecked)
             {
-                Pregled pregled = new Pregled();
-                pregled.VremePocetkaPregleda = trenutnoVreme.AddMinutes(5);
-                pregled.VremeKrajaPregleda = pregled.VremePocetkaPregleda.AddMinutes(45);   // pretpostavka da termin traje 45min
-                pregled.Lekar = lekar;
-                trenutnoVreme = pregled.VremeKrajaPregleda; // potencijalno sledeci slobodan termin je 5min nakon zavrsetka ovog termina
-                //TODO: provera da li se termin vec preklapa sa nekim terminom i koje je radno vreme lekara
-                i++;
-                PreglediLekara.Add(pregled);
+                Mouse.OverrideCursor = Cursors.Wait;
+                try
+                {
+                    foreach (var pregled in pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar))
+                    {
+                        PreglediLekara.Add(pregled);
+                    }
+                }
+                finally
+                {
+                    Mouse.OverrideCursor = null;
+                }
             }
-        }
-
-        private void RadioButton_Termin_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RadioButton_Lekar_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Button_Click_Novi_Termin(object sender, RoutedEventArgs e)
@@ -148,8 +164,28 @@ namespace IS_Bolnice.Prozori.Sekretar
                     VremeKrajaPregleda = termin[1],
                     Lekar = lekar
                 };
+                PreglediLekara.Clear();
                 PreglediLekara.Add(p);
+                prikazTermina.SelectedValue = PreglediLekara.Count - 1;
             }
+        }
+
+        private void RadioButton_Termin_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBoxLekar.IsEnabled = false;
+            comboLekari.IsEnabled = false;
+            comboLekari.SelectedIndex = -1;
+            if (PreglediLekara != null)
+            {
+                OsvezavanjeListeSlobodnihPregledaPoTerminu();
+            }
+        }
+
+        private void RadioButton_Lekar_Checked(object sender, RoutedEventArgs e)
+        {
+            PreglediLekara.Clear();
+            checkBoxLekar.IsEnabled = true;
+            comboLekari.IsEnabled = true;
         }
     }
 }

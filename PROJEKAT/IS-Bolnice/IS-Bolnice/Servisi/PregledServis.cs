@@ -13,6 +13,7 @@ namespace IS_Bolnice.Servisi
         private readonly int MINUTI_TRAJANJA_PREGLEDA = 45;
         private readonly int DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA = 6;
         private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_PREGLEDA_LEKARU = 7200;
+        private readonly int MINUTI_PREDLAGANJA_ZA_3_DANA = 4320;
         private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_HITNIH_PREGLEDA = 60;
 
         private BazaPregleda bazaPregleda = new BazaPregleda();
@@ -358,6 +359,24 @@ namespace IS_Bolnice.Servisi
                 }
             }
             return pregledi;
+        }
+
+        public List<Pregled> SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu()
+        {
+            BazaLekara bazaLekara = new BazaLekara();
+            foreach (Lekar lekar in bazaLekara.LekariOpstePrakse())
+            {
+                List<Pregled> slobodniTerminiLekara =
+                    SviPredloziSkorasnjihPregleda(lekar, MINUTI_TRAJANJA_PREGLEDA, MINUTI_PREDLAGANJA_ZA_3_DANA);
+                List<Pregled> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, slobodniTerminiLekara);
+                List<Pregled> slobodniTermini = SlobodniPreglediLekara(lekar, terminiURadnomVremenu);
+                if (slobodniTermini.Count > 0)
+                {
+                    return slobodniTermini;
+                }
+            }
+
+            return null;
         }
 
         public List<Pregled> SlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaPregleda)

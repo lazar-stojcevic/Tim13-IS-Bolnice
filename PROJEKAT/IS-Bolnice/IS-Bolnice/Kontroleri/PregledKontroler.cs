@@ -86,6 +86,11 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
         }
 
+        public List<Pregled> SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu()
+        {
+            return pregledServis.SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu();
+        }
+
         public bool PacijentImaZakazanPregled(Pregled pregledZaProveru)
         {
             return pregledServis.PacijentImaZakazanPregled(pregledZaProveru);

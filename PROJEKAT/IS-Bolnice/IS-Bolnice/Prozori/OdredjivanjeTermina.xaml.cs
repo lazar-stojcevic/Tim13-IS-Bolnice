@@ -42,25 +42,36 @@ namespace IS_Bolnice.Prozori
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            DateTime pocetakTermina = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-            DateTime krajTermina = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
-                kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
-            krajTermina = krajTermina.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
-
-            if (termin.Count == 0)
+            try
             {
-                termin.Add(pocetakTermina);
-                termin.Add(krajTermina);
-            }
-            else
-            {
-                termin[0] = pocetakTermina;
-                termin[1] = krajTermina;
-            }
-            
+                DateTime pocetakTermina = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
+                    kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
+                DateTime krajTermina = new DateTime(kalendar.SelectedDate.Value.Year, kalendar.SelectedDate.Value.Month,
+                    kalendar.SelectedDate.Value.Day, Int32.Parse(txtHour.Text), Int32.Parse(txtMinute.Text), 0);
+                krajTermina = krajTermina.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
 
-            this.Close();
+                if (pocetakTermina < DateTime.Now)
+                {
+                    MessageBox.Show("Nemoguće je odabrati datum pre današnjeg datuma.");
+                    return;
+                }
+
+                if (termin.Count == 0)
+                {
+                    termin.Add(pocetakTermina);
+                    termin.Add(krajTermina);
+                }
+                else
+                {
+                    termin[0] = pocetakTermina;
+                    termin[1] = krajTermina;
+                }
+                this.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Nevalidno unesen termin.");
+            }
         }
 
         private void Button_Click_Sati_Plus(object sender, RoutedEventArgs e)

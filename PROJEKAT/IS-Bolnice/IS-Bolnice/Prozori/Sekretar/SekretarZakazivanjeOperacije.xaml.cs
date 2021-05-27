@@ -89,10 +89,29 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            if (comboLekari.SelectedIndex != -1 && comboSale.SelectedIndex != -1)
+            if (comboTrajanja.SelectedIndex == -1)
             {
-                operacijaKontroler.ZakaziOperaciju(operacija);
-                this.Close();
+                MessageBox.Show("Odaberite dužinu trajanja termina");
+            }
+            else if (comboSale.SelectedIndex == -1)
+            {
+                MessageBox.Show("Odaberite salu za operaciju.");
+            }
+            else if (comboLekari.SelectedIndex == -1)
+            {
+                MessageBox.Show("Odaberite lekara za operaciju");
+            }
+            else
+            {
+                if (operacijaKontroler.ZakaziOperaciju(operacija))
+                {
+                    MessageBox.Show("Operacija uspešno zakazana.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Nemoguće zakazati operaciju. Promenite termin");
+                }
             }
         }
 

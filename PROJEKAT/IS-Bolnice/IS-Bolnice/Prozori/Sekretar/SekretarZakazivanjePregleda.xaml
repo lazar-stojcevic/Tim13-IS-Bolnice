@@ -8,7 +8,8 @@
         xmlns:cvt="clr-namespace:IS_Bolnice.Konverteri"
         mc:Ignorable="d"
         Title="Zakazivanje pregleda" Height="600" Width="600"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
 
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="122" Margin="40,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
@@ -21,14 +22,14 @@
         <TextBox Name="txtJmbg" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <Label Content="Prioritet:" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <StackPanel Margin="166,191,55.6,359.4" Orientation="Horizontal">
-            <RadioButton IsChecked="True" HorizontalAlignment="Left" Checked="RadioButton_Termin_Checked" Margin="0,-8,0,8">Termin</RadioButton>
+            <RadioButton x:Name="rbTermin" HorizontalAlignment="Left" Checked="RadioButton_Termin_Checked" Margin="0,-8,0,8">Termin</RadioButton>
             <Label Content="                                " Margin="0,-10,0,10"/>
-            <RadioButton HorizontalAlignment="Right" Checked="RadioButton_Lekar_Checked" Margin="0,-10,0,10">Lekar</RadioButton>
+            <RadioButton x:Name="rbLekar" HorizontalAlignment="Right" Margin="0,-10,0,10" Checked="RadioButton_Lekar_Checked">Lekar</RadioButton>
         </StackPanel>
         <Label Content="Lekar" HorizontalAlignment="Left" Margin="40,206,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="55" Margin="40,233,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
-        <CheckBox Name="checkBoxLekar" Content="Izabrani lekar" HorizontalAlignment="Left" Margin="69,252,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <ComboBox Name="comboLekari" HorizontalAlignment="Left" Margin="281,250,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
+        <CheckBox x:Name="checkBoxLekar" Content="Izabrani lekar" HorizontalAlignment="Left" Margin="69,252,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <ComboBox x:Name="comboLekari" HorizontalAlignment="Left" Margin="281,250,0,0" VerticalAlignment="Top" Width="188" SelectionChanged="comboLekari_SelectionChanged"/>
         <Label Content="Najbliži termini" HorizontalAlignment="Left" Margin="40,297,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <ListView Name="prikazTermina" ItemsSource="{Binding PreglediLekara}" HorizontalAlignment="Left" Height="100" Margin="40,328,0,0" VerticalAlignment="Top" Width="498">
             <ListView.ItemTemplate>
