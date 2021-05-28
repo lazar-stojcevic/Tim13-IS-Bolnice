@@ -69,7 +69,7 @@ public class BazaSadrzaja
         Soba soba = new Soba();
         soba.Id = niz[0];
         BazaOpreme bazaOpreme = new BazaOpreme();
-        Predmet predmet = bazaOpreme.GetPredmet(niz[1]);
+        Predmet predmet = bazaOpreme.DobaviPoId(niz[1]);
         //predmet.Id = niz[1];
         //predmet.Naziv = new BazaOpreme().GetPredmet(predmet.Id).Naziv;
         Soba novaSoba = new Soba();

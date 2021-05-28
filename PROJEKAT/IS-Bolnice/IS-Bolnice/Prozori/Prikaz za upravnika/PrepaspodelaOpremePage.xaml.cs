@@ -49,7 +49,7 @@ namespace IS_Bolnice.Prozori
             List<string> tekst = new List<string>();
             BazaOpreme baza = new BazaOpreme();
             foreach (SadrzajSobe sadrzaj in sadrzajSobe) {
-                string linija = "ID: " + sadrzaj.Predmet.Id + " Naziv: " + baza.GetPredmet(sadrzaj.Predmet.Id).Naziv + " Kolicina " + sadrzaj.Kolicina;
+                string linija = "ID: " + sadrzaj.Predmet.Id + " Naziv: " + baza.DobaviPoId(sadrzaj.Predmet.Id).Naziv + " Kolicina " + sadrzaj.Kolicina;
                 tekst.Add(linija);
             }
             return tekst;
@@ -87,7 +87,7 @@ namespace IS_Bolnice.Prozori
             if (listBox2.SelectedIndex != -1)
             {
                 string[] polja = listBox2.SelectedItem.ToString().Split(' ');
-                Predmet odabraneOprema = bazaOpreme.GetPredmet(polja[1]);
+                Predmet odabraneOprema = bazaOpreme.DobaviPoId(polja[1]);
                 if (odabraneOprema.Tip == TipOpreme.dinamicka)
                 {
                     OduzmiOdabranuKolicinuOpreme(false);
@@ -188,7 +188,7 @@ namespace IS_Bolnice.Prozori
             if (listBox1.SelectedIndex != -1)
             {
                 string[] polja = listBox1.SelectedItem.ToString().Split(' ');
-                Predmet odabraneOprema = bazaOpreme.GetPredmet(polja[1]);
+                Predmet odabraneOprema = bazaOpreme.DobaviPoId(polja[1]);
                 if (odabraneOprema.Tip == TipOpreme.dinamicka)
                 {
                     OduzmiOdabranuKolicinuOpreme(true);

@@ -9,10 +9,12 @@ namespace IS_Bolnice.Servisi
     class OdgovorNaZahtevZaValidacijuServis
     {
         private BazaOdgovoraNaZahteveZaValidacijuLekova bazaOdgovora = new BazaOdgovoraNaZahteveZaValidacijuLekova();
+        private BazaZahtevaZaValidacijuLeka bazaZahteva = new BazaZahtevaZaValidacijuLeka();
 
         public void KreirajOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovor, ZahtevZaValidacijuLeka zahtev)
         {
-            bazaOdgovora.KreirajOdgovorNaZahtev(odgovor, zahtev);
+            bazaOdgovora.Sacuvaj(odgovor);
+            bazaZahteva.ObrisiZahtev(zahtev);
         }
     }
 }

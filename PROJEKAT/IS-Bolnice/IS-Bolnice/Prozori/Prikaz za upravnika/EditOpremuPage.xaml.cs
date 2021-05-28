@@ -25,7 +25,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             InitializeComponent();
             id_txt.Text = selectedID;
             BazaOpreme baza = new BazaOpreme();
-            Predmet izmenjenPredmet = baza.GetPredmet(selectedID);
+            Predmet izmenjenPredmet = baza.DobaviPoId(selectedID);
             naziv_txt.Text = izmenjenPredmet.Naziv;
             if (izmenjenPredmet.Tip == TipOpreme.dinamicka)
             {
@@ -40,8 +40,8 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
             BazaOpreme baza = new BazaOpreme();
-            List<Predmet> lista = baza.SvaOprema();
-            Predmet izmenjenPredmet = baza.GetPredmet(id_txt.Text);
+            List<Predmet> lista = baza.DobaviSve();
+            Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
             izmenjenPredmet.Naziv = naziv_txt.Text;
             if (tip_opreme_txt.SelectedIndex == 1)
             {
@@ -51,7 +51,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             {
                 izmenjenPredmet.Tip = TipOpreme.dinamicka;
             }
-            baza.IzmeniOpremu(izmenjenPredmet);
+            baza.Izmeni(izmenjenPredmet);
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);
         }
@@ -69,12 +69,12 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             {
                 BazaOpreme baza = new BazaOpreme();
                 BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-                List<Predmet> lista = baza.SvaOprema();
-                Predmet izmenjenPredmet = baza.GetPredmet(id_txt.Text);
+                List<Predmet> lista = baza.DobaviSve();
+                Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
                 if (!bazaSadrzaja.PostojiOpremaUBolnici(id_txt.Text))
                 {
                     izmenjenPredmet.Obrisano = true;
-                    baza.IzmeniOpremu(izmenjenPredmet);
+                    baza.Izmeni(izmenjenPredmet);
  
                 }
                 else

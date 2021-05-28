@@ -14,6 +14,7 @@ namespace IS_Bolnice.Kontroleri
         public void KreirajOdgovorNaZahtevZaValidaciju(OdgovorNaZahtevZaValidaciju odgovor,
             ZahtevZaValidacijuLeka zahtev)
         {
+            odgovor.Lek = zahtev.Lek;
             odgovorNaZahtevServis.KreirajOdgovorNaZahtev(odgovor, zahtev);
         }
     }

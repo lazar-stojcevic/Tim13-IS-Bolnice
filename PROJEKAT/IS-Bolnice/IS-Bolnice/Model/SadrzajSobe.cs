@@ -19,8 +19,7 @@ public class SadrzajSobe
         Kolicina = kolicina;
         Soba = new Soba() ;
         Soba.Id = sobaID;
-        Predmet = new Predmet();
-        Predmet.Id = predmetID;
+        Predmet = new Predmet(predmetID);
     }
 
     public SadrzajSobe(Soba soba, Predmet predmet, int kolicina, DateTime datumPremestanja, Soba novaSoba)

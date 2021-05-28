@@ -4,16 +4,20 @@
 // Purpose: Definition of Class OdgovorNaZahtevZaValidaciju
 
 using System;
+using System.Runtime.CompilerServices;
+using IS_Bolnice.Model;
 
-public class OdgovorNaZahtevZaValidaciju
+public class OdgovorNaZahtevZaValidaciju: Entitet
 {
     public string Obrazlozenje { get; set; }
 
     public Lek Lek { get; set; }
 
-    public OdgovorNaZahtevZaValidaciju() { }
+    public OdgovorNaZahtevZaValidaciju(string idLeka):base(idLeka)
+    {
+    }
 
-    public OdgovorNaZahtevZaValidaciju(Lek lek, string obrazlozenje)
+    public OdgovorNaZahtevZaValidaciju(Lek lek, string obrazlozenje):base(lek.Sifra)
     {
         Lek = lek;
         Obrazlozenje = obrazlozenje;

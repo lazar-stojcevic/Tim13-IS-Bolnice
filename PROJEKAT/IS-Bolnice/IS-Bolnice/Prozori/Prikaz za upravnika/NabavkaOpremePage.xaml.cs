@@ -26,7 +26,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             InitializeComponent();
             BazaOpreme baza = new BazaOpreme();
             List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.SvaOprema();
+            predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Predmet predmet in predmeti)
             {
@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             TipOpreme tip = SelektovaniTipOpreme();
             BazaOpreme baza = new BazaOpreme();
             List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.SvaOprema();
+            predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Predmet predmet in predmeti)
             {
@@ -161,7 +161,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             BazaOpreme baza = new BazaOpreme();
             List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.SvaOprema();
+            predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Predmet predmet in predmeti)
             {

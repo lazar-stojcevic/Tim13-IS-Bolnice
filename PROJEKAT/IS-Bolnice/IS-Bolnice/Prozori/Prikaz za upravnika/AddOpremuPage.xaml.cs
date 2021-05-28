@@ -27,8 +27,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void Dodaj_btn_Click(object sender, RoutedEventArgs e)
         {
-            Predmet noviPredmet = new Predmet();
-            noviPredmet.Id = id_txt.Text;
+            Predmet noviPredmet = new Predmet(id_txt.Text);
             noviPredmet.Naziv = naziv_txt.Text;
             if (tip_opreme_txt.SelectedIndex == 1)
             {
@@ -39,7 +38,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 noviPredmet.Tip = TipOpreme.dinamicka;
             }
             BazaOpreme baza = new BazaOpreme();
-            baza.KreirajOpremu(noviPredmet);
+            baza.Sacuvaj(noviPredmet);
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);
         }

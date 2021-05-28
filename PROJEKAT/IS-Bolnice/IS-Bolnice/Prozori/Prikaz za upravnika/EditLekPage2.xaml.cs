@@ -120,7 +120,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             }
             else {
                 OdgovorNaZahtevZaValidaciju odgovorNaZahtev = new OdgovorNaZahtevZaValidaciju(noviLek, null);
-                bazaOdgovora.ObrisiOdgovorNaZahtev(odgovorNaZahtev);
+                bazaOdgovora.Obrisi(odgovorNaZahtev.Lek.Sifra);
                 AddLekPage3 addLekareZaZahtev = new AddLekPage3(noviLek);
                 this.NavigationService.Navigate(addLekareZaZahtev);
             }
