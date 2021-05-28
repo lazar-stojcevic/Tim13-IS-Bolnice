@@ -64,7 +64,11 @@
                 <MenuItem Header="Ukidanje leka-zahtev"></MenuItem>-->
             </MenuItem>
             <MenuItem Header="Termini">
-                <MenuItem Header="Prikaz termina" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="MenuItem_Click_Prikaz_Termina"></MenuItem>
+                <MenuItem Header="Hitan termin" ToolTip="Zakazivanje hitnog termina" Click="Button_Click_Hitan_Termin"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Termini pacijenta" ToolTip="Prikaz zakazanih termina selektovanog pacijenta" Click="MenuItem_Click_Prikaz_Termina"></MenuItem>
+                <MenuItem Header="Termini lekara specijaliste" ToolTip="Prikaz zauzeih termina selektovanog lekara specijaliste" Click="Button_Click_Zauzetost_Lekara_Specijaliste"></MenuItem>
+                <MenuItem Header="Termini lekara opšte prakse" ToolTip="Prikaz zauzetih termina selektovanog lekara opšte prakse" Click="Button_Click_Zauzetost_Lekara_Opste_Prakse"></MenuItem>
             </MenuItem>
             <MenuItem Header="Izvršenje">
                 <MenuItem Header="Naplata" Icon="{StaticResource naplata}" Click="Button_Click_Naplata_Usluga"></MenuItem>
@@ -92,6 +96,10 @@
             <Button ToolTip="Naplata usluga" Click="Button_Click_Naplata_Usluga">
                 <Image Source="/Slike/Sekretar/payment.png" Height="24" Width="24"></Image>
             </Button>
+            <Label></Label>
+            <Separator></Separator>
+            <Label></Label>
+            <Button Background="LightGray" Height="30" VerticalContentAlignment="Center" Content="Hitan termin" ToolTip="Zakazivanje hitnog termina" Click="Button_Click_Hitan_Termin"></Button>
         </ToolBar>
         <ToolBar Grid.Row="1" HorizontalAlignment="Right" ToolBarTray.IsLocked="True">
             <Button ToolTip="Pomoć">
@@ -219,7 +227,8 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="1" Grid.Column="0" Content="Hitan termin" Width="80" Height="35" ToolTip="Zakazivanje hitnog termina" Click="Button_Click_Hitan_Termin"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="Hitan termin" Width="80" Height="35" 
+                            ToolTip="Zakazivanje hitnog termina" Click="Button_Click_Hitan_Termin"/>
 
                     <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal">
                         <Button Background="White" BorderThickness="0" ToolTip="Dodavanje novog pacijenta" Click="Button_Click_Novi">
@@ -242,7 +251,7 @@
                             <Image Source="/Slike/Sekretar/payment.png"></Image>
                         </Button>
                     </StackPanel>
-                    <TextBox Grid.Row="1" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                    <!--<TextBox Grid.Row="1" Grid.Column="5" Height="23" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Width="120"/>-->
                     <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
                         <Button Content="Zakaži pregled" Margin="10" Height="30" ToolTip="Zakazivanje pregleda za izabranog pacijenta" Click="Button_Click_Zakazivanje_Pregleda"/>
                         <Button Content="Zakaži operaciju" Margin="10" Height="35" ToolTip="Zakazivanje operacije za izabranog pacijenta" Click="Button_Click_Zakazivanje_Operacije"/>
@@ -390,8 +399,8 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Aktuelni lekovi u ustanovi:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
                            VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
-                    <TextBox Text="pretraga" Foreground="Gray" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Height="20" Width="100"></TextBox>
+                    <!--<TextBox Text="pretraga" Foreground="Gray" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                               HorizontalAlignment="Right" Height="20" Width="100"></TextBox>-->
                     <DataGrid x:Name="dgLekovi" IsReadOnly="True" ItemsSource="{Binding SviLekovi}"
                               SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" SelectionChanged="dgLekovi_SelectionChanged">
                         <DataGrid.Columns>

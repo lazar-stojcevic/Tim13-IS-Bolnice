@@ -27,8 +27,8 @@
         </Grid.ColumnDefinitions>
         <Label Content="Tip termina: " HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"
                FontWeight="Bold"/>
-        <RadioButton x:Name="rbPregled" Content="Pregled" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-        <RadioButton x:Name="rbOperacija" Content="Operacija" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+        <RadioButton x:Name="rbPregled" Content="Pregled" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Checked="rbPregled_Checked"/>
+        <RadioButton x:Name="rbOperacija" Content="Operacija" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Checked="rbOperacija_Checked"/>
         <Label Content="Pacijent:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"
                FontWeight="Bold"/>
         <TextBox x:Name="odabraniPacijentTxt" Height="25" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1"/>
@@ -36,7 +36,7 @@
         <Button Height="25" Width="60" Content="Gostujući" Grid.Row="1" Grid.Column="4" Click="Button_Click_Gostujuci"/>
         <Label Content="Oblast lekara:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"
                FontWeight="Bold"/>
-        <ComboBox x:Name="comboOblastLekara" Height="25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="comboOblastLekara" IsEnabled="False" Height="25" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label Content="Trajanje termina (u satima):" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"
                FontWeight="Bold"/>
         <ComboBox x:Name="comboTrajanja" Height="25" Grid.Row="3" Grid.Column="1"/>

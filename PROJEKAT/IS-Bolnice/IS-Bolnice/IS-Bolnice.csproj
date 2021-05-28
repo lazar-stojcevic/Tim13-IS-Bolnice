@@ -316,6 +316,9 @@
     <Compile Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml.cs">
       <DependentUpon>FormiranjeObavestenjaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Sekretar\InformativniProzor.xaml.cs">
+      <DependentUpon>InformativniProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\NaplacivanjeUsluga.xaml.cs">
       <DependentUpon>NaplacivanjeUsluga.xaml</DependentUpon>
     </Compile>
@@ -636,6 +639,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Sekretar\FormiranjeObavestenjaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Sekretar\InformativniProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

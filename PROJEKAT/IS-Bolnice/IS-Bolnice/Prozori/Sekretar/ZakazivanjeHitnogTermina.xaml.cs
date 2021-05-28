@@ -33,7 +33,6 @@ namespace IS_Bolnice.Prozori.Sekretar
             this.DataContext = this;
             PreglediZaOdlaganje = new ObservableCollection<Pregled>();
             OperacijeZaOdlaganje = new ObservableCollection<Operacija>();
-            PopunjavanjeOblastiLekara();
             PopunjavanjePonudjenihTrajanja();
         }
 
@@ -44,9 +43,14 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             foreach (OblastLekara oblast in sveOblastiIzBaze)
             {
+                if ((bool) rbOperacija.IsChecked && oblast.Naziv.Equals(OblastLekara.oznakaOpstePrakse))
+                {
+                    continue;
+                }
                 sveOblastiZaPrikaz.Add(oblast.Naziv);
             }
             comboOblastLekara.ItemsSource = sveOblastiZaPrikaz;
+            comboOblastLekara.IsEnabled = true;
         }
 
         private void PopunjavanjePonudjenihTrajanja()
@@ -127,8 +131,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             }
             else
             {
-                string message = "Odaberite tip termina!";
-                MessageBox.Show(message);
+                InformativniProzor ip = new InformativniProzor("Odaberite tip termina.");
+                ip.ShowDialog();
             }
         }
 
@@ -150,14 +154,19 @@ namespace IS_Bolnice.Prozori.Sekretar
                 Pregled pregled = slobodniPregledi[0];
                 pregled.Pacijent = odabraniPacijent;
                 pregledKontroler.ZakaziPregled(pregled);
-                string message = "Uspesno zakazan termin";
-                MessageBox.Show(message);
+
+                InformativniProzor ip = new InformativniProzor("Uspešno zakazan termin sa početkom u " +
+                                                               pregled.VremePocetkaPregleda.ToString("HH:mm") + 
+                                                               "h  " + pregled.VremePocetkaPregleda.ToString("dd.MM."));
+                ip.ShowDialog();
+
                 Close();
             }
             else
             {
-                string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
-                MessageBox.Show(message);
+                InformativniProzor ip = new InformativniProzor("Nema slobodnih termina u skorije vreme. Možete odabrati" +
+                                                               " neki od ponuđenih da se odloži ukoliko postoji.");
+                ip.ShowDialog();
                 OsvezavanjePrikazaZauzetihTermina(oblastLekara);
             }
         }
@@ -176,14 +185,17 @@ namespace IS_Bolnice.Prozori.Sekretar
                 operacija.Pacijent = odabraniPacijent;
                 operacijaKontroler.ZakaziOperaciju(operacija);
 
-                string message = "Uspesno zakazan termin";
-                MessageBox.Show(message);
+                InformativniProzor ip = new InformativniProzor("Uspešno zakazan termin sa početkom u " + 
+                                                               operacija.VremePocetkaOperacije.ToString("HH:mm") +
+                                                               "h  " + operacija.VremePocetkaOperacije.ToString("dd.MM."));
+                ip.ShowDialog();
                 Close();
             }
             else
             {
-                string message = "Nema slobodnih termina u skorije vreme! OBRISATI OVO";
-                MessageBox.Show(message);
+                InformativniProzor ip = new InformativniProzor("Nema slobodnih termina u skorije vreme. Možete odabrati " +
+                                                               "neki od ponuđenih da se odloži ukoliko postoji.");
+                ip.ShowDialog();
                 OsvezavanjePrikazaZauzetihTermina(oblastLekara);
             }
         }
@@ -219,6 +231,16 @@ namespace IS_Bolnice.Prozori.Sekretar
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
                 OsvezavanjePrikazaZauzetihOperacija(operacijaKontroler.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
             }
+        }
+
+        private void rbPregled_Checked(object sender, RoutedEventArgs e)
+        {
+            PopunjavanjeOblastiLekara();
+        }
+
+        private void rbOperacija_Checked(object sender, RoutedEventArgs e)
+        {
+            PopunjavanjeOblastiLekara();
         }
     }
 }
