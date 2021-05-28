@@ -394,6 +394,9 @@
     <Compile Include="Prozori\Sekretar\VanredniRadLekara.xaml.cs">
       <DependentUpon>VanredniRadLekara.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Sekretar\VideoTutorijalHitnogZakazivanja.xaml.cs">
+      <DependentUpon>VideoTutorijalHitnogZakazivanja.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\ZakazivanjeHitnogTermina.xaml.cs">
       <DependentUpon>ZakazivanjeHitnogTermina.xaml</DependentUpon>
     </Compile>
@@ -762,6 +765,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Prozori\Sekretar\VideoTutorijalHitnogZakazivanja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\Sekretar\ZakazivanjeHitnogTermina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -995,6 +1002,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\email.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Slike\Sekretar\stop.png" />
+    <Resource Include="Slike\Sekretar\pause.png" />
+    <Resource Include="Slike\Sekretar\play.png" />
+    <Content Include="Video\videoTutorijal.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

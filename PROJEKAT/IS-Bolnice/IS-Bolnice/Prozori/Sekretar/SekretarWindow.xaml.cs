@@ -456,5 +456,11 @@ namespace IS_Bolnice.Prozori.Sekretar
                 nu.ShowDialog();
             }
         }
+
+        private void Click_Video_Tutorijal(object sender, RoutedEventArgs e)
+        {
+            VideoTutorijalHitnogZakazivanja v = new VideoTutorijalHitnogZakazivanja();
+            v.Show();
+        }
     }
 }
