@@ -178,6 +178,9 @@
     <Compile Include="Prozori\Prikaz kod lekara\LekarKreiranjeHospitalizacije.xaml.cs">
       <DependentUpon>LekarKreiranjeHospitalizacije.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz kod lekara\LekarObavestenja.xaml.cs">
+      <DependentUpon>LekarObavestenja.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz kod lekara\LekarPodaciOLeku.xaml.cs">
       <DependentUpon>LekarPodaciOLeku.xaml</DependentUpon>
     </Compile>
@@ -451,6 +454,10 @@
     <Page Include="Prozori\Prikaz kod lekara\LekarKreiranjeHospitalizacije.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz kod lekara\LekarObavestenja.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz kod lekara\LekarPodaciOLeku.xaml">
       <Generator>MSBuild:Compile</Generator>
