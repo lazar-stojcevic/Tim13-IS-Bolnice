@@ -27,7 +27,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             InitializeComponent();
             noviLek = lek;
             kreiranjeIzmena = izmenaKreiranje;
-            id_txt.Text = noviLek.Sifra;
+            id_txt.Text = noviLek.Id;
             naziv_txt.Text = noviLek.Ime;
             opis_txt.Text = noviLek.Opis;
             if (noviLek.PotrebanRecept == true)
@@ -60,7 +60,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void id_txt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            noviLek.Sifra = id_txt.Text;
+            noviLek.Id = id_txt.Text;
         }
 
         private void naziv_txt_TextChanged(object sender, TextChangedEventArgs e)

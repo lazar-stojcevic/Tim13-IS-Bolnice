@@ -7,111 +7,161 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 
-public class BazaZahtevaZaValidacijuLeka
+public class BazaZahtevaZaValidacijuLeka : GenerickiFajlRepozitorijum<ZahtevZaValidacijuLeka>, ZahteviZaValidacijuRepozitorijum
 {
-   private String fileLocation = @"..\..\Datoteke\zahteviLekovi.txt";
-   
-   public List<ZahtevZaValidacijuLeka> SviZahtevi()
-   {
-        List<Lek> lekovi = new List<Lek>();
-        BazaLekara bazaLekara = new BazaLekara();
-        List<Lekar> sviLekari = bazaLekara.SviLekari();
-        List<ZahtevZaValidacijuLeka> listaZahteva = new List<ZahtevZaValidacijuLeka>();
+    public BazaZahtevaZaValidacijuLeka():base(@"..\..\Datoteke\zahteviLekovi.txt")
+    { }
 
-        if (File.Exists(@"..\..\Datoteke\zahteviLekovi.txt"))
+    public override ZahtevZaValidacijuLeka KreirajEntitet(string[] podaciEntiteta)
+    {
+        
+        Lek p = new Lek();
+        p.Id = podaciEntiteta[0];
+        p.Ime = podaciEntiteta[1];
+        p.Opis = podaciEntiteta[2];
+
+        Console.WriteLine(p.Opis + "     " + p.Opis);
+
+        p.PotrebanRecept = PostaviDaLiJePotrebanRecept(podaciEntiteta[3]);
+
+        p.Alergeni = DobaviAlergeneLeka(podaciEntiteta[4]);
+
+        p.ZamenskiLekovi = DobaviZamenskeLekove(podaciEntiteta[5]);
+
+        ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka(p);
+
+        string[] idLekara = podaciEntiteta[6].Split('-');
+        foreach (Lekar lekarIter in new BazaLekara().DobaviSve())
         {
-            BazaLekova bazaLekova = new BazaLekova();
-            string[] lines = File.ReadAllLines(@"..\..\Datoteke\zahteviLekovi.txt");
-            foreach (string line in lines)
+            foreach (string id in idLekara)
             {
-                Lek p = new Lek();
-                string[] delovi = line.Split('#');
-                p.Sifra = delovi[0];
-                p.Ime = delovi[1];
-                p.Opis = delovi[2];
-                if (delovi[3].Equals("1"))
+                if (idLekara.Equals("")) { break; }
+                if (lekarIter.Jmbg.Equals(id))
                 {
-                    p.PotrebanRecept = true;
+                    zahtev.lekariKomeIdeNaValidaciju.Add(lekarIter);
                 }
-                else
-                {
-                    p.PotrebanRecept = false;
-                }
-
-                string alergeniSvi = delovi[4];
-                if (!alergeniSvi.Equals(""))
-                {
-                    string[] alergen = alergeniSvi.Split(',');
-                    foreach (string a in alergen)
-                    {
-                        if (a.Equals("")) { break; }
-
-                        if (!a.Equals(""))
-                        {
-                            Sastojak s = new Sastojak(a);
-                            p.Alergeni.Add(s);
-                        }
-                    }
-                }
-
-                string zamenskiLekoviSvi = delovi[5];
-                if (!zamenskiLekoviSvi.Equals(""))
-                {
-                    string[] zameskiLek = zamenskiLekoviSvi.Split('/');
-                    foreach (string deo in zameskiLek)
-                    {
-                        Lek lek = new Lek(deo);
-                        foreach (Lek lekIter in bazaLekova.SviLekovi())
-                        {
-                            if (deo.Equals(lekIter.Sifra))
-                            {
-                                lek.Ime = lekIter.Ime;
-                            }
-                        }
-                        p.ZamenskiLekovi.Add(lek);
-                    }
-                }
-
-                Console.WriteLine(line);
-                ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka();
-                zahtev.Lek = p;
-
-                string[] idLekara = delovi[6].Split('-');
-                foreach (Lekar lekarIter in sviLekari)
-                {
-                    foreach (string id in idLekara)
-                    {
-                        if (idLekara.Equals("")) { break; }
-                        if (lekarIter.Jmbg.Equals(id))
-                        {
-                            zahtev.lekariKomeIdeNaValidaciju.Add(lekarIter);
-                        }
-                    }
-                }
-                listaZahteva.Add(zahtev);
             }
         }
-        else
-        {
-            Console.WriteLine("Nista");
-        }
-        return listaZahteva;
+
+        return zahtev;
     }
-   
-   public void KreirajZahtev(ZahtevZaValidacijuLeka zahtev)
-   {
-        string novaLinija = zahtev.Lek.Sifra + "#" + zahtev.Lek.Ime + "#" + zahtev.Lek.Opis + "#";
-        if (zahtev.Lek.PotrebanRecept)
+
+    public override string KreirajTextZaUpis(ZahtevZaValidacijuLeka entitet)
+    {
+        string novaLinija = entitet.Lek.Id + "#" + entitet.Lek.Ime + "#" + entitet.Lek.Opis + "#";
+        if (entitet.Lek.PotrebanRecept)
         {
             novaLinija += "1#";
         }
         else novaLinija += "0#";
 
 
-        if (zahtev.Lek.Alergeni.Count != 0)
+        novaLinija = UbaciSastojkeLeka(entitet, novaLinija);
+
+        novaLinija = UbaciZamenskeLekove(entitet, novaLinija);
+
+        novaLinija = DodajLekareKomeLekIdenaValidaciju(entitet, novaLinija);
+
+        return novaLinija;
+    }
+
+    private List<Lek> DobaviZamenskeLekove(string podaciEntiteta)
+    {
+        List<Lek> zamenskiLekovi = new List<Lek>();
+        if (!podaciEntiteta.Equals(""))
         {
-            foreach (Sastojak sastojak in zahtev.Lek.Alergeni)
+            string[] zameskiLek = podaciEntiteta.Split('/');
+            foreach (string deo in zameskiLek)
+            {
+                Lek lek = new Lek(deo);
+                foreach (Lek lekIter in new BazaLekova().DobaviSve())
+                {
+                    if (deo.Equals(lekIter.Id))
+                    {
+                        lek.Ime = lekIter.Ime;
+                    }
+                }
+
+                zamenskiLekovi.Add(lek);
+            }
+        }
+
+        return zamenskiLekovi;
+    }
+
+    private List<Sastojak> DobaviAlergeneLeka(string podaciEntiteta)
+    {
+        List<Sastojak> listaAlergena = new List<Sastojak>();
+        if (!podaciEntiteta.Equals(""))
+        {
+            string[] alergen = podaciEntiteta.Split(',');
+            foreach (string a in alergen)
+            {
+                if (a.Equals(""))
+                {
+                    break;
+                }
+
+                if (!a.Equals(""))
+                {
+                    Sastojak s = new Sastojak(a);
+                    listaAlergena.Add(s);
+                }
+            }
+        }
+
+        return listaAlergena;
+    }
+
+    private static bool PostaviDaLiJePotrebanRecept(string podaciEntiteta)
+    {
+        if (podaciEntiteta.Equals("1"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    private static string DodajLekareKomeLekIdenaValidaciju(ZahtevZaValidacijuLeka entitet, string novaLinija)
+    {
+        novaLinija = novaLinija + "#";
+        foreach (Lekar lekar in entitet.lekariKomeIdeNaValidaciju)
+        {
+            novaLinija = novaLinija + lekar.Jmbg + "-";
+        }
+
+        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+        return novaLinija;
+    }
+
+    private static string UbaciZamenskeLekove(ZahtevZaValidacijuLeka entitet, string novaLinija)
+    {
+        novaLinija = novaLinija + "#";
+        if (entitet.Lek.ZamenskiLekovi.Count != 0)
+        {
+            foreach (Lek zamenskiLek in entitet.Lek.ZamenskiLekovi)
+            {
+                novaLinija = novaLinija + zamenskiLek.Id + "/";
+            }
+
+            novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+        }
+
+        return novaLinija;
+    }
+
+    private static string UbaciSastojkeLeka(ZahtevZaValidacijuLeka entitet, string novaLinija)
+    {
+        if (entitet.Lek.Alergeni.Count != 0)
+        {
+            foreach (Sastojak sastojak in entitet.Lek.Alergeni)
             {
                 novaLinija += sastojak.Ime + ",";
             }
@@ -120,67 +170,27 @@ public class BazaZahtevaZaValidacijuLeka
         {
             novaLinija += "nema,";
         }
+
         novaLinija = novaLinija.Remove(novaLinija.Length - 1);
-
-        novaLinija = novaLinija + "#";
-        if (zahtev.Lek.ZamenskiLekovi.Count != 0)
-        {
-            foreach (Lek zamenskiLek in zahtev.Lek.ZamenskiLekovi)
-            {
-                novaLinija = novaLinija + zamenskiLek.Sifra + "/";
-            }
-            novaLinija = novaLinija.Remove(novaLinija.Length - 1);
-        }
-
-        novaLinija = novaLinija + "#";
-        foreach (Lekar lekar in zahtev.lekariKomeIdeNaValidaciju)
-        {
-            novaLinija = novaLinija + lekar.Jmbg + "-";
-        }
-        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
-
-        File.AppendAllText(fileLocation, novaLinija);
-    }
-   
-   public void IzmeniZahtev(ZahtevZaValidacijuLeka zahtevZaValidaciju)
-   {
-      throw new NotImplementedException();
-   }
-   
-   public void ObrisiZahtev(ZahtevZaValidacijuLeka zahtev)
-   {
-        List<ZahtevZaValidacijuLeka> sviZahtevi = SviZahtevi();
-        List<string> zahtevi = new List<string>();
-
-        foreach (ZahtevZaValidacijuLeka iterZahtev in sviZahtevi)
-        {
-            if (!iterZahtev.Lek.Sifra.Equals(zahtev.Lek.Sifra))
-            {
-                string linija = iterZahtev.Lek.Sifra + "#" + iterZahtev.Lek.Ime + "#" + iterZahtev.Lek.Opis + "#";
-                if (iterZahtev.Lek.PotrebanRecept) { linija += "1#"; } else { linija += "0#"; }
-                foreach (Sastojak sastojak in iterZahtev.Lek.Alergeni)
-                {
-                    linija += sastojak.Ime + ",";
-                }
-                linija.Remove(linija.LastIndexOf(','), 1);
-                linija += "#";
-                if (iterZahtev.Lek.ZamenskiLekovi.Count != 0)
-                    foreach (Lek lek in iterZahtev.Lek.ZamenskiLekovi)
-                    {
-                        linija += lek.Sifra + "/";
-                    }
-                linija.Remove(linija.LastIndexOf('/'), 1);
-                linija += "#";
-
-                foreach (Lekar lekar in iterZahtev.lekariKomeIdeNaValidaciju)
-                {
-                    linija += lekar.Jmbg + "-";
-                }
-                linija.Remove(linija.LastIndexOf('-'), 1);
-                zahtevi.Add(linija);
-            }
-        }
-        File.WriteAllLines(fileLocation, zahtevi);
+        return novaLinija;
     }
 
+    public List<ZahtevZaValidacijuLeka> DobaviZahteveZaValidacijuZaLekara(string idLekara)
+    {
+        List<ZahtevZaValidacijuLeka> povratnaVrednost = new List<ZahtevZaValidacijuLeka>();
+
+        foreach (ZahtevZaValidacijuLeka zahtev in DobaviSve())
+        {
+            foreach (Lekar lekar in zahtev.lekariKomeIdeNaValidaciju)
+            {
+                if (lekar.Jmbg.Equals(idLekara))
+                {
+                    povratnaVrednost.Add(zahtev);
+                    break;
+                }
+            }
+        }
+
+        return povratnaVrednost;
+    }
 }

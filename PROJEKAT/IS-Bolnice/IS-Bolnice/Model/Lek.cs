@@ -5,25 +5,24 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.ComponentModel;using IS_Bolnice.Model;
 
-public class Lek: INotifyPropertyChanged
+public class Lek: Entitet, INotifyPropertyChanged
 {
-   private String sifra;
    private String ime;
    private String opis;
    private List<Sastojak> sastojci;
    private List<Lek> zamenskiLekovi;
    private bool potrebanRecept;
 
-    public Lek() {
+    public Lek(): base("85236") {
         sastojci = new List<Sastojak>();
         zamenskiLekovi = new List<Lek>();
     }
 
-    public Lek(string sifraLeka, string imeLeka, string opisLeka, List<Sastojak> sastojciLeka, List<Lek> zamenskiLekoviLeka, bool lekuPotrebanRecept)
+    public Lek(string sifraLeka, string imeLeka, string opisLeka, List<Sastojak> sastojciLeka, List<Lek> zamenskiLekoviLeka, bool lekuPotrebanRecept): base(sifraLeka)
     {
-        Sifra = sifraLeka;
+        Id = sifraLeka;
         Ime = imeLeka;
         Opis = opisLeka;
         Alergeni = sastojciLeka;
@@ -31,14 +30,14 @@ public class Lek: INotifyPropertyChanged
         PotrebanRecept = lekuPotrebanRecept;
     }
 
-    public Lek(string sifra)
+    public Lek(string sifra): base(sifra)
     {
-        Sifra = sifra;
+        Id = sifra;
     }
 
-    public Lek(string sifraLeka, string imeLeka, string opisLeka, bool lekuPotrebanRecept)
+    public Lek(string sifraLeka, string imeLeka, string opisLeka, bool lekuPotrebanRecept) : base(sifraLeka)
     {
-        Sifra = sifraLeka;
+        Id = sifraLeka;
         Ime = imeLeka;
         Opis = opisLeka;
         Alergeni = new List<Sastojak>();
@@ -46,16 +45,6 @@ public class Lek: INotifyPropertyChanged
         PotrebanRecept = lekuPotrebanRecept;
     }
 
-    public String Sifra
-    {
-        get { return sifra; }
-        set
-        {
-            if (sifra == value) return;
-            sifra = value;
-            RaisePropertyChanged("sifra");
-        }
-    }
 
     public String Ime
     {

@@ -22,7 +22,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarZahtevValidacije : Page
     {
-        ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka();
+        ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka(new Lek());
         private ZahtevZaValidacijuKontroler zahtevZaValidacijuKontroler = new ZahtevZaValidacijuKontroler();
         string sifra;
         public LekarZahtevValidacije(string sifraLeka, string sifraLekara)
@@ -32,20 +32,21 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             List<ZahtevZaValidacijuLeka> sviZahtevi = zahtevZaValidacijuKontroler.GetSviZaValidacijuLeka();
             foreach (ZahtevZaValidacijuLeka zahtevIter in sviZahtevi)
             {
-                if (zahtevIter.Lek.Sifra.Equals(sifraLeka))
+                if (zahtevIter.Lek.Id.Equals(sifraLeka))
                 {
                     zahtev = zahtevIter;
                     break;
                 }   
             }
 
+            zahtev.Id = zahtev.Lek.Id; 
             txtIme.Text = zahtev.Lek.Ime;
             txtGramaza.Text = zahtev.Lek.Opis;
             foreach (Sastojak sastojak in zahtev.Lek.Alergeni)
             {
                 listSastojci.Items.Add(sastojak.Ime);
             }
-            txtSifra.Text = zahtev.Lek.Sifra;
+            txtSifra.Text = zahtev.Lek.Id;
 
             listZamesnski.ItemsSource = zahtev.Lek.ZamenskiLekovi;
 
@@ -59,6 +60,9 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
                 LekarRazlogOdbijanjaLeka razlogOdbijanjaLeka = new LekarRazlogOdbijanjaLeka(zahtev);
                 razlogOdbijanjaLeka.Show();
+                //TODO NAPRAVI DA RADI KAKO TREBA
+                LekarGlavniMeni meni = new LekarGlavniMeni(sifra);
+                this.NavigationService.Navigate(meni);
             }
         }
 

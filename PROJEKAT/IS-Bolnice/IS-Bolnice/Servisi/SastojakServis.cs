@@ -12,7 +12,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Sastojak> GetSviSastojci()
         {
-            return bazaSastojaka.SviSastojci();
+            return bazaSastojaka.DobaviSve();
         }
 
     }

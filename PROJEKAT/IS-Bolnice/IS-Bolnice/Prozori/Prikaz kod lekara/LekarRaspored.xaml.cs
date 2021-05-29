@@ -67,7 +67,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             Console.WriteLine(datum);
             DateTime vreme = selektovani.VremePocetkaOperacije;
             //TODO napravi lepi kostruktor
-            IzmenaOperacije izmena = new IzmenaOperacije();
+            IzmenaOperacije izmena = new IzmenaOperacije(selektovani.Id);
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;

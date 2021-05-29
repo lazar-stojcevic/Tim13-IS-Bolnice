@@ -245,7 +245,7 @@ namespace IS_Bolnice.Baze
 
         public Lekar FindDoctorFromJmbg(string doctorJmbg)
         {
-            foreach (Lekar doctor in bazaLekara.SviLekari())
+            foreach (Lekar doctor in bazaLekara.DobaviSve())
             {
                 if (doctor.Jmbg == doctorJmbg)
                 {

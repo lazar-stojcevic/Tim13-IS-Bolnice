@@ -114,7 +114,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private static string GenerisanjeTekstaJedneTerapije(Terapija ter)
         {
-            return ter.Lek.Sifra + "$" + ter.Lek.Ime + "$" + ter.Lek.Opis + "$" +
+            return ter.Lek.Id + "$" + ter.Lek.Ime + "$" + ter.Lek.Opis + "$" +
                    ter.RazlikaNaKolikoSeDanaUzimaLek + "$"
                    + ter.UcestanostKonzumiranja + "$" + ter.VremePocetka + "$" +
                    ter.VremeKraja + "$" + ter.Opis + "&";
@@ -155,7 +155,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private static void IcrtavanjeSifreLeka(StringFormat stringFormat, Terapija ter, Graphics graphicsImage)
         {
-            graphicsImage.DrawString(ter.Lek.Sifra, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
+            graphicsImage.DrawString(ter.Lek.Id, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(30, 310), stringFormat);
         }
 

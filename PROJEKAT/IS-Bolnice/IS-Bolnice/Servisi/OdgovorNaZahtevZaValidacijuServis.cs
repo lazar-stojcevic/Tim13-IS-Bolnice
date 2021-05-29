@@ -14,7 +14,7 @@ namespace IS_Bolnice.Servisi
         public void KreirajOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovor, ZahtevZaValidacijuLeka zahtev)
         {
             bazaOdgovora.Sacuvaj(odgovor);
-            bazaZahteva.ObrisiZahtev(zahtev);
+            bazaZahteva.Obrisi(zahtev.Id);
         }
     }
 }

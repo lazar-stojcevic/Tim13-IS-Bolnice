@@ -30,7 +30,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private void DeleteAddButton_Click(object sender, RoutedEventArgs e)
         {
             BazaLekova bazaLekova = new BazaLekova();
-            bazaLekova.ObrisiILek(izabraniLek);
+            bazaLekova.Obrisi(izabraniLek.Id);
             Page lekovi = new LekoviPage();
             this.NavigationService.Navigate(lekovi);
         }

@@ -28,7 +28,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             BazaSastojaka bazaSastojaka = new BazaSastojaka();
             Sastojak sastojak = new Sastojak(id_txt.Text);
-            bazaSastojaka.KreirajSastojak(sastojak);
+            bazaSastojaka.Sacuvaj(sastojak);
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)

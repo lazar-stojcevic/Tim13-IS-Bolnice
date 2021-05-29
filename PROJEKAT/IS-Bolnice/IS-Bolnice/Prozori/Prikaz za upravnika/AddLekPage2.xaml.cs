@@ -35,7 +35,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseSastojakToString() {
             BazaSastojaka bazaSastojaka = new BazaSastojaka();
-            List<Sastojak> sastojci = bazaSastojaka.SviSastojci();
+            List<Sastojak> sastojci = bazaSastojaka.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Sastojak sastojak in sastojci)
             {
@@ -48,10 +48,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             BazaLekova bazaLekova = new BazaLekova();
             List<string> tekst = new List<string>();
-            List<Lek> lekovi = bazaLekova.SviLekovi();
+            List<Lek> lekovi = bazaLekova.DobaviSve();
             foreach (Lek lek in lekovi)
             {
-                string linija = "ID: " + lek.Sifra + " Naziv: " + lek.Ime;
+                string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;
                 tekst.Add(linija);
             }
             return tekst;

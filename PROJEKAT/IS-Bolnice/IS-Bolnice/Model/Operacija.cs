@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel;
 using IS_Bolnice.Model;
 
-public class Operacija : INotifyPropertyChanged
+public class Operacija : Entitet, INotifyPropertyChanged
 {
 
     private Pacijent pacijent;
@@ -17,24 +17,15 @@ public class Operacija : INotifyPropertyChanged
     private Soba soba;
     private Boolean hitna;
 
-    public Operacija()
+    public Operacija():base(Guid.NewGuid().ToString())
     {
         this.Pacijent = new Pacijent();
         this.Lekar = new Lekar();
         this.Soba = new Soba();
     }
 
-    public Operacija(Pacijent pacijent, Lekar lekar, DateTime vremePocetkaOperacije, DateTime vremeKrajaOperacije, Soba soba, Boolean hitna)
-    {
-        Pacijent = pacijent;
-        Lekar = lekar;
-        VremePocetkaOperacije = vremePocetkaOperacije;
-        VremeKrajaOperacije = vremeKrajaOperacije;
-        Soba = soba;
-        Hitna = hitna;
-    }
 
-    public Operacija(string idLekara, Pacijent pacijent, DateTime datum, OblastLekara oblast)
+    public Operacija(string idLekara, Pacijent pacijent, DateTime datum, OblastLekara oblast) : base(Guid.NewGuid().ToString())
     {
         Lekar = new Lekar();
         Pacijent = new Pacijent();
@@ -44,7 +35,7 @@ public class Operacija : INotifyPropertyChanged
         VremePocetkaOperacije = datum;
     }
 
-    public Operacija(Operacija operacija)
+    public Operacija(Operacija operacija) : base(operacija.Id)
     {
         Pacijent = operacija.Pacijent;
         Lekar = operacija.Lekar;
@@ -52,6 +43,13 @@ public class Operacija : INotifyPropertyChanged
         VremeKrajaOperacije = operacija.VremeKrajaOperacije;
         Soba = operacija.Soba;
         Hitna = operacija.Hitna;
+    }
+
+    public Operacija(string id): base(id)
+    {
+        this.Pacijent = new Pacijent();
+        this.Lekar = new Lekar();
+        this.Soba = new Soba();
     }
 
     public Pacijent Pacijent

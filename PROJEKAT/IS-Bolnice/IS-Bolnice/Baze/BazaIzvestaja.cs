@@ -93,7 +93,7 @@ public class BazaIzvestaja
     {
         Lek lek = new Lek();
 
-        lek.Sifra = podaci[0];
+        lek.Id = podaci[0];
         lek.Ime = podaci[1];
         lek.Opis = podaci[2];
 

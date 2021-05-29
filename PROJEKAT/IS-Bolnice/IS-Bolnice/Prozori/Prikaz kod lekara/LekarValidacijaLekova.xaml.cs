@@ -49,7 +49,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void otvoriLekClick(object sender, RoutedEventArgs e)
         {
             ZahtevZaValidacijuLeka zahtevZaValidaciju = (ZahtevZaValidacijuLeka)listaZahteva.SelectedItem;
-            LekarZahtevValidacije zahtev = new LekarZahtevValidacije(zahtevZaValidaciju.Lek.Sifra, sifraLekara);
+            LekarZahtevValidacije zahtev = new LekarZahtevValidacije(zahtevZaValidaciju.Id, sifraLekara);
 
             this.NavigationService.Navigate(zahtev);
 

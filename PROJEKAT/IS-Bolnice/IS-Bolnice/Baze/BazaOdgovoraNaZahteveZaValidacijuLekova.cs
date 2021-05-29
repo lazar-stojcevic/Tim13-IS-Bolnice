@@ -52,7 +52,7 @@ public class BazaOdgovoraNaZahteveZaValidacijuLekova : GenerickiFajlRepozitoriju
             {
                 foreach (Lek zamenskiLek in entitet.Lek.ZamenskiLekovi)
                 {
-                    novaLinija = novaLinija + zamenskiLek.Sifra + "/";
+                    novaLinija = novaLinija + zamenskiLek.Id + "/";
                 }
                 novaLinija = novaLinija.Remove(novaLinija.Length - 1);
             }

@@ -12,17 +12,17 @@ namespace IS_Bolnice.Servisi
 
         public List<Lek> GetSviLekovi()
         {
-            return bazaLekova.SviLekovi();
+            return bazaLekova.DobaviSve();
         }
 
         public void ObrisiLek(Lek lek)
         {
-            bazaLekova.ObrisiILek(lek);
+            bazaLekova.Obrisi(lek.Id);
         }
 
         public void KreirajLek(Lek lek)
         {
-            bazaLekova.KreirajLek(lek);
+            bazaLekova.Sacuvaj(lek);
         }
     }
 }

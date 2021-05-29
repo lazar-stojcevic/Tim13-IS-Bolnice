@@ -29,7 +29,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseToString() {
             BazaSastojaka bazaSastojaka = new BazaSastojaka();
-            List<Sastojak> sastojci = bazaSastojaka.SviSastojci();
+            List<Sastojak> sastojci = bazaSastojaka.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Sastojak sastojak in sastojci) {
                 tekst.Add(sastojak.Ime);

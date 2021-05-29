@@ -34,7 +34,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
                 foreach (Lek zalenskiLek in zamenski)
                 {
-                    if (zalenskiLek.Sifra.Equals(lek.Sifra) || lek.Sifra.Equals(sifraTrenutnogLeka))
+                    if (zalenskiLek.Id.Equals(lek.Id) || lek.Id.Equals(sifraTrenutnogLeka))
                     {
                         lekoviZaPrikaz.RemoveAt(i);
                         --i;

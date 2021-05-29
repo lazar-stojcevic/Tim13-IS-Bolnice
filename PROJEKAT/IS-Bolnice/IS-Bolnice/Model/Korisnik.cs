@@ -4,61 +4,15 @@
 // Purpose: Definition of Class Korisnik
 
 using System;
+using IS_Bolnice.Model;
 
-public class Korisnik
+public class Korisnik: Entitet
 {
-    private string jmbg;
-    private string korisnickoIme;
-    private string sifra;
-    private string ime;
-    private string prezime;
-    private string brojTelefona;
-    private string eMail;
-    private string adresa;
-    private Pol pol;
-    private DateTime datumRodjenja;
-    private bool obrisan = false;
-
-    public Korisnik(string jmbg, string korisnickoIme, string sifra, string ime, string prezime, string brojTelefona,
-        string eMail, string adresa, Pol pol)
+    public Korisnik() : base("123")
     {
-        this.jmbg = jmbg;
-        this.korisnickoIme = korisnickoIme;
-        this.sifra = sifra;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.brojTelefona = brojTelefona;
-        this.eMail = eMail;
-        this.adresa = adresa;
-        this.pol = pol;
-    }
 
-    public Korisnik()
-    {
-        this.jmbg = "123456789";
-        this.korisnickoIme = "mare123";
-        this.sifra = "1234";
-        this.ime = "Marko";
-        this.prezime = "Markovic";
-        this.brojTelefona = "0123456789";
-        this.eMail = "nema";
-        this.adresa = "nema";
-        this.pol = Pol.muski;
-        this.obrisan = false;
     }
-
-    public Korisnik(Korisnik korisnik)
-    {
-        this.jmbg = korisnik.jmbg;
-        this.korisnickoIme = korisnik.korisnickoIme;
-        this.sifra = korisnik.sifra;
-        this.ime = korisnik.ime;
-        this.prezime = korisnik.prezime;
-        this.brojTelefona = korisnik.brojTelefona;
-        this.eMail = korisnik.eMail;
-        this.adresa = korisnik.adresa;
-        this.pol = korisnik.pol;
-    }
+    
 
     //OVDE JE BIO PRAZAN KONSTRUKTOR BEZ ICEG
 

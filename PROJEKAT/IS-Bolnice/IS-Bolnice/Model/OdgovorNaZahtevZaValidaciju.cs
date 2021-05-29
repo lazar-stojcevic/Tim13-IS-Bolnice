@@ -17,7 +17,7 @@ public class OdgovorNaZahtevZaValidaciju: Entitet
     {
     }
 
-    public OdgovorNaZahtevZaValidaciju(Lek lek, string obrazlozenje):base(lek.Sifra)
+    public OdgovorNaZahtevZaValidaciju(Lek lek, string obrazlozenje):base(lek.Id)
     {
         Lek = lek;
         Obrazlozenje = obrazlozenje;

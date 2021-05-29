@@ -33,7 +33,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             sviLekovi = lekovi;
             lekStari = odabraniLek;
             InitializeComponent();
-            txtSifra.Text = odabraniLek.Sifra;
+            txtSifra.Text = odabraniLek.Id;
             txtIme.Text = odabraniLek.Ime;
             txtGramaza.Text = odabraniLek.Opis;
             listZamesnski.ItemsSource = zamensnkiLekovi;
@@ -48,7 +48,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
                 foreach (Lek lek in sviLekovi)
                 {
-                    if (lek.Sifra.Equals(zamenskiLek.Sifra))
+                    if (lek.Id.Equals(zamenskiLek.Id))
                     {
                         zamenskiLek.Ime = lek.Ime;
                     }
@@ -64,7 +64,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (result == MessageBoxResult.Yes)
             {
 
-                lek.Sifra = txtSifra.Text;
+                lek.Id = txtSifra.Text;
                 lek.Ime = txtIme.Text;
                 lek.Opis = txtGramaza.Text;
                 lek.Alergeni.Clear();
@@ -116,7 +116,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickDodajZamenski(object sender, RoutedEventArgs e)
         {
-            LekarDodavanjeZamenskogLeka dodavanje = new LekarDodavanjeZamenskogLeka(zamensnkiLekovi, lekStari.Sifra);
+            LekarDodavanjeZamenskogLeka dodavanje = new LekarDodavanjeZamenskogLeka(zamensnkiLekovi, lekStari.Id);
             dodavanje.Show();
         }
 

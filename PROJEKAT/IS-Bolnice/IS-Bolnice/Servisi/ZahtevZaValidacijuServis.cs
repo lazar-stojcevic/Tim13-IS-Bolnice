@@ -12,12 +12,12 @@ namespace IS_Bolnice.Servisi
 
         public void ObrisiZahtevZaValidacijuLeka(ZahtevZaValidacijuLeka zahtev)
         {
-            bazaZahteva.ObrisiZahtev(zahtev);
+            bazaZahteva.Obrisi(zahtev.Id);
         }
 
         public List<ZahtevZaValidacijuLeka> GetSviZaValidacijuLeka()
         {
-            return bazaZahteva.SviZahtevi();
+            return bazaZahteva.DobaviSve();
         }
     }
 }

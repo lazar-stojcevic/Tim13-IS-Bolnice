@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -30,10 +31,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             BazaLekova bazaLekova = new BazaLekova();
             List<string> tekst = new List<string>();
-            List<Lek> lekovi = bazaLekova.SviLekovi();
+            List<Lek> lekovi = new LekKontroler().GetSviLekovi();
             foreach (Lek lek in lekovi)
             {
-                string linija = "ID: " + lek.Sifra + " Naziv: " + lek.Ime;
+                string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;
                 tekst.Add(linija);
             }
             return tekst;
@@ -49,7 +50,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             BazaLekova bazaLekova = new BazaLekova();
             string[] podaciOLeku = listBox.SelectedItem.ToString().Split(' ');
-            Page editPage = new EditBrisanjePage(bazaLekova.GetLek(podaciOLeku[1]));
+            Page editPage = new EditBrisanjePage(bazaLekova.DobaviPoId(podaciOLeku[1]));
             this.NavigationService.Navigate(editPage);
         }
 

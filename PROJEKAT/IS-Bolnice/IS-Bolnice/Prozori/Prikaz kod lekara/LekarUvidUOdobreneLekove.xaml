@@ -11,12 +11,12 @@
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
         <Label Content="Odobreni lekovi" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
-        <Label Content="Svi odabrani lekovi:" FontSize="14" HorizontalAlignment="Left" Margin="3,44,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
+        <Label Content="Svi odabrani lekovi:" FontSize="14" HorizontalAlignment="Left" Margin="3,47,0,0" VerticalAlignment="Top" Height="37" Width="185"/>
 
         <ListView x:Name="listaLekova" HorizontalAlignment="Left" Height="488" Margin="6,71,0,0" VerticalAlignment="Top" Width="370">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Šifra" Width="71" DisplayMemberBinding="{Binding Sifra}"/>
+                    <GridViewColumn Header="Šifra" Width="71" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="Ime leka" Width="192" DisplayMemberBinding="{Binding Ime}" />
                     <GridViewColumn Header="Gramaza" Width="100" DisplayMemberBinding="{Binding Opis}"/>
                 </GridView>

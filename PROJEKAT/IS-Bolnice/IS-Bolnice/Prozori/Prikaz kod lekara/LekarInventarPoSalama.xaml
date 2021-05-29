@@ -8,17 +8,19 @@
       d:DesignHeight="700" d:DesignWidth="400"
       Background="White" Title="LekarInventarPoSalama">
 
-    <Grid>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
 
-        <Label Content="Inventar po salama" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="56,8,0,0"/>
+    <Grid>
+
+        <ToolBarPanel  Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="47" VerticalAlignment="Top" Width="400" RenderTransformOrigin="0.5,0.5"/>
+
+        <Label Content="Inventar po salama" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="84,8,0,0" Width="184"/>
 
         <Label Content="Sala za uvid:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,64,0,0"/>
 
         <ComboBox x:Name="listaSoba" HorizontalAlignment="Left" Height="31" Margin="12,94,0,0" VerticalAlignment="Top" Width="378" SelectionChanged="PromenaSelekcije">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" />
+                    <TextBlock Text="{Binding ''}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 
@@ -34,13 +36,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" Margin="12,5,341,653" Width="47" Click="ButtonBack_Click">
             <StackPanel>
                 <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-
-
     </Grid>
+
+
 </Page>

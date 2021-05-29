@@ -30,7 +30,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseLekarToString() {
             BazaLekara bazaLekara = new BazaLekara();
-            List<Lekar> lekari = bazaLekara.SviLekari();
+            List<Lekar> lekari = bazaLekara.DobaviSve();
             List<string> tekst = new List<string>();
             foreach(Lekar lekar in lekari)
             {
@@ -57,7 +57,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             }
             ZahtevZaValidacijuLeka zahtevZaValidaciju = new ZahtevZaValidacijuLeka(noviLek, lekari);
             BazaZahtevaZaValidacijuLeka bazaZahtevaZaValidaciju = new BazaZahtevaZaValidacijuLeka();
-            bazaZahtevaZaValidaciju.KreirajZahtev(zahtevZaValidaciju);
+            bazaZahtevaZaValidaciju.Sacuvaj(zahtevZaValidaciju);
             Page lekovi = new LekoviPage();
             this.NavigationService.Navigate(lekovi);
         }

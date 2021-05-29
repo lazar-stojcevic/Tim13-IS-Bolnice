@@ -10,7 +10,7 @@
         <ListView x:Name="listaZamenskihLekova" HorizontalAlignment="Left" Height="149" Margin="10,10,0,0" VerticalAlignment="Top" Width="449">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Šifra" Width="90" DisplayMemberBinding="{Binding Sifra}" />
+                    <GridViewColumn Header="Šifra" Width="90" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Ime" Width="193" DisplayMemberBinding="{Binding Ime}"/>
                     <GridViewColumn Header="Opis" Width="159" DisplayMemberBinding="{Binding Opis}"/>
                 </GridView>

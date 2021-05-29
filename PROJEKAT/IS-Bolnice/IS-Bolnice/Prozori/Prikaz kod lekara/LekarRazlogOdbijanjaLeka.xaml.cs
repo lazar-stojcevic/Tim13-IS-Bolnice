@@ -37,7 +37,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_ClickPotvrdi(object sender, RoutedEventArgs e)
         {
-            OdgovorNaZahtevZaValidaciju odgovor = new OdgovorNaZahtevZaValidaciju(zahtev.Lek.Sifra);
+            OdgovorNaZahtevZaValidaciju odgovor = new OdgovorNaZahtevZaValidaciju(zahtev.Lek.Id);
             odgovor.Obrazlozenje = txtRazlog.Text;
             odgovorNaValidacijeKontroler.KreirajOdgovorNaZahtevZaValidaciju(odgovor, zahtev);
             zahtevZaValidacijuKontroler.ObrisiZahtev(zahtev);

@@ -4,8 +4,9 @@
 // Purpose: Definition of Class SadrzajSobe
 
 using System;
+using IS_Bolnice.Model;
 
-public class SadrzajSobe
+public class SadrzajSobe: Entitet
 {
 
     public int Kolicina { get; set; }
@@ -14,7 +15,7 @@ public class SadrzajSobe
     public Soba Soba { get; set; }
     public Predmet Predmet { get; set; }
 
-    public SadrzajSobe(string sobaID, string predmetID, int kolicina) {
+    public SadrzajSobe(string sobaID, string predmetID, int kolicina): base(sobaID+predmetID) {
 
         Kolicina = kolicina;
         Soba = new Soba() ;
@@ -22,7 +23,7 @@ public class SadrzajSobe
         Predmet = new Predmet(predmetID);
     }
 
-    public SadrzajSobe(Soba soba, Predmet predmet, int kolicina, DateTime datumPremestanja, Soba novaSoba)
+    public SadrzajSobe(Soba soba, Predmet predmet, int kolicina, DateTime datumPremestanja, Soba novaSoba): base(soba.Id+predmet.Id)
     {
 
         Kolicina = kolicina;
@@ -32,7 +33,7 @@ public class SadrzajSobe
         NovaSoba = novaSoba;
     }
 
-    public SadrzajSobe(Soba soba, Predmet predmet, int kolicina)
+    public SadrzajSobe(Soba soba, Predmet predmet, int kolicina) : base(soba.Id + predmet.Id)
     {
 
         Kolicina = kolicina;
@@ -40,6 +41,6 @@ public class SadrzajSobe
         Predmet = predmet;
     }
 
-    public SadrzajSobe() { }
+    public SadrzajSobe(): base("123") { }
 
 }

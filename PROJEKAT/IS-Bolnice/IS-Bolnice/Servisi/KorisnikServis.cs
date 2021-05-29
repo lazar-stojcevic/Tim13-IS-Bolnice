@@ -87,7 +87,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenoKorisnickoImeLekara(string korisnickoIme)
         {
-            foreach (var lekar in bazaLekara.SviLekari())
+            foreach (var lekar in bazaLekara.DobaviSve())
             {
                 if (lekar.KorisnickoIme.Equals(korisnickoIme))
                 {
@@ -139,7 +139,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenJmbgLekara(string jmbg)
         {
-            foreach (var lekar in bazaLekara.SviLekari())
+            foreach (var lekar in bazaLekara.DobaviSve())
             {
                 if (lekar.Jmbg.Equals(jmbg))
                 {

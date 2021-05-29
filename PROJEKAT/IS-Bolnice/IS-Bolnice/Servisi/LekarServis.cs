@@ -12,7 +12,7 @@ namespace IS_Bolnice.Servisi
         public List<Lekar> GetSviLekariSpecijalisti()
         {
             List<Lekar> listaSvihLekara = new List<Lekar>();
-            foreach (Lekar lekar in bazaLekara.SviLekari())
+            foreach (Lekar lekar in bazaLekara.DobaviSve())
             {
                 if (!lekar.JelLekarOpstePrakse())
                 {
@@ -26,7 +26,7 @@ namespace IS_Bolnice.Servisi
         public List<Lekar> GetSviLekariOpstePrakse()
         {
             List<Lekar> listaSvihLekaraOpstePrakse = new List<Lekar>();
-            foreach (Lekar lekar in bazaLekara.SviLekari())
+            foreach (Lekar lekar in bazaLekara.DobaviSve())
             {
                 if (lekar.JelLekarOpstePrakse())
                 {
@@ -39,12 +39,12 @@ namespace IS_Bolnice.Servisi
 
         public List<Lekar> GetSviLekari()
         {
-            return bazaLekara.SviLekari();
+            return bazaLekara.DobaviSve();
         }
 
         public Lekar GetLekar(string jmbgLekara)
         {
-            return bazaLekara.DobaviLekara(jmbgLekara);
+            return bazaLekara.DobaviPoId(jmbgLekara);
         }
     }
 }

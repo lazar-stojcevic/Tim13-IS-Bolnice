@@ -22,7 +22,7 @@
         <ListView x:Name="listZamesnski" HorizontalAlignment="Left" Height="106" Margin="117,358,0,0" VerticalAlignment="Top" Width="259">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Šifra" Width="80" DisplayMemberBinding="{Binding Sifra}" />
+                    <GridViewColumn Header="Šifra" Width="80" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Ime" Width="173" DisplayMemberBinding="{Binding Ime}"/>
                 </GridView>
             </ListView.View>

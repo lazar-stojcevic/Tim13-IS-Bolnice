@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 
-public class BazaLekara
+public class BazaLekara: GenerickiFajlRepozitorijum<Lekar>, LekarRepozitorijum
 {
     private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
     private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
@@ -15,11 +17,15 @@ public class BazaLekara
         "M-d-yyyy h:mm:ss tt"
     };
 
+    public BazaLekara() : base(@"..\..\Datoteke\lekari.txt")
+    {
+    }
+
     // metoda izlistava samo lekare opste prakse
     public List<Lekar> LekariOpstePrakse()
     {
         List<Lekar> LekariOP = new List<Lekar>();
-        List<Lekar> sviLekari = SviLekari();
+        List<Lekar> sviLekari = DobaviSve();
 
         foreach(Lekar l in sviLekari)
         {
@@ -32,11 +38,10 @@ public class BazaLekara
         return LekariOP;
     }
 
-    // metoda izlistava samo lekare specijaliste
     public List<Lekar> LekariSpecijalisti()
     {
         List<Lekar> LekariSpecijalisti = new List<Lekar>();
-        List<Lekar> sviLekari = SviLekari();
+        List<Lekar> sviLekari = DobaviSve();
 
         foreach (Lekar l in sviLekari)
         {
@@ -52,7 +57,7 @@ public class BazaLekara
     public List<Lekar> LekariOdredjeneOblasti(string trazenaOblast)
     {
         List<Lekar> lekariOdredjeneOblasti = new List<Lekar>();
-        List<Lekar> sviLekari = SviLekari();
+        List<Lekar> sviLekari = DobaviSve();
 
         foreach (Lekar lekar in sviLekari)
         {
@@ -64,63 +69,25 @@ public class BazaLekara
         return lekariOdredjeneOblasti;
     }
 
-    public List<Lekar> SviLekari()
+    public override Lekar KreirajEntitet(string[] delovi)
     {
-        List<Lekar> ret = new List<Lekar>();
-        if (File.Exists(@"..\..\Datoteke\lekari.txt"))
-        {
-            string[] lines = File.ReadAllLines(@"..\..\Datoteke\lekari.txt");
-            foreach (string line in lines)
-            {
-                Lekar p = new Lekar();
-                string[] delovi = line.Split('#');
-                p.Jmbg = delovi[0];
-                p.Ime = delovi[1];
-                p.Prezime = delovi[2];
-                p.Oblast = new OblastLekara(delovi[3]);
-                p.KorisnickoIme = delovi[4];
-                p.Sifra = delovi[5];
-                p.RadnoVreme = bazaRadnogVremena.RadnoVremeOdredjenogLekara(delovi[0]);
-                p.Ordinacija = new Soba(delovi[6]);
-                //TREBA DODATI ORDINACIJU
-                ret.Add(p);
-            }
-        }
-        else
-        {
-            Console.WriteLine("Nista");
-        }
-        return ret;
+        Lekar lekar = new Lekar();
+        lekar.Jmbg = delovi[0];
+        lekar.Id = lekar.Jmbg;
+        lekar.Ime = delovi[1];
+        lekar.Prezime = delovi[2];
+        lekar.Oblast = new OblastLekara(delovi[3]);
+        lekar.KorisnickoIme = delovi[4];
+        lekar.Sifra = delovi[5];
+        lekar.RadnoVreme = bazaRadnogVremena.RadnoVremeOdredjenogLekara(delovi[0]);
+        lekar.Ordinacija = new Soba(delovi[6]);
+        return lekar;
     }
 
-    public Lekar DobaviLekara(string jmbgLekara)
+    public override string KreirajTextZaUpis(Lekar entitet)
     {
-        foreach (Lekar lekar in SviLekari())
-        {
-            if (lekar.Jmbg.Equals(jmbgLekara))
-            {
-                return lekar;
-            }
-        }
-
-        return null;
+        throw new NotImplementedException();
     }
 
-    public void KreirajLekara(Lekar noviLekar)
-   {
-      throw new NotImplementedException();
-   }
-   
-   public void ObrisiLekara(Lekar lekar)
-   {
-      throw new NotImplementedException();
-   }
-   
-   public void IzmeniLekara(Lekar lekar)
-   {
-      throw new NotImplementedException();
-   }
-   
-   public string fileLocation;
 
 }

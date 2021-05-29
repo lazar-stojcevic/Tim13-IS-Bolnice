@@ -16,7 +16,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> GetSveOperacije()
         {
-            return bazaOperacija.SveOperacije();
+            return bazaOperacija.DobaviSve();
         }
 
         public List<Operacija> GetSveSledeceOperacije()
@@ -56,7 +56,7 @@ namespace IS_Bolnice.Servisi
         public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
         {
             List<Operacija> ret = new List<Operacija>();
-            foreach (Operacija operacija in bazaOperacija.SveOperacije())
+            foreach (Operacija operacija in bazaOperacija.DobaviSve())
             {
                 if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
                 {
@@ -81,7 +81,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
         {
-            Lekar lekar = new BazaLekara().DobaviLekara(jmbgLekara);
+            Lekar lekar = new BazaLekara().DobaviPoId(jmbgLekara);
             BazaOperacija bazaOperacija = new BazaOperacija();
             return SlobodneOperacijeLekaraUNarednomPeriodu(lekar, duzinaTrajanja, idSale);
         }
@@ -113,6 +113,7 @@ namespace IS_Bolnice.Servisi
                     Soba = new BazaBolnica().GetSobaById(idSale),
                     Hitna = true
                 };
+                Console.Write(operacija.Lekar);
                 sveSkorasnjeOperacije.Add(operacija);
             }
             return sveSkorasnjeOperacije;
@@ -141,7 +142,7 @@ namespace IS_Bolnice.Servisi
                     operacija.VremePocetkaOperacije.Date.Equals(stariDatum))
                 {
                     Operacija staraOperacija = operacija;
-                    baza.IzmeniOperaciju(novaOperacija, staraOperacija);
+                    baza.Izmeni(novaOperacija);
                     return true;
                 }
             }
@@ -230,14 +231,14 @@ namespace IS_Bolnice.Servisi
 
         public void IzmeniOperaciju(Operacija nova, Operacija stara)
         {
-            bazaOperacija.IzmeniOperaciju(nova, stara);
+            bazaOperacija.Izmeni(nova);
         }
 
         public bool ZakaziOperaciju(Operacija operacija)
         {
             if (MozeDaSeZakaze(operacija))
             {
-                bazaOperacija.ZakaziOperaciju(operacija);
+                bazaOperacija.Sacuvaj(operacija);
                 return true;
             }
 
@@ -246,7 +247,7 @@ namespace IS_Bolnice.Servisi
 
         public void OtkaziOperaciju(Operacija operacija)
         {
-            bazaOperacija.OtkaziOperaciju(operacija);
+            bazaOperacija.Obrisi(operacija.Id);
         }
 
         public void OdloziOperaciju(Operacija pomeranaOperacija)

@@ -115,8 +115,13 @@
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
     <Compile Include="Baze\Interfejsi\GenerickiRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\LekarRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\LekRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\OdgovorNaZahtevRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\OperacijaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\OpremaRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\SastojakRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\ZahteviZaValidacijuRepozitorijum.cs" />
     <Compile Include="Baze\Klase\GenerickiFajlRepozitorijum.cs" />
     <Compile Include="Kontroleri\BelezkeKontroler.cs" />
     <Compile Include="Kontroleri\BolnicaKontroler.cs" />

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -32,14 +33,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private List<Lekar> lekariSpecijalisti = new List<Lekar>();
         private List<Operacija> operacije = new List<Operacija>();
 
-        public DateTime StariDatum  { get; set; }
+        public DateTime StariDatum { get; set; }
         public string StariSat { get; set; }
         public string StariMinut { get; set; }
-        public IzmenaOperacije()
+
+        public string idStare { get; set; }
+
+        public IzmenaOperacije(string idStareOperacije)
         {
             InitializeComponent();
 
-
+            idStare = idStareOperacije;
+            
             List<Lekar> lekariSpecijalisti = lekarKontroler.GetSviLekariSpecijalisti();
             listaLekara.ItemsSource = lekariSpecijalisti;
            
@@ -61,7 +66,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena operacije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                Operacija novaOperacija = new Operacija();
+                Operacija novaOperacija = new Operacija(idStare);
                 Lekar lekar = (Lekar)listaLekara.SelectedItem;
                 string idLekara = lekar.Jmbg;
 

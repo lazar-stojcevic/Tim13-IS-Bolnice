@@ -8,7 +8,10 @@ using System;
 
 public class Lekar : Korisnik
 {
-    public Lekar() { }
+    public Lekar()
+    {
+        Id = Jmbg;
+    }
     
 
     public OblastLekara Oblast { get; set; }

@@ -6,9 +6,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 
-public class BazaLekova
+public class BazaLekova: GenerickiFajlRepozitorijum<Lek>, LekRepozitorijum
 {
+    public BazaLekova() : base(@"..\..\Datoteke\lekovi.txt")
+    {
+
+    }
+    /*
    public List<Lek> SviLekovi()
    {
         List<Lek> ret = new List<Lek>();
@@ -24,21 +31,21 @@ public class BazaLekova
            string[] lines = File.ReadAllLines(@"..\..\Datoteke\lekovi.txt");
            foreach (string line in lines)
            {
-               Lek p = new Lek();
+               Lek lek = new Lek();
                string[] delovi = line.Split('#');
 
-               p.Sifra = delovi[0];
-               p.Ime = delovi[1];
-               p.Opis = delovi[2];
+               lek.Id = delovi[0];
+               lek.Ime = delovi[1];
+               lek.Opis = delovi[2];
 
-               PostaviDaLiJePotrebanRecept(delovi, p);
+               PostaviDaLiJePotrebanRecept(delovi, lek);
 
-               KreirajAlergene(delovi, p);
+               KreirajAlergene(delovi, lek);
 
-               KreirajZamenskeLekove(delovi, p);
+               KreirajZamenskeLekove(delovi, lek);
 
                Console.WriteLine(line);
-               ret.Add(p);
+               ret.Add(lek);
            }
        }
    }
@@ -92,7 +99,7 @@ public class BazaLekova
         List<Lek> lekovi = SviLekovi();
         foreach (Lek lek in lekovi)
         {
-            if (lek.Sifra.Equals(sifraLeka))
+            if (lek.Id.Equals(sifraLeka))
             {
                 return lek;
             }
@@ -103,7 +110,7 @@ public class BazaLekova
     public void KreirajLek(Lek lek)
    {
        List<string> linije = new List<string>();
-       string novaLinija = lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+       string novaLinija = lek.Id + "#" + lek.Ime + "#" + lek.Opis + "#";
        if (lek.PotrebanRecept)
        {
            novaLinija += "1#";
@@ -128,7 +135,7 @@ public class BazaLekova
        {
            foreach (Lek lekIter in lek.ZamenskiLekovi)
            {
-               novaLinija += lekIter.Sifra + "/";
+               novaLinija += lekIter.Id + "/";
            }
        }
 
@@ -184,9 +191,9 @@ public class BazaLekova
         List<string> linije = new List<string>();
         foreach (Lek lek in SviLekovi())
         {
-            if (!lekZaBrisanje.Sifra.Equals(lek.Sifra))
+            if (!lekZaBrisanje.Id.Equals(lek.Id))
             {
-                string novaLinija =lek.Sifra + "#" + lek.Ime + "#" + lek.Opis + "#";
+                string novaLinija =lek.Id + "#" + lek.Ime + "#" + lek.Opis + "#";
                 if (lek.PotrebanRecept)
                 {
                     novaLinija += "1#";
@@ -211,7 +218,7 @@ public class BazaLekova
                 {
                     foreach (Lek zamenskiLek in lek.ZamenskiLekovi)
                     {
-                        novaLinija = novaLinija + zamenskiLek.Sifra + "/";
+                        novaLinija = novaLinija + zamenskiLek.Id + "/";
                     }
                     novaLinija = novaLinija.Remove(novaLinija.Length - 1);
                 }
@@ -222,7 +229,103 @@ public class BazaLekova
         }
         File.WriteAllLines(fileLocation, linije);
     }
-   
-   public string fileLocation = @"..\..\Datoteke\lekovi.txt";
+    */
+    public override Lek KreirajEntitet(string[] podaciEntiteta)
+    {
+        Lek lek = new Lek();
+
+        lek.Id = podaciEntiteta[0];
+        lek.Ime = podaciEntiteta[1];
+        lek.Opis = podaciEntiteta[2];
+
+        PostaviDaLiJePotrebanRecept(podaciEntiteta, lek);
+
+        KreirajAlergene(podaciEntiteta, lek);
+
+        KreirajZamenskeLekove(podaciEntiteta, lek);
+
+        return lek;
+    }
+
+    public override string KreirajTextZaUpis(Lek lek)
+    {
+        string novaLinija = System.Environment.NewLine + lek.Id + "#" + lek.Ime + "#" + lek.Opis + "#";
+        if (lek.PotrebanRecept)
+        {
+            novaLinija += "1#";
+        }
+        else novaLinija += "0#";
+
+
+        if (lek.Alergeni.Count != 0)
+        {
+            foreach (Sastojak sastojak in lek.Alergeni)
+            {
+                novaLinija += sastojak.Ime + ",";
+            }
+        }
+        else
+        {
+            novaLinija += "nema,";
+        }
+        novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+
+        novaLinija = novaLinija + "#";
+        if (lek.ZamenskiLekovi.Count != 0)
+        {
+            foreach (Lek zamenskiLek in lek.ZamenskiLekovi)
+            {
+                novaLinija = novaLinija + zamenskiLek.Id + "/";
+            }
+            novaLinija = novaLinija.Remove(novaLinija.Length - 1);
+        }
+
+        return novaLinija;
+    }
+
+    private static void PostaviDaLiJePotrebanRecept(string[] delovi, Lek p)
+    {
+        if (delovi[3].Equals("1"))
+        {
+            p.PotrebanRecept = true;
+        }
+        else
+        {
+            p.PotrebanRecept = false;
+        }
+    }
+
+    private static void KreirajAlergene(string[] delovi, Lek p)
+    {
+        string alergeniSvi = delovi[4];
+        if (!alergeniSvi.Equals(""))
+        {
+            string[] alergen = alergeniSvi.Split(',');
+            foreach (string a in alergen)
+            {
+                if (!a.Equals(""))
+                {
+                    Sastojak s = new Sastojak(a);
+                    p.Alergeni.Add(s);
+                }
+            }
+        }
+    }
+
+    private static void KreirajZamenskeLekove(string[] delovi, Lek p)
+    {
+        string zamenskiLekoviSvi = delovi[5];
+        if (!zamenskiLekoviSvi.Equals(""))
+        {
+            string[] zameskiLek = zamenskiLekoviSvi.Split('/');
+            foreach (string deo in zameskiLek)
+            {
+                if (deo.Equals("")) continue;
+                Lek lek = new Lek(deo);
+                p.ZamenskiLekovi.Add(lek);
+            }
+        }
+    }
+    public string fileLocation = @"..\..\Datoteke\lekovi.txt";
 
 }

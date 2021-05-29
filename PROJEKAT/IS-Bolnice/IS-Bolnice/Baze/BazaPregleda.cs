@@ -105,7 +105,7 @@ public class BazaPregleda
 
         List<string> lines = new List<string>();
         List<Pregled> pregledi = new List<Pregled>();
-        List<Lekar> lekari = bl.SviLekari();
+        List<Lekar> lekari = bl.DobaviSve();
 
         lines = File.ReadAllLines(fileLocation).ToList();
 
@@ -218,7 +218,7 @@ public class BazaPregleda
     }
 
     public string FormatPisanjaPregleda(Pregled pregled){
-        foreach (Lekar lekar in bazaLekara.SviLekari())
+        foreach (Lekar lekar in bazaLekara.DobaviSve())
         {
             if (lekar.Jmbg.Equals(pregled.Lekar.Jmbg))
             {

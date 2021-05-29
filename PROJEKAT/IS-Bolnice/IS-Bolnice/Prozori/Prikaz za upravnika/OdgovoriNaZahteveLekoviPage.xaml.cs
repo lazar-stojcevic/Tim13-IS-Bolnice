@@ -31,7 +31,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             List<OdgovorNaZahtevZaValidaciju> odgovoriNaZahteve = baza.DobaviSve();
             List<string> linije = new List<string>();
             foreach (OdgovorNaZahtevZaValidaciju odgovor in odgovoriNaZahteve) {
-                string linija = "ID: " + odgovor.Lek.Sifra + " Naziv: " + odgovor.Lek.Ime;
+                string linija = "ID: " + odgovor.Lek.Id + " Naziv: " + odgovor.Lek.Ime;
                 linije.Add(linija);
             }
             return linije;

@@ -82,7 +82,7 @@ namespace IS_Bolnice
             {
                 BazaLekara baza3 = new BazaLekara();
                 List<Lekar> lekari = new List<Lekar>();
-                lekari = baza3.SviLekari();
+                lekari = baza3.DobaviSve();
                 foreach (Lekar l in lekari)
                 {
                     if (l.KorisnickoIme.Equals(korisnik))

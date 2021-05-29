@@ -39,7 +39,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 foreach (Terapija terapija in izvestaj.Terapija)
                 {
                     Console.WriteLine("***********TERAPIJA************");
-                    Console.WriteLine("Sifra leka: " + terapija.Lek.Sifra);
+                    Console.WriteLine("Sifra leka: " + terapija.Lek.Id);
                     Console.WriteLine("Naziv leka: " + terapija.Lek.Ime);
                     Console.WriteLine("Opis leka: " + terapija.Lek.Opis);
                     Console.WriteLine("Na koliko dana se lek uzima: " + terapija.RazlikaNaKolikoSeDanaUzimaLek.ToString());

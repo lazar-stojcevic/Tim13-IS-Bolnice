@@ -1,10 +1,11 @@
 using System;
+using IS_Bolnice.Model;
 
-public class Sastojak
+public class Sastojak: Entitet
 {
     public string Ime { get; set; }
 
-    public Sastojak(string ime)
+    public Sastojak(string ime):base(ime)
     {
         Ime = ime;
     }
