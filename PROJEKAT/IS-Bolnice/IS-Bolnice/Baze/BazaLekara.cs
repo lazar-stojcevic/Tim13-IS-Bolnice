@@ -9,7 +9,7 @@ using IS_Bolnice.Baze.Klase;
 
 public class BazaLekara: GenerickiFajlRepozitorijum<Lekar>, LekarRepozitorijum
 {
-    private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
+    private IRadnoVremeRepozitorijum radnoVremeRepo = new RadnoVremeFajlRepozitorijum();
     private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
     private static string[] vremenskiFormatiCitanje = new[]
     {
@@ -79,7 +79,7 @@ public class BazaLekara: GenerickiFajlRepozitorijum<Lekar>, LekarRepozitorijum
         lekar.Oblast = new OblastLekara(delovi[3]);
         lekar.KorisnickoIme = delovi[4];
         lekar.Sifra = delovi[5];
-        lekar.RadnoVreme = bazaRadnogVremena.RadnoVremeOdredjenogLekara(delovi[0]);
+        lekar.RadnoVreme = radnoVremeRepo.RadnoVremeOdredjenogLekara(delovi[0]);
         lekar.Ordinacija = new Soba(delovi[6]);
         return lekar;
     }

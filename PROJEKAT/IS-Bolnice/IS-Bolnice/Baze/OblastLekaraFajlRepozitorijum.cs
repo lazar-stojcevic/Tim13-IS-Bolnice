@@ -10,9 +10,9 @@ using IS_Bolnice.Baze.Klase;
 
 namespace IS_Bolnice.Baze
 {
-    class BazaOblastiLekara : GenerickiFajlRepozitorijum<OblastLekara>, IOblastiLekaraRepozitorijum
+    class OblastLekaraFajlRepozitorijum : GenerickiFajlRepozitorijum<OblastLekara>, IOblastLekaraRepozitorijum
     {
-        public BazaOblastiLekara() : base(@"..\..\Datoteke\oblastiLekara.txt")
+        public OblastLekaraFajlRepozitorijum() : base(@"..\..\Datoteke\oblastiLekara.txt")
         {
         }
 

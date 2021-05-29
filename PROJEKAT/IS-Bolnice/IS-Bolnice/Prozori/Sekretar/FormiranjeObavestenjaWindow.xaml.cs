@@ -42,7 +42,7 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             Obavestenje obavestenje = new Obavestenje
             {
-                Id = tmpsadrzaj.GetHashCode().ToString(),    // kreira se id obavestenja na osnovu sadrzaja
+                Id = Guid.NewGuid().ToString(),    // kreira se id obavestenja na osnovu sadrzaja
                 Naslov = tmpNaslov,
                 Sadrzaj = tmpsadrzaj,
                 VremeKreiranja = tmpVremeKreiranja,

@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Servisi
 {
     class ObavestenjeServis
     {
-        private BazaObavestenja bazaObavestenja = new BazaObavestenja();
+        private IObavestenjaRepozitorijum obavestenjaRepo = new ObavestenjeFajlRepozitorijum();
 
         public void KreirajObavestenje(Obavestenje novoObavestenje)
         {
-            bazaObavestenja.KreirajObavestenje(novoObavestenje);
+            obavestenjaRepo.Sacuvaj(novoObavestenje);
         }
 
         public void IzmeniObavestenje(Obavestenje izmenjeno)
         {
-            bazaObavestenja.IzmeniObavestenje(izmenjeno);
+            obavestenjaRepo.Izmeni(izmenjeno);
         }
 
         public List<Obavestenje> GetSvaSortiranaObavestenja()
         {
-            List<Obavestenje> svaObavestenja = bazaObavestenja.SvaObavestenja();
+            List<Obavestenje> svaObavestenja = obavestenjaRepo.DobaviSve();
             svaObavestenja.Sort((o1, o2) => DateTime.Compare(o1.VremeKreiranja,o2.VremeKreiranja));
             svaObavestenja.Reverse();
             return svaObavestenja;
         }
 
-        public void ObrisiObavestenje(Obavestenje obavestenje)
+        public void ObrisiObavestenje(string idObavestenja)
         {
-            bazaObavestenja.ObrisiObavestenje(obavestenje);
+            obavestenjaRepo.Obrisi(idObavestenja);
         }
     }
 }

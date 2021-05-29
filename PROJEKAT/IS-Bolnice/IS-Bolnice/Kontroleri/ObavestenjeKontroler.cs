@@ -27,9 +27,9 @@ namespace IS_Bolnice.Kontroleri
             return obavestenjeServis.GetSvaSortiranaObavestenja();
         }
 
-        public void ObrisiObavestenje(Obavestenje obavestenje)
+        public void ObrisiObavestenje(string idObavestenja)
         {
-            obavestenjeServis.ObrisiObavestenje(obavestenje);
+            obavestenjeServis.ObrisiObavestenje(idObavestenja);
         }
     }
 }

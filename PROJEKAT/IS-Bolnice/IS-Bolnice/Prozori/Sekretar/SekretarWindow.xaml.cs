@@ -69,11 +69,19 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void OsvezavanjePrikazaPacijenata()
         {
-            List<Pacijent> sviPacijenti = pacijentKontroler.GetSviPacijenti();
             Pacijenti.Clear();
-            foreach (Pacijent pacijent in sviPacijenti)
+            foreach (Pacijent pacijent in pacijentKontroler.GetSviPacijenti())
             {
                 Pacijenti.Add(pacijent);
+            }
+        }
+
+        private void OsvezavanjePrikazaObavestenja()
+        {
+            Obavestenja.Clear();
+            foreach (var obavestenje in obavestenjeKontroler.GetSvaSortiranaObavestenja())
+            {
+                Obavestenja.Add(obavestenje);
             }
         }
 
@@ -133,6 +141,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             FormiranjeObavestenjaWindow fow = new FormiranjeObavestenjaWindow(Obavestenja);
             fow.ShowDialog();
+            OsvezavanjePrikazaObavestenja();
         }
 
         private void IzmenaObavestenja()
@@ -161,7 +170,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        obavestenjeKontroler.ObrisiObavestenje(o);
+                        obavestenjeKontroler.ObrisiObavestenje(o.Id);
                         Obavestenja.Remove(o);
                         break;
 

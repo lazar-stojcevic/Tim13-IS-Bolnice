@@ -11,11 +11,11 @@ namespace IS_Bolnice.Servisi
 {
     class OblastLekaraServis
     {
-        private IOblastiLekaraRepozitorijum oblastiLekaraRepo = new BazaOblastiLekara();
+        private IOblastLekaraRepozitorijum oblastLekaraRepo = new OblastLekaraFajlRepozitorijum();
 
         public List<OblastLekara> GetSveOblastiLekara()
         {
-            return oblastiLekaraRepo.DobaviSve();
+            return oblastLekaraRepo.DobaviSve();
         }
     }
 }

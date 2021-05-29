@@ -9,7 +9,7 @@ using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Baze
 {
-    class BazaRadnogVremena : GenerickiFajlRepozitorijum<RadnoVremeLekara>, IRadnoVremeRepozitorijum
+    class RadnoVremeFajlRepozitorijum : GenerickiFajlRepozitorijum<RadnoVremeLekara>, IRadnoVremeRepozitorijum
     {
         private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
         private static string[] vremenskiFormatiCitanje = new[]
@@ -18,7 +18,7 @@ namespace IS_Bolnice.Baze
             "M-d-yyyy h:mm:ss tt"
         };
 
-        public BazaRadnogVremena() : base(@"..\..\Datoteke\radnaVremenaLekara.txt")
+        public RadnoVremeFajlRepozitorijum() : base(@"..\..\Datoteke\radnaVremenaLekara.txt")
         {
         }
 

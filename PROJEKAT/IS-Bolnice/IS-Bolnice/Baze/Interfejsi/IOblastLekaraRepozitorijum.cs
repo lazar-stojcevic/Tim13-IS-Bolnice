@@ -7,7 +7,7 @@ using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Baze.Interfejsi
 {
-    interface IOblastiLekaraRepozitorijum : GenerickiRepozitorijum<OblastLekara>
+    interface IOblastLekaraRepozitorijum : GenerickiRepozitorijum<OblastLekara>
     {
     }
 }

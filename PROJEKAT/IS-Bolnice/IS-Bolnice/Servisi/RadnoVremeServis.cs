@@ -11,7 +11,7 @@ namespace IS_Bolnice.Servisi
 {
     class RadnoVremeServis
     {
-        private IRadnoVremeRepozitorijum radnoVremeRepo = new BazaRadnogVremena();
+        private IRadnoVremeRepozitorijum radnoVremeRepo = new RadnoVremeFajlRepozitorijum();
 
         public void IzmeniRadnoVreme(RadnoVremeLekara radnoVreme)
         {
