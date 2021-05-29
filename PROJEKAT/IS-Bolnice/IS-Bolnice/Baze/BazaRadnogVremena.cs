@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Baze
 {
-    class BazaRadnogVremena
+    class BazaRadnogVremena : GenerickiFajlRepozitorijum<RadnoVremeLekara>, IRadnoVremeRepozitorijum
     {
-        private static string fileLocation = @"..\..\Datoteke\radnaVremenaLekara.txt";
         private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
         private static string[] vremenskiFormatiCitanje = new[]
         {
@@ -17,33 +18,58 @@ namespace IS_Bolnice.Baze
             "M-d-yyyy h:mm:ss tt"
         };
 
-        public List<RadnoVremeLekara> RadnoVremeSvihLekara()
+        public BazaRadnogVremena() : base(@"..\..\Datoteke\radnaVremenaLekara.txt")
         {
-            List<string> linije = File.ReadAllLines(fileLocation).ToList();
-            List<RadnoVremeLekara> svaRadnaVremena = NapraviRadnaVremena(linije);
-            return svaRadnaVremena;
         }
 
-        private List<RadnoVremeLekara> NapraviRadnaVremena(List<string> linije)
+        public override RadnoVremeLekara KreirajEntitet(string[] podaciEntiteta)
         {
-            List<RadnoVremeLekara> radnaVremena = new List<RadnoVremeLekara>();
-
-            foreach (string linija in linije)
+            RadnoVremeLekara radnoVremeLekara = new RadnoVremeLekara()
             {
-                string[] delovi = linija.Split('#');
-                RadnoVremeLekara radnoVremeLekara = new RadnoVremeLekara()
-                {
-                    Id = delovi[0],
-                    StandardnoRadnoVreme = NapraviVremenskiInterval(delovi[1]),
-                    VanrednaRadnaVremena = NapraviVanrednaRadnaVremena(delovi[2]),
-                    SlobodniDani = NapraviSlobodneDane(delovi[3]),
-                    SlobodniDaniUNedelji = NapraviSlobodneDaneUNedelji(delovi[4]),
-                    PreostaliSlobodniDaniUGodini = Int32.Parse(delovi[5])
-                };
-                radnaVremena.Add(radnoVremeLekara);
-            }
+                Id = podaciEntiteta[0],
+                StandardnoRadnoVreme = NapraviVremenskiInterval(podaciEntiteta[1]),
+                VanrednaRadnaVremena = NapraviVanrednaRadnaVremena(podaciEntiteta[2]),
+                SlobodniDani = NapraviSlobodneDane(podaciEntiteta[3]),
+                SlobodniDaniUNedelji = NapraviSlobodneDaneUNedelji(podaciEntiteta[4]),
+                PreostaliSlobodniDaniUGodini = Int32.Parse(podaciEntiteta[5])
+            };
+            return radnoVremeLekara;
+        }
 
-            return radnaVremena;
+        public override string KreirajTextZaUpis(RadnoVremeLekara radnoVreme)
+        {
+            string radnoVremePisanje = radnoVreme.Id + "#" + radnoVreme.StandardnoRadnoVreme.Pocetak.ToString(vremenskiFormatPisanje)
+                                       + "!" + radnoVreme.StandardnoRadnoVreme.Kraj.ToString(vremenskiFormatPisanje) + "#";
+
+            // upisivanje liste vanrednih radnih vremena
+            foreach (VremenskiInterval vanrednoRadnoVreme in radnoVreme.VanrednaRadnaVremena)
+            {
+                radnoVremePisanje += vanrednoRadnoVreme.Pocetak.ToString(vremenskiFormatPisanje) + "!"
+                    + vanrednoRadnoVreme.Kraj.ToString(vremenskiFormatPisanje) + ",";
+
+            }
+            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
+            radnoVremePisanje += "#";
+            // upisivanje liste slobodnih dana
+            foreach (DateTime slobodanDan in radnoVreme.SlobodniDani)
+            {
+                radnoVremePisanje += slobodanDan.ToString(vremenskiFormatPisanje) + ",";
+            }
+            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
+            radnoVremePisanje += "#";
+
+            // upisivanje liste slobodnih dana u nedelji
+            foreach (DayOfWeek slobodanDanUNedelji in radnoVreme.SlobodniDaniUNedelji)
+            {
+                radnoVremePisanje += slobodanDanUNedelji.ToString() + ",";
+            }
+            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
+            radnoVremePisanje += "#";
+
+            // upisivanje preostalih slobodnih dana u godini
+            radnoVremePisanje += radnoVreme.PreostaliSlobodniDaniUGodini.ToString();
+
+            return radnoVremePisanje;
         }
 
         private VremenskiInterval NapraviVremenskiInterval(string radnoVreme)
@@ -121,45 +147,9 @@ namespace IS_Bolnice.Baze
             return slobodniDaniUNedelji;
         }
 
-        private string RadnoVremeToString(RadnoVremeLekara radnoVreme)
-        {
-            string radnoVremePisanje = radnoVreme.Id + "#" + radnoVreme.StandardnoRadnoVreme.Pocetak.ToString(vremenskiFormatPisanje)
-                                       + "!" + radnoVreme.StandardnoRadnoVreme.Kraj.ToString(vremenskiFormatPisanje) + "#";
-
-            // upisivanje liste vanrednih radnih vremena
-            foreach (VremenskiInterval vanrednoRadnoVreme in radnoVreme.VanrednaRadnaVremena)
-            {
-                radnoVremePisanje += vanrednoRadnoVreme.Pocetak.ToString(vremenskiFormatPisanje) + "!" 
-                    + vanrednoRadnoVreme.Kraj.ToString(vremenskiFormatPisanje) + ",";
-
-            }
-            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
-            radnoVremePisanje += "#";
-            // upisivanje liste slobodnih dana
-            foreach (DateTime slobodanDan in radnoVreme.SlobodniDani)
-            {
-                radnoVremePisanje += slobodanDan.ToString(vremenskiFormatPisanje) + ",";
-            }
-            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
-            radnoVremePisanje += "#";
-
-            // upisivanje liste slobodnih dana u nedelji
-            foreach (DayOfWeek slobodanDanUNedelji in radnoVreme.SlobodniDaniUNedelji)
-            {
-                radnoVremePisanje += slobodanDanUNedelji.ToString() + ",";
-            }
-            radnoVremePisanje = radnoVremePisanje.TrimEnd(',');
-            radnoVremePisanje += "#";
-
-            // upisivanje preostalih slobodnih dana u godini
-            radnoVremePisanje += radnoVreme.PreostaliSlobodniDaniUGodini.ToString();
-
-            return radnoVremePisanje;
-        }
-
         public RadnoVremeLekara RadnoVremeOdredjenogLekara(string jmbg)
         {
-            List<RadnoVremeLekara> svaRadnaVremena = RadnoVremeSvihLekara();
+            List<RadnoVremeLekara> svaRadnaVremena = DobaviSve();
 
             foreach (RadnoVremeLekara radnoVreme in svaRadnaVremena)
             {
@@ -170,6 +160,13 @@ namespace IS_Bolnice.Baze
             }
 
             return null;
+        }
+
+        /*
+
+        public RadnoVremeLekara RadnoVremeOdredjenogLekara(string jmbg)
+        {
+            
         }
 
         public void NovoRadnoVreme(RadnoVremeLekara novoRadnoVreme)
@@ -215,5 +212,7 @@ namespace IS_Bolnice.Baze
             }
             File.WriteAllLines(fileLocation, svaRandaVremenaString);
         }
+        */
+
     }
 }

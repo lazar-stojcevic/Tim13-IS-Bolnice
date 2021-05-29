@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Servisi
 {
     class RadnoVremeServis
     {
-        private BazaRadnogVremena bazaRadnogVremena = new BazaRadnogVremena();
+        private IRadnoVremeRepozitorijum radnoVremeRepo = new BazaRadnogVremena();
 
         public void IzmeniRadnoVreme(RadnoVremeLekara radnoVreme)
         {
-            bazaRadnogVremena.IzmeniRadnoVreme(radnoVreme);
+            radnoVremeRepo.Izmeni(radnoVreme);
         }
 
         // ne racunaju se dani u nedelji koji su mu neradni
         public int PreracunajBrojIskoriscenihSlobodnihDanaLekara(string jmbgLekara, List<DateTime> noviSlobodniDani)
         {
-            RadnoVremeLekara radnoVremeLekara = bazaRadnogVremena.RadnoVremeOdredjenogLekara(jmbgLekara);
+            RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.RadnoVremeOdredjenogLekara(jmbgLekara);
 
             int iskorisceniSlobodniDani = 0;
             foreach (var dan in noviSlobodniDani)
@@ -36,7 +37,9 @@ namespace IS_Bolnice.Servisi
 
         public bool PreklapanjeIntervalaGodisnjegOdmoraLekara(List<DateTime> potencijalniSlobodniDani, string jmbgLekara)
         {
-            foreach (var slobodanDan in bazaRadnogVremena.RadnoVremeOdredjenogLekara(jmbgLekara).SlobodniDani)
+            RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.RadnoVremeOdredjenogLekara(jmbgLekara);
+
+            foreach (var slobodanDan in radnoVremeLekara.SlobodniDani)
             {
                 foreach (var pot in potencijalniSlobodniDani)
                 {

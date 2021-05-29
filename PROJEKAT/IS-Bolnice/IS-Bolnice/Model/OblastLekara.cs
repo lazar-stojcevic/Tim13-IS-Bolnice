@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Model
 {
-    public class OblastLekara
+    public class OblastLekara : Entitet
     {
         public static readonly string oznakaOpstePrakse = "opsta praksa";
         public string Naziv { get; set; }
 
-        public OblastLekara(string oblast)
+        public OblastLekara() : base(Guid.NewGuid().ToString())
+        {
+
+        }
+        public OblastLekara(string oblast) : base(Guid.NewGuid().ToString())
+        {
+            Naziv = oblast;
+        }
+        public OblastLekara(string id, string oblast) : base(id)
         {
             Naziv = oblast;
         }

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace IS_Bolnice.Model
 {
-    public class RadnoVremeLekara
+    public class RadnoVremeLekara : Entitet
     {
-        public string Id { get; set; }
         public VremenskiInterval StandardnoRadnoVreme { get; set; }
         public List<VremenskiInterval> VanrednaRadnaVremena { get; set; }
         public List<DateTime> SlobodniDani { get; set; }
@@ -13,7 +12,7 @@ namespace IS_Bolnice.Model
 
         public int PreostaliSlobodniDaniUGodini { get; set; }
 
-        public RadnoVremeLekara()
+        public RadnoVremeLekara() : base()
         {
             VanrednaRadnaVremena = new List<VremenskiInterval>();
             SlobodniDani = new List<DateTime>();

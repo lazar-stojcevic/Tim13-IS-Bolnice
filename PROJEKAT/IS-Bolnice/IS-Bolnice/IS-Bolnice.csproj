@@ -115,6 +115,8 @@
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
     <Compile Include="Baze\Interfejsi\GenerickiRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IOblastiLekaraRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IRadnoVremeRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\LekarRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\LekRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\OdgovorNaZahtevRepozitorijum.cs" />

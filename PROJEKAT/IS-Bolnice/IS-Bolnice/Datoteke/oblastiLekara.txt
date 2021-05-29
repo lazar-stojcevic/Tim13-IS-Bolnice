@@ -1,7 +1,7 @@
-opsta praksa
-kardiolog
-hirurg
-neurolog
-psihijatar
-urolog
-oftamolog
+123#opsta praksa
+234#kardiolog
+345#hirurg
+456#neurolog
+567#psihijatar
+678#urolog
+789#oftamolog

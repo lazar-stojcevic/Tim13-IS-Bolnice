@@ -10,6 +10,10 @@ namespace IS_Bolnice.Model
     {
         public string Id { get; set; }
 
+        public Entitet()
+        {
+
+        }
         public Entitet(string id)
         {
             Id = id;

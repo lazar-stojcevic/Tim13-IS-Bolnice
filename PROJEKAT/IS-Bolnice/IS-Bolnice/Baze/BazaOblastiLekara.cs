@@ -5,43 +5,25 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 
 namespace IS_Bolnice.Baze
 {
-    class BazaOblastiLekara
+    class BazaOblastiLekara : GenerickiFajlRepozitorijum<OblastLekara>, IOblastiLekaraRepozitorijum
     {
-        private static string fileLocation = @"..\..\Datoteke\oblastiLekara.txt";
-
-        public List<OblastLekara> SveOblasti()
+        public BazaOblastiLekara() : base(@"..\..\Datoteke\oblastiLekara.txt")
         {
-            List<string> linije = File.ReadAllLines(fileLocation).ToList();
-            List<OblastLekara> sveOblasti = NapraviOblasti(linije);
-            return sveOblasti;
         }
 
-        private List<OblastLekara> NapraviOblasti(List<string> linijeIzFajla)
+        public override OblastLekara KreirajEntitet(string[] podaciEntiteta)
         {
-            List<OblastLekara> sveOblasti = new List<OblastLekara>();
-
-            foreach(string linija in linijeIzFajla)
-            {
-                OblastLekara oblast = new OblastLekara(linija);
-                sveOblasti.Add(oblast);
-            }
-            return sveOblasti;
+            string id = podaciEntiteta[0];
+            string nazivOblasti = podaciEntiteta[1];
+            return new OblastLekara(id, nazivOblasti);
         }
 
-        public void KreirajOblast(OblastLekara novaOblast)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void IzmeniOblast(OblastLekara izmenjenaOblast)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ObrisiOblast(OblastLekara oblastZaBrisanje)
+        public override string KreirajTextZaUpis(OblastLekara entitet)
         {
             throw new NotImplementedException();
         }
