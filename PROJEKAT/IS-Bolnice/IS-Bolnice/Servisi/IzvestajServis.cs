@@ -10,16 +10,16 @@ namespace IS_Bolnice.Servisi
     {
         private BazaIzvestaja bazaIzvestaja = new BazaIzvestaja();
 
-        public void KreirajIzvestaj(string textIzvestaja)
+        public void KreirajIzvestaj(Izvestaj izvestaj)
         {
-            bazaIzvestaja.KreirajIzvestaj(textIzvestaja);
+            bazaIzvestaja.Sacuvaj(izvestaj);
         }
 
         public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)
         {
             List<Izvestaj> izvestajiPacijenta = new List<Izvestaj>();
 
-            foreach (Izvestaj izvestaj in bazaIzvestaja.SviIzvestaji())
+            foreach (Izvestaj izvestaj in bazaIzvestaja.DobaviSve())
             {
                 if (izvestaj.Pacijent.Jmbg == jmbgPacijenta)
                 {

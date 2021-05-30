@@ -104,6 +104,8 @@
     <Compile Include="Baze\BazaIzmena.cs" />
     <Compile Include="Baze\BazaIzvestaja.cs" />
     <Compile Include="Baze\BazaLekova.cs" />
+    <Compile Include="Baze\Interfejsi\IHospitalizacijaRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IIzvestajRepozitorijum.cs" />
     <Compile Include="Baze\ObavestenjeFajlRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IObavestenjaRepozitorijum.cs" />
     <Compile Include="Baze\OblastLekaraFajlRepozitorijum.cs" />

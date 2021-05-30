@@ -64,7 +64,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
                     Pacijent p = new PacijentKontroler().GetPacijentSaOvimJMBG(jmbgPac);
 
-                    string imeBolnice = "Super bolnica";
+                    string imeBolnice = "Zdravo bolnica";
                     string imeIPrezimePacijenta = p.Ime + " " + p.Prezime;
                     string datumRodjenjaPacijenta = p.DatumRodjenja.ToString("dd MM yyyy");
                     string danasniDatum = DateTime.Now.ToString("dd MM yyyy");
@@ -77,6 +77,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     }
                 }
 
+
+
+                Izvestaj izvestaj = new Izvestaj(new Lekar(jmbgLek), new Pacijent(jmbgPac), txtAnamneza.Text,
+                    DateTime.Now);
+                izvestaj.Terapija = terapije.ToList();
+                SacuvajIzvestaj(izvestaj);
+
                 LekarGlavniMeni glavniMeni = new LekarGlavniMeni(jmbgLek);
                 NavigationService.Navigate(glavniMeni);
             }
@@ -84,41 +91,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         }
 
-        private void SacuvajIzvestaj()
+        private void SacuvajIzvestaj(Izvestaj izvestaj)
         {
-            string textIzvestaja = KreirajTextIzvestaja();
-
-            izvestajKontroler.KreirajIzvestaj(textIzvestaja);
+            IzvestajKontroler izvestajKontroler = new IzvestajKontroler();
+            izvestajKontroler.KreirajIzvestaj(izvestaj);
         }
 
-        private string KreirajTextIzvestaja()
-        {
-            string textIzvestaja = KreirajPocetakTekstaIzvestaja();
-
-            foreach (Terapija jednaTerapija in terapije)
-            {
-                textIzvestaja += GenerisanjeTekstaJedneTerapije(jednaTerapija);
-            }
-
-            textIzvestaja = textIzvestaja + Environment.NewLine;
-            return textIzvestaja;
-        }
-
-        private string KreirajPocetakTekstaIzvestaja()
-        {
-            string textIzvestaja;
-            textIzvestaja = txtAnamneza.Text.Replace("\n", "%%%");
-            textIzvestaja = jmbgLek + "#" + jmbgPac + "#" + textIzvestaja + "#" + DateTime.Now.Date + "#";
-            return textIzvestaja;
-        }
-
-        private static string GenerisanjeTekstaJedneTerapije(Terapija ter)
-        {
-            return ter.Lek.Id + "$" + ter.Lek.Ime + "$" + ter.Lek.Opis + "$" +
-                   ter.RazlikaNaKolikoSeDanaUzimaLek + "$"
-                   + ter.UcestanostKonzumiranja + "$" + ter.VremePocetka + "$" +
-                   ter.VremeKraja + "$" + ter.Opis + "&";
-        }
 
         private void KreirajReceptZaStampanje(string imeBolnice, StringFormat stringFormat, string imePacijenta, string datumRodjenjaPacijenta,
             string danasniDatum, Terapija ter, ref int broj)

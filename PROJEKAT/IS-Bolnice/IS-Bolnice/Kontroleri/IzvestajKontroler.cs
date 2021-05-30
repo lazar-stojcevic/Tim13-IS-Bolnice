@@ -11,9 +11,9 @@ namespace IS_Bolnice.Kontroleri
     {
         private IzvestajServis izvestajServis = new IzvestajServis();
 
-        public void KreirajIzvestaj(string textIzvestaja)
+        public void KreirajIzvestaj(Izvestaj izvestaj)
         {
-            izvestajServis.KreirajIzvestaj(textIzvestaja);
+            izvestajServis.KreirajIzvestaj(izvestaj);
         }
 
         public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)

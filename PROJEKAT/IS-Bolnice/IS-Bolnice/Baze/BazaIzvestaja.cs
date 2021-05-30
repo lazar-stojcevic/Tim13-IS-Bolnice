@@ -3,57 +3,58 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 
-public class BazaIzvestaja
+public class BazaIzvestaja: GenerickiFajlRepozitorijum<Izvestaj>, IIzvestajRepozitorijum
 {
-    private static string fileLocation = @"..\..\Datoteke\izvestaji.txt";
     private static string formatPisanjaDatuma = "M/d/yyyy h:mm:ss tt";
     private static string[] formatCitanjaDatuma = new[]
     {
         "M/d/yyyy h:mm:ss tt",
         "M-d-yyyy h:mm:ss tt"
     };
-    public List<Izvestaj> SviIzvestaji()
+
+    public BazaIzvestaja() : base(@"..\..\Datoteke\izvestaji.txt")
     {
-        List<Izvestaj> izvestaji = new List<Izvestaj>();
-
-        foreach (string linija in ProcitajDatoteku())
-        {
-            string[] deloviLinije = linija.Split('#');
-            izvestaji.Add(FormirajIzvestajOdLinije(deloviLinije));
-        }
-
-        return izvestaji;
     }
-
-    public void KreirajIzvestaj(string izvestaj)
-    {
-        File.AppendAllText(@"..\..\Datoteke\izvestaji.txt", izvestaj);
-    }
-
-    public void IzmeniIzvestaj(Izvestaj izvestaj)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ObrisiIzvestaj(Izvestaj izvestaj)
-    {
-        throw new NotImplementedException();
-    }
-
-    private Izvestaj FormirajIzvestajOdLinije(string[] linija)
+    
+    public override Izvestaj KreirajEntitet(string[] podaciEntiteta)
     {
         Lekar lekar = new Lekar();
-        lekar.Jmbg = linija[0];
+        lekar.Jmbg = podaciEntiteta[1];
         Pacijent pacijent = new Pacijent();
-        pacijent.Jmbg = linija[1];
+        pacijent.Jmbg = podaciEntiteta[2];
 
-        List<Terapija> terapije = NapraviTerapijeOdLinije(linija[4]);
+        List<Terapija> terapije = NapraviTerapijeOdLinije(podaciEntiteta[5]);
 
-        Izvestaj izvestaj = new Izvestaj(lekar, pacijent, linija[2], FormirajDatumZaCitanje(linija[3]));
+        Izvestaj izvestaj = new Izvestaj(lekar, pacijent, podaciEntiteta[3], FormirajDatumZaCitanje(podaciEntiteta[4]));
         izvestaj.Terapija = terapije;
-
+        izvestaj.Id = podaciEntiteta[0];
         return izvestaj;
+    }
+
+    public override string KreirajTextZaUpis(Izvestaj entitet)
+    {
+        string textIzvestaja;
+        textIzvestaja = entitet.Id +"#" + entitet.Lekar.Jmbg + "#" + entitet.Pacijent.Jmbg + "#" + entitet.Opis + "#" +
+                        DateTime.Now.Date + "#";
+        foreach (Terapija terapija in entitet.Terapija)
+        {
+            textIzvestaja += KreirajTextJedneTerapije(terapija);
+        }
+
+        return textIzvestaja;
+    }
+
+    private static string KreirajTextJedneTerapije(Terapija terapija)
+    {
+        string textIzvestaja = "";
+        textIzvestaja += terapija.Lek.Id + "$" + terapija.Lek.Ime + "$" + terapija.Lek.Opis + "$" +
+                         terapija.RazlikaNaKolikoSeDanaUzimaLek + "$"
+                         + terapija.UcestanostKonzumiranja + "$" + terapija.VremePocetka + "$" +
+                         terapija.VremeKraja + "$" + terapija.Opis + "&";
+        return textIzvestaja;
     }
 
     private List<Terapija> NapraviTerapijeOdLinije(string linija)
@@ -100,14 +101,9 @@ public class BazaIzvestaja
         return lek;
     }
 
-    private List<string> ProcitajDatoteku()
-    {
-        return File.ReadAllLines(fileLocation).ToList();
-    }
-
     private DateTime FormirajDatumZaCitanje(string datum)
     {
         return DateTime.ParseExact(datum, formatCitanjaDatuma, CultureInfo.InvariantCulture,
-                                              DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+            DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
     }
 }

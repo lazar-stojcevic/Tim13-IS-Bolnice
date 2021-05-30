@@ -13,7 +13,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Hospitalizacija> GetSveHospitalizacije()
         {
-            return bazaHospitalizacija.SveHospitalizacije();
+            return bazaHospitalizacija.DobaviSve();
         }
 
         public bool KreirajHospitalizaciju(Hospitalizacija hospitalizacija)
@@ -23,7 +23,7 @@ namespace IS_Bolnice.Servisi
 
         public void ObrisiHospitalizaciju(Hospitalizacija hospitalizacija)
         {
-            bazaHospitalizacija.ObrisiHospitalizaciju(hospitalizacija);
+            bazaHospitalizacija.Obrisi(hospitalizacija.Id);
         }
     }
 }

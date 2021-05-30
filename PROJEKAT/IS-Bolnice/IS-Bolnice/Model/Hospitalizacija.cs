@@ -5,8 +5,9 @@
 
 using System;
 using System.ComponentModel;
+using IS_Bolnice.Model;
 
-public class Hospitalizacija :INotifyPropertyChanged
+public class Hospitalizacija :Entitet ,INotifyPropertyChanged
 {
     private DateTime pocetakHospitalizacije;
     private DateTime krajHospitalizacije;
@@ -17,7 +18,7 @@ public class Hospitalizacija :INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public Hospitalizacija(string idPacijenta, string idSobe, DateTime krajHospitalizacije)
+    public Hospitalizacija(string idPacijenta, string idSobe, DateTime krajHospitalizacije):base(idPacijenta + "+" + idSobe)
     {
         PocetakHospitalizacije = DateTime.Now;
         KrajHospitalizacije = krajHospitalizacije;
@@ -29,7 +30,7 @@ public class Hospitalizacija :INotifyPropertyChanged
         Pacijent.Jmbg = idPacijenta;
     }
 
-    public Hospitalizacija()
+    public Hospitalizacija():base("")
     {
         Soba = new Soba();
         Pacijent = new Pacijent();

@@ -4,22 +4,25 @@
 // Purpose: Definition of Class Izvestaj
 
 using System;
+using System.Collections.Generic;
+using IS_Bolnice.Model;
 
-public class Izvestaj
+public class Izvestaj : Entitet
 {
     public string Opis { get; set; }
     public DateTime DatumKreiranja { get; set; }
     public Pacijent Pacijent { get; set; }
     public Lekar Lekar { get; set; }
 
-    public Izvestaj() { }
+    public Izvestaj():base("") { }
 
-    public Izvestaj(Lekar lekar, Pacijent pacijent, string opis, DateTime datumKreiranja)
+    public Izvestaj(Lekar lekar, Pacijent pacijent, string opis, DateTime datumKreiranja):base(Guid.NewGuid().ToString())
     {
         this.Lekar = lekar;
         this.Pacijent = pacijent;
         this.Opis = opis;
         this.DatumKreiranja = datumKreiranja;
+        this.Terapija = new List<Terapija>();
     }
 
 

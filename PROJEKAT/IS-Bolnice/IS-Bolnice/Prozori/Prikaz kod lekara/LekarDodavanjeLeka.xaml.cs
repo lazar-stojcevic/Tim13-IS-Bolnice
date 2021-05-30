@@ -80,7 +80,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             t.Lek = l;
             t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
             t.VremePocetka = System.DateTime.Now;
-            t.VremeKraja = DateTime.Now.AddDays(Int16.Parse(txtTrajanje.Text));
+            t.VremeKraja = DateTime.Now.AddDays(Int32.Parse(txtTrajanje.Text));
             t.RazlikaNaKolikoSeDanaUzimaLek = comboboxNaKolikoDana.SelectedIndex;
             t.Opis = txtDetalji.Text;
             sveZadateTerapije.Add(t);

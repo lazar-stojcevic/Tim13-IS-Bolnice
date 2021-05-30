@@ -12,6 +12,11 @@ public class Pacijent : Korisnik
         Alergeni = new List<Sastojak>();    
     }
 
+    public Pacijent(string jmbg)
+    {
+        Jmbg = jmbg;
+    }
+
     public Pacijent(string jmbg, string ime, string prezime)
     {
         Jmbg = jmbg;

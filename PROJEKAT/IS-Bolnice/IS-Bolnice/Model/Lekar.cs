@@ -12,6 +12,12 @@ public class Lekar : Korisnik
     {
         Id = Jmbg;
     }
+
+    public Lekar(string jmbg)
+    {
+        Jmbg = jmbg;
+        Id = jmbg;
+    }
     
 
     public OblastLekara Oblast { get; set; }

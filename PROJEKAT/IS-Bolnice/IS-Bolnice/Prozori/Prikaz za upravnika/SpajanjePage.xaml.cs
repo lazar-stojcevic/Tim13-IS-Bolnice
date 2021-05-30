@@ -183,7 +183,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             BazaRenovacija bazaRenovacija = new BazaRenovacija();
             BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
             Renovacija renovacija = MakeRenovacija();
-            foreach (Hospitalizacija hospitalizacija in bazaHospitalizacija.GetHospitalizacijeZaSobu(idSobe)) {
+            foreach (Hospitalizacija hospitalizacija in bazaHospitalizacija.DobaviSveHospitalizacijeZaSobu(idSobe)) {
                 if (hospitalizacija.PocetakHospitalizacije > renovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < renovacija.DatumKraja)
                 {
                     MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
