@@ -3,15 +3,16 @@
 // Created: Monday, March 22, 2021 6:39:01 PM
 // Purpose: Definition of Class Soba
 
+using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Documents;
 
-public class Soba
+public class Soba: Entitet
 {
 
-    public Soba(string id, bool zauzeta, bool podRenoviranje, RoomType tip, bool obrisano, int sprat, double kvadratura)
+    public Soba(string id, bool zauzeta, bool podRenoviranje, RoomType tip, bool obrisano, int sprat, double kvadratura): base(id)
     {
         Id = id;
         Zauzeta = zauzeta;
@@ -21,7 +22,7 @@ public class Soba
         Kvadratura = kvadratura;
     }
 
-    public Soba()
+    public Soba(): base("101")
     {
 
     }
@@ -29,35 +30,6 @@ public class Soba
     public Soba(string idSobe)
     {
         this.Id = idSobe;
-    }
-
-   
-   public bool Izmeni(string noviID, int noviBrojSprata, RoomType noviTip, double novaKvadratura)
-   {
-        Id = noviID;
-        Sprat = noviBrojSprata;
-        Tip = noviTip;
-        Kvadratura = novaKvadratura;
-        return true;
-    }
-   
-   public bool Obrisi()
-   {
-        this.Obrisano = true;
-        return true;
-    }
-   
-   public bool Zauzmi()
-   {
-        if (Zauzeta)
-        {
-            return false;
-        }
-        else
-        {
-            Zauzeta = true;
-            return true;
-        }
     }
    
 
@@ -102,7 +74,6 @@ public class Soba
         return Id + " " + Kvadratura + "m^2 " + "Sprat: " + Sprat;
     }
 
-    public string Id { get; set; }
     public bool Zauzeta { get; set; }
     public bool PodRenoviranje { get; set; }
     public RoomType Tip { get; set; }

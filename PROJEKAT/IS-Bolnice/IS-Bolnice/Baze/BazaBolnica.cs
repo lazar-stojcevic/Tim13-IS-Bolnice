@@ -3,65 +3,26 @@
 // Created: Monday, March 22, 2021 9:11:00 PM
 // Purpose: Definition of Class BazaBolnica
 
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
-public class BazaBolnica
+public class BazaBolnica: GenerickiFajlRepozitorijum<Bolnica>, IBolnicaRepozitorijum
 {
-    public List<Bolnica> SveBolnice()
-    {
-        List<Bolnica> ret = new List<Bolnica>();
-        if (File.Exists(fileLocation))
-        {
-            string[] lines = File.ReadAllLines(fileLocation);
-            foreach (string line in lines)
-            {
-                Bolnica b = ParseStringToBolnica(line);
-                ret.Add(b);
-            }
-        }
-        else
-        {
 
-            MessageBox.Show("Nista");
-        }
-        return ret;
+    public BazaBolnica() : base(@"..\..\Datoteke\bolnice.txt") { }
 
-    }
-
+   
     public Bolnica GetBolnica() {
-        foreach (Bolnica bolnicaIter in SveBolnice()) {
+        foreach (Bolnica bolnicaIter in DobaviSve()) {
             return bolnicaIter;
         }
         return new Bolnica();
     }
 
-    public Bolnica ParseStringToBolnica(string podaciOSobi)
-    {
-        Bolnica b = new Bolnica();
-        string[] delovi = podaciOSobi.Split('#');
-        b.Ime = delovi[0];
-        b.Adresa = delovi[1];
-        b.EMail = delovi[2];
-        b.BrojTelefona = delovi[3];
-        string[] sobe = delovi[4].Split('%');
-        foreach (string linije in sobe)
-        {
-            if (linije.Equals("")) break;
-            Soba s = new Soba();
-            string[] ds = linije.Split('/');
-            s.Id = ds[0];
-            s.Zauzeta = ParseStringToBool(ds[1]);
-            s.Tip = (RoomType)Enum.Parse(typeof(RoomType), ds[2]);
-            s.Obrisano = ParseStringToBool(ds[3]);
-            s.Sprat = Int32.Parse(ds[4]);
-            s.Kvadratura = Double.Parse(ds[5]);
-            b.AddSoba(s);
-        }
-        return b;
-    }
 
     public bool ParseStringToBool(string tekst) {
         if (tekst.Equals("False"))
@@ -76,7 +37,7 @@ public class BazaBolnica
 
     public List<Soba> GetSobe()
     {
-        List<Bolnica> bolnice = SveBolnice();
+        List<Bolnica> bolnice = DobaviSve();
         foreach (Bolnica b in bolnice)
         {
             return b.Soba;
@@ -88,7 +49,7 @@ public class BazaBolnica
     public Soba GetMagacin()
     {
         Soba soba = new Soba();
-        List<Bolnica> bolnice = SveBolnice();
+        List<Bolnica> bolnice = DobaviSve();
         foreach (Bolnica b in bolnice)
         {
             foreach (Soba s in b.Soba)
@@ -114,40 +75,9 @@ public class BazaBolnica
         return new Soba();
     }
 
-    public void KreirajBolnicu(Bolnica novaBolnica)
-    {
-
-        if (File.Exists(fileLocation))
-        {
-            string[] niz = new string[1];
-            niz[0] = novaBolnica.Ime + "#" + novaBolnica.Adresa + "#" + novaBolnica.EMail + "#" + novaBolnica.BrojTelefona + "#";
-            foreach (Soba s in novaBolnica.Soba)
-            {
-                niz[0] = niz[0] + s.Id + "/" + s.Zauzeta + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "%";
-            }
-            niz[0] = niz[0] + "#";
-            File.WriteAllLines(fileLocation, niz);
-        }
-        else
-        {
-
-            MessageBox.Show("Nista");
-        }
-    }
-
-    public void ObrisiBolnicu(Bolnica bolnica)
-   {
-      throw new NotImplementedException();
-   }
-   
-   public void IzmeniBolnicu(Bolnica bolnica)
-   {
-      throw new NotImplementedException();
-   }
-
     public List<Soba> SveOperacioneSaleOveBolnice()
     {
-        List<Bolnica> bolnice = SveBolnice();
+        List<Bolnica> bolnice = DobaviSve();
         List<Soba> sveSobe = bolnice[0].Soba; // za sada se podrazumeva da postoji samo jedna bolnica
         List<Soba> operacioneSale = new List<Soba>();
 
@@ -160,7 +90,41 @@ public class BazaBolnica
         }
         return operacioneSale;
     }
-   
-   public string fileLocation = @"..\..\Datoteke\bolnice.txt";
+
+    public override Bolnica KreirajEntitet(string[] podaciEntiteta)
+    {
+        Bolnica b = new Bolnica();
+        b.Ime = podaciEntiteta[0];
+        b.Adresa = podaciEntiteta[1];
+        b.EMail = podaciEntiteta[2];
+        b.BrojTelefona = podaciEntiteta[3];
+        string[] sobe = podaciEntiteta[4].Split('%');
+        foreach (string linije in sobe)
+        {
+            if (linije.Equals("")) break;
+            Soba s = new Soba();
+            string[] ds = linije.Split('/');
+            s.Id = ds[0];
+            s.Zauzeta = ParseStringToBool(ds[1]);
+            s.Tip = (RoomType)Enum.Parse(typeof(RoomType), ds[2]);
+            s.Obrisano = ParseStringToBool(ds[3]);
+            s.Sprat = Int32.Parse(ds[4]);
+            s.Kvadratura = Double.Parse(ds[5]);
+            b.AddSoba(s);
+        }
+        return b;
+    }
+
+    public override string KreirajTextZaUpis(Bolnica entitet)
+    {
+        string linija= entitet.Ime + "#" + entitet.Adresa + "#" + entitet.EMail + "#" + entitet.BrojTelefona + "#";
+        foreach (Soba s in entitet.Soba)
+        {
+            linija = linija + s.Id + "/" + s.Zauzeta + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "%";
+        }
+        linija = linija + "#";
+        return linija;
+    }
+
 
 }

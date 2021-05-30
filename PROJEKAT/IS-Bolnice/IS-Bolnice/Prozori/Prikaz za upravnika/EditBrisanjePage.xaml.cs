@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     public partial class EditBrisanjePage : Page
     {
         Lek izabraniLek;
+
+        LekKontroler lekKontroler = new LekKontroler();
+
         public EditBrisanjePage(Lek lek)
         {
             InitializeComponent();
@@ -29,8 +33,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void DeleteAddButton_Click(object sender, RoutedEventArgs e)
         {
-            BazaLekova bazaLekova = new BazaLekova();
-            bazaLekova.Obrisi(izabraniLek.Id);
+            lekKontroler.ObrisiLek(izabraniLek);
             Page lekovi = new LekoviPage();
             this.NavigationService.Navigate(lekovi);
         }

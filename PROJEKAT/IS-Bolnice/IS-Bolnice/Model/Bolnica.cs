@@ -1,25 +1,22 @@
+using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
 
-public class Bolnica
+public class Bolnica: Entitet
 {
-   private string ime;
-   private string adresa;
-   private string eMail;
-   private string brojTelefona;
    
    public System.Collections.Generic.List<Soba> soba;
 
-    public Bolnica(string ime, string adresa, string eMail, string brTel, List<Soba> sobe)
+    public Bolnica(string ime, string adresa, string eMail, string brTel, List<Soba> sobe): base(ime)
     {
-        this.ime = ime;
-        this.adresa = adresa;
-        this.eMail = eMail;
-        this.brojTelefona = brTel;
-        this.soba = sobe;
+        this.Ime = ime;
+        this.Adresa = adresa;
+        this.EMail = eMail;
+        this.BrojTelefona = brTel;
+        this.Soba = sobe;
     }
 
-    public Bolnica()
+    public Bolnica(): base("1")
     {
 
     }
@@ -74,5 +71,7 @@ public class Bolnica
     public string Adresa { get; set; }
     public string EMail { get; set; }
     public string BrojTelefona { get; set; }
+
+    public List<Soba> Sobe { get; set; }
 
 }

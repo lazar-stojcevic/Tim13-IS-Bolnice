@@ -15,5 +15,9 @@ namespace IS_Bolnice.Kontroleri
         {
             return sadrzajSobeServis.GetSadrzajSobe(idSobe);
         }
+
+        public void IzvrsiTransport() {
+            sadrzajSobeServis.IzvrsiTransport();
+        }
     }
 }

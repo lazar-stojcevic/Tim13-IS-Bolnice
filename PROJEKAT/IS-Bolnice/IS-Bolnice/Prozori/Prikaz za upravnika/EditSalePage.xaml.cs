@@ -29,7 +29,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             List<Bolnica> bolnice = new List<Bolnica>();
             Bolnica b1 = new Bolnica();
             BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolnice();
+            bolnice = baza.DobaviSve();
             foreach (Bolnica b in bolnice)
             {
                 foreach (Soba s in b.Soba)
@@ -68,7 +68,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             List<Bolnica> bolnice = new List<Bolnica>();
             Bolnica b1 = new Bolnica();
             BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolnice();
+            bolnice = baza.DobaviSve();
             foreach (Bolnica b in bolnice)
             {
                 foreach (Soba s in b.Soba)
@@ -84,7 +84,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 }
 
             }
-            baza.KreirajBolnicu(b1);
+            baza.Sacuvaj(b1);
             Page sale = new SalePage();
             this.NavigationService.Navigate(sale);
         }
@@ -102,7 +102,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 {
                     List<Bolnica> bolnice = new List<Bolnica>();
                     BazaBolnica baza = new BazaBolnica();
-                    bolnice = baza.SveBolnice();
+                    bolnice = baza.DobaviSve();
                     foreach (Bolnica b in bolnice)
                     {
                         foreach (Soba s in b.Soba)
@@ -111,7 +111,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                             if (s.Id.Equals(selectedSoba.Id))
                             {
                                 s.Obrisano = true;
-                                baza.KreirajBolnicu(b);
+                                baza.Sacuvaj(b);
                                 break;
                             }
                         }

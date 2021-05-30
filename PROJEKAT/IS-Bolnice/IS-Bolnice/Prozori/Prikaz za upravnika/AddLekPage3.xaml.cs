@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     public partial class AddLekPage3 : Page
     {
         Lek noviLek;
+
+        ZahtevZaValidacijuKontroler kontroler = new ZahtevZaValidacijuKontroler();
+
         public AddLekPage3(Lek lek)
         {
             InitializeComponent();
@@ -56,8 +60,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 lekari.Add(lekar);
             }
             ZahtevZaValidacijuLeka zahtevZaValidaciju = new ZahtevZaValidacijuLeka(noviLek, lekari);
-            BazaZahtevaZaValidacijuLeka bazaZahtevaZaValidaciju = new BazaZahtevaZaValidacijuLeka();
-            bazaZahtevaZaValidaciju.Sacuvaj(zahtevZaValidaciju);
+            kontroler.KreirajZahtevZaValidaciju(zahtevZaValidaciju);
             Page lekovi = new LekoviPage();
             this.NavigationService.Navigate(lekovi);
         }

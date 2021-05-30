@@ -3,15 +3,16 @@
 // Created: Friday, May 7, 2021 6:46:55 PM
 // Purpose: Definition of Class BazaRenovacija
 
+using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows;
 
-public class BazaRenovacija
+public class BazaRenovacija: GenerickiFajlRepozitorijum<Renovacija>, IRenovacijaRepozitorijum
 {
-   private string fileLocation = @"..\..\Datoteke\renoviranje.txt";
 
     private static string vremenskiFormatPisanje = "M/d/yyyy";
     private static string[] vremenskiFormatiCitanje = new[]
@@ -20,29 +21,11 @@ public class BazaRenovacija
         "M-d-yyyy"
     };
 
-    public List<Renovacija> SveRenovacije()
-   {
-        List<Renovacija> ret = new List<Renovacija>();
-        if (File.Exists(fileLocation))
-        {
-            string[] lines = File.ReadAllLines(fileLocation);
-            foreach (string line in lines)
-            {
-                Renovacija s = ParseFromString(line);
-                ret.Add(s);
-            }
-        }
-        else
-        {
-
-            MessageBox.Show("Nista");
-        }
-        return ret;
-    }
-
+    public BazaRenovacija() : base(@"..\..\Datoteke\renoviranje.txt") { }
+ 
     public List<Renovacija> SveRenovacijeJedneSobe(Soba soba)
     {
-        List<Renovacija> sveRenovacije = SveRenovacije();
+        List<Renovacija> sveRenovacije = DobaviSve();
         List<Renovacija> renovacijeJedneSobe = new List<Renovacija>();
 
         foreach (Renovacija renovacija in sveRenovacije)
@@ -66,54 +49,18 @@ public class BazaRenovacija
         return novaRenovacija;
     }
 
-    public void KreirajRenovaciju(Renovacija renovacija)
-   {
-        if (File.Exists(fileLocation))
-        {
-            string novoRenoviranje = ParseToString(renovacija);
-            List<string> lista = new List<string>();
-            lista.Add(novoRenoviranje);
-            File.AppendAllLines(fileLocation, lista);
-        }
-        else
-        {
 
-            MessageBox.Show("Nista");
-        }
+    public override Renovacija KreirajEntitet(string[] podaciEntiteta)
+    {
+        Soba soba = new Soba();
+        soba.Id = podaciEntiteta[0];
+        Renovacija novaRenovacija = new Renovacija(DateTime.ParseExact(podaciEntiteta[1], vremenskiFormatiCitanje, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal), DateTime.ParseExact(podaciEntiteta[2], vremenskiFormatiCitanje, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal), soba);
+        return novaRenovacija;
     }
 
-    public string ParseToString(Renovacija renovacija)
+    public override string KreirajTextZaUpis(Renovacija entitet)
     {
-        string tekst = renovacija.ProstorijaZaRenoviranje.Id + "#" + renovacija.DatumPocetka.ToString(vremenskiFormatPisanje) + "#" + renovacija.DatumKraja.ToString(vremenskiFormatPisanje);
+        string tekst = entitet.ProstorijaZaRenoviranje.Id + "#" + entitet.DatumPocetka.ToString(vremenskiFormatPisanje) + "#" + entitet.DatumKraja.ToString(vremenskiFormatPisanje);
         return tekst;
     }
-
-    public void IzmeniRenovaciju(Renovacija renovacija)
-   {
-      throw new NotImplementedException();
-   }
-   
-   public void ObrisiRenovaciju(Renovacija renovacija)
-   {
-        if (File.Exists(fileLocation))
-        {
-            List<Renovacija> listaRenovacija =SveRenovacije();
-            List<string> tekst = new List<string>();
-            foreach (Renovacija renovacijaPrivremena in listaRenovacija)
-            {
-                if (!(renovacijaPrivremena.ProstorijaZaRenoviranje.Id.Equals(renovacija.ProstorijaZaRenoviranje.Id)))
-                {
-                    string linija = ParseToString(renovacijaPrivremena);
-                    tekst.Add(linija);
-                }
-            }
-            File.WriteAllLines(fileLocation, tekst);
-        }
-        else
-        {
-
-            MessageBox.Show("Nista");
-        }
-    }
-
 }

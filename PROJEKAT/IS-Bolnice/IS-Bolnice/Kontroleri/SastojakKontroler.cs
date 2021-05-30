@@ -15,5 +15,10 @@ namespace IS_Bolnice.Kontroleri
         {
             return sastojakServis.GetSviSastojci();
         }
+
+        internal void KreirajNoviSastojak(Sastojak sastojak)
+        {
+            sastojakServis.KreirajNoviSastojak(sastojak);
+        }
     }
 }

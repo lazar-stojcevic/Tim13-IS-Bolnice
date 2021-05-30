@@ -127,7 +127,7 @@ namespace IS_Bolnice.Prozori
                     if (predmet.Kolicina >= Int32.Parse(textBox.Text))
                     {
                         predmet.Kolicina = predmet.Kolicina - Int32.Parse(textBox.Text);
-                        bazaSadrzaja.IzmeniSadrzaj(predmet);
+                        bazaSadrzaja.Izmeni(predmet);
                     }
                     else
                     {
@@ -172,12 +172,12 @@ namespace IS_Bolnice.Prozori
                 if (predmet.Predmet.Id.Equals(GetIDOpreme(!smer)))
                 {
                         predmet.Kolicina = predmet.Kolicina + Int32.Parse(textBox.Text);
-                        bazaSadrzaja.IzmeniSadrzaj(predmet);
+                        bazaSadrzaja.Izmeni(predmet);
                     return;
                 }
             }
             SadrzajSobe noviSadrzaj = new SadrzajSobe(GetIDProstorije(smer), GetIDOpreme(!smer), Int32.Parse(textBox.Text));
-            bazaSadrzaja.KreirajSadrzaj(noviSadrzaj);
+            bazaSadrzaja.Sacuvaj(noviSadrzaj);
         }
 
 

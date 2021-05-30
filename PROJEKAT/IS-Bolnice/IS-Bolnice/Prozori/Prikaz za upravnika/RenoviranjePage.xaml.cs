@@ -65,7 +65,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 }
                 else
                 {
-                    bazaRenovacija.KreirajRenovaciju(renovacija);
+                    bazaRenovacija.Sacuvaj(renovacija);
                     RenoviranjeOprema();
                     this.NavigationService.GoBack();
                 }
@@ -83,7 +83,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 }
                 else
                 {
-                    bazaRenovacija.KreirajRenovaciju(renovacija);
+                    bazaRenovacija.Sacuvaj(renovacija);
                     RenoviranjeOprema();
                     this.NavigationService.GoBack();
                 }
@@ -107,7 +107,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 }
             }
             if (!postojiZakazanTermin) {
-                bazaRenovacija.KreirajRenovaciju(renovacija);
+                bazaRenovacija.Sacuvaj(renovacija);
                 RenoviranjeOprema();
                 this.NavigationService.GoBack();
             }
@@ -139,14 +139,14 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 foreach (SadrzajSobe opremaUMagacinu in svaOpremaUMagacinu) {
                     if (opremaUSobi.Predmet.Id.Equals(opremaUMagacinu.Predmet.Id)) {
                         opremaUMagacinu.Kolicina = opremaUMagacinu.Kolicina + opremaUSobi.Kolicina;
-                        bazaSadrzaja.IzmeniSadrzaj(opremaUMagacinu);
+                        bazaSadrzaja.Izmeni(opremaUMagacinu);
                         postojiOpremaUMagacinu = true;
                         break;
                     }
                 }
                 if (!postojiOpremaUMagacinu) {
                     opremaUSobi.Soba.Id = bazaBolnica.GetMagacin().Id;
-                    bazaSadrzaja.KreirajSadrzaj(opremaUSobi);
+                    bazaSadrzaja.Sacuvaj(opremaUSobi);
                 }
                 postojiOpremaUMagacinu = false;
             }
@@ -157,7 +157,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
             List<SadrzajSobe> opremaUSobi = bazaSadrzaja.GetSadrzajSobe(selektovanaSoba.Id);
             foreach (SadrzajSobe oprema in opremaUSobi) {
-                bazaSadrzaja.ObrisiSadrzaj(oprema);
+                bazaSadrzaja.Obrisi(oprema.Id);
             }
         }
 

@@ -15,5 +15,9 @@ namespace IS_Bolnice.Servisi
             return bazaSastojaka.DobaviSve();
         }
 
+        internal void KreirajNoviSastojak(Sastojak noviSastojak)
+        {
+            bazaSastojaka.Sacuvaj(noviSastojak);
+        }
     }
 }

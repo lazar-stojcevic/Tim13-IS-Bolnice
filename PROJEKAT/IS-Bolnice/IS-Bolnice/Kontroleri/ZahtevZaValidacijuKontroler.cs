@@ -20,5 +20,10 @@ namespace IS_Bolnice.Kontroleri
         {
             return servis.GetSviZaValidacijuLeka();
         }
+
+        public void KreirajZahtevZaValidaciju(ZahtevZaValidacijuLeka zahtevZaValidaciju)
+        {
+            servis.KreirajZahtevZaValidaciju(zahtevZaValidaciju);
+        }
     }
 }

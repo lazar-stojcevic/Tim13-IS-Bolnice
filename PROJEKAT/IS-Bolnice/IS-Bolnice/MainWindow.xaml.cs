@@ -1,4 +1,5 @@
-﻿using IS_Bolnice.Prozori;
+﻿using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Prozori;
 using IS_Bolnice.Prozori.Prikaz_za_upravnika;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace IS_Bolnice
 {
     public partial class MainWindow : Window
     {
+        SadrzajSobeKontroler kontroler = new SadrzajSobeKontroler();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,8 +29,7 @@ namespace IS_Bolnice
 
         private void btnLogin_Click_1(object sender, RoutedEventArgs e)
         {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            bazaSadrzaja.IzvrsiTransport();
+            kontroler.IzvrsiTransport();
             string korisnik = txtUserId.Text;
             string sifra = txtPassword.Password;
             BazaUpravnika baza1 = new BazaUpravnika();

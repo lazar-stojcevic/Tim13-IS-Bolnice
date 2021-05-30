@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,9 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class AddOpremuPage : Page
     {
+
+        OpremaKontroler kontroler = new OpremaKontroler();
+
         public AddOpremuPage()
         {
             InitializeComponent();
@@ -37,8 +41,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             {
                 noviPredmet.Tip = TipOpreme.dinamicka;
             }
-            BazaOpreme baza = new BazaOpreme();
-            baza.Sacuvaj(noviPredmet);
+            kontroler.KreirajNoviPredmet(noviPredmet);
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);
         }

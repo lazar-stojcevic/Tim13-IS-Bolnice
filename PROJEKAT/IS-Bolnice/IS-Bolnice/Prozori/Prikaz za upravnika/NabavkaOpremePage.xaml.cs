@@ -92,12 +92,12 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 {
                     SadrzajSobe s = IzmenaSadrzaja(sadrzajSobe);
                     MessageBox.Show(s.Kolicina.ToString());
-                    bazaSadrzaja.IzmeniSadrzaj(s);
+                    bazaSadrzaja.Izmeni(s);
                 }
                 else { 
                     string[] item = listBox.SelectedItem.ToString().Split(' ');
                     SadrzajSobe noviSadrzaj = new SadrzajSobe(baza.GetMagacin().Id, item[1], Int32.Parse(textBox.Text));
-                    bazaSadrzaja.KreirajSadrzaj(noviSadrzaj);
+                    bazaSadrzaja.Sacuvaj(noviSadrzaj);
                 }
             }
             else {

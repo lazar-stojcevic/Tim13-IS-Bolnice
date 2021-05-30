@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,16 +20,16 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class AddSastojakWindow : Window
     {
+        SastojakKontroler sastojakKontroler = new SastojakKontroler();
         public AddSastojakWindow()
         {
             InitializeComponent();
         }
 
         private void Dodaj_btn_Click(object sender, RoutedEventArgs e)
-        {
-            BazaSastojaka bazaSastojaka = new BazaSastojaka();
+        { 
             Sastojak sastojak = new Sastojak(id_txt.Text);
-            bazaSastojaka.Sacuvaj(sastojak);
+            sastojakKontroler.KreirajNoviSastojak(sastojak);
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)

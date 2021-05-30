@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class AddSalePage : Page
     {
+        BolnicaKontroler kontroler = new BolnicaKontroler();
         public AddSalePage()
         {
             InitializeComponent();
@@ -27,46 +29,14 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void Dodaj_btn_Click(object sender, RoutedEventArgs e)
         {
-            Soba newS = new Soba();
-            newS.Id = id_txt.Text;
-            newS.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
-            newS.Kvadratura = double.Parse(kvadratura_txt.Text);
-            newS.Sprat = int.Parse(sprat_txt.Text);
-            List<Bolnica> bolnice = new List<Bolnica>();
-            BazaBolnica baza = new BazaBolnica();
-            bolnice = baza.SveBolnice();
-            int flag = 0;
-            foreach (Bolnica b in bolnice)
-            {
-                foreach (Soba s in b.Soba)
-                {
-                    if (s.Id.Equals(newS.Id))
-                    {
-                        if (s.Obrisano == true)
-                        {
-                            s.Obrisano = false;
-                            flag = 1;
-                            break;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Soba sa izabranim ID vec postoji!");
-                            flag = 2;
-                        }
-
-                    }
-
-                }
-                if (flag == 0)
-                {
-                    b.AddSoba(newS);
-                    baza.KreirajBolnicu(b);
-                }
-                else if (flag == 1)
-                {
-                    baza.KreirajBolnicu(b);
-                }
-            }
+            Soba novaSoba = new Soba();
+            novaSoba.Id = id_txt.Text;
+            novaSoba.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
+            novaSoba.Kvadratura = double.Parse(kvadratura_txt.Text);
+            novaSoba.Sprat = int.Parse(sprat_txt.Text);
+            kontroler.KreirajSobuUBolnici(novaSoba);
+            
+            
             Page sale = new SalePage();
             this.NavigationService.Navigate(sale);
         }

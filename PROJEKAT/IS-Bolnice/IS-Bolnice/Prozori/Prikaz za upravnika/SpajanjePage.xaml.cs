@@ -53,7 +53,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             KreirajNovuSobu();
             Renovacija renovacija = MakeRenovacija();
             BazaRenovacija bazaRenovacija = new BazaRenovacija();
-            bazaRenovacija.KreirajRenovaciju(renovacija);
+            bazaRenovacija.Sacuvaj(renovacija);
             UkloniSobe();
         }
 
@@ -80,7 +80,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             }
             Bolnica novaBolnica = bazaBolnica.GetBolnica();
             novaBolnica.Soba = updateSoba;
-            bazaBolnica.KreirajBolnicu(novaBolnica);
+            bazaBolnica.Sacuvaj(novaBolnica);
             this.NavigationService.GoBack();
         }
 
@@ -98,7 +98,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                     if (opremaUSobi.Predmet.Id.Equals(opremaUMagacinu.Predmet.Id))
                     {
                         opremaUMagacinu.Kolicina = opremaUMagacinu.Kolicina + opremaUSobi.Kolicina;
-                        bazaSadrzaja.IzmeniSadrzaj(opremaUMagacinu);
+                        bazaSadrzaja.Izmeni(opremaUMagacinu);
                         postojiOpremaUMagacinu = true;
                         break;
                     }
@@ -106,7 +106,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 if (!postojiOpremaUMagacinu)
                 {
                     opremaUSobi.Soba.Id = bazaBolnica.GetMagacin().Id;
-                    bazaSadrzaja.KreirajSadrzaj(opremaUSobi);
+                    bazaSadrzaja.Sacuvaj(opremaUSobi);
                 }
                 postojiOpremaUMagacinu = false;
             }
@@ -119,7 +119,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             List<SadrzajSobe> opremaUSobi = bazaSadrzaja.GetSadrzajSobe(idSobe);
             foreach (SadrzajSobe oprema in opremaUSobi)
             {
-                bazaSadrzaja.ObrisiSadrzaj(oprema);
+                bazaSadrzaja.Obrisi(oprema.Id);
             }
         }
 
@@ -131,7 +131,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             BazaBolnica bazaBolnica = new BazaBolnica();
             Bolnica novaBolnica = bazaBolnica.GetBolnica();
             novaBolnica.AddSoba(novaSoba);
-            bazaBolnica.KreirajBolnicu(novaBolnica);
+            bazaBolnica.Sacuvaj(novaBolnica);
             
         }
 

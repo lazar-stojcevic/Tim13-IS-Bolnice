@@ -19,5 +19,10 @@ namespace IS_Bolnice.Servisi
         {
             return bazaZahteva.DobaviSve();
         }
+
+        internal void KreirajZahtevZaValidaciju(ZahtevZaValidacijuLeka zahtevZaValidaciju)
+        {
+            bazaZahteva.Sacuvaj(zahtevZaValidaciju);
+        }
     }
 }

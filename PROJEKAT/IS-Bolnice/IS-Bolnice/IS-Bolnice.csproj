@@ -104,8 +104,13 @@
     <Compile Include="Baze\BazaIzmena.cs" />
     <Compile Include="Baze\BazaIzvestaja.cs" />
     <Compile Include="Baze\BazaLekova.cs" />
+    <Compile Include="Baze\BazaRenovacija.cs" />
+    <Compile Include="Baze\BazaSadrzaja.cs" />
+    <Compile Include="Baze\Interfejsi\IBolnicaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IHospitalizacijaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IIzvestajRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IRenovacijaRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\ISadrzajSobeRepozitorijum.cs" />
     <Compile Include="Baze\ObavestenjeFajlRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IObavestenjaRepozitorijum.cs" />
     <Compile Include="Baze\OblastLekaraFajlRepozitorijum.cs" />
@@ -113,8 +118,6 @@
     <Compile Include="Baze\BazaOdgovoraNaZahteveZaValidacijuLekova.cs" />
     <Compile Include="Baze\BazaOpreme.cs" />
     <Compile Include="Baze\RadnoVremeFajlRepozitorijum.cs" />
-    <Compile Include="Baze\BazaRenovacija.cs" />
-    <Compile Include="Baze\BazaSadrzaja.cs" />
     <Compile Include="Baze\BazaSastojaka.cs" />
     <Compile Include="Baze\BazaZahtevaZaValidacijuLeka.cs" />
     <Compile Include="Baze\Interfejsi\GenerickiRepozitorijum.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="Kontroleri\OblastLekaraKontroler.cs" />
     <Compile Include="Kontroleri\OdgovoriNaZahtevZaValidacijeKontroler.cs" />
     <Compile Include="Kontroleri\OperacijaKontroler.cs" />
+    <Compile Include="Kontroleri\OpremaKontroler.cs" />
     <Compile Include="Kontroleri\PacijentKontroler.cs" />
     <Compile Include="Kontroleri\PregledKontroler.cs" />
     <Compile Include="Kontroleri\RadnoVremeKontroler.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Belezka.cs" />
+    <Compile Include="Model\Bolnica.cs" />
     <Compile Include="Model\Change.cs" />
     <Compile Include="Model\Entitet.cs" />
     <Compile Include="Model\Hospitalizacija.cs" />
@@ -159,6 +164,7 @@
     <Compile Include="Model\Renovacija.cs" />
     <Compile Include="Model\SadrzajSobe.cs" />
     <Compile Include="Model\Sastojak.cs" />
+    <Compile Include="Model\Soba.cs" />
     <Compile Include="Model\Survery.cs" />
     <Compile Include="Model\Uloge.cs" />
     <Compile Include="Model\VremenskiInterval.cs" />
@@ -430,6 +436,7 @@
     <Compile Include="Servisi\OblastLekaraServis.cs" />
     <Compile Include="Servisi\OdgovorNaZahtevZaValidacijuServis.cs" />
     <Compile Include="Servisi\OperacijaServis.cs" />
+    <Compile Include="Servisi\OpremaServis.cs" />
     <Compile Include="Servisi\PacijentServis.cs" />
     <Compile Include="Servisi\PregledServis.cs" />
     <Compile Include="Servisi\RadnoVremeServis.cs" />
@@ -617,8 +624,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\SpajanjePage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\UpravljanjeOpremomPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -804,7 +811,6 @@
     <Compile Include="Baze\BazaPregleda.cs" />
     <Compile Include="Baze\BazaSekretara.cs" />
     <Compile Include="Baze\BazaUpravnika.cs" />
-    <Compile Include="Model\Bolnica.cs" />
     <Compile Include="Model\Korisnik.cs" />
     <Compile Include="Model\Lekar.cs" />
     <Compile Include="Model\Operacija.cs" />
@@ -814,7 +820,6 @@
     <Compile Include="Model\Pregled.cs" />
     <Compile Include="Model\RoomType.cs" />
     <Compile Include="Model\Sekretar.cs" />
-    <Compile Include="Model\Soba.cs" />
     <Compile Include="Model\TipLekara.cs" />
     <Compile Include="Model\TipOpreme.cs" />
     <Compile Include="Model\Upravnik.cs" />

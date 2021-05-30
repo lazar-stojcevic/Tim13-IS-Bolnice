@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Servisi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            SadrzajSobeServis sadrzajSobeServis = new SadrzajSobeServis();
             MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete opremu?", "", MessageBoxButton.YesNo);
             if (resultat == MessageBoxResult.Yes)
             {
@@ -71,7 +73,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
                 List<Predmet> lista = baza.DobaviSve();
                 Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
-                if (!bazaSadrzaja.PostojiOpremaUBolnici(id_txt.Text))
+                if (!sadrzajSobeServis.PostojiOpremaUBolnici(id_txt.Text))
                 {
                     izmenjenPredmet.Obrisano = true;
                     baza.Izmeni(izmenjenPredmet);
