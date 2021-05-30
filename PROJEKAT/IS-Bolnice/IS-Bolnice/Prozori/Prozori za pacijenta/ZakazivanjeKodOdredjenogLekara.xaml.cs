@@ -25,7 +25,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
         private PregledKontroler pregledKontroler = new PregledKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
-        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
         public ZakazivanjeKodOdredjenogLekara(string jmbgPacijenta)
@@ -66,7 +66,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 }
                 else
                 {
-                    bazaPregleda.ZakaziPregled(pregled);
+                    preglediFajlRepozitorijum.Sacuvaj(pregled);
                     string message = "Uspešno ste zakazali pregled";
                     MessageBox.Show(message);
                     this.Close();

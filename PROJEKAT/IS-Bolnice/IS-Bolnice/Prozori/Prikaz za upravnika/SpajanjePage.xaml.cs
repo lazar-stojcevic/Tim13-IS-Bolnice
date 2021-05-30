@@ -196,7 +196,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private bool ProveraProstorije(string idSobe)
         {
             PregledKontroler pregledKontroler = new PregledKontroler();
-            BazaPregleda bazaPregleda = new BazaPregleda();
+            PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
             RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
             foreach (Pregled pregled in pregledKontroler.GetSviBuduciPreglediSobe(idSobe))

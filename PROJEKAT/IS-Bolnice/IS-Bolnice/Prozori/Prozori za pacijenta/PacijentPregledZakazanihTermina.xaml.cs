@@ -20,7 +20,7 @@ namespace IS_Bolnice.Prozori
     {
         private string jmbgPac;
 
-        BazaPregleda bp = new BazaPregleda();
+        PreglediFajlRepozitorijum bp = new PreglediFajlRepozitorijum();
         private PregledKontroler pregledKontroler = new PregledKontroler();
         public PacijentPregledZakazanihTermina(string jmbgPacijenta)
         {
@@ -33,14 +33,14 @@ namespace IS_Bolnice.Prozori
         private void obrisiTermin_Click(object sender, RoutedEventArgs e)
         {
             // dodati da li si siguran dijalog
-            BazaPregleda bp = new BazaPregleda();
+            PreglediFajlRepozitorijum bp = new PreglediFajlRepozitorijum();
             Pacijent pac = new Pacijent();
             pac.Jmbg = jmbgPac;
 
             Pregled p = (Pregled)lvPregledi.SelectedItem;
             p.Pacijent = pac;
 
-            bp.OtkaziPregled(p);
+            bp.Obrisi(p.Id);
             lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(jmbgPac);
         }
 

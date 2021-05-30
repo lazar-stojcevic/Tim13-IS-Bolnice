@@ -183,12 +183,12 @@ namespace IS_Bolnice.Servisi
 
         private bool TerminSePreklapaKodLekaraISale(Operacija predlozenaOperacija)
         {
-            BazaPregleda bazaPregleda = new BazaPregleda();
+            PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
 
             VremenskiInterval drugiTermin = new VremenskiInterval(predlozenaOperacija.VremePocetkaOperacije,
                 predlozenaOperacija.VremeKrajaOperacije);
 
-            foreach (Pregled zakazaniPregled in bazaPregleda.SviBuduciPreglediKojeLekarIma(predlozenaOperacija.Lekar.Jmbg))
+            foreach (Pregled zakazaniPregled in preglediFajlRepozitorijum.SviBuduciPreglediKojeLekarIma(predlozenaOperacija.Lekar.Jmbg))
             {
                 VremenskiInterval prviTermin = new VremenskiInterval(zakazaniPregled.VremePocetkaPregleda,
                     zakazaniPregled.VremeKrajaPregleda);

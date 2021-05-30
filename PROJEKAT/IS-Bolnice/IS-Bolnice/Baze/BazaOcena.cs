@@ -14,7 +14,7 @@ namespace IS_Bolnice.Baze
     class BazaOcena
     {
         private static string fileLocation = @"..\..\Datoteke\Ocene.txt";
-        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
         private LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
         private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
 
@@ -260,7 +260,7 @@ namespace IS_Bolnice.Baze
         {
             List<Pregled> pastReviews = new List<Pregled>();
 
-            foreach (Pregled review in bazaPregleda.SviBuduciPregledi())
+            foreach (Pregled review in preglediFajlRepozitorijum.SviBuduciPregledi())
             {
                 if (review.Pacijent.Jmbg == patientJmbg && review.VremeKrajaPregleda < DateTime.Now)
                 {

@@ -21,7 +21,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         private string jmbgPac;
 
         private PregledKontroler pregledKontroler = new PregledKontroler();
-        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
         public ZakazivanjeUOdredjenomTerminu(string jmbgPacijenta)

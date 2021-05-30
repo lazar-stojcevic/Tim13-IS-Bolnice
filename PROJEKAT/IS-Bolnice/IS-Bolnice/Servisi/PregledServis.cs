@@ -20,7 +20,7 @@ namespace IS_Bolnice.Servisi
         private readonly int MINUTI_INTERVALA_ZA_IZMENU_TERMINA_PREGLEDA = 30;
 
 
-        private BazaPregleda bazaPregleda = new BazaPregleda();
+        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
         private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
@@ -70,7 +70,7 @@ namespace IS_Bolnice.Servisi
         {
             if (MozeDaSeZakaze(pregled))
             {
-                bazaPregleda.ZakaziPregled(pregled);
+                preglediFajlRepozitorijum.Sacuvaj(pregled);
                 UpisiIzmenuUBazu(pregled.Pacijent.Jmbg);
                 return true;
             }
@@ -79,7 +79,8 @@ namespace IS_Bolnice.Servisi
         }
         public void IzmeniPregled(Pregled noviPregled, Pregled stariPregled)
         {
-            bazaPregleda.IzmeniPregled(noviPregled, stariPregled);
+            noviPregled.Id = stariPregled.Id;
+            preglediFajlRepozitorijum.Izmeni(noviPregled);
             UpisiIzmenuUBazu(noviPregled.Pacijent.Jmbg);
         }
 
@@ -96,7 +97,7 @@ namespace IS_Bolnice.Servisi
 
         public void OtkaziPregled(Pregled pregled)
         {
-            bazaPregleda.OtkaziPregled(pregled);
+            preglediFajlRepozitorijum.Obrisi(pregled.Id);
         }
         public void OdloziPregledStoPre(Pregled pomeraniPregled)
         {
@@ -133,18 +134,18 @@ namespace IS_Bolnice.Servisi
 
         public List<Pregled> GetsviPregledi()
         {
-            return bazaPregleda.SviPregledi();
+            return preglediFajlRepozitorijum.DobaviSve();
         }
 
         public List<Pregled> GetSviBuduciPregledi()
         {
-            return bazaPregleda.SviBuduciPregledi();
+            return preglediFajlRepozitorijum.SviBuduciPregledi();
         }
 
         public List<Pregled> GetSviPreglediLekara(string jmbgLekara)
         {
             List<Pregled> sviPreglediLekara = new List<Pregled>();
-            foreach (Pregled pregled in bazaPregleda.SviPregledi())
+            foreach (Pregled pregled in preglediFajlRepozitorijum.DobaviSve())
             {
                 if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
                 {
@@ -172,7 +173,7 @@ namespace IS_Bolnice.Servisi
         {
             List<Pregled> pregledi = new List<Pregled>();
 
-            foreach (Pregled pregled in bazaPregleda.SviBuduciPregledi())
+            foreach (Pregled pregled in preglediFajlRepozitorijum.SviBuduciPregledi())
             {
                 if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta))
                 {
@@ -188,7 +189,7 @@ namespace IS_Bolnice.Servisi
         public List<Pregled> GetSviBuduciPreglediLekara(string jmbgLekara)
         {
             List<Pregled> sviPregledi = new List<Pregled>();
-            foreach (Pregled pregled in bazaPregleda.SviBuduciPregledi())
+            foreach (Pregled pregled in preglediFajlRepozitorijum.SviBuduciPregledi())
             {
                 if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
                 {
@@ -318,7 +319,7 @@ namespace IS_Bolnice.Servisi
 
         public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
         {
-            BazaPregleda baza = new BazaPregleda();
+            PreglediFajlRepozitorijum baza = new PreglediFajlRepozitorijum();
             List<Pregled> lista = baza.SviBuduciPregledi();
             foreach (Pregled pregled in lista)
             {
@@ -326,8 +327,8 @@ namespace IS_Bolnice.Servisi
                     pregled.VremePocetkaPregleda.Hour == Int32.Parse(stariSat) &&
                     pregled.VremePocetkaPregleda.Date.Equals(stariDatum))
                 {
-                    Pregled stariPregled = pregled;
-                    baza.IzmeniPregled(noviPregled, stariPregled);
+                    noviPregled.Id = pregled.Id;
+                    baza.Izmeni(noviPregled);
                     return true;
                 }
             }

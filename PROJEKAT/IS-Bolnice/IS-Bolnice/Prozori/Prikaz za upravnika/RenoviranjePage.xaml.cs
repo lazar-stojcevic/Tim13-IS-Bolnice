@@ -93,7 +93,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private void RenoviranjeProstorije()
         {
             PregledKontroler pregledKontroler = new PregledKontroler();
-            BazaPregleda bazaPregleda = new BazaPregleda();
+            PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
             RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
             bool postojiZakazanTermin = false;
