@@ -13,55 +13,55 @@
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="231,61,0,0" VerticalAlignment="Top" Width="101" Click="ButtonRaspored_Click">
             <StackPanel>
-                <Image Source="../../Slike/timetable.png" Height="73" Width="86" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/timetable.png" Height="73" Width="86" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="54,61,0,0" VerticalAlignment="Top" Width="101" Click="ButtonPregled_Click">
             <StackPanel>
-                <Image Source="../../Slike/pregled.png" Height="68" Width="77" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/pregled.png" Height="68" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,181,0,0" VerticalAlignment="Top" Width="101" Click="Button_VidiRecenzije" >
             <StackPanel>
-                <Image Source="../../Slike/recension.png" Height="67" Width="80" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/recension.png" Height="67" Width="80" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,309,0,0" VerticalAlignment="Top" Width="101" Click="ButtonClick_Godisnji" >
             <StackPanel>
-                <Image Source="../../Slike/suitcase.png" Height="67" Width="77" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/suitcase.png" Height="67" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="57,181,0,0" VerticalAlignment="Top" Width="101" Click="ButtonClick_InventarPoSalama" >
             <StackPanel>
-                <Image Source="../../Slike/storage.png" Height="64" Width="74" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/storage.png" Height="64" Width="74" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="245,312,0,0" VerticalAlignment="Top" Width="101"  Click="validacijaLekovaClick">
             <StackPanel>
-                <Image Source="../../Slike/dozvola.png" Height="69" Width="81" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/dozvola.png" Height="69" Width="81" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,431,0,0" VerticalAlignment="Top" Width="101" >
             <StackPanel>
-                <Image Source="../../Slike/potrosnja.png" Height="63" Width="75" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/potrosnja.png" Height="63" Width="75" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="243,431,0,0" VerticalAlignment="Top" Width="101" Click="Button_UvidUOdobreneLekoveClick" >
             <StackPanel>
-                <Image Source="../../Slike/vitamin.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/vitamin.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,549,0,0" VerticalAlignment="Top" Width="101" Click="odjavaClick" >
             <StackPanel>
-                <Image Source="../../Slike/logout.png" Height="66" Width="72" RenderTransformOrigin="1.966,0.541"  />
+                <Image Source="/Slike/Lekar/logout.png" Height="66" Width="72" RenderTransformOrigin="1.966,0.541"  />
             </StackPanel>
         </Button>
         <Label Content="Uvid u raspored" FontSize="15" HorizontalAlignment="Left" Margin="224,144,0,0" VerticalAlignment="Top" Width="131" Height="28"/>
@@ -75,7 +75,7 @@
         <Label Content="Uvid u odobrene lekove" FontSize="15" HorizontalAlignment="Left" Margin="211,511,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,549,0,0" VerticalAlignment="Top" Width="101" Click="Button_UvidUHospitalizacijeClick" >
             <StackPanel>
-                <Image Source="/IS-Bolnice;component/Slike/hospital-bed.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/hospital-bed.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
         <Label Content="Uvid u hospitalizacije" FontSize="15" HorizontalAlignment="Left" Margin="27,629,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
@@ -83,7 +83,7 @@
 
         <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="341,0,0,657" VerticalAlignment="Bottom" Width="47" Click="ButtonObavestenja_Click">
             <StackPanel>
-                <Image Source="/IS-Bolnice;component/Slike/email.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/email.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 

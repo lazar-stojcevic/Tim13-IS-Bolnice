@@ -42,7 +42,7 @@
         </Grid>
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Margin="2,5,0,653" Width="47" Click="ButtonBack_Click">
             <StackPanel>
-                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 

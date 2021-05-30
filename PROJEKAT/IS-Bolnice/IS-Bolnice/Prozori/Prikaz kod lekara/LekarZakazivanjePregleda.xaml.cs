@@ -55,22 +55,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             Lekar lekar = (Lekar)listaLekara.SelectedItem;
             string idLekara = lekar.Jmbg;
             noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
-            /*
-            foreach (Lekar iterLekar in lekari)
-            {
-                if (iterLekar.Jmbg.Equals(idLekara))
-                {
-                    noviPregled.Lekar.Ordinacija = iterLekar.Ordinacija;
-                    break;
-                }
-            }
-            */
-
-            //TODO: OVAJ NIJE OPTIMALNO ALI STA SAD
+            
             Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
 
             DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
-                //OBAVEZNOOOOOOOOOOOOOOOOOOOOOOOOOOOOO POGLEDATI
                 pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour, pregled.VremePocetkaPregleda.Minute, 0);
             DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
                 pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute, 0);

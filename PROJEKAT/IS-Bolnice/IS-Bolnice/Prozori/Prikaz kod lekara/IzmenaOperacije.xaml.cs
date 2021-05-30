@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.DTOs;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Servisi;
 using WPFCustomMessageBox;
@@ -29,21 +30,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
         private BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
-
-        private List<Lekar> lekariSpecijalisti = new List<Lekar>();
         private List<Operacija> operacije = new List<Operacija>();
+        public string IdStareOperacije { get; set; }
 
-        public DateTime StariDatum { get; set; }
-        public string StariSat { get; set; }
-        public string StariMinut { get; set; }
-
-        public string idStare { get; set; }
-
-        public IzmenaOperacije(string idStareOperacije)
+        public IzmenaOperacije(string idStareOperacijeOperacije)
         {
             InitializeComponent();
 
-            idStare = idStareOperacije;
+            IdStareOperacije = idStareOperacijeOperacije;
             
             List<Lekar> lekariSpecijalisti = lekarKontroler.GetSviLekariSpecijalisti();
             listaLekara.ItemsSource = lekariSpecijalisti;
@@ -66,7 +60,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena operacije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                Operacija novaOperacija = new Operacija(idStare);
+                Operacija novaOperacija = new Operacija(IdStareOperacije);
                 Lekar lekar = (Lekar)listaLekara.SelectedItem;
                 string idLekara = lekar.Jmbg;
 
@@ -97,7 +91,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 novaOperacija.VremeKrajaOperacije = kraj;
                 novaOperacija.Hitna = (bool)boxHitno.IsChecked;
 
-                operacijaKontroler.IzmeniOperaciju(StariDatum, StariSat, StariMinut, novaOperacija);
+                operacijaKontroler.IzmeniOperaciju(novaOperacija);
 
                 this.Close();
 
@@ -144,10 +138,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             Soba soba = (Soba)comboBoxSale.SelectionBoxItem;
             string idSale = soba.Id;
-
+            int trajanjeOperacije;
             try
             {
-                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale, Int32.Parse(txtDuzina.Text));
+                trajanjeOperacije = Int32.Parse(txtDuzina.Text);
             }
             catch (Exception e)
             {
@@ -155,6 +149,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+
+            OperacijaDTO operacijaDto = new OperacijaDTO()
+            {
+                Lekar = (Lekar)listaLekara.SelectedItem,
+                Soba = (Soba)comboBoxSale.SelectionBoxItem,
+                TrajanjeOperacijeUMinutima = trajanjeOperacije
+            };
+
+                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(operacijaDto);
+            
+           
 
             terminiList.Items.Clear();
 

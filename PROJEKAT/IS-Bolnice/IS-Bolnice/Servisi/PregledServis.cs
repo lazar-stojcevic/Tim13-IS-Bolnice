@@ -14,7 +14,7 @@ namespace IS_Bolnice.Servisi
     {
         private readonly int MINUTI_TRAJANJA_PREGLEDA = 45;
         private readonly int DOVOLJAN_BROJ_ZAKAZANIH_PREGLEDA = 6;
-        private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_PREGLEDA_LEKARU = 7200;
+        private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_PREGLEDA_LEKARU = 5760;
         private readonly int MINUTI_PREDLAGANJA_ZA_3_DANA = 4320;
         private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_HITNIH_PREGLEDA = 60;
         private readonly int MINUTI_INTERVALA_ZA_IZMENU_TERMINA_PREGLEDA = 30;
@@ -317,22 +317,11 @@ namespace IS_Bolnice.Servisi
             return pregledi;
         }
 
-        public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
+        public bool IzmeniPregled(Pregled noviPregled)
         {
             PreglediFajlRepozitorijum baza = new PreglediFajlRepozitorijum();
-            List<Pregled> lista = baza.SviBuduciPregledi();
-            foreach (Pregled pregled in lista)
-            {
-                if (noviPregled.Pacijent.Jmbg.Equals(pregled.Pacijent.Jmbg) &&
-                    pregled.VremePocetkaPregleda.Hour == Int32.Parse(stariSat) &&
-                    pregled.VremePocetkaPregleda.Date.Equals(stariDatum))
-                {
-                    noviPregled.Id = pregled.Id;
-                    baza.Izmeni(noviPregled);
-                    return true;
-                }
-            }
-            return false;
+            baza.Izmeni(noviPregled);
+            return true;
         }
 
         public Pregled GetSledeciPregledKodLekara(string jmbg)

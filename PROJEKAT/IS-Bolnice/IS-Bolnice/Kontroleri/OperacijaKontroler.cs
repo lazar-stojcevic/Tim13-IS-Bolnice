@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.DTOs;
 using IS_Bolnice.Model;
 using IS_Bolnice.Servisi;
 
@@ -40,19 +41,19 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.GetSveSledeceOperacijeSale(idSale);
         }
 
-        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
+        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)
         {
-            return operacijaServis.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale, duzinaTrajanja);
+            return operacijaServis.DostuptniTerminiLekaraZaDatuProstoriju(operacija);
         }
 
-        public bool IzmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
+        public bool IzmeniOperaciju(Operacija novaOperacija)
         {
-            return operacijaServis.izmeniOperaciju(stariDatum, stariSat, stariMinut, novaOperacija);
+            return operacijaServis.IzmeniOperaciju(novaOperacija);
         }
 
         public void IzmeniOperaciju(Operacija nova, Operacija stara)
         {
-            operacijaServis.IzmeniOperaciju(nova, stara);
+            operacijaServis.IzmeniOperaciju(nova);
         }
 
         public bool ZakaziOperaciju(Operacija operacija)

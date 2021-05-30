@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="Lekar" Height="700" Width="400">
+        Title="Lekar" Height="702" Width="405">
     <Grid>
         <Frame x:Name="frame" HorizontalAlignment="Left" Height="670" VerticalAlignment="Top" Width="394" Margin="0,0,-0.4,0" NavigationUIVisibility="Hidden"/>
 

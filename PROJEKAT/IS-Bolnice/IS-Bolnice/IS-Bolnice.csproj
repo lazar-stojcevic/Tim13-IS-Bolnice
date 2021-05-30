@@ -136,6 +136,8 @@
     <Compile Include="Baze\Interfejsi\ISastojakRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IZahteviZaValidacijuRepozitorijum.cs" />
     <Compile Include="Baze\Klase\GenerickiFajlRepozitorijum.cs" />
+    <Compile Include="DTOs\OperacijaDTO.cs" />
+    <Compile Include="DTOs\PregledDTO.cs" />
     <Compile Include="Kontroleri\BelezkeKontroler.cs" />
     <Compile Include="Kontroleri\BolnicaKontroler.cs" />
     <Compile Include="Kontroleri\HospitalizacijaKontroler.cs" />
@@ -868,13 +870,13 @@
     <Resource Include="Datoteke\pacijenti.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\menu1.png" />
-    <Resource Include="Slike\refresh1.png" />
-    <Resource Include="Slike\tick.png" />
+    <Resource Include="Slike\Lekar\menu1.png" />
+    <Resource Include="Slike\Lekar\refresh1.png" />
+    <Resource Include="Slike\Lekar\tick.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\menu.png" />
-    <Resource Include="Slike\timetable.png" />
+    <Resource Include="Slike\Lekar\menu.png" />
+    <Resource Include="Slike\Lekar\timetable.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\operacije.txt" />
@@ -890,40 +892,40 @@
     <Resource Include="Datoteke\lekari.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\pregled.png" />
+    <Resource Include="Slike\Lekar\pregled.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\storage.png" />
+    <Resource Include="Slike\Lekar\storage.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\recension.png" />
+    <Resource Include="Slike\Lekar\recension.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\suitcase.png" />
+    <Resource Include="Slike\Lekar\suitcase.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\vitamin.png" />
+    <Resource Include="Slike\Lekar\vitamin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\potrosnja.png" />
+    <Resource Include="Slike\Lekar\potrosnja.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\logout.png" />
+    <Resource Include="Slike\Lekar\logout.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\report.png" />
+    <Resource Include="Slike\Lekar\report.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\lekovi.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\recept.bmp" />
+    <Resource Include="Slike\Lekar\recept.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\oprema.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\3d-up-arrow.png" />
+    <Resource Include="Slike\Lekar\3d-up-arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\Upravnik\add.png" />
@@ -960,7 +962,7 @@
     <Resource Include="Datoteke\sastojci.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\dozvola.png" />
+    <Resource Include="Slike\Lekar\dozvola.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\izmene.txt" />
@@ -1000,7 +1002,7 @@
     <Resource Include="Slike\Sekretar\add_message.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\hospital-bed.png" />
+    <Resource Include="Slike\Lekar\hospital-bed.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\Sekretar\hospital.jpg" />
@@ -1015,13 +1017,13 @@
     <Resource Include="Slike\Sekretar\help.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\operacija.png" />
+    <Resource Include="Slike\Lekar\operacija.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\zakazivanjepregleda.png" />
+    <Resource Include="Slike\Lekar\zakazivanjepregleda.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\hospitalizacija.png" />
+    <Resource Include="Slike\Lekar\hospitalizacija.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Datoteke\belezke.txt" />
@@ -1030,10 +1032,10 @@
     <Resource Include="Datoteke\izvestaji.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\arrow.png" />
+    <Resource Include="Slike\Lekar\arrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Slike\email.png" />
+    <Resource Include="Slike\Lekar\email.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -22,15 +22,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarIzmenaPregleda : Window
     {
-        public DateTime StariDatum { get; set; }
-        public string StariSat { get; set; }
-        public string StariMinut { get; set; }
 
+        private Pregled stariPregled = new Pregled();
         private PregledKontroler pregledKontroler = new PregledKontroler();
 
         List<Pregled> pregledi = new List<Pregled>();
-        public LekarIzmenaPregleda()
+        public LekarIzmenaPregleda(Pregled stariPr)
         {
+            stariPregled = stariPr;
             InitializeComponent();
             LekarKontroler lekarKontroler = new LekarKontroler();
             listaLekara.ItemsSource = lekarKontroler.GetSviLekari();
@@ -42,29 +41,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste dobro uneli sve podatke za izmenu?", "Izmena pregleda", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                Lekar lekar = (Lekar)listaLekara.SelectedItem;
-                string idLekara = lekar.Jmbg;
+                Pregled noviPregled = KreirajNoviPregled();
 
-                Pregled noviPregled = new Pregled();
-                noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
-                Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
-
-                DateTime pocetak = new DateTime(pregled.VremePocetkaPregleda.Year, pregled.VremePocetkaPregleda.Month,
-                    pregled.VremePocetkaPregleda.Day, pregled.VremePocetkaPregleda.Hour,
-                    pregled.VremePocetkaPregleda.Minute, 0);
-                DateTime kraj = new DateTime(pregled.VremeKrajaPregleda.Year, pregled.VremeKrajaPregleda.Month,
-                    pregled.VremeKrajaPregleda.Day, pregled.VremeKrajaPregleda.Hour, pregled.VremeKrajaPregleda.Minute,
-                    0);
-                kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
-
-                noviPregled.Lekar.Jmbg = idLekara;
-                noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
-                noviPregled.VremePocetkaPregleda = pocetak;
-                noviPregled.VremeKrajaPregleda = kraj;
-                pregledKontroler.IzmeniPregled(StariDatum, StariSat, StariMinut, noviPregled);
+                pregledKontroler.IzmeniPregled(noviPregled);
                 this.Close();
             }
         }
+
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -121,6 +105,31 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private Pregled KreirajNoviPregled()
+        {
+            Pregled noviPregled = new Pregled();
+            Pregled selektovaniTermin = pregledi.ElementAt(terminiList.SelectedIndex);
+            Lekar lekar = (Lekar)listaLekara.SelectedItem;
+            string idLekara = lekar.Jmbg;
+            noviPregled.Id = stariPregled.Id;
+            noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
+
+            DateTime pocetak = new DateTime(selektovaniTermin.VremePocetkaPregleda.Year, selektovaniTermin.VremePocetkaPregleda.Month,
+                selektovaniTermin.VremePocetkaPregleda.Day, selektovaniTermin.VremePocetkaPregleda.Hour,
+                selektovaniTermin.VremePocetkaPregleda.Minute, 0);
+            DateTime kraj = new DateTime(selektovaniTermin.VremeKrajaPregleda.Year, selektovaniTermin.VremeKrajaPregleda.Month,
+                selektovaniTermin.VremeKrajaPregleda.Day, selektovaniTermin.VremeKrajaPregleda.Hour,
+                selektovaniTermin.VremeKrajaPregleda.Minute,
+                0);
+            kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
+
+            noviPregled.Lekar.Jmbg = idLekara;
+            noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
+            noviPregled.VremePocetkaPregleda = pocetak;
+            noviPregled.VremeKrajaPregleda = kraj;
+            return noviPregled;
         }
 
     }

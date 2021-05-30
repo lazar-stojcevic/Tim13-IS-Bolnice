@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.DTOs;
 
 namespace IS_Bolnice.Servisi
 {
@@ -82,22 +83,22 @@ namespace IS_Bolnice.Servisi
             return ret;
         }
 
-        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
+        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)
         {
-            Lekar lekar = lekarRepo.DobaviPoId(jmbgLekara);
-            return SlobodneOperacijeLekaraUNarednomPeriodu(lekar, duzinaTrajanja, idSale);
+            Lekar lekar = lekarRepo.DobaviPoId(operacija.Lekar.Jmbg);
+            return SlobodneOperacijeLekaraUNarednomPeriodu(operacija);
         }
 
-        public List<Operacija> SlobodneOperacijeLekaraUNarednomPeriodu(Lekar lekar, int trajanjePregleda, string idSale)
+        public List<Operacija> SlobodneOperacijeLekaraUNarednomPeriodu(OperacijaDTO pregled)
         {
-            List<Operacija> sviSkorasnjiTermini = SviPredloziTerminaOperacije(lekar, trajanjePregleda, idSale);
-            List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+            List<Operacija> sviSkorasnjiTermini = SviPredloziTerminaOperacije(pregled);
+            List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(pregled.Lekar, sviSkorasnjiTermini);
             List<Operacija> slobodniTermini = SlobodneOperacijeLekara(terminiURadnomVremenu);
 
             return slobodniTermini;
         }
 
-        private List<Operacija> SviPredloziTerminaOperacije(Lekar lekar, int trajanjeOperacije, string idSale)
+        private List<Operacija> SviPredloziTerminaOperacije(OperacijaDTO operacijaDto)
         {
             List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
             DateTime najbliziTermin = NajbliziTermin();
@@ -109,10 +110,10 @@ namespace IS_Bolnice.Servisi
 
                 Operacija operacija = new Operacija()
                 {
-                    Lekar = lekar,
+                    Lekar = operacijaDto.Lekar,
                     VremePocetkaOperacije = pocetakTermina,
-                    VremeKrajaOperacije = pocetakTermina.AddMinutes(trajanjeOperacije),
-                    Soba = bolnicaRepo.GetSobaById(idSale),
+                    VremeKrajaOperacije = pocetakTermina.AddMinutes(operacijaDto.TrajanjeOperacijeUMinutima),
+                    Soba = bolnicaRepo.GetSobaById(operacijaDto.Soba.Id),
                     Hitna = true
                 };
                 Console.Write(operacija.Lekar);
@@ -133,22 +134,10 @@ namespace IS_Bolnice.Servisi
         }
 
 
-        public bool izmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
+        public bool IzmeniOperaciju(Operacija novaOperacija)
         {
-            OperacijaFajlRepozitorijum baza = new OperacijaFajlRepozitorijum();
-            List<Operacija> lista = baza.SveSledeceOperacije();
-            foreach (Operacija operacija in lista)
-            {
-                if (novaOperacija.Pacijent.Jmbg.Equals(operacija.Pacijent.Jmbg) &&
-                    operacija.VremePocetkaOperacije.Hour == Int32.Parse(stariSat) &&
-                    operacija.VremePocetkaOperacije.Date.Equals(stariDatum))
-                {
-                    Operacija staraOperacija = operacija;
-                    baza.Izmeni(novaOperacija);
-                    return true;
-                }
-            }
-            return false;
+            operacijaRepo.Izmeni(novaOperacija);
+            return true;
         }
 
         private List<Operacija> SviTerminiURadnomVremenuLekara(Lekar lekar, List<Operacija> operacije)
@@ -231,10 +220,6 @@ namespace IS_Bolnice.Servisi
             return predlozen.DaLiSePreklapaSa(upitan);
         }
 
-        public void IzmeniOperaciju(Operacija nova, Operacija stara)
-        {
-            operacijaRepo.Izmeni(nova);
-        }
 
         public bool ZakaziOperaciju(Operacija operacija)
         {

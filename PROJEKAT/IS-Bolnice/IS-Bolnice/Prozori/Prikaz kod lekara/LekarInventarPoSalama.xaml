@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="400"
+      Height="700" Width="400"
       Background="White" Title="LekarInventarPoSalama">
 
 
@@ -38,7 +38,7 @@
         </ListView>
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" Margin="12,5,341,653" Width="47" Click="ButtonBack_Click">
             <StackPanel>
-                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 

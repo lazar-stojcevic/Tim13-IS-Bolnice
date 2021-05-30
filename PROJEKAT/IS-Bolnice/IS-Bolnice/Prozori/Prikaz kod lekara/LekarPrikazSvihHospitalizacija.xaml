@@ -28,7 +28,7 @@
         <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
         <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
-            <Rectangle  HorizontalAlignment="Left" Height="421" Margin="10,10,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
+            <Rectangle  HorizontalAlignment="Left" Height="421" Margin="8,10,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
             <Label Foreground="Red"  Content="Sve aktuelne hospitazacije" HorizontalAlignment="Left" Height="31" Margin="222,431,0,0" VerticalAlignment="Top" Width="162"/>
 
             <Rectangle   HorizontalAlignment="Left" Height="130" Margin="13,456,0,0" Stroke="Red" VerticalAlignment="Top" Width="250"/>
@@ -37,7 +37,7 @@
         </Grid>
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
             <StackPanel>
-                <Image Source="/IS-Bolnice;component/Slike/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+                <Image Source="/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 

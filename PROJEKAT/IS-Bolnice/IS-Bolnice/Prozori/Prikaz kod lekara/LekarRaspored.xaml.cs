@@ -63,10 +63,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             string ime = selektovani.Pacijent.Ime;
             string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
-            DateTime datum = selektovani.VremePocetkaOperacije.Date;
-            Console.WriteLine(datum);
-            DateTime vreme = selektovani.VremePocetkaOperacije;
-            //TODO napravi lepi kostruktor
             IzmenaOperacije izmena = new IzmenaOperacije(selektovani.Id);
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
@@ -75,9 +71,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             izmena.boxHitno.IsChecked = selektovani.Hitna;
             izmena.comboBoxSale.SelectedIndex = 0;
             izmena.listaLekara.SelectedIndex = 0;
-            izmena.StariSat = vreme.Hour.ToString();
-            izmena.StariMinut = vreme.Minute.ToString();
-            izmena.StariDatum = datum;
 
             izmena.ShowDialog();
 
@@ -118,20 +111,14 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             string ime = selektovani.Pacijent.Ime;
             string prz = selektovani.Pacijent.Prezime;
             string jmbg = selektovani.Pacijent.Jmbg;
-            DateTime datum = selektovani.VremePocetkaPregleda.Date;
-            DateTime vreme = selektovani.VremePocetkaPregleda;
 
-            LekarIzmenaPregleda izmena = new LekarIzmenaPregleda();
+            LekarIzmenaPregleda izmena = new LekarIzmenaPregleda(selektovani);
 
             izmena.txtOperIme.Text = ime;
             izmena.txtOperPrz.Text = prz;
             izmena.txtOperJmbg.Text = jmbg;
             izmena.terminiList.Items.Add(selektovani.VremePocetkaPregleda);
-            //OVEJ DEO TREBA MODIFIKOVATI
             izmena.listaLekara.SelectedIndex = 0;
-            izmena.StariSat = vreme.Hour.ToString();
-            izmena.StariMinut = vreme.Minute.ToString();
-            izmena.StariDatum = datum;
 
             izmena.ShowDialog();
 

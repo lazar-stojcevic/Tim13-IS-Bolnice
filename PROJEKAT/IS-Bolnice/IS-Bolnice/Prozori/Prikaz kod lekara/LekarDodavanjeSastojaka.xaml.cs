@@ -20,28 +20,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarDodavanjeSastojaka : Window
     {
-        private ListBox lista = new ListBox();
+        private ListBox sviSastojciLeka = new ListBox();
         private SastojakKontroler sastojakKontroler = new SastojakKontroler();
-        public LekarDodavanjeSastojaka(ListBox listaSastojaka)
+        public LekarDodavanjeSastojaka(ListBox sviSastojciLekaSastojaka)
         {
             InitializeComponent();
-            foreach (Sastojak iter in sastojakKontroler.GetSviSastojci())
-            {
-                bool vecPostoji = false;
-                foreach (string sastojak in listaSastojaka.Items)
-                {
-                    if (sastojak.Equals(iter.Ime))
-                    {
-                        vecPostoji = true;
-                        break;
-                    }
-                }
-                if (!vecPostoji)
-                    listaSvihSastojaka.Items.Add(iter.Ime);
-            }
 
-            lista = listaSastojaka;
+            IzpisiSveSastojke(sviSastojciLekaSastojaka);
+
+            sviSastojciLeka = sviSastojciLekaSastojaka;
         }
+
+       
 
         private void Button_ClickKraj(object sender, RoutedEventArgs e)
         {
@@ -53,7 +43,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (listaSvihSastojaka.SelectedIndex != -1)
             {
                 bool vecPostoji = false;
-                foreach (string sastojak in lista.Items)
+                foreach (string sastojak in sviSastojciLeka.Items)
                 {
                     if (sastojak.Equals(listaSvihSastojaka.SelectedItem))
                     {
@@ -63,7 +53,26 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 }
 
                 if (!vecPostoji)
-                    lista.Items.Add(listaSvihSastojaka.SelectedItem);
+                    sviSastojciLeka.Items.Add(listaSvihSastojaka.SelectedItem);
+            }
+        }
+
+        private void IzpisiSveSastojke(ListBox sviSastojciLekaSastojaka)
+        {
+            foreach (Sastojak iter in sastojakKontroler.GetSviSastojci())
+            {
+                bool vecPostoji = false;
+                foreach (string sastojak in sviSastojciLekaSastojaka.Items)
+                {
+                    if (sastojak.Equals(iter.Ime))
+                    {
+                        vecPostoji = true;
+                        break;
+                    }
+                }
+
+                if (!vecPostoji)
+                    listaSvihSastojaka.Items.Add(iter.Ime);
             }
         }
     }

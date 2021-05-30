@@ -24,12 +24,15 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarIzvestaj : Page
     {
-        IzvestajKontroler izvestajKontroler = new IzvestajKontroler();
         ObservableCollection<Terapija> terapije = new ObservableCollection<Terapija>();
         string jmbgPac;
         string jmbgLek;
+
+        StringFormat stringFormat = new StringFormat();
+        Graphics graphicsImage = Graphics.FromImage(new Bitmap(@"..\..\Slike\Lekar\recept.bmp"));
         public LekarIzvestaj(string jmbgPacijenta, string jmbgLekara)
         {
+            stringFormat.Alignment = StringAlignment.Near;
             InitializeComponent();
             listaLekova.ItemsSource = terapije;
             jmbgPac = jmbgPacijenta;
@@ -59,9 +62,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
                 if (terapije.Count != 0)
                 {
-                    StringFormat stringFormat = new StringFormat();
-                    stringFormat.Alignment = StringAlignment.Near;
-
                     Pacijent p = new PacijentKontroler().GetPacijentSaOvimJMBG(jmbgPac);
 
                     string imeBolnice = "Zdravo bolnica";
@@ -73,7 +73,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     foreach (Terapija ter in terapije)
                     {
                         if (!ter.Lek.PotrebanRecept) { continue; }
-                        KreirajReceptZaStampanje(imeBolnice, stringFormat, imeIPrezimePacijenta, datumRodjenjaPacijenta, danasniDatum, ter, ref brojRecepta);
+                        KreirajReceptZaStampanje(imeBolnice, imeIPrezimePacijenta, datumRodjenjaPacijenta, danasniDatum, ter, ref brojRecepta);
                     }
                 }
 
@@ -98,107 +98,102 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         }
 
 
-        private void KreirajReceptZaStampanje(string imeBolnice, StringFormat stringFormat, string imePacijenta, string datumRodjenjaPacijenta,
+        private void KreirajReceptZaStampanje(string imeBolnice, string imePacijenta, string datumRodjenjaPacijenta,
             string danasniDatum, Terapija ter, ref int broj)
         {
-            System.Drawing.Image bitmap = new Bitmap(@"..\..\Slike\recept.bmp");
-            Graphics graphicsImage = Graphics.FromImage(bitmap);
             //ISCRTAVANJAE NA SLIKU RECEPTA
-            IscrtavanjeImenaBolnice(imeBolnice, stringFormat, graphicsImage);
+            IscrtavanjeImenaBolnice(imeBolnice);
 
-            IscrtavanjeImenaIPrezimenaPacijenta(stringFormat, imePacijenta, graphicsImage);
+            IscrtavanjeImenaIPrezimenaPacijenta(imePacijenta);
 
-            IscrtavanjeDatumaRodjenjaPacijenta(stringFormat, datumRodjenjaPacijenta, graphicsImage);
+            IscrtavanjeDatumaRodjenjaPacijenta(datumRodjenjaPacijenta);
 
-            IcrtavanjeDanasnjegDatuma(stringFormat, danasniDatum, graphicsImage);
+            IcrtavanjeDanasnjegDatuma(danasniDatum);
 
-            IscrtavanjaIDLekara(stringFormat, graphicsImage);
+            IscrtavanjaIdLekara();
 
-            IcrtavanjeSifreLeka(stringFormat, ter, graphicsImage);
+            IcrtavanjeSifreLeka(ter);
 
-            IscrtavanjeKolikoSePutaDnevnoLekUzima(stringFormat, ter, graphicsImage);
+            IscrtavanjeKolikoSePutaDnevnoLekUzima(ter);
 
-            IspisNaReceptuNaKolikoDanaSeLekUzima(stringFormat, ter, graphicsImage);
+            IspisNaReceptuNaKolikoDanaSeLekUzima(ter);
 
             ++broj;
-            bitmap.Save(@"..\..\Recepti\noviRecept" + jmbgPac + "_(" + broj + ").bmp");
+
+            new Bitmap(@"..\..\Slike\Lekar\recept.bmp").Save(@"..\..\Recepti\noviRecept" + jmbgPac + "_(" + broj + ").bmp");
         }
 
-        private static void IscrtavanjeKolikoSePutaDnevnoLekUzima(StringFormat stringFormat, Terapija ter,
-            Graphics graphicsImage)
+        private void IscrtavanjeKolikoSePutaDnevnoLekUzima(Terapija ter)
         {
             graphicsImage.DrawString(ter.UcestanostKonzumiranja + "puta na dan", new Font("arail", 10),
                 new SolidBrush(System.Drawing.Color.Black), new System.Drawing.Point(80, 360), stringFormat);
         }
 
-        private static void IcrtavanjeSifreLeka(StringFormat stringFormat, Terapija ter, Graphics graphicsImage)
+        private void IcrtavanjeSifreLeka(Terapija ter)
         {
             graphicsImage.DrawString(ter.Lek.Id, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(30, 310), stringFormat);
         }
 
-        private void IscrtavanjaIDLekara(StringFormat stringFormat, Graphics graphicsImage)
+        private void IscrtavanjaIdLekara()
         {
             graphicsImage.DrawString(jmbgLek, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(100, 280), stringFormat);
         }
 
-        private static void IcrtavanjeDanasnjegDatuma(StringFormat stringFormat, string danasniDatum, Graphics graphicsImage)
+        private void IcrtavanjeDanasnjegDatuma(string danasniDatum)
         {
             graphicsImage.DrawString(danasniDatum, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(110, 210), stringFormat);
         }
 
-        private static void IscrtavanjeDatumaRodjenjaPacijenta(StringFormat stringFormat, string datumRodjenjaPacijenta,
-            Graphics graphicsImage)
+        private void IscrtavanjeDatumaRodjenjaPacijenta(string datumRodjenjaPacijenta)
         {
             graphicsImage.DrawString(datumRodjenjaPacijenta, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(30, 140), stringFormat);
         }
 
-        private static void IscrtavanjeImenaIPrezimenaPacijenta(StringFormat stringFormat, string imePacijenta,
-            Graphics graphicsImage)
+        private void IscrtavanjeImenaIPrezimenaPacijenta(string imePacijenta)
         {
             graphicsImage.DrawString(imePacijenta, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(30, 110), stringFormat);
         }
 
-        private static void IscrtavanjeImenaBolnice(string imeBolnice, StringFormat stringFormat, Graphics graphicsImage)
+        private void IscrtavanjeImenaBolnice(string imeBolnice)
         {
             graphicsImage.DrawString(imeBolnice, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(30, 70), stringFormat);
         }
 
-        private static void IspisNaReceptuNaKolikoDanaSeLekUzima(StringFormat stringFormat, Terapija ter,
-            Graphics graphicsImage)
+        private void IspisNaReceptuNaKolikoDanaSeLekUzima(Terapija ter)
         {
             switch (ter.RazlikaNaKolikoSeDanaUzimaLek)
             {
                 case 0:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki dan",stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki dan");
                     break;
                 case 1:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki drugi dan", stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki drugi dan");
                     break;
                 case 2:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki treći dan", stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki treći dan");
                     break;
                 case 3:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki četvrti dan", stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki četvrti dan");
                     break;
                 case 4:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki peti dan", stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki peti dan");
                     break;
                 case 5:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki šesti dan", stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Svaki šesti dan");
                     break;
                 default:
-                    IscrtavanjeNaKolikoSeDanaIzimaLek("Na svakih nedelju dana", stringFormat, graphicsImage);
+                    IscrtavanjeNaKolikoSeDanaIzimaLek("Na svakih nedelju dana");
                     break;
             }
         }
 
-        private static void IscrtavanjeNaKolikoSeDanaIzimaLek(string text, StringFormat stringFormat, Graphics graphicsImage)
+        private void IscrtavanjeNaKolikoSeDanaIzimaLek(string text)
         {
             graphicsImage.DrawString(text, new Font("arail", 12), new SolidBrush(System.Drawing.Color.Black),
                 new System.Drawing.Point(80, 410), stringFormat);

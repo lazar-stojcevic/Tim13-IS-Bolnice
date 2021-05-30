@@ -58,9 +58,9 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
         }
 
-        public bool IzmeniPregled(DateTime stariDatum, string stariSat, string stariMinut, Pregled noviPregled)
+        public bool IzmeniPregled(Pregled noviPregled)
         {
-            return pregledServis.IzmeniPregled(stariDatum, stariSat, stariMinut, noviPregled);
+            return pregledServis.IzmeniPregled(noviPregled);
         }
 
         public void OtkaziPregled(Pregled pregled)

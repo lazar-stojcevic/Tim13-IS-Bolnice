@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.DTOs;
 using IS_Bolnice.Kontroleri;
 using WPFCustomMessageBox;
 
@@ -114,15 +115,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 potvrdi.IsEnabled = true;
             }
 
-            Lekar lekar = (Lekar)listaLekara.SelectedItem;
-            string jmbgLekara = lekar.Jmbg;
-
-            Soba soba = (Soba)comboBoxSale.SelectionBoxItem;
-            string idSale = soba.Id;
-
+            int trajanjeOperacije;
             try
             {
-                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(jmbgLekara, idSale,Int32.Parse(txtDuzina.Text));
+                trajanjeOperacije = Int32.Parse(txtDuzina.Text);
             }
             catch (Exception e)
             {
@@ -130,6 +126,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            
+
+            OperacijaDTO operacijaDto = new OperacijaDTO()
+            {
+                Lekar = (Lekar)listaLekara.SelectedItem,
+                Soba = (Soba)comboBoxSale.SelectionBoxItem,
+                TrajanjeOperacijeUMinutima = trajanjeOperacije
+            };
+
+            operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(operacijaDto);
+            
 
             terminiList.Items.Clear();
 
