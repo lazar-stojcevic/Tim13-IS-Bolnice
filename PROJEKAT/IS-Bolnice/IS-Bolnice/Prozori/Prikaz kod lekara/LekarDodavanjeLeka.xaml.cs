@@ -43,22 +43,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             if (pacijentKojiJeNaPregledu.Alergeni.Count != 0)
             {
-                int index = 0;
                 foreach (Sastojak alergenKodPacijenta in pacijentKojiJeNaPregledu.Alergeni)
                 {
+                    int index = 0;
                     foreach (Lek lek in lekoviZaPrikaz)
                     {
-                        ++index;
+
                         foreach (Sastojak alergenLek in lek.Alergeni)
                         {
                             if (alergenLek.Ime.Equals(alergenKodPacijenta.Ime) && !alergenLek.Ime.Equals(""))
                             {
                                 sviLekovi.RemoveAt(index);
+                                --index;
+                                break;
                             }
 
-                            --index;
-                            break;
+                            
                         }
+                        ++index;
                     }
                 }
             }
@@ -75,15 +77,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void DodajNovuTerapiju()
         {
-            Terapija t = new Terapija();
-            Lek l = (Lek) listaSvihLekova.SelectedItem;
-            t.Lek = l;
-            t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
-            t.VremePocetka = System.DateTime.Now;
-            t.VremeKraja = DateTime.Now.AddDays(Int32.Parse(txtTrajanje.Text));
-            t.RazlikaNaKolikoSeDanaUzimaLek = comboboxNaKolikoDana.SelectedIndex;
-            t.Opis = txtDetalji.Text;
-            sveZadateTerapije.Add(t);
+
+            try
+            {
+                Terapija t = new Terapija();
+                Lek l = (Lek) listaSvihLekova.SelectedItem;
+                t.Lek = l;
+                t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
+                t.VremePocetka = System.DateTime.Now;
+                t.VremeKraja = DateTime.Now.AddDays(Int32.Parse(txtTrajanje.Text));
+                t.RazlikaNaKolikoSeDanaUzimaLek = comboboxNaKolikoDana.SelectedIndex;
+                t.Opis = txtDetalji.Text;
+                sveZadateTerapije.Add(t);
+            }
+            catch (Exception e)
+            {
+                CustomMessageBox.ShowOK("Niste dobro uneli parametre za terapiju", "Dodavanje terapije", "Dobro", MessageBoxImage.Error);
+            }
+
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
