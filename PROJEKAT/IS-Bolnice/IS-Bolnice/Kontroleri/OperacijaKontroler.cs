@@ -52,11 +52,6 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.IzmeniOperaciju(novaOperacija);
         }
 
-        public void IzmeniOperaciju(Operacija nova, Operacija stara)
-        {
-            operacijaServis.IzmeniOperaciju(nova);
-        }
-
         public bool ZakaziOperaciju(Operacija operacija)
         {
             return operacijaServis.ZakaziOperaciju(operacija);

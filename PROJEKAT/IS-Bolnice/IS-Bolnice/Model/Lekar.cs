@@ -80,8 +80,9 @@ public class Lekar : Korisnik
 
         DateTime pocetakRadnogVremena = new DateTime(termin.Pocetak.Year, termin.Pocetak.Month, termin.Pocetak.Day,
             this.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, this.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
-        DateTime krajRadnogVremena = new DateTime(termin.Pocetak.Year, termin.Pocetak.Month, termin.Pocetak.Day + brojDanaRada,
+        DateTime krajRadnogVremena = new DateTime(termin.Pocetak.Year, termin.Pocetak.Month, termin.Pocetak.Day,
             this.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, this.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
+        krajRadnogVremena = krajRadnogVremena.AddDays(brojDanaRada);
 
         if (pocetakRadnogVremena <= termin.Pocetak && krajRadnogVremena >= termin.Kraj)
         {

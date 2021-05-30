@@ -130,11 +130,11 @@ namespace IS_Bolnice.Servisi
 
             return false;
         }
-        public void IzmeniPregled(Pregled noviPregled, Pregled stariPregled)
+        public bool IzmeniPregled(Pregled noviPregled)
         {
-            noviPregled.Id = stariPregled.Id;
             pregledRepo.Izmeni(noviPregled);
             UpisiIzmenuUBazu(noviPregled.Pacijent.Jmbg);
+            return true;
         }
 
         private void UpisiIzmenuUBazu(string jmbgPacijenta)
@@ -285,13 +285,6 @@ namespace IS_Bolnice.Servisi
             }
 
             return false;
-        }
-
-        public bool IzmeniPregled(Pregled noviPregled)
-        {
-            PreglediFajlRepozitorijum baza = new PreglediFajlRepozitorijum();
-            baza.Izmeni(noviPregled);
-            return true;
         }
 
         public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast)

@@ -12,13 +12,6 @@ namespace IS_Bolnice.Kontroleri
     {
         private PregledServis pregledServis = new PregledServis();
 
-        public List<Pregled> GetSlobodniTerminiZaIzmenu(Lekar lekar, DateTime datumIzmene)
-        {
-            LekarKontroler lekarKontroler = new LekarKontroler();
-            lekar = lekarKontroler.GetLekar(lekar.Jmbg);
-            return pregledServis.SlobodniTerminiZaIzmenuPregledaPacijenta(lekar, datumIzmene);
-        }
-
         public List<Pregled> GetSviPregledi()
         {
             return pregledServis.GetsviPregledi();
@@ -53,6 +46,13 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.GetSledeciPregledKodLekara(jmbg);
         }
 
+        public List<Pregled> GetSlobodniTerminiZaIzmenu(Lekar lekar, DateTime datumIzmene)
+        {
+            LekarKontroler lekarKontroler = new LekarKontroler();
+            lekar = lekarKontroler.GetLekar(lekar.Jmbg);
+            return pregledServis.SlobodniTerminiZaIzmenuPregledaPacijenta(lekar, datumIzmene);
+        }
+
         public List<Pregled> GetDostupniTerminiPregledaLekaraUNarednomPeriodu(Lekar lekar)
         {
             return pregledServis.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
@@ -61,6 +61,12 @@ namespace IS_Bolnice.Kontroleri
         public bool IzmeniPregled(Pregled noviPregled)
         {
             return pregledServis.IzmeniPregled(noviPregled);
+        }
+
+        public void IzmeniPregled(Pregled novi, Pregled stari)
+        {
+            novi.Id = stari.Id;
+            pregledServis.IzmeniPregled(novi);
         }
 
         public void OtkaziPregled(Pregled pregled)
@@ -76,11 +82,6 @@ namespace IS_Bolnice.Kontroleri
         public bool ZakaziPregled(Pregled pregled)
         {
             return pregledServis.ZakaziPregled(pregled);
-        }
-
-        public void IzmeniPregled(Pregled novi, Pregled stari)
-        {
-            pregledServis.IzmeniPregled(novi, stari);
         }
 
         public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara)

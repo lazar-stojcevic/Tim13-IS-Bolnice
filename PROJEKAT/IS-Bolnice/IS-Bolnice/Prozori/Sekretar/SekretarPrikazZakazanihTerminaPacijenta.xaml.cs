@@ -146,7 +146,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     TimeSpan trajanje = staraOperacija.VremeKrajaOperacije.Subtract(staraOperacija.VremePocetkaOperacije);
                     novaOperacija.VremeKrajaOperacije = novaOperacija.VremePocetkaOperacije.Add(trajanje);
 
-                    operacijaKontroler.IzmeniOperaciju(novaOperacija, staraOperacija);
+                    operacijaKontroler.IzmeniOperaciju(novaOperacija);
                     OperacijePacijenta[index] = novaOperacija;
                 }
             }
