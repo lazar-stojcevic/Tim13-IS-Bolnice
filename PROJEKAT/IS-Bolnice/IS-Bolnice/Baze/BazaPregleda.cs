@@ -19,68 +19,6 @@ public class BazaPregleda
     private BazaIzmena bazaIzmena = new BazaIzmena();
     private LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
 
-    //PREDLAZE TERMINE ZA IZMENU, SREDITI PROSLEDJENOG LEKARA DA IMA TACNO RADNO VREME
-    public List<Pregled> SlobodniTerminiZaIzmenu(Lekar l, DateTime datum)
-    {
-        List<Pregled> validni = new List<Pregled>();
-        List<Pregled> slobodni = new List<Pregled>();
-
-        List<Lekar> lekari = lekarFajlRepozitorijum.LekariOpstePrakse();
-        Lekar lekar = new Lekar();
-        foreach (Lekar ll in lekari)
-        {
-            if (l.Jmbg == ll.Jmbg)
-            {
-                lekar = ll;
-            }
-        }
-
-        System.DateTime pocetakIntervala = new System.DateTime(datum.Year, datum.Month, datum.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Pocetak.Minute, 0, 0);
-        System.DateTime krajIntervala = new System.DateTime(datum.Year, datum.Month, datum.Day, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Hour, lekar.RadnoVreme.StandardnoRadnoVreme.Kraj.Minute, 0, 0);
-        krajIntervala = krajIntervala.AddMinutes(-30);
-
-        while (pocetakIntervala <= krajIntervala)
-        {
-            Pregled p = new Pregled();
-            p.Lekar = lekar;
-            p.VremePocetkaPregleda = pocetakIntervala;
-            pocetakIntervala = pocetakIntervala.AddMinutes(10);
-            p.VremeKrajaPregleda = p.VremePocetkaPregleda.AddMinutes(30);
-            slobodni.Add(p);
-        }
-
-        foreach (Pregled predlozeni in slobodni)
-        {
-            bool isValid = true;
-            foreach (Pregled zakazani in SviBuduciPreglediKojeLekarIma(l.Jmbg))
-            {
-                // TODO : refaktorisati (moze se pozvati metoda PreklapanjeTerminaPregleda(Pregled predlozeniPregled, Pregled zakazaniPregled) )
-                if (predlozeni.VremePocetkaPregleda == zakazani.VremePocetkaPregleda)
-                {
-                    isValid = false;
-                    break;
-                }
-                if (predlozeni.VremePocetkaPregleda > zakazani.VremePocetkaPregleda && predlozeni.VremePocetkaPregleda < zakazani.VremeKrajaPregleda)
-                {
-                    isValid = false;
-                    break;
-                }
-                if (predlozeni.VremeKrajaPregleda > zakazani.VremePocetkaPregleda && predlozeni.VremeKrajaPregleda < zakazani.VremeKrajaPregleda)
-                {
-                    isValid = false;
-                    break;
-                }
-            }
-
-            if (isValid)
-            {
-                validni.Add(predlozeni);
-            }
-        }
-
-        return validni;
-    }
-
     public List<Pregled> SviBuduciPreglediKojeLekarIma(string jmbgLekara)
     {
         List<Pregled> pregledi = new List<Pregled>();
@@ -151,7 +89,6 @@ public class BazaPregleda
         return pregledi;
     }
 
-    //OPTIMIZOVATI KOD
     public List<Pregled> SviBuduciPregledi()
     {
         List<Pregled> sviBuduciPregledi = new List<Pregled>();
@@ -172,12 +109,10 @@ public class BazaPregleda
 
         List<string> pregledi = new List<string>();
         pregledi.Add(zakazivanje);
-        File.AppendAllLines(fileLocation, pregledi);
 
-        SaveChangeInBase(noviPregled.Pacijent.Jmbg);
+        File.AppendAllLines(fileLocation, pregledi);
     }
 
-    // refaktorisane
     public void OtkaziPregled(Pregled pregledZaBrisanje)
     {
         List<string> redoviZaUpisUDatoteku = new List<string>();
@@ -191,29 +126,13 @@ public class BazaPregleda
             }
 
         }
+
         File.WriteAllLines(fileLocation, redoviZaUpisUDatoteku);
     }
 
     public void IzmeniPregled(Pregled noviPregled, Pregled stariPregled)
     {
-        List<string> redoviZaUpisUDatoteku = new List<string>();
-
-        foreach (Pregled pregled in SviBuduciPregledi())
-        {
-            if (pregled.Lekar.Jmbg != stariPregled.Lekar.Jmbg || !pregled.VremePocetkaPregleda.Equals(stariPregled.VremePocetkaPregleda))
-            {
-                string zakazivanje = FormatPisanjaPregleda(pregled);
-                redoviZaUpisUDatoteku.Add(zakazivanje);
-            }
-            else
-            {
-                string zakazivanje = FormatPisanjaPregleda(noviPregled);
-                redoviZaUpisUDatoteku.Add(zakazivanje);
-                SaveChangeInBase(noviPregled.Pacijent.Jmbg);
-            }
-
-        }
-        OtkaziPregled(stariPregled);
+       OtkaziPregled(stariPregled);
        ZakaziPregled(noviPregled);
     }
 
@@ -229,16 +148,5 @@ public class BazaPregleda
     
         return pregled.Pacijent.Jmbg + "#" + pregled.Lekar.Jmbg + "#" + pregled.VremePocetkaPregleda.ToString(vremenskiFormatPisanje)
             + "#" + pregled.VremeKrajaPregleda.ToString(vremenskiFormatPisanje) + "#" + pregled.Lekar.Ordinacija.Id;
-    }
-
-    public void SaveChangeInBase(string jmbgPacijenta)
-    {
-        Change change = new Change();
-        DateTime now = DateTime.Now;
-
-        change.DateOfChange = now;
-        change.JmbgOfPatient = jmbgPacijenta;
-
-        bazaIzmena.SaveChange(change);
     }
 }

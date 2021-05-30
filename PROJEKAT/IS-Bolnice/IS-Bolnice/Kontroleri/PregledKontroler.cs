@@ -12,6 +12,13 @@ namespace IS_Bolnice.Kontroleri
     {
         private PregledServis pregledServis = new PregledServis();
 
+        public List<Pregled> GetSlobodniTerminiZaIzmenu(Lekar lekar, DateTime datumIzmene)
+        {
+            LekarKontroler lekarKontroler = new LekarKontroler();
+            lekar = lekarKontroler.GetLekar(lekar.Jmbg);
+            return pregledServis.SlobodniTerminiZaIzmenuPregledaPacijenta(lekar, datumIzmene);
+        }
+
         public List<Pregled> GetSviPregledi()
         {
             return pregledServis.GetsviPregledi();

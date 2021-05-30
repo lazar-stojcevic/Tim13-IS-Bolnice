@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Model
 {
-    class Survery
+    //Anketa
+    class Survery : Entitet
     {
         public Survery() { }
         public Pacijent Patient { get; set; }

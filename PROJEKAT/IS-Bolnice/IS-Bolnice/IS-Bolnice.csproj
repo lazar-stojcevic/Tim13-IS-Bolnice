@@ -102,6 +102,7 @@
     <Compile Include="Baze\BolnicaFajlRepozitorijum.cs" />
     <Compile Include="Baze\HospitalizacijaFajlRepozitorijum.cs" />
     <Compile Include="Baze\BazaIzmena.cs" />
+    <Compile Include="Baze\Interfejsi\IOcenaRepozitorijum.cs" />
     <Compile Include="Baze\IzvestajFajlRepozitorijum.cs" />
     <Compile Include="Baze\LekFajlRepozitorijum.cs" />
     <Compile Include="Baze\RenovacijaFajlRepozitorijum.cs" />

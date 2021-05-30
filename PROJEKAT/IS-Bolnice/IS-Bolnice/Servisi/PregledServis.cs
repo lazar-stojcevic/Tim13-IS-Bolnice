@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
@@ -16,23 +17,81 @@ namespace IS_Bolnice.Servisi
         private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_PREGLEDA_LEKARU = 7200;
         private readonly int MINUTI_PREDLAGANJA_ZA_3_DANA = 4320;
         private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_HITNIH_PREGLEDA = 60;
+        private readonly int MINUTI_INTERVALA_ZA_IZMENU_TERMINA_PREGLEDA = 30;
+
 
         private BazaPregleda bazaPregleda = new BazaPregleda();
         private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
+        private BazaIzmena bazaIzmena = new BazaIzmena();
+
+        public List<Pregled> SlobodniTerminiZaIzmenuPregledaPacijenta(Lekar lekar, DateTime datum)
+        {
+            List<Pregled> validni = new List<Pregled>();
+            
+            foreach (Pregled predlozeni in ListaSlobodnihPregledaTokomRadnogVremenaLekara(lekar, datum))
+            {
+                if (MozeDaSeZakaze(predlozeni))
+                {
+                    validni.Add(predlozeni);
+                }
+            }
+
+            return validni;
+        }
+
+        private DateTime FormirajPocetakIntervalaZaIzmenu(DateTime datum)
+        {
+            return new System.DateTime(datum.Year, datum.Month, datum.Day, 0, 0, 0, 0);
+        }
+
+        private DateTime FormirajKrajIntervalaZaIzmenu(DateTime datum)
+        {
+            return new System.DateTime(datum.Year, datum.Month, datum.Day + 1, 0, 0, 0, 0);
+        }
+
+        private List<Pregled> ListaSlobodnihPregledaTokomRadnogVremenaLekara(Lekar lekar, DateTime datum)
+        {
+            List<Pregled> slobodni = new List<Pregled>();
+
+            DateTime pocetakIntervala = FormirajPocetakIntervalaZaIzmenu(datum);
+            DateTime krajIntervala = FormirajKrajIntervalaZaIzmenu(datum).AddMinutes(-30);
+
+            while (pocetakIntervala <= krajIntervala)
+            {
+                Pregled p = new Pregled(null, lekar, pocetakIntervala, pocetakIntervala.AddMinutes(30));
+                pocetakIntervala = pocetakIntervala.AddMinutes(MINUTI_INTERVALA_ZA_IZMENU_TERMINA_PREGLEDA);
+                slobodni.Add(p);
+            }
+
+            return slobodni;
+        }
 
         public bool ZakaziPregled(Pregled pregled)
         {
             if (MozeDaSeZakaze(pregled))
             {
                 bazaPregleda.ZakaziPregled(pregled);
+                UpisiIzmenuUBazu(pregled.Pacijent.Jmbg);
                 return true;
             }
 
             return false;
         }
-        public void IzmeniPregled(Pregled novi, Pregled stari)
+        public void IzmeniPregled(Pregled noviPregled, Pregled stariPregled)
         {
-            bazaPregleda.IzmeniPregled(novi, stari);
+            bazaPregleda.IzmeniPregled(noviPregled, stariPregled);
+            UpisiIzmenuUBazu(noviPregled.Pacijent.Jmbg);
+        }
+
+        private void UpisiIzmenuUBazu(string jmbgPacijenta)
+        {
+            Change izmena = new Change();
+            DateTime sada = DateTime.Now;
+
+            izmena.DateOfChange = sada;
+            izmena.JmbgOfPatient = jmbgPacijenta;
+
+            bazaIzmena.SaveChange(izmena);
         }
 
         public void OtkaziPregled(Pregled pregled)

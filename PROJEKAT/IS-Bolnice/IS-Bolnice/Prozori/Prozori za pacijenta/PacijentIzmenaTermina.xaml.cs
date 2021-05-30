@@ -135,11 +135,11 @@ namespace IS_Bolnice.Prozori
             if (comboLekari.SelectedIndex != -1)
             {
                 Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
-                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(lekar, datum);
+                pregledi = pregledKontroler.GetSlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
             {
-                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
+                pregledi = pregledKontroler.GetSlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
             }
 
             listTermina.Items.Clear();
@@ -169,11 +169,11 @@ namespace IS_Bolnice.Prozori
             if (comboDani.SelectedIndex != -1)
             {
                 Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
-                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(lekar, datum);
+                pregledi = pregledKontroler.GetSlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
             {
-                pregledi = bazaPregleda.SlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
+                pregledi = pregledKontroler.GetSlobodniTerminiZaIzmenu(stariPregled.Lekar, datum);
             }
 
             listTermina.Items.Clear();
