@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Baze
 {
@@ -15,7 +16,7 @@ namespace IS_Bolnice.Baze
         private static string fileLocation = @"..\..\Datoteke\Ocene.txt";
         private BazaPregleda bazaPregleda = new BazaPregleda();
         private BazaLekara bazaLekara = new BazaLekara();
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
 
         private static string timeFormatForWriting = "M/d/yyyy h:mm:ss tt";
         private static string[] timeFormatForReading = new[]
@@ -123,7 +124,7 @@ namespace IS_Bolnice.Baze
             survery.TimeLimit = GetFormatedDateForReading(items[1]);
             survery.Rating = Int32.Parse(items[2]);
             survery.Comment = items[3];
-            survery.Patient = bazaPacijenata.PacijentSaOvimJMBG(items[4]);
+            survery.Patient = pacijentRepo.DobaviPoJmbg(items[4]);
             survery.Doctor = doctor;
             survery.Doctor.Jmbg = items[5];
             return survery;
@@ -136,7 +137,7 @@ namespace IS_Bolnice.Baze
             survery.TimeLimit = GetFormatedDateForReading(items[1]);
             survery.Rating = Int32.Parse(items[2]);
             survery.Comment = items[3];
-            survery.Patient = bazaPacijenata.PacijentSaOvimJMBG(items[4]);
+            survery.Patient = pacijentRepo.DobaviPoJmbg(items[4]);
             survery.Hospital = hospital;
             survery.Hospital.Ime = items[5];
             survery.Doctor = new Lekar();

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class PacijentServis
     {
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
 
         public Pacijent GetPacijentSaOvimJMBG(string jmbgPacijenta)
         {
-            foreach (Pacijent pacijent in bazaPacijenata.SviPacijenti())
+            foreach (Pacijent pacijent in pacijentRepo.DobaviSve())
             {
                 if (pacijent.Jmbg.Equals(jmbgPacijenta))
                 {
@@ -24,12 +25,12 @@ namespace IS_Bolnice.Servisi
 
         public List<Pacijent> GetSviPacijenti()
         {
-            return bazaPacijenata.SviPacijenti();
+            return pacijentRepo.DobaviSve();
         }
 
         public Pacijent GetPoslednjiDodat()
         {
-            List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
+            List<Pacijent> pacijenti = pacijentRepo.DobaviSve();
             int index = pacijenti.Count() - 1;
 
             if (index != -1)
@@ -41,17 +42,17 @@ namespace IS_Bolnice.Servisi
 
         public void KreirajPacijenta(Pacijent potencijalniPacijent)
         {
-            bazaPacijenata.KreirajPacijenta(potencijalniPacijent);
+            pacijentRepo.Sacuvaj(potencijalniPacijent);
         }
 
-        public void IzmeniPacijenta(Pacijent izmenjen, Pacijent pocetni)
+        public void IzmeniPacijenta(Pacijent izmenjen)
         {
-            bazaPacijenata.IzmeniPacijenta(izmenjen, pocetni);
+            pacijentRepo.Izmeni(izmenjen);
         }
 
-        public void ObrisiPacijenta(Pacijent pacijent)
+        public void ObrisiPacijenta(string jmbgPacijenta)
         {
-            bazaPacijenata.ObrisiPacijenta(pacijent);
+            pacijentRepo.Obrisi(jmbgPacijenta);
         }
     }
 }

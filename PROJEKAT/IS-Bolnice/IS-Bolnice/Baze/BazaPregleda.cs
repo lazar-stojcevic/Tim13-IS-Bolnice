@@ -100,8 +100,8 @@ public class BazaPregleda
     {
         BazaLekara bl = new BazaLekara();
 
-        BazaPacijenata bazaPacijenata = new BazaPacijenata();
-        List<Pacijent> pacijenti = bazaPacijenata.SviPacijenti();
+        PacijentFajlRepozitorijum pacijentFajlRepozitorijum = new PacijentFajlRepozitorijum();
+        List<Pacijent> pacijenti = pacijentFajlRepozitorijum.DobaviSve();
 
         List<string> lines = new List<string>();
         List<Pregled> pregledi = new List<Pregled>();

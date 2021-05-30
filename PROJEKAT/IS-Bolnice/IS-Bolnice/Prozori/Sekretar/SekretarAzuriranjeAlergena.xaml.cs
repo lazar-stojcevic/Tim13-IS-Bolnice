@@ -85,8 +85,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
             pacijentRef.Alergeni = AlergeniPacijenta.ToList();
-            // u ovom slucaju se nikada nece menjati jmbg pa je moguce staviti istu instancu za oba parametra
-            pacijentKontroler.IzmeniPacijenta(pacijentRef, pacijentRef);
+            pacijentKontroler.IzmeniPacijenta(pacijentRef);
             Close();
         }
 

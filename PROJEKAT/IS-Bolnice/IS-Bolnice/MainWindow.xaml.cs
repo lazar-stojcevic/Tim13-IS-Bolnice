@@ -107,9 +107,9 @@ namespace IS_Bolnice
 
             if (found == false)
             {
-                BazaPacijenata baza4 = new BazaPacijenata();
+                PacijentFajlRepozitorijum baza4 = new PacijentFajlRepozitorijum();
                 List<Pacijent> pacijenti = new List<Pacijent>();
-                pacijenti = baza4.SviPacijenti();
+                pacijenti = baza4.DobaviSve();
                 foreach (Pacijent p in pacijenti)
                 {
                     if (p.KorisnickoIme.Equals(korisnik))

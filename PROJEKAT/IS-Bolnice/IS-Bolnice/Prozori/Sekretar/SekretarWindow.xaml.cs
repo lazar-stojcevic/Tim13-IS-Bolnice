@@ -126,7 +126,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        pacijentKontroler.ObrisiPacijenta(p);
+                        pacijentKontroler.ObrisiPacijenta(p.Jmbg);
                         Pacijenti.Remove(p);
                         break;
 

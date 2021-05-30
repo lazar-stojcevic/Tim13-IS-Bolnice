@@ -24,6 +24,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             pacijentZaIzmenu = p;
             lekari = lekarKontroler.GetSviLekariOpstePrakse();  // samo lekari opste prakse mogu biti izabrani lekari
             PacijentiRef = Pacijenti;
+            txtJMBG.IsEnabled = false;
             PopunjvanjePoljaZaPrikaz();
         }
 
@@ -153,8 +154,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     IzabraniLekar = lekar
                 };
 
-                // p je pacijent sa izmenjenim informacijama, a "pacijent" predstavlja selektovanog pacijenta (bitno ukoliko ima potreba da se promeni JMBG)
-                pacijentKontroler.IzmeniPacijenta(p, pacijentZaIzmenu);
+                pacijentKontroler.IzmeniPacijenta(p);
                 // osvezavanje liste
                 int i = PacijentiRef.IndexOf(pacijentZaIzmenu);
                 if (i != -1)

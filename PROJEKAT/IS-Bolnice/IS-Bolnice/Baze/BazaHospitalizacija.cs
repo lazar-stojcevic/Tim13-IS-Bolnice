@@ -62,7 +62,7 @@ namespace IS_Bolnice.Baze
                 DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
 
             hospitalizacija.Soba = new BazaBolnica().GetSobaById(delovi[2]);
-            hospitalizacija.Pacijent = new BazaPacijenata().PacijentSaOvimJMBG(delovi[3]);
+            hospitalizacija.Pacijent = new PacijentFajlRepozitorijum().DobaviPoJmbg(delovi[3]);
             hospitalizacija.Id = hospitalizacija.Pacijent.Id + "+" + hospitalizacija.Soba.Id;
 
             return hospitalizacija;

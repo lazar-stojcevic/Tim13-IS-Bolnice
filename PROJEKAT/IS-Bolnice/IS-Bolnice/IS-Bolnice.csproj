@@ -109,6 +109,7 @@
     <Compile Include="Baze\Interfejsi\IBolnicaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IHospitalizacijaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IIzvestajRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IPacijentRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IRenovacijaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\ISadrzajSobeRepozitorijum.cs" />
     <Compile Include="Baze\ObavestenjeFajlRepozitorijum.cs" />
@@ -807,7 +808,7 @@
   <ItemGroup>
     <Compile Include="Baze\BazaLekara.cs" />
     <Compile Include="Baze\BazaOperacija.cs" />
-    <Compile Include="Baze\BazaPacijenata.cs" />
+    <Compile Include="Baze\PacijentFajlRepozitorijum.cs" />
     <Compile Include="Baze\BazaPregleda.cs" />
     <Compile Include="Baze\BazaSekretara.cs" />
     <Compile Include="Baze\BazaUpravnika.cs" />

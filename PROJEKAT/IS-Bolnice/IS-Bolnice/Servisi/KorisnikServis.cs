@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
@@ -11,7 +12,7 @@ namespace IS_Bolnice.Servisi
         private BazaUpravnika bazaUpravnika = new BazaUpravnika();
         private BazaLekara bazaLekara = new BazaLekara();
         private BazaSekretara bazaSekretara = new BazaSekretara();
-        private BazaPacijenata bazaPacijenata = new BazaPacijenata();
+        private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
 
         public bool JedinstvenNoviJmbgKorisnika(string noviJmbg, string stariJmbg)
         {
@@ -61,7 +62,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenoKorisnickoImePacijenta(string korisnickoIme)
         {
-            foreach (var pacijent in bazaPacijenata.SviPacijenti())
+            foreach (var pacijent in pacijentRepo.DobaviSve())
             {
                 if (pacijent.KorisnickoIme.Equals(korisnickoIme))
                 {
@@ -113,7 +114,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenJmbgPacijenta(string jmbg)
         {
-            foreach (var pacijent in bazaPacijenata.SviPacijenti())
+            foreach (var pacijent in pacijentRepo.DobaviSve())
             {
                 if (pacijent.Jmbg.Equals(jmbg))
                 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
@@ -88,6 +89,30 @@ namespace IS_Bolnice.Prozori.Sekretar
         {
             PrikazSvihPacijenata prikazSvihPacijenata = new PrikazSvihPacijenata(OdabraniPacijenti);
             prikazSvihPacijenata.Show();
+        }
+
+        private void TxtNaslov_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = txtNaslov.Text;
+            if (text.Contains("#"))
+            {
+                text = text.Replace("#", "");
+                txtNaslov.Text = text;
+                InformativniProzor ip = new InformativniProzor("Naslov ne može da sadrži '#'");
+                ip.ShowDialog();
+            }
+        }
+
+        private void TxtSadrzaj_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = txtSadrzaj.Text;
+            if (text.Contains("#"))
+            {
+                text = text.Replace("#", "");
+                txtSadrzaj.Text = text;
+                InformativniProzor ip = new InformativniProzor("Sadržaj ne može da sadrži '#'");
+                ip.ShowDialog();
+            }
         }
     }
 }

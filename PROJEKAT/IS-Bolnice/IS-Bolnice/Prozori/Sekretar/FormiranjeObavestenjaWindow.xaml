@@ -9,9 +9,11 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Naslov:" HorizontalAlignment="Left" FontWeight="Bold" Margin="20,203,0,0" VerticalAlignment="Top" Width="84"/>
-        <TextBox Name="txtNaslov" HorizontalAlignment="Left" Height="23" Margin="20,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="653"/>
+        <TextBox Name="txtNaslov" HorizontalAlignment="Left" Height="23" Margin="20,229,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="653" TextChanged="TxtNaslov_OnTextChanged"/>
         <Label Content="Sadržaj:" HorizontalAlignment="Left" FontWeight="Bold" Margin="20,261,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.307,0.268" Width="89"/>
-        <TextBox Name="txtSadrzaj" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap" Height="145" Margin="20,287,0,0" VerticalAlignment="Top" Width="653" />
+        <TextBox Name="txtSadrzaj" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap"
+                 Height="145" Margin="20,287,0,0" VerticalAlignment="Top" Width="653" TextChanged="TxtSadrzaj_TextChanged" />
         <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="111,463,0,0" VerticalAlignment="Top" Width="101" Height="38" Click="Button_Click_Potvrdi"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="470,463,0,0" VerticalAlignment="Top" Width="92" Height="38" Click="Button_Click_Odustani"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="162" Margin="18,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="150"/>

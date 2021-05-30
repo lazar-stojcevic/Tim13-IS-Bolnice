@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using IS_Bolnice.Baze.Interfejsi;
 
-public class BazaPacijenata
+public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
 {
     private static string fileLocation = @"..\..\Datoteke\pacijenti.txt";
     private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
@@ -14,7 +15,22 @@ public class BazaPacijenata
         "M-d-yyyy h:mm:ss tt"
     };
 
-    public List<Pacijent> SviPacijenti()
+    public Pacijent DobaviPoJmbg(string jmbg)
+    {
+        foreach (Pacijent p in DobaviSve())
+        {
+            if (p.Obrisan == false)
+            {
+                if (p.Jmbg.Equals(jmbg))
+                {
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<Pacijent> DobaviSve()
     {
         List<string> linije = File.ReadAllLines(fileLocation).ToList();
 
@@ -32,66 +48,15 @@ public class BazaPacijenata
         return aktuelniPacijenti;
     }
 
-    public Pacijent PacijentSaOvimJMBG(string jmbg)
+    public void Izmeni(Pacijent noviEntitet)
     {
-        foreach (Pacijent p in SviPacijenti())
-        {
-            if (p.Obrisan == false)
-            {
-                if (p.Jmbg.Equals(jmbg))
-                {
-                    return p;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void KreirajPacijenta(Pacijent pacijent)
-    {
-        // lista se koristi samo zato sto je to potrebno za metodu AppendAllLines
-        List<string> pLista = new List<string>();
-        pLista.Add(PacijentToString(pacijent));
-        File.AppendAllLines(fileLocation, pLista);
-    }
-   
-    public void ObrisiPacijenta(Pacijent pacijent)
-    {
-        List<string> linije = new List<string>();
-        linije = File.ReadAllLines(fileLocation).ToList();
-
-        List<Pacijent> pacijenti = new List<Pacijent>();
-        pacijenti = NapraviPacijente(linije);
-
         List<string> pacijentiString = new List<string>();
 
-        foreach (Pacijent p in pacijenti)
+        foreach (Pacijent p in DobaviSve())
         {
-            if (pacijent.Jmbg.Equals(p.Jmbg))
+            if (noviEntitet.Jmbg.Equals(p.Jmbg))
             {
-                p.Obrisan = true;
-            }
-            pacijentiString.Add(PacijentToString(p));
-        }
-
-        File.WriteAllLines(fileLocation, pacijentiString);
-    }
-   
-    public void IzmeniPacijenta(Pacijent pacijentIzmenjen, Pacijent pacijentPocetni)
-     {
-        List<string> linije = new List<string>();
-        linije = File.ReadAllLines(fileLocation).ToList();
-
-        List<Pacijent> pacijenti = new List<Pacijent>();
-        pacijenti = NapraviPacijente(linije);
-
-        List<string> pacijentiString = new List<string>();
-
-        foreach(Pacijent p in pacijenti)
-        {
-            if (pacijentPocetni.Jmbg.Equals(p.Jmbg))
-            {
-                pacijentiString.Add(PacijentToString(pacijentIzmenjen));
+                pacijentiString.Add(PacijentToString(noviEntitet));
             }
             else
             {
@@ -100,28 +65,30 @@ public class BazaPacijenata
         }
 
         File.WriteAllLines(fileLocation, pacijentiString);
-     }
+    }
 
-    private string PacijentToString(Pacijent pacijent)
+    public void Obrisi(string jmbg)
     {
-        string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
-            pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
-            pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja.ToString(vremenskiFormatPisanje) + "#";
+        List<string> pacijentiString = new List<string>();
 
-        // upisivanje liste alergena
-        foreach (Sastojak s in pacijent.Alergeni)
+        foreach (Pacijent p in DobaviSve())
         {
-            p += s.Ime + ",";
-        }
-        p = p.TrimEnd(',');
-
-        // upisivanje izabranog lekara ako postoji
-        if (pacijent.IzabraniLekar != null)
-        {
-            p += "#" + pacijent.IzabraniLekar.Jmbg;
+            if (p.Jmbg.Equals(jmbg))
+            {
+                p.Obrisan = true;
+            }
+            pacijentiString.Add(PacijentToString(p));
         }
 
-        return p;
+        File.WriteAllLines(fileLocation, pacijentiString);
+    }
+
+    public void Sacuvaj(Pacijent noviEntitet)
+    {
+        // lista se koristi samo zato sto je to potrebno za metodu AppendAllLines
+        List<string> pLista = new List<string>();
+        pLista.Add(PacijentToString(noviEntitet));
+        File.AppendAllLines(fileLocation, pLista);
     }
 
     private List<Pacijent> NapraviPacijente(List<string> linije)
@@ -180,10 +147,32 @@ public class BazaPacijenata
                         break;
                     }
                 }
-            } 
+            }
 
             pacijenti.Add(p);
         }
         return pacijenti;
+    }
+
+    private string PacijentToString(Pacijent pacijent)
+    {
+        string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
+                   pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
+                   pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja.ToString(vremenskiFormatPisanje) + "#";
+
+        // upisivanje liste alergena
+        foreach (Sastojak s in pacijent.Alergeni)
+        {
+            p += s.Ime + ",";
+        }
+        p = p.TrimEnd(',');
+
+        // upisivanje izabranog lekara ako postoji
+        if (pacijent.IzabraniLekar != null)
+        {
+            p += "#" + pacijent.IzabraniLekar.Jmbg;
+        }
+
+        return p;
     }
 }

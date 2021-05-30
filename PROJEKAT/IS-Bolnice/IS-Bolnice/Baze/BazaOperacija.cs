@@ -77,7 +77,7 @@ public class BazaOperacija:GenerickiFajlRepozitorijum<Operacija>, OperacijaRepoz
     private static void PostaviPacijentaOperacije(string[] delovi, Operacija operacija)
     {
         operacija.Pacijent.Jmbg = delovi[3];
-        foreach (Pacijent p in new BazaPacijenata().SviPacijenti())
+        foreach (Pacijent p in new PacijentFajlRepozitorijum().DobaviSve())
         {
             if (operacija.Pacijent.Jmbg.Equals(p.Jmbg))
             {

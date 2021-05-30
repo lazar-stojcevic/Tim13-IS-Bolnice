@@ -31,14 +31,14 @@ namespace IS_Bolnice.Kontroleri
             pacijentServis.KreirajPacijenta(potencijalniPacijent);
         }
 
-        public void IzmeniPacijenta(Pacijent izmenjen, Pacijent pocetni)
+        public void IzmeniPacijenta(Pacijent izmenjen)
         {
-            pacijentServis.IzmeniPacijenta(izmenjen, pocetni);
+            pacijentServis.IzmeniPacijenta(izmenjen);
         }
 
-        public void ObrisiPacijenta(Pacijent pacijent)
+        public void ObrisiPacijenta(string jmbgPacijenta)
         {
-            pacijentServis.ObrisiPacijenta(pacijent);
+            pacijentServis.ObrisiPacijenta(jmbgPacijenta);
         }
     }
 }

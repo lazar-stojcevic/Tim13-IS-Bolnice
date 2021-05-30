@@ -9,6 +9,7 @@ using IS_Bolnice.Model;
 
 public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavestenje>, IObavestenjaRepozitorijum
 {
+    IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
     private readonly string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
     private readonly string[] vremenskiFormatiCitanje = new[]
     {
@@ -160,7 +161,6 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
 
     private List<Pacijent> SviPacijentiObavestenja(string delovi)
     {
-        BazaPacijenata bp = new BazaPacijenata();
         List<Pacijent> sviPacijentiObavestenja = new List<Pacijent>();
 
         string[] odredjeniPacijenti = delovi.Split(listSeparator, StringSplitOptions.None);
@@ -168,7 +168,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
         {
             foreach (string pacijentJMBG in odredjeniPacijenti)
             {
-                sviPacijentiObavestenja.Add(bp.PacijentSaOvimJMBG(pacijentJMBG));
+                sviPacijentiObavestenja.Add(pacijentRepo.DobaviPoJmbg(pacijentJMBG));
             }
         }
         return sviPacijentiObavestenja;
