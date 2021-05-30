@@ -29,7 +29,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseLekToString()
         {
-            BazaLekova bazaLekova = new BazaLekova();
+            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
             List<string> tekst = new List<string>();
             List<Lek> lekovi = new LekKontroler().GetSviLekovi();
             foreach (Lek lek in lekovi)
@@ -48,9 +48,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BazaLekova bazaLekova = new BazaLekova();
+            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
             string[] podaciOLeku = listBox.SelectedItem.ToString().Split(' ');
-            Page editPage = new EditBrisanjePage(bazaLekova.DobaviPoId(podaciOLeku[1]));
+            Page editPage = new EditBrisanjePage(lekFajlRepozitorijum.DobaviPoId(podaciOLeku[1]));
             this.NavigationService.Navigate(editPage);
         }
 

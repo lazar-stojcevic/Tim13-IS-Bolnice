@@ -28,7 +28,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             InitializeComponent();
             List<Bolnica> bolnice = new List<Bolnica>();
             Bolnica b1 = new Bolnica();
-            BazaBolnica baza = new BazaBolnica();
+            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
             bolnice = baza.DobaviSve();
             foreach (Bolnica b in bolnice)
             {
@@ -67,7 +67,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         {
             List<Bolnica> bolnice = new List<Bolnica>();
             Bolnica b1 = new Bolnica();
-            BazaBolnica baza = new BazaBolnica();
+            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
             bolnice = baza.DobaviSve();
             foreach (Bolnica b in bolnice)
             {
@@ -101,7 +101,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 if (resultat == MessageBoxResult.Yes)
                 {
                     List<Bolnica> bolnice = new List<Bolnica>();
-                    BazaBolnica baza = new BazaBolnica();
+                    BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
                     bolnice = baza.DobaviSve();
                     foreach (Bolnica b in bolnice)
                     {

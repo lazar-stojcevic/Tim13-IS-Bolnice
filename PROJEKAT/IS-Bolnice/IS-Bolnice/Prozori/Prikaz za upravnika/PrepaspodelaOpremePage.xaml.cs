@@ -24,7 +24,7 @@ namespace IS_Bolnice.Prozori
         public PrepaspodelaOpremePage()
         {
             InitializeComponent();
-            BazaBolnica baza = new BazaBolnica();
+            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
             List<Soba> prostorije = baza.GetSobe();
             List<string> izvor = new List<string>();
             izvor.Add("");
@@ -39,7 +39,7 @@ namespace IS_Bolnice.Prozori
         {
             if (!sala1_txt.SelectedItem.Equals(""))
             {
-                BazaSadrzaja baza = new BazaSadrzaja();
+                SadrzajSobeFajlRepozitorijum baza = new SadrzajSobeFajlRepozitorijum();
                 List<SadrzajSobe> sadrzajSobe = baza.GetSadrzajSobe(sala1_txt.SelectedItem.ToString());
                 listBox1.ItemsSource = ParseToString(sadrzajSobe);
             }
@@ -47,7 +47,7 @@ namespace IS_Bolnice.Prozori
 
         private List<string> ParseToString(List<SadrzajSobe> sadrzajSobe) {
             List<string> tekst = new List<string>();
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             foreach (SadrzajSobe sadrzaj in sadrzajSobe) {
                 string linija = "ID: " + sadrzaj.Predmet.Id + " Naziv: " + baza.DobaviPoId(sadrzaj.Predmet.Id).Naziv + " Kolicina " + sadrzaj.Kolicina;
                 tekst.Add(linija);
@@ -59,7 +59,7 @@ namespace IS_Bolnice.Prozori
         {
             if (!sala2_txt.SelectedItem.Equals(""))
             {
-                BazaSadrzaja baza = new BazaSadrzaja();
+                SadrzajSobeFajlRepozitorijum baza = new SadrzajSobeFajlRepozitorijum();
                 List<SadrzajSobe> sadrzajSobe = baza.GetSadrzajSobe(sala2_txt.SelectedItem.ToString());
                 listBox2.ItemsSource = ParseToString(sadrzajSobe);
             }
@@ -83,11 +83,11 @@ namespace IS_Bolnice.Prozori
 
         private void UpMoveButton_Click(object sender, RoutedEventArgs e)
         {
-            BazaOpreme bazaOpreme = new BazaOpreme();
+            OpremaFajlRepozitorijum opremaFajlRepozitorijum = new OpremaFajlRepozitorijum();
             if (listBox2.SelectedIndex != -1)
             {
                 string[] polja = listBox2.SelectedItem.ToString().Split(' ');
-                Predmet odabraneOprema = bazaOpreme.DobaviPoId(polja[1]);
+                Predmet odabraneOprema = opremaFajlRepozitorijum.DobaviPoId(polja[1]);
                 if (odabraneOprema.Tip == TipOpreme.dinamicka)
                 {
                     OduzmiOdabranuKolicinuOpreme(false);
@@ -97,10 +97,10 @@ namespace IS_Bolnice.Prozori
                     OduzmiOdabranuKolicinuOpreme(false);
                     PrebaciOpremuUStanjeCekanja(false);
                 }
-                BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-                List<SadrzajSobe> sadrzajSobe1 = bazaSadrzaja.GetSadrzajSobe(GetIDProstorije(true));
+                SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+                List<SadrzajSobe> sadrzajSobe1 = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(GetIDProstorije(true));
                 listBox1.ItemsSource = ParseToString(sadrzajSobe1);
-                List<SadrzajSobe> sadrzajSobe2 = bazaSadrzaja.GetSadrzajSobe(GetIDProstorije(false));
+                List<SadrzajSobe> sadrzajSobe2 = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(GetIDProstorije(false));
                 listBox2.ItemsSource = ParseToString(sadrzajSobe2);
             }
             else {
@@ -118,8 +118,8 @@ namespace IS_Bolnice.Prozori
         }
 
         private void OduzmiOdabranuKolicinuOpreme(bool smer) {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            List<SadrzajSobe> sadrzajSobe = bazaSadrzaja.GetSadrzajSobe(GetIDProstorije(smer));
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+            List<SadrzajSobe> sadrzajSobe = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(GetIDProstorije(smer));
             foreach (SadrzajSobe predmet in sadrzajSobe)
             {
                 if (predmet.Predmet.Id.Equals(GetIDOpreme(smer)))
@@ -127,7 +127,7 @@ namespace IS_Bolnice.Prozori
                     if (predmet.Kolicina >= Int32.Parse(textBox.Text))
                     {
                         predmet.Kolicina = predmet.Kolicina - Int32.Parse(textBox.Text);
-                        bazaSadrzaja.Izmeni(predmet);
+                        sadrzajSobeFajlRepozitorijum.Izmeni(predmet);
                     }
                     else
                     {
@@ -164,31 +164,31 @@ namespace IS_Bolnice.Prozori
         }
 
         private void DodajOdabranuKolicinuOpreme(bool smer) {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
          
-            List<SadrzajSobe> sadrzajSobe = bazaSadrzaja.GetSadrzajSobe(GetIDProstorije(smer));
+            List<SadrzajSobe> sadrzajSobe = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(GetIDProstorije(smer));
             foreach (SadrzajSobe predmet in sadrzajSobe)
             {
                 if (predmet.Predmet.Id.Equals(GetIDOpreme(!smer)))
                 {
                         predmet.Kolicina = predmet.Kolicina + Int32.Parse(textBox.Text);
-                        bazaSadrzaja.Izmeni(predmet);
+                        sadrzajSobeFajlRepozitorijum.Izmeni(predmet);
                     return;
                 }
             }
             SadrzajSobe noviSadrzaj = new SadrzajSobe(GetIDProstorije(smer), GetIDOpreme(!smer), Int32.Parse(textBox.Text));
-            bazaSadrzaja.Sacuvaj(noviSadrzaj);
+            sadrzajSobeFajlRepozitorijum.Sacuvaj(noviSadrzaj);
         }
 
 
 
         private void DownMoveButton_Click(object sender, RoutedEventArgs e)
         {
-            BazaOpreme bazaOpreme = new BazaOpreme();
+            OpremaFajlRepozitorijum opremaFajlRepozitorijum = new OpremaFajlRepozitorijum();
             if (listBox1.SelectedIndex != -1)
             {
                 string[] polja = listBox1.SelectedItem.ToString().Split(' ');
-                Predmet odabraneOprema = bazaOpreme.DobaviPoId(polja[1]);
+                Predmet odabraneOprema = opremaFajlRepozitorijum.DobaviPoId(polja[1]);
                 if (odabraneOprema.Tip == TipOpreme.dinamicka)
                 {
                     OduzmiOdabranuKolicinuOpreme(true);
@@ -199,10 +199,10 @@ namespace IS_Bolnice.Prozori
                     OduzmiOdabranuKolicinuOpreme(true);
                     PrebaciOpremuUStanjeCekanja(true);
                 }
-                BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-                List<SadrzajSobe> sadrzajSobe1 = bazaSadrzaja.GetSadrzajSobe(GetIDProstorije(true));
+                SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+                List<SadrzajSobe> sadrzajSobe1 = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(GetIDProstorije(true));
                 listBox1.ItemsSource = ParseToString(sadrzajSobe1);
-                List<SadrzajSobe> sadrzajSobe2 = bazaSadrzaja.GetSadrzajSobe(GetIDProstorije(false));
+                List<SadrzajSobe> sadrzajSobe2 = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(GetIDProstorije(false));
                 listBox2.ItemsSource = ParseToString(sadrzajSobe2);
             }
             else

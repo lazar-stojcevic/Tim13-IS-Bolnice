@@ -17,7 +17,7 @@ public class BazaPregleda
         "M-d-yyyy h:mm:ss tt"
     };
     private BazaIzmena bazaIzmena = new BazaIzmena();
-    private BazaLekara bazaLekara = new BazaLekara();
+    private LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
 
     //PREDLAZE TERMINE ZA IZMENU, SREDITI PROSLEDJENOG LEKARA DA IMA TACNO RADNO VREME
     public List<Pregled> SlobodniTerminiZaIzmenu(Lekar l, DateTime datum)
@@ -25,7 +25,7 @@ public class BazaPregleda
         List<Pregled> validni = new List<Pregled>();
         List<Pregled> slobodni = new List<Pregled>();
 
-        List<Lekar> lekari = bazaLekara.LekariOpstePrakse();
+        List<Lekar> lekari = lekarFajlRepozitorijum.LekariOpstePrakse();
         Lekar lekar = new Lekar();
         foreach (Lekar ll in lekari)
         {
@@ -98,7 +98,7 @@ public class BazaPregleda
 
     public List<Pregled> SviPregledi()
     {
-        BazaLekara bl = new BazaLekara();
+        LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
 
         PacijentFajlRepozitorijum pacijentFajlRepozitorijum = new PacijentFajlRepozitorijum();
         List<Pacijent> pacijenti = pacijentFajlRepozitorijum.DobaviSve();
@@ -218,7 +218,7 @@ public class BazaPregleda
     }
 
     public string FormatPisanjaPregleda(Pregled pregled){
-        foreach (Lekar lekar in bazaLekara.DobaviSve())
+        foreach (Lekar lekar in lekarFajlRepozitorijum.DobaviSve())
         {
             if (lekar.Jmbg.Equals(pregled.Lekar.Jmbg))
             {

@@ -23,8 +23,8 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         public SalePage()
         {
             InitializeComponent();
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            listBox.ItemsSource = ParseSobaToString(bazaBolnica.GetSobe());
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            listBox.ItemsSource = ParseSobaToString(bolnicaFajlRepozitorijum.GetSobe());
         }
 
         private List<string> ParseSobaToString(List<Soba> sobe) {
@@ -72,7 +72,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BazaBolnica baza = new BazaBolnica();
+            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
             listBox.ItemsSource = ParseSobaToString(baza.GetSobe());
         }
 

@@ -24,7 +24,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public OdgovorNaZahtevLekPage(string idLeka)
         {
             InitializeComponent();
-            BazaOdgovoraNaZahteveZaValidacijuLekova baza = new BazaOdgovoraNaZahteveZaValidacijuLekova();
+            OdgovorNaZahtevFajlRepozitorijum baza = new OdgovorNaZahtevFajlRepozitorijum();
             noviLek = baza.DobaviPoId(idLeka).Lek;
             opis_txt.Text = baza.DobaviPoId(idLeka).Obrazlozenje;
         }

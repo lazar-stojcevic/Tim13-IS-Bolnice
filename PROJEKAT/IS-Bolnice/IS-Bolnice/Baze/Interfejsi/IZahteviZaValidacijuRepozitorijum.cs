@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Baze.Interfejsi
 {
-    interface ZahteviZaValidacijuRepozitorijum : GenerickiRepozitorijum<ZahtevZaValidacijuLeka>
+    interface IZahteviZaValidacijuRepozitorijum : GenerickiRepozitorijum<ZahtevZaValidacijuLeka>
     {
         List<ZahtevZaValidacijuLeka> DobaviZahteveZaValidacijuZaLekara(string idLekara);
     }

@@ -1,7 +1,7 @@
-// File:    BazaOdgovoraNaZahteveZaValidacijuLekova.cs
+// File:    OdgovorNaZahtevFajlRepozitorijum.cs
 // Author:  Zola
 // Created: Monday, May 3, 2021 9:32:38 PM
-// Purpose: Definition of Class BazaOdgovoraNaZahteveZaValidacijuLekova
+// Purpose: Definition of Class OdgovorNaZahtevFajlRepozitorijum
 
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Windows;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaOdgovoraNaZahteveZaValidacijuLekova : GenerickiFajlRepozitorijum<OdgovorNaZahtevZaValidaciju>, OdgovorNaZahtevRepozitorijum
+public class OdgovorNaZahtevFajlRepozitorijum : GenerickiFajlRepozitorijum<OdgovorNaZahtevZaValidaciju>, IOdgovorNaZahtevRepozitorijum
 {
-    public BazaOdgovoraNaZahteveZaValidacijuLekova():base(@"..\..\Datoteke\odgovorLekovi.txt")
+    public OdgovorNaZahtevFajlRepozitorijum():base(@"..\..\Datoteke\odgovorLekovi.txt")
    {
 
    }

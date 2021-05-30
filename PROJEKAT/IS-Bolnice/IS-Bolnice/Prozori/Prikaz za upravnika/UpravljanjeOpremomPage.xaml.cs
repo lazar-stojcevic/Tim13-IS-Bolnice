@@ -23,7 +23,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         public UpravljanjeOpremomPage()
         {
             InitializeComponent();
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
             predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
@@ -43,7 +43,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
             bool svaOpremaSelektovana = SelectovanaSvaOprema();
             TipOpreme tip = SelektovaniTipOpreme();
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Predmet predmet in predmeti)
@@ -93,7 +93,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
             predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();

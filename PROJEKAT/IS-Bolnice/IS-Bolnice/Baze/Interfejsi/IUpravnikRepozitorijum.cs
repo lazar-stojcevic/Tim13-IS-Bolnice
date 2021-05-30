@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Baze.Interfejsi
 {
-    interface LekRepozitorijum: GenerickiRepozitorijum<Lek>
+    interface IUpravnikRepozitorijum : GenerickiRepozitorijum<Upravnik>
     {
     }
 }

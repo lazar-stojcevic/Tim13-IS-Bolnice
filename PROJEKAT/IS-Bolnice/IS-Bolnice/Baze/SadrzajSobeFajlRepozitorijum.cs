@@ -1,7 +1,7 @@
-// File:    BazaSadrzaja.cs
+// File:    SadrzajSobeFajlRepozitorijum.cs
 // Author:  teddy
 // Created: Monday, April 26, 2021 3:42:44 PM
-// Purpose: Definition of Class BazaSadrzaja
+// Purpose: Definition of Class SadrzajSobeFajlRepozitorijum
 
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
@@ -11,7 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 
-public class BazaSadrzaja: GenerickiFajlRepozitorijum<SadrzajSobe>, ISadrzajSobeRepozitorijum
+public class SadrzajSobeFajlRepozitorijum: GenerickiFajlRepozitorijum<SadrzajSobe>, ISadrzajSobeRepozitorijum
 {
 
     private static string vremenskiFormatPisanje = "M/d/yyyy";
@@ -21,15 +21,15 @@ public class BazaSadrzaja: GenerickiFajlRepozitorijum<SadrzajSobe>, ISadrzajSobe
         "M-d-yyyy"
     };
 
-    public BazaSadrzaja() : base(@"..\..\Datoteke\sadrzajiSoba.txt") { }
+    public SadrzajSobeFajlRepozitorijum() : base(@"..\..\Datoteke\sadrzajiSoba.txt") { }
     
 
     public override SadrzajSobe KreirajEntitet(string[] podaciEntiteta)
     {
         Soba soba = new Soba();
         soba.Id = podaciEntiteta[0];
-        BazaOpreme bazaOpreme = new BazaOpreme();
-        Predmet predmet = bazaOpreme.DobaviPoId(podaciEntiteta[1]);
+        OpremaFajlRepozitorijum opremaFajlRepozitorijum = new OpremaFajlRepozitorijum();
+        Predmet predmet = opremaFajlRepozitorijum.DobaviPoId(podaciEntiteta[1]);
         Soba novaSoba = new Soba();
         SadrzajSobe s;
         if (!podaciEntiteta[3].Equals(""))

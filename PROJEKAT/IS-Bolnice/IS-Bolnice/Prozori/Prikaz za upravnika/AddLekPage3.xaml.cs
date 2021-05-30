@@ -33,8 +33,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         public List<string> ParseLekarToString() {
-            BazaLekara bazaLekara = new BazaLekara();
-            List<Lekar> lekari = bazaLekara.DobaviSve();
+            LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
+            List<Lekar> lekari = lekarFajlRepozitorijum.DobaviSve();
             List<string> tekst = new List<string>();
             foreach(Lekar lekar in lekari)
             {

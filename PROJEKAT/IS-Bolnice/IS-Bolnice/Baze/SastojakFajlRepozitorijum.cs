@@ -5,10 +5,10 @@ using System.Windows;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaSastojaka : GenerickiFajlRepozitorijum<Sastojak>, SastojakInterfejs
+public class SastojakFajlRepozitorijum : GenerickiFajlRepozitorijum<Sastojak>, ISastojakRepozitorijum
 {
 
-    public BazaSastojaka() : base(@"..\..\Datoteke\sastojci.txt")
+    public SastojakFajlRepozitorijum() : base(@"..\..\Datoteke\sastojci.txt")
     {
     }
    

@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class LekServis
     {
-        private BazaLekova bazaLekova = new BazaLekova();
+        private ILekRepozitorijum lekRepo = new LekFajlRepozitorijum();
 
         public List<Lek> GetSviLekovi()
         {
-            return bazaLekova.DobaviSve();
+            return lekRepo.DobaviSve();
         }
 
         public void ObrisiLek(Lek lek)
         {
-            bazaLekova.Obrisi(lek.Id);
+            lekRepo.Obrisi(lek.Id);
         }
 
         public void KreirajLek(Lek lek)
         {
-            bazaLekova.Sacuvaj(lek);
+            lekRepo.Sacuvaj(lek);
         }
     }
 }

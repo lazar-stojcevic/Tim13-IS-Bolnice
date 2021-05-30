@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -67,8 +68,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseSastojakToString()
         {
-            BazaSastojaka bazaSastojaka = new BazaSastojaka();
-            List<Sastojak> sastojci = bazaSastojaka.DobaviSve();
+            ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
+            List<Sastojak> sastojci = sastojakRepo.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Sastojak sastojak in sastojci)
             {
@@ -79,9 +80,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseLekToString()
         {
-            BazaLekova bazaLekova = new BazaLekova();
+            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
             List<string> tekst = new List<string>();
-            List<Lek> lekovi = bazaLekova.DobaviSve();
+            List<Lek> lekovi = lekFajlRepozitorijum.DobaviSve();
             foreach (Lek lek in lekovi)
             {
                 string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;
@@ -112,15 +113,15 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void Potvrdi_btn_Click(object sender, RoutedEventArgs e)
         {
-            BazaLekova bazaLekova = new BazaLekova();
-            BazaOdgovoraNaZahteveZaValidacijuLekova bazaOdgovora = new BazaOdgovoraNaZahteveZaValidacijuLekova();
+            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
+            OdgovorNaZahtevFajlRepozitorijum odgovor = new OdgovorNaZahtevFajlRepozitorijum();
             if (kreiranjeIzmena)
             {
-                bazaLekova.Izmeni(noviLek);
+                lekFajlRepozitorijum.Izmeni(noviLek);
             }
             else {
                 OdgovorNaZahtevZaValidaciju odgovorNaZahtev = new OdgovorNaZahtevZaValidaciju(noviLek, null);
-                bazaOdgovora.Obrisi(odgovorNaZahtev.Lek.Id);
+                odgovor.Obrisi(odgovorNaZahtev.Lek.Id);
                 AddLekPage3 addLekareZaZahtev = new AddLekPage3(noviLek);
                 this.NavigationService.Navigate(addLekareZaZahtev);
             }

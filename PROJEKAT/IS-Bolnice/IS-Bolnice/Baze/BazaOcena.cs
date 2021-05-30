@@ -15,7 +15,7 @@ namespace IS_Bolnice.Baze
     {
         private static string fileLocation = @"..\..\Datoteke\Ocene.txt";
         private BazaPregleda bazaPregleda = new BazaPregleda();
-        private BazaLekara bazaLekara = new BazaLekara();
+        private LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
         private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
 
         private static string timeFormatForWriting = "M/d/yyyy h:mm:ss tt";
@@ -246,7 +246,7 @@ namespace IS_Bolnice.Baze
 
         public Lekar FindDoctorFromJmbg(string doctorJmbg)
         {
-            foreach (Lekar doctor in bazaLekara.DobaviSve())
+            foreach (Lekar doctor in lekarFajlRepozitorijum.DobaviSve())
             {
                 if (doctor.Jmbg == doctorJmbg)
                 {

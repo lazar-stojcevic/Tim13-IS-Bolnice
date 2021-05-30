@@ -52,14 +52,14 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private void SpajanjeSoba() {
             KreirajNovuSobu();
             Renovacija renovacija = MakeRenovacija();
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
-            bazaRenovacija.Sacuvaj(renovacija);
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
+            renovacijaFajlRepozitorijum.Sacuvaj(renovacija);
             UkloniSobe();
         }
 
         private void PrebaciOpremuUMagacin() {
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            List<Soba> updateSoba = bazaBolnica.GetSobe();
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
             foreach (Soba selected in selectovaneSobe)
             {
                 DodajOpremuUMagacin(selected.Id);
@@ -68,8 +68,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         private void UkloniSobe() {
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            List<Soba> updateSoba = bazaBolnica.GetSobe();
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
             foreach (Soba selected in selectovaneSobe) {
                 foreach (Soba sobaIter in updateSoba) {
                     if (sobaIter.Id.Equals(selected.Id)) {
@@ -78,18 +78,18 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                     }
                 }
             }
-            Bolnica novaBolnica = bazaBolnica.GetBolnica();
+            Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
             novaBolnica.Soba = updateSoba;
-            bazaBolnica.Sacuvaj(novaBolnica);
+            bolnicaFajlRepozitorijum.Sacuvaj(novaBolnica);
             this.NavigationService.GoBack();
         }
 
         public void DodajOpremuUMagacin(string idSobe)
         {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            List<SadrzajSobe> svaOpremaUSobi = bazaSadrzaja.GetSadrzajSobe(idSobe);
-            List<SadrzajSobe> svaOpremaUMagacinu = bazaSadrzaja.GetSadrzajSobe(bazaBolnica.GetMagacin().Id);
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            List<SadrzajSobe> svaOpremaUSobi = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(idSobe);
+            List<SadrzajSobe> svaOpremaUMagacinu = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(bolnicaFajlRepozitorijum.GetMagacin().Id);
             bool postojiOpremaUMagacinu = false;
             foreach (SadrzajSobe opremaUSobi in svaOpremaUSobi)
             {
@@ -98,15 +98,15 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                     if (opremaUSobi.Predmet.Id.Equals(opremaUMagacinu.Predmet.Id))
                     {
                         opremaUMagacinu.Kolicina = opremaUMagacinu.Kolicina + opremaUSobi.Kolicina;
-                        bazaSadrzaja.Izmeni(opremaUMagacinu);
+                        sadrzajSobeFajlRepozitorijum.Izmeni(opremaUMagacinu);
                         postojiOpremaUMagacinu = true;
                         break;
                     }
                 }
                 if (!postojiOpremaUMagacinu)
                 {
-                    opremaUSobi.Soba.Id = bazaBolnica.GetMagacin().Id;
-                    bazaSadrzaja.Sacuvaj(opremaUSobi);
+                    opremaUSobi.Soba.Id = bolnicaFajlRepozitorijum.GetMagacin().Id;
+                    sadrzajSobeFajlRepozitorijum.Sacuvaj(opremaUSobi);
                 }
                 postojiOpremaUMagacinu = false;
             }
@@ -115,11 +115,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public void ObrisiOpremuIzSobe(string idSobe)
         {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            List<SadrzajSobe> opremaUSobi = bazaSadrzaja.GetSadrzajSobe(idSobe);
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+            List<SadrzajSobe> opremaUSobi = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(idSobe);
             foreach (SadrzajSobe oprema in opremaUSobi)
             {
-                bazaSadrzaja.Obrisi(oprema.Id);
+                sadrzajSobeFajlRepozitorijum.Obrisi(oprema.Id);
             }
         }
 
@@ -128,10 +128,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 novaSoba.Kvadratura = novaSoba.Kvadratura + sobaIter.Kvadratura;
                 novaSoba.Sprat = sobaIter.Sprat;
             }
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            Bolnica novaBolnica = bazaBolnica.GetBolnica();
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
             novaBolnica.AddSoba(novaSoba);
-            bazaBolnica.Sacuvaj(novaBolnica);
+            bolnicaFajlRepozitorijum.Sacuvaj(novaBolnica);
             
         }
 
@@ -165,8 +165,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private bool ProveraOperacioneSale(string idSobe)
         {
             OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
-            BazaOperacija bazaOperacija = new BazaOperacija();
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
+            OperacijaFajlRepozitorijum operacijaFajlRepozitorijum = new OperacijaFajlRepozitorijum();
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
             foreach (Operacija operacija in operacijaKontroler.GetSveSledeceOperacijeSale(idSobe))
             {
@@ -180,10 +180,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         private bool ProveraBolnickeSobe(string idSobe) {
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
-            BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
+            HospitalizacijaFajlRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
-            foreach (Hospitalizacija hospitalizacija in bazaHospitalizacija.DobaviSveHospitalizacijeZaSobu(idSobe)) {
+            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.DobaviSveHospitalizacijeZaSobu(idSobe)) {
                 if (hospitalizacija.PocetakHospitalizacije > renovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < renovacija.DatumKraja)
                 {
                     MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
@@ -197,7 +197,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             PregledKontroler pregledKontroler = new PregledKontroler();
             BazaPregleda bazaPregleda = new BazaPregleda();
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
             foreach (Pregled pregled in pregledKontroler.GetSviBuduciPreglediSobe(idSobe))
             {

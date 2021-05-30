@@ -137,7 +137,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
             // ako postoji i izabrani lekar (bez provere bi puklo ukoliko korisnik nema izabranog lekara)
             if (delovi.Length > 12)
             {
-                BazaLekara bl = new BazaLekara();
+                LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
                 List<Lekar> lekari = bl.LekariOpstePrakse();
                 foreach (Lekar l in lekari)
                 {

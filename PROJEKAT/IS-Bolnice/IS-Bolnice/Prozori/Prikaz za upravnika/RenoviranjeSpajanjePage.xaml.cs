@@ -25,8 +25,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public RenoviranjeSpajanjePage()
         {
             InitializeComponent();
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            listBox.ItemsSource = ParseSobaToString(bazaBolnica.GetSobe());
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            listBox.ItemsSource = ParseSobaToString(bolnicaFajlRepozitorijum.GetSobe());
             spajanje = false; 
         }
 
@@ -50,8 +50,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private Soba ParseStringToSoba(string redTebele) {
             string[] niz = redTebele.Split(' ');
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            return bazaBolnica.GetSobaById(niz[1]);
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            return bolnicaFajlRepozitorijum.GetSobaById(niz[1]);
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

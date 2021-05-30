@@ -7,7 +7,7 @@ using IS_Bolnice.Baze;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaLekara: GenerickiFajlRepozitorijum<Lekar>, LekarRepozitorijum
+public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRepozitorijum
 {
     private IRadnoVremeRepozitorijum radnoVremeRepo = new RadnoVremeFajlRepozitorijum();
     private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
@@ -17,7 +17,7 @@ public class BazaLekara: GenerickiFajlRepozitorijum<Lekar>, LekarRepozitorijum
         "M-d-yyyy h:mm:ss tt"
     };
 
-    public BazaLekara() : base(@"..\..\Datoteke\lekari.txt")
+    public LekarFajlRepozitorijum() : base(@"..\..\Datoteke\lekari.txt")
     {
     }
 

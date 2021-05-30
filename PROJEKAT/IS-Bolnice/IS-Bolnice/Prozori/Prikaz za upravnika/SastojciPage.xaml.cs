@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -20,6 +21,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class SastojciPage : Page
     {
+        private ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
         public SastojciPage()
         {
             InitializeComponent();
@@ -28,8 +30,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         public List<string> ParseToString() {
-            BazaSastojaka bazaSastojaka = new BazaSastojaka();
-            List<Sastojak> sastojci = bazaSastojaka.DobaviSve();
+            List<Sastojak> sastojci = sastojakRepo.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Sastojak sastojak in sastojci) {
                 tekst.Add(sastojak.Ime);

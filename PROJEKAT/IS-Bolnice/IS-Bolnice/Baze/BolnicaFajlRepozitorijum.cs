@@ -1,7 +1,7 @@
-// File:    BazaBolnica.cs
+// File:    BolnicaFajlRepozitorijum.cs
 // Author:  Zola
 // Created: Monday, March 22, 2021 9:11:00 PM
-// Purpose: Definition of Class BazaBolnica
+// Purpose: Definition of Class BolnicaFajlRepozitorijum
 
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
-public class BazaBolnica: GenerickiFajlRepozitorijum<Bolnica>, IBolnicaRepozitorijum
+public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBolnicaRepozitorijum
 {
 
-    public BazaBolnica() : base(@"..\..\Datoteke\bolnice.txt") { }
+    public BolnicaFajlRepozitorijum() : base(@"..\..\Datoteke\bolnice.txt") { }
 
    
     public Bolnica GetBolnica() {

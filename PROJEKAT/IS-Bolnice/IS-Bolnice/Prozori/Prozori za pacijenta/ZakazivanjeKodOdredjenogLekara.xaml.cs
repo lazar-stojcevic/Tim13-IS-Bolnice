@@ -33,7 +33,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             InitializeComponent();
             jmbgPac = jmbgPacijenta;
 
-            BazaLekara bl = new BazaLekara();
+            LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
             lekari = bl.LekariOpstePrakse();
 
             foreach (Lekar l in lekari)

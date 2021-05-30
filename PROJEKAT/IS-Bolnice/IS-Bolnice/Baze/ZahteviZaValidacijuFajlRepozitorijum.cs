@@ -1,7 +1,7 @@
-// File:    BazaZahtevaZaValidacijuLeka.cs
+// File:    ZahteviZaValidacijuFajlRepozitorijum.cs
 // Author:  Zola
 // Created: Monday, May 3, 2021 9:32:33 PM
-// Purpose: Definition of Class BazaZahtevaZaValidacijuLeka
+// Purpose: Definition of Class ZahteviZaValidacijuFajlRepozitorijum
 
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Linq;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaZahtevaZaValidacijuLeka : GenerickiFajlRepozitorijum<ZahtevZaValidacijuLeka>, ZahteviZaValidacijuRepozitorijum
+public class ZahteviZaValidacijuFajlRepozitorijum : GenerickiFajlRepozitorijum<ZahtevZaValidacijuLeka>, IZahteviZaValidacijuRepozitorijum
 {
-    public BazaZahtevaZaValidacijuLeka():base(@"..\..\Datoteke\zahteviLekovi.txt")
+    public ZahteviZaValidacijuFajlRepozitorijum():base(@"..\..\Datoteke\zahteviLekovi.txt")
     { }
 
     public override ZahtevZaValidacijuLeka KreirajEntitet(string[] podaciEntiteta)
@@ -34,7 +34,7 @@ public class BazaZahtevaZaValidacijuLeka : GenerickiFajlRepozitorijum<ZahtevZaVa
         ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka(p);
 
         string[] idLekara = podaciEntiteta[6].Split('-');
-        foreach (Lekar lekarIter in new BazaLekara().DobaviSve())
+        foreach (Lekar lekarIter in new LekarFajlRepozitorijum().DobaviSve())
         {
             foreach (string id in idLekara)
             {
@@ -77,7 +77,7 @@ public class BazaZahtevaZaValidacijuLeka : GenerickiFajlRepozitorijum<ZahtevZaVa
             foreach (string deo in zameskiLek)
             {
                 Lek lek = new Lek(deo);
-                foreach (Lek lekIter in new BazaLekova().DobaviSve())
+                foreach (Lek lekIter in new LekFajlRepozitorijum().DobaviSve())
                 {
                     if (deo.Equals(lekIter.Id))
                     {

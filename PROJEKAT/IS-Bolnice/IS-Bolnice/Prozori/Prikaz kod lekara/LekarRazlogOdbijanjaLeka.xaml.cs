@@ -20,8 +20,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// </summary>
     public partial class LekarRazlogOdbijanjaLeka : Window
     {
-        BazaZahtevaZaValidacijuLeka bazaZahtevaZaValidaciju = new BazaZahtevaZaValidacijuLeka();
-        BazaOdgovoraNaZahteveZaValidacijuLekova bazaOdgovora = new BazaOdgovoraNaZahteveZaValidacijuLekova();
+        ZahteviZaValidacijuFajlRepozitorijum zahteviZaValidaciju = new ZahteviZaValidacijuFajlRepozitorijum();
+        OdgovorNaZahtevFajlRepozitorijum odgovor = new OdgovorNaZahtevFajlRepozitorijum();
 
         private ZahtevZaValidacijuKontroler zahtevZaValidacijuKontroler = new ZahtevZaValidacijuKontroler();
 

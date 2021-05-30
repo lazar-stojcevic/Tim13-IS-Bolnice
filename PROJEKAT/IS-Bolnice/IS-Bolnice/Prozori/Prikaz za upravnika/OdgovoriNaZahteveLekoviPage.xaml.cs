@@ -27,7 +27,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         public List<string> ParseToString() {
-            BazaOdgovoraNaZahteveZaValidacijuLekova baza = new BazaOdgovoraNaZahteveZaValidacijuLekova();
+            OdgovorNaZahtevFajlRepozitorijum baza = new OdgovorNaZahtevFajlRepozitorijum();
             List<OdgovorNaZahtevZaValidaciju> odgovoriNaZahteve = baza.DobaviSve();
             List<string> linije = new List<string>();
             foreach (OdgovorNaZahtevZaValidaciju odgovor in odgovoriNaZahteve) {

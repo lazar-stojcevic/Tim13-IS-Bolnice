@@ -1,7 +1,7 @@
-// File:    BazaOpreme.cs
+// File:    OpremaFajlRepozitorijum.cs
 // Author:  teddy
 // Created: Monday, April 12, 2021 6:08:22 PM
-// Purpose: Definition of Class BazaOpreme
+// Purpose: Definition of Class OpremaFajlRepozitorijum
 
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Windows;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaOpreme : GenerickiFajlRepozitorijum<Predmet>, OpremaRepozitorijum
+public class OpremaFajlRepozitorijum : GenerickiFajlRepozitorijum<Predmet>, IOpremaRepozitorijum
 {
-    public BazaOpreme():base(@"..\..\Datoteke\oprema.txt") { }
+    public OpremaFajlRepozitorijum():base(@"..\..\Datoteke\oprema.txt") { }
     
     public override Predmet KreirajEntitet(string[] podaciEntiteta)
     {

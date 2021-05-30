@@ -25,7 +25,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         {
             InitializeComponent();
             id_txt.Text = selectedID;
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             Predmet izmenjenPredmet = baza.DobaviPoId(selectedID);
             naziv_txt.Text = izmenjenPredmet.Naziv;
             if (izmenjenPredmet.Tip == TipOpreme.dinamicka)
@@ -40,7 +40,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> lista = baza.DobaviSve();
             Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
             izmenjenPredmet.Naziv = naziv_txt.Text;
@@ -69,8 +69,8 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete opremu?", "", MessageBoxButton.YesNo);
             if (resultat == MessageBoxResult.Yes)
             {
-                BazaOpreme baza = new BazaOpreme();
-                BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
+                OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
+                SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
                 List<Predmet> lista = baza.DobaviSve();
                 Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
                 if (!sadrzajSobeServis.PostojiOpremaUBolnici(id_txt.Text))

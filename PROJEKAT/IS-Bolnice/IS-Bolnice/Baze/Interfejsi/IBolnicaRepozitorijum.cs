@@ -15,5 +15,7 @@ namespace IS_Bolnice.Baze.Interfejsi
         List<Soba> GetSobe();
 
         Bolnica GetBolnica();
+
+        List<Soba> SveOperacioneSaleOveBolnice();
     }
 }

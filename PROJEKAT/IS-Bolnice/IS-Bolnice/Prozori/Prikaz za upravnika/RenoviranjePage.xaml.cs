@@ -53,9 +53,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         private void RenoviranjeOperacioneSale() {
-            BazaOperacija bazaOperacija = new BazaOperacija();
+            OperacijaFajlRepozitorijum operacijaFajlRepozitorijum = new OperacijaFajlRepozitorijum();
             OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
             foreach (Operacija operacija in operacijaKontroler.GetSveSledeceOperacijeSale(selektovanaSoba.Id))
             {
@@ -65,7 +65,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 }
                 else
                 {
-                    bazaRenovacija.Sacuvaj(renovacija);
+                    renovacijaFajlRepozitorijum.Sacuvaj(renovacija);
                     RenoviranjeOprema();
                     this.NavigationService.GoBack();
                 }
@@ -73,17 +73,17 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         private void RenovirajBolnickuSobu() {
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
-            BazaHospitalizacija bazaHospitalizacija = new BazaHospitalizacija();
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
+            HospitalizacijaFajlRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
-            foreach (Hospitalizacija hospitalizacija in bazaHospitalizacija.DobaviSveHospitalizacijeZaSobu(selektovanaSoba.Id)) {
+            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.DobaviSveHospitalizacijeZaSobu(selektovanaSoba.Id)) {
                 if (hospitalizacija.PocetakHospitalizacije > renovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < renovacija.DatumKraja)
                 {
                     MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
                 }
                 else
                 {
-                    bazaRenovacija.Sacuvaj(renovacija);
+                    renovacijaFajlRepozitorijum.Sacuvaj(renovacija);
                     RenoviranjeOprema();
                     this.NavigationService.GoBack();
                 }
@@ -94,7 +94,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             PregledKontroler pregledKontroler = new PregledKontroler();
             BazaPregleda bazaPregleda = new BazaPregleda();
-            BazaRenovacija bazaRenovacija = new BazaRenovacija();
+            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
             bool postojiZakazanTermin = false;
             foreach (Pregled pregled in pregledKontroler.GetSviBuduciPreglediSobe(selektovanaSoba.Id))
@@ -107,7 +107,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 }
             }
             if (!postojiZakazanTermin) {
-                bazaRenovacija.Sacuvaj(renovacija);
+                renovacijaFajlRepozitorijum.Sacuvaj(renovacija);
                 RenoviranjeOprema();
                 this.NavigationService.GoBack();
             }
@@ -130,23 +130,23 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         public void DodajOpremuUMagacin() {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            BazaBolnica bazaBolnica = new BazaBolnica();
-            List<SadrzajSobe> svaOpremaUSobi = bazaSadrzaja.GetSadrzajSobe(selektovanaSoba.Id);
-            List<SadrzajSobe> svaOpremaUMagacinu = bazaSadrzaja.GetSadrzajSobe(bazaBolnica.GetMagacin().Id);
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
+            List<SadrzajSobe> svaOpremaUSobi = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(selektovanaSoba.Id);
+            List<SadrzajSobe> svaOpremaUMagacinu = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(bolnicaFajlRepozitorijum.GetMagacin().Id);
             bool postojiOpremaUMagacinu = false;
             foreach (SadrzajSobe opremaUSobi in svaOpremaUSobi) {
                 foreach (SadrzajSobe opremaUMagacinu in svaOpremaUMagacinu) {
                     if (opremaUSobi.Predmet.Id.Equals(opremaUMagacinu.Predmet.Id)) {
                         opremaUMagacinu.Kolicina = opremaUMagacinu.Kolicina + opremaUSobi.Kolicina;
-                        bazaSadrzaja.Izmeni(opremaUMagacinu);
+                        sadrzajSobeFajlRepozitorijum.Izmeni(opremaUMagacinu);
                         postojiOpremaUMagacinu = true;
                         break;
                     }
                 }
                 if (!postojiOpremaUMagacinu) {
-                    opremaUSobi.Soba.Id = bazaBolnica.GetMagacin().Id;
-                    bazaSadrzaja.Sacuvaj(opremaUSobi);
+                    opremaUSobi.Soba.Id = bolnicaFajlRepozitorijum.GetMagacin().Id;
+                    sadrzajSobeFajlRepozitorijum.Sacuvaj(opremaUSobi);
                 }
                 postojiOpremaUMagacinu = false;
             }
@@ -154,10 +154,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
 
         public void ObrisiOpremuIzSobe() {
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            List<SadrzajSobe> opremaUSobi = bazaSadrzaja.GetSadrzajSobe(selektovanaSoba.Id);
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+            List<SadrzajSobe> opremaUSobi = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(selektovanaSoba.Id);
             foreach (SadrzajSobe oprema in opremaUSobi) {
-                bazaSadrzaja.Obrisi(oprema.Id);
+                sadrzajSobeFajlRepozitorijum.Obrisi(oprema.Id);
             }
         }
 

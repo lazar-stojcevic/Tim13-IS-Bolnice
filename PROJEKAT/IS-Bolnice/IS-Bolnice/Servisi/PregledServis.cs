@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
@@ -17,6 +18,7 @@ namespace IS_Bolnice.Servisi
         private readonly int MINUTI_INTERVALA_ZA_PREDLAGANJE_HITNIH_PREGLEDA = 60;
 
         private BazaPregleda bazaPregleda = new BazaPregleda();
+        private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
 
         public bool ZakaziPregled(Pregled pregled)
         {
@@ -290,8 +292,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast)
         {
-            BazaLekara bazaLekara = new BazaLekara();
-            List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
+            List<Lekar> sviLekariOdredjeneOblasti = lekarRepo.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
             List<Pregled> skorasnjiZauzetiPreglediLekara = new List<Pregled>();
 
             foreach (Lekar lekar in sviLekariOdredjeneOblasti)
@@ -363,8 +364,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Pregled> SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu()
         {
-            BazaLekara bazaLekara = new BazaLekara();
-            foreach (Lekar lekar in bazaLekara.LekariOpstePrakse())
+            foreach (Lekar lekar in lekarRepo.LekariOpstePrakse())
             {
                 List<Pregled> slobodniTerminiLekara =
                     SviPredloziSkorasnjihPregleda(lekar, MINUTI_TRAJANJA_PREGLEDA, MINUTI_PREDLAGANJA_ZA_3_DANA);
@@ -381,9 +381,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Pregled> SlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaPregleda)
         {
-            BazaLekara bazaLekara = new BazaLekara();
-
-            foreach (Lekar lekar in bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
+            foreach (Lekar lekar in lekarRepo.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
             {
                 List<Pregled> slobodniTerminiLekara = SlobodniHitniPreglediLekaraSaTrajanjem(lekar, minutiTrajanjaPregleda);
                 if (slobodniTerminiLekara.Count() > 0)

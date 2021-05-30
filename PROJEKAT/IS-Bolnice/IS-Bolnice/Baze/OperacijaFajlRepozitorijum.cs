@@ -6,7 +6,7 @@ using System.IO;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaOperacija:GenerickiFajlRepozitorijum<Operacija>, OperacijaRepozitorijum
+public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, IOperacijaRepozitorijum
 {
     public string fileLocation;
     private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
@@ -16,7 +16,7 @@ public class BazaOperacija:GenerickiFajlRepozitorijum<Operacija>, OperacijaRepoz
         "M-d-yyyy h:mm:ss tt"
     };
 
-    public BazaOperacija() : base(@"..\..\Datoteke\operacije.txt")
+    public OperacijaFajlRepozitorijum() : base(@"..\..\Datoteke\operacije.txt")
     {
     }
 
@@ -52,7 +52,7 @@ public class BazaOperacija:GenerickiFajlRepozitorijum<Operacija>, OperacijaRepoz
     private static void PostaviLekaraOperacije(string[] delovi, Operacija operacija)
     {
         operacija.Lekar.Jmbg = delovi[4];
-        foreach (Lekar lekar in new BazaLekara().DobaviSve())
+        foreach (Lekar lekar in new LekarFajlRepozitorijum().DobaviSve())
         {
             if (delovi[4].Equals(lekar.Jmbg))
             {
@@ -64,7 +64,7 @@ public class BazaOperacija:GenerickiFajlRepozitorijum<Operacija>, OperacijaRepoz
 
     private static void PostaviOperacionuSalu(string[] delovi, Operacija operacija)
     {
-        foreach (Soba s in new BazaBolnica().GetSobe())
+        foreach (Soba s in new BolnicaFajlRepozitorijum().GetSobe())
         {
             if (delovi[5].Equals(s.Id))
             {

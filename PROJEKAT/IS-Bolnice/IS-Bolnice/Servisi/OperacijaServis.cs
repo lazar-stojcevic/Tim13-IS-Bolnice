@@ -5,30 +5,33 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class OperacijaServis
     {
-        private BazaOperacija bazaOperacija = new BazaOperacija();
+        private IOperacijaRepozitorijum operacijaRepo = new OperacijaFajlRepozitorijum();
+        private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
+        private IBolnicaRepozitorijum bolnicaRepo = new BolnicaFajlRepozitorijum();
         private static int DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA = 6;
         private static int BROJ_MINUTA_ZA_HITAN_TERMIN = 60;
 
         public List<Operacija> GetSveOperacije()
         {
-            return bazaOperacija.DobaviSve();
+            return operacijaRepo.DobaviSve();
         }
 
         public List<Operacija> GetSveSledeceOperacije()
         {
-            return bazaOperacija.SveSledeceOperacije();
+            return operacijaRepo.SveSledeceOperacije();
         }
 
         public List<Operacija> GetSveSledeveOperacijePacijenta(string jmbgPacijenta)
         {
             List<Operacija> operacijePacijenta = new List<Operacija>();
 
-            foreach (Operacija o in bazaOperacija.SveSledeceOperacije())
+            foreach (Operacija o in operacijaRepo.SveSledeceOperacije())
             {
                 if (o.Pacijent.Jmbg.Equals(jmbgPacijenta))
                 {
@@ -42,7 +45,7 @@ namespace IS_Bolnice.Servisi
         public List<Operacija> GetSveSledeceOperacijeSale(string idSale)
         {
             List<Operacija> operacijeSale = new List<Operacija>();
-            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
+            foreach (Operacija operacija in operacijaRepo.SveSledeceOperacije())
             {
                 if (operacija.Soba.Id.Equals(idSale))
                 {
@@ -56,7 +59,7 @@ namespace IS_Bolnice.Servisi
         public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
         {
             List<Operacija> ret = new List<Operacija>();
-            foreach (Operacija operacija in bazaOperacija.DobaviSve())
+            foreach (Operacija operacija in operacijaRepo.DobaviSve())
             {
                 if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
                 {
@@ -69,7 +72,7 @@ namespace IS_Bolnice.Servisi
         public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
         {
             List<Operacija> ret = new List<Operacija>();
-            foreach (Operacija operacija in bazaOperacija.SveSledeceOperacije())
+            foreach (Operacija operacija in operacijaRepo.SveSledeceOperacije())
             {
                 if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
                 {
@@ -81,8 +84,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(string jmbgLekara, string idSale, int duzinaTrajanja)
         {
-            Lekar lekar = new BazaLekara().DobaviPoId(jmbgLekara);
-            BazaOperacija bazaOperacija = new BazaOperacija();
+            Lekar lekar = lekarRepo.DobaviPoId(jmbgLekara);
             return SlobodneOperacijeLekaraUNarednomPeriodu(lekar, duzinaTrajanja, idSale);
         }
 
@@ -110,7 +112,7 @@ namespace IS_Bolnice.Servisi
                     Lekar = lekar,
                     VremePocetkaOperacije = pocetakTermina,
                     VremeKrajaOperacije = pocetakTermina.AddMinutes(trajanjeOperacije),
-                    Soba = new BazaBolnica().GetSobaById(idSale),
+                    Soba = bolnicaRepo.GetSobaById(idSale),
                     Hitna = true
                 };
                 Console.Write(operacija.Lekar);
@@ -133,7 +135,7 @@ namespace IS_Bolnice.Servisi
 
         public bool izmeniOperaciju(DateTime stariDatum, string stariSat, string stariMinut, Operacija novaOperacija)
         {
-            BazaOperacija baza = new BazaOperacija();
+            OperacijaFajlRepozitorijum baza = new OperacijaFajlRepozitorijum();
             List<Operacija> lista = baza.SveSledeceOperacije();
             foreach (Operacija operacija in lista)
             {
@@ -231,14 +233,14 @@ namespace IS_Bolnice.Servisi
 
         public void IzmeniOperaciju(Operacija nova, Operacija stara)
         {
-            bazaOperacija.Izmeni(nova);
+            operacijaRepo.Izmeni(nova);
         }
 
         public bool ZakaziOperaciju(Operacija operacija)
         {
             if (MozeDaSeZakaze(operacija))
             {
-                bazaOperacija.Sacuvaj(operacija);
+                operacijaRepo.Sacuvaj(operacija);
                 return true;
             }
 
@@ -247,7 +249,7 @@ namespace IS_Bolnice.Servisi
 
         public void OtkaziOperaciju(Operacija operacija)
         {
-            bazaOperacija.Obrisi(operacija.Id);
+            operacijaRepo.Obrisi(operacija.Id);
         }
 
         public void OdloziOperaciju(Operacija pomeranaOperacija)
@@ -285,8 +287,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara prosledjenaOblast)
         {
-            BazaLekara bazaLekara = new BazaLekara();
-            List<Lekar> sviLekariOdredjeneOblasti = bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
+            List<Lekar> sviLekariOdredjeneOblasti = lekarRepo.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
             List<Operacija> skorasnjeOperacijeLekara = new List<Operacija>();
 
             foreach (Lekar lekar in sviLekariOdredjeneOblasti)
@@ -376,8 +377,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> SlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaOperacije)
         {
-            BazaLekara bazaLekara = new BazaLekara();
-            foreach (Lekar lekar in bazaLekara.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
+            foreach (Lekar lekar in lekarRepo.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
             {
                 List<Operacija> slobodniTerminiLekara = SlobodneHitneOperacijeLekaraSaTrajanjem(lekar, minutiTrajanjaOperacije);
                 if (slobodniTerminiLekara.Count > 0)
@@ -399,7 +399,6 @@ namespace IS_Bolnice.Servisi
 
         private List<Operacija> SviPredloziHitnihOperacija(Lekar lekar, int minutiTrajanjaOperacije)
         {
-            BazaBolnica bazaBolnica = new BazaBolnica();
             List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
             DateTime najbliziTermin = NajbliziTermin();
 
@@ -407,7 +406,7 @@ namespace IS_Bolnice.Servisi
             {
                 DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
 
-                foreach (Soba sala in bazaBolnica.SveOperacioneSaleOveBolnice())
+                foreach (Soba sala in bolnicaRepo.SveOperacioneSaleOveBolnice())
                 {
                     Operacija operacija = new Operacija()
                     {

@@ -44,8 +44,8 @@ public class Soba: Entitet
 
     public bool TrenutnoPodRenoviranjem()
     {
-        BazaRenovacija bazaRenovacija = new BazaRenovacija();
-        List<Renovacija> renovacijeSobe = bazaRenovacija.SveRenovacijeJedneSobe(this);
+        RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
+        List<Renovacija> renovacijeSobe = renovacijaFajlRepozitorijum.SveRenovacijeJedneSobe(this);
 
         foreach (Renovacija renovacija in renovacijeSobe)
         {

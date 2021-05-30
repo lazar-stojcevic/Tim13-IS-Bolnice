@@ -44,7 +44,7 @@ namespace IS_Bolnice.Prozori
             stariPregled.Pacijent = p;
             stariPregled.VremePocetkaPregleda = datum;
 
-            BazaLekara bl = new BazaLekara();
+            LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
             lekari = bl.LekariOpstePrakse();
 
             //UPISIVANJE DANA U comboBox

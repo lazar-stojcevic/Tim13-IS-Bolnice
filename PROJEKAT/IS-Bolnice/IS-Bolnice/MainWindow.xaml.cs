@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice
 {
@@ -32,9 +33,9 @@ namespace IS_Bolnice
             kontroler.IzvrsiTransport();
             string korisnik = txtUserId.Text;
             string sifra = txtPassword.Password;
-            BazaUpravnika baza1 = new BazaUpravnika();
+            IUpravnikRepozitorijum upravnikRepo = new UpravnikFajlRepozitorijum();
             List<Upravnik> upravnici = new List<Upravnik>();
-            upravnici = baza1.SviUpravnici();
+            upravnici = upravnikRepo.DobaviSve();
             bool found = false;
             foreach (Upravnik u in upravnici)
             {
@@ -57,9 +58,9 @@ namespace IS_Bolnice
 
             if (found == false)
             {
-                BazaSekretara baza2 = new BazaSekretara();
+                ISekretarRepozitorijum sekretarRepo = new SekretarFajlRepozitorijum();
                 List<Sekretar> sekretari = new List<Sekretar>();
-                sekretari = baza2.SviSekretari();
+                sekretari = sekretarRepo.DobaviSve();
                 foreach (Sekretar s in sekretari)
                 {
                     if (s.KorisnickoIme.Equals(korisnik))
@@ -82,7 +83,7 @@ namespace IS_Bolnice
 
             if (found == false)
             {
-                BazaLekara baza3 = new BazaLekara();
+                LekarFajlRepozitorijum baza3 = new LekarFajlRepozitorijum();
                 List<Lekar> lekari = new List<Lekar>();
                 lekari = baza3.DobaviSve();
                 foreach (Lekar l in lekari)
@@ -107,9 +108,9 @@ namespace IS_Bolnice
 
             if (found == false)
             {
-                PacijentFajlRepozitorijum baza4 = new PacijentFajlRepozitorijum();
+                IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
                 List<Pacijent> pacijenti = new List<Pacijent>();
-                pacijenti = baza4.DobaviSve();
+                pacijenti = pacijentRepo.DobaviSve();
                 foreach (Pacijent p in pacijenti)
                 {
                     if (p.KorisnickoIme.Equals(korisnik))

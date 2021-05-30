@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -20,7 +21,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class AddLekPage2 : Page
     {
-
+        private ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
         public Lek noviLek;
         public AddLekPage2(Lek lek)
         {
@@ -34,8 +35,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
 
         public List<string> ParseSastojakToString() {
-            BazaSastojaka bazaSastojaka = new BazaSastojaka();
-            List<Sastojak> sastojci = bazaSastojaka.DobaviSve();
+            List<Sastojak> sastojci = sastojakRepo.DobaviSve();
             List<string> tekst = new List<string>();
             foreach (Sastojak sastojak in sastojci)
             {
@@ -46,9 +46,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         public List<string> ParseLekToString()
         {
-            BazaLekova bazaLekova = new BazaLekova();
+            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
             List<string> tekst = new List<string>();
-            List<Lek> lekovi = bazaLekova.DobaviSve();
+            List<Lek> lekovi = lekFajlRepozitorijum.DobaviSve();
             foreach (Lek lek in lekovi)
             {
                 string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;

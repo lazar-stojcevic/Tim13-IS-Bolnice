@@ -4,22 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class BolnicaServis
     {
-        private BazaBolnica bazaBolnica = new BazaBolnica();
+        private IBolnicaRepozitorijum bolnicaRepo = new BolnicaFajlRepozitorijum();
 
         public List<Soba> GetSveSobe()
         {
-            return bazaBolnica.GetSobe();
+            return bolnicaRepo.GetSobe();
         }
 
         public List<Soba> GetSveOperacioneSale()
         {
             List<Soba> sveOperacioneSale = new List<Soba>();
-            foreach (Soba soba in bazaBolnica.GetSobe())
+            foreach (Soba soba in bolnicaRepo.GetSobe())
             {
                 if (soba.Tip.Equals(RoomType.operacionaSala))
                 {
@@ -31,7 +32,7 @@ namespace IS_Bolnice.Servisi
 
         internal void KreirajSobuUBolnici(Soba novaSoba)
         {
-            Bolnica izmenjenaBolnica = bazaBolnica.GetBolnica();
+            Bolnica izmenjenaBolnica = bolnicaRepo.GetBolnica();
             int flag = 0;
             foreach (Soba s in izmenjenaBolnica.Soba)
             {
@@ -55,18 +56,18 @@ namespace IS_Bolnice.Servisi
             if (flag == 0)
             {
                 izmenjenaBolnica.AddSoba(novaSoba);
-                bazaBolnica.Izmeni(izmenjenaBolnica);
+                bolnicaRepo.Izmeni(izmenjenaBolnica);
             }
             else if (flag == 1)
             {
-                bazaBolnica.Izmeni(izmenjenaBolnica);
+                bolnicaRepo.Izmeni(izmenjenaBolnica);
             }
         }
 
         public List<Soba> GetSveSobeZaPregled()
         {
             List<Soba> sveSobeZaPregled = new List<Soba>();
-            foreach (Soba soba in bazaBolnica.GetSobe())
+            foreach (Soba soba in bolnicaRepo.GetSobe())
             {
                 if (!soba.Tip.Equals(RoomType.magacin))
                 {
@@ -79,7 +80,7 @@ namespace IS_Bolnice.Servisi
         public List<Soba> GetSveSobeZaHospitalizaciju()
         {
             List<Soba> sveSobeZAHospitalizaciju = new List<Soba>();
-            foreach (Soba soba in bazaBolnica.GetSobe())
+            foreach (Soba soba in bolnicaRepo.GetSobe())
             {
                 if (soba.Tip.Equals(RoomType.bolnickaSoba))
                 {

@@ -1,7 +1,7 @@
-// File:    BazaLekova.cs
+// File:    LekFajlRepozitorijum.cs
 // Author:  Zola
 // Created: Sunday, April 11, 2021 7:46:32 PM
-// Purpose: Definition of Class BazaLekova
+// Purpose: Definition of Class LekFajlRepozitorijum
 
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ using System.IO;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaLekova: GenerickiFajlRepozitorijum<Lek>, LekRepozitorijum
+public class LekFajlRepozitorijum: GenerickiFajlRepozitorijum<Lek>, ILekRepozitorijum
 {
-    public BazaLekova() : base(@"..\..\Datoteke\lekovi.txt")
+    public LekFajlRepozitorijum() : base(@"..\..\Datoteke\lekovi.txt")
     {
 
     }

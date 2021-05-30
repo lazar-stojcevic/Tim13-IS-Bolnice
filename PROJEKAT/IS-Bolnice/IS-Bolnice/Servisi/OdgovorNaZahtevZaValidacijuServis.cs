@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class OdgovorNaZahtevZaValidacijuServis
     {
-        private BazaOdgovoraNaZahteveZaValidacijuLekova bazaOdgovora = new BazaOdgovoraNaZahteveZaValidacijuLekova();
-        private BazaZahtevaZaValidacijuLeka bazaZahteva = new BazaZahtevaZaValidacijuLeka();
+        private IOdgovorNaZahtevRepozitorijum odgovorNaZahtevRepo = new OdgovorNaZahtevFajlRepozitorijum();
+        private IZahteviZaValidacijuRepozitorijum zahteviZaValidacijuRepo = new ZahteviZaValidacijuFajlRepozitorijum();
 
         public void KreirajOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovor, ZahtevZaValidacijuLeka zahtev)
         {
-            bazaOdgovora.Sacuvaj(odgovor);
-            bazaZahteva.Obrisi(zahtev.Id);
+            this.odgovorNaZahtevRepo.Sacuvaj(odgovor);
+            zahteviZaValidacijuRepo.Obrisi(zahtev.Id);
         }
     }
 }

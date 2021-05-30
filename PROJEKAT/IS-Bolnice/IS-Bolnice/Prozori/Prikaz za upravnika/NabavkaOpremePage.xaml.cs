@@ -24,7 +24,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public NabavkaOpremePage()
         {
             InitializeComponent();
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
             predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
@@ -50,7 +50,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             bool svaOpremaSelektovana = SelectovanaSvaOprema();
             TipOpreme tip = SelektovaniTipOpreme();
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
             predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();
@@ -85,19 +85,19 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             if (listBox.SelectedIndex != -1)
             {
-                BazaBolnica baza = new BazaBolnica();
-                BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-                List<SadrzajSobe> sadrzajSobe = bazaSadrzaja.GetSadrzajSobe(baza.GetMagacin().Id);
+                BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
+                SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+                List<SadrzajSobe> sadrzajSobe = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(baza.GetMagacin().Id);
                 if (OpremaPostojiUMagaciju(sadrzajSobe))
                 {
                     SadrzajSobe s = IzmenaSadrzaja(sadrzajSobe);
                     MessageBox.Show(s.Kolicina.ToString());
-                    bazaSadrzaja.Izmeni(s);
+                    sadrzajSobeFajlRepozitorijum.Izmeni(s);
                 }
                 else { 
                     string[] item = listBox.SelectedItem.ToString().Split(' ');
                     SadrzajSobe noviSadrzaj = new SadrzajSobe(baza.GetMagacin().Id, item[1], Int32.Parse(textBox.Text));
-                    bazaSadrzaja.Sacuvaj(noviSadrzaj);
+                    sadrzajSobeFajlRepozitorijum.Sacuvaj(noviSadrzaj);
                 }
             }
             else {
@@ -159,7 +159,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            BazaOpreme baza = new BazaOpreme();
+            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
             predmeti = baza.DobaviSve();
             List<string> tekst = new List<string>();

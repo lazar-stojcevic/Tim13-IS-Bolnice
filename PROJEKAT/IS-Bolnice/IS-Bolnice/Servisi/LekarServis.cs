@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class LekarServis
     {
-        private BazaLekara bazaLekara = new BazaLekara();
+        private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
         public List<Lekar> GetSviLekariSpecijalisti()
         {
             List<Lekar> listaSvihLekara = new List<Lekar>();
-            foreach (Lekar lekar in bazaLekara.DobaviSve())
+            foreach (Lekar lekar in lekarRepo.DobaviSve())
             {
                 if (!lekar.JelLekarOpstePrakse())
                 {
@@ -26,7 +27,7 @@ namespace IS_Bolnice.Servisi
         public List<Lekar> GetSviLekariOpstePrakse()
         {
             List<Lekar> listaSvihLekaraOpstePrakse = new List<Lekar>();
-            foreach (Lekar lekar in bazaLekara.DobaviSve())
+            foreach (Lekar lekar in lekarRepo.DobaviSve())
             {
                 if (lekar.JelLekarOpstePrakse())
                 {
@@ -39,12 +40,12 @@ namespace IS_Bolnice.Servisi
 
         public List<Lekar> GetSviLekari()
         {
-            return bazaLekara.DobaviSve();
+            return lekarRepo.DobaviSve();
         }
 
         public Lekar GetLekar(string jmbgLekara)
         {
-            return bazaLekara.DobaviPoId(jmbgLekara);
+            return lekarRepo.DobaviPoId(jmbgLekara);
         }
     }
 }

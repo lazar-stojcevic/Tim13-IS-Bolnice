@@ -1,7 +1,7 @@
-// File:    BazaRenovacija.cs
+// File:    RenovacijaFajlRepozitorijum.cs
 // Author:  teddy
 // Created: Friday, May 7, 2021 6:46:55 PM
-// Purpose: Definition of Class BazaRenovacija
+// Purpose: Definition of Class RenovacijaFajlRepozitorijum
 
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
@@ -11,7 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 
-public class BazaRenovacija: GenerickiFajlRepozitorijum<Renovacija>, IRenovacijaRepozitorijum
+public class RenovacijaFajlRepozitorijum: GenerickiFajlRepozitorijum<Renovacija>, IRenovacijaRepozitorijum
 {
 
     private static string vremenskiFormatPisanje = "M/d/yyyy";
@@ -21,7 +21,7 @@ public class BazaRenovacija: GenerickiFajlRepozitorijum<Renovacija>, IRenovacija
         "M-d-yyyy"
     };
 
-    public BazaRenovacija() : base(@"..\..\Datoteke\renoviranje.txt") { }
+    public RenovacijaFajlRepozitorijum() : base(@"..\..\Datoteke\renoviranje.txt") { }
  
     public List<Renovacija> SveRenovacijeJedneSobe(Soba soba)
     {

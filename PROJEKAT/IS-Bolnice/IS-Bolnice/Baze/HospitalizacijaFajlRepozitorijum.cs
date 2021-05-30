@@ -1,7 +1,7 @@
-// File:    BazaHospitalizacija.cs
+// File:    HospitalizacijaFajlRepozitorijum.cs
 // Author:  Zola
 // Created: Monday, May 17, 2021 7:14:56 PM
-// Purpose: Definition of Class BazaHospitalizacija
+// Purpose: Definition of Class HospitalizacijaFajlRepozitorijum
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using IS_Bolnice.Baze.Klase;
 
 namespace IS_Bolnice.Baze
 {
-   public class BazaHospitalizacija:GenerickiFajlRepozitorijum<Hospitalizacija>, IHospitalizacijaRepozitorijum
+   public class HospitalizacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Hospitalizacija>, IHospitalizacijaRepozitorijum
    {
       private String fileLocation = @"..\..\Datoteke\hospitalizacija.txt";
       private static string vremenskiFormatPisanje = "M/d/yyyy";
@@ -22,7 +22,7 @@ namespace IS_Bolnice.Baze
           "M-d-yyyy"
       };
 
-      public BazaHospitalizacija():base(@"..\..\Datoteke\hospitalizacija.txt"){}
+      public HospitalizacijaFajlRepozitorijum():base(@"..\..\Datoteke\hospitalizacija.txt"){}
       public List<Hospitalizacija> DobaviSveHospitalizacijeZaSobu(string sobaID) {
 
             List<Hospitalizacija> hospitalizacije = new List<Hospitalizacija>();
@@ -61,7 +61,7 @@ namespace IS_Bolnice.Baze
             hospitalizacija.KrajHospitalizacije = DateTime.ParseExact(delovi[1], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
                 DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
 
-            hospitalizacija.Soba = new BazaBolnica().GetSobaById(delovi[2]);
+            hospitalizacija.Soba = new BolnicaFajlRepozitorijum().GetSobaById(delovi[2]);
             hospitalizacija.Pacijent = new PacijentFajlRepozitorijum().DobaviPoJmbg(delovi[3]);
             hospitalizacija.Id = hospitalizacija.Pacijent.Id + "+" + hospitalizacija.Soba.Id;
 

@@ -6,7 +6,7 @@ using System.Linq;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 
-public class BazaIzvestaja: GenerickiFajlRepozitorijum<Izvestaj>, IIzvestajRepozitorijum
+public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, IIzvestajRepozitorijum
 {
     private static string formatPisanjaDatuma = "M/d/yyyy h:mm:ss tt";
     private static string[] formatCitanjaDatuma = new[]
@@ -15,7 +15,7 @@ public class BazaIzvestaja: GenerickiFajlRepozitorijum<Izvestaj>, IIzvestajRepoz
         "M-d-yyyy h:mm:ss tt"
     };
 
-    public BazaIzvestaja() : base(@"..\..\Datoteke\izvestaji.txt")
+    public IzvestajFajlRepozitorijum() : base(@"..\..\Datoteke\izvestaji.txt")
     {
     }
     

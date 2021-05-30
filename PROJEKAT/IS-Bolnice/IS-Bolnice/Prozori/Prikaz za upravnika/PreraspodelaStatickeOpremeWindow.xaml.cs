@@ -30,8 +30,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             DateTime izbraniDatum = DateTime.Parse(datePicker_pocetak.SelectedDate.ToString());
             sadrzajNaCekanju.DatumPremestanja = new DateTime(izbraniDatum.Year, izbraniDatum.Month, izbraniDatum.Day);
-            BazaSadrzaja bazaSadrzaja = new BazaSadrzaja();
-            bazaSadrzaja.Sacuvaj(sadrzajNaCekanju);
+            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
+            sadrzajSobeFajlRepozitorijum.Sacuvaj(sadrzajNaCekanju);
             this.Close();
         }
 

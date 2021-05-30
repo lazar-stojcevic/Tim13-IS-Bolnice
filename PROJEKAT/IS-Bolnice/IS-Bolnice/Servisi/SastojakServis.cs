@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class SastojakServis
     {
-        private BazaSastojaka bazaSastojaka = new BazaSastojaka();
+        private ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
 
         public List<Sastojak> GetSviSastojci()
         {
-            return bazaSastojaka.DobaviSve();
+            return sastojakRepo.DobaviSve();
         }
 
         internal void KreirajNoviSastojak(Sastojak noviSastojak)
         {
-            bazaSastojaka.Sacuvaj(noviSastojak);
+            sastojakRepo.Sacuvaj(noviSastojak);
         }
     }
 }

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Baze.Interfejsi
 {
-    interface OdgovorNaZahtevRepozitorijum:GenerickiRepozitorijum<OdgovorNaZahtevZaValidaciju>
+    interface ISastojakRepozitorijum:GenerickiRepozitorijum<Sastojak>
     {
     }
-   
 }
