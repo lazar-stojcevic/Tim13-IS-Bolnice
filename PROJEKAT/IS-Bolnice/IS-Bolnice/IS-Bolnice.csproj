@@ -332,6 +332,9 @@
     <Compile Include="Prozori\Prozori za pacijenta\PrikazIzvestaja.xaml.cs">
       <DependentUpon>PrikazIzvestaja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prozori za pacijenta\PrikazTerminaOperacija.xaml.cs">
+      <DependentUpon>PrikazTerminaOperacija.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\DodavanjeGuestNalogaWindow.xaml.cs">
       <DependentUpon>DodavanjeGuestNalogaWindow.xaml</DependentUpon>
     </Compile>
@@ -656,6 +659,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prozori za pacijenta\PrikazIzvestaja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prozori za pacijenta\PrikazTerminaOperacija.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

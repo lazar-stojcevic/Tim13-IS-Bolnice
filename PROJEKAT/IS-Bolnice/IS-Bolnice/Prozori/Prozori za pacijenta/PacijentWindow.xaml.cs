@@ -59,5 +59,12 @@ namespace IS_Bolnice
             Obavestenje o = new Obavestenje(items[2]);
             o.ShowDialog();
         }
+
+        private void operacijeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string[] items = imeKorisnika.Text.Split();
+            PrikazTerminaOperacija pto = new PrikazTerminaOperacija(items[2]);
+            pto.ShowDialog();
+        }
     }
 }

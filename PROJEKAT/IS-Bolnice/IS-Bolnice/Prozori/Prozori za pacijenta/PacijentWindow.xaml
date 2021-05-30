@@ -94,7 +94,7 @@
                         FontSize="16"
                         Content="Prikaz termina operacija"
                         Margin="10"
-                        Height="70"/>
+                        Height="70" Click="operacijeBtn_Click"/>
                     <!--Odjava-->
                     <Button Grid.Row="2"
                     x:Name="odjavaBtn"

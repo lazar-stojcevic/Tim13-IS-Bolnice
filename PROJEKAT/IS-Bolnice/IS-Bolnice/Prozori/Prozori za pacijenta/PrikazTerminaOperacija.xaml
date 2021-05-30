@@ -1,0 +1,30 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prozori_za_pacijenta.PrikazTerminaOperacija"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
+        mc:Ignorable="d"
+        Title="Prikaz termina operacija" Height="580" Width="620"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Grid>
+            <ListView Margin="10 5" Name="listaOperacija" Height="420">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Ime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Ime}" />
+                        <GridViewColumn Header="Prezime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Prezime}" />
+                        <GridViewColumn Header="Početak operacije" Width="150" DisplayMemberBinding="{Binding VremePocetkaOperacije}"/>
+                        <GridViewColumn Header="Ordinacija" Width="150" DisplayMemberBinding="{Binding Soba.Id}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Height="100" Margin="10 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="izadji" Width="100" Height="50" Content="Izađi" FontSize="20" Click="izadji_Click_1" />
+        </Grid>
+    </StackPanel>
+</Window>
