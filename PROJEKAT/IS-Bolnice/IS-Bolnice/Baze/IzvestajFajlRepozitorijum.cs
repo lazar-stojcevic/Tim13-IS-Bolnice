@@ -18,7 +18,22 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
     public IzvestajFajlRepozitorijum() : base(@"..\..\Datoteke\izvestaji.txt")
     {
     }
-    
+
+    public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)
+    {
+        List<Izvestaj> izvestajiPacijenta = new List<Izvestaj>();
+
+        foreach (Izvestaj izvestaj in DobaviSve())
+        {
+            if (izvestaj.Pacijent.Jmbg == jmbgPacijenta)
+            {
+                izvestajiPacijenta.Add(izvestaj);
+            }
+        }
+
+        return izvestajiPacijenta;
+    }
+
     public override Izvestaj KreirajEntitet(string[] podaciEntiteta)
     {
         Lekar lekar = new Lekar();

@@ -20,6 +20,75 @@ public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, I
     {
     }
 
+    public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
+    {
+        List<Operacija> ret = new List<Operacija>();
+        foreach (Operacija operacija in DobaviSve())
+        {
+            if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
+            {
+                ret.Add(operacija);
+            }
+        }
+        return ret;
+    }
+
+    public List<Operacija> GetSveBuduceOperacije()
+    {
+        List<Operacija> ret = new List<Operacija>();
+        foreach (Operacija operacija in DobaviSve())
+        {
+            if (operacija.VremePocetkaOperacije > DateTime.Now.AddHours(-1))
+            {
+                ret.Add(operacija);
+            }
+        }
+
+        return ret;
+    }
+
+    public List<Operacija> GetSveBuduceOperacijePacijenta(string jmbgPacijenta)
+    {
+        List<Operacija> operacijePacijenta = new List<Operacija>();
+
+        foreach (Operacija o in GetSveBuduceOperacije())
+        {
+            if (o.Pacijent.Jmbg.Equals(jmbgPacijenta))
+            {
+                operacijePacijenta.Add(o);
+            }
+        }
+
+        return operacijePacijenta;
+    }
+
+    public List<Operacija> GetSveBuduceOperacijeSale(string idSale)
+    {
+        List<Operacija> operacijeSale = new List<Operacija>();
+        foreach (Operacija operacija in GetSveBuduceOperacije())
+        {
+            if (operacija.Soba.Id.Equals(idSale))
+            {
+                operacijeSale.Add(operacija);
+            }
+        }
+
+        return operacijeSale;
+    }
+
+    public List<Operacija> GetSveBuduceOperacijeLekara(string jmbgLekara)
+    {
+        List<Operacija> ret = new List<Operacija>();
+        foreach (Operacija operacija in GetSveBuduceOperacije())
+        {
+            if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
+            {
+                ret.Add(operacija);
+            }
+        }
+        return ret;
+    }
+
     public override Operacija KreirajEntitet(string[] delovi)
     {
         Operacija operacija = new Operacija(delovi[0]);
@@ -102,19 +171,5 @@ public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, I
                         novaOperacija.Pacijent.Jmbg + "#" + novaOperacija.Lekar.Jmbg + "#" + novaOperacija.Soba.Id +
                         "#" + novaOperacija.Hitna;
         return linija;
-    }
-
-    public List<Operacija> SveSledeceOperacije()
-    {
-        List<Operacija> ret = new List<Operacija>();
-        foreach (Operacija operacija in DobaviSve())
-        {
-            if (operacija.VremePocetkaOperacije > DateTime.Now.AddHours(-1))
-            {
-                ret.Add(operacija);
-            }
-        }
-
-        return ret;
     }
 }

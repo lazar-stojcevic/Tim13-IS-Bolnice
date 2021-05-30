@@ -18,17 +18,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)
         {
-            List<Izvestaj> izvestajiPacijenta = new List<Izvestaj>();
-
-            foreach (Izvestaj izvestaj in izvestajRepo.DobaviSve())
-            {
-                if (izvestaj.Pacijent.Jmbg == jmbgPacijenta)
-                {
-                    izvestajiPacijenta.Add(izvestaj);
-                }
-            }
-
-            return izvestajiPacijenta;
+            return izvestajRepo.SviIzvestajiPacijenta(jmbgPacijenta);
         }
     }
 }

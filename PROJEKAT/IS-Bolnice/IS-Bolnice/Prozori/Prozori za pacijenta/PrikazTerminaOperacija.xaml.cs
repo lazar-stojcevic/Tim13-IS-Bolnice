@@ -21,7 +21,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         public PrikazTerminaOperacija(string jmbgPacijenat)
         {
             InitializeComponent();
-            listaOperacija.ItemsSource = operacijaKontroler.GetSveSledeveOperacijePacijenta(jmbgPacijenat);
+            listaOperacija.ItemsSource = operacijaKontroler.GetSveBuduceOperacijePacijenta(jmbgPacijenat);
         }
 
         private void izadji_Click_1(object sender, RoutedEventArgs e)

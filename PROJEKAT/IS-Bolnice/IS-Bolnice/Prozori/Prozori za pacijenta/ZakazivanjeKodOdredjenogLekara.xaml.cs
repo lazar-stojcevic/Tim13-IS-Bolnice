@@ -34,7 +34,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             jmbgPac = jmbgPacijenta;
 
             LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
-            lekari = bl.LekariOpstePrakse();
+            lekari = bl.GetSviLekariOpstePrakse();
 
             foreach (Lekar l in lekari)
             {

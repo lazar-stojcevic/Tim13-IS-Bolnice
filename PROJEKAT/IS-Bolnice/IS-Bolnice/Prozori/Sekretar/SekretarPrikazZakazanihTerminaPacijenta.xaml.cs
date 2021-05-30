@@ -34,8 +34,8 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             pacijentTxt.Text = p.Ime + " " + p.Prezime;
 
-            PreglediPacijenta = new ObservableCollection<Pregled>(pregledKontroler.GetSviBuduciPreglediPacijenta(p.Jmbg));
-            OperacijePacijenta = new ObservableCollection<Operacija>(operacijaKontroler.GetSveSledeveOperacijePacijenta(p.Jmbg));
+            PreglediPacijenta = new ObservableCollection<Pregled>(pregledKontroler.GetSviBuduciSortiraniPreglediPacijenta(p.Jmbg));
+            OperacijePacijenta = new ObservableCollection<Operacija>(operacijaKontroler.GetSveBuduceOperacijePacijenta(p.Jmbg));
         }
 
         private void Button_Click_Otkazi_Pregled(object sender, RoutedEventArgs e)

@@ -75,20 +75,42 @@ public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBol
         return new Soba();
     }
 
-    public List<Soba> SveOperacioneSaleOveBolnice()
+    public List<Soba> GetSveSobeZaPregled()
     {
-        List<Bolnica> bolnice = DobaviSve();
-        List<Soba> sveSobe = bolnice[0].Soba; // za sada se podrazumeva da postoji samo jedna bolnica
-        List<Soba> operacioneSale = new List<Soba>();
-
-        foreach (Soba soba in sveSobe)
+        List<Soba> sveSobeZaPregled = new List<Soba>();
+        foreach (Soba soba in GetSobe())
         {
-            if (soba.Tip.Equals(RoomType.operacionaSala) && !soba.Obrisano && !soba.TrenutnoPodRenoviranjem())
+            if (!soba.Tip.Equals(RoomType.magacin))
             {
-                operacioneSale.Add(soba);
+                sveSobeZaPregled.Add(soba);
             }
         }
-        return operacioneSale;
+        return sveSobeZaPregled;
+    }
+
+    public List<Soba> GetSveSobeZaHospitalizaciju()
+    {
+        List<Soba> sveSobeZAHospitalizaciju = new List<Soba>();
+        foreach (Soba soba in GetSobe())
+        {
+            if (soba.Tip.Equals(RoomType.bolnickaSoba))
+            {
+                sveSobeZAHospitalizaciju.Add(soba);
+            }
+        }
+        return sveSobeZAHospitalizaciju;
+    }
+    public List<Soba> GetSveOperacioneSale()
+    {
+        List<Soba> sveOperacioneSale = new List<Soba>();
+        foreach (Soba soba in GetSobe())
+        {
+            if (soba.Tip.Equals(RoomType.operacionaSala))
+            {
+                sveOperacioneSale.Add(soba);
+            }
+        }
+        return sveOperacioneSale;
     }
 
     public override Bolnica KreirajEntitet(string[] podaciEntiteta)

@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 new ObservableCollection<Pregled>(pregledKontroler.GetSviBuduciPreglediLekara(selektovaniLekar.Jmbg));
             OperacijeSelektovanogLekara =
                 new ObservableCollection<Operacija>(
-                    operacijaKontroler.GetSveSledeceOperacijeLekara(selektovaniLekar.Jmbg));
+                    operacijaKontroler.GetSveBuduceOperacijeLekara(selektovaniLekar.Jmbg));
         }
         private bool ValidnoUnesenDatum(DateTime pocetak, DateTime kraj)
         {

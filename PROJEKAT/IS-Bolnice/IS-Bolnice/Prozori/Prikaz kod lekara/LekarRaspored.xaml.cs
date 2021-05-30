@@ -36,7 +36,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             InitializeComponent();
             sifra = id;
-            List<Operacija> sveSledeceOperacije = operacijaKontroler.GetSveSledeceOperacijeLekara(id);
+            List<Operacija> sveSledeceOperacije = operacijaKontroler.GetSveBuduceOperacijeLekara(id);
             foreach (Operacija operacija in sveSledeceOperacije)
             {
                 opKolekcija.Add(operacija);
@@ -74,7 +74,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             izmena.ShowDialog();
 
-            List<Operacija> op = operacijaKontroler.GetSveSledeceOperacijeLekara(sifra);
+            List<Operacija> op = operacijaKontroler.GetSveBuduceOperacijeLekara(sifra);
             opKolekcija.Clear();
             foreach (Operacija operacija in op)
             {

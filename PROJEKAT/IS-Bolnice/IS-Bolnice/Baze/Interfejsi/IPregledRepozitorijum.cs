@@ -8,7 +8,14 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IPregledRepozitorijum: GenerickiRepozitorijum<Pregled>
     {
-        List<Pregled> SviBuduciPreglediKojeLekarIma(string jmbgLekara);
-        List<Pregled> SviBuduciPregledi();
+        List<Pregled> GetSviPreglediLekara(string jmbgLekara);
+
+        List<Pregled> GetSviBuduciPregledi();
+
+        List<Pregled> GetSviBuduciPreglediLekara(string jmbgLekara);
+
+        List<Pregled> GetSviBuduciPreglediSobe(string idSobe);
+
+        List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta);
     }
 }

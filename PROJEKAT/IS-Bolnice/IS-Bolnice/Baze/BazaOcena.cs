@@ -260,7 +260,7 @@ namespace IS_Bolnice.Baze
         {
             List<Pregled> pastReviews = new List<Pregled>();
 
-            foreach (Pregled review in preglediFajlRepozitorijum.SviBuduciPregledi())
+            foreach (Pregled review in preglediFajlRepozitorijum.GetSviBuduciPregledi())
             {
                 if (review.Pacijent.Jmbg == patientJmbg && review.VremeKrajaPregleda < DateTime.Now)
                 {

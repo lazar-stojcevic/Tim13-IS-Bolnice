@@ -57,7 +57,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
             RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
             Renovacija renovacija = MakeRenovacija();
-            foreach (Operacija operacija in operacijaKontroler.GetSveSledeceOperacijeSale(selektovanaSoba.Id))
+            foreach (Operacija operacija in operacijaKontroler.GetSveBuduceOperacijeSale(selektovanaSoba.Id))
             {
                 if (operacija.VremePocetkaOperacije > renovacija.DatumPocetka && operacija.VremeKrajaOperacije < renovacija.DatumKraja)
                 {

@@ -8,9 +8,9 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface ILekarRepozitorijum: GenerickiRepozitorijum<Lekar>
     { 
-       List<Lekar> LekariOpstePrakse();
+       List<Lekar> GetSviLekariOpstePrakse();
 
-       List<Lekar> LekariSpecijalisti();
+       List<Lekar> GetSviLekariSpecijalisti();
 
        List<Lekar> LekariOdredjeneOblasti(string trazenaOblast);
     }

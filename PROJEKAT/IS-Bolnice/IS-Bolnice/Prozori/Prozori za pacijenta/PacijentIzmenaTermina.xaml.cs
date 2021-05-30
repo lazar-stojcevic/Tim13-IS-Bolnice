@@ -45,7 +45,7 @@ namespace IS_Bolnice.Prozori
             stariPregled.VremePocetkaPregleda = datum;
 
             LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
-            lekari = bl.LekariOpstePrakse();
+            lekari = bl.GetSviLekariOpstePrakse();
 
             //UPISIVANJE DANA U comboBox
             for (int j = 1; j <= 5; j++)
@@ -105,7 +105,7 @@ namespace IS_Bolnice.Prozori
                     string message = "Uspešno ste zakazali pregled";
                     MessageBox.Show(message);
 
-                    listView.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(stariPregled.Pacijent.Jmbg);
+                    listView.ItemsSource = pregledKontroler.GetSviBuduciSortiraniPreglediPacijenta(stariPregled.Pacijent.Jmbg);
 
                     this.Close();
                 }

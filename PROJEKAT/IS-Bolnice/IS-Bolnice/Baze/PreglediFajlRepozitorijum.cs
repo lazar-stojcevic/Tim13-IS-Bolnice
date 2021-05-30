@@ -26,22 +26,21 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
     {
     }
 
-    public List<Pregled> SviBuduciPreglediKojeLekarIma(string jmbgLekara)
+    public List<Pregled> GetSviPreglediLekara(string jmbgLekara)
     {
-        List<Pregled> pregledi = new List<Pregled>();
-
-        foreach (Pregled p in SviBuduciPregledi())
+        List<Pregled> sviPreglediLekara = new List<Pregled>();
+        foreach (Pregled pregled in DobaviSve())
         {
-            if (p.Lekar.Jmbg.Equals(jmbgLekara) && p.VremeKrajaPregleda > DateTime.Now)
+            if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
             {
-                pregledi.Add(p);
+                sviPreglediLekara.Add(pregled);
             }
         }
 
-        return pregledi;
+        return sviPreglediLekara;
     }
 
-    public List<Pregled> SviBuduciPregledi()
+    public List<Pregled> GetSviBuduciPregledi()
     {
         List<Pregled> sviBuduciPregledi = new List<Pregled>();
         foreach (Pregled pregled in DobaviSve())
@@ -55,7 +54,47 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
         return sviBuduciPregledi;
     }
 
-    
+    public List<Pregled> GetSviBuduciPreglediLekara(string jmbgLekara)
+    {
+        List<Pregled> sviPregledi = new List<Pregled>();
+        foreach (Pregled pregled in GetSviBuduciPregledi())
+        {
+            if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
+            {
+                sviPregledi.Add(pregled);
+            }
+        }
+
+        return sviPregledi;
+    }
+
+    public List<Pregled> GetSviBuduciPreglediSobe(string idSobe)
+    {
+        List<Pregled> preglediUSobi = new List<Pregled>();
+        foreach (Pregled pregled in GetSviBuduciPregledi())
+        {
+            if (pregled.Lekar.Ordinacija.Id.Equals(idSobe))
+            {
+                preglediUSobi.Add(pregled);
+            }
+        }
+        return preglediUSobi;
+    }
+
+    public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
+    {
+        List<Pregled> pregledi = new List<Pregled>();
+
+        foreach (Pregled pregled in GetSviBuduciPregledi())
+        {
+            if (pregled.Pacijent.Jmbg.Equals(jmbgPacijenta))
+            {
+                pregledi.Add(pregled);
+            }
+        }
+
+        return pregledi;
+    }
 
     public override Pregled KreirajEntitet(string[] podaciEntiteta)
     {

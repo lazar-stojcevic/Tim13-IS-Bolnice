@@ -67,7 +67,7 @@ namespace IS_Bolnice.Servisi
             string jmbgLekara)
         {
             OperacijaServis operacijaServis = new OperacijaServis();
-            foreach (var operacija in operacijaServis.GetSveSledeceOperacijeLekara(jmbgLekara))
+            foreach (var operacija in operacijaServis.GetSveBuduceOperacijeLekara(jmbgLekara))
             {
                 VremenskiInterval intervalOperacije =
                     new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
@@ -83,7 +83,7 @@ namespace IS_Bolnice.Servisi
         private bool PreklapanjeIntervalaSaPregledimaLekara(VremenskiInterval intervalGodisnjegOdmora, string jmbgLekara)
         {
             PregledServis pregledServis = new PregledServis();
-            foreach (var pregled in pregledServis.SviBuduciPreglediKojeLekarIma(jmbgLekara))
+            foreach (var pregled in pregledServis.GetSviBuduciPreglediLekara(jmbgLekara))
             {
                 VremenskiInterval intervalPregleda =
                     new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);

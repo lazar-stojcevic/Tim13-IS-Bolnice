@@ -17,28 +17,29 @@ namespace IS_Bolnice.Kontroleri
         {
             return operacijaServis.GetSveOperacije();
         }
-        public List<Operacija> GetSveSledeceOperacije()
+
+        public List<Operacija> GetSveBuduceOperacije()
         {
-            return operacijaServis.GetSveSledeceOperacije();
+            return operacijaServis.GetSveBuduceOperacije();
         }
 
         public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
         {
             return operacijaServis.GetSveOperacijeLekara(jmbgLekara);
         }
-        public List<Operacija> GetSveSledeceOperacijeLekara(string jmbgLekara)
+        public List<Operacija> GetSveBuduceOperacijeLekara(string jmbgLekara)
         {
-            return operacijaServis.GetSveSledeceOperacijeLekara(jmbgLekara);
+            return operacijaServis.GetSveBuduceOperacijeLekara(jmbgLekara);
         }
 
-        public List<Operacija> GetSveSledeveOperacijePacijenta(string jmbgPacijenta)
+        public List<Operacija> GetSveBuduceOperacijePacijenta(string jmbgPacijenta)
         {
-            return operacijaServis.GetSveSledeveOperacijePacijenta(jmbgPacijenta);
+            return operacijaServis.GetSveBuduceOperacijePacijenta(jmbgPacijenta);
         }
 
-        public List<Operacija> GetSveSledeceOperacijeSale(string idSale)
+        public List<Operacija> GetSveBuduceOperacijeSale(string idSale)
         {
-            return operacijaServis.GetSveSledeceOperacijeSale(idSale);
+            return operacijaServis.GetSveBuduceOperacijeSale(idSale);
         }
 
         public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)

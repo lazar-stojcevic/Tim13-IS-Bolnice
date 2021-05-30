@@ -138,7 +138,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
             if (delovi.Length > 12)
             {
                 LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
-                List<Lekar> lekari = bl.LekariOpstePrakse();
+                List<Lekar> lekari = bl.GetSviLekariOpstePrakse();
                 foreach (Lekar l in lekari)
                 {
                     if (l.Jmbg.Equals(delovi[12]))

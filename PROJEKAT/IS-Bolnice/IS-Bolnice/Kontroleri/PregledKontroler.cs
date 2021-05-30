@@ -33,9 +33,9 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.GetSviPreglediLekara(jmbgLekara);
         }
 
-        public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
+        public List<Pregled> GetSviBuduciSortiraniPreglediPacijenta(string jmbgPacijenta)
         {
-            return pregledServis.GetSviBuduciPreglediPacijenta(jmbgPacijenta);
+            return pregledServis.GetSviBuduciSortiraniPreglediPacijenta(jmbgPacijenta);
         }
 
         public List<Pregled> GetSviBuduciPreglediSobe(string idSobe)

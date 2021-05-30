@@ -12,30 +12,12 @@ namespace IS_Bolnice.Servisi
         private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
         public List<Lekar> GetSviLekariSpecijalisti()
         {
-            List<Lekar> listaSvihLekara = new List<Lekar>();
-            foreach (Lekar lekar in lekarRepo.DobaviSve())
-            {
-                if (!lekar.JelLekarOpstePrakse())
-                {
-                    listaSvihLekara.Add(lekar);
-                }
-            }
-
-            return listaSvihLekara;
+            return lekarRepo.GetSviLekariSpecijalisti();
         }
 
         public List<Lekar> GetSviLekariOpstePrakse()
         {
-            List<Lekar> listaSvihLekaraOpstePrakse = new List<Lekar>();
-            foreach (Lekar lekar in lekarRepo.DobaviSve())
-            {
-                if (lekar.JelLekarOpstePrakse())
-                {
-                    listaSvihLekaraOpstePrakse.Add(lekar);
-                }
-            }
-
-            return listaSvihLekaraOpstePrakse;
+            return lekarRepo.GetSviLekariOpstePrakse();
         }
 
         public List<Lekar> GetSviLekari()

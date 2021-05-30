@@ -27,7 +27,7 @@ namespace IS_Bolnice.Prozori
             InitializeComponent();
             jmbgPac = jmbgPacijenta;
 
-            lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(jmbgPacijenta);
+            lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciSortiraniPreglediPacijenta(jmbgPacijenta);
         }
 
         private void obrisiTermin_Click(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace IS_Bolnice.Prozori
             p.Pacijent = pac;
 
             bp.Obrisi(p.Id);
-            lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciPreglediPacijenta(jmbgPac);
+            lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciSortiraniPreglediPacijenta(jmbgPac);
         }
 
         private void izadji_Click(object sender, RoutedEventArgs e)

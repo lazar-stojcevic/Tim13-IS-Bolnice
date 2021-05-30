@@ -13,14 +13,7 @@ namespace IS_Bolnice.Servisi
 
         public Pacijent GetPacijentSaOvimJMBG(string jmbgPacijenta)
         {
-            foreach (Pacijent pacijent in pacijentRepo.DobaviSve())
-            {
-                if (pacijent.Jmbg.Equals(jmbgPacijenta))
-                {
-                    return pacijent;
-                }
-            }
-            return null;
+            return pacijentRepo.DobaviPoJmbg(jmbgPacijenta);
         }
 
         public List<Pacijent> GetSviPacijenti()

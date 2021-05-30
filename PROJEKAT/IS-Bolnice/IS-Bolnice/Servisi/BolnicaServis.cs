@@ -19,15 +19,17 @@ namespace IS_Bolnice.Servisi
 
         public List<Soba> GetSveOperacioneSale()
         {
-            List<Soba> sveOperacioneSale = new List<Soba>();
-            foreach (Soba soba in bolnicaRepo.GetSobe())
-            {
-                if (soba.Tip.Equals(RoomType.operacionaSala))
-                {
-                    sveOperacioneSale.Add(soba);
-                }
-            }
-            return sveOperacioneSale;
+            return bolnicaRepo.GetSveOperacioneSale();
+        }
+
+        public List<Soba> GetSveSobeZaPregled()
+        {
+            return bolnicaRepo.GetSveSobeZaPregled();
+        }
+
+        public List<Soba> GetSveSobeZaHospitalizaciju()
+        {
+            return bolnicaRepo.GetSveSobeZaHospitalizaciju();
         }
 
         internal void KreirajSobuUBolnici(Soba novaSoba)
@@ -63,32 +65,5 @@ namespace IS_Bolnice.Servisi
                 bolnicaRepo.Izmeni(izmenjenaBolnica);
             }
         }
-
-        public List<Soba> GetSveSobeZaPregled()
-        {
-            List<Soba> sveSobeZaPregled = new List<Soba>();
-            foreach (Soba soba in bolnicaRepo.GetSobe())
-            {
-                if (!soba.Tip.Equals(RoomType.magacin))
-                {
-                    sveSobeZaPregled.Add(soba);
-                }
-            }
-            return sveSobeZaPregled;
-        }
-
-        public List<Soba> GetSveSobeZaHospitalizaciju()
-        {
-            List<Soba> sveSobeZAHospitalizaciju = new List<Soba>();
-            foreach (Soba soba in bolnicaRepo.GetSobe())
-            {
-                if (soba.Tip.Equals(RoomType.bolnickaSoba))
-                {
-                    sveSobeZAHospitalizaciju.Add(soba);
-                }
-            }
-            return sveSobeZAHospitalizaciju;
-        }
-
     }
 }

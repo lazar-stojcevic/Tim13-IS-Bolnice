@@ -21,37 +21,32 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
     {
     }
 
-    // metoda izlistava samo lekare opste prakse
-    public List<Lekar> LekariOpstePrakse()
+    public List<Lekar> GetSviLekariOpstePrakse()
     {
-        List<Lekar> LekariOP = new List<Lekar>();
-        List<Lekar> sviLekari = DobaviSve();
-
-        foreach(Lekar l in sviLekari)
+        List<Lekar> listaSvihLekaraOpstePrakse = new List<Lekar>();
+        foreach (Lekar lekar in DobaviSve())
         {
-            if(l.JelLekarOpstePrakse())
+            if (lekar.JelLekarOpstePrakse())
             {
-                LekariOP.Add(l);
+                listaSvihLekaraOpstePrakse.Add(lekar);
             }
         }
 
-        return LekariOP;
+        return listaSvihLekaraOpstePrakse;
     }
 
-    public List<Lekar> LekariSpecijalisti()
+    public List<Lekar> GetSviLekariSpecijalisti()
     {
-        List<Lekar> LekariSpecijalisti = new List<Lekar>();
-        List<Lekar> sviLekari = DobaviSve();
-
-        foreach (Lekar l in sviLekari)
+        List<Lekar> listaSvihLekara = new List<Lekar>();
+        foreach (Lekar lekar in DobaviSve())
         {
-            if (!l.JelLekarOpstePrakse())
+            if (!lekar.JelLekarOpstePrakse())
             {
-                LekariSpecijalisti.Add(l);
+                listaSvihLekara.Add(lekar);
             }
         }
 
-        return LekariSpecijalisti;
+        return listaSvihLekara;
     }
 
     public List<Lekar> LekariOdredjeneOblasti(string trazenaOblast)

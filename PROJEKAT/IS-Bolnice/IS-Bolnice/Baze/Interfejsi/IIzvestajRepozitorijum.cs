@@ -8,5 +8,6 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IIzvestajRepozitorijum: GenerickiRepozitorijum<Izvestaj>
     {
+        List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta);
     }
 }
