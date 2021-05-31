@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
+using IS_Bolnice.Servisi;
 
 namespace IS_Bolnice.Baze
 {
@@ -41,12 +42,22 @@ namespace IS_Bolnice.Baze
           string novaLinija = hospitalizacija.PocetakHospitalizacije.ToString(vremenskiFormatPisanje) + "#" + hospitalizacija.KrajHospitalizacije.ToString(vremenskiFormatPisanje) + "#" + hospitalizacija.Soba.Id + "#" + hospitalizacija.Pacijent.Jmbg;
           linije.Add(novaLinija);
           List<Hospitalizacija> sveHospitalizacije = DobaviSve();
+          int brojUSobi = 0;
           foreach (Hospitalizacija hostIter in sveHospitalizacije)
           {
               if (hostIter.Pacijent.Jmbg.Equals(hospitalizacija.Pacijent.Jmbg) &&
                   hostIter.KrajHospitalizacije > DateTime.Now)
               {
                   return false;
+              }
+
+              if (hospitalizacija.Soba.Id.Equals(hostIter.Soba.Id) && hostIter.KrajHospitalizacije > DateTime.Now)
+              {
+                  ++brojUSobi;
+                  if (brojUSobi >= new SadrzajSobeServis().BrojKrevetaUSobi(hospitalizacija.Soba.Id))
+                  {
+                      return false;
+                  }
               }
           }
           File.AppendAllLines(fileLocation, linije);
