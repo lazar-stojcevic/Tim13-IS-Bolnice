@@ -5,28 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class BelezkeServis
     {
-        private BazaBelezaka bazaBelezaka = new BazaBelezaka();
+        private IBeleskaRepozitorijum beleskaRepo = new BeleskaFajlRepozitorijum();
 
-        public void IzmeniBelezku(Beleska staraBeleska, Beleska novaBeleska)
+        public void IzmeniBelezku(Beleska izmenjenaBeleska)
         {
-            bazaBelezaka.IzmeniBelezku(staraBeleska, novaBeleska);
+            beleskaRepo.Izmeni(izmenjenaBeleska);
         }
 
         public void SacuvajBelezku(Beleska beleska)
         {
-            bazaBelezaka.SacuvajBelezku(beleska);
+            beleskaRepo.Sacuvaj(beleska);
         }
 
         public List<Beleska> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
         {
             List<Beleska> pacijentoveBelezke = new List<Beleska>();
 
-            foreach (Beleska belezka in bazaBelezaka.SveBelezke())
+            foreach (Beleska belezka in beleskaRepo.DobaviSve())
             {
                 if (TrajeLiBelezka(belezka) && belezka.Pacijent.Jmbg == jmbgPacijenta)
                 {
@@ -37,9 +38,9 @@ namespace IS_Bolnice.Servisi
             return pacijentoveBelezke;
         }
 
-        public void ObrisiBelezku(Beleska beleska)
+        public void ObrisiBelezku(string idBeleske)
         {
-            bazaBelezaka.ObrisiBelezku(beleska);
+            beleskaRepo.Obrisi(idBeleske);
         }
 
         private bool TrajeLiBelezka(Beleska beleska)

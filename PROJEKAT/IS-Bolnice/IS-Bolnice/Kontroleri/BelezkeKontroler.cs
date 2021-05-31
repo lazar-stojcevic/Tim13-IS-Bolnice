@@ -12,9 +12,9 @@ namespace IS_Bolnice.Kontroleri
     {
         private BelezkeServis belezkeServis = new BelezkeServis();
 
-        public void IzmeniBelezku(Beleska staraBeleska, Beleska novaBeleska)
+        public void IzmeniBelezku(Beleska izmenjenaBeleska)
         {
-            belezkeServis.IzmeniBelezku(staraBeleska, novaBeleska);
+            belezkeServis.IzmeniBelezku(izmenjenaBeleska);
         }
 
         public void SacuvajBelezku(Beleska beleska)
@@ -27,9 +27,9 @@ namespace IS_Bolnice.Kontroleri
             return belezkeServis.SveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
-        public void ObrisiBelezku(Beleska beleska)
+        public void ObrisiBelezku(string idBeleske)
         {
-            belezkeServis.ObrisiBelezku(beleska);
+            belezkeServis.ObrisiBelezku(idBeleske);
         }
     }
 }

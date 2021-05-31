@@ -64,7 +64,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         private void obrisiBelezku_Click(object sender, RoutedEventArgs e)
         {
             Beleska beleskaZaBrisanje = (Beleska)listaObavestenja.SelectedItem;
-            belezkaKontroler.ObrisiBelezku(beleskaZaBrisanje);
+            belezkaKontroler.ObrisiBelezku(beleskaZaBrisanje.Id);
             poljeZaIspis.Text = "";
             listaObavestenja.ItemsSource = belezkaKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
         }

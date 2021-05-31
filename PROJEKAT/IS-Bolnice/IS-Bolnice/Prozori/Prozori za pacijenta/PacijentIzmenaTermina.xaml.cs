@@ -25,7 +25,6 @@ namespace IS_Bolnice.Prozori
         private Pregled stariPregled = new Pregled();
 
         private PregledKontroler pregledKontroler = new PregledKontroler();
-        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
         private BazaIzmena bazaIzmena = new BazaIzmena();
 
         public PacijentIzmenaTermina(string jmbgPacijenta, string jmbgLekara, DateTime datum, ListView lv)
@@ -86,7 +85,7 @@ namespace IS_Bolnice.Prozori
             noviPregled.Lekar = lekari.ElementAt(comboLekari.SelectedIndex);
             noviPregled.Id = stariPregled.Id;
 
-            if (bazaIzmena.IsPatientMalicious(pacijent))
+            if (bazaIzmena.IsPatientMalicious(stariPregled.Pacijent))
             {
                 string message = "Izvinjavamo se, ali previše puta ste vršili izmene tokom protekle nedelje";
                 MessageBox.Show(message);
@@ -100,7 +99,7 @@ namespace IS_Bolnice.Prozori
                 }
                 else
                 {
-                    preglediFajlRepozitorijum.Izmeni(noviPregled);
+                    pregledKontroler.IzmeniPregled(noviPregled, stariPregled);
 
                     string message = "Uspešno ste zakazali pregled";
                     MessageBox.Show(message);

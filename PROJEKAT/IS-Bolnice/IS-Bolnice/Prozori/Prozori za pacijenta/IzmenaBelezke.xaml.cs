@@ -41,9 +41,9 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 Pacijent pacijent = new Pacijent();
                 pacijent.Jmbg = staraBeleska.Pacijent.Jmbg;
 
-                Beleska novaBeleska = new Beleska(pacijent, sadrzajBelezke.Text, DateTime.Now, Int32.Parse(brojDana.Text), nazivBelezke.Text);
+                Beleska novaBeleska = new Beleska(staraBeleska.Id ,pacijent, sadrzajBelezke.Text, DateTime.Now, Int32.Parse(brojDana.Text), nazivBelezke.Text);
 
-                belezkeKontroleri.IzmeniBelezku(staraBeleska, novaBeleska);
+                belezkeKontroleri.IzmeniBelezku(novaBeleska);
                 listaZaOsvezavanje.ItemsSource = belezkeKontroleri.SveTrenutneBelezkePacijenta(staraBeleska.Pacijent.Jmbg);
                 this.Close();
             }

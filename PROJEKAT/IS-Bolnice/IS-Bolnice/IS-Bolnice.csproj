@@ -98,11 +98,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Baze\BazaBelezaka.cs" />
+    <Compile Include="Baze\BeleskaFajlRepozitorijum.cs" />
     <Compile Include="Baze\BolnicaFajlRepozitorijum.cs" />
     <Compile Include="Baze\HospitalizacijaFajlRepozitorijum.cs" />
     <Compile Include="Baze\BazaIzmena.cs" />
     <Compile Include="Baze\Interfejsi\IAnketaRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IBeleskaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IPregledRepozitorijum.cs" />
     <Compile Include="Baze\IzvestajFajlRepozitorijum.cs" />
     <Compile Include="Baze\LekFajlRepozitorijum.cs" />
