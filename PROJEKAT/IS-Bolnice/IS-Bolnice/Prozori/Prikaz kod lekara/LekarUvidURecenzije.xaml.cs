@@ -25,13 +25,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public LekarUvidURecenzije(string idLekara)
         {
             InitializeComponent();
-            List<Survery> recenzije = new List<Survery>();
+            List<Anketa> recenzije = new List<Anketa>();
 
-            foreach (Survery recenzija in new BazaOcena().ReadAllSurvery())
+            foreach (Anketa recenzija in new AnketaFajlRepozitorijum().DobaviSve())
             {
                 try
                 {
-                    if (recenzija.Doctor.Jmbg.Equals(idLekara))
+                    if (recenzija.Lekar.Jmbg.Equals(idLekara))
                     {
                         recenzije.Add(recenzija);
                     }
@@ -49,8 +49,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void Open_OnClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Survery recenzija = button.DataContext as Survery;
-            MessageBox.Show(recenzija.Comment, "Recenzija");
+            Anketa recenzija = button.DataContext as Anketa;
+            MessageBox.Show(recenzija.Komentar, "Recenzija");
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

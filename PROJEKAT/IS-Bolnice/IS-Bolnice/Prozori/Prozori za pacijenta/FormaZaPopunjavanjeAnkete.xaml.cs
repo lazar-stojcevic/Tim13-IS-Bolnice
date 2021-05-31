@@ -1,4 +1,5 @@
 ﻿using IS_Bolnice.Baze;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,16 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
         private List<Pregled> preglediZaAnketu = new List<Pregled>();
 
-        private BazaOcena bazaOcena = new BazaOcena();
+        private AnketaKontroler anketaKontroler = new AnketaKontroler();
 
-        private Survery survery = new Survery();
+        private Anketa anketa = new Anketa();
 
         public FormaZaPopunjavanjeAnkete(string jmbgPac)
         {
             InitializeComponent();
 
             jmbgPacijenta = jmbgPac;
-            preglediZaAnketu = bazaOcena.AllReviewForSurvery(jmbgPacijenta);
+            preglediZaAnketu = anketaKontroler.GetSviPreglediZaAnketu(jmbgPacijenta);
 
             InitializeComboBoxForServery();
 
@@ -60,13 +61,13 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         {
             Pregled pregled = preglediZaAnketu.ElementAt(surveryName.SelectedIndex);
 
-            survery.Doctor = pregled.Lekar;
-            survery.Patient = pregled.Pacijent;
-            survery.Rating = WitchBtnIsSelected();
-            survery.TimeLimit = pregled.VremePocetkaPregleda;
-            survery.Comment = komentar.Text;
-
-            bazaOcena.SaveSurvery(survery, 0);
+            anketa.Lekar = pregled.Lekar;
+            anketa.Pacijent = pregled.Pacijent;
+            anketa.Ocena = WitchBtnIsSelected();
+            anketa.Trajanje = pregled.VremePocetkaPregleda;
+            anketa.Komentar = komentar.Text;
+            anketa.KojaAnketa = 0;
+            anketaKontroler.SacuvajAnketu(anketa);
         }
 
         private void ratingForCorporation()
@@ -77,13 +78,13 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             Bolnica hospital = new Bolnica();
             hospital.Ime = "Naziv kompanije";
 
-            survery.Patient = patient;
-            survery.TimeLimit = DateTime.Now;
-            survery.Comment = komentar.Text;
-            survery.Rating = WitchBtnIsSelected();
-            survery.Hospital = hospital;
-
-            bazaOcena.SaveSurvery(survery, 1);
+            anketa.Pacijent = patient;
+            anketa.Trajanje = DateTime.Now;
+            anketa.Komentar = komentar.Text;
+            anketa.Ocena = WitchBtnIsSelected();
+            anketa.Bolnica = hospital;
+            anketa.KojaAnketa = 1;
+            anketaKontroler.SacuvajAnketu(anketa);
         }
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
@@ -95,7 +96,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             }
             else
             {
-                if (bazaOcena.IsTimeForHospitalSurvery(jmbgPacijenta))
+                if (anketaKontroler.DaLiJeVremeZaAnketuBolnice(jmbgPacijenta))
                 {
                     ratingForCorporation();
                     this.Close();

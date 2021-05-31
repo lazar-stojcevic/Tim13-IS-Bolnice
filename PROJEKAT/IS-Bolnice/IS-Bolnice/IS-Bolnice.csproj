@@ -102,7 +102,7 @@
     <Compile Include="Baze\BolnicaFajlRepozitorijum.cs" />
     <Compile Include="Baze\HospitalizacijaFajlRepozitorijum.cs" />
     <Compile Include="Baze\BazaIzmena.cs" />
-    <Compile Include="Baze\Interfejsi\IOcenaRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IAnketaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IPregledRepozitorijum.cs" />
     <Compile Include="Baze\IzvestajFajlRepozitorijum.cs" />
     <Compile Include="Baze\LekFajlRepozitorijum.cs" />
@@ -119,7 +119,7 @@
     <Compile Include="Baze\ObavestenjeFajlRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IObavestenjaRepozitorijum.cs" />
     <Compile Include="Baze\OblastLekaraFajlRepozitorijum.cs" />
-    <Compile Include="Baze\BazaOcena.cs" />
+    <Compile Include="Baze\AnketaFajlRepozitorijum.cs" />
     <Compile Include="Baze\OdgovorNaZahtevFajlRepozitorijum.cs" />
     <Compile Include="Baze\OpremaFajlRepozitorijum.cs" />
     <Compile Include="Baze\RadnoVremeFajlRepozitorijum.cs" />
@@ -138,6 +138,7 @@
     <Compile Include="Baze\Klase\GenerickiFajlRepozitorijum.cs" />
     <Compile Include="DTOs\OperacijaDTO.cs" />
     <Compile Include="DTOs\PregledDTO.cs" />
+    <Compile Include="Kontroleri\AnketaKontroler.cs" />
     <Compile Include="Kontroleri\BelezkeKontroler.cs" />
     <Compile Include="Kontroleri\BolnicaKontroler.cs" />
     <Compile Include="Kontroleri\HospitalizacijaKontroler.cs" />
@@ -173,7 +174,7 @@
     <Compile Include="Model\SadrzajSobe.cs" />
     <Compile Include="Model\Sastojak.cs" />
     <Compile Include="Model\Soba.cs" />
-    <Compile Include="Model\Survery.cs" />
+    <Compile Include="Model\Anketa.cs" />
     <Compile Include="Model\Uloge.cs" />
     <Compile Include="Model\VremenskiInterval.cs" />
     <Compile Include="Model\ZahtevZaValidacijuLeka.cs" />
@@ -439,6 +440,7 @@
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
+    <Compile Include="Servisi\AnketaServis.cs" />
     <Compile Include="Servisi\BelezkeServis.cs" />
     <Compile Include="Servisi\BolnicaServis.cs" />
     <Compile Include="Servisi\HospitalizacijaServis.cs" />
