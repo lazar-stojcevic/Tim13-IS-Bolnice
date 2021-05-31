@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze;
+using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
@@ -27,7 +28,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             InitializeComponent();
             List<Anketa> recenzije = new List<Anketa>();
 
-            foreach (Anketa recenzija in new AnketaFajlRepozitorijum().DobaviSve())
+            foreach (Anketa recenzija in new AnketaKontroler().DobaviSveAnketeLekara())
             {
                 try
                 {

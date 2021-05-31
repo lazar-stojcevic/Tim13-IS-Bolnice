@@ -35,6 +35,19 @@ namespace IS_Bolnice.Baze
             return anketeBolnice;
         }
 
+        public List<Anketa> DobaviSveAnketeLekara()
+        {
+            List<Anketa> anketeBolnice = new List<Anketa>();
+            foreach (Anketa anketa in DobaviSve())
+            {
+                if (anketa.Lekar != null)
+                {
+                    anketeBolnice.Add(anketa);
+                }
+            }
+            return anketeBolnice;
+        }
+
         public override Anketa KreirajEntitet(string[] podaciEntiteta)
         {
             string[] items = podaciEntiteta;
