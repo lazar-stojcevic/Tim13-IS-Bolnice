@@ -36,5 +36,10 @@ namespace IS_Bolnice.Kontroleri
             return radnoVremeServis.PreklapanjeIntervalaGodisnjegOdmoraSaObavezamaLekara(intervalGodisnjegOdmora,
                 jmbgLekara);
         }
+
+        public RadnoVremeLekara DobaviRadnoVremeLekara(string idLekara)
+        {
+            return radnoVremeServis.DobaRadnoVremeLekara(idLekara);
+        }
     }
 }

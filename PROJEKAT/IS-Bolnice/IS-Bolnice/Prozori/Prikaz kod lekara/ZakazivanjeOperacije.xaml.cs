@@ -77,6 +77,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             operacija.VremePocetkaOperacije = pocetak;
             operacija.VremeKrajaOperacije = kraj;
             operacija.Hitna = (bool) boxHitno.IsChecked;
+            operacija.Lekar.RadnoVreme = new RadnoVremeKontroler().DobaviRadnoVremeLekara(idLekara);
             return operacija;
         }
 
@@ -101,63 +102,71 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void PostavljanjeParametara()
         {
-            if (listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
-            {
-                return;
-            }
-
-            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
-            {
-                potvrdi.IsEnabled = false;
-            }
-            else
-            {
-                potvrdi.IsEnabled = true;
-            }
-
-            int trajanjeOperacije;
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
-                trajanjeOperacije = Int32.Parse(txtDuzina.Text);
+                if (listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
+                {
+                    return;
+                }
+
+                if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1 || txtDuzina.Text.Equals(""))
+                {
+                    potvrdi.IsEnabled = false;
+                }
+                else
+                {
+                    potvrdi.IsEnabled = true;
+                }
+
+                int trajanjeOperacije;
+                try
+                {
+                    trajanjeOperacije = Int32.Parse(txtDuzina.Text);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Niste validno uneli dužinu trajanja operacije", "Dužina trajanja operacije",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+
+
+                OperacijaDTO operacijaDto = new OperacijaDTO()
+                {
+                    Lekar = (Lekar) listaLekara.SelectedItem,
+                    Soba = (Soba) comboBoxSale.SelectionBoxItem,
+                    TrajanjeOperacijeUMinutima = trajanjeOperacije
+                };
+
+                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(operacijaDto);
+
+
+                terminiList.Items.Clear();
+
+                foreach (Operacija operacija in operacije)
+                {
+                    terminiList.Items.Add(operacija.VremePocetkaOperacije);
+                }
+
+                if (terminiList.Items.Count != 0)
+                {
+                    terminiList.SelectedIndex = 0;
+                }
+
+                if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+                {
+                    potvrdi.IsEnabled = false;
+                }
+                else
+                {
+                    potvrdi.IsEnabled = true;
+                }
             }
-            catch (Exception e)
+            finally
             {
-                MessageBox.Show("Niste validno uneli dužinu trajanja operacije", "Dužina trajanja operacije",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            
-
-            OperacijaDTO operacijaDto = new OperacijaDTO()
-            {
-                Lekar = (Lekar)listaLekara.SelectedItem,
-                Soba = (Soba)comboBoxSale.SelectionBoxItem,
-                TrajanjeOperacijeUMinutima = trajanjeOperacije
-            };
-
-            operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(operacijaDto);
-            
-
-            terminiList.Items.Clear();
-
-            foreach (Operacija operacija in operacije)
-            {
-                terminiList.Items.Add(operacija.VremePocetkaOperacije);
-            }
-
-            if (terminiList.Items.Count != 0)
-            {
-                terminiList.SelectedIndex = 0;
-            }
-
-            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
-            {
-                potvrdi.IsEnabled = false;
-            }
-            else
-            {
-                potvrdi.IsEnabled = true;
+                Mouse.OverrideCursor = null;
             }
         }
 

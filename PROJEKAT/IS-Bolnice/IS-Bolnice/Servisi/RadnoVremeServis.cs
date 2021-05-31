@@ -35,6 +35,11 @@ namespace IS_Bolnice.Servisi
             return iskorisceniSlobodniDani;
         }
 
+        public RadnoVremeLekara DobaRadnoVremeLekara(string idLekara)
+        {
+            return radnoVremeRepo.RadnoVremeOdredjenogLekara(idLekara);
+        }
+
         public bool PreklapanjeIntervalaGodisnjegOdmoraLekara(List<DateTime> potencijalniSlobodniDani, string jmbgLekara)
         {
             RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.RadnoVremeOdredjenogLekara(jmbgLekara);

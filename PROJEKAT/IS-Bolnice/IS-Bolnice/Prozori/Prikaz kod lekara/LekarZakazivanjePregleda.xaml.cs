@@ -66,6 +66,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
             noviPregled.VremePocetkaPregleda = pocetak;
             noviPregled.VremeKrajaPregleda = kraj;
+            noviPregled.Lekar.RadnoVreme = new RadnoVremeKontroler().DobaviRadnoVremeLekara(idLekara);
             return noviPregled;
         }
 
@@ -80,38 +81,50 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void lekariList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listaLekara.SelectedIndex == -1) { return; }
-            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
             {
-                potvrdi.IsEnabled = false;
-            }
-            else
-            {
-                potvrdi.IsEnabled = true;
-            }
+                if (listaLekara.SelectedIndex == -1)
+                {
+                    return;
+                }
 
-            Lekar lekar = (Lekar)listaLekara.SelectedItem;
-            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
+                if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+                {
+                    potvrdi.IsEnabled = false;
+                }
+                else
+                {
+                    potvrdi.IsEnabled = true;
+                }
 
-            terminiList.Items.Clear();
+                Lekar lekar = (Lekar) listaLekara.SelectedItem;
+                pregledi = pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
 
-            foreach (Pregled p in pregledi)
-            {
-                terminiList.Items.Add(p.VremePocetkaPregleda);
+                terminiList.Items.Clear();
+
+                foreach (Pregled p in pregledi)
+                {
+                    terminiList.Items.Add(p.VremePocetkaPregleda);
+                }
+
+                if (terminiList.Items.Count != 0)
+                {
+                    terminiList.SelectedIndex = 0;
+                }
+
+                if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
+                {
+                    potvrdi.IsEnabled = false;
+                }
+                else
+                {
+                    potvrdi.IsEnabled = true;
+                }
             }
-
-            if (terminiList.Items.Count != 0)
+            finally
             {
-                terminiList.SelectedIndex = 0;
-            }
-
-            if (terminiList.SelectedIndex == -1 || listaLekara.SelectedIndex == -1)
-            {
-                potvrdi.IsEnabled = false;
-            }
-            else
-            {
-                potvrdi.IsEnabled = true;
+                Mouse.OverrideCursor = null;
             }
 
         }

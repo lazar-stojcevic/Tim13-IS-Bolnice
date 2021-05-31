@@ -54,31 +54,40 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_IzmeniOperaciju(object sender, RoutedEventArgs e)
         {
-            if (listaOperacija.SelectedIndex == -1)
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
             {
-                MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                if (listaOperacija.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                Operacija selektovani = (Operacija) listaOperacija.SelectedItem;
+                string ime = selektovani.Pacijent.Ime;
+                string prz = selektovani.Pacijent.Prezime;
+                string jmbg = selektovani.Pacijent.Jmbg;
+                IzmenaOperacije izmena = new IzmenaOperacije(selektovani.Id);
+                izmena.txtOperIme.Text = ime;
+                izmena.txtOperPrz.Text = prz;
+                izmena.txtOperJmbg.Text = jmbg;
+                izmena.terminiList.Items.Add(selektovani.VremePocetkaOperacije);
+                izmena.boxHitno.IsChecked = selektovani.Hitna;
+                izmena.comboBoxSale.SelectedIndex = 0;
+                izmena.listaLekara.SelectedIndex = 0;
+
+                izmena.ShowDialog();
+
+                List<Operacija> op = operacijaKontroler.GetSveBuduceOperacijeLekara(sifra);
+                opKolekcija.Clear();
+                foreach (Operacija operacija in op)
+                {
+                    opKolekcija.Add(operacija);
+                }
             }
-            Operacija selektovani = (Operacija)listaOperacija.SelectedItem;
-            string ime = selektovani.Pacijent.Ime;
-            string prz = selektovani.Pacijent.Prezime;
-            string jmbg = selektovani.Pacijent.Jmbg;
-            IzmenaOperacije izmena = new IzmenaOperacije(selektovani.Id);
-            izmena.txtOperIme.Text = ime;
-            izmena.txtOperPrz.Text = prz;
-            izmena.txtOperJmbg.Text = jmbg;
-            izmena.terminiList.Items.Add(selektovani.VremePocetkaOperacije);
-            izmena.boxHitno.IsChecked = selektovani.Hitna;
-            izmena.comboBoxSale.SelectedIndex = 0;
-            izmena.listaLekara.SelectedIndex = 0;
-
-            izmena.ShowDialog();
-
-            List<Operacija> op = operacijaKontroler.GetSveBuduceOperacijeLekara(sifra);
-            opKolekcija.Clear();
-            foreach (Operacija operacija in op)
+            finally
             {
-                opKolekcija.Add(operacija);
+                Mouse.OverrideCursor = null;
             }
 
         }
@@ -102,31 +111,40 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void Button_IzmeniPregled(object sender, RoutedEventArgs e)
         {
-            if (listaPregleda.SelectedIndex == -1) { 
-                MessageBox.Show("Nista nije selektovano","Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            Pregled selektovani = (Pregled)listaPregleda.SelectedItem;
-            string ime = selektovani.Pacijent.Ime;
-            string prz = selektovani.Pacijent.Prezime;
-            string jmbg = selektovani.Pacijent.Jmbg;
-
-            LekarIzmenaPregleda izmena = new LekarIzmenaPregleda(selektovani);
-
-            izmena.txtOperIme.Text = ime;
-            izmena.txtOperPrz.Text = prz;
-            izmena.txtOperJmbg.Text = jmbg;
-            izmena.terminiList.Items.Add(selektovani.VremePocetkaPregleda);
-            izmena.listaLekara.SelectedIndex = 0;
-
-            izmena.ShowDialog();
-
-            List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
-            preglediKolekcija.Clear();
-            foreach (Pregled pregled in pr)
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
             {
-                preglediKolekcija.Add(pregled);
+                if (listaPregleda.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Nista nije selektovano", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                Pregled selektovani = (Pregled) listaPregleda.SelectedItem;
+                string ime = selektovani.Pacijent.Ime;
+                string prz = selektovani.Pacijent.Prezime;
+                string jmbg = selektovani.Pacijent.Jmbg;
+
+                LekarIzmenaPregleda izmena = new LekarIzmenaPregleda(selektovani);
+
+                izmena.txtOperIme.Text = ime;
+                izmena.txtOperPrz.Text = prz;
+                izmena.txtOperJmbg.Text = jmbg;
+                izmena.terminiList.Items.Add(selektovani.VremePocetkaPregleda);
+                izmena.listaLekara.SelectedIndex = 0;
+
+                izmena.ShowDialog();
+
+                List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
+                preglediKolekcija.Clear();
+                foreach (Pregled pregled in pr)
+                {
+                    preglediKolekcija.Add(pregled);
+                }
+            }
+            finally
+            {
+                Mouse.OverrideCursor = null;
             }
 
 
