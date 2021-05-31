@@ -57,42 +57,9 @@ namespace IS_Bolnice.Prozori.Sekretar
                 string tempEMail = txtEMail.Text;
                 string tempKorisnickoIme = txtKorisnickoIme.Text;
                 string tempLozinka = txtLozinka.Password;
-                DateTime tempDatumRodjenja;
-                if (datum.SelectedDate == null)
-                {
-                    tempDatumRodjenja = DateTime.MinValue;
-                }
-                else
-                {
-                    tempDatumRodjenja = (DateTime)datum.SelectedDate;
-                }
-
-                string polString = comboPol.Text;
-                Pol tempPol;
-
-                if (polString.Equals("Muški"))
-                {
-                    tempPol = Pol.muski;
-                }
-                else if (polString.Equals("Ženski"))
-                {
-                    tempPol = Pol.zenski;
-                }
-                else
-                {
-                    tempPol = Pol.drugo;
-                }
-
-                Lekar lekar;
-                int indeks = comboLekari.SelectedIndex;
-                if (indeks == -1)
-                {
-                    lekar = null;
-                }
-                else
-                {
-                    lekar = lekari[indeks];
-                }
+                DateTime tempDatumRodjenja = OdrediDatumRodjenja();
+                Pol tempPol = OdrediPol();
+                Lekar lekar = OdrediIzabranogLekara();
 
                 Pacijent p = new Pacijent
                 {
@@ -113,6 +80,48 @@ namespace IS_Bolnice.Prozori.Sekretar
                 pacijentKontroler.KreirajPacijenta(p);
 
                 this.Close();
+            }
+        }
+
+        private DateTime OdrediDatumRodjenja()
+        {
+            if (datum.SelectedDate == null)
+            {
+                return DateTime.MinValue;
+            }
+            else
+            {
+                return (DateTime)datum.SelectedDate;
+            }
+        }
+
+        private Pol OdrediPol()
+        {
+            string polString = comboPol.Text;
+            if (polString.Equals("Muški"))
+            {
+                return Pol.muski;
+            }
+            else if (polString.Equals("Ženski"))
+            {
+                return Pol.zenski;
+            }
+            else
+            {
+                return Pol.drugo;
+            }
+        }
+
+        private Lekar OdrediIzabranogLekara()
+        {
+            int indeks = comboLekari.SelectedIndex;
+            if (indeks == -1)
+            {
+                return null;
+            }
+            else
+            {
+                return lekari[indeks];
             }
         }
 

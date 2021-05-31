@@ -333,16 +333,6 @@ namespace IS_Bolnice.Prozori.Sekretar
             PrikazTerminaPacijenta();
         }
 
-        private void MenuItem_Click_Pomeranje_Termina(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void MenuItem_Click_Otkazivanje_Termina(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void ToolBar_Button_Click_Novi_Pacijent(object sender, RoutedEventArgs e)
         {
             DodavanjePacijenta();

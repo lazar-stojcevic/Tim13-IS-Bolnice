@@ -36,6 +36,20 @@ namespace IS_Bolnice.Prozori.Sekretar
             txtAdresa.Text = pacijentZaIzmenu.Adresa;
             txtBrTelefona.Text = pacijentZaIzmenu.BrojTelefona;
             txtEMail.Text = pacijentZaIzmenu.EMail;
+            OznaciPol();
+            datum.SelectedDate = pacijentZaIzmenu.DatumRodjenja;
+            OznaciIzabranogLekara();
+            txtKorisnickoIme.Text = pacijentZaIzmenu.KorisnickoIme;
+            txtLozinka.Password = pacijentZaIzmenu.Sifra;
+            // ako je blokiran cekira se check box
+            if (bazaIzmena.IsPatientMalicious(pacijentZaIzmenu))
+            {
+                CbBlokiran.IsChecked = true;
+            }
+        }
+
+        private void OznaciPol()
+        {
             if (pacijentZaIzmenu.Pol.ToString().Equals("muski"))
             {
                 comboPol.SelectedIndex = 0;
@@ -48,21 +62,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 comboPol.SelectedIndex = 2;
             }
+        }
 
-            datum.SelectedDate = pacijentZaIzmenu.DatumRodjenja;
-
-            // oznacavanje izabranog lekara
-            List<string> lekariString = new List<string>();
-
-            // formiranje stringa za svakog lekara
-            foreach (Lekar l in lekari)
-            {
-                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Oblast.Naziv + ")";
-                lekariString.Add(lekarString);
-            }
-
-            // postavljanje combo boxa na odgovarajuceg lekara
-            comboLekari.ItemsSource = lekariString;
+        private void OznaciIzabranogLekara()
+        {
+            comboLekari.ItemsSource = FormirajStringZaSvakogLekara();
             if (pacijentZaIzmenu.IzabraniLekar == null)
             {
                 comboLekari.SelectedIndex = -1;
@@ -80,15 +84,18 @@ namespace IS_Bolnice.Prozori.Sekretar
                 }
                 comboLekari.SelectedIndex = indeks;
             }
+        }
 
-            txtKorisnickoIme.Text = pacijentZaIzmenu.KorisnickoIme;
-            txtLozinka.Password = pacijentZaIzmenu.Sifra;
-
-            // ako je blokiran cekira se check box
-            if (bazaIzmena.IsPatientMalicious(pacijentZaIzmenu))
+        private List<string> FormirajStringZaSvakogLekara()
+        {
+            List<string> lekariString = new List<string>();
+            foreach (Lekar l in lekari)
             {
-                CbBlokiran.IsChecked = true;
+                string lekarString = l.Ime + " " + l.Prezime + " (" + l.Oblast.Naziv + ")";
+                lekariString.Add(lekarString);
             }
+
+            return lekariString;
         }
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
@@ -109,35 +116,9 @@ namespace IS_Bolnice.Prozori.Sekretar
                 string tempEMail = txtEMail.Text;
                 string tempKorisnickoIme = txtKorisnickoIme.Text;
                 string tempLozinka = txtLozinka.Password;
-
-                string polString = comboPol.Text;
-
-                Pol tempPol;
-
-                if (polString.Equals("Muški"))
-                {
-                    tempPol = Pol.muski;
-                }
-                else if (polString.Equals("Ženski"))
-                {
-                    tempPol = Pol.zenski;
-                }
-                else
-                {
-                    tempPol = Pol.drugo;
-                }
+                Pol tempPol = OdrediPol();
                 DateTime tempDatumRodjenja = (DateTime)datum.SelectedDate;
-
-                Lekar lekar;
-                int indeks = comboLekari.SelectedIndex;
-                if (indeks == -1)
-                {
-                    lekar = null;
-                }
-                else
-                {
-                    lekar = lekari[indeks];
-                }
+                Lekar lekar = OdrediIzabranogLekara();
 
                 Pacijent p = new Pacijent
                 {
@@ -155,13 +136,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 };
 
                 pacijentKontroler.IzmeniPacijenta(p);
-                // osvezavanje liste
-                int i = PacijentiRef.IndexOf(pacijentZaIzmenu);
-                if (i != -1)
-                {
-                    PacijentiRef[i] = p;
-                }
-
+                OsvezavanjeListePacijenata(p);
                 // ako nije oznaceno da je blokiran poziva se metoda za odblokiranje
                 if (!(bool)CbBlokiran.IsChecked)
                 {
@@ -169,6 +144,45 @@ namespace IS_Bolnice.Prozori.Sekretar
                 }
 
                 this.Close();
+            }
+        }
+
+        private Pol OdrediPol()
+        {
+            string polString = comboPol.Text;
+            if (polString.Equals("Muški"))
+            {
+                return Pol.muski;
+            }
+            else if (polString.Equals("Ženski"))
+            {
+                return Pol.zenski;
+            }
+            else
+            {
+                return Pol.drugo;
+            }
+        }
+
+        private Lekar OdrediIzabranogLekara()
+        {
+            int indeks = comboLekari.SelectedIndex;
+            if (indeks == -1)
+            {
+                return null;
+            }
+            else
+            {
+                return lekari[indeks];
+            }
+        }
+
+        private void OsvezavanjeListePacijenata(Pacijent izmenjenPacijent)
+        {
+            int i = PacijentiRef.IndexOf(pacijentZaIzmenu);
+            if (i != -1)
+            {
+                PacijentiRef[i] = izmenjenPacijent;
             }
         }
 

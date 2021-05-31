@@ -111,14 +111,17 @@ namespace IS_Bolnice.Prozori.Sekretar
             };
 
             obavestenjeKontroler.IzmeniObavestenje(obavestenje);
-            // osvezavanje liste
+            OsvezavanjeListeObavestenja(obavestenje);
+            this.Close();
+        }
+
+        private void OsvezavanjeListeObavestenja(Obavestenje obavestenje)
+        {
             int i = ObavestenjaRef.IndexOf(odabranoObavestenje);
             if (i != -1)
             {
                 ObavestenjaRef[i] = obavestenje;
             }
-
-            this.Close();
         }
 
         private void dodavanjePacijenata_Click(object sender, RoutedEventArgs e)
