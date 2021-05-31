@@ -11,6 +11,6 @@ namespace IS_Bolnice.Baze.Interfejsi
     {
         void OdblokirajPacijenta(Pacijent pacijent);
         bool DaLiJeJmbgJednak(IzmenaTermina izmenaTermina, Pacijent pacijent);
-        List<IzmenaTermina> GetIzmenePacijenta(Pacijent patient);
+        List<IzmenaTermina> GetIzmenePacijenta(Pacijent pacijent);
     }
 }

@@ -9,6 +9,11 @@ namespace IS_Bolnice.Servisi
         private static int MAX_CHANGES_IN_WEEK = 3;
         private IzmenaTerminaFajlRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
 
+        public void SacuvajIzmenu(IzmenaTermina izmenaTermina)
+        {
+            izmenaTerminaRepo.Sacuvaj(izmenaTermina);
+        }
+
         public void OdblokirajPacijenta(Pacijent pacijent)
         {
             izmenaTerminaRepo.OdblokirajPacijenta(pacijent);

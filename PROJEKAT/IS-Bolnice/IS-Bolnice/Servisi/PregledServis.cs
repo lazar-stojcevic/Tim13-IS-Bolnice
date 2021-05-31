@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IS_Bolnice.Baze;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Kontroleri;
@@ -22,7 +20,7 @@ namespace IS_Bolnice.Servisi
 
         private IPregledRepozitorijum pregledRepo = new PreglediFajlRepozitorijum();
         private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
-        private IzmenaTerminaFajlRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
+        private IIzmenaTerminaRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
 
         public List<Pregled> GetsviPregledi()
         {
@@ -145,7 +143,7 @@ namespace IS_Bolnice.Servisi
             izmena.DatumIzmene = sada;
             izmena.JmbgPacijenta = jmbgPacijenta;
 
-            izmenaTerminaRepo.SaveChange(izmena);
+            izmenaTerminaRepo.Sacuvaj(izmena);
         }
 
         public void OtkaziPregled(Pregled pregled)

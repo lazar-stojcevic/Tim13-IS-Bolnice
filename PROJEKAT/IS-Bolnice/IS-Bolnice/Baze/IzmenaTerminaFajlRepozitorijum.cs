@@ -1,4 +1,6 @@
-﻿using IS_Bolnice.Model;
+﻿using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Baze.Klase;
+using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Baze
 {
-    class IzmenaTerminaFajlRepozitorijum
+    class IzmenaTerminaFajlRepozitorijum : GenerickiFajlRepozitorijum<IzmenaTermina>, IIzmenaTerminaRepozitorijum
     {
         private static string fileLocation = @"..\..\Datoteke\izmene.txt";
         private static string timeFormatForWriting = "M/d/yyyy h:mm:ss tt";
@@ -19,13 +21,22 @@ namespace IS_Bolnice.Baze
         "M-d-yyyy h:mm:ss tt"
         };
 
-        public List<IzmenaTermina> GetIzmenePacijenta(Pacijent patient)
+        public IzmenaTerminaFajlRepozitorijum() : base(fileLocation)
+        {
+        }
+
+        public bool DaLiJeJmbgJednak(IzmenaTermina izmenaTermina, Pacijent pacijent)
+        {
+            return izmenaTermina.JmbgPacijenta.Equals(pacijent.Jmbg);
+        }
+
+        public List<IzmenaTermina> GetIzmenePacijenta(Pacijent pacijent)
         {
             List<IzmenaTermina> changesOfPatient = new List<IzmenaTermina>();
 
-            foreach (IzmenaTermina change in ReadAllChanges())
+            foreach (IzmenaTermina change in DobaviSve())
             {
-                if (DaLiJeJmbgJednak(change, patient))
+                if (DaLiJeJmbgJednak(change, pacijent))
                 {
                     changesOfPatient.Add(change);
                 }
@@ -34,81 +45,25 @@ namespace IS_Bolnice.Baze
             return changesOfPatient;
         }
 
-        private bool DaLiJeJmbgJednak(IzmenaTermina izmenaTermina, Pacijent pacijent)
+        public override IzmenaTermina KreirajEntitet(string[] podaciEntiteta)
         {
-            return izmenaTermina.JmbgPacijenta.Equals(pacijent.Jmbg);
-        }
-
-        public void SaveChange(IzmenaTermina izmenaTermina)
-        {
-            List<string> lines = new List<string>();
-
-            string formatOfchangeForWriting = FormatPisanjaIzmene(izmenaTermina);
-
-            lines.Add(formatOfchangeForWriting);
-
-            File.AppendAllLines(fileLocation, lines);
-        }
-
-        private string FormatPisanjaIzmene(IzmenaTermina izmenaTermina)
-        {
-            return izmenaTermina.JmbgPacijenta + "#" + GetFormatedDateForWriting(izmenaTermina.DatumIzmene);
-        }
-
-        public List<IzmenaTermina> ReadAllChanges()
-        {
-            List<string> lines = ReadLinesOfFile();
-            List<IzmenaTermina> changes = new List<IzmenaTermina>();
-
-            foreach (string line in lines)
-            {
-                changes.Add(NparaviIzmenuOdLinije(line));
-            }
-
-            return changes;
-        }
-
-        public List<string> ReadLinesOfFile()
-        {
-            return File.ReadAllLines(fileLocation).ToList(); ;
-        }
-
-        public IzmenaTermina NparaviIzmenuOdLinije(string line)
-        {
-            string[] items = line.Split('#');
-
             IzmenaTermina izmenaTermina = new IzmenaTermina();
 
-            izmenaTermina.JmbgPacijenta = items[0];
-            izmenaTermina.DatumIzmene = GetFormatedDateForReading(items[1]);
+            izmenaTermina.JmbgPacijenta = podaciEntiteta[0];
+            izmenaTermina.DatumIzmene = FormatCitanjaDatuma(podaciEntiteta[1]);
 
             return izmenaTermina;
         }
 
-        public DateTime GetFormatedDateForReading(string date)
+        public override string KreirajTextZaUpis(IzmenaTermina entitet)
         {
-            return DateTime.ParseExact(date, timeFormatForReading, CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-        }
-
-        public String GetFormatedDateForWriting(DateTime date)
-        {
-            return date.ToString(timeFormatForWriting);
-        }
-
-        private void WriteAllChangesInFile(List<IzmenaTermina> changes)
-        {
-            List<String> changesString = new List<string>();
-            foreach (IzmenaTermina change in changes)
-            {
-                changesString.Add(FormatPisanjaIzmene(change));
-            }
-            File.WriteAllLines(fileLocation, changesString);
+            IzmenaTermina izmenaTermina = entitet;
+            return izmenaTermina.JmbgPacijenta + "#" + FormatPisanjaDatuma(izmenaTermina.DatumIzmene);
         }
 
         public void OdblokirajPacijenta(Pacijent pacijent)
         {
-            List<IzmenaTermina> sveIzmene = ReadAllChanges();
+            List<IzmenaTermina> sveIzmene = DobaviSve();
             List<IzmenaTermina> filtriraneIzmene = new List<IzmenaTermina>();
 
             foreach (IzmenaTermina izmena in sveIzmene)
@@ -119,7 +74,28 @@ namespace IS_Bolnice.Baze
                 }
             }
 
-            WriteAllChangesInFile(filtriraneIzmene);
+            UpisiSveIzmene(filtriraneIzmene);
+        }
+
+        private void UpisiSveIzmene(List<IzmenaTermina> izmene)
+        {
+            List<string> izmeneString = new List<string>();
+            foreach (IzmenaTermina izmena in izmene)
+            {
+                izmeneString.Add(KreirajTextZaUpis(izmena));
+            }
+            File.WriteAllLines(fileLocation, izmeneString);
+        }
+
+        private DateTime FormatCitanjaDatuma(string datum)
+        {
+            return DateTime.ParseExact(datum, timeFormatForReading, CultureInfo.InvariantCulture,
+                                                  DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+        }
+
+        private string FormatPisanjaDatuma(DateTime datum)
+        {
+            return datum.ToString(timeFormatForWriting);
         }
     }
 }
