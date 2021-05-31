@@ -19,9 +19,9 @@ namespace IS_Bolnice.Baze
         "M-d-yyyy h:mm:ss tt"
         };
 
-        public List<Belezka> SveBelezke()
+        public List<Beleska> SveBelezke()
         {
-            List<Belezka> belezke = new List<Belezka>();
+            List<Beleska> belezke = new List<Beleska>();
 
             foreach (var linija in ProcitajDatoteku())
             {
@@ -32,22 +32,22 @@ namespace IS_Bolnice.Baze
             return belezke;
         }
 
-        public void SacuvajBelezku(Belezka belezka)
+        public void SacuvajBelezku(Beleska beleska)
         {
             List<string> linije = new List<string>();
 
-            linije.Add(FormatPisanjaBelezke(belezka));
+            linije.Add(FormatPisanjaBelezke(beleska));
 
             File.AppendAllLines(filePath, linije);
         }
 
-        public void ObrisiBelezku(Belezka belezkaZaBrisanje)
+        public void ObrisiBelezku(Beleska beleskaZaBrisanje)
         {
             List<string> belezkeKojeSeNeBrisu = new List<string>();
 
-            foreach (Belezka belezka in SveBelezke())
+            foreach (Beleska belezka in SveBelezke())
             {
-                if (!belezka.Iste(belezkaZaBrisanje))
+                if (!belezka.Iste(beleskaZaBrisanje))
                 {
                     belezkeKojeSeNeBrisu.Add(FormatPisanjaBelezke(belezka));
                 }
@@ -56,19 +56,19 @@ namespace IS_Bolnice.Baze
             File.WriteAllLines(filePath, belezkeKojeSeNeBrisu);
         }
 
-        public void IzmeniBelezku(Belezka staraBelezka, Belezka novaBelezka)
+        public void IzmeniBelezku(Beleska staraBeleska, Beleska novaBeleska)
         {
             List<string> regularneBelezke = new List<string>();
 
-            foreach (Belezka belezka in SveBelezke())
+            foreach (Beleska belezka in SveBelezke())
             {
-                if (!belezka.Iste(staraBelezka))
+                if (!belezka.Iste(staraBeleska))
                 {
                     regularneBelezke.Add(FormatPisanjaBelezke(belezka));
                 }
                 else
                 {
-                    regularneBelezke.Add(FormatPisanjaBelezke(novaBelezka));
+                    regularneBelezke.Add(FormatPisanjaBelezke(novaBeleska));
                 }
             }
 
@@ -86,17 +86,17 @@ namespace IS_Bolnice.Baze
             return date.ToString(formatPisanjaDatuma);
         }
 
-        private string FormatPisanjaBelezke(Belezka belezka)
+        private string FormatPisanjaBelezke(Beleska beleska)
         {
-            return belezka.Pacijent.Jmbg + "#" + belezka.Komentar + "#" + belezka.PeriodVazenja.ToString() + "#" + FormirajDatumZaPisanje(belezka.VremePocetkaVazenja) + "#" + belezka.Naziv;
+            return beleska.Pacijent.Jmbg + "#" + beleska.Komentar + "#" + beleska.PeriodVazenja.ToString() + "#" + FormirajDatumZaPisanje(beleska.VremePocetkaVazenja) + "#" + beleska.Naziv;
         }
 
-        private Belezka FormatCitanjaBelezke(string[] linija)
+        private Beleska FormatCitanjaBelezke(string[] linija)
         {
             Pacijent pacijent = new Pacijent();
             pacijent.Jmbg = linija[0];
 
-            return new Belezka(pacijent, linija[1], FormirajDatumZaCitanje(linija[3]), Int32.Parse(linija[2]), linija[4]);
+            return new Beleska(pacijent, linija[1], FormirajDatumZaCitanje(linija[3]), Int32.Parse(linija[2]), linija[4]);
         }
 
         private List<string> ProcitajDatoteku()

@@ -18,20 +18,20 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {
     public partial class IzmenaBelezke : Window
     {
-        private Belezka staraBelezka;
+        private Beleska staraBeleska;
 
         private BelezkeKontroler belezkeKontroleri = new BelezkeKontroler();
 
         private ListView listaZaOsvezavanje;
-        public IzmenaBelezke(Belezka belezka, ListView listView)
+        public IzmenaBelezke(Beleska beleska, ListView listView)
         {
             InitializeComponent();
-            staraBelezka = belezka;
+            staraBeleska = beleska;
             listaZaOsvezavanje = listView;
 
-            nazivBelezke.Text = staraBelezka.Naziv;
-            sadrzajBelezke.Text = staraBelezka.Komentar;
-            brojDana.Text = staraBelezka.PeriodVazenja.ToString();
+            nazivBelezke.Text = staraBeleska.Naziv;
+            sadrzajBelezke.Text = staraBeleska.Komentar;
+            brojDana.Text = staraBeleska.PeriodVazenja.ToString();
         }
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
@@ -39,12 +39,12 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             if (nazivBelezke.Text.Trim() != "" && sadrzajBelezke.Text.Trim() != "" && brojDana.Text.Trim() != "")
             {
                 Pacijent pacijent = new Pacijent();
-                pacijent.Jmbg = staraBelezka.Pacijent.Jmbg;
+                pacijent.Jmbg = staraBeleska.Pacijent.Jmbg;
 
-                Belezka novaBelezka = new Belezka(pacijent, sadrzajBelezke.Text, DateTime.Now, Int32.Parse(brojDana.Text), nazivBelezke.Text);
+                Beleska novaBeleska = new Beleska(pacijent, sadrzajBelezke.Text, DateTime.Now, Int32.Parse(brojDana.Text), nazivBelezke.Text);
 
-                belezkeKontroleri.IzmeniBelezku(staraBelezka, novaBelezka);
-                listaZaOsvezavanje.ItemsSource = belezkeKontroleri.SveTrenutneBelezkePacijenta(staraBelezka.Pacijent.Jmbg);
+                belezkeKontroleri.IzmeniBelezku(staraBeleska, novaBeleska);
+                listaZaOsvezavanje.ItemsSource = belezkeKontroleri.SveTrenutneBelezkePacijenta(staraBeleska.Pacijent.Jmbg);
                 this.Close();
             }
         }

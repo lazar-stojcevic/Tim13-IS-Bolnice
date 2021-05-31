@@ -159,9 +159,9 @@
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
-    <Compile Include="Model\Belezka.cs" />
+    <Compile Include="Model\Beleska.cs" />
     <Compile Include="Model\Bolnica.cs" />
-    <Compile Include="Model\Change.cs" />
+    <Compile Include="Model\IzmenaTermina.cs" />
     <Compile Include="Model\Entitet.cs" />
     <Compile Include="Model\Hospitalizacija.cs" />
     <Compile Include="Model\Izvestaj.cs" />

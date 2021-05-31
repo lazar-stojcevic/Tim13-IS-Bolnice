@@ -51,8 +51,8 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 obrisiBelezku.IsEnabled = true;
                 izmeniBelezku.IsEnabled = true;
 
-                Belezka selektovanaBelezka = (Belezka)listaObavestenja.SelectedItem;
-                poljeZaIspis.Text = selektovanaBelezka.Komentar;
+                Beleska selektovanaBeleska = (Beleska)listaObavestenja.SelectedItem;
+                poljeZaIspis.Text = selektovanaBeleska.Komentar;
             }
             else
             {
@@ -63,16 +63,16 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
         private void obrisiBelezku_Click(object sender, RoutedEventArgs e)
         {
-            Belezka belezkaZaBrisanje = (Belezka)listaObavestenja.SelectedItem;
-            belezkaKontroler.ObrisiBelezku(belezkaZaBrisanje);
+            Beleska beleskaZaBrisanje = (Beleska)listaObavestenja.SelectedItem;
+            belezkaKontroler.ObrisiBelezku(beleskaZaBrisanje);
             poljeZaIspis.Text = "";
             listaObavestenja.ItemsSource = belezkaKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
         private void izmeniBelezku_Click(object sender, RoutedEventArgs e)
         {
-            Belezka belezkaZaIzmenu = (Belezka)listaObavestenja.SelectedItem;
-            IzmenaBelezke ib = new IzmenaBelezke(belezkaZaIzmenu, listaObavestenja);
+            Beleska beleskaZaIzmenu = (Beleska)listaObavestenja.SelectedItem;
+            IzmenaBelezke ib = new IzmenaBelezke(beleskaZaIzmenu, listaObavestenja);
             ib.ShowDialog();
         }
     }

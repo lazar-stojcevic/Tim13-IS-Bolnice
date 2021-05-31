@@ -56,7 +56,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             myMediaElement.Stop();
         }
 
-        // Change the speed of the media.
+        // IzmenaTermina the speed of the media.
         private void ChangeMediaSpeedRatio(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             myMediaElement.SpeedRatio = (double)speedRatioSlider.Value;

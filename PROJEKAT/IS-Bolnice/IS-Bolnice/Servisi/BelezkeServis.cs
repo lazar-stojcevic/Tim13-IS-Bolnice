@@ -12,21 +12,21 @@ namespace IS_Bolnice.Servisi
     {
         private BazaBelezaka bazaBelezaka = new BazaBelezaka();
 
-        public void IzmeniBelezku(Belezka staraBelezka, Belezka novaBelezka)
+        public void IzmeniBelezku(Beleska staraBeleska, Beleska novaBeleska)
         {
-            bazaBelezaka.IzmeniBelezku(staraBelezka, novaBelezka);
+            bazaBelezaka.IzmeniBelezku(staraBeleska, novaBeleska);
         }
 
-        public void SacuvajBelezku(Belezka belezka)
+        public void SacuvajBelezku(Beleska beleska)
         {
-            bazaBelezaka.SacuvajBelezku(belezka);
+            bazaBelezaka.SacuvajBelezku(beleska);
         }
 
-        public List<Belezka> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
+        public List<Beleska> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
         {
-            List<Belezka> pacijentoveBelezke = new List<Belezka>();
+            List<Beleska> pacijentoveBelezke = new List<Beleska>();
 
-            foreach (Belezka belezka in bazaBelezaka.SveBelezke())
+            foreach (Beleska belezka in bazaBelezaka.SveBelezke())
             {
                 if (TrajeLiBelezka(belezka) && belezka.Pacijent.Jmbg == jmbgPacijenta)
                 {
@@ -37,14 +37,14 @@ namespace IS_Bolnice.Servisi
             return pacijentoveBelezke;
         }
 
-        public void ObrisiBelezku(Belezka belezka)
+        public void ObrisiBelezku(Beleska beleska)
         {
-            bazaBelezaka.ObrisiBelezku(belezka);
+            bazaBelezaka.ObrisiBelezku(beleska);
         }
 
-        private bool TrajeLiBelezka(Belezka belezka)
+        private bool TrajeLiBelezka(Beleska beleska)
         {
-            DateTime vremeKrajaTrajanjaBelezke = belezka.VremePocetkaVazenja.AddDays(belezka.PeriodVazenja);
+            DateTime vremeKrajaTrajanjaBelezke = beleska.VremePocetkaVazenja.AddDays(beleska.PeriodVazenja);
 
             if (vremeKrajaTrajanjaBelezke > DateTime.Now)
             {

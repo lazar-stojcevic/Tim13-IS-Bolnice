@@ -12,24 +12,24 @@ namespace IS_Bolnice.Kontroleri
     {
         private BelezkeServis belezkeServis = new BelezkeServis();
 
-        public void IzmeniBelezku(Belezka staraBelezka, Belezka novaBelezka)
+        public void IzmeniBelezku(Beleska staraBeleska, Beleska novaBeleska)
         {
-            belezkeServis.IzmeniBelezku(staraBelezka, novaBelezka);
+            belezkeServis.IzmeniBelezku(staraBeleska, novaBeleska);
         }
 
-        public void SacuvajBelezku(Belezka belezka)
+        public void SacuvajBelezku(Beleska beleska)
         {
-            belezkeServis.SacuvajBelezku(belezka);
+            belezkeServis.SacuvajBelezku(beleska);
         }
 
-        public List<Belezka> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
+        public List<Beleska> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
         {
             return belezkeServis.SveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
-        public void ObrisiBelezku(Belezka belezka)
+        public void ObrisiBelezku(Beleska beleska)
         {
-            belezkeServis.ObrisiBelezku(belezka);
+            belezkeServis.ObrisiBelezku(beleska);
         }
     }
 }

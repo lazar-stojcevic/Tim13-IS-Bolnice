@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Model
 {
-    public class Belezka
+    public class Beleska
     {
         public string Naziv { get; set; }
         public Pacijent Pacijent { get; set; }
@@ -14,12 +14,12 @@ namespace IS_Bolnice.Model
         public DateTime VremePocetkaVazenja { get; set; }
         public int PeriodVazenja { get; set; }
 
-        public Belezka()
+        public Beleska()
         {
             VremePocetkaVazenja = DateTime.Now;
         }
 
-        public Belezka(Pacijent pacijent, string komentar, DateTime vremePocetkaVazenja, int periodVazenja, string naziv)
+        public Beleska(Pacijent pacijent, string komentar, DateTime vremePocetkaVazenja, int periodVazenja, string naziv)
         {
             Naziv = naziv;
             Pacijent = pacijent;
@@ -28,9 +28,9 @@ namespace IS_Bolnice.Model
             PeriodVazenja = periodVazenja;
         }
 
-        public bool Iste(Belezka belezka)
+        public bool Iste(Beleska beleska)
         {
-            return this.Pacijent.Jmbg == belezka.Pacijent.Jmbg && this.VremePocetkaVazenja == belezka.VremePocetkaVazenja;
+            return this.Pacijent.Jmbg == beleska.Pacijent.Jmbg && this.VremePocetkaVazenja == beleska.VremePocetkaVazenja;
         }
     }
 }

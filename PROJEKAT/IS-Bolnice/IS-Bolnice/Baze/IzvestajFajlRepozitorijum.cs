@@ -36,10 +36,10 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
 
     public override Izvestaj KreirajEntitet(string[] podaciEntiteta)
     {
-        Lekar lekar = new Lekar();
-        lekar.Jmbg = podaciEntiteta[1];
-        Pacijent pacijent = new Pacijent();
-        pacijent.Jmbg = podaciEntiteta[2];
+        LekarFajlRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
+        PacijentFajlRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
+        Lekar lekar = lekarRepo.DobaviPoId(podaciEntiteta[1]);
+        Pacijent pacijent = pacijentRepo.DobaviPoJmbg(podaciEntiteta[2]);
 
         List<Terapija> terapije = NapraviTerapijeOdLinije(podaciEntiteta[5]);
 

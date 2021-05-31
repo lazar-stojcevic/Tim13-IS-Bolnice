@@ -139,11 +139,11 @@ namespace IS_Bolnice.Servisi
 
         private void UpisiIzmenuUBazu(string jmbgPacijenta)
         {
-            Change izmena = new Change();
+            IzmenaTermina izmena = new IzmenaTermina();
             DateTime sada = DateTime.Now;
 
-            izmena.DateOfChange = sada;
-            izmena.JmbgOfPatient = jmbgPacijenta;
+            izmena.DatumIzmene = sada;
+            izmena.JmbgPacijenta = jmbgPacijenta;
 
             bazaIzmena.SaveChange(izmena);
         }

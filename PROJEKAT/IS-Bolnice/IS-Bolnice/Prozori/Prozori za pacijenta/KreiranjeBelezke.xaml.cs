@@ -50,12 +50,12 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 this.Close();
             }
         }
-        private Belezka napraviBelezku()
+        private Beleska napraviBelezku()
         {
             Pacijent pacijent = new Pacijent();
             pacijent.Jmbg = jmbgPacijenta;
 
-            return new Belezka(pacijent, sadrzajBelezke.Text, DateTime.Now, Int32.Parse(brojDana.Text), nazivBelezke.Text);
+            return new Beleska(pacijent, sadrzajBelezke.Text, DateTime.Now, Int32.Parse(brojDana.Text), nazivBelezke.Text);
         }
         private void nazivBelezke_TextChanged(object sender, TextChangedEventArgs e)
         {

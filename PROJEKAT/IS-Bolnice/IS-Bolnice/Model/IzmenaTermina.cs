@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace IS_Bolnice.Model
 {
     // na klas dijagramu treba spojiti sa pacijentom
-    class Change
+    class IzmenaTermina
     {
-        public Change() { }
+        public IzmenaTermina() { }
 
-        public DateTime DateOfChange { get; set; }
-        public string JmbgOfPatient { get; set; }
+        public DateTime DatumIzmene { get; set; }
+        public string JmbgPacijenta { get; set; }
     }
 }

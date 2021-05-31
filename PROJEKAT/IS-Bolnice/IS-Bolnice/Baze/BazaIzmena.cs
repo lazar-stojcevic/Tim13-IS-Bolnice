@@ -19,11 +19,11 @@ namespace IS_Bolnice.Baze
         "M-d-yyyy h:mm:ss tt"
         };
         private static int MAX_CHANGES_IN_WEEK = 3;
-        public List<Change> FindPatientChanges(Pacijent patient)
+        public List<IzmenaTermina> FindPatientChanges(Pacijent patient)
         {
-            List<Change> changesOfPatient = new List<Change>();
+            List<IzmenaTermina> changesOfPatient = new List<IzmenaTermina>();
 
-            foreach (Change change in ReadAllChanges())
+            foreach (IzmenaTermina change in ReadAllChanges())
             {
                 if (IsJmbgEquals(change, patient))
                 {
@@ -34,31 +34,31 @@ namespace IS_Bolnice.Baze
             return changesOfPatient;
         }
 
-        public bool IsJmbgEquals(Change change, Pacijent patient)
+        public bool IsJmbgEquals(IzmenaTermina izmenaTermina, Pacijent patient)
         {
-            return change.JmbgOfPatient.Equals(patient.Jmbg);
+            return izmenaTermina.JmbgPacijenta.Equals(patient.Jmbg);
         }
 
-        public void SaveChange(Change change)
+        public void SaveChange(IzmenaTermina izmenaTermina)
         {
             List<string> lines = new List<string>();
 
-            string formatOfchangeForWriting = ChangeToString(change);
+            string formatOfchangeForWriting = ChangeToString(izmenaTermina);
 
             lines.Add(formatOfchangeForWriting);
 
             File.AppendAllLines(fileLocation, lines);
         }
 
-        private string ChangeToString(Change change)
+        private string ChangeToString(IzmenaTermina izmenaTermina)
         {
-            return change.JmbgOfPatient + "#" + GetFormatedDateForWriting(change.DateOfChange);
+            return izmenaTermina.JmbgPacijenta + "#" + GetFormatedDateForWriting(izmenaTermina.DatumIzmene);
         }
 
-        public List<Change> ReadAllChanges()
+        public List<IzmenaTermina> ReadAllChanges()
         {
             List<string> lines = ReadLinesOfFile();
-            List<Change> changes = new List<Change>();
+            List<IzmenaTermina> changes = new List<IzmenaTermina>();
 
             foreach (string line in lines)
             {
@@ -73,16 +73,16 @@ namespace IS_Bolnice.Baze
             return File.ReadAllLines(fileLocation).ToList(); ;
         }
 
-        public Change MakeChangeFromLine(string line)
+        public IzmenaTermina MakeChangeFromLine(string line)
         {
             string[] items = line.Split('#');
 
-            Change change = new Change();
+            IzmenaTermina izmenaTermina = new IzmenaTermina();
 
-            change.JmbgOfPatient = items[0];
-            change.DateOfChange = GetFormatedDateForReading(items[1]);
+            izmenaTermina.JmbgPacijenta = items[0];
+            izmenaTermina.DatumIzmene = GetFormatedDateForReading(items[1]);
 
-            return change;
+            return izmenaTermina;
         }
 
         public DateTime GetFormatedDateForReading(string date)
@@ -96,10 +96,10 @@ namespace IS_Bolnice.Baze
             return date.ToString(timeFormatForWriting);
         }
 
-        private void WriteAllChangesInFile(List<Change> changes)
+        private void WriteAllChangesInFile(List<IzmenaTermina> changes)
         {
             List<String> changesString = new List<string>();
-            foreach (Change change in changes)
+            foreach (IzmenaTermina change in changes)
             {
                 changesString.Add(ChangeToString(change));
             }
@@ -108,10 +108,10 @@ namespace IS_Bolnice.Baze
 
         public void UnblockPatient(Pacijent patient)
         {
-            List<Change> allChanges = ReadAllChanges();
-            List<Change> filteredChanges = new List<Change>();
+            List<IzmenaTermina> allChanges = ReadAllChanges();
+            List<IzmenaTermina> filteredChanges = new List<IzmenaTermina>();
 
-            foreach (Change change in allChanges)
+            foreach (IzmenaTermina change in allChanges)
             {
                 if (!IsJmbgEquals(change, patient))
                 {
@@ -134,7 +134,7 @@ namespace IS_Bolnice.Baze
         public int CountOfPatientChanges(Pacijent patient)
         {
             int numberOfPatientChanges = 0;
-            foreach (Change change in FindPatientChanges(patient))
+            foreach (IzmenaTermina change in FindPatientChanges(patient))
             {
                 if (HasChangeHappenedInLastWeek(change))
                 {
@@ -144,12 +144,12 @@ namespace IS_Bolnice.Baze
             return numberOfPatientChanges;
         }
 
-        public bool HasChangeHappenedInLastWeek(Change change)
+        public bool HasChangeHappenedInLastWeek(IzmenaTermina izmenaTermina)
         {
             DateTime now = DateTime.Now;
             System.DateTime lastWeekConstraint = now.AddDays(-7);
 
-            if (change.DateOfChange > lastWeekConstraint && change.DateOfChange < now)
+            if (izmenaTermina.DatumIzmene > lastWeekConstraint && izmenaTermina.DatumIzmene < now)
             {
                 return true;
             }
