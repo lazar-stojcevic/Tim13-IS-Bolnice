@@ -46,7 +46,10 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             {
                 belezkeKontroler.SacuvajBelezku(napraviBelezku());
                 MessageBox.Show("Uspešno ste kreirali beležku");
-                listaZaOsvezavanje.ItemsSource = belezkeKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
+
+                if(listaZaOsvezavanje != null)
+                    listaZaOsvezavanje.ItemsSource = belezkeKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
+
                 this.Close();
             }
         }
