@@ -161,58 +161,5 @@ namespace IS_Bolnice.Baze
 
             return null;
         }
-
-        /*
-
-        public RadnoVremeLekara RadnoVremeOdredjenogLekara(string jmbg)
-        {
-            
-        }
-
-        public void NovoRadnoVreme(RadnoVremeLekara novoRadnoVreme)
-        {
-            // lista se koristi samo zato sto je to potrebno za metodu AppendAllLines
-            List<string> radnoVreme = new List<string>();
-            radnoVreme.Add(RadnoVremeToString(novoRadnoVreme));
-            File.AppendAllLines(fileLocation, radnoVreme);
-        }
-
-        public void IzmeniRadnoVreme(RadnoVremeLekara izmenjenoRadnoVreme)
-        {
-            List<RadnoVremeLekara> svaRadnaVremena = RadnoVremeSvihLekara();
-            List<string> svaRandaVremenaString = new List<string>();
-            foreach (RadnoVremeLekara radnoVreme in svaRadnaVremena)
-            {
-                if (radnoVreme.Id.Equals(izmenjenoRadnoVreme.Id))
-                {
-                    svaRandaVremenaString.Add(RadnoVremeToString(izmenjenoRadnoVreme));
-                }
-                else
-                {
-                    svaRandaVremenaString.Add(RadnoVremeToString(radnoVreme));
-                }
-            }
-            File.WriteAllLines(fileLocation, svaRandaVremenaString);
-        }
-
-        public void ObrisiRadnoVreme(RadnoVremeLekara radnoVremeZaBrisanje)
-        {
-            List<RadnoVremeLekara> svaRadnaVremena = RadnoVremeSvihLekara();
-            List<string> svaRandaVremenaString = new List<string>();
-            foreach (RadnoVremeLekara radnoVreme in svaRadnaVremena)
-            {
-                if (radnoVreme.Id.Equals(radnoVremeZaBrisanje.Id))
-                {
-                    // ne unosi u listu
-                }
-                else
-                {
-                    svaRandaVremenaString.Add(RadnoVremeToString(radnoVreme));
-                }
-            }
-            File.WriteAllLines(fileLocation, svaRandaVremenaString);
-        }
-        */
-
     }
 }

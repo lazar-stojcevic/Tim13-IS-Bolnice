@@ -137,6 +137,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                     }
                     else
                     {
+                        // TODO: NE TREBA OVA METODA DA SE POZIVA NEGO NEKA KOJA CE SAMA DA NADJE LEKARA I ZAKAZE
                         if (pregledKontroler.ZakaziPregled(pregled))
                         {
                             string message = "Uspešno ste zakazali pregled";
