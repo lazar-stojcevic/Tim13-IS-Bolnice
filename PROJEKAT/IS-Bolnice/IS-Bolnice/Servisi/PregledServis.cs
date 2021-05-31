@@ -22,7 +22,7 @@ namespace IS_Bolnice.Servisi
 
         private IPregledRepozitorijum pregledRepo = new PreglediFajlRepozitorijum();
         private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
-        private BazaIzmena bazaIzmena = new BazaIzmena();
+        private IzmenaTerminaFajlRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
 
         public List<Pregled> GetsviPregledi()
         {
@@ -145,7 +145,7 @@ namespace IS_Bolnice.Servisi
             izmena.DatumIzmene = sada;
             izmena.JmbgPacijenta = jmbgPacijenta;
 
-            bazaIzmena.SaveChange(izmena);
+            izmenaTerminaRepo.SaveChange(izmena);
         }
 
         public void OtkaziPregled(Pregled pregled)

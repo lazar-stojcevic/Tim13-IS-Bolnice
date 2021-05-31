@@ -13,9 +13,10 @@ namespace IS_Bolnice.Prozori.Sekretar
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private KorisnikKontroler korisnikKontroler = new KorisnikKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
-        private BazaIzmena bazaIzmena = new BazaIzmena();
+        private IzmenaTerminaFajlRepozitorijum bazaIzmena = new IzmenaTerminaFajlRepozitorijum();
         private List<Lekar> lekari;
         private ObservableCollection<Pacijent> PacijentiRef;
+        private IzmenaTerminaKontroler izmenaTerminaKontroler = new IzmenaTerminaKontroler();
 
         public IzmenaPacijentaWindow(Pacijent p, ObservableCollection<Pacijent> Pacijenti)
         {
@@ -42,7 +43,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             txtKorisnickoIme.Text = pacijentZaIzmenu.KorisnickoIme;
             txtLozinka.Password = pacijentZaIzmenu.Sifra;
             // ako je blokiran cekira se check box
-            if (bazaIzmena.IsPatientMalicious(pacijentZaIzmenu))
+            if (izmenaTerminaKontroler.DaLiJePacijentMaliciozan(pacijentZaIzmenu))
             {
                 CbBlokiran.IsChecked = true;
             }
@@ -140,7 +141,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 // ako nije oznaceno da je blokiran poziva se metoda za odblokiranje
                 if (!(bool)CbBlokiran.IsChecked)
                 {
-                    bazaIzmena.UnblockPatient(p);
+                    izmenaTerminaKontroler.OdblokirajPacijenta(p);
                 }
 
                 this.Close();

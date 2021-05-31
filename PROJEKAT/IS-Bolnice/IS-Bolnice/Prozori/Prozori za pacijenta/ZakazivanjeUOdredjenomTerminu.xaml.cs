@@ -21,9 +21,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         private string jmbgPac;
 
         private PregledKontroler pregledKontroler = new PregledKontroler();
-        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
-        private BazaIzmena bazaIzmena = new BazaIzmena();
-
+        private IzmenaTerminaKontroler izmenaTerminaKontroler = new IzmenaTerminaKontroler();
         public ZakazivanjeUOdredjenomTerminu(string jmbgPacijenta)
         {
             InitializeComponent();
@@ -126,7 +124,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 pregled.VremePocetkaPregleda = pocetakPregleda;
                 pregled.VremeKrajaPregleda = krajPregleda;
 
-                if (bazaIzmena.IsPatientMalicious(pregled.Pacijent))
+                if (izmenaTerminaKontroler.DaLiJePacijentMaliciozan(pregled.Pacijent))
                 {
                     MessageBox.Show("Izvinjavamo se, ali previše puta ste vršili izmene tokom protekle nedelje");
                 }

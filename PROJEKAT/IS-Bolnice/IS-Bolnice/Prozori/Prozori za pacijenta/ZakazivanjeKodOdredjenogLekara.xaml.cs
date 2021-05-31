@@ -26,8 +26,8 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         private PregledKontroler pregledKontroler = new PregledKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
         private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
-        private BazaIzmena bazaIzmena = new BazaIzmena();
-
+        private IzmenaTerminaFajlRepozitorijum bazaIzmena = new IzmenaTerminaFajlRepozitorijum();
+        private IzmenaTerminaKontroler izmenaTerminaKontroler = new IzmenaTerminaKontroler();
         public ZakazivanjeKodOdredjenogLekara(string jmbgPacijenta)
         {
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             Pregled pregled = pregledi.ElementAt(terminiList.SelectedIndex);
             pregled.Pacijent = pacijent;
 
-            if (bazaIzmena.IsPatientMalicious(pregled.Pacijent))
+            if (izmenaTerminaKontroler.DaLiJePacijentMaliciozan(pregled.Pacijent))
             {
                 string message = "Izvinjavamo se, ali previše puta ste vršili izmene tokom protekle nedelje";
                 MessageBox.Show(message);

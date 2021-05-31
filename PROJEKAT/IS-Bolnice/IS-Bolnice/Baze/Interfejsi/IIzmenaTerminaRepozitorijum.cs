@@ -9,5 +9,8 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IIzmenaTerminaRepozitorijum : GenerickiRepozitorijum<IzmenaTermina>
     {
+        void OdblokirajPacijenta(Pacijent pacijent);
+        bool DaLiJeJmbgJednak(IzmenaTermina izmenaTermina, Pacijent pacijent);
+        List<IzmenaTermina> GetIzmenePacijenta(Pacijent patient);
     }
 }

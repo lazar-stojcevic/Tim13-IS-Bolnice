@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IS_Bolnice.Baze
 {
-    class BazaIzmena
+    class IzmenaTerminaFajlRepozitorijum
     {
         private static string fileLocation = @"..\..\Datoteke\izmene.txt";
         private static string timeFormatForWriting = "M/d/yyyy h:mm:ss tt";
@@ -18,14 +18,14 @@ namespace IS_Bolnice.Baze
         "M/d/yyyy h:mm:ss tt",
         "M-d-yyyy h:mm:ss tt"
         };
-        private static int MAX_CHANGES_IN_WEEK = 3;
-        public List<IzmenaTermina> FindPatientChanges(Pacijent patient)
+
+        public List<IzmenaTermina> GetIzmenePacijenta(Pacijent patient)
         {
             List<IzmenaTermina> changesOfPatient = new List<IzmenaTermina>();
 
             foreach (IzmenaTermina change in ReadAllChanges())
             {
-                if (IsJmbgEquals(change, patient))
+                if (DaLiJeJmbgJednak(change, patient))
                 {
                     changesOfPatient.Add(change);
                 }
@@ -34,23 +34,23 @@ namespace IS_Bolnice.Baze
             return changesOfPatient;
         }
 
-        public bool IsJmbgEquals(IzmenaTermina izmenaTermina, Pacijent patient)
+        private bool DaLiJeJmbgJednak(IzmenaTermina izmenaTermina, Pacijent pacijent)
         {
-            return izmenaTermina.JmbgPacijenta.Equals(patient.Jmbg);
+            return izmenaTermina.JmbgPacijenta.Equals(pacijent.Jmbg);
         }
 
         public void SaveChange(IzmenaTermina izmenaTermina)
         {
             List<string> lines = new List<string>();
 
-            string formatOfchangeForWriting = ChangeToString(izmenaTermina);
+            string formatOfchangeForWriting = FormatPisanjaIzmene(izmenaTermina);
 
             lines.Add(formatOfchangeForWriting);
 
             File.AppendAllLines(fileLocation, lines);
         }
 
-        private string ChangeToString(IzmenaTermina izmenaTermina)
+        private string FormatPisanjaIzmene(IzmenaTermina izmenaTermina)
         {
             return izmenaTermina.JmbgPacijenta + "#" + GetFormatedDateForWriting(izmenaTermina.DatumIzmene);
         }
@@ -62,7 +62,7 @@ namespace IS_Bolnice.Baze
 
             foreach (string line in lines)
             {
-                changes.Add(MakeChangeFromLine(line));
+                changes.Add(NparaviIzmenuOdLinije(line));
             }
 
             return changes;
@@ -73,7 +73,7 @@ namespace IS_Bolnice.Baze
             return File.ReadAllLines(fileLocation).ToList(); ;
         }
 
-        public IzmenaTermina MakeChangeFromLine(string line)
+        public IzmenaTermina NparaviIzmenuOdLinije(string line)
         {
             string[] items = line.Split('#');
 
@@ -101,59 +101,25 @@ namespace IS_Bolnice.Baze
             List<String> changesString = new List<string>();
             foreach (IzmenaTermina change in changes)
             {
-                changesString.Add(ChangeToString(change));
+                changesString.Add(FormatPisanjaIzmene(change));
             }
             File.WriteAllLines(fileLocation, changesString);
         }
 
-        public void UnblockPatient(Pacijent patient)
+        public void OdblokirajPacijenta(Pacijent pacijent)
         {
-            List<IzmenaTermina> allChanges = ReadAllChanges();
-            List<IzmenaTermina> filteredChanges = new List<IzmenaTermina>();
+            List<IzmenaTermina> sveIzmene = ReadAllChanges();
+            List<IzmenaTermina> filtriraneIzmene = new List<IzmenaTermina>();
 
-            foreach (IzmenaTermina change in allChanges)
+            foreach (IzmenaTermina izmena in sveIzmene)
             {
-                if (!IsJmbgEquals(change, patient))
+                if (!DaLiJeJmbgJednak(izmena, pacijent))
                 {
-                    filteredChanges.Add(change);
+                    filtriraneIzmene.Add(izmena);
                 }
             }
 
-            WriteAllChangesInFile(filteredChanges);
-        }
-
-        public bool IsPatientMalicious(Pacijent patient)
-        {
-            if (CountOfPatientChanges(patient) > MAX_CHANGES_IN_WEEK)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public int CountOfPatientChanges(Pacijent patient)
-        {
-            int numberOfPatientChanges = 0;
-            foreach (IzmenaTermina change in FindPatientChanges(patient))
-            {
-                if (HasChangeHappenedInLastWeek(change))
-                {
-                    numberOfPatientChanges++;
-                }
-            }
-            return numberOfPatientChanges;
-        }
-
-        public bool HasChangeHappenedInLastWeek(IzmenaTermina izmenaTermina)
-        {
-            DateTime now = DateTime.Now;
-            System.DateTime lastWeekConstraint = now.AddDays(-7);
-
-            if (izmenaTermina.DatumIzmene > lastWeekConstraint && izmenaTermina.DatumIzmene < now)
-            {
-                return true;
-            }
-            return false;
+            WriteAllChangesInFile(filtriraneIzmene);
         }
     }
 }

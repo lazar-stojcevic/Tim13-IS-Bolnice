@@ -19,7 +19,7 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
         "M-d-yyyy h:mm:ss tt"
     };
 
-    private BazaIzmena bazaIzmena = new BazaIzmena();
+    private IzmenaTerminaFajlRepozitorijum bazaIzmena = new IzmenaTerminaFajlRepozitorijum();
     private LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
 
     public PreglediFajlRepozitorijum() : base(@"..\..\Datoteke\pregledi.txt")
