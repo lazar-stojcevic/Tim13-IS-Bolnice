@@ -14,5 +14,25 @@ namespace IS_Bolnice.Kontroleri
         {
             servis.KreirajNoviPredmet(noviPredmet);
         }
+
+        public Predmet DobaviPoId(string idOpreme)
+        {
+            return servis.DodaviPoID(idOpreme);
+        }
+
+        public void IzmeniPredmet(Predmet izmenjenPredmet)
+        {
+            servis.IzmeniPredmet(izmenjenPredmet);
+        }
+
+        public void ObrisiPredmet(string idPredmeta)
+        {
+            servis.ObrisiPredmet(idPredmeta);
+        }
+
+        public List<Predmet> DobaviSvuOpremu()
+        {
+            return servis.DobaviSvuOpremu();
+        }
     }
 }

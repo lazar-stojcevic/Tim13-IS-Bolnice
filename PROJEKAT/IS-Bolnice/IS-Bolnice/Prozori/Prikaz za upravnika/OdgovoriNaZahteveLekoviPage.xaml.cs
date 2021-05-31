@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,14 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class OdgovoriNaZahteveLekoviPage : Page
     {
+        private List<OdgovorNaZahtevZaValidaciju> odgovori = new List<OdgovorNaZahtevZaValidaciju>();
+        private OdgovoriNaZahtevZaValidacijeKontroler kontroler = new OdgovoriNaZahtevZaValidacijeKontroler();
+
         public OdgovoriNaZahteveLekoviPage()
         {
             InitializeComponent();
-            listBox.ItemsSource = ParseToString();
+            odgovori = kontroler.DobaviSve();
+            listBox.ItemsSource = odgovori;
         }
 
         public List<string> ParseToString() {
@@ -39,8 +44,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string[] redTabele = listBox.SelectedItem.ToString().Split(' ');
-            Page odgovorNaZahtev = new OdgovorNaZahtevLekPage(redTabele[1]);
+            OdgovorNaZahtevZaValidaciju odgovorNaZahtevZaValidaciju = (OdgovorNaZahtevZaValidaciju)listBox.SelectedItem;
+            Page odgovorNaZahtev = new OdgovorNaZahtevLekPage(odgovorNaZahtevZaValidaciju.Lek.Id);
             this.NavigationService.Navigate(odgovorNaZahtev);
         }
     }

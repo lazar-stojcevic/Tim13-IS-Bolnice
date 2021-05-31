@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,41 +21,39 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class UpravljanjeOpremomPage : Page
     {
+        private List<Predmet> svaOprema = new List<Predmet>();
+        private OpremaKontroler kontroler = new OpremaKontroler();
+
         public UpravljanjeOpremomPage()
         {
             InitializeComponent();
-            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-            List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.DobaviSve();
-            List<string> tekst = new List<string>();
+            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            svaOprema.Clear();
             foreach (Predmet predmet in predmeti)
             {
-
                 if (predmet.Obrisano == false)
                 {
-                    tekst.Add(ParseToString(predmet));
+                    svaOprema.Add(predmet);
                 }
             }
-            listBox.ItemsSource = tekst;
+            listBox.ItemsSource = svaOprema;
         }
 
         private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             bool svaOpremaSelektovana = SelectovanaSvaOprema();
             TipOpreme tip = SelektovaniTipOpreme();
-            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-            List<Predmet> predmeti = baza.DobaviSve();
-            List<string> tekst = new List<string>();
+            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            svaOprema.Clear();
             foreach (Predmet predmet in predmeti)
             {
 
                 if (predmet.Obrisano == false && (svaOpremaSelektovana == true || predmet.Tip == tip))
                 {
-                    tekst.Add(ParseToString(predmet));
+                    svaOprema.Add(predmet);
                 }
             }
-            listBox.ItemsSource = tekst;
+            listBox.ItemsSource = svaOprema;
 
         }
 
@@ -73,15 +72,10 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             return TipOpreme.dinamicka;
         }
 
-        private string ParseToString(Predmet predmet) {
-            string text = "ID: " + predmet.Id + " Naziv: " + predmet.Naziv + " Tip: " + predmet.Tip;
-            return text;
-        }
-
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string[] podaciOOpremi = listBox.SelectedItem.ToString().Split(' ');
-            Page editOpreme = new EditOpremuPage(podaciOOpremi[1]);
+            Predmet selektovaniPredmet = (Predmet)listBox.SelectedItem;
+            Page editOpreme = new EditOpremuPage(selektovaniPredmet.Id);
             this.NavigationService.Navigate(editOpreme);
         }
 
@@ -93,19 +87,17 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-            List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.DobaviSve();
-            List<string> tekst = new List<string>();
+            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            svaOprema.Clear();
             foreach (Predmet predmet in predmeti)
             {
 
                 if (predmet.Obrisano == false && predmet.Naziv.ToLower().Contains(search.Text.ToLower()))
                 {
-                    tekst.Add("ID: " + predmet.Id + " Naziv: " + predmet.Naziv + " Tip: " + predmet.Tip);
+                    svaOprema.Add(predmet);
                 }
             }
-            listBox.ItemsSource = tekst;
+            listBox.ItemsSource = svaOprema;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,59 +21,58 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class RenoviranjeSpajanjePage : Page
     {
-
+        BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
+        List<Soba> sveSobe = new List<Soba>();
         bool spajanje;
         public RenoviranjeSpajanjePage()
         {
             InitializeComponent();
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            listBox.ItemsSource = ParseSobaToString(bolnicaFajlRepozitorijum.GetSobe());
-            spajanje = false; 
-        }
-
-        private List<string> ParseSobaToString(List<Soba> sobe)
-        {
-
-            List<string> tekst = new List<string>();
-            foreach (Soba s in sobe)
-            {
-
-                if (s.Obrisano == false)
+            foreach (Soba iterSoba in bolnicaKontroler.GetSveSobe()) {
+                if (iterSoba.Obrisano == false)
                 {
-                    tekst.Add("ID: " + s.Id + " Sprat: " + s.Sprat.ToString() + " Tip: " + s.Tip);
-
+                    sveSobe.Add(iterSoba);
                 }
             }
-            return tekst;
-
-
-        }
-
-        private Soba ParseStringToSoba(string redTebele) {
-            string[] niz = redTebele.Split(' ');
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            return bolnicaFajlRepozitorijum.GetSobaById(niz[1]);
+            listBox.ItemsSource = sveSobe;
+            spajanje = false; 
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!spajanje)
             {
-                Page renoviranje = new RenoviranjePage(ParseStringToSoba(listBox.SelectedItem.ToString()));
+                Page renoviranje = new RenoviranjePage((Soba)listBox.SelectedItem);
                 this.NavigationService.Navigate(renoviranje);
             }
         }
 
         private void Spoji_btn_Click(object sender, RoutedEventArgs e)
         { 
-
             List<Soba> sobe = new List<Soba>();
-            foreach (string redTabele in listBox.SelectedItems)
+            foreach (Soba redTabele in listBox.SelectedItems)
             {
-                sobe.Add(ParseStringToSoba(redTabele));
+                    sobe.Add(redTabele);
             }
-            Page spajanje = new SpajanjePage(sobe);
-            this.NavigationService.Navigate(spajanje);
+            if (CheckSpratSobe(sobe))
+            {
+                Page spajanje = new SpajanjePage(sobe);
+                this.NavigationService.Navigate(spajanje);
+            }
+            else {
+                MessageBox.Show("Sve prostorije moraju biti na istom spratu!");
+            }
+        }
+
+        private bool CheckSpratSobe(List<Soba> sobe)
+        {
+            int sprat = sobe[0].Sprat;
+            foreach (Soba soba in sobe) {
+                if (soba.Sprat != sprat)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void checkBox_Checked(object sender, RoutedEventArgs e)

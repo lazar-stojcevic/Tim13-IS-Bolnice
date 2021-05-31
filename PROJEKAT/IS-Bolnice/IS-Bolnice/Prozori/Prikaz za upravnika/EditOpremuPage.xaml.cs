@@ -1,4 +1,5 @@
-﻿using IS_Bolnice.Servisi;
+﻿using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Servisi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class EditOpremuPage : Page
     {
+
+        OpremaKontroler opremaKontroler = new OpremaKontroler();
+
         public EditOpremuPage(string selectedID)
         {
             InitializeComponent();
@@ -40,21 +44,24 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
-            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-            List<Predmet> lista = baza.DobaviSve();
-            Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
+            Predmet izmenjenPredmet = opremaKontroler.DobaviPoId(id_txt.Text);
             izmenjenPredmet.Naziv = naziv_txt.Text;
+            izmenjenPredmet.Tip = DobaviTip();
+            opremaKontroler.IzmeniPredmet(izmenjenPredmet);
+            Page upravljanje = new UpravljanjeOpremomPage();
+            this.NavigationService.Navigate(upravljanje);
+        }
+
+        private TipOpreme DobaviTip() 
+        {
             if (tip_opreme_txt.SelectedIndex == 1)
             {
-                izmenjenPredmet.Tip = TipOpreme.staticka;
+                return TipOpreme.staticka;
             }
             else
             {
-                izmenjenPredmet.Tip = TipOpreme.dinamicka;
+                return TipOpreme.dinamicka;
             }
-            baza.Izmeni(izmenjenPredmet);
-            Page upravljanje = new UpravljanjeOpremomPage();
-            this.NavigationService.Navigate(upravljanje);
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
@@ -65,24 +72,10 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            SadrzajSobeServis sadrzajSobeServis = new SadrzajSobeServis();
             MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete opremu?", "", MessageBoxButton.YesNo);
             if (resultat == MessageBoxResult.Yes)
             {
-                OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-                SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
-                List<Predmet> lista = baza.DobaviSve();
-                Predmet izmenjenPredmet = baza.DobaviPoId(id_txt.Text);
-                if (!sadrzajSobeServis.PostojiOpremaUBolnici(id_txt.Text))
-                {
-                    izmenjenPredmet.Obrisano = true;
-                    baza.Izmeni(izmenjenPredmet);
- 
-                }
-                else
-                {
-                    MessageBox.Show("Oprema postoji na stanju, ne može biti obrisana!");
-                }
+                opremaKontroler.ObrisiPredmet(id_txt.Text);
             }
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);

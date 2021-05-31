@@ -9,7 +9,14 @@
       Title="UpravljanjeOpremomPage" Background="White">
 
     <Grid>
-        <ListBox x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged"/>
+        <ListView x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
+            <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                <GridViewColumn Header="Naziv" DisplayMemberBinding="{Binding Naziv}"/>
+            </GridView>
+            </ListView.View>
+        </ListView>
         <Label x:Name="label" FontSize="40" Content="Upravljanje opremom" HorizontalAlignment="Left" Margin="39,10,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="tip_opreme_txt" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,98,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="tip_opreme_txt_SelectionChanged">
 

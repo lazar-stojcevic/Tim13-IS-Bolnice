@@ -23,8 +23,9 @@
             <ComboBoxItem Content="Ostavlja u prostoriji"/>
 
         </ComboBox>
-        <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="48,589,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
-        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="291,589,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="48,546,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="291,546,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Button x:Name="Podeli_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Podeli" HorizontalAlignment="Left" Height="50" Margin="170,621,0,0" VerticalAlignment="Top" Width="184" Click="Podeli_btn_Click"/>
 
     </Grid>
 </Page>

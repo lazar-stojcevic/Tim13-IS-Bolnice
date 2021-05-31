@@ -9,7 +9,14 @@
       Title="NabavkaOpremePage" Background="White">
 
     <Grid>
-        <ListBox x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="338" Margin="39,205,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged"/>
+        <ListView x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="338" Margin="39,205,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Naziv" DisplayMemberBinding="{Binding Naziv}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Label x:Name="label" FontSize="36" Content="Nabavka opreme" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock4" FontFamily="Verdana" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="335,102,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="Kreiraj novu opremu" VerticalAlignment="Top" Height="56" Width="155"/>
         <ComboBox x:Name="tip_opreme_txt" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,163,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="tip_opreme_txt_SelectionChanged">

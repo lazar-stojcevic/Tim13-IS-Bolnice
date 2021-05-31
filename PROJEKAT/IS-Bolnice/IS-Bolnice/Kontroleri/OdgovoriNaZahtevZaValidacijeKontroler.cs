@@ -17,5 +17,15 @@ namespace IS_Bolnice.Kontroleri
             odgovor.Lek = zahtev.Lek;
             odgovorNaZahtevServis.KreirajOdgovorNaZahtev(odgovor, zahtev);
         }
+
+        public void ObrisiOdgovorNaZahtevZaValidaciju(OdgovorNaZahtevZaValidaciju odgovor)
+        {
+            odgovorNaZahtevServis.ObrisiOdgovorNaZahtev(odgovor);
+        }
+
+        public List<OdgovorNaZahtevZaValidaciju> DobaviSve()
+        {
+            return odgovorNaZahtevServis.DobaviSve();
+        }
     }
 }

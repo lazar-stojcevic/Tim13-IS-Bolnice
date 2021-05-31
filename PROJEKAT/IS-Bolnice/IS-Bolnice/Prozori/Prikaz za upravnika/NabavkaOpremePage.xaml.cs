@@ -1,4 +1,5 @@
-﻿using IS_Bolnice.Prozori.UpravnikPages;
+﻿using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Prozori.UpravnikPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,22 +22,15 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class NabavkaOpremePage : Page
     {
+        OpremaKontroler kontroler = new OpremaKontroler();
+        SadrzajSobeKontroler sadrzajKontroler = new SadrzajSobeKontroler();
+        BolnicaKontroler bolnicaKontroler = new BolnicaKontroler();
+
         public NabavkaOpremePage()
         {
             InitializeComponent();
-            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-            List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.DobaviSve();
-            List<string> tekst = new List<string>();
-            foreach (Predmet predmet in predmeti)
-            {
-
-                if (predmet.Obrisano == false)
-                {
-                    tekst.Add("ID: " + predmet.Id + " Naziv: " + predmet.Naziv + " Tip: " + predmet.Tip);
-                }
-            }
-            listBox.ItemsSource = tekst;
+            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            listBox.ItemsSource = predmeti;
 
         }
 
@@ -50,19 +44,16 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             bool svaOpremaSelektovana = SelectovanaSvaOprema();
             TipOpreme tip = SelektovaniTipOpreme();
-            OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.DobaviSve();
-            List<string> tekst = new List<string>();
-            foreach (Predmet predmet in predmeti)
+            foreach (Predmet predmet in kontroler.DobaviSvuOpremu())
             {
 
                 if (predmet.Obrisano == false && (svaOpremaSelektovana == true || predmet.Tip == tip))
                 {
-                    tekst.Add("ID: " + predmet.Id + " Naziv: " + predmet.Naziv + " Tip: " + predmet.Tip);
+                    predmeti.Add(predmet);
                 }
             }
-            listBox.ItemsSource = tekst;
+            listBox.ItemsSource = predmeti;
         }
 
         private void Oduzmi_btn_Click(object sender, RoutedEventArgs e)
@@ -85,20 +76,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             if (listBox.SelectedIndex != -1)
             {
-                BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
-                SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
-                List<SadrzajSobe> sadrzajSobe = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(baza.GetMagacin().Id);
-                if (OpremaPostojiUMagaciju(sadrzajSobe))
-                {
-                    SadrzajSobe s = IzmenaSadrzaja(sadrzajSobe);
-                    MessageBox.Show(s.Kolicina.ToString());
-                    sadrzajSobeFajlRepozitorijum.Izmeni(s);
-                }
-                else { 
-                    string[] item = listBox.SelectedItem.ToString().Split(' ');
-                    SadrzajSobe noviSadrzaj = new SadrzajSobe(baza.GetMagacin().Id, item[1], Int32.Parse(textBox.Text));
-                    sadrzajSobeFajlRepozitorijum.Sacuvaj(noviSadrzaj);
-                }
+                sadrzajKontroler.DodajUMagacin((Predmet)listBox.SelectedItem, Int32.Parse(textBox.Text));
             }
             else {
                 MessageBox.Show("Nije selektovan deo opreme za nabavku");
@@ -120,31 +98,6 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 return TipOpreme.staticka;
             }
             return TipOpreme.dinamicka;
-        }
-
-
-        private bool OpremaPostojiUMagaciju(List<SadrzajSobe> sadrzajSobe) {
-            bool postoji = false;
-            string[] item = listBox.SelectedItem.ToString().Split(' ');
-            foreach (SadrzajSobe sadrzaj in sadrzajSobe) {
-                if (sadrzaj.Predmet.Id.Equals(item[1])) {
-                    postoji = true;
-                }
-            }
-
-            return postoji;
-        }
-
-        private SadrzajSobe IzmenaSadrzaja(List<SadrzajSobe> sadrzajSobe) {
-            SadrzajSobe noviSadrzaj = new SadrzajSobe();
-            string[] item = listBox.SelectedItem.ToString().Split(' ');
-            foreach (SadrzajSobe sadrzaj in sadrzajSobe) {
-                if (sadrzaj.Predmet.Id.Equals(item[1])) {
-                    sadrzaj.Kolicina = sadrzaj.Kolicina + Int32.Parse(textBox.Text);
-                    return sadrzaj;
-                }
-            }
-            return noviSadrzaj;
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -9,7 +9,14 @@
       Title="LekoviPage" Background="White">
 
     <Grid>
-        <ListBox x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged"/>
+        <ListView x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime leka" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Header="Opis" DisplayMemberBinding="{Binding Opis}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Label x:Name="label" FontSize="40" Content="Lekovi" HorizontalAlignment="Left" Margin="39,39,0,0" VerticalAlignment="Top"/>
         <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="AddButton_Click" Margin="209,591,190,26">
             <StackPanel>

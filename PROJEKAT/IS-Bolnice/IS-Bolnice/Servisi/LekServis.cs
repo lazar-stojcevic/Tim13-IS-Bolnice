@@ -25,5 +25,15 @@ namespace IS_Bolnice.Servisi
         {
             lekRepo.Sacuvaj(lek);
         }
+
+        public void IzmeniLek(Lek lek)
+        {
+            lekRepo.Izmeni(lek);
+        }
+
+        public Lek DobaviLekPoId(string idLeka)
+        {
+            return lekRepo.DobaviPoId(idLeka);
+        }
     }
 }

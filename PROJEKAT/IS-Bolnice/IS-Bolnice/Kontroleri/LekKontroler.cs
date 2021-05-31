@@ -25,5 +25,15 @@ namespace IS_Bolnice.Kontroleri
         {
             lekServis.KreirajLek(lek);
         }
+
+        public void IzmeniLek(Lek lek)
+        {
+            lekServis.IzmeniLek(lek);
+        }
+
+        public Lek DobaviLekPoId(string idLeka)
+        {
+            return lekServis.DobaviLekPoId(idLeka);
+        }
     }
 }

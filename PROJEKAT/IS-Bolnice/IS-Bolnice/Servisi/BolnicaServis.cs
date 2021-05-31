@@ -65,5 +65,32 @@ namespace IS_Bolnice.Servisi
                 bolnicaRepo.Izmeni(izmenjenaBolnica);
             }
         }
+
+
+        public Soba GetSobaPoId(string idSobe)
+        {
+            return bolnicaRepo.GetSobaById(idSobe);
+        }
+
+        public void IzmeniSobu(Soba izmenjenaSoba)
+        {
+            Bolnica ovaBolnica = bolnicaRepo.GetBolnica();
+            List<Soba> listaSoba = ovaBolnica.Sobe;
+            foreach (Soba iterSoba in listaSoba)
+            {
+                if (iterSoba.Id.Equals(izmenjenaSoba.Id))
+                {
+                    ovaBolnica.RemoveSoba(iterSoba);
+                    ovaBolnica.AddSoba(izmenjenaSoba);
+                    break;
+                }
+            }
+            bolnicaRepo.Izmeni(ovaBolnica);
+        }
+
+        public Soba GetMagacin()
+        {
+            return bolnicaRepo.GetMagacin();
+        }
     }
 }

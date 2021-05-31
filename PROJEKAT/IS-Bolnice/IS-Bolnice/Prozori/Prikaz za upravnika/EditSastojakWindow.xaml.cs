@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -21,7 +22,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     public partial class EditSastojakWindow : Window
     {
         string ime;
-        private ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
+        private SastojakKontroler kontroler = new SastojakKontroler();
 
         public EditSastojakWindow(string name)
         {
@@ -37,10 +38,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
-            Sastojak stariSastojak = new Sastojak(ime);
-            sastojakRepo.Obrisi(stariSastojak.Ime);
+            kontroler.ObrisiSastojak(ime);
             Sastojak noviSastojak = new Sastojak(id_txt.Text);
-            sastojakRepo.Sacuvaj(noviSastojak);
+            kontroler.KreirajNoviSastojak(noviSastojak);
         }
     }
 }

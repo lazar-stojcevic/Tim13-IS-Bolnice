@@ -20,5 +20,10 @@ namespace IS_Bolnice.Kontroleri
         {
             sastojakServis.KreirajNoviSastojak(sastojak);
         }
+
+        public void ObrisiSastojak(string idSastojka)
+        {
+            sastojakServis.ObrisiSastojak(idSastojka);
+        }
     }
 }

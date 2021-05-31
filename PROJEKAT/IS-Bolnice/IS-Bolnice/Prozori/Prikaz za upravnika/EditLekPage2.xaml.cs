@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -113,15 +114,15 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void Potvrdi_btn_Click(object sender, RoutedEventArgs e)
         {
-            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
-            OdgovorNaZahtevFajlRepozitorijum odgovor = new OdgovorNaZahtevFajlRepozitorijum();
+            LekKontroler kontroler = new LekKontroler();
+            OdgovoriNaZahtevZaValidacijeKontroler odgovorKontroler = new OdgovoriNaZahtevZaValidacijeKontroler();
             if (kreiranjeIzmena)
             {
-                lekFajlRepozitorijum.Izmeni(noviLek);
+                kontroler.IzmeniLek(noviLek);
             }
             else {
                 OdgovorNaZahtevZaValidaciju odgovorNaZahtev = new OdgovorNaZahtevZaValidaciju(noviLek, null);
-                odgovor.Obrisi(odgovorNaZahtev.Lek.Id);
+                odgovorKontroler.ObrisiOdgovorNaZahtevZaValidaciju(odgovorNaZahtev);
                 AddLekPage3 addLekareZaZahtev = new AddLekPage3(noviLek);
                 this.NavigationService.Navigate(addLekareZaZahtev);
             }

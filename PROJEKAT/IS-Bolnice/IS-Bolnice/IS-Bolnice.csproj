@@ -153,6 +153,7 @@
     <Compile Include="Kontroleri\PacijentKontroler.cs" />
     <Compile Include="Kontroleri\PregledKontroler.cs" />
     <Compile Include="Kontroleri\RadnoVremeKontroler.cs" />
+    <Compile Include="Kontroleri\RenovacijaKontroler.cs" />
     <Compile Include="Kontroleri\SadrzajSobeKontroler.cs" />
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
@@ -298,6 +299,9 @@
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\PreraspodelaStatickeOpremeWindow.xaml.cs">
       <DependentUpon>PreraspodelaStatickeOpremeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\RazdvajanjeSobePage.xaml.cs">
+      <DependentUpon>RazdvajanjeSobePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\RenoviranjePage.xaml.cs">
       <DependentUpon>RenoviranjePage.xaml</DependentUpon>
@@ -450,6 +454,7 @@
     <Compile Include="Servisi\PacijentServis.cs" />
     <Compile Include="Servisi\PregledServis.cs" />
     <Compile Include="Servisi\RadnoVremeServis.cs" />
+    <Compile Include="Servisi\RenovacijaServis.cs" />
     <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
@@ -614,6 +619,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\PreraspodelaStatickeOpremeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\RazdvajanjeSobePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

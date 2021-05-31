@@ -1,4 +1,5 @@
-﻿using IS_Bolnice.Prozori.Prikaz_za_upravnika;
+﻿using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Prozori.Prikaz_za_upravnika;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,30 +22,23 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class EditSalePage : Page
     {
+        BolnicaKontroler kontroler = new BolnicaKontroler();
 
         Soba selectedSoba;
         public EditSalePage(string selectedId)
         {
             InitializeComponent();
-            List<Bolnica> bolnice = new List<Bolnica>();
-            Bolnica b1 = new Bolnica();
-            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
-            bolnice = baza.DobaviSve();
-            foreach (Bolnica b in bolnice)
-            {
-                foreach (Soba s in b.Soba)
-                {
-                    if (s.Id.Equals(selectedId))
-                    {
-                        selectedSoba = s;
-                        break;
-                    }
-                }
-
-            }
+            
+            selectedSoba = kontroler.GetSobaPoId(selectedId);
             this.id_txt.Text = selectedSoba.Id;
             this.kvadratura_txt.Text = selectedSoba.Kvadratura.ToString();
             this.sprat_txt.Text = selectedSoba.Sprat.ToString();
+            PostaviTip();
+
+        }
+
+        private void PostaviTip()
+        {
             switch (selectedSoba.Tip)
             {
                 case RoomType.bolnickaSoba:
@@ -60,31 +54,29 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                     this.tip_sobe_txt.SelectedIndex = 2;
                     break;
             }
+        }
 
+        private RoomType DobaviTip() {
+
+            switch (tip_sobe_txt.SelectedIndex) {
+                case 0:
+                    return RoomType.operacionaSala;
+                case 1:
+                    return RoomType.bolnickaSoba;
+                case 2:
+                    return RoomType.ordinacija;
+                default:
+                    return RoomType.magacin;
+            }
         }
 
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
-            List<Bolnica> bolnice = new List<Bolnica>();
-            Bolnica b1 = new Bolnica();
-            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
-            bolnice = baza.DobaviSve();
-            foreach (Bolnica b in bolnice)
-            {
-                foreach (Soba s in b.Soba)
-                {
-                    if (s.Id == this.id_txt.Text)
-                    {
-                        s.Kvadratura = double.Parse(kvadratura_txt.Text);
-                        s.Sprat = int.Parse(sprat_txt.Text);
-                        s.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
-                        b1 = b;
-                        break;
-                    }
-                }
-
-            }
-            baza.Sacuvaj(b1);
+            Soba izmenjenaSoba = new Soba(id_txt.Text);
+            izmenjenaSoba.Kvadratura =Int32.Parse(kvadratura_txt.Text);
+            izmenjenaSoba.Sprat = Int32.Parse(sprat_txt.Text);
+            izmenjenaSoba.Tip = DobaviTip();
+            kontroler.IzmeniSobu(izmenjenaSoba);
             Page sale = new SalePage();
             this.NavigationService.Navigate(sale);
         }
@@ -100,25 +92,10 @@ namespace IS_Bolnice.Prozori.UpravnikPages
                 MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete sobu?", "", MessageBoxButton.YesNo);
                 if (resultat == MessageBoxResult.Yes)
                 {
-                    List<Bolnica> bolnice = new List<Bolnica>();
-                    BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
-                    bolnice = baza.DobaviSve();
-                    foreach (Bolnica b in bolnice)
-                    {
-                        foreach (Soba s in b.Soba)
-                        {
-
-                            if (s.Id.Equals(selectedSoba.Id))
-                            {
-                                s.Obrisano = true;
-                                baza.Sacuvaj(b);
-                                break;
-                            }
-                        }
-
-                    }
-                Page sale = new SalePage();
-                this.NavigationService.Navigate(sale);
+                    selectedSoba.Obrisano = true;
+                    kontroler.IzmeniSobu(selectedSoba);
+                    Page sale = new SalePage();
+                    this.NavigationService.Navigate(sale);
                 }
 
             

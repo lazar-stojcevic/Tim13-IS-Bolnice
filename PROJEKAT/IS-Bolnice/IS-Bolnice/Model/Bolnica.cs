@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class Bolnica: Entitet
 {
-   
-   public System.Collections.Generic.List<Soba> soba;
 
     public Bolnica(string ime, string adresa, string eMail, string brTel, List<Soba> sobe): base(ime)
     {
@@ -26,9 +24,9 @@ public class Bolnica: Entitet
    {
       get
       {
-         if (soba == null)
-            soba = new System.Collections.Generic.List<Soba>();
-         return soba;
+         if (Sobe == null)
+                Sobe = new System.Collections.Generic.List<Soba>();
+         return Sobe;
       }
       set
       {
@@ -45,25 +43,25 @@ public class Bolnica: Entitet
    {
       if (newSoba == null)
          return;
-      if (this.soba == null)
-         this.soba = new System.Collections.Generic.List<Soba>();
-      if (!this.soba.Contains(newSoba))
-         this.soba.Add(newSoba);
+      if (this.Sobe == null)
+         this.Sobe = new System.Collections.Generic.List<Soba>();
+      if (!this.Sobe.Contains(newSoba))
+         this.Sobe.Add(newSoba);
    }
    
    public void RemoveSoba(Soba oldSoba)
    {
       if (oldSoba == null)
          return;
-      if (this.soba != null)
-         if (this.soba.Contains(oldSoba))
-            this.soba.Remove(oldSoba);
+      if (this.Sobe != null)
+         if (this.Sobe.Contains(oldSoba))
+            this.Sobe.Remove(oldSoba);
    }
    
    public void RemoveAllSoba()
    {
-      if (soba != null)
-         soba.Clear();
+      if (Sobe != null)
+            Sobe.Clear();
    }
    public Upravnik upravnik;
 

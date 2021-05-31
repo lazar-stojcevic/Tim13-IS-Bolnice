@@ -17,5 +17,15 @@ namespace IS_Bolnice.Servisi
             this.odgovorNaZahtevRepo.Sacuvaj(odgovor);
             zahteviZaValidacijuRepo.Obrisi(zahtev.Id);
         }
+
+        public void ObrisiOdgovorNaZahtev(OdgovorNaZahtevZaValidaciju odgovor)
+        {
+            odgovorNaZahtevRepo.Obrisi(odgovor.Id);
+        }
+
+        public List<OdgovorNaZahtevZaValidaciju> DobaviSve()
+        {
+            return odgovorNaZahtevRepo.DobaviSve();
+        }
     }
 }

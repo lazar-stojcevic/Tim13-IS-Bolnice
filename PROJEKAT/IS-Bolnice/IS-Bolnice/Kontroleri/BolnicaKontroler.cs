@@ -34,5 +34,20 @@ namespace IS_Bolnice.Kontroleri
         {
             return bolnicaServis.GetSveSobeZaHospitalizaciju();
         }
+
+        public Soba GetSobaPoId(string idSobe)
+        {
+            return bolnicaServis.GetSobaPoId(idSobe);
+        }
+
+        public void IzmeniSobu(Soba izmenjenaSoba)
+        {
+            bolnicaServis.IzmeniSobu(izmenjenaSoba);
+        }
+
+        public Soba GetMagacin()
+        {
+            return bolnicaServis.GetMagacin();
+        }
     }
 }

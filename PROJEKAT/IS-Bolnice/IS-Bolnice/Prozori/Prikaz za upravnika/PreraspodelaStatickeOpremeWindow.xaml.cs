@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,9 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     public partial class PreraspodelaStatickeOpremeWindow : Window
     {
         SadrzajSobe sadrzajNaCekanju;
+
+        SadrzajSobeKontroler kontroler = new SadrzajSobeKontroler();
+
         public PreraspodelaStatickeOpremeWindow(SadrzajSobe sadrzajSobe)
         {
             InitializeComponent();
@@ -30,8 +34,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             DateTime izbraniDatum = DateTime.Parse(datePicker_pocetak.SelectedDate.ToString());
             sadrzajNaCekanju.DatumPremestanja = new DateTime(izbraniDatum.Year, izbraniDatum.Month, izbraniDatum.Day);
-            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
-            sadrzajSobeFajlRepozitorijum.Sacuvaj(sadrzajNaCekanju);
+            kontroler.PrebaciOpremuUStanjeCekanja(sadrzajNaCekanju);
             this.Close();
         }
 

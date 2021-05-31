@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS_Bolnice.Kontroleri;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,28 +21,18 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class SalePage : Page
     {
+        private List<Soba> sveSobeZaPrikaz = new List<Soba>();
+        private BolnicaKontroler kontroler = new BolnicaKontroler();
         public SalePage()
         {
             InitializeComponent();
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            listBox.ItemsSource = ParseSobaToString(bolnicaFajlRepozitorijum.GetSobe());
-        }
-
-        private List<string> ParseSobaToString(List<Soba> sobe) {
-
-            List<string> tekst = new List<string>();
-            foreach (Soba s in sobe)
-            {
-
-                if (s.Obrisano == false && (SveProstorijeSuSelektovanje() || s.Tip == SelektovaniTipProstorije()))
-                {
-                    tekst.Add("ID: " + s.Id + " Sprat: " + s.Sprat.ToString() + " Tip: " + s.Tip);
-
+            List<Soba> sveSobe = kontroler.GetSveSobe();
+            foreach (Soba iterSoba in sveSobe) {
+                if (iterSoba.Obrisano == false) {
+                    sveSobeZaPrikaz.Add(iterSoba);
                 }
             }
-            return tekst;
-
-           
+            listBox.ItemsSource = sveSobeZaPrikaz;
         }
 
         private bool SveProstorijeSuSelektovanje() {
@@ -72,14 +63,23 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BolnicaFajlRepozitorijum baza = new BolnicaFajlRepozitorijum();
-            listBox.ItemsSource = ParseSobaToString(baza.GetSobe());
+            List<Soba> selektovaneSobe = new List<Soba>();
+            foreach (Soba s in sveSobeZaPrikaz)
+            {
+
+                if (s.Obrisano == false && (SveProstorijeSuSelektovanje() || s.Tip == SelektovaniTipProstorije()))
+                {
+                    selektovaneSobe.Add(s);
+                    
+                }
+            }
+            listBox.ItemsSource = selektovaneSobe;
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string[] niz = listBox.SelectedItem.ToString().Split(' ');
-            Page editSale = new EditSalePage(niz[1]);
+            Soba selectovanaSoba = (Soba)listBox.SelectedItem;
+            Page editSale = new EditSalePage(selectovanaSoba.Id);
             this.NavigationService.Navigate(editSale);
         }
 

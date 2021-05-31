@@ -19,5 +19,20 @@ namespace IS_Bolnice.Kontroleri
         public void IzvrsiTransport() {
             sadrzajSobeServis.IzvrsiTransport();
         }
+
+        public void DodajUMagacin(Predmet p, int kolicina)
+        {
+            sadrzajSobeServis.DodajUMagacin(p, kolicina);
+        }
+
+        public void PrebaciOpremu(SadrzajSobe stariSadrzaj, Soba novaSoba)
+        {
+            sadrzajSobeServis.PrebaciOpremu(stariSadrzaj, novaSoba);
+        }
+
+        public void PrebaciOpremuUStanjeCekanja(SadrzajSobe sadrzajZaPrenos)
+        {
+            sadrzajSobeServis.PrebaciOpremuUStanjeCekanja(sadrzajZaPrenos);
+        }
     }
 }

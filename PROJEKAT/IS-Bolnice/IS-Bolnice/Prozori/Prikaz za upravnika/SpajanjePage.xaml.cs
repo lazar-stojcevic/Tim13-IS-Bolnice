@@ -25,6 +25,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         List<Soba> selectovaneSobe;
         Soba novaSoba;
 
+        RenovacijaKontroler kontroler = new RenovacijaKontroler();
+
         public SpajanjePage(List<Soba> sobeZaSpajanje)
         {
             InitializeComponent();
@@ -39,8 +41,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             novaSoba.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
             if (CheckDatum(MakeRenovacija()))
             {
-                if (ProveraRaspolozivostiProstorija()) {
-                    SpajanjeSoba();
+                if (kontroler.SpajanjeSobe(selectovaneSobe, MakeRenovacija()))
+                {
+                    Page renoviranje = new RenoviranjeSpajanjePage();
+                    this.NavigationService.Navigate(renoviranje);
                 }
             }
             else
@@ -49,167 +53,6 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             }
         }
 
-        private void SpajanjeSoba() {
-            KreirajNovuSobu();
-            Renovacija renovacija = MakeRenovacija();
-            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
-            renovacijaFajlRepozitorijum.Sacuvaj(renovacija);
-            UkloniSobe();
-        }
-
-        private void PrebaciOpremuUMagacin() {
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
-            foreach (Soba selected in selectovaneSobe)
-            {
-                DodajOpremuUMagacin(selected.Id);
-                ObrisiOpremuIzSobe(selected.Id);
-            }
-        }
-
-        private void UkloniSobe() {
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
-            foreach (Soba selected in selectovaneSobe) {
-                foreach (Soba sobaIter in updateSoba) {
-                    if (sobaIter.Id.Equals(selected.Id)) {
-                        sobaIter.Obrisano = true;
-                        break;
-                    }
-                }
-            }
-            Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
-            novaBolnica.Soba = updateSoba;
-            bolnicaFajlRepozitorijum.Sacuvaj(novaBolnica);
-            this.NavigationService.GoBack();
-        }
-
-        public void DodajOpremuUMagacin(string idSobe)
-        {
-            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            List<SadrzajSobe> svaOpremaUSobi = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(idSobe);
-            List<SadrzajSobe> svaOpremaUMagacinu = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(bolnicaFajlRepozitorijum.GetMagacin().Id);
-            bool postojiOpremaUMagacinu = false;
-            foreach (SadrzajSobe opremaUSobi in svaOpremaUSobi)
-            {
-                foreach (SadrzajSobe opremaUMagacinu in svaOpremaUMagacinu)
-                {
-                    if (opremaUSobi.Predmet.Id.Equals(opremaUMagacinu.Predmet.Id))
-                    {
-                        opremaUMagacinu.Kolicina = opremaUMagacinu.Kolicina + opremaUSobi.Kolicina;
-                        sadrzajSobeFajlRepozitorijum.Izmeni(opremaUMagacinu);
-                        postojiOpremaUMagacinu = true;
-                        break;
-                    }
-                }
-                if (!postojiOpremaUMagacinu)
-                {
-                    opremaUSobi.Soba.Id = bolnicaFajlRepozitorijum.GetMagacin().Id;
-                    sadrzajSobeFajlRepozitorijum.Sacuvaj(opremaUSobi);
-                }
-                postojiOpremaUMagacinu = false;
-            }
-        }
-
-
-        public void ObrisiOpremuIzSobe(string idSobe)
-        {
-            SadrzajSobeFajlRepozitorijum sadrzajSobeFajlRepozitorijum = new SadrzajSobeFajlRepozitorijum();
-            List<SadrzajSobe> opremaUSobi = sadrzajSobeFajlRepozitorijum.GetSadrzajSobe(idSobe);
-            foreach (SadrzajSobe oprema in opremaUSobi)
-            {
-                sadrzajSobeFajlRepozitorijum.Obrisi(oprema.Id);
-            }
-        }
-
-        private void KreirajNovuSobu() {
-            foreach (Soba sobaIter in selectovaneSobe) {
-                novaSoba.Kvadratura = novaSoba.Kvadratura + sobaIter.Kvadratura;
-                novaSoba.Sprat = sobaIter.Sprat;
-            }
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
-            novaBolnica.AddSoba(novaSoba);
-            bolnicaFajlRepozitorijum.Sacuvaj(novaBolnica);
-            
-        }
-
-        private bool ProveraRaspolozivostiProstorija() {
-            bool prostorijaJeSlobodna = true;
-            foreach (Soba soba in selectovaneSobe) {
-                if (soba.Tip == RoomType.operacionaSala)
-                {
-                    if (!ProveraOperacioneSale(soba.Id)) {
-                        prostorijaJeSlobodna = false;
-                    }
-                }
-                else if (soba.Tip == RoomType.bolnickaSoba)
-                {
-                    if (!ProveraBolnickeSobe(soba.Id))
-                    {
-                        prostorijaJeSlobodna = false;
-                    }
-                }
-                else
-                {
-                    if (!ProveraProstorije(soba.Id))
-                    {
-                        prostorijaJeSlobodna = false;
-                    }
-                }
-            }
-            return prostorijaJeSlobodna;
-        }
-
-        private bool ProveraOperacioneSale(string idSobe)
-        {
-            OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
-            OperacijaFajlRepozitorijum operacijaFajlRepozitorijum = new OperacijaFajlRepozitorijum();
-            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
-            Renovacija renovacija = MakeRenovacija();
-            foreach (Operacija operacija in operacijaKontroler.GetSveBuduceOperacijeSale(idSobe))
-            {
-                if (operacija.VremePocetkaOperacije > renovacija.DatumPocetka && operacija.VremeKrajaOperacije < renovacija.DatumKraja)
-                {
-                    MessageBox.Show("Postoje zakazane operacije! Odaberite drugi period!");
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool ProveraBolnickeSobe(string idSobe) {
-            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
-            HospitalizacijaFajlRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
-            Renovacija renovacija = MakeRenovacija();
-            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.DobaviSveHospitalizacijeZaSobu(idSobe)) {
-                if (hospitalizacija.PocetakHospitalizacije > renovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < renovacija.DatumKraja)
-                {
-                    MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool ProveraProstorije(string idSobe)
-        {
-            PregledKontroler pregledKontroler = new PregledKontroler();
-            PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
-            RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
-            Renovacija renovacija = MakeRenovacija();
-            foreach (Pregled pregled in pregledKontroler.GetSviBuduciPreglediSobe(idSobe))
-            {
-                if (pregled.VremePocetkaPregleda > renovacija.DatumPocetka && pregled.VremePocetkaPregleda < renovacija.DatumKraja)
-                {
-                    MessageBox.Show("Postoje zakazani pregledi! Odaberite drugi period!");
-                    return false;
-                }
-            }
-            return true;
-
-        }
 
         private Renovacija MakeRenovacija()
         {

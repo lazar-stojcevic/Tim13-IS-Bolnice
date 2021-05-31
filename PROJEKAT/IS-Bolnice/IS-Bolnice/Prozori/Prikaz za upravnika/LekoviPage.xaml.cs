@@ -21,24 +21,13 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class LekoviPage : Page
     {
+        LekKontroler kontroler = new LekKontroler();
         public LekoviPage()
         {
             InitializeComponent();
-            listBox.ItemsSource = ParseLekToString();
+            listBox.ItemsSource = kontroler.GetSviLekovi();
         }
 
-        public List<string> ParseLekToString()
-        {
-            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
-            List<string> tekst = new List<string>();
-            List<Lek> lekovi = new LekKontroler().GetSviLekovi();
-            foreach (Lek lek in lekovi)
-            {
-                string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;
-                tekst.Add(linija);
-            }
-            return tekst;
-        }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -48,9 +37,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
-            string[] podaciOLeku = listBox.SelectedItem.ToString().Split(' ');
-            Page editPage = new EditBrisanjePage(lekFajlRepozitorijum.DobaviPoId(podaciOLeku[1]));
+            Page editPage = new EditBrisanjePage((Lek)listBox.SelectedItem);
             this.NavigationService.Navigate(editPage);
         }
 

@@ -20,5 +20,10 @@ namespace IS_Bolnice.Servisi
         {
             sastojakRepo.Sacuvaj(noviSastojak);
         }
+
+        public void ObrisiSastojak(string isSastojak)
+        {
+            sastojakRepo.Obrisi(isSastojak);
+        }
     }
 }
