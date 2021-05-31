@@ -15,8 +15,8 @@
         <ListView x:Name="listaRecenzija" HorizontalAlignment="Left" Height="561" Margin="12,75,0,0" VerticalAlignment="Top" Width="378">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Opis" Width="265" DisplayMemberBinding="{Binding Comment}" />
-                    <GridViewColumn Header="Ocena" Width="50" DisplayMemberBinding="{Binding Rating}"/>
+                    <GridViewColumn Header="Opis" Width="265" DisplayMemberBinding="{Binding Komentar}" />
+                    <GridViewColumn Header="Ocena" Width="50" DisplayMemberBinding="{Binding Ocena}"/>
                     <GridViewColumn Header="Vise" Width="53">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

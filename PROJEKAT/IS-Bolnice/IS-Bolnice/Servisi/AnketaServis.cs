@@ -25,6 +25,11 @@ namespace IS_Bolnice.Servisi
             return pregledi;
         }
 
+        public List<Anketa> DobaviSveAnketeLekara()
+        {
+            return anketaRepo.DobaviSveAnketeLekara();
+        }
+
         public bool DaLiJeVremeZaAnketuBolnice(string jmbgPacijenta)
         {
             List<Anketa> sveAnketePacijentaZaBlonicu = GetSveAnketeBolnicePacijenta(jmbgPacijenta);

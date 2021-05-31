@@ -27,12 +27,34 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private LekKontroler lekKontroler = new LekKontroler();
+        private List<Lek> sviLekovi = new List<Lek>();
         public LekarDodavanjeLeka(ObservableCollection<Terapija> terapija, string jmbgPacijenta)
         {
-            List<Lek> sviLekovi = lekKontroler.GetSviLekovi();
+            sviLekovi = lekKontroler.GetSviLekovi();
             PrikazLekovaNaKojePacijentNijeAlergican(jmbgPacijenta, sviLekovi);
             InitializeComponent();
+            sviLekovi.Clear();
+
+            foreach (Lek lek in lekKontroler.GetSviLekovi())
+            {
+                bool isValid = true;
+                Pacijent pacijentKojiJeNaPregledu = pacijentKontroler.GetPacijentSaOvimJMBG(jmbgPacijenta);
+                foreach (Sastojak alergenPacijenta in pacijentKojiJeNaPregledu.Alergeni)
+                {
+                    foreach (Sastojak alergen in lek.Alergeni)
+                    {
+                        if (alergen.Ime.Equals(alergenPacijenta.Ime))
+                        {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                }
+                if (isValid)
+                    sviLekovi.Add(lek);
+            }
             listaSvihLekova.ItemsSource = sviLekovi;
+
             sveZadateTerapije = terapija;
         }
 
@@ -43,12 +65,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
             if (pacijentKojiJeNaPregledu.Alergeni.Count != 0)
             {
+                /*
                 foreach (Sastojak alergenKodPacijenta in pacijentKojiJeNaPregledu.Alergeni)
                 {
                     int index = 0;
                     foreach (Lek lek in lekoviZaPrikaz)
                     {
-
                         foreach (Sastojak alergenLek in lek.Alergeni)
                         {
                             if (alergenLek.Ime.Equals(alergenKodPacijenta.Ime) && !alergenLek.Ime.Equals(""))
@@ -57,13 +79,33 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                                 --index;
                                 break;
                             }
-
-                            
                         }
                         ++index;
                     }
                 }
+              
+                sviLekovi.Clear();
+
+                foreach (Lek lek in lekKontroler.GetSviLekovi())
+                {
+                    bool isValid = true;
+                    foreach (Sastojak alergenPacijenta in pacijentKojiJeNaPregledu.Alergeni)
+                    {
+                        if (lek.Alergeni.Contains(alergenPacijenta))
+                        {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                    if (isValid)
+                        sviLekovi.Add(lek);
+                }
+                if (listaSvihLekova != null)
+                    listaSvihLekova.ItemsSource = sviLekovi;
+                  */
+
             }
+
         }
 
         private void Button_DodajClick(object sender, RoutedEventArgs e)
