@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace IS_Bolnice.Model
 {
     // na klas dijagramu treba spojiti sa pacijentom
-    class IzmenaTermina
+    class IzmenaTermina : Entitet
     {
         public IzmenaTermina() { }
 

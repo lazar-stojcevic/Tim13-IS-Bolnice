@@ -104,6 +104,7 @@
     <Compile Include="Baze\BazaIzmena.cs" />
     <Compile Include="Baze\Interfejsi\IAnketaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IBeleskaRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\IIzmenaTerminaRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IPregledRepozitorijum.cs" />
     <Compile Include="Baze\IzvestajFajlRepozitorijum.cs" />
     <Compile Include="Baze\LekFajlRepozitorijum.cs" />
