@@ -1,8 +1,6 @@
 using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using IS_Bolnice.Baze;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
@@ -10,12 +8,6 @@ using IS_Bolnice.Baze.Klase;
 public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRepozitorijum
 {
     private IRadnoVremeRepozitorijum radnoVremeRepo = new RadnoVremeFajlRepozitorijum();
-    private static string vremenskiFormatPisanje = "M/d/yyyy h:mm:ss tt";
-    private static string[] vremenskiFormatiCitanje = new[]
-    {
-        "M/d/yyyy h:mm:ss tt",
-        "M-d-yyyy h:mm:ss tt"
-    };
 
     public LekarFajlRepozitorijum() : base(@"..\..\Datoteke\lekari.txt")
     {

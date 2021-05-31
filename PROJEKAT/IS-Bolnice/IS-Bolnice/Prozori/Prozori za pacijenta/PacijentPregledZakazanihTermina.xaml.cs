@@ -1,27 +1,16 @@
 ﻿using IS_Bolnice.Prozori.Prozori_za_pacijenta;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori
 {
     public partial class PacijentPregledZakazanihTermina : Window
     {
-        private string jmbgPac;
+        private readonly string jmbgPac;
 
-        PreglediFajlRepozitorijum bp = new PreglediFajlRepozitorijum();
         private PregledKontroler pregledKontroler = new PregledKontroler();
+
         public PacijentPregledZakazanihTermina(string jmbgPacijenta)
         {
             InitializeComponent();
@@ -32,34 +21,33 @@ namespace IS_Bolnice.Prozori
 
         private void obrisiTermin_Click(object sender, RoutedEventArgs e)
         {
-            // dodati da li si siguran dijalog
-            PreglediFajlRepozitorijum bp = new PreglediFajlRepozitorijum();
-            Pacijent pac = new Pacijent();
-            pac.Jmbg = jmbgPac;
+            Pacijent pacijent = new Pacijent();
+            pacijent.Jmbg = jmbgPac;
 
-            Pregled p = (Pregled)lvPregledi.SelectedItem;
-            p.Pacijent = pac;
+            Pregled pregled = (Pregled)lvPregledi.SelectedItem;
+            pregled.Pacijent = pacijent;
 
-            bp.Obrisi(p.Id);
+            pregledKontroler.OtkaziPregled(pregled);
+
             lvPregledi.ItemsSource = pregledKontroler.GetSviBuduciSortiraniPreglediPacijenta(jmbgPac);
         }
 
         private void izadji_Click(object sender, RoutedEventArgs e)
         {
-            // dodati da li si siguran?
             this.Close();
         }
 
         private void izmeniTermin_Click(object sender, RoutedEventArgs e)
         {
-            Pregled p = (Pregled)lvPregledi.SelectedItem;
-            PacijentIzmenaTermina pit = new PacijentIzmenaTermina(jmbgPac, p.Lekar.Jmbg, p.VremePocetkaPregleda, lvPregledi);
+            Pregled pregledZaIzmenu = (Pregled)lvPregledi.SelectedItem;
+            PacijentIzmenaTermina pit = new PacijentIzmenaTermina(pregledZaIzmenu, lvPregledi);
             pit.ShowDialog();
         }
 
         private void lvPregledi_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvPregledi.SelectedIndex;
+
             if (index == -1)
             {
                 izmeniTermin.IsEnabled = false;

@@ -1,52 +1,39 @@
-﻿using IS_Bolnice.Baze;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori
 {
     public partial class PacijentIzmenaTermina : Window
     {
-        private List<Lekar> lekari;
+        
         private ListView listView;
+        private Pregled stariPregled;
 
+        private readonly List<Lekar> lekariOpstePrakse = new LekarKontroler().GetSviLekariOpstePrakse();
         private List<Pregled> pregledi = new List<Pregled>();
-        private Pregled stariPregled = new Pregled();
+        
 
         private PregledKontroler pregledKontroler = new PregledKontroler();
         private IzmenaTerminaKontroler izmenaTerminaKontroler = new IzmenaTerminaKontroler();
 
-        public PacijentIzmenaTermina(string jmbgPacijenta, string jmbgLekara, DateTime datum, ListView lv)
+        public PacijentIzmenaTermina(Pregled pregledZaIzmenu, ListView lv)
         {
             InitializeComponent();
 
             listView = lv;
+            stariPregled = pregledZaIzmenu;
 
-            Lekar ll = new Lekar();
-            Pacijent p = new Pacijent();
+            InicijalizacijaDana();
+            InicijalizacijaLekara();
 
-            ll.Jmbg = jmbgLekara;
-            p.Jmbg = jmbgPacijenta;
+        }
 
-            stariPregled.Lekar = ll;
-            stariPregled.Pacijent = p;
-            stariPregled.VremePocetkaPregleda = datum;
-
-            LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
-            lekari = bl.GetSviLekariOpstePrakse();
-
-            //UPISIVANJE DANA U comboBox
+        private void InicijalizacijaDana()
+        {
             for (int j = 1; j <= 5; j++)
             {
                 if (j == 1)
@@ -55,22 +42,23 @@ namespace IS_Bolnice.Prozori
                     comboDani.Items.Add(j + " dana");
             }
             comboDani.SelectedIndex = 0;
+        }
 
-            //UPISIVANJE LEKARA I SELEKTOVANJE LEKARA CIJI SE TERMIN MENJA
+        private void InicijalizacijaLekara()
+        {
             int i = 0;
-            foreach (Lekar l in lekari)
+            foreach (Lekar lekar in lekariOpstePrakse)
             {
-                string imePrezime = l.Ime + " " + l.Prezime;
+                string imePrezime = lekar.Ime + " " + lekar.Prezime;
                 comboLekari.Items.Add(imePrezime);
 
-                if (l.Jmbg == jmbgLekara)
+                if (lekar.Jmbg == stariPregled.Lekar.Jmbg)
                 {
                     comboLekari.SelectedIndex = i;
                 }
 
                 i += 1;
             }
-
         }
 
         //DODATI PROVERU
@@ -82,7 +70,7 @@ namespace IS_Bolnice.Prozori
             noviPregled = pregledi.ElementAt(listTermina.SelectedIndex);
             pacijent.Jmbg = stariPregled.Pacijent.Jmbg;
             noviPregled.Pacijent = pacijent;
-            noviPregled.Lekar = lekari.ElementAt(comboLekari.SelectedIndex);
+            noviPregled.Lekar = lekariOpstePrakse.ElementAt(comboLekari.SelectedIndex);
             noviPregled.Id = stariPregled.Id;
 
             if (izmenaTerminaKontroler.DaLiJePacijentMaliciozan(stariPregled.Pacijent))
@@ -134,7 +122,7 @@ namespace IS_Bolnice.Prozori
             //OGRANICENJE PRILIKOM PRVOG POKRETANJA
             if (comboLekari.SelectedIndex != -1)
             {
-                Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
+                Lekar lekar = lekariOpstePrakse.ElementAt(comboLekari.SelectedIndex);
                 pregledi = pregledKontroler.GetSlobodniTerminiZaIzmenu(lekar, datum);
             }
             else
@@ -168,7 +156,7 @@ namespace IS_Bolnice.Prozori
             //OGRANICENJE PRILIKOM PRVOG POKRETANJA
             if (comboDani.SelectedIndex != -1)
             {
-                Lekar lekar = lekari.ElementAt(comboLekari.SelectedIndex);
+                Lekar lekar = lekariOpstePrakse.ElementAt(comboLekari.SelectedIndex);
                 pregledi = pregledKontroler.GetSlobodniTerminiZaIzmenu(lekar, datum);
             }
             else

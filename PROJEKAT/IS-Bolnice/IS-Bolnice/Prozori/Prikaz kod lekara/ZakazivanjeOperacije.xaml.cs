@@ -1,18 +1,10 @@
-﻿using IS_Bolnice.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using IS_Bolnice.DTOs;
 using IS_Bolnice.Kontroleri;
 using WPFCustomMessageBox;
@@ -21,7 +13,6 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
     public partial class ZakazivanjeOperacije : Window
     {
-        List<Lekar> lekariSpecijalisti = new List<Lekar>();
         OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
         List<Operacija> operacije = new List<Operacija>();
