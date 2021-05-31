@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
         mc:Ignorable="d"
-        Title="PrikazIzvestaja" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="prikaziSve" Click="prikaziSve_Click">Prikazi</Button>
-    </Grid>
+        Title="Prikaz izvestaja" Height="700" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Grid>
+            <ListView x:Name="listaIzvestaja" Margin="10 5" Height="150" FontSize="14" Background="#eee" SelectionChanged="listaIzvestaja_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Ime lekara" Width="250" DisplayMemberBinding="{Binding Lekar.Ime}" />
+                        <GridViewColumn Header="Prezime lekara" Width="250" DisplayMemberBinding="{Binding Lekar.Prezime}" />
+                        <GridViewColumn Header="Datum kreiranja izvestaja" Width="250" DisplayMemberBinding="{Binding DatumKreiranja}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <TextBlock FontSize="13" Margin="10 5">Opis izveštaja</TextBlock>
+        <TextBlock x:Name="opisIzvestaja" Height="100" Margin="10 0" Background="#eee" ScrollViewer.HorizontalScrollBarVisibility="Auto"></TextBlock>
+
+        <Grid>
+            <ListView x:Name="listaTerapija" Margin="10 5" Height="150" FontSize="14" Background="#eee" SelectionChanged="listaTerapija_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Naziv leka" Width="200" DisplayMemberBinding="{Binding Lek.Ime}" />
+                        <GridViewColumn Header="Vreme početka konzumiranja" Width="185" DisplayMemberBinding="{Binding VremePocetka}" />
+                        <GridViewColumn Header="Vreme kraja konzumiranja" Width="165" DisplayMemberBinding="{Binding VremeKraja}" />
+                        <GridViewColumn Header="Učestalost konzumiranja" Width="160" DisplayMemberBinding="{Binding UcestanostKonzumiranja}" />
+                        <GridViewColumn Header="Na koliko dana se uzima" Width="160" DisplayMemberBinding="{Binding RazlikaNaKolikoSeDanaUzimaLek}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <TextBlock FontSize="13" Margin="10 5">Opis terapije</TextBlock>
+        <TextBlock x:Name="opisTerapije" Height="100" Margin="10 0" Background="#eee" ScrollViewer.HorizontalScrollBarVisibility="Auto"></TextBlock>
+
+        <Grid Margin="10 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="napraviBelezku" Grid.Column="0" Height="50" Width="100" Margin="10" Content="Napravi beležku" Click="napraviBelezku_Click"/>
+            <Button x:Name="izdadji" Grid.Column="1" Height="50" Width="100" Margin="10" Content="Izađi" Click="izdadji_Click"/>
+        </Grid>
+    </StackPanel>
 </Window>

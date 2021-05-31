@@ -15,7 +15,7 @@
                         <GridViewColumn Header="Ime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Ime}" />
                         <GridViewColumn Header="Prezime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Prezime}" />
                         <GridViewColumn Header="Pocetak pregleda" Width="150" DisplayMemberBinding="{Binding VremePocetkaPregleda}"/>
-                        <GridViewColumn Header="Ordinacija" Width="150"/>
+                        <GridViewColumn Header="Ordinacija" Width="150" DisplayMemberBinding="{Binding Lekar.Ordinacija.Id}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

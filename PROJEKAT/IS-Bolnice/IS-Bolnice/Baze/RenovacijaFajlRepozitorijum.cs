@@ -1,8 +1,3 @@
-// File:    RenovacijaFajlRepozitorijum.cs
-// Author:  teddy
-// Created: Friday, May 7, 2021 6:46:55 PM
-// Purpose: Definition of Class RenovacijaFajlRepozitorijum
-
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 using System;

@@ -18,6 +18,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
     public partial class PrikazIzvestaja : Window
     {
         private string jmbgPacijenta;
+
         private IzvestajKontroler izvestajKontroler = new IzvestajKontroler();
 
         public PrikazIzvestaja(string jmbg)
@@ -25,31 +26,46 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             InitializeComponent();
 
             jmbgPacijenta = jmbg;
-        }
 
-        private void prikaziSve_Click(object sender, RoutedEventArgs e)
-        {
+            listaIzvestaja.ItemsSource = izvestajKontroler.SviIzvestajiPacijenta(jmbgPacijenta);
             foreach (Izvestaj izvestaj in izvestajKontroler.SviIzvestajiPacijenta(jmbgPacijenta))
             {
-                Console.WriteLine("***IZVESTAJ***");
-                Console.WriteLine("Lekar: " + izvestaj.Lekar.Jmbg);
-                Console.WriteLine("Pacijent: " + izvestaj.Pacijent.Jmbg);
-                Console.WriteLine("Opis: " + izvestaj.Opis);
-                Console.WriteLine("Datum: " + izvestaj.DatumKreiranja.ToString());
-                foreach (Terapija terapija in izvestaj.Terapija)
-                {
-                    Console.WriteLine("***********TERAPIJA************");
-                    Console.WriteLine("Sifra leka: " + terapija.Lek.Id);
-                    Console.WriteLine("Naziv leka: " + terapija.Lek.Ime);
-                    Console.WriteLine("Opis leka: " + terapija.Lek.Opis);
-                    Console.WriteLine("Na koliko dana se lek uzima: " + terapija.RazlikaNaKolikoSeDanaUzimaLek.ToString());
-                    Console.WriteLine("Ucestalost: " + terapija.UcestanostKonzumiranja.ToString());
-                    Console.WriteLine("Vreme pocetka: " + terapija.VremePocetka.ToString());
-                    Console.WriteLine("Vreme kraja: " + terapija.VremeKraja.ToString());
-                    Console.WriteLine("Opis: " + terapija.Opis.ToString());
-                }
+                Console.WriteLine(izvestaj.Lekar.Ime);
+                Console.WriteLine(izvestaj.Lekar.Prezime);
 
             }
+        }
+
+        private void listaIzvestaja_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Izvestaj selektovaniIzvestaj = (Izvestaj)listaIzvestaja.SelectedItem;
+            opisIzvestaja.Text = selektovaniIzvestaj.Opis;
+            listaTerapija.ItemsSource = selektovaniIzvestaj.Terapija;
+        }
+
+        private void listaTerapija_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Terapija selektovanaTerapija = (Terapija)listaTerapija.SelectedItem;
+            if (selektovanaTerapija != null)
+            {
+                opisTerapije.Text = selektovanaTerapija.Opis;
+            }
+            else
+            {
+                opisTerapije.Text = "";
+            }
+
+        }
+
+        private void napraviBelezku_Click(object sender, RoutedEventArgs e)
+        {
+            KreiranjeBelezke kreiranjeBelezke = new KreiranjeBelezke(jmbgPacijenta);
+            kreiranjeBelezke.ShowDialog();
+        }
+
+        private void izdadji_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
