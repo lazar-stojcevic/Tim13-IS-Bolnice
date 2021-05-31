@@ -404,7 +404,7 @@
                     <DataGrid x:Name="dgLekovi" IsReadOnly="True" ItemsSource="{Binding SviLekovi}"
                               SelectionMode="Single" AutoGenerateColumns="False" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" SelectionChanged="dgLekovi_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Šifra" Binding="{Binding Sifra}" Width="1*"/>
+                            <DataGridTextColumn Header="Šifra" Binding="{Binding Id}" Width="1*"/>
                             <DataGridTextColumn Header="Naziv" Binding="{Binding Ime}" Width="2*"/>
                         </DataGrid.Columns>
                     </DataGrid>
