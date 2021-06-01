@@ -1057,6 +1057,14 @@
     <Resource Include="Slike\Sekretar\stop.png" />
     <Resource Include="Slike\Sekretar\pause.png" />
     <Resource Include="Slike\Sekretar\play.png" />
+    <Resource Include="Slike\Pacijent\blueCalendarIcon.jpg" />
+    <Resource Include="Slike\Pacijent\blueLogOutIcon.png" />
+    <Resource Include="Slike\Pacijent\blueMesgIcon.png" />
+    <Resource Include="Slike\Pacijent\bluePlusIcon.jpg" />
+    <Resource Include="Slike\Pacijent\bluePlusIcon2.jpg" />
+    <Resource Include="Slike\Pacijent\blueSurveyIcon.png" />
+    <Resource Include="Slike\Pacijent\bluHospitalIcon.png" />
+    <Resource Include="Slike\Pacijent\blueMessageIcon2.png" />
     <Content Include="Video\videoTutorijal.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,33 +8,48 @@
         Title="Osnovni prozor" Height="600" Width="570"
         WindowStartupLocation="CenterScreen">
 
-    <Border Padding ="10" Background="#eee">
+    <Border Padding ="10" Background="#ABD9DF">
         <StackPanel Background="#fff">
             <!--Meni-->
-            <Menu Width="Auto" Height="45" Background="Gray">
-                <MenuItem Header="Uredi" FontSize="20" Padding="5"/>
+            <Menu Width="Auto" Background="Gray">
             </Menu>
             <!--ToolBar-->
-            <ToolBar Height="50">
-
+            <ToolBar Height="45">
+                <Button Height="35" Width="35" ToolTip="Zakaži pregled">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluePlusIcon2.jpg" Height="28" Width="28" RenderTransformOrigin="-0.3,-0.2"></Image>
+                </Button>
+                <Label Width="10"></Label>
+                <Button Height="35" Width="35" ToolTip="Prikaz obaveštenja">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueMessageIcon2.png" Height="28" Width="28"></Image>
+                </Button>
+                <Label Width="10"></Label>
+                <Button Height="35" Width="35" ToolTip="Prikaz termina pregleda">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueCalendarIcon.jpg" Height="28" Width="28"></Image>
+                </Button>
+                <Label Width="10"></Label>
+                <Button Height="35" Width="35" ToolTip="Prikaz termina operacija">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluHospitalIcon.png" Height="28" Width="28"></Image>
+                </Button>
+                <Label Width="10"></Label>
+                <Button Height="35" Width="35" ToolTip="Anketa">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueSurveyIcon.png" Height="28" Width="28"></Image>
+                </Button>
+                <Label Width="10"></Label>
+                <Button Height="35" Width="35" ToolTip="Odjavi se">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueLogOutIcon.png" Height="28" Width="28"></Image>
+                </Button>
             </ToolBar>
-            <!--Korisnik-->
-            <TextBlock
-                    Height="25"
-                    FontSize ="20"
-                    FontStyle="Italic"
-                    Text="Korisnik"
-                    Padding="10 0"/>
             <!--Prostor za ime, prezime i jmbg-->
             <TextBox 
                 x:Name="imeKorisnika"
                 Height="40"
                 IsReadOnly="True"
                 Text="Bojan Lupulov 12345"
-                Background="#eee"
+                Background="#fff"
                 Padding ="0 2"
-                Margin ="5 0"
-                FontSize="20"/>
+                Margin ="5 5"
+                FontSize="20"
+                BorderBrush="AliceBlue"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -52,7 +67,7 @@
                     <Button
                     x:Name="zakaziBtn"
                     FontSize="16"
-                    Content="Zakaži termin"
+                    Content="Zakažite pregled"
                     Grid.Row="0"
                     Margin="10"
                     Height="70" Click="zakaziBtn_Click"/>
