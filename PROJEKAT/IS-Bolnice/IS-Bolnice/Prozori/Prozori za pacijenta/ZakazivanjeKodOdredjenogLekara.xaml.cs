@@ -25,20 +25,18 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
         private PregledKontroler pregledKontroler = new PregledKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
-        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
-        private IzmenaTerminaFajlRepozitorijum bazaIzmena = new IzmenaTerminaFajlRepozitorijum();
         private IzmenaTerminaKontroler izmenaTerminaKontroler = new IzmenaTerminaKontroler();
+
         public ZakazivanjeKodOdredjenogLekara(string jmbgPacijenta)
         {
             InitializeComponent();
+
             jmbgPac = jmbgPacijenta;
+            lekari = lekarKontroler.GetSviLekariOpstePrakse();
 
-            LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
-            lekari = bl.GetSviLekariOpstePrakse();
-
-            foreach (Lekar l in lekari)
+            foreach (Lekar lekar in lekari)
             {
-                string imePrezime = l.Ime + " " + l.Prezime;
+                string imePrezime = lekar.Ime + " " + lekar.Prezime;
                 lekariList.Items.Add(imePrezime);
             }
 
@@ -66,7 +64,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 }
                 else
                 {
-                    preglediFajlRepozitorijum.Sacuvaj(pregled);
+                    pregledKontroler.ZakaziPregled(pregled);
                     string message = "Uspešno ste zakazali pregled";
                     MessageBox.Show(message);
                     this.Close();
@@ -92,8 +90,11 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             }
 
             string jmbgLekara = lekari.ElementAt(lekariList.SelectedIndex).Jmbg;
+            Lekar lekar = lekarKontroler.GetLekar(jmbgLekara);
 
-            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekarKontroler.GetLekar(jmbgLekara));
+            Mouse.OverrideCursor = Cursors.Wait;
+            pregledi = pregledKontroler.GetDostupniTerminiPregledaLekaraUNarednomPeriodu(lekar);
+            Mouse.OverrideCursor = null;
 
             terminiList.Items.Clear();
 
