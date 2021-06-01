@@ -11,31 +11,57 @@
     <Border Padding ="10" Background="#ABD9DF">
         <StackPanel Background="#fff">
             <!--Meni-->
-            <Menu Width="Auto" Background="Gray">
+            <Menu>
+                <MenuItem Header="Funkcije">
+                    <MenuItem Header="Zakazivanje pregleda">
+                        <MenuItem Header="Kod određenog lekara"></MenuItem>
+                        <MenuItem Header="U određenom terminu"></MenuItem>
+                    </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Prikaz termina pregleda"></MenuItem>
+                    <MenuItem Header="Prikaz termina operacija"></MenuItem>
+                    <MenuItem Header="Prikaz obaveštenja"></MenuItem>
+                    <MenuItem Header="Prikaz izveštaja sa pregleda"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Ankete"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Odjavi se"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Uredi">
+                    <MenuItem Header="Promeni temu">
+                        <MenuItem Header="Svetla tema"></MenuItem>
+                        <MenuItem Header="Tamna tema"></MenuItem>
+                    </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Promeni jezik">
+                        <MenuItem Header="Srpski jezik"></MenuItem>
+                        <MenuItem Header="Engleski jezik"></MenuItem>
+                    </MenuItem>
+                </MenuItem>
             </Menu>
             <!--ToolBar-->
             <ToolBar Height="45">
-                <Button Height="35" Width="35" ToolTip="Zakaži pregled">
+                <Button Height="36" Width="35" ToolTip="Zakaži pregled" Margin="0,0,0,2" VerticalAlignment="Bottom" Click="Button_Click">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluePlusIcon2.jpg" Height="28" Width="28" RenderTransformOrigin="-0.3,-0.2"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Prikaz obaveštenja">
+                <Button Height="35" Width="35" ToolTip="Prikaz obaveštenja" Click="Button_Click_2">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueMessageIcon2.png" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Prikaz termina pregleda">
+                <Button Height="35" Width="35" ToolTip="Prikaz termina pregleda" Click="Button_Click_1">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueCalendarIcon.jpg" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Prikaz termina operacija">
+                <Button Height="35" Width="35" ToolTip="Prikaz termina operacija" Click="Button_Click_4">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluHospitalIcon.png" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Anketa">
+                <Button Height="35" Width="35" ToolTip="Anketa" Click="Button_Click_5">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueSurveyIcon.png" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Odjavi se">
+                <Button Height="35" Width="35" ToolTip="Odjavi se" Click="Button_Click_3">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueLogOutIcon.png" Height="28" Width="28"></Image>
                 </Button>
             </ToolBar>

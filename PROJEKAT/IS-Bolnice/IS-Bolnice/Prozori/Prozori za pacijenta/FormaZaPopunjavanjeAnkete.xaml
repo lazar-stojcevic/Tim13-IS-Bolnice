@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
         mc:Ignorable="d"
-        Title="Anketa" Height="450" Width="370">
+        Title="Anketa" Height="450" Width="370"
+        WindowStartupLocation="CenterScreen">
     <StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
