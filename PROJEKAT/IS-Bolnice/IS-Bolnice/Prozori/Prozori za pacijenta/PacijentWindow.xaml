@@ -7,26 +7,61 @@
         mc:Ignorable="d"
         Title="Osnovni prozor" Height="600" Width="570"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <RoutedUICommand x:Key="PrikazTerminaPregleda" Text="PrikazTerminaPregleda" />
+        <RoutedUICommand x:Key="PrikazTerminaOperacija" Text="TerminaOperacija" />
+        <RoutedUICommand x:Key="PrikazObavestenja" Text="PrikazObavestenja" />
+        <RoutedUICommand x:Key="PrikazAnkete" Text="PrikazAnkete" />
+        <RoutedUICommand x:Key="Odjava" Text="Odjava" />
+        <RoutedUICommand x:Key="ZakazivanjeKodLekara" Text="KodLekara" />
+        <RoutedUICommand x:Key="ZakazivanjeUTerminu" Text="UTerminu" />
+        <RoutedUICommand x:Key="PrikazIzvestaja" Text="Izvestaj" />
+    </Window.Resources>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource PrikazTerminaPregleda}" Executed="prikaziBtn_Click" />
+        <CommandBinding Command="{StaticResource PrikazTerminaOperacija}" Executed="operacijeBtn_Click" />
+        <CommandBinding Command="{StaticResource PrikazObavestenja}" Executed="obavestenjaBtn_Click" />
+        <CommandBinding Command="{StaticResource PrikazAnkete}" Executed="anketaBtn_Click" />
+        <CommandBinding Command="{StaticResource Odjava}" Executed="odjavaBtn_Click" />
+        <CommandBinding Command="{StaticResource ZakazivanjeKodLekara}" Executed="zakazivanjeKodLekara_Click" />
+        <CommandBinding Command="{StaticResource ZakazivanjeUTerminu}" Executed="zakazivanjeUTerminu_Click" />
+        <CommandBinding Command="{StaticResource PrikazIzvestaja}" Executed="izvestaj_Click" />
+    </Window.CommandBindings>
 
+    <Window.InputBindings>
+        <KeyBinding Command="{StaticResource PrikazTerminaPregleda}" Key="P" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource PrikazTerminaOperacija}" Key="O" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource PrikazAnkete}" Key="A" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource PrikazObavestenja}" Key="Q" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource Odjava}" Key="L" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource ZakazivanjeKodLekara}" Key="G" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource ZakazivanjeUTerminu}" Key="T" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource PrikazIzvestaja}" Key="I" Modifiers="Ctrl" />
+    </Window.InputBindings>
+    
     <Border Padding ="10" Background="#ABD9DF">
         <StackPanel Background="#fff">
             <!--Meni-->
             <Menu>
                 <MenuItem Header="Funkcije">
+                    <!--ZAKAZIVANJE PREGLEDA-->
                     <MenuItem Header="Zakazivanje pregleda">
-                        <MenuItem Header="Kod određenog lekara"></MenuItem>
-                        <MenuItem Header="U određenom terminu"></MenuItem>
+                        <MenuItem Command="{StaticResource ZakazivanjeKodLekara}" InputGestureText="Ctrl+G" Click="zakazivanjeKodLekara_Click" Header="Kod određenog lekara"></MenuItem>
+                        <MenuItem Command="{StaticResource ZakazivanjeUTerminu}" InputGestureText="Ctrl+T" Click="zakazivanjeUTerminu_Click" Header="U određenom terminu"></MenuItem>
                     </MenuItem>
+                    <!--PRIKAZI-->
                     <Separator></Separator>
-                    <MenuItem Header="Prikaz termina pregleda"></MenuItem>
-                    <MenuItem Header="Prikaz termina operacija"></MenuItem>
-                    <MenuItem Header="Prikaz obaveštenja"></MenuItem>
-                    <MenuItem Header="Prikaz izveštaja sa pregleda"></MenuItem>
+                    <MenuItem Click="prikaziBtn_Click" Header="Prikaz termina pregleda" Command="{StaticResource PrikazTerminaPregleda}" InputGestureText="Ctrl+P"></MenuItem>
+                    <MenuItem Click="operacijeBtn_Click" Header="Prikaz termina operacija" Command="{StaticResource PrikazTerminaOperacija}" InputGestureText="Ctrl+O"></MenuItem>
+                    <MenuItem Click="obavestenjaBtn_Click" Header="Prikaz obaveštenja" Command="{StaticResource PrikazObavestenja}" InputGestureText="Ctrl+Q"></MenuItem>
+                    <MenuItem Click="izvestaj_Click" Header="Prikaz izveštaja sa pregleda" Command="{StaticResource PrikazIzvestaja}" InputGestureText="Ctrl+I" ></MenuItem>
                     <Separator></Separator>
-                    <MenuItem Header="Ankete"></MenuItem>
+                    <MenuItem Click="anketaBtn_Click" Header="Ankete" Command="{StaticResource PrikazAnkete}" InputGestureText="Ctrl+A"></MenuItem>
                     <Separator></Separator>
-                    <MenuItem Header="Odjavi se"></MenuItem>
+                    <MenuItem Click="odjavaBtn_Click" Header="Odjavi se" Command="{StaticResource Odjava}" InputGestureText="Ctrl+L"></MenuItem>
                 </MenuItem>
+                <!--UREDI-->
                 <MenuItem Header="Uredi">
                     <MenuItem Header="Promeni temu">
                         <MenuItem Header="Svetla tema"></MenuItem>
@@ -40,28 +75,28 @@
                 </MenuItem>
             </Menu>
             <!--ToolBar-->
-            <ToolBar Height="45">
-                <Button Height="36" Width="35" ToolTip="Zakaži pregled" Margin="0,0,0,2" VerticalAlignment="Bottom" Click="Button_Click">
+            <ToolBar KeyboardNavigation.TabNavigation="Once" Height="45">
+                <Button Click="zakaziBtn_Click" Height="36" Width="35" ToolTip="Zakaži pregled">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluePlusIcon2.jpg" Height="28" Width="28" RenderTransformOrigin="-0.3,-0.2"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Prikaz obaveštenja" Click="Button_Click_2">
+                <Button Click="obavestenjaBtn_Click" Height="35" Width="35" ToolTip="Prikaz obaveštenja">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueMessageIcon2.png" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Prikaz termina pregleda" Click="Button_Click_1">
+                <Button Click="prikaziBtn_Click" Height="35" Width="35" ToolTip="Prikaz termina pregleda">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueCalendarIcon.jpg" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Prikaz termina operacija" Click="Button_Click_4">
+                <Button Click="operacijeBtn_Click" Height="35" Width="35" ToolTip="Prikaz termina operacija">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluHospitalIcon.png" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Anketa" Click="Button_Click_5">
+                <Button Click="anketaBtn_Click" Height="35" Width="35" ToolTip="Anketa">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueSurveyIcon.png" Height="28" Width="28"></Image>
                 </Button>
                 <Label Width="10"></Label>
-                <Button Height="35" Width="35" ToolTip="Odjavi se" Click="Button_Click_3">
+                <Button Click="odjavaBtn_Click" Height="35" Width="35" ToolTip="Odjavi se">
                     <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueLogOutIcon.png" Height="28" Width="28"></Image>
                 </Button>
             </ToolBar>
@@ -91,12 +126,15 @@
                     </Grid.RowDefinitions>
                     <!--Zakazi termin-->
                     <Button
-                    x:Name="zakaziBtn"
-                    FontSize="16"
-                    Content="Zakažite pregled"
-                    Grid.Row="0"
-                    Margin="10"
-                    Height="70" Click="zakaziBtn_Click"/>
+                        x:Name="zakaziBtn"
+                        FontSize="16"
+                        Content="Zakažite pregled"
+                        Grid.Row="0"
+                        Margin="10"
+                        Height="70" Click="zakaziBtn_Click"
+                        >
+                    </Button>
+
                     <!--Prikaz termina pregleda-->
                     <Button
                     x:Name="prikaziBtn"
