@@ -828,6 +828,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Skinovi\SvetlaTema.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Skinovi\TamnaTema.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Stilovi\Lekar\LekarStilovi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -6,8 +6,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary x:Name="SkinDictionary">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                
                 <ResourceDictionary Source="/Stilovi/Lekar/LekarStilovi.xaml">
                 </ResourceDictionary>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

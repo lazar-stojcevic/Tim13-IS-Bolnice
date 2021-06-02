@@ -8,10 +8,19 @@ using System.Windows;
 
 namespace IS_Bolnice
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public ResourceDictionary SkinDictionary { get { return Resources.MergedDictionaries[0]; } }
+
+        public void PromeniTemu(Uri uri)
+        {
+            SkinDictionary.MergedDictionaries.Clear();
+            SkinDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = uri });
+
+        }
+        public void OcistiTemu()
+        {
+            SkinDictionary.MergedDictionaries.Clear();
+        }
     }
 }

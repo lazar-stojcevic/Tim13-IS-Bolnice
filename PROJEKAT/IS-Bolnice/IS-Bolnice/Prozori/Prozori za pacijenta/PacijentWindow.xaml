@@ -64,8 +64,8 @@
                 <!--UREDI-->
                 <MenuItem Header="Uredi">
                     <MenuItem Header="Promeni temu">
-                        <MenuItem Header="Svetla tema"></MenuItem>
-                        <MenuItem Header="Tamna tema"></MenuItem>
+                        <MenuItem Header="Svetla tema" Click="MenuItem_Click_1"></MenuItem>
+                        <MenuItem Header="Tamna tema" Click="MenuItem_Click"></MenuItem>
                     </MenuItem>
                     <Separator></Separator>
                     <MenuItem Header="Promeni jezik">

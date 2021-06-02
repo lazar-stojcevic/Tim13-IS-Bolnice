@@ -1,6 +1,8 @@
 ﻿using IS_Bolnice.Prozori;
 using IS_Bolnice.Prozori.Prozori_za_pacijenta;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace IS_Bolnice
@@ -77,5 +79,29 @@ namespace IS_Bolnice
             ziot.ShowDialog();
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            PromeniTemu(sender);
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PromeniTemu(object sender)
+        {
+            var app = (App)Application.Current;
+
+            MenuItem menuItem = (MenuItem)sender;
+            if(menuItem.Header.Equals("Tamna tema"))
+            {
+                app.PromeniTemu(new Uri("Skinovi/TamnaTema.xaml", UriKind.Relative));
+            }
+            else
+            {
+                app.OcistiTemu();
+            }
+        }
     }
 }
