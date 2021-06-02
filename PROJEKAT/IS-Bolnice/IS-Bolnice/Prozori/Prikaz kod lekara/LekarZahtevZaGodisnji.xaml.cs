@@ -30,22 +30,33 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void ButtonClick_Povrdi(object sender, RoutedEventArgs e)
         {
-            DateTime startTime = pocetak.DisplayDate;
-            DateTime endTime = kraj.DisplayDate;
+            if (pocetak.Text.Length < 2 || kraj.Text.Length < 2)
+            {
+                CustomMessageBox.ShowOK("Niste dobro popunili sva polja", "Zahtev za odmor", "Dobro", MessageBoxImage.Error);
+                return;
+            }
+
+            DateTime startTime = (DateTime)pocetak.SelectedDate;
+            DateTime endTime = (DateTime)kraj.SelectedDate;
 
             TimeSpan span = endTime.Subtract(startTime);
 
             if (span.Days > Int16.Parse(PreostaliDani.Text))
             {
                 CustomMessageBox.ShowOK("Uneliste ste predugačak vremenski period!", "Zahtev za odmor", "Dobro", MessageBoxImage.Error);
+                return;
             }
 
 
             if (span.Days < 0)
             {
                 CustomMessageBox.ShowOK("Uneli ste negativan vremenski perion!", "Zahtev za odmor", "Dobro", MessageBoxImage.Error);
+                return;
             }
 
+
+            CustomMessageBox.ShowOK("Uspešno ste podneli zahtev za godišnji odmor", "Kreiran zahtev za odmor", "Dobro", MessageBoxImage.Information);
+            NavigationService.GoBack();
         }
 
         private void ButtonClick_Odustani(object sender, RoutedEventArgs e)

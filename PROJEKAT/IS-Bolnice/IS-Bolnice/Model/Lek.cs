@@ -20,6 +20,12 @@ public class Lek: Entitet, INotifyPropertyChanged
         zamenskiLekovi = new List<Lek>();
     }
 
+    public Lek(string imeLeka, string opisLeka) : base("123456789")
+    {
+        ime = imeLeka;
+        opis = opisLeka;
+    }
+
     public Lek(string sifraLeka, string imeLeka, string opisLeka, List<Sastojak> sastojciLeka, List<Lek> zamenskiLekoviLeka, bool lekuPotrebanRecept): base(sifraLeka)
     {
         Id = sifraLeka;

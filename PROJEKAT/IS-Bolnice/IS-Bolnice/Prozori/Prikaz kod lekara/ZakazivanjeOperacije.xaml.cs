@@ -11,7 +11,7 @@ using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
-    public partial class ZakazivanjeOperacije : Window
+    public partial class ZakazivanjeOperacije : Page
     {
         OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
@@ -42,7 +42,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 operacijaKontroler.ZakaziOperaciju(operacija);
                 MessageBox.Show("Operacijacija uspešno kreirana", "Kreirana operacija", MessageBoxButton.OK,
                     MessageBoxImage.Information);
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -77,7 +77,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da odustanete od zakazivanje operacije?", "Zakazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -178,7 +178,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             e.Handled = regex.IsMatch(e.Text);
         }
 
-       
+        private void Button_ClickNazad(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
     }
 
 }

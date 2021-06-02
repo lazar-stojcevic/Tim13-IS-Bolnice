@@ -32,7 +32,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             operacija.txtOperJmbg.Text = txtJMBG.Text;
             operacija.txtOperIme.Text = txtIme.Text;
             operacija.txtOperPrz.Text = txtPrz.Text;
-            operacija.ShowDialog();
+            NavigationService.Navigate(operacija);
 
         }
 
@@ -42,7 +42,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             pregled.txtOperJmbg.Text = txtJMBG.Text;
             pregled.txtOperIme.Text = txtIme.Text;
             pregled.txtOperPrz.Text = txtPrz.Text;
-            pregled.ShowDialog();
+            NavigationService.Navigate(pregled);
 
         }
 

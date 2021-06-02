@@ -50,5 +50,17 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             NavigationService.GoBack();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ViseOPregledu viseOPregledu = new ViseOPregledu();
+            NavigationService.Navigate(viseOPregledu);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ViseOOperaciji viseOOperaciji = new ViseOOperaciji();
+            NavigationService.Navigate(viseOOperaciji);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// <summary>
     /// Interaction logic for IzmenaOperacije.xaml
     /// </summary>
-    public partial class IzmenaOperacije : Window
+    public partial class IzmenaOperacije : Page
     {
         private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
@@ -93,7 +93,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
                 operacijaKontroler.IzmeniOperaciju(novaOperacija);
 
-                this.Close();
+                NavigationService.GoBack();
 
             }
         }
@@ -103,7 +103,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da napustite izmenu operacije, premene se neće sačuvati!", "Izmena operacije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -206,6 +206,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Button_ClickNazad(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
 
 

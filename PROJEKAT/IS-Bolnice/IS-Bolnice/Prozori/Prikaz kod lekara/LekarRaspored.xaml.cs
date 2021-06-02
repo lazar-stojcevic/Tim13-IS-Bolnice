@@ -76,7 +76,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 izmena.comboBoxSale.SelectedIndex = 0;
                 izmena.listaLekara.SelectedIndex = 0;
 
-                izmena.ShowDialog();
+                NavigationService.Navigate(izmena);
 
                 List<Operacija> op = operacijaKontroler.GetSveBuduceOperacijeLekara(sifra);
                 opKolekcija.Clear();
@@ -133,7 +133,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 izmena.terminiList.Items.Add(selektovani.VremePocetkaPregleda);
                 izmena.listaLekara.SelectedIndex = 0;
 
-                izmena.ShowDialog();
+                NavigationService.Navigate(izmena);
 
                 List<Pregled> pr = pregledKontroler.GetSviBuduciPreglediLekara(sifra);
                 preglediKolekcija.Clear();

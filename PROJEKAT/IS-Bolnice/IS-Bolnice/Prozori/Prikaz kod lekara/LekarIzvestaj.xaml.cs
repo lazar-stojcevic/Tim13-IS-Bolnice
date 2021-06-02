@@ -42,7 +42,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void Button_DodajLek(object sender, RoutedEventArgs e)
         {
             LekarDodavanjeLeka prozor = new LekarDodavanjeLeka(terapije, jmbgPac);
-            prozor.Show();
+            NavigationService.Navigate(prozor);
         }
 
         private void Button_ObrisiLek(object sender, RoutedEventArgs e)

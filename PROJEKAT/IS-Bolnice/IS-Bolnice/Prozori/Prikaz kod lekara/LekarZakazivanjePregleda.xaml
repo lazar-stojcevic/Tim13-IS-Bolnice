@@ -1,4 +1,4 @@
-﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarZakazivanjePregleda"
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarZakazivanjePregleda"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IS_Bolnice"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="LekarZakazivanjePregleda" Height="700" Width="400">
+        Title="LekarZakazivanjePregleda" Height="700" Width="400" Background="White">
     <Grid>
         <!--Vreme-->
         <TextBlock Text="Početak pregleda:" Margin="10,496,274.6,150.4"/>
@@ -63,7 +63,12 @@
             <Label Foreground="Red"  Content="Dostupni termini za selektovanu prostoriju i lekara" HorizontalAlignment="Left" Height="32" Margin="106,449,0,0" VerticalAlignment="Top" Width="284"/>
 
         </Grid>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="Button_ClickNazad">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
 
 
     </Grid>
-</Window>
+</Page>

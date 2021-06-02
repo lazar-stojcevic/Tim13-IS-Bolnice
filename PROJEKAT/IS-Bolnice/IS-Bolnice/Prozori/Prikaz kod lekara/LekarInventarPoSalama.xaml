@@ -17,7 +17,7 @@
 
         <Label Content="Sala za uvid:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,64,0,0"/>
 
-        <ComboBox x:Name="listaSoba" HorizontalAlignment="Left" Height="31" Margin="12,94,0,0" VerticalAlignment="Top" Width="378" SelectionChanged="PromenaSelekcije">
+        <ComboBox x:Name="listaSoba" HorizontalAlignment="Left" Height="31" Margin="12,94,0,0" VerticalAlignment="Top" Width="365" SelectionChanged="PromenaSelekcije">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding ''}" />
@@ -27,12 +27,12 @@
         </ComboBox>
 
         <Label Content="Inventar:" HorizontalAlignment="Left" Height="32" Margin="12,145,0,0" VerticalAlignment="Top" Width="70"/>
-        <ListView x:Name="inventar" HorizontalAlignment="Left" Height="465" Margin="12,182,0,0" VerticalAlignment="Top" Width="378">
+        <ListView x:Name="inventar" HorizontalAlignment="Left" Height="465" Margin="12,182,0,0" VerticalAlignment="Top" Width="365">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="90" DisplayMemberBinding="{Binding Predmet.Id}" />
                     <GridViewColumn Header="Ime opreme" Width="195" DisplayMemberBinding="{Binding Predmet.Naziv}"/>
-                    <GridViewColumn Header="Količina" Width="80" DisplayMemberBinding="{Binding Kolicina}"/>
+                    <GridViewColumn Header="Količina" Width="73" DisplayMemberBinding="{Binding Kolicina}"/>
                 </GridView>
             </ListView.View>
         </ListView>

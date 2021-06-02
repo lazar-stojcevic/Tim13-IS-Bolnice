@@ -20,7 +20,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// <summary>
     /// Interaction logic for LekarIzmenaPregleda.xaml
     /// </summary>
-    public partial class LekarIzmenaPregleda : Window
+    public partial class LekarIzmenaPregleda : Page
     {
 
         private Pregled stariPregled = new Pregled();
@@ -44,7 +44,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 Pregled noviPregled = KreirajNoviPregled();
 
                 pregledKontroler.IzmeniPregled(noviPregled);
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -55,7 +55,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da napustite izmenu operacije, premene se neće sačuvati!", "Izmena pregleda", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -142,6 +142,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             noviPregled.VremePocetkaPregleda = pocetak;
             noviPregled.VremeKrajaPregleda = kraj;
             return noviPregled;
+        }
+
+        private void Button_ClickNazad(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
 
     }

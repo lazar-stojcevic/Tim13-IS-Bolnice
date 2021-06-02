@@ -1,0 +1,39 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.ViseOOperaciji"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+      mc:Ignorable="d" 
+      Height="700" Width="400" Background="White"
+      Title="Vise o operaciji">
+
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,0,0"/>
+        <Label Content="Više o operaciji" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216"/>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+
+        <Label  Content="JMBG pacijenta:" HorizontalAlignment="Left" Margin="11,74,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label  Content="Ime pacijenta:" HorizontalAlignment="Left" Margin="11,124,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label  Content="Prezime pacijenta:" HorizontalAlignment="Left" Margin="11,176,0,0" VerticalAlignment="Top" Width="115"/>
+        <Label  Content="Vreme početka:" HorizontalAlignment="Left" Margin="11,302,0,0" VerticalAlignment="Top" Width="115"/>
+        <Label  Content="Vreme kraja:" HorizontalAlignment="Left" Margin="11,360,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label  Content="Operaciona sala:" HorizontalAlignment="Left" Margin="11,418,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="jmbgTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="129,74,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="imeTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="129,124,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="przTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="129,180,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="vremePocetkaTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="129,300,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="vremeKrajaTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="129,358,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <TextBox x:Name="salaTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="129,420,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <Label  Content="Oblast pregleda:" HorizontalAlignment="Left" Margin="11,242,0,0" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="oblastLekaraTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="129,242,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="248"/>
+        <Label  Content="Izveštaj:" HorizontalAlignment="Left" Margin="11,462,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="izvestajTxt" IsReadOnly="True" HorizontalAlignment="Left" Height="163" Margin="11,493,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="366"/>
+
+
+    </Grid>
+</Page>

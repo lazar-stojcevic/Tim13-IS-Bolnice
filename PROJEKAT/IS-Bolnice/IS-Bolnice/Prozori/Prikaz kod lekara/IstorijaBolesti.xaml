@@ -12,25 +12,25 @@
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,0,0"/>
         <Label Content="Istorija bolesti" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216"/>
         <Label Content="Pregledi:" HorizontalAlignment="Left" Height="31" Margin="10,71,0,0" VerticalAlignment="Top" Width="122"/>
-        <ListView x:Name="listaPregleda" HorizontalAlignment="Left" Height="206" Margin="10,107,0,0" VerticalAlignment="Top" Width="380">
+        <ListView x:Name="listaPregleda" HorizontalAlignment="Left" Height="182" Margin="10,107,0,0" VerticalAlignment="Top" Width="367">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Oblast lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Oblast.Naziv}" />
-                    <GridViewColumn Header="Datum" Width="220" DisplayMemberBinding="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}"/>
+                    <GridViewColumn Header="Datum" Width="210" DisplayMemberBinding="{Binding VremePocetkaPregleda, StringFormat=dd-MM-yyyy HH:mm}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="Operacije:" HorizontalAlignment="Left" Height="31" Margin="10,379,0,0" VerticalAlignment="Top" Width="122"/>
-        <ListView x:Name="listaOperacija" HorizontalAlignment="Left" Height="206" Margin="10,415,0,0" VerticalAlignment="Top" Width="380">
+        <Label Content="Operacije:" HorizontalAlignment="Left" Height="31" Margin="10,365,0,0" VerticalAlignment="Top" Width="122"/>
+        <ListView x:Name="listaOperacija" HorizontalAlignment="Left" Height="182" Margin="10,401,0,0" VerticalAlignment="Top" Width="367">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Oblast lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Oblast.Naziv}" />
-                    <GridViewColumn Header="Datum" Width="220" DisplayMemberBinding="{Binding VremePocetkaOperacije, StringFormat=dd-MM-yyyy HH:mm}"/>
+                    <GridViewColumn Header="Datum" Width="210" DisplayMemberBinding="{Binding VremePocetkaOperacije, StringFormat=dd-MM-yyyy HH:mm}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Više" HorizontalAlignment="Left" Height="44" Margin="226,327,0,0" VerticalAlignment="Top" Width="164"/>
-        <Button Content="Više" HorizontalAlignment="Left" Height="44" Margin="226,636,0,0" VerticalAlignment="Top" Width="164"/>
+        <Button Content="Više" HorizontalAlignment="Left" Height="44" Margin="218,299,0,0" VerticalAlignment="Top" Width="159" Click="Button_Click"/>
+        <Button Content="Više" HorizontalAlignment="Left" Height="44" Margin="218,592,0,0" VerticalAlignment="Top" Width="159" Click="Button_Click_1"/>
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
             <StackPanel>
                 <Image Source="/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />

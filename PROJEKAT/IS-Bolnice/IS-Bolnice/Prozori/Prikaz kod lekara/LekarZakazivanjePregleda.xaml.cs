@@ -19,7 +19,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// <summary>
     /// Interaction logic for LekarZakazivanjePregleda.xaml
     /// </summary>
-    public partial class LekarZakazivanjePregleda : Window
+    public partial class LekarZakazivanjePregleda : Page
     {
         private PregledKontroler pregledKontroler = new PregledKontroler();
 
@@ -42,7 +42,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 pregledKontroler.ZakaziPregled(noviPregled);
                 MessageBox.Show("Pregled uspešno kreiran", "Kreiran pregled", MessageBoxButton.OK,
                     MessageBoxImage.Information);
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -75,7 +75,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li želida da odustanete od zakazivanje pregleda?", "Zakazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -138,6 +138,13 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             help.Opacity = 0;
         }
+
+        private void Button_ClickNazad(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+
 
     }
 }

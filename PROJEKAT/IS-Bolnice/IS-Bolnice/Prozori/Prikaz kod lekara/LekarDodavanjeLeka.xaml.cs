@@ -21,7 +21,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     /// <summary>
     /// Interaction logic for LekarDodavanjeLeka.xaml
     /// </summary>
-    public partial class LekarDodavanjeLeka : Window
+    public partial class LekarDodavanjeLeka : Page
     {
         ObservableCollection<Terapija> sveZadateTerapije = new ObservableCollection<Terapija>();
 
@@ -145,12 +145,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void ValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[\\.a-zA-Z0-9,!? ]*$");
+            e.Handled = !regex.IsMatch(e.Text);
+        }
+
         private void Button_KrajClick(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da ste definisali sve terapije?", "Dodavanje terapije", "Da", "Ne", MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                this.Close();
+                NavigationService.GoBack();
             }
         }
 
@@ -163,6 +169,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private void Button_ClickNazad(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
 
     }
