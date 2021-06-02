@@ -7,38 +7,36 @@
         mc:Ignorable="d"
         Title="Zakazivanje termina kod određenog lekara" Height="400" Width="350"
         WindowStartupLocation="CenterScreen">
-    <Border Background="#eee">
-        <StackPanel Margin="10" Background="White">
-            <!--Lista lekara-->
-            <TextBlock 
+    <StackPanel Margin="10" Background="White">
+        <!--Lista lekara-->
+        <TextBlock 
                Text="Odaberite lekara"
                FontSize="16"
                Margin="10 10 10 0"/>
-            <ListBox 
+        <ListBox 
                 Height="100"
                 Margin="5"
                 FontSize="16"
                 x:Name="lekariList" SelectionChanged="lekariList_SelectionChanged"/>
 
-            <!--Predlozeni termini-->
-            <TextBlock
+        <!--Predlozeni termini-->
+        <TextBlock
                 Text="Odaberite termin"
                 FontSize="16"
                 Margin="10 0 10 0"/>
-            <ListBox
+        <ListBox
                 Height="100"
                 Margin="5"
                 FontSize="16"
                 x:Name="terminiList" SelectionChanged="terminiList_SelectionChanged"/>
-            <!--Dugmad-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button IsEnabled="false" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="Potvrdi" Click="potvrdi_Click"/>
-                <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="Odustani" Click="odustani_Click"/>
-            </Grid>
-        </StackPanel>
-    </Border>
+        <!--Dugmad-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button IsEnabled="false" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="Potvrdi" Click="potvrdi_Click"/>
+            <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="Odustani" Click="odustani_Click"/>
+        </Grid>
+    </StackPanel>
 </Window>

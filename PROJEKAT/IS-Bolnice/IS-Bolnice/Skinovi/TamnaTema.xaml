@@ -2,10 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style TargetType="ToolBar">
-        <Setter Property="Background" Value="DarkCyan"/>
+        <Setter Property="Background" Value="DarkGray"/>
     </Style>
     
     <Style TargetType="Menu">
-        <Setter Property="Background" Value="DarkCyan"/>
+        <Setter Property="Background" Value="DarkOliveGreen"/>
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
     </Style>
+    
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="DarkOliveGreen"/>
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
+    </Style>
+
+    <Style TargetType="StackPanel">
+        <Setter Property="Background" Value="DarkGray"/>
+    </Style>
+    
 </ResourceDictionary>

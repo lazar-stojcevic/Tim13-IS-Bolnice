@@ -86,7 +86,7 @@ namespace IS_Bolnice
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-
+            PromeniTemu(sender);
         }
 
         private void PromeniTemu(object sender)
@@ -100,7 +100,7 @@ namespace IS_Bolnice
             }
             else
             {
-                app.OcistiTemu();
+                app.PromeniTemu(new Uri("Skinovi/SvetlaTema.xaml", UriKind.Relative));
             }
         }
     }

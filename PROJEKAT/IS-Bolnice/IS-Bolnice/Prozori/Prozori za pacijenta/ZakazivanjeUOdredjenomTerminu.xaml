@@ -8,62 +8,60 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="Zakazivanje pregleda u određenom terminu" Height="350" Width="300"
         WindowStartupLocation="CenterScreen">
-    <Border>
-        <StackPanel Margin="10">
-            <!--Datum-->
-            <TextBlock FontSize="16" Text="Datum pregleda"/>
-            <DatePicker FontSize="16" x:Name="datePicker" Margin= "0 5" SelectedDate="{x:Static sys:DateTime.Now}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
-            <!-- DODATI OVO SelectedDate="{x:Static sys:DateTime.Now}" DisplayDateStart="{x:Static sys:DateTime.Now}"-->
-            <!--Vreme-->
-            <TextBlock FontSize="16" Text="Odaberite vreme pregleda"/>
-            <Grid Height="61">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition />
+    <StackPanel>
+        <!--Datum-->
+        <TextBlock FontSize="16" Text="Datum pregleda"/>
+        <DatePicker FontSize="16" x:Name="datePicker" Margin= "0 5" SelectedDate="{x:Static sys:DateTime.Now}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+        <!-- DODATI OVO SelectedDate="{x:Static sys:DateTime.Now}" DisplayDateStart="{x:Static sys:DateTime.Now}"-->
+        <!--Vreme-->
+        <TextBlock FontSize="16" Text="Odaberite vreme pregleda"/>
+        <Grid Height="61">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition />
 
-                </Grid.ColumnDefinitions>
-                <TextBox FontSize="16" BorderBrush="Black" x:Name="txtHour" BorderThickness="1" MaxLength="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="00"/>
-                <TextBlock Text=":" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBox FontSize="16" BorderBrush="Black" x:Name="txtMinute" BorderThickness="1" MaxLength="2" TextAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="00"/>
+            </Grid.ColumnDefinitions>
+            <TextBox FontSize="16" BorderBrush="Black" x:Name="txtHour" BorderThickness="1" MaxLength="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="00"/>
+            <TextBlock Text=":" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox FontSize="16" BorderBrush="Black" x:Name="txtMinute" BorderThickness="1" MaxLength="2" TextAlignment="Center" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="00"/>
+        </Grid>
+
+        <!--Dugmad za sate-->
+        <Grid Height="61">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Height="25" Width="65" Margin="2" x:Name="btnUpHrs" Content="+" FontSize="20" Click="btnUpHrs_Click"/>
+                <Button Height="25" Width="65" Margin="2" x:Name="btnDownHrs" Grid.Row="1" Content="-" FontSize="20" Click="btnDownHrs_Click"/>
             </Grid>
 
-            <!--Dugmad za sate-->
-            <Grid Height="61">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="5" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Button Height="25" Width="65" Margin="2" x:Name="btnUpHrs" Content="+" FontSize="20" Click="btnUpHrs_Click"/>
-                    <Button Height="25" Width="65" Margin="2" x:Name="btnDownHrs" Grid.Row="1" Content="-" FontSize="20" Click="btnDownHrs_Click"/>
-                </Grid>
-
-                <!--Dugamd za minute-->
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Button Height="25" Width="65" Margin="2" x:Name="btnUpMin" Content="+" FontSize="20" Click="btnUpMin_Click"/>
-                    <Button Height="25" Width="65" Margin="2" x:Name="btnDownMin" Grid.Row="1" Content="-" FontSize="20" Click="btnDownMin_Click"/>
-                </Grid>
+            <!--Dugamd za minute-->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Height="25" Width="65" Margin="2" x:Name="btnUpMin" Content="+" FontSize="20" Click="btnUpMin_Click"/>
+                <Button Height="25" Width="65" Margin="2" x:Name="btnDownMin" Grid.Row="1" Content="-" FontSize="20" Click="btnDownMin_Click"/>
             </Grid>
+        </Grid>
 
-            <!--Razmak-->
-            <Grid Height="75" Margin="5 20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button FontSize="16" Content="Potvrdi" Margin="5" x:Name="btnPotvrdi" Click="btnPotvrdi_Click" Width="100" Height="50"/>
-                <Button FontSize="16" Grid.Column="1" Content="Odustani" Margin="5" x:Name="Odustani" Click="Odustani_Click" Width="100" Height="50"/>
-            </Grid>
-        </StackPanel>
-    </Border>
+        <!--Razmak-->
+        <Grid Height="75" Margin="5 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button FontSize="16" Content="Potvrdi" Margin="5" x:Name="btnPotvrdi" Click="btnPotvrdi_Click" Width="100" Height="50"/>
+            <Button FontSize="16" Grid.Column="1" Content="Odustani" Margin="5" x:Name="Odustani" Click="Odustani_Click" Width="100" Height="50"/>
+        </Grid>
+    </StackPanel>
 </Window>
