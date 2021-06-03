@@ -160,6 +160,7 @@
     <Compile Include="Kontroleri\RenovacijaKontroler.cs" />
     <Compile Include="Kontroleri\SadrzajSobeKontroler.cs" />
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
+    <Compile Include="Kontroleri\WPFNavigacijaKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
     <Compile Include="Model\Beleska.cs" />
@@ -459,6 +460,7 @@
       <DependentUpon>ZakazivanjeOperacije.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Terapija.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="Servisi\AnketaServis.cs" />
     <Compile Include="Servisi\BelezkeServis.cs" />
     <Compile Include="Servisi\BolnicaServis.cs" />
@@ -480,6 +482,11 @@
     <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
+    <Compile Include="ViewModel\Upravnik\AddSaluPageViewModel.cs" />
+    <Compile Include="ViewModel\Upravnik\EditSalePageViewModel.cs" />
+    <Compile Include="ViewModel\Upravnik\SalePageViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="VMConverter\SaleConverter.cs" />
     <Page Include="Prozori\OdredjivanjeTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

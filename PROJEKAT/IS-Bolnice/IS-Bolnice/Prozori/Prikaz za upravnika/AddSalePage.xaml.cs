@@ -1,4 +1,5 @@
 ﻿using IS_Bolnice.Kontroleri;
+using IS_Bolnice.ViewModel.Upravnik;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,30 +22,16 @@ namespace IS_Bolnice.Prozori.UpravnikPages
     /// </summary>
     public partial class AddSalePage : Page
     {
-        BolnicaKontroler kontroler = new BolnicaKontroler();
         public AddSalePage()
         {
             InitializeComponent();
         }
 
-        private void Dodaj_btn_Click(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Soba novaSoba = new Soba();
-            novaSoba.Id = id_txt.Text;
-            novaSoba.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
-            novaSoba.Kvadratura = double.Parse(kvadratura_txt.Text);
-            novaSoba.Sprat = int.Parse(sprat_txt.Text);
-            kontroler.KreirajSobuUBolnici(novaSoba);
-            
-            
-            Page sale = new SalePage();
-            this.NavigationService.Navigate(sale);
+            this.DataContext = new AddSaluPageViewModel(this.NavigationService);
         }
 
-        private void Odustani_btn_Click(object sender, RoutedEventArgs e)
-        {
-            Page sale = new SalePage();
-            this.NavigationService.Navigate(sale);
-        }
+
     }
 }

@@ -49,5 +49,10 @@ namespace IS_Bolnice.Kontroleri
         {
             return bolnicaServis.GetMagacin();
         }
+
+        public void ObrisiSobu(string id)
+        {
+            bolnicaServis.ObrisiSobu(id);
+        }
     }
 }

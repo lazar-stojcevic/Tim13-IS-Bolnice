@@ -92,5 +92,19 @@ namespace IS_Bolnice.Servisi
         {
             return bolnicaRepo.GetMagacin();
         }
+
+        public void ObrisiSobu(string id)
+        {
+            Bolnica bolnica = bolnicaRepo.GetBolnica();
+            foreach (Soba sobaIter in bolnica.Sobe)
+            {
+                if (sobaIter.Id.Equals(id))
+                {
+                    sobaIter.Obrisano = true;
+                }
+            }
+            bolnicaRepo.Izmeni(bolnica);
+
+        }
     }
 }

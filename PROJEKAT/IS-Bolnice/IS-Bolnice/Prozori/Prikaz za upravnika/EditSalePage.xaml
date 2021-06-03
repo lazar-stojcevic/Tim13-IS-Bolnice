@@ -6,35 +6,23 @@
       xmlns:local="clr-namespace:IS_Bolnice.Prozori.UpravnikPages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="500"
-      Title="EditSalePage" Background="White">
+      Title="EditSalePage" Background="White" Loaded="OnLoad">
 
     <Grid>
         <Label Content="ID sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,172,0,0" VerticalAlignment="Top" Width="153"/>
-        <Label Content="Tip sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,240,0,0" VerticalAlignment="Top" Width="153" RenderTransformOrigin="0.528,1.613"/>
-        <Label Content="Sprat:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,306,0,0" VerticalAlignment="Top" Width="153"/>
-        <Label Content="Kvadratura sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,378,0,0" VerticalAlignment="Top" Width="219"/>
-        <TextBox x:Name="id_txt" IsReadOnly="True" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap" Text="Upisite ID sobe" VerticalAlignment="Top" Width="239"/>
-        <TextBox x:Name="sprat_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,306,0,0" TextWrapping="Wrap" Text="Upisite sprat na kom se soba nalazi" VerticalAlignment="Top" Width="239"/>
-        <TextBox x:Name="kvadratura_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,378,0,0" TextWrapping="Wrap" Text="Upisite kvadraturu sobe" VerticalAlignment="Top" Width="239"/>
-        <ComboBox x:Name="tip_sobe_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="195,242,0,0" VerticalAlignment="Top" Width="273">
-
-            <ComboBoxItem IsSelected="True">Operaciona sala</ComboBoxItem>
-            <ComboBoxItem>Bolnicka soba</ComboBoxItem>
-            <ComboBoxItem>Ordinacija</ComboBoxItem>
-            <ComboBoxItem>Magacin</ComboBoxItem>
-
-        </ComboBox>
-        <Button x:Name="Izmeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="41,476,0,0" VerticalAlignment="Top" Width="179" Click="Izmeni_btn_Click"/>
-        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,476,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Label Content="Tip sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,247,0,0" VerticalAlignment="Top" Width="153" RenderTransformOrigin="0.528,1.613"/>
+        <Label Content="Sprat:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,327,0,0" VerticalAlignment="Top" Width="153"/>
+        <Label Content="Kvadratura sobe:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="10,407,0,0" VerticalAlignment="Top" Width="219"/>
+        <TextBox x:Name="id_txt" IsReadOnly="True" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap" Text="{Binding Id}" VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="sprat_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,326,0,0" TextWrapping="Wrap" Text="{Binding Sprat}" VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="kvadratura_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,406,0,0" TextWrapping="Wrap" Text="{Binding Kvadratura}" VerticalAlignment="Top" Width="239"/>
+        <ComboBox x:Name="tip_sobe_txt" ItemsSource="{Binding SviMoguciTipovi}" SelectedItem="{Binding Tip}" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="195,249,0,0" VerticalAlignment="Top" Width="273"/>
+        <Button x:Name="Izmeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Izmeni" HorizontalAlignment="Left" Height="50" Margin="41,540,0,0" VerticalAlignment="Top" Width="179" Command="{Binding Path=EditCommand}"/>
+        <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,540,0,0" VerticalAlignment="Top" Width="184" Command="{Binding Path=CancelEditCommand}"/>
         <Label x:Name="label" FontSize="38" Content="Izmena prostorije" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Height="65" Width="321"/>
-        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="DeleteButton_Click" Margin="195,569,204,48">
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Margin="367,45,32,572" Command="{Binding Path=DeleteCommand}">
             <StackPanel>
                 <Image Source="/Slike/Upravnik/garbage-can.png" Height="65" Width="85" />
-            </StackPanel>
-        </Button>
-        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="RenoviranjeButton_Click" Margin="367,27,32,590">
-            <StackPanel>
-                <Image Source="/Slike/Upravnik/renovation.png" Height="65" Width="85" />
             </StackPanel>
         </Button>
     </Grid>

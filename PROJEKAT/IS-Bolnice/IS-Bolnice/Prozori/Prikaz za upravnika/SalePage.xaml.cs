@@ -1,4 +1,5 @@
 ﻿using IS_Bolnice.Kontroleri;
+using IS_Bolnice.ViewModel.Upravnik;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,54 +27,11 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         public SalePage()
         {
             InitializeComponent();
-            List<Soba> sveSobe = kontroler.GetSveSobe();
-            foreach (Soba iterSoba in sveSobe) {
-                if (iterSoba.Obrisano == false) {
-                    sveSobeZaPrikaz.Add(iterSoba);
-                }
-            }
-            listBox.ItemsSource = sveSobeZaPrikaz;
         }
 
-        private bool SveProstorijeSuSelektovanje() {
-            switch (tip_sale_txt.SelectedIndex)
-            {
-                case 0:
-                    return true;
-               
-                default:
-                    return false;
-                   
-            }
-        }
-
-        private RoomType SelektovaniTipProstorije() {
-            switch (tip_sale_txt.SelectedIndex)
-            {
-                case 1:
-                    return RoomType.operacionaSala;
-                case 2:
-                    return RoomType.bolnickaSoba;
-                case 3:
-                    return RoomType.ordinacija;
-                default:
-                    return RoomType.magacin;
-            }
-        }
-
-        private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
-            List<Soba> selektovaneSobe = new List<Soba>();
-            foreach (Soba s in sveSobeZaPrikaz)
-            {
-
-                if (s.Obrisano == false && (SveProstorijeSuSelektovanje() || s.Tip == SelektovaniTipProstorije()))
-                {
-                    selektovaneSobe.Add(s);
-                    
-                }
-            }
-            listBox.ItemsSource = selektovaneSobe;
+            this.DataContext = new SalePageViewModel(this.NavigationService);
         }
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,11 +41,9 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             this.NavigationService.Navigate(editSale);
         }
 
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void tip_opreme_txt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Page addSale = new AddSalePage();
-            this.NavigationService.Navigate(addSale);
+
         }
     }
 }
