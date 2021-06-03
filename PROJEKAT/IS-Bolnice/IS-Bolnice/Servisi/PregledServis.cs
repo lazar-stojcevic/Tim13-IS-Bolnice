@@ -22,6 +22,20 @@ namespace IS_Bolnice.Servisi
         private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
         private IIzmenaTerminaRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
 
+        public Pregled PostaviPrvogSlobodnogLekaraOpstePrakseNaPregled(Pregled pregled)
+        {
+            foreach(Lekar lekar in lekarRepo.GetSviLekariOpstePrakse())
+            {
+                pregled.Lekar = lekar;
+                if (MozeDaSeZakaze(pregled))
+                {
+                    break;
+                }
+            }
+
+            return pregled;
+        }
+
         public List<Pregled> GetsviPregledi()
         {
             return pregledRepo.DobaviSve();
