@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
+        xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
-        Title="Osnovni prozor" Height="600" Width="570"
+        Title="{x:Static p:Resources.ttPocetnaStranica}" Height="600" Width="570"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <RoutedUICommand x:Key="PrikazTerminaPregleda" Text="PrikazTerminaPregleda" />
@@ -17,7 +18,7 @@
         <RoutedUICommand x:Key="ZakazivanjeUTerminu" Text="UTerminu" />
         <RoutedUICommand x:Key="PrikazIzvestaja" Text="Izvestaj" />
     </Window.Resources>
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource PrikazTerminaPregleda}" Executed="prikaziBtn_Click" />
         <CommandBinding Command="{StaticResource PrikazTerminaOperacija}" Executed="operacijeBtn_Click" />
@@ -44,59 +45,59 @@
     <StackPanel Background="LightSteelBlue">
         <!--Meni-->
         <Menu>
-            <MenuItem Header="Funkcije">
+            <MenuItem Header="{x:Static p:Resources.btnFunkcije}">
                 <!--ZAKAZIVANJE PREGLEDA-->
-                <MenuItem Header="Zakazivanje pregleda">
-                    <MenuItem Command="{StaticResource ZakazivanjeKodLekara}" InputGestureText="Ctrl+G" Click="zakazivanjeKodLekara_Click" Header="Kod određenog lekara"></MenuItem>
-                    <MenuItem Command="{StaticResource ZakazivanjeUTerminu}" InputGestureText="Ctrl+T" Click="zakazivanjeUTerminu_Click" Header="U određenom terminu"></MenuItem>
+                <MenuItem Header="{x:Static p:Resources.btnPregled}">
+                    <MenuItem Command="{StaticResource ZakazivanjeKodLekara}" InputGestureText="Ctrl+G" Click="zakazivanjeKodLekara_Click" Header="{x:Static p:Resources.btnKodLekara}"></MenuItem>
+                    <MenuItem Command="{StaticResource ZakazivanjeUTerminu}" InputGestureText="Ctrl+T" Click="zakazivanjeUTerminu_Click" Header="{x:Static p:Resources.btnUTerminu}"></MenuItem>
                 </MenuItem>
                 <!--PRIKAZI-->
                 <Separator></Separator>
-                <MenuItem Click="prikaziBtn_Click" Header="Prikaz termina pregleda" Command="{StaticResource PrikazTerminaPregleda}" InputGestureText="Ctrl+P"></MenuItem>
-                <MenuItem Click="operacijeBtn_Click" Header="Prikaz termina operacija" Command="{StaticResource PrikazTerminaOperacija}" InputGestureText="Ctrl+O"></MenuItem>
-                <MenuItem Click="obavestenjaBtn_Click" Header="Prikaz obaveštenja" Command="{StaticResource PrikazObavestenja}" InputGestureText="Ctrl+Q"></MenuItem>
-                <MenuItem Click="izvestaj_Click" Header="Prikaz izveštaja sa pregleda" Command="{StaticResource PrikazIzvestaja}" InputGestureText="Ctrl+I" ></MenuItem>
+                <MenuItem Click="prikaziBtn_Click" Header="{x:Static p:Resources.btnTerminiPregleda}" Command="{StaticResource PrikazTerminaPregleda}" InputGestureText="Ctrl+P"></MenuItem>
+                <MenuItem Click="operacijeBtn_Click" Header="{x:Static p:Resources.btnTerminiOperacija}" Command="{StaticResource PrikazTerminaOperacija}" InputGestureText="Ctrl+O"></MenuItem>
+                <MenuItem Click="obavestenjaBtn_Click" Header="{x:Static p:Resources.btnObavestenje}" Command="{StaticResource PrikazObavestenja}" InputGestureText="Ctrl+Q"></MenuItem>
+                <MenuItem Click="izvestaj_Click" Header="{x:Static p:Resources.btnIzvestaj}" Command="{StaticResource PrikazIzvestaja}" InputGestureText="Ctrl+I" ></MenuItem>
                 <Separator></Separator>
-                <MenuItem Click="anketaBtn_Click" Header="Ankete" Command="{StaticResource PrikazAnkete}" InputGestureText="Ctrl+A"></MenuItem>
+                <MenuItem Click="anketaBtn_Click" Header="{x:Static p:Resources.btnAnketa}" Command="{StaticResource PrikazAnkete}" InputGestureText="Ctrl+A"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Click="odjavaBtn_Click" Header="Odjavi se" Command="{StaticResource Odjava}" InputGestureText="Ctrl+L"></MenuItem>
+                <MenuItem Click="odjavaBtn_Click" Header="{x:Static p:Resources.btnOdjaviSe}" Command="{StaticResource Odjava}" InputGestureText="Ctrl+L"></MenuItem>
             </MenuItem>
             <!--UREDI-->
-            <MenuItem Header="Uredi">
-                <MenuItem Header="Promeni temu">
-                    <MenuItem Header="Svetla tema" Click="MenuItem_Click_1"></MenuItem>
-                    <MenuItem Header="Tamna tema" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Header="{x:Static p:Resources.btnUredi}">
+                <MenuItem Header="{x:Static p:Resources.menuTema}">
+                    <MenuItem x:Name="svetlaTema" Header="{x:Static p:Resources.menuSvetla}" Click="svetlaTema_Click"></MenuItem>
+                    <MenuItem x:Name="tamnaTema" Header="{x:Static p:Resources.menuTamna}" Click="tamnaTema_Click"></MenuItem>
                 </MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Promeni jezik">
-                    <MenuItem Header="Srpski jezik"></MenuItem>
-                    <MenuItem Header="Engleski jezik"></MenuItem>
+                <MenuItem Header="{x:Static p:Resources.menuJezik}">
+                    <MenuItem x:Name="srpski" Header="{x:Static p:Resources.menuSrpski}" Click="srpski_Click"></MenuItem>
+                    <MenuItem x:Name="engleski" Header="{x:Static p:Resources.menuEngleski}" Click="engleski_Click"></MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>
         <!--ToolBar-->
         <ToolBar Background="AliceBlue" KeyboardNavigation.TabNavigation="Once" Height="45">
-            <Button Click="zakaziBtn_Click" Height="36" Width="35" ToolTip="Zakaži pregled">
+            <Button Click="zakaziBtn_Click" Height="36" Width="35" ToolTip="{x:Static p:Resources.btnPregled}">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluePlusIcon2.jpg" Height="28" Width="28" RenderTransformOrigin="-0.3,-0.2"></Image>
             </Button>
             <Label Width="10"></Label>
-            <Button Click="obavestenjaBtn_Click" Height="35" Width="35" ToolTip="Prikaz obaveštenja">
+            <Button Click="obavestenjaBtn_Click" Height="35" Width="35" ToolTip="{x:Static p:Resources.btnObavestenje}">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueMessageIcon2.png" Height="28" Width="28"></Image>
             </Button>
             <Label Width="10"></Label>
-            <Button Click="prikaziBtn_Click" Height="35" Width="35" ToolTip="Prikaz termina pregleda">
+            <Button Click="prikaziBtn_Click" Height="35" Width="35" ToolTip="{x:Static p:Resources.btnTerminiPregleda}">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueCalendarIcon.jpg" Height="28" Width="28"></Image>
             </Button>
             <Label Width="10"></Label>
-            <Button Click="operacijeBtn_Click" Height="35" Width="35" ToolTip="Prikaz termina operacija">
+            <Button Click="operacijeBtn_Click" Height="35" Width="35" ToolTip="{x:Static p:Resources.btnTerminiOperacija}">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/bluHospitalIcon.png" Height="28" Width="28"></Image>
             </Button>
             <Label Width="10"></Label>
-            <Button Click="anketaBtn_Click" Height="35" Width="35" ToolTip="Anketa">
+            <Button Click="anketaBtn_Click" Height="35" Width="35" ToolTip="{x:Static p:Resources.btnAnketa}">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueSurveyIcon.png" Height="28" Width="28"></Image>
             </Button>
             <Label Width="10"></Label>
-            <Button Click="odjavaBtn_Click" Height="35" Width="35" ToolTip="Odjavi se">
+            <Button Click="odjavaBtn_Click" Height="35" Width="35" ToolTip="{x:Static p:Resources.btnOdjaviSe}">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Slike/Pacijent/blueLogOutIcon.png" Height="28" Width="28"></Image>
             </Button>
         </ToolBar>
@@ -128,7 +129,7 @@
                 <Button
                         x:Name="zakaziBtn"
                         FontSize="16"
-                        Content="Zakažite pregled"
+                        Content="{x:Static p:Resources.btnPregled}"
                         Grid.Row="0"
                         Margin="10"
                         Height="70" Click="zakaziBtn_Click"
@@ -139,7 +140,7 @@
                 <Button
                     x:Name="prikaziBtn"
                     FontSize="16"
-                    Content="Prikaz termina pregleda"
+                    Content="{x:Static p:Resources.btnTerminiPregleda}"
                     Grid.Row="1"
                     Margin="10"
                     Height="70" Click="prikaziBtn_Click"/>
@@ -147,7 +148,7 @@
                 <Button
                     x:Name="anketaBtn"
                     FontSize="16"
-                    Content="Anketa"
+                    Content="{x:Static p:Resources.btnAnketa}"
                     Grid.Row="2"
                     Margin="10"
                     Height="70" Click="anketaBtn_Click"/>
@@ -164,21 +165,21 @@
                 <Button
                         x:Name="obavestenjaBtn"
                         FontSize="16"
-                        Content="Prikaz obavestenja"
+                        Content="{x:Static p:Resources.btnObavestenje}"
                         Margin="10"
                         Height="70" Click="obavestenjaBtn_Click"/>
                 <!--Prikaz operacija-->
                 <Button Grid.Row="1"
                         x:Name="operacijeBtn"
                         FontSize="16"
-                        Content="Prikaz termina operacija"
+                        Content="{x:Static p:Resources.btnTerminiOperacija}"
                         Margin="10"
                         Height="70" Click="operacijeBtn_Click"/>
                 <!--Odjava-->
                 <Button Grid.Row="2"
                     x:Name="odjavaBtn"
                         FontSize="16"
-                        Content="Odjavi se"
+                        Content="{x:Static p:Resources.btnOdjaviSe}"
                         Margin="10"
                         Height="70" Click="odjavaBtn_Click"/>
             </Grid>

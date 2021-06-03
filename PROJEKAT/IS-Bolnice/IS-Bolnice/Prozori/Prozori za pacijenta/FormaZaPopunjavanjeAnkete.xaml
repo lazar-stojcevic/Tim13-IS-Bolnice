@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
+        xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
         Title="Anketa" Height="450" Width="370"
         WindowStartupLocation="CenterScreen">
@@ -13,14 +14,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <RadioButton x:Name="radBtnLekari" GroupName="anketa" Content="Oceni lekare" Grid.Column="0" Margin="10" IsChecked="True" Checked="radBtnLekari_Checked"/>
-            <RadioButton x:Name="radBtnKompanija" GroupName="anketa" Content="Oceni rad kompanije" Grid.Column="1" Margin="10" Checked="radBtnKompanija_Checked"/>
+            <RadioButton x:Name="radBtnLekari" GroupName="anketa" Content="{x:Static p:Resources.labOceniLekara}" Grid.Column="0" Margin="10" IsChecked="True" Checked="radBtnLekari_Checked"/>
+            <RadioButton x:Name="radBtnKompanija" GroupName="anketa" Content="{x:Static p:Resources.labOceniRadKompanije}" Grid.Column="1" Margin="10" Checked="radBtnKompanija_Checked"/>
         </Grid>
         <!--Naziv ankete-->
-        <TextBlock FontSize="16" Margin="10 5">Naziv ankete</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labNazivAnkete}" FontSize="16" Margin="10 5"></TextBlock>
         <ComboBox x:Name="surveryName" FontSize="16" Margin="10 0" SelectionChanged="nazivAnkete_SelectionChanged"/>
         <!--Ocena-->
-        <TextBlock FontSize="16" Margin="10 5">Ocena</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labOcena}" FontSize="16" Margin="10 5"></TextBlock>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -36,7 +37,7 @@
             <RadioButton x:Name="btn5" GroupName="ocena" Content="5" Grid.Column="4" Margin="10" IsChecked="True"/>
         </Grid>
         <!--Komentar-->
-        <TextBlock Margin="10 5" FontSize="16">Komentar</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labKomentar}" Margin="10 5" FontSize="16"></TextBlock>
         <TextBox VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap"  x:Name="komentar" Margin="10,0,0,0" FontSize="13" Height="140" Width="340"/>
         <!--Dogmad-->
         <Grid>
@@ -44,8 +45,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button IsEnabled="False" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="Potvrdi" Click="potvrdi_Click"/>
-            <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="Odustani" Click="odustani_Click"/>
+            <Button IsEnabled="False" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="{x:Static p:Resources.btnPotvrdi}" Click="potvrdi_Click"/>
+            <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="{x:Static p:Resources.btnIzadji}" Click="odustani_Click"/>
         </Grid>
     </StackPanel>
 </Window>

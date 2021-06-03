@@ -4,17 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
+        xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
-        Title="Kreiranje belezke" Height="400" Width="410"
+        Title="{x:Static p:Resources.ttNapraviBelezku}" Height="400" Width="410"
         WindowStartupLocation="CenterScreen">
     <StackPanel Height="358" VerticalAlignment="Top">
-        <TextBlock Margin="10 5" FontSize="16">Naziv</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labNaziv}" Margin="10 5" FontSize="16"></TextBlock>
         <TextBox VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap" x:Name="nazivBelezke" Margin="10 5" FontSize="13" Width="370" Height="25" TextChanged="nazivBelezke_TextChanged"/>
 
-        <TextBlock Margin="10 5" FontSize="16">Sadržaj</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labKomentar}" Margin="10 5" FontSize="16"></TextBlock>
         <TextBox VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" TextWrapping="Wrap" x:Name="sadrzajBelezke" Margin="10,5,0,5" FontSize="13" Width="370" Height="112" TextChanged="sadrzajBelezke_TextChanged"/>
 
-        <TextBlock Margin="10 5" FontSize="16">Vreme važenja u danima</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labVremeVazenja}" Margin="10 5" FontSize="16"></TextBlock>
         <TextBox x:Name="brojDana" Height="25" FontSize="13" Width="370" HorizontalAlignment="Left" Margin="10 5" TextChanged="brojDana_TextChanged"></TextBox>
 
         <Grid Margin="10 5">
@@ -22,8 +23,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button IsEnabled="False" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="Potvrdi" Click="potvrdi_Click"/>
-            <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="Odustani" Click="odustani_Click"/>
+            <Button IsEnabled="False" x:Name="potvrdi" Grid.Column="0" Height="50" Width="100" Margin="10" Content="{x:Static p:Resources.btnPotvrdi}" Click="potvrdi_Click"/>
+            <Button x:Name="odustani" Grid.Column="1" Height="50" Width="100" Margin="10" Content="{x:Static p:Resources.btnIzadji}" Click="odustani_Click"/>
         </Grid>
     </StackPanel>
 </Window>

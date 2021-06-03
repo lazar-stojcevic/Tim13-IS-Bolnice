@@ -4,30 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
+        xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
-       Title="Zakazivanje pregleda" Height="300" Width="310"
+       Title="{x:Static p:Resources.btnPregled}" Height="300" Width="310"
         WindowStartupLocation="CenterScreen">
     <StackPanel>
         <!--Zakazivanje kod lekara-->
         <Button 
             Height="70"
             x:Name="kodLekaraBtn"
-            Content="Zakazivanje kod određenog lekara"
+            Content="{x:Static p:Resources.btnKodLekara}"
             Margin="21, 10" Click="kodLekaraBtn_Click"
-            FontSize="16"/>
+            FontSize="14"/>
         <!--Zakazivanje kod lekara-->
         <Button 
             Height="70"
             x:Name="uTerminuBtn"
-            Content="Zakazivanje u određenom terminu"
+            Content="{x:Static p:Resources.btnUTerminu}"
             Margin="21,5" Click="uTerminuBtn_Click"
-            FontSize="16"/>
+            FontSize="14"/>
         <!--Odustani-->
         <Button 
             Height="70"
             x:Name="izadjiBtn"
-            Content="Izađi"
+            Content="{x:Static p:Resources.btnIzadji}"
             Margin="21,10" Click="izadjiBtn_Click"
-            FontSize="16"/>
+            FontSize="14"/>
     </StackPanel>
 </Window>

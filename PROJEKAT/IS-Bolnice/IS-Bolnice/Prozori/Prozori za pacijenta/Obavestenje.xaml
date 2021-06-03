@@ -4,22 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
+        xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
-        Title="Obavestenje" Height="700" Width="800"
+        Title="{x:Static p:Resources.btnObavestenje}" Height="700" Width="800"
         WindowStartupLocation="CenterScreen">
     <StackPanel>
         <Grid>
             <ListView x:Name="listaObavestenja" Margin="10 5" Height="200" FontSize="14" Background="#eee" SelectionChanged="listaObavestenja_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Header="Naziv obaveštenja" Width="753" DisplayMemberBinding="{Binding Naziv}" />
+                        <GridViewColumn ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Header="{x:Static p:Resources.labNaziv}" Width="753" DisplayMemberBinding="{Binding Naziv}" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
 
         <!--x:Name="listaObavestenja" Margin="10 5" Height="200" FontSize="14" Background="#eee" SelectionChanged="listaObavestenja_SelectionChanged"-->
-        <TextBlock Margin="10 5" FontSize="16">Sadržaj obaveštenja</TextBlock>
+        <TextBlock Text="{x:Static p:Resources.labKomentar}" Margin="10 5" FontSize="16"></TextBlock>
         <TextBlock
          x:Name="poljeZaIspis"
          Margin="10 5"
@@ -35,10 +36,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="obrisiBelezku" Margin="5" Content="Obriši obaveštenje" FontSize="18" IsEnabled="False" Click="obrisiBelezku_Click"/>
-            <Button Grid.Column="1" x:Name="izmeniBelezku" Margin="5" Content="Izmeni obaveštenje" FontSize="18" IsEnabled="False" Click="izmeniBelezku_Click"/>
-            <Button Grid.Column="2" x:Name="kreirajBelezku" Margin="5" Content="Kreiraj beležku" FontSize="18" Click="kreirajBelezku_Click"/>
-            <Button Grid.Column="3" x:Name="izadji" Margin="5" Content="Izadji iz prikaza" FontSize="18" Click="izadji_Click"/>
+            <Button Grid.Column="0" x:Name="obrisiBelezku" Margin="5" Content="{x:Static p:Resources.btnObrisi}" FontSize="18" IsEnabled="False" Click="obrisiBelezku_Click"/>
+            <Button Grid.Column="1" x:Name="izmeniBelezku" Margin="5" Content="{x:Static p:Resources.btnIzmeni}" FontSize="18" IsEnabled="False" Click="izmeniBelezku_Click"/>
+            <Button Grid.Column="2" x:Name="kreirajBelezku" Margin="5" Content="{x:Static p:Resources.btnBelezka}" FontSize="18" Click="kreirajBelezku_Click"/>
+            <Button Grid.Column="3" x:Name="izadji" Margin="5" Content="{x:Static p:Resources.btnIzadji}" FontSize="18" Click="izadji_Click"/>
         </Grid>
     </StackPanel>
 </Window>

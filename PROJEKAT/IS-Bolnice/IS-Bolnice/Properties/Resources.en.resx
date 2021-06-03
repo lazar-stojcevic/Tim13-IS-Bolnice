@@ -118,159 +118,159 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnAnketa" xml:space="preserve">
-    <value>Anketa</value>
+    <value>Survey</value>
   </data>
   <data name="btnBelezka" xml:space="preserve">
-    <value>Napravi beležku</value>
+    <value>Create note</value>
   </data>
   <data name="btnFunkcije" xml:space="preserve">
-    <value>Funkcije</value>
+    <value>Function</value>
   </data>
   <data name="btnIzadji" xml:space="preserve">
-    <value>Izađi</value>
+    <value>Leave</value>
   </data>
   <data name="btnIzmeni" xml:space="preserve">
-    <value>Izmeni</value>
+    <value>Change</value>
   </data>
   <data name="btnIzvestaj" xml:space="preserve">
-    <value>Izveštaj</value>
+    <value>Report</value>
   </data>
   <data name="btnKodLekara" xml:space="preserve">
-    <value>Zakazivanje kod određenog lekara</value>
+    <value>Scheduling review with a specific doctor</value>
   </data>
   <data name="btnObavestenje" xml:space="preserve">
-    <value>Prikaz obaveštenja</value>
+    <value>Display notifications</value>
   </data>
   <data name="btnObrisi" xml:space="preserve">
-    <value>Obriši</value>
+    <value>Delete</value>
   </data>
   <data name="btnOdjaviSe" xml:space="preserve">
-    <value>Odjavi se</value>
+    <value>Logout</value>
   </data>
   <data name="btnOdustani" xml:space="preserve">
-    <value>Odustani</value>
+    <value>Give up</value>
   </data>
   <data name="btnPotvrdi" xml:space="preserve">
-    <value>Potvrid</value>
+    <value>Accept</value>
   </data>
   <data name="btnPregled" xml:space="preserve">
-    <value>Zakaži pregled</value>
+    <value>Scheduling review</value>
   </data>
   <data name="btnTerminiOperacija" xml:space="preserve">
-    <value>Prikaz termina operacija</value>
+    <value>Display date of operations</value>
   </data>
   <data name="btnTerminiPregleda" xml:space="preserve">
-    <value>Prikaz termina pregleda</value>
+    <value>Display date of review</value>
   </data>
   <data name="btnUredi" xml:space="preserve">
-    <value>Uredi</value>
+    <value>Edit</value>
   </data>
   <data name="btnUTerminu" xml:space="preserve">
-    <value>Zakazivanje u određenom terminu</value>
+    <value>Scheduling review in a specific date</value>
   </data>
   <data name="labDatumOperacije" xml:space="preserve">
-    <value>Datum operacije</value>
+    <value>Date of operation</value>
   </data>
   <data name="labDatumPregleda" xml:space="preserve">
-    <value>Datum početka pregleda</value>
+    <value>Date of review</value>
   </data>
   <data name="labImeLekara" xml:space="preserve">
-    <value>Ime lekara</value>
+    <value>Doctor name</value>
   </data>
   <data name="labKomentar" xml:space="preserve">
-    <value>Komentar</value>
+    <value>Comment</value>
   </data>
   <data name="labKrajKonzumiranja" xml:space="preserve">
-    <value>Datum kraja konzumiranja</value>
+    <value>Last date of consumption</value>
   </data>
   <data name="labLekar" xml:space="preserve">
-    <value>Lekar</value>
+    <value>Doctor</value>
   </data>
   <data name="labNaKolikoDanaSeUzima" xml:space="preserve">
-    <value>Na koliko dana se uzima</value>
+    <value>Difference in day of taking</value>
   </data>
   <data name="labNaziv" xml:space="preserve">
-    <value>Naziv</value>
+    <value>Name</value>
   </data>
   <data name="labNazivAnkete" xml:space="preserve">
-    <value>Naziv ankete</value>
+    <value>Survey name</value>
   </data>
   <data name="labNazivLeka" xml:space="preserve">
-    <value>Naziv leka</value>
+    <value>Medicine name</value>
   </data>
   <data name="labOcena" xml:space="preserve">
-    <value>Ocena</value>
+    <value>Grade</value>
   </data>
   <data name="labOceniLekara" xml:space="preserve">
-    <value>Oceni lekara</value>
+    <value>Rating doctor</value>
   </data>
   <data name="labOceniRadKompanije" xml:space="preserve">
-    <value>Oceni rad kompanije</value>
+    <value>Rating company</value>
   </data>
   <data name="labOpisIzvestaja" xml:space="preserve">
-    <value>Opis izveštaja</value>
+    <value>Report description </value>
   </data>
   <data name="labOpisTerapije" xml:space="preserve">
-    <value>Opis terapije</value>
+    <value>Therapy description</value>
   </data>
   <data name="labOrdinacija" xml:space="preserve">
-    <value>Ordinacija</value>
+    <value>Surgery</value>
   </data>
   <data name="labPocetakKonzumiranja" xml:space="preserve">
-    <value>Datum početka konzumiranja</value>
+    <value>Start date of consumation</value>
   </data>
   <data name="labPomreiTermin" xml:space="preserve">
-    <value>Pomeri termin za (broj dana)</value>
+    <value>Move term for (number of day)</value>
   </data>
   <data name="labPrezimeLekara" xml:space="preserve">
-    <value>Prezime lekara</value>
+    <value>Doctor lastname</value>
   </data>
   <data name="labSlobodniTermini" xml:space="preserve">
-    <value>Slobodni termini</value>
+    <value>Free term</value>
   </data>
   <data name="labUcestalost" xml:space="preserve">
-    <value>Učestalost konzumiranja</value>
+    <value>Consuming frequency</value>
   </data>
   <data name="labVremeVazenja" xml:space="preserve">
-    <value>Vreme važenja u danima</value>
+    <value>Validity time in days</value>
   </data>
   <data name="menuEngleski" xml:space="preserve">
-    <value>Engleski</value>
+    <value>English</value>
   </data>
   <data name="menuJezik" xml:space="preserve">
-    <value>Jezik</value>
+    <value>Language</value>
   </data>
   <data name="menuSrpski" xml:space="preserve">
-    <value>Srpski</value>
+    <value>Serbian</value>
   </data>
   <data name="menuSvetla" xml:space="preserve">
-    <value>Svetla</value>
+    <value>Light them</value>
   </data>
   <data name="menuTamna" xml:space="preserve">
-    <value>Tamna</value>
+    <value>Dark them</value>
   </data>
   <data name="menuTema" xml:space="preserve">
-    <value>Tema</value>
+    <value>Them</value>
   </data>
   <data name="ttIzmeniBelezku" xml:space="preserve">
-    <value>Izmena beležke</value>
+    <value>Notice change</value>
   </data>
   <data name="ttIzmeniTerminPregleda" xml:space="preserve">
-    <value>Izmena termina pregleda</value>
+    <value>Change of review</value>
   </data>
   <data name="ttIzvestaj" xml:space="preserve">
-    <value>Izveštaji</value>
+    <value>Report</value>
   </data>
   <data name="ttNapraviBelezku" xml:space="preserve">
-    <value>Pravljenje beležke</value>
+    <value>Create notice</value>
   </data>
   <data name="ttOperacije" xml:space="preserve">
-    <value>Operacije</value>
+    <value>Operations</value>
   </data>
   <data name="ttPocetnaStranica" xml:space="preserve">
-    <value>Početna stranica</value>
+    <value>Main page</value>
   </data>
   <data name="ttPregledi" xml:space="preserve">
-    <value>Pregledi</value>
+    <value>Review</value>
   </data>
 </root>

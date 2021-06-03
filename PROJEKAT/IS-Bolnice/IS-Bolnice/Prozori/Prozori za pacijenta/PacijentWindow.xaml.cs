@@ -79,16 +79,6 @@ namespace IS_Bolnice
             ziot.ShowDialog();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            PromeniTemu(sender);
-        }
-
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            PromeniTemu(sender);
-        }
-
         private void PromeniTemu(object sender)
         {
             var app = (App)Application.Current;
@@ -102,6 +92,31 @@ namespace IS_Bolnice
             {
                 app.PromeniTemu(new Uri("Skinovi/SvetlaTema.xaml", UriKind.Relative));
             }
+        }
+
+        private void tamnaTema_Click(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            app.PromeniTemu(new Uri("Skinovi/TamnaTema.xaml", UriKind.Relative));
+
+        }
+
+        private void svetlaTema_Click(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            app.PromeniTemu(new Uri("Skinovi/SvetlaTema.xaml", UriKind.Relative));
+        }
+
+        private void srpski_Click(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            app.SrpskiJezik();
+        }
+
+        private void engleski_Click(object sender, RoutedEventArgs e)
+        {
+            App app = (App)Application.Current;
+            app.EngleskiJezik();
         }
     }
 }

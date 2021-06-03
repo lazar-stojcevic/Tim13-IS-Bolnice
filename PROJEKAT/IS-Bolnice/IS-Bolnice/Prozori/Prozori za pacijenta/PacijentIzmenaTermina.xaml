@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
+        xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
-        Title="Izmena termina" Height="500" Width="350"
+        Title="{x:Static p:Resources.ttIzmeniTerminPregleda}" Height="500" Width="350"
         WindowStartupLocation="CenterScreen">
     <Border Background="#ddd">
         <StackPanel Margin="10" Background="White">
