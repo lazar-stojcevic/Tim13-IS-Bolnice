@@ -482,6 +482,7 @@
     <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
+    <Compile Include="ViewModel\Lekar\ZakazivanjeOperacijeViewModel.cs" />
     <Compile Include="ViewModel\Upravnik\AddSaluPageViewModel.cs" />
     <Compile Include="ViewModel\Upravnik\EditSalePageViewModel.cs" />
     <Compile Include="ViewModel\Upravnik\SalePageViewModel.cs" />

@@ -28,7 +28,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void btnKreirajOperaciju(object sender, RoutedEventArgs e)
         {
-            var operacija = new ZakazivanjeOperacije();
+            var operacija = new ZakazivanjeOperacije(txtJMBG.Text);
             operacija.txtOperJmbg.Text = txtJMBG.Text;
             operacija.txtOperIme.Text = txtIme.Text;
             operacija.txtOperPrz.Text = txtPrz.Text;

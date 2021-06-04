@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IS_Bolnice"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Operacija" Height="700" Width="400" Background="White">
+        Title="Operacija" Height="700" Width="400" Background="White" Loaded="OnLoad">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
@@ -15,16 +15,17 @@
         <!--Vreme-->
         <TextBlock Text="Početak operacije:" Margin="10,434,274.6,212.4" Grid.ColumnSpan="2"/>
 
-        <Button IsEnabled="false" x:Name="potvrdi" Content="Zakaži" HorizontalAlignment="Left" Height="35" Margin="10,605,0,0" VerticalAlignment="Top" Width="176" Click="Button_ClickZakazi" Grid.ColumnSpan="2"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="212,605,0,0" VerticalAlignment="Top" Width="172" Height="35" Click="Button_Click_1" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperPrz" Height="33" Margin="128,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperIme" Height="33" Margin="128,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" IsReadOnly="True" x:Name="txtOperJmbg" Height="33" Margin="128,148,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
+        <Button  x:Name="potvrdi" Content="Zakaži" HorizontalAlignment="Left" Height="35" Margin="10,605,0,0" VerticalAlignment="Top" Width="176"  Grid.ColumnSpan="2" Command="{Binding DodajOperaciju}"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="212,605,0,0" VerticalAlignment="Top" Width="172" Height="35"  Grid.ColumnSpan="2" Command="{Binding OdustaniOdZakazivanjeOperacije}" />
+
+        <TextBox HorizontalAlignment="Left" Text="{Binding Pacijent.Prezime}"  IsReadOnly="True" x:Name="txtOperPrz" Height="33" Margin="128,72,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Pacijent.Ime}" IsReadOnly="True" x:Name="txtOperIme" Height="33" Margin="128,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Pacijent.Jmbg}" IsReadOnly="True" x:Name="txtOperJmbg" Height="33" Margin="128,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="256" Grid.ColumnSpan="2"/>
         <Label Content="Ime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,106,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
         <Label Content="Prezime pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,72,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
         <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="36" Margin="10,142,0,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
 
-        <ListView x:Name="listaLekara" HorizontalAlignment="Left" Height="102" Margin="10,318,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged">
+        <ListView x:Name="listaLekara" ItemsSource="{Binding Lekari}" SelectedItem="{Binding Lekar}" HorizontalAlignment="Left" Height="102" Margin="10,318,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Ime" Width="80" DisplayMemberBinding="{Binding Ime}" />
@@ -38,7 +39,7 @@
         <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,287,0,0" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
         <Label Content="Sala u kojoj će se operacija izvršiti:" HorizontalAlignment="Left" Height="31" Margin="10,197,0,0" VerticalAlignment="Top" Width="196" Grid.ColumnSpan="2"/>
 
-        <ComboBox x:Name="comboBoxSale" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,228,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2" SelectionChanged="liste_SelectionChanged">
+        <ComboBox x:Name="comboBoxSale" ItemsSource="{Binding OperacioneSale}" SelectedItem="{Binding Soba}" SelectedIndex="0" HorizontalAlignment="Left" Height="22" Margin="10,228,0,0" VerticalAlignment="Top" Width="374" Grid.ColumnSpan="2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" />
@@ -47,17 +48,17 @@
 
         </ComboBox>
 
-        <ComboBox x:Name="terminiList" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="10,464,0,0" VerticalAlignment="Top" Width="374"/>
+        <ComboBox x:Name="terminiList" ItemsSource="{Binding Termini}" SelectedItem="{Binding Operacija}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="10,464,0,0" VerticalAlignment="Top" Width="374"/>
 
         <Label FontSize="15" Grid.ColumnSpan="2" Content="HITNO :" HorizontalAlignment="Left" Height="28" Margin="10,561,0,0" VerticalAlignment="Top" Width="69"/>
-        <CheckBox x:Name="boxHitno" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,570,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
+        <CheckBox x:Name="boxHitno" IsChecked="{Binding Hitna, UpdateSourceTrigger = PropertyChanged}" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,570,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,-4.4,0" Grid.ColumnSpan="2"/>
         <Label Content="Zakazivanje operacije" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216" Grid.ColumnSpan="2"/>
         <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Grid.ColumnSpan="2" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
-        <TextBox x:Name="txtDuzina" HorizontalAlignment="Left" PreviewTextInput="NumberValidationTextBox" Height="29" Margin="229,513,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="155" Grid.ColumnSpan="2" LostFocus="TxtDuzina_LostFocus"/>
+        <TextBox x:Name="txtDuzina"  HorizontalAlignment="Left" Height="29" Margin="229,513,0,0" TextWrapping="Wrap" Text="{Binding DuzinaTrajanjeOperacijeUMinutima}" VerticalAlignment="Top" Width="155" Grid.ColumnSpan="2"/>
         <Label Content="Dužina trajanja operacije u minutima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,513,0,0" Width="219" Grid.ColumnSpan="2"/>
 
-        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="1" HorizontalAlignment="Left" Height="619" Margin="0,51,-4.4,0" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2">
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="617" Margin="0,51,0,0" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2">
             <Rectangle  HorizontalAlignment="Left" Height="137" Margin="118,12,0,0" Stroke="Red" VerticalAlignment="Top" Width="266"/>
             <Label Foreground="Red"  Content="Osnovni podaci pacijenta" HorizontalAlignment="Left" Height="31" Margin="191,122,0,0" VerticalAlignment="Top" Width="145"/>
 
@@ -74,7 +75,7 @@
             <Label Foreground="Red"  Content="Da li operacija može da se odloži (čekirano - NE / nije čekirano DA)" HorizontalAlignment="Left" Height="28" Margin="10,497,0,0" VerticalAlignment="Top" Width="374"/>
 
         </Grid>
-        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="Button_ClickNazad" Grid.ColumnSpan="2">
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47"  Grid.ColumnSpan="2" Command="{Binding OdustaniOdZakazivanjeOperacije}">
             <StackPanel>
                 <Image Source="/IS-Bolnice;component/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>

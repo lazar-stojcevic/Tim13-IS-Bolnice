@@ -127,4 +127,9 @@ public class Operacija : Entitet, INotifyPropertyChanged
             eh(this, new PropertyChangedEventArgs(propName));
         }
     }
+
+    public override string ToString()
+    {
+        return VremePocetkaOperacije.ToString();
+    }
 }

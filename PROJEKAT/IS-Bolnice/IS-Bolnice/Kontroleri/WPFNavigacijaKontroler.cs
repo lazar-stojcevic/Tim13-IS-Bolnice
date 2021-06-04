@@ -32,5 +32,10 @@ namespace IS_Bolnice.Kontroleri
         {
             navService.Navigate(new EditSalePage(idSale));
         }
+
+        public void IdiNazad()
+        {
+            navService.GoBack();
+        }
     }
 }
