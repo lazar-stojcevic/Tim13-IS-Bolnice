@@ -7,23 +7,24 @@
         mc:Ignorable="d"
         Title="Dodavanje guest naloga" Height="300" Width="500"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Loaded="OnLoad">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Gray" VerticalAlignment="Top" Width="300" Margin="95,36,0,0"/>
         <Label Content="Ime:" HorizontalAlignment="Left" Margin="100,50,0,0" VerticalAlignment="Top"
                FontWeight="Bold"/>
-        <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="23" Margin="180,50,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="txtIme" Text="{Binding Ime}" HorizontalAlignment="Left" Height="23" Margin="180,50,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="200"/>
         <Label Content="Prezime:" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"
                FontWeight="Bold"/>
-        <TextBox x:Name="txtPrezime" HorizontalAlignment="Left" Height="23" Margin="180,100,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="txtPrezime" Text="{Binding Prezime}" HorizontalAlignment="Left" Height="23" Margin="180,100,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="200"/>
         <Label Content="JMBG:" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top"
                FontWeight="Bold"/>
-        <TextBox x:Name="txtJMBG" HorizontalAlignment="Left" Height="23" Margin="180,150,0,0" TextWrapping="Wrap" 
+        <TextBox x:Name="txtJMBG" Text="{Binding Jmbg}" HorizontalAlignment="Left" Height="23" Margin="180,150,0,0" TextWrapping="Wrap" 
                  VerticalAlignment="Top" Width="200"/>
-        <Button Content="Potvrdi" Width="92" Height="32" Click="Button_Click_Potvrdi" HorizontalAlignment="Left" Margin="95,219,0,0" VerticalAlignment="Top"/>
-        <Button Content="Odustani" Width="92" Height="32" Click="Button_Click_Odustani" HorizontalAlignment="Left" Margin="303,219,0,0" VerticalAlignment="Top"/>
+        <Button Content="Potvrdi" Width="92" Height="32" Command="{Binding Path=PotvrdiCommand}" HorizontalAlignment="Left" Margin="95,219,0,0" VerticalAlignment="Top"/>
+        <Button Content="Odustani" Width="92" Height="32" Command="{Binding Path=OdustaniCommand}" HorizontalAlignment="Left" Margin="303,219,0,0" VerticalAlignment="Top"/>
         
         <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Gray" VerticalAlignment="Top" Width="300" Margin="95,85,0,0"/>
         <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Gray" VerticalAlignment="Top" Width="300" Margin="95,134,0,0"/>

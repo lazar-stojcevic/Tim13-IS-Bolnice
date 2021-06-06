@@ -22,7 +22,6 @@ namespace IS_Bolnice.Prozori.Sekretar
         public InformativniProzor(string poruka)
         {
             InitializeComponent();
-
             tbSadrzaj.Text = poruka;
         }
 
