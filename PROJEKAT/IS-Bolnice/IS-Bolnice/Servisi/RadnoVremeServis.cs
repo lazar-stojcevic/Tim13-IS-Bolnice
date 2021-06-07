@@ -48,7 +48,7 @@ namespace IS_Bolnice.Servisi
             {
                 foreach (var pot in potencijalniSlobodniDani)
                 {
-                    if (pot.Day == slobodanDan.Day)
+                    if (pot.Day == slobodanDan.Day && pot.Month == slobodanDan.Month)
                     {
                         return true;
                     }

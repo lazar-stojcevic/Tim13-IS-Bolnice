@@ -14,17 +14,17 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="137" Margin="40,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
         <Label Content="Pacijent" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Label Content="Ime:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="141" Margin="69,49,0,0"/>
-        <Label Content="Prezime:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,465.4"/>
+        <Label Content="Prezime:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,463.4"/>
         <Label Content="JMBG:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,431.4"/>
-        <TextBox Name="txtIme" HorizontalAlignment="Left" Height="23" Margin="281,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
-        <TextBox Name="txtPrezime" HorizontalAlignment="Left" Height="23" Margin="281,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
-        <TextBox Name="txtJmbg" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
+        <TextBox Name="txtIme" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
+        <TextBox Name="txtPrezime" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
+        <TextBox Name="txtJmbg" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <Label Content="Lekar:" HorizontalAlignment="Left" Margin="42,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
 
         <Button Name="odabirTermina" Content="Odaberi termin" HorizontalAlignment="Left" Margin="348,371,0,0" VerticalAlignment="Top" Width="190" Height="30" Click="Button_Click_Odaberi_Termin"/>
         <Label Content="Sala:" HorizontalAlignment="Left" Margin="40,261,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Label Content="Termin:" HorizontalAlignment="Left" Margin="40,375,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
-        <TextBox Name="txtTermin" HorizontalAlignment="Left" Height="23" Margin="114,375,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>
+        <TextBox Name="txtTermin" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="114,375,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>
         <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="82,508,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_Potvrdi" Height="40"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="397,508,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_Odustani" Height="40"/>
         <Label Content="Trajanje operacije (u satima):" HorizontalAlignment="Left" Margin="42,425,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>

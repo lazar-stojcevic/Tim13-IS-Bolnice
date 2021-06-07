@@ -52,7 +52,7 @@ namespace IS_Bolnice.Prozori
 
                 if (pocetakTermina < DateTime.Now)
                 {
-                    MessageBox.Show("Nemoguće je odabrati datum pre današnjeg datuma.");
+                    MessageBox.Show("Nemoguće je odabrati vreme pre sadašnjeg vremena.");
                     return;
                 }
 

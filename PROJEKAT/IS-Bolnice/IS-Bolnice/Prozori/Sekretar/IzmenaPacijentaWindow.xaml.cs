@@ -133,7 +133,8 @@ namespace IS_Bolnice.Prozori.Sekretar
                     Adresa = tempAdresa,
                     Pol = tempPol,
                     DatumRodjenja = tempDatumRodjenja,
-                    IzabraniLekar = lekar
+                    IzabraniLekar = lekar,
+                    Guest = false
                 };
 
                 pacijentKontroler.IzmeniPacijenta(p);

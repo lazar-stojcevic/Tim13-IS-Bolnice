@@ -350,10 +350,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Radno_Vreme_Lekara_Opste(object sender, RoutedEventArgs e)
         {
-            int index = dgLekariOpstePrakse.SelectedIndex;
-            if (index != -1)
+            Lekar lekar = (Lekar) dgLekariOpstePrakse.SelectedItem;
+            if (lekar != null)
             {
-                Lekar lekar = LekariOpstePrakse[index];
                 RadnoVremeLekara rvl = new RadnoVremeLekara(lekar);
                 rvl.ShowDialog();
             }
@@ -361,10 +360,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Radno_Vreme_Lekara_Specijaliste(object sender, RoutedEventArgs e)
         {
-            int index = dgLekariSpecijalisti.SelectedIndex;
-            if (index != -1)
+            Lekar lekar = (Lekar) dgLekariSpecijalisti.SelectedItem;
+            if (lekar != null)
             {
-                Lekar lekar = LekariSpecijalisti[index];
                 RadnoVremeLekara rvl = new RadnoVremeLekara(lekar);
                 rvl.ShowDialog();
             }
@@ -372,10 +370,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void dgLekovi_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            int index = dgLekovi.SelectedIndex;
-            if (index != -1)
+            Lek selektovaniLek = (Lek) dgLekovi.SelectedItem;
+            if (selektovaniLek != null)
             {
-                Lek selektovaniLek = SviLekovi[index];
                 AzurirajPrikazOpisaLeka(selektovaniLek);
             }
         }
@@ -388,10 +385,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void dgSale_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            int index = dgSale.SelectedIndex;
-            if (index != -1)
+            Soba selektovanaSoba = (Soba) dgSale.SelectedItem;
+            if (selektovanaSoba != null)
             {
-                Soba selektovanaSoba = SveSobeBolnice[index];
                 AzurirajPrikazOpisaSobe(selektovanaSoba);
             }
         }
@@ -425,10 +421,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Zauzetost_Lekara_Opste_Prakse(object sender, RoutedEventArgs e)
         {
-            int index = dgLekariOpstePrakse.SelectedIndex;
-            if (index != -1)
+            Lekar lekar = (Lekar) dgLekariOpstePrakse.SelectedItem;
+            if (lekar != null)
             {
-                Lekar lekar = LekariOpstePrakse[index];
                 PrikazZauzetostiLekaraOpstePrakse pzlop = new PrikazZauzetostiLekaraOpstePrakse(lekar);
                 pzlop.ShowDialog();
             }
@@ -436,10 +431,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Zauzetost_Lekara_Specijaliste(object sender, RoutedEventArgs e)
         {
-            int index = dgLekariSpecijalisti.SelectedIndex;
-            if (index != -1)
+            Lekar lekar = (Lekar) dgLekariSpecijalisti.SelectedItem;
+            if (lekar != null)
             {
-                Lekar lekar = LekariSpecijalisti[index];
                 PrikazZauzetostiLekaraSpecijalista pzls = new PrikazZauzetostiLekaraSpecijalista(lekar);
                 pzls.ShowDialog();
             }
@@ -447,10 +441,9 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Naplata_Usluga(object sender, RoutedEventArgs e)
         {
-            int index = dataGridPacijenti.SelectedIndex;
-            if (index != -1)
+            Pacijent pacijent = (Pacijent) dataGridPacijenti.SelectedItem;
+            if (pacijent != null)
             {
-                Pacijent pacijent = Pacijenti[index];
                 NaplacivanjeUsluga nu = new NaplacivanjeUsluga(pacijent);
                 nu.ShowDialog();
             }

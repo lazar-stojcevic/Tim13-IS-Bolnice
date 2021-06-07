@@ -108,7 +108,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             dodavanjeGostujuceg.ShowDialog();
             // u slucaju dodavanja gostujuceg uzima se poslednji iz baze
             odabraniPacijent = pacijentKontroler.GetPoslednjiDodat();
-            if (odabraniPacijent != null)
+            if (odabraniPacijent.Guest)
             {
                 UpdateTextBox();
             }

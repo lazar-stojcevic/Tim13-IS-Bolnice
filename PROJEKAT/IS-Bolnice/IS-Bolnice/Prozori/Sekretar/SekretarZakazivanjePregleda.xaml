@@ -15,11 +15,11 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="122" Margin="40,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="498"/>
         <Label Content="Pacijent" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <Label Content="Ime:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="141" Margin="69,49,0,0"/>
-        <Label Content="Prezime:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,465.4"/>
+        <Label Content="Prezime:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,463.4"/>
         <Label Content="JMBG:" VerticalAlignment="Bottom" Height="23" Width="141" Margin="69,0,383.6,431.4"/>
-        <TextBox Name="txtIme" HorizontalAlignment="Left" Height="23" Margin="281,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
-        <TextBox Name="txtPrezime" HorizontalAlignment="Left" Height="23" Margin="281,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
-        <TextBox Name="txtJmbg" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
+        <TextBox Name="txtIme" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
+        <TextBox Name="txtPrezime" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
+        <TextBox Name="txtJmbg" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="281,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0,0.143"/>
         <Label Content="Prioritet:" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.552,0.406" FontWeight="Bold"/>
         <StackPanel Margin="166,191,55.6,359.4" Orientation="Horizontal">
             <RadioButton x:Name="rbTermin" HorizontalAlignment="Left" Checked="RadioButton_Termin_Checked" Margin="0,-8,0,8">Termin</RadioButton>

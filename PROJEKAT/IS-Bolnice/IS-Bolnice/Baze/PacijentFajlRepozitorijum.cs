@@ -121,11 +121,12 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
                 p.Pol = Pol.drugo;
             }
             p.Obrisan = Boolean.Parse(delovi[9]);
-            p.DatumRodjenja = DateTime.ParseExact(delovi[10], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
+            p.Guest = Boolean.Parse(delovi[10]);
+            p.DatumRodjenja = DateTime.ParseExact(delovi[11], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
                                                   DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
 
             // lista alergena
-            string[] alergeni = delovi[11].Split(',');
+            string[] alergeni = delovi[12].Split(',');
             foreach (string a in alergeni)
             {
                 if (!a.Equals(""))
@@ -135,13 +136,13 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
             }
 
             // ako postoji i izabrani lekar (bez provere bi puklo ukoliko korisnik nema izabranog lekara)
-            if (delovi.Length > 12)
+            if (delovi.Length > 13)
             {
                 LekarFajlRepozitorijum bl = new LekarFajlRepozitorijum();
                 List<Lekar> lekari = bl.GetSviLekariOpstePrakse();
                 foreach (Lekar l in lekari)
                 {
-                    if (l.Jmbg.Equals(delovi[12]))
+                    if (l.Jmbg.Equals(delovi[13]))
                     {
                         p.IzabraniLekar = l;
                         break;
@@ -158,7 +159,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
     {
         string p = pacijent.Jmbg + "#" + pacijent.KorisnickoIme + "#" + pacijent.Sifra + "#" + pacijent.Ime + "#" +
                    pacijent.Prezime + "#" + pacijent.BrojTelefona + "#" + pacijent.EMail + "#" + pacijent.Adresa + "#" +
-                   pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.DatumRodjenja.ToString(vremenskiFormatPisanje) + "#";
+                   pacijent.Pol.ToString() + "#" + pacijent.Obrisan + "#" + pacijent.Guest + "#" + pacijent.DatumRodjenja.ToString(vremenskiFormatPisanje) + "#";
 
         // upisivanje liste alergena
         foreach (Sastojak s in pacijent.Alergeni)

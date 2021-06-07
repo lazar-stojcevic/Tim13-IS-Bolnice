@@ -1,8 +1,8 @@
-32132133321#pacijent#123#Pera#Peric#064232332#pera.peric@gmail.com#Neka adresa 21#muski#False#1-15-1999 12:00:00 AM##654
-98897973232#jova#12345#Jova#Jovic#060321312#mejl.jova@gmail.com#Adresa 13#drugo#False#1-27-1997 12:00:00 AM#skrob,silicijum-dioksid,glucerol,gluten
-31234123432#mita#mita123#Mitar#Mitić#061456789#mita@gmail.com#Nova adresa 99#muski#False#2-2-1999 12:00:00 AM##420
-3213542342#milica#milica123#Milica#Miličić#0601233423#milica.m@uns.ac.rs#Narodnog fronta 55#zenski#False#4-17-2008 12:00:00 AM##654
-543534534323#nikolina#nikolina123#Nikolina#Nikić#06632113#nikolina123@gmail.com#Palih boraca 44#zenski#False#1-27-2004 12:00:00 AM#skrob,silicijum-dioksid
-3213124232#nikola#nikola123#Nikola#Nikićević#065532423#nikola11@gmail.com#Alekse Šantića#muski#False#1-27-1999 12:00:00 AM#
-3333333343#Mina#mina123#Mina#Mikić#067323213#mina@gmail.com#Glavna adresa 87#zenski#False#3-11-2001 12:00:00 AM##654
-1234567891024#neso#123#Nešo#Nešić#069198793#neso.nesic@gmail.com#Vinogradska 22#muski#False#11-25-1994 12:00:00 AM#glucerol,gluten
+32132133321#pacijent#123#Pera#Peric#064232332#pera.peric@gmail.com#Neka adresa 21#muski#False#False#1-15-1999 12:00:00 AM##654
+98897973232#jova#12345#Jova#Jovic#060321312#mejl.jova@gmail.com#Adresa 13#drugo#False#False#1-27-1997 12:00:00 AM#skrob,silicijum-dioksid,glucerol,gluten
+31234123432#mita#mita123#Mitar#Mitić#061456789#mita@gmail.com#Nova adresa 99#muski#False#False#2-2-1999 12:00:00 AM##420
+3213542342#milica#milica123#Milica#Miličić#0601233423#milica.m@uns.ac.rs#Narodnog fronta 55#zenski#False#False#4-17-2008 12:00:00 AM##654
+543534534323#nikolina#nikolina123#Nikolina#Nikić#06632113#nikolina123@gmail.com#Palih boraca 44#zenski#False#False#1-27-2004 12:00:00 AM#skrob,silicijum-dioksid
+3213124232#nikola#nikola123#Nikola#Nikićević#065532423#nikola11@gmail.com#Alekse Šantića#muski#False#False#1-27-1999 12:00:00 AM#
+3333333343#Mina#mina123#Mina#Mikić#067323213#mina@gmail.com#Glavna adresa 87#zenski#False#False#3-11-2001 12:00:00 AM##654
+1234567891024#neso#123#Nešo#Nešić#069198793#neso.nesic@gmail.com#Vinogradska 22#muski#False#False#11-25-1994 12:00:00 AM#glucerol,gluten

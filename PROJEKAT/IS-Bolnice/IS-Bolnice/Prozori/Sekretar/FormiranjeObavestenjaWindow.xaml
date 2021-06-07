@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori"
         mc:Ignorable="d"
-        Title="Formiranje obavestenja" Height="550" Width="700"
+        Title="Formiranje obaveštenja" Height="550" Width="700"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Naslov:" HorizontalAlignment="Left" FontWeight="Bold" Margin="20,203,0,0" VerticalAlignment="Top" Width="84"/>

@@ -40,7 +40,16 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Otkazi_Pregled(object sender, RoutedEventArgs e)
         {
-            Pregled pregled = PreglediPacijenta[dataGridPregledi.SelectedIndex];
+            Pregled pregled;
+            try
+            {
+                pregled = PreglediPacijenta[dataGridPregledi.SelectedIndex];
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
             if (pregled != null)
             {
                 string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin pregleda?";
@@ -67,7 +76,16 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Otkazi_Operaciju(object sender, RoutedEventArgs e)
         {
-            Operacija operacija = OperacijePacijenta[dataGridOperacije.SelectedIndex];
+            Operacija operacija;
+            try
+            {
+                operacija = OperacijePacijenta[dataGridOperacije.SelectedIndex];
+            }
+            catch (Exception)
+            {
+                return;
+            }
+ 
             if (operacija != null)
             {
                 string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin operacije?";

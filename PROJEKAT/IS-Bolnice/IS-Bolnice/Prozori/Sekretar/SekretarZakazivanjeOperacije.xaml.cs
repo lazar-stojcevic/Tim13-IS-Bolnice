@@ -101,6 +101,10 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 MessageBox.Show("Odaberite lekara za operaciju");
             }
+            else if (operacija.VremePocetkaOperacije < DateTime.Now)
+            {
+                MessageBox.Show("Nemoguće zakazati operaciju u prošlom vremenu.");
+            }
             else
             {
                 if (operacijaKontroler.ZakaziOperaciju(operacija))
