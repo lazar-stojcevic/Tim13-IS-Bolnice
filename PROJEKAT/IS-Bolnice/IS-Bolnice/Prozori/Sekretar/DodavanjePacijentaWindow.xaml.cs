@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Servisi;
@@ -45,7 +46,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!popunjenaObaveznaPolja())
             {
                 dugmePotvrdi.IsEnabled = false;
-                MessageBox.Show("Nisu popunjena sva obavezna polja!");
+                InformativniProzor ip = new InformativniProzor("Nisu popunjena sva obavezna polja!");
+                ip.ShowDialog();
             }
             else
             {
@@ -164,7 +166,26 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!korisnikKontroler.JedinstvenJmbgKorisnika(tempJmbg))
             {
                 dugmePotvrdi.IsEnabled = false;
-                MessageBox.Show("Uneti JMBG već postoji u sistemu!");
+                InformativniProzor ip = new InformativniProzor("Uneti JMBG već postoji u sistemu!");
+                ip.ShowDialog();
+            }
+
+            if (!Regex.IsMatch(tempJmbg, "^[0-9]{13}$") && tempJmbg != "")
+            {
+                txtJMBG.Text = "";
+                InformativniProzor ip = new InformativniProzor("JMBG se mora sastojati od 13 cifara.");
+                ip.ShowDialog();
+            }
+        }
+
+        private void TxtEMail_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            string temlMail = txtEMail.Text;
+            if (!Regex.IsMatch(temlMail, @"^((\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)\s*[;]{0,1}\s*)+$") && temlMail != "")
+            {
+                txtEMail.Text = "";
+                InformativniProzor ip = new InformativniProzor("Email adresa nije u validnom formatu");
+                ip.ShowDialog();
             }
         }
 
@@ -182,7 +203,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!korisnikKontroler.JedinstvenoKorisnickoImeKorisnika(tempKorisnickoIme))
             {
                 dugmePotvrdi.IsEnabled = false;
-                MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");
+                InformativniProzor ip = new InformativniProzor("Uneto korisničko ime već postoji u sistemu!");
+                ip.ShowDialog();
             }
         }
 

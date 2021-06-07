@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Prozori.Sekretar;
 
 namespace IS_Bolnice.ViewModel.Sekretar
 {
@@ -12,6 +14,7 @@ namespace IS_Bolnice.ViewModel.Sekretar
     {
         private Window window;
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
+        private KorisnikKontroler korisnikKontroler = new KorisnikKontroler();
         private RelayCommand potvrdiCommand;
         private RelayCommand odustaniCommand;
         private string ime;
@@ -67,24 +70,62 @@ namespace IS_Bolnice.ViewModel.Sekretar
             }
         }
 
-        public DodavanjeGuestNalogaViewModel(Window prosledjenWindow)
+        private bool PopunjenaObaveznaPolja()
         {
-            window = prosledjenWindow;
-            PotvrdiCommand = new RelayCommand(Execute_PotvrdiCommand);
-            OdustaniCommand = new RelayCommand(Execute_OdustaniCommand);
+            if (jmbg != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool MozeDaSeKreira()
+        {
+            if (!PopunjenaObaveznaPolja())
+            {
+                InformativniProzor ip = new InformativniProzor("Morate popuniti obavezna polja.");
+                ip.Show();
+                return false;
+            }
+            if (!Regex.IsMatch(jmbg, "^[0-9]{13}$"))
+            {
+                Jmbg = "";
+                InformativniProzor ip = new InformativniProzor("JMBG se mora sastojati od 13 cifara.");
+                ip.ShowDialog();
+                return false;
+            }
+            if (!korisnikKontroler.JedinstvenJmbgKorisnika(jmbg))
+            {
+                InformativniProzor ip = new InformativniProzor("Uneti JMBG već postoji u sistemu!");
+                ip.ShowDialog();
+                return false;
+            }
+
+            return true;
         }
 
         public void Execute_PotvrdiCommand(object obj)
         {
-            Pacijent noviGuestPacijent = new Pacijent(jmbg, ime, prezime);
-            noviGuestPacijent.Guest = true;
-            pacijentKontroler.KreirajPacijenta(noviGuestPacijent);
-            window.Close();
+            if (MozeDaSeKreira())
+            {
+                Pacijent noviGuestPacijent = new Pacijent(jmbg, ime, prezime);
+                noviGuestPacijent.Guest = true;
+                pacijentKontroler.KreirajPacijenta(noviGuestPacijent);
+                window.Close();
+            }
         }
 
         public void Execute_OdustaniCommand(object obj)
         {
             window.Close();
+        }
+
+        public DodavanjeGuestNalogaViewModel(Window prosledjenWindow)
+        {
+            window = prosledjenWindow;
+            PotvrdiCommand = new RelayCommand(Execute_PotvrdiCommand);
+            OdustaniCommand = new RelayCommand(Execute_OdustaniCommand);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using IS_Bolnice.Baze;
 using IS_Bolnice.Kontroleri;
@@ -233,6 +234,23 @@ namespace IS_Bolnice.Prozori.Sekretar
             {
                 dugmePotvrdi.IsEnabled = false;
                 MessageBox.Show("Uneti JMBG već postoji u sistemu!");
+            }
+            if (!Regex.IsMatch(tempNoviJmbg, "^[0-9]{13}$"))
+            {
+                txtJMBG.Text = "";
+                InformativniProzor ip = new InformativniProzor("JMBG se mora sastojati od 13 cifara.");
+                ip.ShowDialog();
+            }
+        }
+
+        private void TxtEMail_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            string temlMail = txtEMail.Text;
+            if (!Regex.IsMatch(temlMail, @"^((\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)\s*[;]{0,1}\s*)+$") && temlMail != "")
+            {
+                txtEMail.Text = "";
+                InformativniProzor ip = new InformativniProzor("Email adresa nije u validnom formatu");
+                ip.ShowDialog();
             }
         }
 

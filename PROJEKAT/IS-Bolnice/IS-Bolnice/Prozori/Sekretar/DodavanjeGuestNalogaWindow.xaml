@@ -19,7 +19,7 @@
                FontWeight="Bold"/>
         <TextBox x:Name="txtPrezime" Text="{Binding Prezime}" HorizontalAlignment="Left" Height="23" Margin="180,100,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="200"/>
-        <Label Content="JMBG:" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top"
+        <Label Content="JMBG:*" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top"
                FontWeight="Bold"/>
         <TextBox x:Name="txtJMBG" Text="{Binding Jmbg}" HorizontalAlignment="Left" Height="23" Margin="180,150,0,0" TextWrapping="Wrap" 
                  VerticalAlignment="Top" Width="200"/>

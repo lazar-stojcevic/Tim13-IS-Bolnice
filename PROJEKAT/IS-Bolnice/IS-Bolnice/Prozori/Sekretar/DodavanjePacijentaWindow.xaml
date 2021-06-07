@@ -44,7 +44,7 @@
         <TextBox x:Name="txtBrTelefona" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,210,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top"/>
         <TextBox x:Name="txtEMail" HorizontalAlignment="Left" Height="23" Width="200" Margin="250,253,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top"/>
+                 VerticalAlignment="Top" LostFocus="TxtEMail_OnLostFocus"/>
         <ComboBox x:Name="comboPol" HorizontalAlignment="Left" Margin="250,296,0,0" VerticalAlignment="Top" Width="200">
             <ComboBoxItem IsSelected="True">Muški</ComboBoxItem>
             <ComboBoxItem>Ženski</ComboBoxItem>
