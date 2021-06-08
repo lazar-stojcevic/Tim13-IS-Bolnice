@@ -97,12 +97,14 @@ namespace IS_Bolnice.Prozori.Sekretar
                 pregled.Pacijent = pacijent;
                 if (pregledKontroler.ZakaziPregled(pregled))
                 {
-                    MessageBox.Show("Uspešno zakazan pregled.");
+                    InformativniProzor ip = new InformativniProzor("Uspešno zakazan pregled.");
+                    ip.ShowDialog();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Termin ne može da se zakaže");
+                    InformativniProzor ip = new InformativniProzor("Termin ne može da se zakaže.");
+                    ip.ShowDialog();
                 }
             }
         }

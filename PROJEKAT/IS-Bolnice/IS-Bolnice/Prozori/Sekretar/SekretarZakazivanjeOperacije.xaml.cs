@@ -89,32 +89,38 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            if (comboTrajanja.SelectedIndex == -1)
+            if (comboLekari.SelectedIndex == -1)
             {
-                MessageBox.Show("Odaberite dužinu trajanja termina");
+                InformativniProzor ip = new InformativniProzor("Odaberite lekara za operaciju");
+                ip.ShowDialog();
             }
             else if (comboSale.SelectedIndex == -1)
             {
-                MessageBox.Show("Odaberite salu za operaciju.");
+                InformativniProzor ip = new InformativniProzor("Odaberite salu za operaciju.");
+                ip.ShowDialog();
             }
-            else if (comboLekari.SelectedIndex == -1)
+            else if (comboTrajanja.SelectedIndex == -1)
             {
-                MessageBox.Show("Odaberite lekara za operaciju");
+                InformativniProzor ip = new InformativniProzor("Odaberite dužinu trajanja termina");
+                ip.ShowDialog();
             }
             else if (operacija.VremePocetkaOperacije < DateTime.Now)
             {
-                MessageBox.Show("Nemoguće zakazati operaciju u prošlom vremenu.");
+                InformativniProzor ip = new InformativniProzor("Nemoguće zakazati operaciju u prošlom vremenu.");
+                ip.ShowDialog();
             }
             else
             {
                 if (operacijaKontroler.ZakaziOperaciju(operacija))
                 {
-                    MessageBox.Show("Operacija uspešno zakazana.");
+                    InformativniProzor ip = new InformativniProzor("Operacija uspešno zakazana.");
+                    ip.ShowDialog();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Nemoguće zakazati operaciju. Promenite termin");
+                    InformativniProzor ip = new InformativniProzor("Nemoguće zakazati operaciju. Promenite termin");
+                    ip.ShowDialog();
                 }
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {
@@ -55,10 +56,8 @@ namespace IS_Bolnice.Prozori.Sekretar
                 string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin pregleda?";
                 string sCaption = "Otkazivanje termina pregleda";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBoxResult rsltMessageBox =
+                    CustomMessageBox.ShowYesNo(sMessageBoxText, sCaption, "Potvrdi", "Odustani", MessageBoxImage.Question);
 
                 switch (rsltMessageBox)
                 {
@@ -91,10 +90,8 @@ namespace IS_Bolnice.Prozori.Sekretar
                 string sMessageBoxText = "Da li ste sigurni da želite da otkažete termin operacije?";
                 string sCaption = "Otkazivanje termina operacije";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Question;
-
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBoxResult rsltMessageBox = CustomMessageBox.ShowYesNo(sMessageBoxText, sCaption, "Potvrdi",
+                    "Odustani", MessageBoxImage.Question);
 
                 switch (rsltMessageBox)
                 {

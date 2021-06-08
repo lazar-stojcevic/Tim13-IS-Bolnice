@@ -65,7 +65,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             DateTime kraj = DateTime.Parse(datePicker_kraj.SelectedDate.ToString());
             if (!ValidnoUnesenDatum(pocetak, kraj))
             {
-                MessageBox.Show("Nevalidan unos datuma godišnjeg odmora.");
+                InformativniProzor ip1 = new InformativniProzor("Nevalidan unos datuma godišnjeg odmora.");
+                ip1.ShowDialog();
                 return;
             }
 
@@ -73,7 +74,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             int daniGodisnjegOdmora = intervalGodisnjegOdmora.Days;
             if (daniGodisnjegOdmora > selektovaniLekar.RadnoVreme.PreostaliSlobodniDaniUGodini)
             {
-                MessageBox.Show("Nema dovoljno preostalih slobodnih dana.");
+                InformativniProzor ip2 = new InformativniProzor("Nema dovoljno preostalih slobodnih dana.");
+                ip2.ShowDialog();
                 return;
             }
 
@@ -85,14 +87,16 @@ namespace IS_Bolnice.Prozori.Sekretar
 
             if (radnoVremeKontroler.PreklapanjeIntervalaGodisnjegOdmoraLekara(potencijalniSlobodniDani, selektovaniLekar.Jmbg))
             {
-                MessageBox.Show("Zadati itnerval se već preklapa sa postojećim slobodnim danima.");
+                InformativniProzor ip3 = new InformativniProzor("Zadati itnerval se već preklapa sa postojećim slobodnim danima.");
+                ip3.ShowDialog();
                 return;
             }
 
             if (radnoVremeKontroler.PreklapanjeIntervalaGodisnjegOdmoraSaObavezamaLekara(potencijalniSlobodniDani,
                 selektovaniLekar.Jmbg))
             {
-                MessageBox.Show("Lekar poseduje obaveze u zadatom itnervalu godišnjeg odmora.");
+                InformativniProzor ip4 = new InformativniProzor("Lekar poseduje obaveze u zadatom itnervalu godišnjeg odmora.");
+                ip4.ShowDialog();
                 return;
             }
 
@@ -102,7 +106,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             }
             selektovaniLekar.RadnoVreme.PreostaliSlobodniDaniUGodini -= radnoVremeKontroler.PreracunajBrojIskoriscenihSlobodnihDanaLekara(selektovaniLekar.Jmbg, potencijalniSlobodniDani);
             radnoVremeKontroler.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
-            MessageBox.Show("Uspešno kreiran godišnji odmor!");
+            InformativniProzor ip5 = new InformativniProzor("Uspešno kreiran godišnji odmor!");
+            ip5.ShowDialog();
             OsvezavanjePrikazaSlobodnihDana();
             labelPreostaliDani.Content = selektovaniLekar.RadnoVreme.PreostaliSlobodniDaniUGodini;
         }
