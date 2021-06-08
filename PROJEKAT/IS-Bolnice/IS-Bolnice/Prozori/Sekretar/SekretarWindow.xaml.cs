@@ -55,11 +55,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             set;
         }
 
-        public SekretarWindow()
+        public SekretarWindow(Korisnik korisnik)
         {
             InitializeComponent();
             this.DataContext = this;
-
+            kredencijaliSekretara.Content = korisnik.Ime + " " + korisnik.Prezime;
             Pacijenti = new ObservableCollection<Pacijent>(pacijentKontroler.GetSviPacijenti());
             LekariOpstePrakse = new ObservableCollection<Lekar>(lekarKontroler.GetSviLekariOpstePrakse());
             LekariSpecijalisti = new ObservableCollection<Lekar>(lekarKontroler.GetSviLekariSpecijalisti());

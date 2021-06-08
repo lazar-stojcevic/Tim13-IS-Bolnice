@@ -118,13 +118,11 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
         {
-            if (napravljenaIzmena)
-            {
-                AzurirajRadnoVremeLekara();
-            }
-
+            if (napravljenaIzmena) AzurirajRadnoVremeLekara();
             AzurirajSlobodneDaneLekara();
             radnoVremeKontroler.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
+            if (napravljenaIzmena) radnoVremeKontroler.OdloziSaObavestenjemBuduceTermineLekaraZbogPromene(selektovaniLekar);
+            
             Close();
         }
 

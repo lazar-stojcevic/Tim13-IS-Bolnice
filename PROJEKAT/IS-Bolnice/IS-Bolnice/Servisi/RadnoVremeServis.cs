@@ -186,5 +186,61 @@ namespace IS_Bolnice.Servisi
                 obavestenjeServis.KreirajObavestenje(novo);
             }
         }
+
+        public void OdloziSaObavestenjemBuduceTermineLekaraZbogPromene(Lekar lekar)
+        {
+            List<Pregled> odlozeniPregledi = OdloziSveBuducePregledeZbogPromene(lekar);
+            List<Operacija> odlozeneOperacije = OdloziSveBuduceOperacijeZbogPromene(lekar);
+
+            PosaljiObavestenjeZaOdlaganjePregledaPacijentima(odlozeniPregledi);
+            PosaljiObavestenjeZaOdlaganjeOperacijaPacijentima(odlozeneOperacije);
+        }
+
+        private List<Pregled> OdloziSveBuducePregledeZbogPromene(Lekar lekar)
+        {
+            List<Pregled> odlozeniPregledi = new List<Pregled>();
+            PregledServis pregledServis = new PregledServis();
+            foreach (Pregled pregled in pregledServis.GetSviBuduciPreglediLekara(lekar.Jmbg))
+            {
+                DateTime sutradan = DateTime.Now.AddDays(1);
+                sutradan = sutradan.Date;
+                if (pregled.VremePocetkaPregleda > sutradan)
+                {
+                    VremenskiInterval intervalPregleda =
+                        new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);
+                    VremenskiInterval standardnoRadnoVreme = lekar.RadnoVreme.StandardnoRadnoVreme;
+                    if (!standardnoRadnoVreme.SadrziInterval(intervalPregleda))
+                    {
+                        pregledServis.OdloziPregledStoPre(pregled);
+                        odlozeniPregledi.Add(pregled);
+                    }
+                }
+            }
+
+            return odlozeniPregledi;
+        }
+
+        private List<Operacija> OdloziSveBuduceOperacijeZbogPromene(Lekar lekar)
+        {
+            List<Operacija> odlozeneOperacije = new List<Operacija>();
+            OperacijaServis operacijaServis = new OperacijaServis();
+            foreach (Operacija operacija in operacijaServis.GetSveBuduceOperacijeLekara(lekar.Jmbg))
+            {
+                DateTime sutradan = DateTime.Now.AddDays(1);
+                if (operacija.VremePocetkaOperacije > sutradan)
+                {
+                    VremenskiInterval intervalOperacije =
+                        new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
+                    VremenskiInterval standardnoRadnoVreme = lekar.RadnoVreme.StandardnoRadnoVreme;
+                    if (!standardnoRadnoVreme.SadrziInterval(intervalOperacije))
+                    {
+                        operacijaServis.OdloziOperacijuStoPre(operacija);
+                        odlozeneOperacije.Add(operacija);
+                    }
+                }
+            }
+
+            return odlozeneOperacije;
+        }
     }
 }

@@ -117,7 +117,7 @@
         </ToolBar>
         <!-- Status bar -->
         <Rectangle Grid.Row="3"/>
-        <Label Grid.Row="3" Content="Ime i Prezime" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+        <Label x:Name="kredencijaliSekretara" Grid.Row="3" Content="Ime i Prezime" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
         <TextBlock Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Text="{Binding RelativeSource={RelativeSource Self}, StringFormat={}{0:HH:mm   dd/MM/yyyy },Path=DataContext.Now}"
                    DataContext="{StaticResource DateTime}">

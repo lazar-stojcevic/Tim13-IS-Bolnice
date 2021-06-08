@@ -68,7 +68,7 @@ namespace IS_Bolnice
                         if (s.Sifra.Equals(sifra))
                         {
                             found = true;
-                            Prozori.Sekretar.SekretarWindow sekretar = new Prozori.Sekretar.SekretarWindow();
+                            Prozori.Sekretar.SekretarWindow sekretar = new Prozori.Sekretar.SekretarWindow(s);
                             sekretar.Show();
                             this.Close();
                         }

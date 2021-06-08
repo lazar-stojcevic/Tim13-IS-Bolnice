@@ -46,5 +46,10 @@ namespace IS_Bolnice.Kontroleri
         {
             radnoVremeServis.OdloziSaObavestenjemTermineLekaraKojiSeNeUklapaju(vremenskiInterval, jmbgLekara);
         }
+
+        public void OdloziSaObavestenjemBuduceTermineLekaraZbogPromene(Lekar lekar)
+        {
+            radnoVremeServis.OdloziSaObavestenjemBuduceTermineLekaraZbogPromene(lekar);
+        }
     }
 }
