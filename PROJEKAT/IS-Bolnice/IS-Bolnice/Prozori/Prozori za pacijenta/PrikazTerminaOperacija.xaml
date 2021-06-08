@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prozori_za_pacijenta"
         mc:Ignorable="d"
         Title="Prikaz termina operacija" Height="580" Width="620"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Loaded="OnLoad">
     <StackPanel>
         <Grid>
-            <ListView Margin="10 5" Name="listaOperacija" Height="420">
+            <ListView ItemsSource="{Binding OperacijePacijenta}" Margin="10 5" Name="listaOperacija" Height="420">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Ime lekara" Width="150" DisplayMemberBinding="{Binding Lekar.Ime}" />
@@ -24,7 +25,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="izadji" Width="100" Height="50" Content="Izađi" FontSize="20" Click="izadji_Click_1" />
+            <Button Grid.Column="0" x:Name="izadji" Width="100" Height="50" Content="Izađi" FontSize="20" Command="{Binding Path=Izadji}" />
         </Grid>
     </StackPanel>
 </Window>
