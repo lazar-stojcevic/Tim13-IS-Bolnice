@@ -1,19 +1,10 @@
-﻿using IS_Bolnice.Baze;
-using IS_Bolnice.Kontroleri;
+﻿using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {
@@ -34,11 +25,11 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             jmbgPacijenta = jmbgPac;
             preglediZaAnketu = anketaKontroler.GetSviPreglediZaAnketu(jmbgPacijenta);
 
-            InitializeComboBoxForServery();
+            PostaviAnkete();
 
         }
 
-        private void InitializeComboBoxForServery()
+        private void PostaviAnkete()
         {
             foreach (Pregled pregled in preglediZaAnketu)
             {
@@ -57,20 +48,20 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
                 potvrdi.IsEnabled = true;
             }
         }
-        private void ratingForDoctor()
+        private void ocenjivanjeDoktora()
         {
             Pregled pregled = preglediZaAnketu.ElementAt(surveryName.SelectedIndex);
 
             anketa.Lekar = pregled.Lekar;
             anketa.Pacijent = pregled.Pacijent;
-            anketa.Ocena = WitchBtnIsSelected();
+            anketa.Ocena = KojaOcenaJeSelektovana();
             anketa.Trajanje = pregled.VremePocetkaPregleda;
             anketa.Komentar = komentar.Text;
             anketa.KojaAnketa = 0;
             anketaKontroler.SacuvajAnketu(anketa);
         }
 
-        private void ratingForCorporation()
+        private void ocenjivanjeBolnice()
         {
             Pacijent patient = new Pacijent();
             patient.Jmbg = jmbgPacijenta;
@@ -81,7 +72,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             anketa.Pacijent = patient;
             anketa.Trajanje = DateTime.Now;
             anketa.Komentar = komentar.Text;
-            anketa.Ocena = WitchBtnIsSelected();
+            anketa.Ocena = KojaOcenaJeSelektovana();
             anketa.Bolnica = hospital;
             anketa.KojaAnketa = 1;
             anketaKontroler.SacuvajAnketu(anketa);
@@ -91,14 +82,14 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
         {
             if (radBtnLekari.IsChecked.Value)
             {
-                ratingForDoctor();
+                ocenjivanjeDoktora();
                 this.Close();
             }
             else
             {
                 if (anketaKontroler.DaLiJeVremeZaAnketuBolnice(jmbgPacijenta))
                 {
-                    ratingForCorporation();
+                    ocenjivanjeBolnice();
                     this.Close();
                 }
                 else
@@ -115,7 +106,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             this.Close();
         }
 
-        private int WitchBtnIsSelected()
+        private int KojaOcenaJeSelektovana()
         {
             int grade;
 

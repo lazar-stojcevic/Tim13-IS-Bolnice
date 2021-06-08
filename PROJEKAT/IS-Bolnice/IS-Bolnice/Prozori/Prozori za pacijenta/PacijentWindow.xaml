@@ -17,6 +17,7 @@
         <RoutedUICommand x:Key="ZakazivanjeKodLekara" Text="KodLekara" />
         <RoutedUICommand x:Key="ZakazivanjeUTerminu" Text="UTerminu" />
         <RoutedUICommand x:Key="PrikazIzvestaja" Text="Izvestaj" />
+        <RoutedUICommand x:Key="OceniAplikaciju" Text="OceniAplikaciju" />
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -28,6 +29,7 @@
         <CommandBinding Command="{StaticResource ZakazivanjeKodLekara}" Executed="zakazivanjeKodLekara_Click" />
         <CommandBinding Command="{StaticResource ZakazivanjeUTerminu}" Executed="zakazivanjeUTerminu_Click" />
         <CommandBinding Command="{StaticResource PrikazIzvestaja}" Executed="izvestaj_Click" />
+        <CommandBinding Command="{StaticResource OceniAplikaciju}" Executed="oceniBtn_Click" />
     </Window.CommandBindings>
 
     <Window.InputBindings>
@@ -39,6 +41,7 @@
         <KeyBinding Command="{StaticResource ZakazivanjeKodLekara}" Key="G" Modifiers="Ctrl" />
         <KeyBinding Command="{StaticResource ZakazivanjeUTerminu}" Key="T" Modifiers="Ctrl" />
         <KeyBinding Command="{StaticResource PrikazIzvestaja}" Key="I" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource OceniAplikaciju}" Key="T" Modifiers="Ctrl" />
     </Window.InputBindings>
 
 
@@ -53,25 +56,26 @@
                 </MenuItem>
                 <!--PRIKAZI-->
                 <Separator></Separator>
-                <MenuItem Click="prikaziBtn_Click" Header="{x:Static p:Resources.btnTerminiPregleda}" Command="{StaticResource PrikazTerminaPregleda}" InputGestureText="Ctrl+P"></MenuItem>
-                <MenuItem Click="operacijeBtn_Click" Header="{x:Static p:Resources.btnTerminiOperacija}" Command="{StaticResource PrikazTerminaOperacija}" InputGestureText="Ctrl+O"></MenuItem>
-                <MenuItem Click="obavestenjaBtn_Click" Header="{x:Static p:Resources.btnObavestenje}" Command="{StaticResource PrikazObavestenja}" InputGestureText="Ctrl+Q"></MenuItem>
-                <MenuItem Click="izvestaj_Click" Header="{x:Static p:Resources.btnIzvestaj}" Command="{StaticResource PrikazIzvestaja}" InputGestureText="Ctrl+I" ></MenuItem>
+                <MenuItem  Header="{x:Static p:Resources.btnTerminiPregleda}" Command="{StaticResource PrikazTerminaPregleda}" InputGestureText="Ctrl+P"></MenuItem>
+                <MenuItem  Header="{x:Static p:Resources.btnTerminiOperacija}" Command="{StaticResource PrikazTerminaOperacija}" InputGestureText="Ctrl+O"></MenuItem>
+                <MenuItem  Header="{x:Static p:Resources.btnObavestenje}" Command="{StaticResource PrikazObavestenja}" InputGestureText="Ctrl+Q"></MenuItem>
+                <MenuItem  Header="{x:Static p:Resources.btnIzvestaj}" Command="{StaticResource PrikazIzvestaja}" InputGestureText="Ctrl+I" ></MenuItem>
                 <Separator></Separator>
-                <MenuItem Click="anketaBtn_Click" Header="{x:Static p:Resources.btnAnketa}" Command="{StaticResource PrikazAnkete}" InputGestureText="Ctrl+A"></MenuItem>
+                <MenuItem  Header="{x:Static p:Resources.btnAnketa}" Command="{StaticResource PrikazAnkete}" InputGestureText="Ctrl+A"></MenuItem>
+                <MenuItem Header="Ocenite aplikaciju" Command="{StaticResource OceniAplikaciju}" InputGestureText="Ctrl+T"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Click="odjavaBtn_Click" Header="{x:Static p:Resources.btnOdjaviSe}" Command="{StaticResource Odjava}" InputGestureText="Ctrl+L"></MenuItem>
+                <MenuItem  Header="{x:Static p:Resources.btnOdjaviSe}" Command="{StaticResource Odjava}" InputGestureText="Ctrl+L"></MenuItem>
             </MenuItem>
             <!--UREDI-->
             <MenuItem Header="{x:Static p:Resources.btnUredi}">
                 <MenuItem Header="{x:Static p:Resources.menuTema}">
-                    <MenuItem x:Name="svetlaTema" Header="{x:Static p:Resources.menuSvetla}" Click="svetlaTema_Click"></MenuItem>
-                    <MenuItem x:Name="tamnaTema" Header="{x:Static p:Resources.menuTamna}" Click="tamnaTema_Click"></MenuItem>
+                    <MenuItem x:Name="svetlaTema" Header="{x:Static p:Resources.menuSvetla}" ></MenuItem>
+                    <MenuItem x:Name="tamnaTema" Header="{x:Static p:Resources.menuTamna}" ></MenuItem>
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="{x:Static p:Resources.menuJezik}">
-                    <MenuItem x:Name="srpski" Header="{x:Static p:Resources.menuSrpski}" Click="srpski_Click"></MenuItem>
-                    <MenuItem x:Name="engleski" Header="{x:Static p:Resources.menuEngleski}" Click="engleski_Click"></MenuItem>
+                    <MenuItem x:Name="srpski" Header="{x:Static p:Resources.menuSrpski}" ></MenuItem>
+                    <MenuItem x:Name="engleski" Header="{x:Static p:Resources.menuEngleski}" ></MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -183,7 +187,7 @@
                         Margin="10"
                         Height="70" Click="odjavaBtn_Click"/>
             </Grid>
-            <!--Slika-->
         </Grid>
+        <Button Margin="0 20" x:Name="oceniBtn" FontSize="16" Content="Ocenite aplikaciju" VerticalAlignment="Center" Height="70" Width="250" Click="oceniBtn_Click"></Button>
     </StackPanel>
 </Window>

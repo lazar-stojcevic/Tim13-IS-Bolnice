@@ -118,5 +118,11 @@ namespace IS_Bolnice
             App app = (App)Application.Current;
             app.EngleskiJezik();
         }
+
+        private void oceniBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FormaZaOcenjivanjeAplikacije fzoa = new FormaZaOcenjivanjeAplikacije();
+            fzoa.ShowDialog();
+        }
     }
 }
