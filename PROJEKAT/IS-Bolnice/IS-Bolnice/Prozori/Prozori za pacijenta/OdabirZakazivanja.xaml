@@ -7,28 +7,32 @@
         xmlns:p = "clr-namespace:IS_Bolnice.Properties"
         mc:Ignorable="d"
        Title="{x:Static p:Resources.btnPregled}" Height="300" Width="310"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Loaded="OnLoad">
     <StackPanel>
         <!--Zakazivanje kod lekara-->
         <Button 
             Height="70"
             x:Name="kodLekaraBtn"
             Content="{x:Static p:Resources.btnKodLekara}"
-            Margin="21, 10" Click="kodLekaraBtn_Click"
+            Margin="21, 10"
+            Command="{Binding Path=ZakazivanjeKodLekara}"
             FontSize="14"/>
         <!--Zakazivanje kod lekara-->
         <Button 
             Height="70"
             x:Name="uTerminuBtn"
             Content="{x:Static p:Resources.btnUTerminu}"
-            Margin="21,5" Click="uTerminuBtn_Click"
+            Command="{Binding Path=ZakazivanjeUTerminu}"
+            Margin="21,5"
             FontSize="14"/>
         <!--Odustani-->
         <Button 
             Height="70"
             x:Name="izadjiBtn"
             Content="{x:Static p:Resources.btnIzadji}"
-            Margin="21,10" Click="izadjiBtn_Click"
-            FontSize="14"/>
+            Margin="21,10"
+            FontSize="14"
+            Command="{Binding Path=Odustani}"/>
     </StackPanel>
 </Window>

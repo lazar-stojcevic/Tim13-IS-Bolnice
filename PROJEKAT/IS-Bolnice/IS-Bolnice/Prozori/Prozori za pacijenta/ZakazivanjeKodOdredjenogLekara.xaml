@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Zakazivanje termina kod određenog lekara" Height="400" Width="350"
         WindowStartupLocation="CenterScreen">
-    <StackPanel Margin="10" Background="White">
+    <StackPanel Margin="5">
         <!--Lista lekara-->
         <TextBlock 
                Text="Odaberite lekara"

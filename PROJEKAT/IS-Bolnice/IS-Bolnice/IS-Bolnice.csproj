@@ -502,6 +502,8 @@
     <Compile Include="ViewModel\Upravnik\EditSalePageViewModel.cs" />
     <Compile Include="ViewModel\Upravnik\SalePageViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="ViewModel\VMPacijent\KreiranjeBelezkeViewModel.cs" />
+    <Compile Include="ViewModel\VMPacijent\OdabirZakazivanjaViewModel.cs" />
     <Compile Include="VMConverter\SaleConverter.cs" />
     <Page Include="Prozori\OdredjivanjeTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
