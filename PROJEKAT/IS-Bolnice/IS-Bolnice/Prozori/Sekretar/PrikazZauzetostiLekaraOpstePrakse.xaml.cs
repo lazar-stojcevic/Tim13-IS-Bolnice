@@ -43,7 +43,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             DateTime kraj = DateTime.Parse(datePicker_kraj.SelectedDate.ToString());
             if (!ValidnoUnesenDatum(pocetak, kraj))
             {
-                MessageBox.Show("Nevalidno unesen period za formranje izveštaja");
+                InformativniProzor ip = new InformativniProzor("Nevalidno unesen period za formranje izveštaja");
+                ip.ShowDialog();
                 return;
             }
 
@@ -88,11 +89,13 @@ namespace IS_Bolnice.Prozori.Sekretar
                     .SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER));
                 document.Close();
 
-                MessageBox.Show("Uspešno generisan izveštaj!");
+                InformativniProzor ip = new InformativniProzor("Uspešno generisan izveštaj!");
+                ip.ShowDialog();
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Zatvorite fajl \"izvestajZaLekaraOpstePrakse\" da bi mogao ponovo da se generiše.");
+                InformativniProzor ip = new InformativniProzor("Zatvorite fajl \"izvestajZaLekaraOpstePrakse\" da bi mogao ponovo da se generiše.");
+                ip.ShowDialog();
                 return;
             }
         }

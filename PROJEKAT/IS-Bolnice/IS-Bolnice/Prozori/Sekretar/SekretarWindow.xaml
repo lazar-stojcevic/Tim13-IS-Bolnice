@@ -75,6 +75,9 @@
             <MenuItem Header="Izvršenje">
                 <MenuItem Header="Naplata" Icon="{StaticResource naplata}" Click="Button_Click_Naplata_Usluga"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Recenzija">
+                <MenuItem Header="Pošalji recenziju" ToolTip="Slanje recenzije o aplikaciji" Click="Button_Click_Recenzija"></MenuItem>
+            </MenuItem>
             <MenuItem Header="Pomoć">
                 <MenuItem Header="Video tutorijal za hitno zakazivanje termina" Click="Click_Video_Tutorijal"></MenuItem>
             </MenuItem>
@@ -104,6 +107,10 @@
             <Button Background="LightGray" Height="30" VerticalContentAlignment="Center" Content="Hitan termin" ToolTip="Zakazivanje hitnog termina" Click="Button_Click_Hitan_Termin"></Button>
         </ToolBar>
         <ToolBar Grid.Row="1" HorizontalAlignment="Right" ToolBarTray.IsLocked="True">
+            <Button ToolTip="Slanje recenzije o aplikaciji" Click="Button_Click_Recenzija">
+                <Image Source="/Slike/Sekretar/review.png"></Image>
+            </Button>
+            <Label></Label>
             <Button ToolTip="Pomoć(video-tutorijal) za hitno zakazivanje termina" Click="Click_Video_Tutorijal">
                 <Image Source="/Slike/Sekretar/help.png" Height="24" Width="24"></Image>
             </Button>

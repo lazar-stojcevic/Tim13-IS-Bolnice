@@ -106,7 +106,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!popunjenaObaveznaPolja())
             {
                 dugmePotvrdi.IsEnabled = false;
-                MessageBox.Show("Nisu popunjena sva obavezna polja!");
+                InformativniProzor ip = new InformativniProzor("Nisu popunjena sva obavezna polja!");
+                ip.ShowDialog();
             }
             else
             {
@@ -233,7 +234,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!korisnikKontroler.JedinstvenNoviJmbgKorisnika(tempNoviJmbg, pacijentZaIzmenu.Jmbg))
             {
                 dugmePotvrdi.IsEnabled = false;
-                MessageBox.Show("Uneti JMBG već postoji u sistemu!");
+                InformativniProzor ip = new InformativniProzor("Uneti JMBG već postoji u sistemu!");
+                ip.ShowDialog();
             }
             if (!Regex.IsMatch(tempNoviJmbg, "^[0-9]{13}$"))
             {
@@ -268,7 +270,8 @@ namespace IS_Bolnice.Prozori.Sekretar
             if (!korisnikKontroler.JedinstvenoNovoKorisnickoImeKroisnika(tempNovoKorisnickoIme, pacijentZaIzmenu.KorisnickoIme))
             {
                 dugmePotvrdi.IsEnabled = false;
-                MessageBox.Show("Uneto korisničko ime već postoji u sistemu!");
+                InformativniProzor ip = new InformativniProzor("Uneto korisničko ime već postoji u sistemu!");
+                ip.ShowDialog();
             }
         }
 

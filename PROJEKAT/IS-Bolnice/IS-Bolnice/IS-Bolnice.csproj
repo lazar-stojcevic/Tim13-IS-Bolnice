@@ -400,6 +400,9 @@
     <Compile Include="Prozori\Sekretar\PrikazZauzetostiLekaraSpecijalista.xaml.cs">
       <DependentUpon>PrikazZauzetostiLekaraSpecijalista.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Sekretar\RecenzijaAplikacijeDesktop.xaml.cs">
+      <DependentUpon>RecenzijaAplikacijeDesktop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Sekretar\SlobodniDaniLekara.xaml.cs">
       <DependentUpon>SlobodniDaniLekara.xaml</DependentUpon>
     </Compile>
@@ -774,6 +777,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Prozori\Sekretar\RecenzijaAplikacijeDesktop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Prozori\Sekretar\SlobodniDaniLekara.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1141,6 +1148,7 @@
     <Resource Include="Slike\Pacijent\blueMessageIcon2.png" />
     <Resource Include="Slike\Lekar\star.png" />
     <Resource Include="Datoteke\recenzije.txt" />
+    <Resource Include="Slike\Sekretar\review.png" />
     <Content Include="Video\videoTutorijal.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

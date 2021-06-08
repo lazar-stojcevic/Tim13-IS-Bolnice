@@ -454,5 +454,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             VideoTutorijalHitnogZakazivanja v = new VideoTutorijalHitnogZakazivanja();
             v.Show();
         }
+
+        private void Button_Click_Recenzija(object sender, RoutedEventArgs e)
+        {
+            RecenzijaAplikacijeDesktop recenzija = new RecenzijaAplikacijeDesktop();
+            recenzija.Show();
+        }
     }
 }
