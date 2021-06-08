@@ -24,8 +24,10 @@
         <Grid Height="100" Margin="10 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" x:Name="izadji" Width="100" Height="50" Content="Izađi" FontSize="20" Command="{Binding Path=Izadji}" />
+            <Button Grid.Column="1" x:Name="generisiPdf" Width="100" Height="50" Content="Izvestaj" FontSize="20" Command="{Binding Path=Izvestaj}" />
         </Grid>
     </StackPanel>
 </Window>

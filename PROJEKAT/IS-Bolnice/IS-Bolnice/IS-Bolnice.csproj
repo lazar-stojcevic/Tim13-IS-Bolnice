@@ -1142,7 +1142,9 @@
   <ItemGroup>
     <Resource Include="Slike\Lekar\email.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PDF\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\Sekretar\stop.png" />
     <Resource Include="Slike\Sekretar\pause.png" />
