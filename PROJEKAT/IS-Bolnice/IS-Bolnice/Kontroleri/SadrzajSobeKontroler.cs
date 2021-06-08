@@ -16,6 +16,11 @@ namespace IS_Bolnice.Kontroleri
             return sadrzajSobeServis.GetSadrzajSobe(idSobe);
         }
 
+        public List<SadrzajSobe> GetDnamickiSadrzajSobe(string idSobe)
+        {
+            return sadrzajSobeServis.GetDinamickiSadrzajSobe(idSobe);
+        }
+
         public void IzvrsiTransport() {
             sadrzajSobeServis.IzvrsiTransport();
         }

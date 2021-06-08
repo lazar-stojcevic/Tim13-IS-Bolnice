@@ -20,5 +20,25 @@ namespace IS_Bolnice.Servisi
         {
             return izvestajRepo.SviIzvestajiPacijenta(jmbgPacijenta);
         }
+
+        public List<Izvestaj> DobaviSveIzvestaje()
+        {
+            return izvestajRepo.DobaviSve();
+        }
+
+        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana()
+        {
+           return izvestajRepo.DobaviSveIzvestajeizPoslednjihNedeljuDana();
+        }
+
+        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana()
+        {
+            return izvestajRepo.DobaviSveIzvestajeizPoslednjihMesecDana();
+        }
+
+        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana()
+        {
+            return izvestajRepo.DobaviSveIzvestajeizPoslednjihGodinuDana();
+        }
     }
 }

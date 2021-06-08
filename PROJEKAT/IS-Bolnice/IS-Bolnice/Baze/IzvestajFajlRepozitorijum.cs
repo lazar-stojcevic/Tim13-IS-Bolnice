@@ -34,6 +34,51 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
         return izvestajiPacijenta;
     }
 
+    public List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana()
+    {
+        List<Izvestaj> retVal = new List<Izvestaj>();
+
+        foreach (Izvestaj izvestaj in DobaviSve())
+        {
+            if (izvestaj.DatumKreiranja > DateTime.Now.AddDays(-7))
+            {
+                retVal.Add(izvestaj);
+            }
+        }
+
+        return retVal;
+    }
+
+    public List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana()
+    {
+        List<Izvestaj> retVal = new List<Izvestaj>();
+
+        foreach (Izvestaj izvestaj in DobaviSve())
+        {
+            if (izvestaj.DatumKreiranja > DateTime.Now.AddMonths(-1))
+            {
+                retVal.Add(izvestaj);
+            }
+        }
+
+        return retVal;
+    }
+
+    public List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana()
+    {
+        List<Izvestaj> retVal = new List<Izvestaj>();
+
+        foreach (Izvestaj izvestaj in DobaviSve())
+        {
+            if (izvestaj.DatumKreiranja > DateTime.Now.AddYears(-1))
+            {
+                retVal.Add(izvestaj);
+            }
+        }
+
+        return retVal;
+    }
+
     public override Izvestaj KreirajEntitet(string[] podaciEntiteta)
     {
         LekarFajlRepozitorijum lekarRepo = new LekarFajlRepozitorijum();

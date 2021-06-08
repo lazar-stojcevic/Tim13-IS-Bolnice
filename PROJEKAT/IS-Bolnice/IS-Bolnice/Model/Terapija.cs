@@ -10,6 +10,11 @@ public class Terapija : INotifyPropertyChanged
    private Lek lek;
    private string opis;
 
+   public Terapija()
+   {
+       lek = new Lek();
+   }
+
     public Double UcestanostKonzumiranja
     {
         get { return ucestanostKonzumiranja; }
@@ -34,7 +39,7 @@ public class Terapija : INotifyPropertyChanged
 
     public DateTime VremeKraja
     {
-        get { return vremePocetka; }
+        get { return vremeKraja; }
         set
         {
             if (vremeKraja == value) return;

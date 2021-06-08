@@ -73,6 +73,20 @@ public class SadrzajSobeFajlRepozitorijum: GenerickiFajlRepozitorijum<SadrzajSob
         return sadrzajSobe;
     }
 
+    public List<SadrzajSobe> GetDinamickiSadrzajSobe(string idSobe)
+    {
+        List<SadrzajSobe> sadrzajSobe = new List<SadrzajSobe>();
+        List<SadrzajSobe> sadrzajSvihSoba = DobaviSve();
+        foreach (SadrzajSobe sadrzaj in sadrzajSvihSoba)
+        {
+            if (sadrzaj.Soba.Id.Equals(idSobe) && sadrzaj.NovaSoba == null && sadrzaj.Predmet.Tip.Equals(TipOpreme.dinamicka))
+            {
+                sadrzajSobe.Add(sadrzaj);
+            }
+        }
+        return sadrzajSobe;
+    }
+
     public string fileLocation = @"..\..\Datoteke\sadrzajiSoba.txt";
 
 }

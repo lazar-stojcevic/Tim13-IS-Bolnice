@@ -20,5 +20,25 @@ namespace IS_Bolnice.Kontroleri
         {
             return izvestajServis.SviIzvestajiPacijenta(jmbgPacijenta);
         }
+
+        public List<Izvestaj> DobaviSveIzvestaje()
+        {
+            return izvestajServis.DobaviSveIzvestaje();
+        }
+
+        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana()
+        {
+            return izvestajServis.DobaviSveIzvestajeizPoslednjihNedeljuDana();
+        }
+
+        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana()
+        {
+            return izvestajServis.DobaviSveIzvestajeizPoslednjihMesecDana();
+        }
+
+        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana()
+        {
+            return izvestajServis.DobaviSveIzvestajeizPoslednjihGodinuDana();
+        }
     }
 }

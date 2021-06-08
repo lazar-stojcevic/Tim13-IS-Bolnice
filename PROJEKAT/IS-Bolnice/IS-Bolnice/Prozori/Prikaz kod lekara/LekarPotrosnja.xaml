@@ -1,0 +1,52 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_kod_lekara.LekarPotrosnja"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
+      mc:Ignorable="d" 
+      Height="700" Width="400" Background="White"
+      Title="LekarPotrosnja">
+
+    <Grid>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398"/>
+
+        <Label Content="Izveštaj o potrošnji" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="48,10,0,0"/>
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="Button_ClickNazad">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+        <Label Content="Prostorija:" HorizontalAlignment="Left" Height="28" Margin="10,66,0,0" VerticalAlignment="Top" Width="71"/>
+        <ListView x:Name="oprema" HorizontalAlignment="Left" Height="189" Margin="10,171,0,0" VerticalAlignment="Top" Width="281">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding Predmet.Id}" />
+                    <GridViewColumn Header="Naziv" Width="180" DisplayMemberBinding="{Binding Predmet.Naziv}"/>
+                    <GridViewColumn Header="Količina" Width="50" DisplayMemberBinding="{Binding Kolicina}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Dinamička oprema:" HorizontalAlignment="Left" Height="28" Margin="10,135,0,0" VerticalAlignment="Top" Width="112"/>
+        <ComboBox x:Name="prostorije" HorizontalAlignment="Left" Height="24" Margin="10,94,0,0" VerticalAlignment="Top" Width="366" SelectionChanged="promenaSelekcije">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding }" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+        <Button Content="+"  HorizontalAlignment="Left" Height="40" Margin="300,222,0,0" VerticalAlignment="Top" Width="52" Click="Button_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" Height="40" Margin="300,277,0,0" VerticalAlignment="Top" Width="52" Click="Button_Click_1"/>
+        <Rectangle   Fill="Black" HorizontalAlignment="Left" Height="3" Margin="0,424,0,0"  VerticalAlignment="Top" Width="400"/>
+        <Label FontSize="18" Content="Generisanje izveštaja o potrošnji lekova:" HorizontalAlignment="Left" Height="36" Margin="10,438,0,0" VerticalAlignment="Top" Width="334"/>
+
+
+        <RadioButton x:Name="nedeljuDana" IsChecked="True" GroupName="period" Content="U protekhih nedelju dana" HorizontalAlignment="Left" Height="24" Margin="30,508,0,0" VerticalAlignment="Top" Width="194"/>
+        <RadioButton x:Name="mesecDana" GroupName="period" Content="U protekhih mesec dana" HorizontalAlignment="Left" Height="24" Margin="30,534,0,0" VerticalAlignment="Top" Width="194"/>
+        <RadioButton x:Name="godinuDana" GroupName="period" Content="U protekhih godinu dana" HorizontalAlignment="Left" Height="24" Margin="30,562,0,0" VerticalAlignment="Top" Width="194"/>
+        <Label Content="Period za koji će se izgenerisati izveštaj:" HorizontalAlignment="Left" Height="28" Margin="10,470,0,0" VerticalAlignment="Top" Width="214"/>
+        <Button Content="Izgeneriši izveštaj" HorizontalAlignment="Left" Height="53" Margin="38,601,0,0" VerticalAlignment="Top" Width="314" Click="Button_Izvestaj"/>
+        <Button Content="Sačuvaj" HorizontalAlignment="Left" Height="40" Margin="235,371,0,0" VerticalAlignment="Top" Width="141" Click="Button_Zavrsi"/>
+    </Grid>
+</Page>

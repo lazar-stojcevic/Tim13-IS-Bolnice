@@ -17,6 +17,11 @@ namespace IS_Bolnice.Servisi
             return sadrzajSobeRepo.GetSadrzajSobe(idSobe);
         }
 
+        public List<SadrzajSobe> GetDinamickiSadrzajSobe(string idSobe)
+        {
+            return sadrzajSobeRepo.GetDinamickiSadrzajSobe(idSobe);
+        }
+
         public bool PostojiOpremaUBolnici(string idPredmeta)
         {
             List<SadrzajSobe> sadrzajSoba = sadrzajSobeRepo.DobaviSve();

@@ -14,22 +14,55 @@ namespace IS_Bolnice.Servisi
 
         public List<Soba> GetSveSobe()
         {
-            return bolnicaRepo.GetSobe();
+            List<Soba> oneKojeNisuLogickiObrisane = new List<Soba>();
+            foreach (Soba soba in bolnicaRepo.GetSobe())
+            {
+                if (!soba.Obrisano)
+                {
+                    oneKojeNisuLogickiObrisane.Add(soba);
+                }
+            }
+
+            return oneKojeNisuLogickiObrisane;
         }
 
         public List<Soba> GetSveOperacioneSale()
         {
-            return bolnicaRepo.GetSveOperacioneSale();
+            List<Soba> oneKojeNisuLogickiObrisane = new List<Soba>();
+            foreach (Soba soba in bolnicaRepo.GetSveOperacioneSale())
+            {
+                if (!soba.Obrisano)
+                {
+                    oneKojeNisuLogickiObrisane.Add(soba);
+                }
+            }
+            return oneKojeNisuLogickiObrisane;
         }
 
         public List<Soba> GetSveSobeZaPregled()
         {
-            return bolnicaRepo.GetSveSobeZaPregled();
+            List<Soba> oneKojeNisuLogickiObrisane = new List<Soba>();
+            foreach (Soba soba in bolnicaRepo.GetSveSobeZaPregled())
+            {
+                if (!soba.Obrisano)
+                {
+                    oneKojeNisuLogickiObrisane.Add(soba);
+                }
+            }
+            return oneKojeNisuLogickiObrisane;
         }
 
         public List<Soba> GetSveSobeZaHospitalizaciju()
         {
-            return bolnicaRepo.GetSveSobeZaHospitalizaciju();
+            List<Soba> oneKojeNisuLogickiObrisane = new List<Soba>();
+            foreach (Soba soba in bolnicaRepo.GetSveSobeZaHospitalizaciju())
+            {
+                if (!soba.Obrisano)
+                {
+                    oneKojeNisuLogickiObrisane.Add(soba);
+                }
+            }
+            return oneKojeNisuLogickiObrisane;
         }
 
         internal void KreirajSobuUBolnici(Soba novaSoba)

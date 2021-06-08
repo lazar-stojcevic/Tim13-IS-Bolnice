@@ -94,6 +94,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             LekarObavestenja lekarObavestenja = new LekarObavestenja();
             NavigationService.Navigate(lekarObavestenja);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LekarPotrosnja lekarPotrosnja = new LekarPotrosnja();
+            NavigationService.Navigate(lekarPotrosnja);
+        }
+
+        private void ButtonRecenzija_Click(object sender, RoutedEventArgs e)
+        {
+            RecenzijaAplikacije recenzijaAplikacije = new RecenzijaAplikacije();
+            NavigationService.Navigate(recenzijaAplikacije);
+        }
     }
 
 }

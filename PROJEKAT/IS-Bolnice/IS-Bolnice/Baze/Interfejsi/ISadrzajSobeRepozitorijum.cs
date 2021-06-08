@@ -9,5 +9,7 @@ namespace IS_Bolnice.Baze.Interfejsi
     interface ISadrzajSobeRepozitorijum: GenerickiRepozitorijum<SadrzajSobe>
     {
         List<SadrzajSobe> GetSadrzajSobe(string idSobe);
+
+        List<SadrzajSobe> GetDinamickiSadrzajSobe(string idSobe);
     }
 }

@@ -124,7 +124,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
                 Terapija t = new Terapija();
                 Lek l = (Lek) listaSvihLekova.SelectedItem;
-                t.Lek = l;
+                t.Lek = l; 
                 t.UcestanostKonzumiranja = Double.Parse(txtBrojUzimanja.Text);
                 t.VremePocetka = System.DateTime.Now;
                 t.VremeKraja = DateTime.Now.AddDays(Int32.Parse(txtTrajanje.Text));

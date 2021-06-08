@@ -47,7 +47,7 @@
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,431,0,0" VerticalAlignment="Top" Width="101" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,431,0,0" VerticalAlignment="Top" Width="101" Click="Button_Click" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/potrosnja.png" Height="63" Width="75" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
@@ -83,6 +83,11 @@
         <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="341,0,0,657" VerticalAlignment="Bottom" Width="47" Click="ButtonObavestenja_Click">
             <StackPanel>
                 <Image Source="/Slike/Lekar/email.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
+            </StackPanel>
+        </Button>
+        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="287,0,0,657" VerticalAlignment="Bottom" Width="47" Click="ButtonRecenzija_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Lekar/star.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
