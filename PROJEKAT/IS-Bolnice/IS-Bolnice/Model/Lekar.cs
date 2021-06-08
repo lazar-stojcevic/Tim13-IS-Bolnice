@@ -25,14 +25,9 @@ public class Lekar : Korisnik
 
     public bool TerminURadnomVremenuLekara(VremenskiInterval termin)
     {
-        if (TerminUSlobodnomDanuLekara(termin))
+        if (TerminUGodisnjemOdmoruLekara(termin))
         {
             return false;
-        }
-
-        if (TerminUStandardnomRadnomVremenu(termin))
-        {
-            return true;
         }
 
         if (TerminUVanrednomRadnomVremenu(termin))
@@ -40,22 +35,37 @@ public class Lekar : Korisnik
             return true;
         }
 
+        if (TerminUSlobodnomDanuNedeljeLekara(termin))
+        {
+            return false;
+        }
+
+        if (TerminUStandardnomRadnomVremenu(termin) && !DefinisanoVanrednoRadnoVremeZa(termin))
+        {
+            return true;
+        }
+
         return false;
     }
 
-    private bool TerminUSlobodnomDanuLekara(VremenskiInterval termin)
+    private bool TerminUSlobodnomDanuNedeljeLekara(VremenskiInterval termin)
     {
-        foreach (DateTime datum in this.RadnoVreme.SlobodniDani)
+        foreach (DayOfWeek danUNedelji in this.RadnoVreme.SlobodniDaniUNedelji)
         {
-            if (datum.Day == termin.Pocetak.Day || datum.Day == termin.Kraj.Day)
+            if (danUNedelji == termin.Pocetak.DayOfWeek || danUNedelji == termin.Kraj.DayOfWeek)
             {
                 return true;
             }
         }
 
-        foreach (DayOfWeek danUNedelji in this.RadnoVreme.SlobodniDaniUNedelji)
+        return false;
+    }
+
+    private bool TerminUGodisnjemOdmoruLekara(VremenskiInterval termin)
+    {
+        foreach (DateTime datum in this.RadnoVreme.SlobodniDani)
         {
-            if (danUNedelji == termin.Pocetak.DayOfWeek || danUNedelji == termin.Kraj.DayOfWeek)
+            if (datum.Day == termin.Pocetak.Day || datum.Day == termin.Kraj.Day)
             {
                 return true;
             }
@@ -99,6 +109,19 @@ public class Lekar : Korisnik
         return false;
     }
 
+    private bool DefinisanoVanrednoRadnoVremeZa(VremenskiInterval termin)
+    {
+        foreach (VremenskiInterval vanrednoRadnoVreme in this.RadnoVreme.VanrednaRadnaVremena)
+        {
+            if (vanrednoRadnoVreme.DaLiJeIstogDatuma(termin))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private bool RadnoVremeLekaraUJednomDanu()
     {
         // ukoliko lekaru radno vreme pocinje u jednom danu i traje preko tog dana
@@ -110,5 +133,18 @@ public class Lekar : Korisnik
         }
 
         return true;
+    }
+
+    public bool VecDodeljenoVanrednoRadnoVreme(VremenskiInterval interval)
+    {
+        foreach (VremenskiInterval vi in this.RadnoVreme.VanrednaRadnaVremena)
+        {
+            if (vi.DaLiSePreklapaSa(interval))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

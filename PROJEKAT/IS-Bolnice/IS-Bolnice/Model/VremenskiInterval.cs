@@ -53,5 +53,15 @@ namespace IS_Bolnice.Model
 
             return false;
         }
+
+        public bool DaLiJeIstogDatuma(VremenskiInterval drugi)
+        {
+            if (this.Pocetak.Date == drugi.Pocetak.Date || this.Kraj.Date == drugi.Kraj.Date)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

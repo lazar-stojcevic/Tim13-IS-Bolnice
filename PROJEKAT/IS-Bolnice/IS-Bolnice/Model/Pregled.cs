@@ -28,7 +28,7 @@ public class Pregled: Entitet
         VremeKrajaPregleda = vremeKrajaPregleda;
     }
 
-    public Pregled(Pregled pregled) : base(Guid.NewGuid().ToString())
+    public Pregled(Pregled pregled) : base(pregled.Id)
     {
         Pacijent = pregled.Pacijent;
         Lekar = pregled.Lekar;

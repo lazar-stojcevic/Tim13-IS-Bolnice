@@ -81,7 +81,17 @@ namespace IS_Bolnice.Prozori.Sekretar
             Close();
         }
 
-        private void Button_Click_Dodaj(object sender, RoutedEventArgs e)
+        private bool LekarNaGodisnjemOdmoru(VremenskiInterval vremenskiInterval)
+        {
+            List<DateTime> daniVanrednogRadnogVremena = new List<DateTime>();
+            daniVanrednogRadnogVremena.Add(vremenskiInterval.Pocetak);
+            daniVanrednogRadnogVremena.Add(vremenskiInterval.Kraj);
+
+            return radnoVremeKontroler.PreklapanjeIntervalaGodisnjegOdmoraLekara(daniVanrednogRadnogVremena,
+                selektovaniLekar.Jmbg);
+        }
+
+        private VremenskiInterval UcitajUneteParametre()
         {
             int satiPocetak = (int)cbSatiPocetak.SelectedValue;
             int minutiPocetka = (int)cbMinutiPocetak.SelectedValue;
@@ -89,13 +99,41 @@ namespace IS_Bolnice.Prozori.Sekretar
             DateTime pocetak = new DateTime(pocetakTemp.Year, pocetakTemp.Month, pocetakTemp.Day, satiPocetak,
                 minutiPocetka, 0, 0);
 
-            int satiTrajanja = (int) cbSatiTrajanje.SelectedValue;
+            int satiTrajanja = (int)cbSatiTrajanje.SelectedValue;
             DateTime kraj = pocetak.AddHours(satiTrajanja);
 
-            VremenskiInterval vanrednoRadnoVreme = new VremenskiInterval(pocetak, kraj);
+            return new VremenskiInterval(pocetak, kraj);
+        }
+
+        private void Button_Click_Dodaj(object sender, RoutedEventArgs e)
+        {
+            VremenskiInterval vanrednoRadnoVreme = UcitajUneteParametre();
+
+            if (vanrednoRadnoVreme.Pocetak < DateTime.Now)
+            {
+                InformativniProzor ip = new InformativniProzor("Uneli ste datum u prošlosti.");
+                ip.ShowDialog();
+                return;
+            }
+
+            if (LekarNaGodisnjemOdmoru(vanrednoRadnoVreme))
+            {
+                InformativniProzor ip = new InformativniProzor("Lekar je na godišnjem odmoru za uneto vanredno radno vreme.");
+                ip.ShowDialog();
+                return;
+            }
+
+            if (selektovaniLekar.VecDodeljenoVanrednoRadnoVreme(vanrednoRadnoVreme))
+            {
+                InformativniProzor ip = new InformativniProzor("Lekaru je već dodeljeno vanredno radno vreme za uneti dan.");
+                ip.ShowDialog();
+                return;
+            }
+
             selektovaniLekar.RadnoVreme.VanrednaRadnaVremena.Add(vanrednoRadnoVreme);
             radnoVremeKontroler.IzmeniRadnoVreme(selektovaniLekar.RadnoVreme);
-            
+            radnoVremeKontroler.OdloziSaObavestenjemTermineLekaraKojiSeNeUklapaju(vanrednoRadnoVreme, selektovaniLekar.Jmbg);
+
             OsvezavanjePrikazaVanrednihRadnihDana();
         }
     }

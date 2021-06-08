@@ -226,7 +226,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 for (int i = 0; i < dgOperacije.SelectedItems.Count; i++)
                 {
                     Operacija operacijaZaOdlaganje = (Operacija)dgOperacije.SelectedItems[i];
-                    operacijaKontroler.OdloziOperaciju(operacijaZaOdlaganje);
+                    operacijaKontroler.OdloziOperacijuStoPre(operacijaZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
                 OsvezavanjePrikazaZauzetihOperacija(operacijaKontroler.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));

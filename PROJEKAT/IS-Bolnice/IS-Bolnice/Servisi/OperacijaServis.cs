@@ -202,7 +202,7 @@ namespace IS_Bolnice.Servisi
             operacijaRepo.Obrisi(operacija.Id);
         }
 
-        public void OdloziOperaciju(Operacija pomeranaOperacija)
+        public void OdloziOperacijuStoPre(Operacija pomeranaOperacija)
         {
             Operacija operacijaZaOtkazivanje = new Operacija(pomeranaOperacija);
 

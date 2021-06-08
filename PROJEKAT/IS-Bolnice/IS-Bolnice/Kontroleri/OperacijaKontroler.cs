@@ -62,9 +62,9 @@ namespace IS_Bolnice.Kontroleri
             operacijaServis.OtkaziOperaciju(operacija);
         }
 
-        public void OdloziOperaciju(Operacija pomeranaOperacija)
+        public void OdloziOperacijuStoPre(Operacija pomeranaOperacija)
         {
-            operacijaServis.OdloziOperaciju(pomeranaOperacija);
+            operacijaServis.OdloziOperacijuStoPre(pomeranaOperacija);
         }
 
         public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara oblastLekara)

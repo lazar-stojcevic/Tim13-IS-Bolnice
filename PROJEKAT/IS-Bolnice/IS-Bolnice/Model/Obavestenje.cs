@@ -16,7 +16,7 @@ namespace IS_Bolnice.Model
         public List<Uloge> Uloge { get; set; }
         public List<Pacijent> OdredjeniPacijenti { get; set; }
 
-        public Obavestenje() : base()
+        public Obavestenje() : base(Guid.NewGuid().ToString())
         {
             Uloge = new List<Uloge>();
             OdredjeniPacijenti = new List<Pacijent>();
