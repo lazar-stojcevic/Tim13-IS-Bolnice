@@ -34,6 +34,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             LekarKontroler lekarKontroler = new LekarKontroler();
             listaLekara.ItemsSource = lekarKontroler.GetSviLekari();
 
+            txtOperIme.Text = stariPr.Pacijent.Ime;
+            txtOperPrz.Text = stariPr.Pacijent.Prezime;
+            txtOperJmbg.Text = stariPr.Pacijent.Jmbg;
+
+            potvrdi.IsEnabled = false;
+
         }
 
         private void Button_ClickIzmeni(object sender, RoutedEventArgs e)

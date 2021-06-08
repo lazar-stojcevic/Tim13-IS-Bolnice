@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.ViewModel.Lekar;
 using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
@@ -25,17 +26,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
     public partial class LekarRaspored : Page
     {
         private string sifra;
-
-        private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
-        PregledKontroler pregledKontroler = new PregledKontroler();
-
-        ObservableCollection<Operacija> opKolekcija = new ObservableCollection<Operacija>();
-
-        ObservableCollection<Pregled> preglediKolekcija = new ObservableCollection<Pregled>();
         public LekarRaspored(string id)
         {
             InitializeComponent();
             sifra = id;
+            /*
             List<Operacija> sveSledeceOperacije = operacijaKontroler.GetSveBuduceOperacijeLekara(id);
             foreach (Operacija operacija in sveSledeceOperacije)
             {
@@ -50,8 +45,24 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 preglediKolekcija.Add(pregled);
             }
             listaPregleda.ItemsSource = preglediKolekcija;
+            */
         }
 
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new RasporedLekaraViewModel(this.NavigationService, sifra);
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            help.Opacity = 1;
+        }
+
+        private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
+        {
+            help.Opacity = 0;
+        }
+        /*
         private void Button_IzmeniOperaciju(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -229,5 +240,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             NavigationService.GoBack();
         }
+        */
     }
+
 }

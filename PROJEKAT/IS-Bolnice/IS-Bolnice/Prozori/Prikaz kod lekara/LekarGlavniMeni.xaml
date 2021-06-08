@@ -5,61 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
         mc:Ignorable="d" Background="White"
-        Title="Lekar glavni meni" Height="700" Width="400">
+        Title="Lekar glavni meni" Height="700" Width="400" Loaded="OnLoad">
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
 
         <Label Content="Dobrodošli!" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0"/>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="231,61,0,0" VerticalAlignment="Top" Width="101" Click="ButtonRaspored_Click">
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="231,61,0,0" VerticalAlignment="Top" Width="101" Command="{Binding IdiNaRaspored}">
             <StackPanel>
                 <Image Source="/Slike/Lekar/timetable.png" Height="73" Width="86" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="54,61,0,0" VerticalAlignment="Top" Width="101" Click="ButtonPregled_Click">
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="54,61,0,0" VerticalAlignment="Top" Width="101" Command="{Binding PocniPregled}">
             <StackPanel>
                 <Image Source="/Slike/Lekar/pregled.png" Height="68" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,181,0,0" VerticalAlignment="Top" Width="101" Click="Button_VidiRecenzije" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,181,0,0" VerticalAlignment="Top" Width="101" Command="{Binding UvidURecenzije}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/recension.png" Height="67" Width="80" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,309,0,0" VerticalAlignment="Top" Width="101" Click="ButtonClick_Godisnji" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,309,0,0" VerticalAlignment="Top" Width="101" Command="{Binding ZahtevZaGodinji}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/suitcase.png" Height="67" Width="77" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="57,181,0,0" VerticalAlignment="Top" Width="101" Click="ButtonClick_InventarPoSalama" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="57,181,0,0" VerticalAlignment="Top" Width="101" Command="{Binding InventarPoSalama}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/storage.png" Height="64" Width="74" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="245,312,0,0" VerticalAlignment="Top" Width="101"  Click="validacijaLekovaClick">
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="245,312,0,0" VerticalAlignment="Top" Width="101"  Command="{Binding ValidacijaLekova}">
             <StackPanel>
                 <Image Source="/Slike/Lekar/dozvola.png" Height="69" Width="81" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,431,0,0" VerticalAlignment="Top" Width="101" Click="Button_Click" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="51,431,0,0" VerticalAlignment="Top" Width="101" Command="{Binding IzvestajOPotrosnji}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/potrosnja.png" Height="63" Width="75" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="243,431,0,0" VerticalAlignment="Top" Width="101" Click="Button_UvidUOdobreneLekoveClick" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="243,431,0,0" VerticalAlignment="Top" Width="101" Command="{Binding UvidUOdobreneLekove}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/vitamin.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
 
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,549,0,0" VerticalAlignment="Top" Width="101" Click="odjavaClick" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="239,549,0,0" VerticalAlignment="Top" Width="101" Command="{Binding OdjaviSe}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/logout.png" Height="66" Width="72" RenderTransformOrigin="1.966,0.541"  />
             </StackPanel>
@@ -73,19 +73,19 @@
         <Label Content="Izveštaj o potrošnji" FontSize="15" HorizontalAlignment="Left" Margin="33,511,0,0" VerticalAlignment="Top" Width="141" Height="33"/>
         <Label Content="Odjavi se" FontSize="15" HorizontalAlignment="Left" Margin="252,629,0,0" VerticalAlignment="Top" Width="72" Height="33"/>
         <Label Content="Uvid u odobrene lekove" FontSize="15" HorizontalAlignment="Left" Margin="211,511,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
-        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,549,0,0" VerticalAlignment="Top" Width="101" Click="Button_UvidUHospitalizacijeClick" >
+        <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="59,549,0,0" VerticalAlignment="Top" Width="101" Command="{Binding UvidUHospitalizacije}" >
             <StackPanel>
                 <Image Source="/Slike/Lekar/hospital-bed.png" Height="67" Width="71" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
         <Label Content="Uvid u hospitalizacije" FontSize="15" HorizontalAlignment="Left" Margin="27,629,0,0" VerticalAlignment="Top" Width="171" Height="33"/>
 
-        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="341,0,0,657" VerticalAlignment="Bottom" Width="47" Click="ButtonObavestenja_Click">
+        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="341,0,0,657" VerticalAlignment="Bottom" Width="47" Command="{Binding Obavestenja}">
             <StackPanel>
                 <Image Source="/Slike/Lekar/email.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
-        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="287,0,0,657" VerticalAlignment="Bottom" Width="47" Click="ButtonRecenzija_Click">
+        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="287,0,0,657" VerticalAlignment="Bottom" Width="47" Command="{Binding RecenzijaAplikacije}">
             <StackPanel>
                 <Image Source="/IS-Bolnice;component/Slike/Lekar/star.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice"
         mc:Ignorable="d"
-        Title="Raspored"  Height="700" Width="400" Background="White">
+        Title="Raspored"  Height="700" Width="400" Background="White" Loaded="OnLoad">
     <Grid>
 
         <Label FontSize="20" Content="Operacije:" HorizontalAlignment="Left" Height="35" Margin="10,375,0,0" VerticalAlignment="Top" Width="101"/>
 
-        <ListView x:Name="listaOperacija" SelectedIndex="0"  HorizontalAlignment="Left" Height="190" Margin="0,415,0,0" VerticalAlignment="Top" Width="394">
+        <ListView x:Name="listaOperacija" ItemsSource="{Binding Operacije}" SelectedItem="{Binding Operacija}"  HorizontalAlignment="Left" Height="190" Margin="0,415,0,0" VerticalAlignment="Top" Width="394">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Ime" Width="60" DisplayMemberBinding="{Binding Pacijent.Ime}" />
@@ -22,14 +22,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Obriši" HorizontalAlignment="Left" Height="54" Margin="146,610,0,0" VerticalAlignment="Top" Width="101" Click="Button_ClickObrisi"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,610,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniOperaciju" />
+        <Button Content="Obriši"  HorizontalAlignment="Left" Height="54" Margin="146,610,0,0" VerticalAlignment="Top" Width="101" Command="{Binding ObrisiOperaciju}"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="10,610,0,0" VerticalAlignment="Top" Width="101" Command="{Binding IzmeniOperaciju}" />
         <Label FontSize="20" Content="Pregledi:" HorizontalAlignment="Left" Height="42" Margin="9,61,0,0" VerticalAlignment="Top" Width="101"/>
-        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,610,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijenta"/>
-        <ListView x:Name="listaPregleda" SelectedIndex="0" HorizontalAlignment="Left" Height="190" Margin="-1,108,0,0" VerticalAlignment="Top" Width="394">
+        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,610,0,0" VerticalAlignment="Top" Width="101" Height="54" Command="{Binding VidiPacijentaOperacije}"/>
+        <ListView x:Name="listaPregleda" ItemsSource="{Binding Pregledi}" SelectedItem="{Binding Pregled}" HorizontalAlignment="Left" Height="190" Margin="-1,108,0,0" VerticalAlignment="Top" Width="394">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Otvori ovaj pregled" Click="Button_OtvoriPregled" />
+                    <MenuItem Header="Otvori ovaj pregled" Command="{Binding ZapocniPregled}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
 
@@ -45,11 +45,11 @@
 
         </ListView>
 
-        <Button Content="Obriši" Height="54" Margin="145,303,148,0" VerticalAlignment="Top" Click="Button_ClickObrisiPregled"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="9,303,0,0" VerticalAlignment="Top" Width="101" Click="Button_IzmeniPregled" />
-        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,303,0,0" VerticalAlignment="Top" Width="101" Height="54" Click="Button_VidiPacijentaPr"/>
+        <Button Content="Obriši" Height="54" Margin="145,303,148,0" VerticalAlignment="Top" Command="{Binding ObrisiPregled}"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Height="54" Margin="9,303,0,0" VerticalAlignment="Top" Width="101" Command="{Binding IzmeniPregled}" />
+        <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,303,0,0" VerticalAlignment="Top" Width="101" Height="54" Command="{Binding VidiPacijentaPregleda}"/>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
-        <Label Content="Podaci o leku" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="144"/>
+        <Label Content="Raspored lekara" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="174"/>
         <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
         <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="618" Margin="0,52,0,0" VerticalAlignment="Top" Width="394">
@@ -72,7 +72,7 @@
 
 
         </Grid>
-        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Click="ButtonBack_Click">
+        <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Command="{Binding IdiNazad}">
             <StackPanel>
                 <Image Source="/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>

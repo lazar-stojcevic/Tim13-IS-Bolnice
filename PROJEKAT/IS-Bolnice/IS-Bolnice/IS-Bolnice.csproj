@@ -502,6 +502,8 @@
     <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
+    <Compile Include="ViewModel\Lekar\GlavniMeniViewModel.cs" />
+    <Compile Include="ViewModel\Lekar\RasporedLekaraViewModel.cs" />
     <Compile Include="ViewModel\Lekar\ZakazivanjeOperacijeViewModel.cs" />
     <Compile Include="ViewModel\Sekretar\DodavanjeGuestNalogaViewModel.cs" />
     <Compile Include="ViewModel\Upravnik\AddSaluPageViewModel.cs" />
