@@ -12,11 +12,15 @@
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
         <Label Content="Podaci o leku" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
         <Label Content="Sifra leka:" HorizontalAlignment="Left" Height="30" Margin="20,79,0,0" VerticalAlignment="Top" Width="61"/>
-        <TextBox x:Name="txtSifra" HorizontalAlignment="Left" Height="30" Margin="117,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
+        <TextBox x:Name="txtSifra" IsReadOnly="True" HorizontalAlignment="Left" Height="30" Margin="117,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
         <Label Content="Ime leka:" HorizontalAlignment="Left" Height="30" Margin="20,125,0,0" VerticalAlignment="Top" Width="61"/>
         <Label Content="Gramaža:" HorizontalAlignment="Left" Height="30" Margin="20,176,0,0" VerticalAlignment="Top" Width="61"/>
-        <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="30" Margin="117,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
-        <TextBox x:Name="txtGramaza" HorizontalAlignment="Left" Height="30" Margin="117,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"/>
+        <TextBox x:Name="txtIme" HorizontalAlignment="Left" Height="30" Margin="117,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"  PreviewTextInput="ValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                 ContextMenu="{x:Null}"/>
+
+        <TextBox x:Name="txtGramaza" HorizontalAlignment="Left" Height="30" Margin="117,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259"  PreviewTextInput="ValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                 ContextMenu="{x:Null}"/>
+
         <ListBox x:Name="listSastojci" HorizontalAlignment="Left" Height="106" Margin="117,231,0,0" VerticalAlignment="Top" Width="259"/>
         <Label Content="Sastojci:" HorizontalAlignment="Left" Height="25" Margin="23,231,0,0" VerticalAlignment="Top" Width="58"/>
         <ListView x:Name="listZamesnski" HorizontalAlignment="Left" Height="106" Margin="117,358,0,0" VerticalAlignment="Top" Width="259">

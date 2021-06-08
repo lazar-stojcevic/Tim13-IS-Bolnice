@@ -31,10 +31,17 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         public LekarDodavanjeLeka(ObservableCollection<Terapija> terapija, string jmbgPacijenta)
         {
             sviLekovi = lekKontroler.GetSviLekovi();
-            PrikazLekovaNaKojePacijentNijeAlergican(jmbgPacijenta, sviLekovi);
             InitializeComponent();
             sviLekovi.Clear();
 
+            FiltritanjeLekovaNaKojePacijentNijeAlergican(jmbgPacijenta);
+            listaSvihLekova.ItemsSource = sviLekovi;
+
+            sveZadateTerapije = terapija;
+        }
+
+        private void FiltritanjeLekovaNaKojePacijentNijeAlergican(string jmbgPacijenta)
+        {
             foreach (Lek lek in lekKontroler.GetSviLekovi())
             {
                 bool isValid = true;
@@ -50,63 +57,12 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                         }
                     }
                 }
+
                 if (isValid)
                     sviLekovi.Add(lek);
             }
-            listaSvihLekova.ItemsSource = sviLekovi;
-
-            sveZadateTerapije = terapija;
         }
 
-        private void PrikazLekovaNaKojePacijentNijeAlergican(string jmbgPacijenta, List<Lek> sviLekovi)
-        {
-            List<Lek> lekoviZaPrikaz = lekKontroler.GetSviLekovi();
-            Pacijent pacijentKojiJeNaPregledu = pacijentKontroler.GetPacijentSaOvimJMBG(jmbgPacijenta);
-
-            if (pacijentKojiJeNaPregledu.Alergeni.Count != 0)
-            {
-                /*
-                foreach (Sastojak alergenKodPacijenta in pacijentKojiJeNaPregledu.Alergeni)
-                {
-                    int index = 0;
-                    foreach (Lek lek in lekoviZaPrikaz)
-                    {
-                        foreach (Sastojak alergenLek in lek.Alergeni)
-                        {
-                            if (alergenLek.Ime.Equals(alergenKodPacijenta.Ime) && !alergenLek.Ime.Equals(""))
-                            {
-                                sviLekovi.RemoveAt(index);
-                                --index;
-                                break;
-                            }
-                        }
-                        ++index;
-                    }
-                }
-              
-                sviLekovi.Clear();
-
-                foreach (Lek lek in lekKontroler.GetSviLekovi())
-                {
-                    bool isValid = true;
-                    foreach (Sastojak alergenPacijenta in pacijentKojiJeNaPregledu.Alergeni)
-                    {
-                        if (lek.Alergeni.Contains(alergenPacijenta))
-                        {
-                            isValid = false;
-                            break;
-                        }
-                    }
-                    if (isValid)
-                        sviLekovi.Add(lek);
-                }
-                if (listaSvihLekova != null)
-                    listaSvihLekova.ItemsSource = sviLekovi;
-                  */
-
-            }
-
-        }
 
         private void Button_DodajClick(object sender, RoutedEventArgs e)
         {
@@ -119,6 +75,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void DodajNovuTerapiju()
         {
+            if (txtDetalji.Text.Contains("#"))
+            {
+                CustomMessageBox.ShowOK("Opis terapije ne sme da sadrži # znak", "Greška", "Dobro", MessageBoxImage.Warning);
+                return;
+            }
 
             try
             {
@@ -147,8 +108,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void ValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("^[\\.a-zA-Z0-9,!? ]*$");
-            e.Handled = !regex.IsMatch(e.Text);
+            Regex regex = new Regex("^[#]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy ||
+                e.Command == ApplicationCommands.Cut ||
+                e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
         }
 
         private void Button_KrajClick(object sender, RoutedEventArgs e)

@@ -11,7 +11,7 @@
 
 
     <Grid>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398"/>
 
         <Label Content="Obaveštenja" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="56,10,0,0"/>
 
@@ -20,7 +20,7 @@
                 <GridView>
                     <GridViewColumn Header="Vreme objave" Width="145" DisplayMemberBinding="{Binding VremeKreiranja}" />
                     <GridViewColumn Header="Opis" Width="170" DisplayMemberBinding="{Binding Naslov}"/>
-                    <GridViewColumn Header="Vise" Width="53">
+                    <GridViewColumn Header="Više" Width="53">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Width="40" x:Name="OpenFile" Content="..." Click="Open_OnClick"/>

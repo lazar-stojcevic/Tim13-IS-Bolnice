@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using IS_Bolnice.Kontroleri;
 using WPFCustomMessageBox;
 
@@ -207,6 +208,22 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private void ValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[#]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy ||
+                e.Command == ApplicationCommands.Cut ||
+                e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

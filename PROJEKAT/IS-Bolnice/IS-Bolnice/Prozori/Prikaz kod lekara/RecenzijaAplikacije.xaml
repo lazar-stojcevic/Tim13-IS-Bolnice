@@ -20,7 +20,8 @@
             <ComboBoxItem Content="4" Tag="4" />
             <ComboBoxItem Content="5" Tag="5" />
         </ComboBox>
-        <TextBox x:Name="opis" HorizontalAlignment="Left" Height="344" Margin="10,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
+        <TextBox x:Name="opis" HorizontalAlignment="Left" Height="344" Margin="10,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" PreviewTextInput="ValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                 ContextMenu="{x:Null}"/>
         <Label Content="Vaše iskustvo sa aplikacijom:"  HorizontalAlignment="Left" Height="34" Margin="10,159,0,0" VerticalAlignment="Top" Width="165"/>
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Margin="2,5,0,653" Width="47" Click="ButtonBack_Click">
             <StackPanel>

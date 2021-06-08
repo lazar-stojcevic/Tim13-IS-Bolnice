@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -53,6 +54,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (listaZamenskihLekova.SelectedIndex != -1)
             {
                 zamenskiLekovi.Add((Lek)listaZamenskihLekova.SelectedItem);
+                CustomMessageBox.ShowOK("Ni jedan lek nije selektovan", "Greška", "Dobro",
+                    MessageBoxImage.Error);
+                return;
+
             }
 
             MessageBox.Show("Uspešno je dodat zamenski lek", "Dodat zamesnki lek", MessageBoxButton.OK,

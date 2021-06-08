@@ -48,6 +48,10 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             if (result == MessageBoxResult.Yes)
             {
                 Pregled noviPregled = KreirajNoviPregled();
+                if (noviPregled == null)
+                {
+                    return;
+                }
 
                 pregledKontroler.IzmeniPregled(noviPregled);
                 NavigationService.GoBack();
@@ -127,27 +131,36 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private Pregled KreirajNoviPregled()
         {
-            Pregled noviPregled = new Pregled();
-            Pregled selektovaniTermin = pregledi.ElementAt(terminiList.SelectedIndex);
-            Lekar lekar = (Lekar)listaLekara.SelectedItem;
-            string idLekara = lekar.Jmbg;
-            noviPregled.Id = stariPregled.Id;
-            noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
+            if (terminiList.SelectedIndex != -1)
+            {
+                Pregled noviPregled = new Pregled();
+                Pregled selektovaniTermin = pregledi.ElementAt(terminiList.SelectedIndex);
+                Lekar lekar = (Lekar)listaLekara.SelectedItem;
+                string idLekara = lekar.Jmbg;
+                noviPregled.Id = stariPregled.Id;
+                noviPregled.Lekar.Ordinacija = lekar.Ordinacija;
 
-            DateTime pocetak = new DateTime(selektovaniTermin.VremePocetkaPregleda.Year, selektovaniTermin.VremePocetkaPregleda.Month,
-                selektovaniTermin.VremePocetkaPregleda.Day, selektovaniTermin.VremePocetkaPregleda.Hour,
-                selektovaniTermin.VremePocetkaPregleda.Minute, 0);
-            DateTime kraj = new DateTime(selektovaniTermin.VremeKrajaPregleda.Year, selektovaniTermin.VremeKrajaPregleda.Month,
-                selektovaniTermin.VremeKrajaPregleda.Day, selektovaniTermin.VremeKrajaPregleda.Hour,
-                selektovaniTermin.VremeKrajaPregleda.Minute,
-                0);
-            kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
+                DateTime pocetak = new DateTime(selektovaniTermin.VremePocetkaPregleda.Year,
+                    selektovaniTermin.VremePocetkaPregleda.Month,
+                    selektovaniTermin.VremePocetkaPregleda.Day, selektovaniTermin.VremePocetkaPregleda.Hour,
+                    selektovaniTermin.VremePocetkaPregleda.Minute, 0);
+                DateTime kraj = new DateTime(selektovaniTermin.VremeKrajaPregleda.Year,
+                    selektovaniTermin.VremeKrajaPregleda.Month,
+                    selektovaniTermin.VremeKrajaPregleda.Day, selektovaniTermin.VremeKrajaPregleda.Hour,
+                    selektovaniTermin.VremeKrajaPregleda.Minute,
+                    0);
+                kraj = kraj.AddMinutes(45); //Predpostavka da ce pregled trajati 45 minuta 
 
-            noviPregled.Lekar.Jmbg = idLekara;
-            noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
-            noviPregled.VremePocetkaPregleda = pocetak;
-            noviPregled.VremeKrajaPregleda = kraj;
-            return noviPregled;
+                noviPregled.Lekar.Jmbg = idLekara;
+                noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
+                noviPregled.VremePocetkaPregleda = pocetak;
+                noviPregled.VremeKrajaPregleda = kraj;
+                return noviPregled;
+            }
+           
+                CustomMessageBox.ShowOK("Niste selektovali termin", "Greška", "Dobro", MessageBoxImage.Error);
+                return null;
+
         }
 
         private void Button_ClickNazad(object sender, RoutedEventArgs e)

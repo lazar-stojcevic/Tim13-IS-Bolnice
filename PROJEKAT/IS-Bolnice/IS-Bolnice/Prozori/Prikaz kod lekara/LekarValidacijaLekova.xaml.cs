@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -48,10 +49,18 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void otvoriLekClick(object sender, RoutedEventArgs e)
         {
-            ZahtevZaValidacijuLeka zahtevZaValidaciju = (ZahtevZaValidacijuLeka)listaZahteva.SelectedItem;
-            LekarZahtevValidacije zahtev = new LekarZahtevValidacije(zahtevZaValidaciju.Id, sifraLekara);
+            if (listaZahteva.SelectedIndex != -1)
+            {
+                ZahtevZaValidacijuLeka zahtevZaValidaciju = (ZahtevZaValidacijuLeka) listaZahteva.SelectedItem;
+                LekarZahtevValidacije zahtev = new LekarZahtevValidacije(zahtevZaValidaciju.Id, sifraLekara);
 
-            this.NavigationService.Navigate(zahtev);
+                this.NavigationService.Navigate(zahtev);
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Ni jedna validacija nije selektovana", "Selektuj validaciju", "Dobro",
+                    MessageBoxImage.Error);
+            }
 
         }
 

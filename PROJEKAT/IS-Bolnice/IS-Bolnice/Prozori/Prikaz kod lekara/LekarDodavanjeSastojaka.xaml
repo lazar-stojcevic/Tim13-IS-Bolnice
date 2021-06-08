@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_kod_lekara"
         mc:Ignorable="d"
-        Title="Dodavanje Sastojaka" Height="250" Width="300">
+        Title="Dodavanje Sastojaka" Height="250" Width="300" WindowStartupLocation="CenterOwner">
     <Grid>
         <ListBox x:Name="listaSvihSastojaka" HorizontalAlignment="Left" Height="149" Margin="10,10,0,0" VerticalAlignment="Top" Width="274"/>
         <Button Content="Dodaj" HorizontalAlignment="Left" Height="46" Margin="10,164,0,0" VerticalAlignment="Top" Width="117" Click="Button_ClickDodaj"/>

@@ -59,8 +59,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             {
 
                 LekarRazlogOdbijanjaLeka razlogOdbijanjaLeka = new LekarRazlogOdbijanjaLeka(zahtev);
-                razlogOdbijanjaLeka.Show();
-                //TODO NAPRAVI DA RADI KAKO TREBA
+                razlogOdbijanjaLeka.ShowDialog();
                 LekarGlavniMeni meni = new LekarGlavniMeni(sifra);
                 this.NavigationService.Navigate(meni);
             }

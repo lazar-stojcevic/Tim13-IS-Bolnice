@@ -9,7 +9,8 @@
     <Grid>
         <Button Content="Pošalji" HorizontalAlignment="Left" Height="40" Margin="28,158,0,0" VerticalAlignment="Top" Width="137" Click="Button_ClickPotvrdi"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Height="40" Margin="210,158,0,0" VerticalAlignment="Top" Width="137" Click="Button_ClickOdustani"/>
-        <TextBox x:Name="txtRazlog" HorizontalAlignment="Left" Height="121" Margin="28,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="319"/>
+        <TextBox x:Name="txtRazlog" HorizontalAlignment="Left" Height="121" Margin="28,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="319" PreviewTextInput="ValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                 ContextMenu="{x:Null}"/>
         <Label Content="Razlog odbijanja:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,0,0,0"/>
 
     </Grid>

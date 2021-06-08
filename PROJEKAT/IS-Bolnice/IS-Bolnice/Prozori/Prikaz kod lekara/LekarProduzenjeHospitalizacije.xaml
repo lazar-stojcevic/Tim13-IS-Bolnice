@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="Produženje hospitalizacije" Height="200" Width="300">
     <Grid>
-        <DatePicker x:Name="datumProduzenja" HorizontalAlignment="Left" Height="31" Margin="10,29,0,0" VerticalAlignment="Top" Width="274"/>
+        <DatePicker ToolTip="Za odabir datuma, kliknite na kalenar sa desne strane" x:Name="datumProduzenja" HorizontalAlignment="Left" Height="31" Margin="10,29,0,0" VerticalAlignment="Top" Width="274">
+        <DatePicker.Resources>
+            <Style TargetType="DatePickerTextBox">
+                <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+        </DatePicker.Resources>
+        </DatePicker>
+
         <Label Content="kraj hospitalizacije:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button Content="Izmeni" HorizontalAlignment="Left" Height="51" Margin="10,109,0,0" VerticalAlignment="Top" Width="133" Click="ButtonClick_Produzi"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Height="51" Margin="151,109,0,0" VerticalAlignment="Top" Width="133" Click="ButtonClickOdustati"/>

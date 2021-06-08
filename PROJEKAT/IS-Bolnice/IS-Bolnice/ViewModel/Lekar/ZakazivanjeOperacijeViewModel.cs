@@ -208,15 +208,23 @@ namespace IS_Bolnice.ViewModel.Lekar
 
         public void Executed_DodajOperaciju(object obj)
         {
-            operacija.Lekar = this.Lekar;
-            operacija.VremeKrajaOperacije = operacija.VremePocetkaOperacije.AddMinutes(Int32.Parse(duzinaTrajanjeOperacijeUMinutima));
-            operacija.Hitna = this.Hitna;
-            operacija.Pacijent = this.Pacijent;
-            operacija.Soba = this.Soba;
+            if (this.Lekar != null && this.Soba != null && operacija != null)
+            {
+                operacija.Lekar = this.Lekar;
+                operacija.VremeKrajaOperacije = operacija.VremePocetkaOperacije.AddMinutes(Int32.Parse(duzinaTrajanjeOperacijeUMinutima));
+                operacija.Hitna = this.Hitna;
+                operacija.Pacijent = this.Pacijent;
+                operacija.Soba = this.Soba;
 
-            operacijaKontroler.ZakaziOperaciju(operacija);
+                operacijaKontroler.ZakaziOperaciju(operacija);
+                CustomMessageBox.ShowOK("Uspešno ste kreirali operaciju", "Kreirana operacija", "Dobro", MessageBoxImage.Information);
+                navigacijaKontroler.IdiNazad();
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Niste selektovali sve podatke", "Greška", "Dobro", MessageBoxImage.Error);
+            }
 
-            navigacijaKontroler.IdiNazad();
         }
 
         public void Execute_CancelEditCommand(object obj)
@@ -273,8 +281,6 @@ namespace IS_Bolnice.ViewModel.Lekar
                     return;
                 }
 
-
-
                 OperacijaDTO operacijaDto = new OperacijaDTO()
                 {
                     Lekar = lekar,
@@ -293,13 +299,8 @@ namespace IS_Bolnice.ViewModel.Lekar
                 if (Termini.Count != 0)
                 {
                     operacija = termini.ElementAt(0);
-                    //DugmePotrvrdi = true;
                 }
-                else
-                {
-                   // DugmePotrvrdi = false;
-                }
-                
+
 
             }
             finally

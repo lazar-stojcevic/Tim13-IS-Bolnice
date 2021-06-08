@@ -158,47 +158,98 @@ namespace IS_Bolnice.ViewModel.Lekar
 
         public void Execute_OtvoriPregled(object obj)
         {
-            navigacijaKontroler.OtvoriPregled(pregled);
+            if (pregled != null)
+            {
+                navigacijaKontroler.OtvoriPregled(pregled);
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati pregled", "Ni jedan pregled nije selektovan", "Dobro", MessageBoxImage.Error);
+            }
         }
 
         public void Execute_IzmeniPregled(object obj)
         {
-            navigacijaKontroler.PrikaziIzmenuPregleda(pregled);
+            if (pregled != null)
+            {
+                navigacijaKontroler.PrikaziIzmenuPregleda(pregled);
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati pregled", "Ni jedan pregled nije selektovan", "Dobro", MessageBoxImage.Error);
+            }
         }
 
         public void Execute_IzmeniOperaciju(object obj)
         {
-            navigacijaKontroler.PrikaziIzmenuOperacije(operacija);
+            if (operacija != null)
+            {
+                navigacijaKontroler.PrikaziIzmenuOperacije(operacija);
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati operaciju", "Ni jedna operacija nije selektovana", "Dobro", MessageBoxImage.Error);
+
+            }
         }
 
         public void Execute_ObrisiPregled(object obj)
         {
-            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete pregled?", "Otkazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (pregled != null)
             {
-                pregledKontroler.OtkaziPregled(pregled);
-                pregledi.Remove(pregled);
+                MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete pregled?", "Otkazivanje pregleda", "Da", "Ne", MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    pregledKontroler.OtkaziPregled(pregled);
+                    pregledi.Remove(pregled);
+                }
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati operaciju", "Ni jedna operacija nije selektovana", "Dobro", MessageBoxImage.Error);
+
             }
         }
 
         public void Execute_ObrisiOperaciju(object obj)
         {
-            MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete operaciju?", "Otkazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (operacija != null)
             {
-                operacijaKontroler.OtkaziOperaciju(operacija);
-                operacije.Remove(operacija);
+                MessageBoxResult result = CustomMessageBox.ShowYesNo("Da li ste sigurni da želite da otkažete operaciju?", "Otkazivanje operacije", "Da", "Ne", MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    operacijaKontroler.OtkaziOperaciju(operacija);
+                    operacije.Remove(operacija);
+                }
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati operaciju", "Ni jedna operacija nije selektovana", "Dobro", MessageBoxImage.Error);
             }
         }
 
         public void Execute_PrikaziPacijentaPregleda(object obj)
         {
-            navigacijaKontroler.PrikaziPacijenta(pregled.Pacijent);
+            if (pregled != null)
+            {
+                navigacijaKontroler.PrikaziPacijenta(pregled.Pacijent);
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati pregled", "Ni jedan pregled nije selektovan", "Dobro", MessageBoxImage.Error);
+            }
         }
 
         public void Execute_PrikaziPacijentaOperacije(object obj)
         {
-            navigacijaKontroler.PrikaziPacijenta(operacija.Pacijent);
+            if (operacija != null)
+            {
+                navigacijaKontroler.PrikaziPacijenta(operacija.Pacijent);
+            }
+            else
+            {
+                CustomMessageBox.ShowOK("Morate prvo selektovati operaciju", "Ni jedna operacija nije selektovana", "Dobro", MessageBoxImage.Error);
+            }
         }
 
         public RasporedLekaraViewModel(NavigationService navigationService, string jmbgLekara)

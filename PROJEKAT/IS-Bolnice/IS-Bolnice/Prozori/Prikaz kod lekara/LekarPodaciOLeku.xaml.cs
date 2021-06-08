@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -85,6 +86,8 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
                 lekKontroler.ObrisiLek(lekStari);
                 lekKontroler.KreirajLek(lek);
+
+                NavigationService.GoBack();
             }
         }
 
@@ -96,7 +99,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void Button_ClickDodaj(object sender, RoutedEventArgs e)
         {
             LekarDodavanjeSastojaka dodavanjeSastojaka = new LekarDodavanjeSastojaka(listSastojci);
-            dodavanjeSastojaka.Show();
+            dodavanjeSastojaka.ShowDialog();
         }
 
         private void Button_ClickUkloni(object sender, RoutedEventArgs e)
@@ -117,7 +120,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void Button_ClickDodajZamenski(object sender, RoutedEventArgs e)
         {
             LekarDodavanjeZamenskogLeka dodavanje = new LekarDodavanjeZamenskogLeka(zamensnkiLekovi, lekStari.Id);
-            dodavanje.Show();
+            dodavanje.ShowDialog();
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
@@ -128,6 +131,22 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         private void ToggleButton_OnUnchecked_UnChecked(object sender, RoutedEventArgs e)
         {
             help.Opacity = 0;
+        }
+
+        private void ValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[#]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy ||
+                e.Command == ApplicationCommands.Cut ||
+                e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

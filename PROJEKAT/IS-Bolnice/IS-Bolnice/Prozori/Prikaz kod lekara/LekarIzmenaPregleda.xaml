@@ -31,7 +31,7 @@
 
         <Label Content="Lekar koji će izvršiti operaciju:" HorizontalAlignment="Left" Height="26" Margin="10,213,0,0" VerticalAlignment="Top" Width="176"/>
         <ComboBox x:Name="terminiList" HorizontalAlignment="Left" Height="27" Margin="10,519,0,0" VerticalAlignment="Top" Width="374"/>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,-6.4,0"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398"/>
         <Label Content="Izmena pregleda" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,6,0,0"/>
         <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="317,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 

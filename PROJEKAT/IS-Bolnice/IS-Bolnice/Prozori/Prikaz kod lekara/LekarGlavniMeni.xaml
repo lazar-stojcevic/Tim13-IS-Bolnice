@@ -7,9 +7,9 @@
         mc:Ignorable="d" Background="White"
         Title="Lekar glavni meni" Height="700" Width="400" Loaded="OnLoad">
     <Grid>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398"/>
 
-        <Label Content="Dobrodošli!" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0"/>
+        <Label Content="Dobro došli!" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0"/>
 
         <Button Background="#FFF" ToolTip="Naredni termini" BorderThickness="0" HorizontalAlignment="Left" Height="83" Margin="231,61,0,0" VerticalAlignment="Top" Width="101" Command="{Binding IdiNaRaspored}">
             <StackPanel>
@@ -85,7 +85,7 @@
                 <Image Source="/Slike/Lekar/email.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>
         </Button>
-        <Button Background="Transparent" ToolTip="Obaveštenja" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="287,0,0,657" VerticalAlignment="Bottom" Width="47" Command="{Binding RecenzijaAplikacije}">
+        <Button Background="Transparent" ToolTip="Recenzija aplikacije" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="287,0,0,657" VerticalAlignment="Bottom" Width="47" Command="{Binding RecenzijaAplikacije}">
             <StackPanel>
                 <Image Source="/IS-Bolnice;component/Slike/Lekar/star.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
             </StackPanel>

@@ -9,13 +9,13 @@
       Title="LekarUvidURecenzije">
 
     <Grid>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398" Margin="2,0,0,0"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="398"/>
 
         <Label Content="Uvid u recencije" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="62,8,0,0"/>
-        <ListView x:Name="listaRecenzija" HorizontalAlignment="Left" Height="561" Margin="12,75,0,0" VerticalAlignment="Top" Width="378">
+        <ListView x:Name="listaRecenzija" HorizontalAlignment="Left" Height="561" Margin="12,75,0,0" VerticalAlignment="Top" Width="364">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Opis" Width="265" DisplayMemberBinding="{Binding Komentar}" />
+                    <GridViewColumn Header="Opis" Width="255" DisplayMemberBinding="{Binding Komentar}" />
                     <GridViewColumn Header="Ocena" Width="50" DisplayMemberBinding="{Binding Ocena}"/>
                     <GridViewColumn Header="Vise" Width="53">
                         <GridViewColumn.CellTemplate>

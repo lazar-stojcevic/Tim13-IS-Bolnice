@@ -9,11 +9,19 @@
       Title="Kreiranje Hospitalizacije" Height="700" Width="400" Background="White">
 
     <Grid>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,0,0"/>
         <Label Content="Kreiranje hospitalizacije" FontSize="22" HorizontalAlignment="Left" Margin="47,4,0,0" VerticalAlignment="Top" Height="40" Width="237"/>
-        <DatePicker DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="datumKraja"  HorizontalAlignment="Left" Height="35" Margin="10,480,0,0" VerticalAlignment="Top" Width="380"/>
+        <DatePicker ToolTip="Za odabir datuma, kliknite na kalenar sa desne strane" DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="datumKraja"   HorizontalAlignment="Left" Height="35" Margin="10,480,0,0" VerticalAlignment="Top" Width="374">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+
+
         <Label Content="Kraj hospitalizacije:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,447,0,0" Width="139"/>
-        <ListView x:Name="listaSoba" HorizontalAlignment="Left" Height="215" Margin="10,227,0,0" VerticalAlignment="Top" Width="380">
+        <ListView x:Name="listaSoba" HorizontalAlignment="Left" Height="215" Margin="10,227,0,0" VerticalAlignment="Top" Width="374">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID Sobe" Width="120" DisplayMemberBinding="{Binding Id}" />
@@ -24,19 +32,19 @@
         </ListView>
         <Label Content="Lista slobodnih soba:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,194,0,0" Width="139"/>
         <Button Content="Pošalji" HorizontalAlignment="Left" Height="50" Margin="10,548,0,0" VerticalAlignment="Top" Width="170" Click="ButtonClick_Zakazi"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="220,548,0,0" VerticalAlignment="Top" Width="170" Click="ButtonClick_Odustani"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="217,548,0,0" VerticalAlignment="Top" Width="167" Click="ButtonClick_Odustani"/>
         <Label Content="JMBG pacijenta:" HorizontalAlignment="Left" Height="25" Margin="10,69,0,0" VerticalAlignment="Top" Width="106"/>
-        <TextBox x:Name="txtJMBG" IsReadOnly="True" HorizontalAlignment="Left" Height="36" Margin="10,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380"/>
+        <TextBox x:Name="txtJMBG" IsReadOnly="True" HorizontalAlignment="Left" Height="36" Margin="10,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="374"/>
         <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
-        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="619" Margin="0,51,-0.4,0" VerticalAlignment="Top" Width="394">
+        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="18" Margin="0,51,0,0" VerticalAlignment="Top" Width="394">
             <Rectangle  HorizontalAlignment="Left" Height="90" Margin="10,24,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
             <Label Foreground="Red"  Content="JMBG pacijenta za koji se šalje na hospitalizaciju" HorizontalAlignment="Left" Height="31" Margin="10,83,0,0" VerticalAlignment="Top" Width="275" RenderTransformOrigin="0.503,0.358"/>
 
-            <Rectangle HorizontalAlignment="Left" Height="247" Margin="10,148,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
+            <Rectangle HorizontalAlignment="Left" Height="247" Margin="10,148,0,-377" Stroke="Red" VerticalAlignment="Top" Width="374"/>
             <Label Foreground="Red"  Content="Podaci o svim sobama sa slobodnim krevetima" HorizontalAlignment="Left" Height="32" Margin="10,365,0,0" VerticalAlignment="Top" Width="262"/>
 
-            <Rectangle   HorizontalAlignment="Left" Height="96" Margin="8,402,0,0" Stroke="Red" VerticalAlignment="Top" Width="384"/>
+            <Rectangle   HorizontalAlignment="Left" Height="96" Margin="8,402,0,-480" Stroke="Red" VerticalAlignment="Top" Width="376"/>
             <Label Foreground="Red"  Content="Datum do kada će trajati hospiralizacija" HorizontalAlignment="Left" Height="33" Margin="10,465,0,0" VerticalAlignment="Top" Width="240"/>
 
         </Grid>

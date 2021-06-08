@@ -9,7 +9,7 @@
       Title="Odobreni lekovi" Background="White">
 
     <Grid>
-        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
+        <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,0,0"/>
         <Label Content="Odobreni lekovi" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="185"/>
         <Label Content="Svi odabrani lekovi:" FontSize="14" HorizontalAlignment="Left" Margin="3,47,0,0" VerticalAlignment="Top" Height="37" Width="185"/>
 

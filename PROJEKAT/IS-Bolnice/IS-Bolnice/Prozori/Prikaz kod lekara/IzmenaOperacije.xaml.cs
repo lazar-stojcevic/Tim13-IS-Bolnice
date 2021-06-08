@@ -213,6 +213,22 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             this.NavigationService.GoBack();
         }
 
+        private void ValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[#]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy ||
+                e.Command == ApplicationCommands.Cut ||
+                e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
+        }
+
 
     }
 }

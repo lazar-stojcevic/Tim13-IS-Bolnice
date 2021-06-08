@@ -36,7 +36,8 @@
         </DatePicker>
 
         <Label Content="Opis:" HorizontalAlignment="Left" Height="32" Margin="14,257,0,0" VerticalAlignment="Top" Width="178"/>
-        <TextBox HorizontalAlignment="Left" Height="283" Margin="14,294,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="364"/>
+        <TextBox HorizontalAlignment="Left" Height="283" Margin="14,294,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="364" PreviewTextInput="ValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                 ContextMenu="{x:Null}"/>
 
         <Button Content="Potvrdi" HorizontalAlignment="Left" Height="43" Margin="25,603,0,0" VerticalAlignment="Top" Width="163" Click="ButtonClick_Povrdi"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Height="43" Margin="207,603,0,0" VerticalAlignment="Top" Width="163" Click="ButtonClick_Odustani"/>
