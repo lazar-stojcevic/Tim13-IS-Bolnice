@@ -9,11 +9,23 @@
       Title="AddLekPage3" Background="White">
 
     <Grid>
-        <Label x:Name="label" FontSize="38" Content="Dodavanje leka" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="65" Width="278"/>
-        <Label Content="Lekari kojima se salje zahtev:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,139,0,0" VerticalAlignment="Top" Width="379"/>
-        <ListBox x:Name="listBox" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="333" Margin="29,220,0,0" VerticalAlignment="Top" Width="430"/>
+        <Label Content="Lekari kojima se salje zahtev:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,149,0,0" VerticalAlignment="Top" Width="436"/>
+        <ListView x:Name="listBox" FontFamily="Verdana" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="333" Margin="29,220,0,0" VerticalAlignment="Top" Width="430">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ime" DisplayMemberBinding="{Binding Ime}" />
+                    <GridViewColumn Header="Prezime" DisplayMemberBinding="{Binding Prezime}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="32,597,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
         <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="275,597,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="38" Content="Dodavanje leka" HorizontalAlignment="Left" Margin="164,49,0,0" VerticalAlignment="Top" Height="65" Width="309"/>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Margin="37,40,362,577" Click="Button_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Upravnik/back.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
 
 
     </Grid>

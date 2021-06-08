@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="AddSastojakWindow" Height="250" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Naziv sastojka:" FontSize="26" HorizontalAlignment="Left" Height="47" Margin="8,41,0,0" VerticalAlignment="Top" Width="210"/>
-        <TextBox x:Name="id_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="227,45,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239"/>
+        <Label Content="Naziv sastojka:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="47" Margin="8,41,0,0" VerticalAlignment="Top" Width="210"/>
+        <TextBox x:Name="id_txt" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="227,45,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239"/>
         <Button x:Name="Dodaj_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Dodaj" HorizontalAlignment="Left" Height="50" Margin="20,130,0,0" VerticalAlignment="Top" Width="179" Click="Dodaj_btn_Click"/>
         <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="263,130,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
 

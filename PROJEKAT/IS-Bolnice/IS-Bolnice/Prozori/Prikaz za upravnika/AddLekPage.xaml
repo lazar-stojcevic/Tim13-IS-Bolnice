@@ -9,22 +9,27 @@
       Title="AddLekPage" Background="White">
 
     <Grid>
-        <Label Content="ID leka:" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="10,104,0,0" VerticalAlignment="Top" Width="210"/>
-        <Label Content="Naziv leka:" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="10,205,0,0" VerticalAlignment="Top" Width="210"/>
-        <TextBox x:Name="id_txt" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,104,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239"/>
-        <TextBox x:Name="naziv_txt" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239"/>
+        <Label Content="ID leka:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="10,126,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Naziv leka:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="10,205,0,0" VerticalAlignment="Top" Width="210"/>
+        <TextBox x:Name="id_txt" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,126,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="naziv_txt" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="229,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239"/>
         <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="41,614,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
         <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,614,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
-        <Label x:Name="label" FontSize="38" Content="Dodavanje leka" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="65" Width="383"/>
-        <Label Content="Opis leka:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,283,0,0" VerticalAlignment="Top" Width="210"/>
-        <TextBox x:Name="opis_txt" FontSize="28" HorizontalAlignment="Left" Height="106" Margin="21,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="447"/>
-        <Label Content="Da li je za lek potreba recept:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,488,0,0" VerticalAlignment="Top" Width="363"/>
-        <ComboBox x:Name="potreban_recept_txt" FontSize="28" HorizontalAlignment="Left" Height="40" Margin="387,490,0,0" VerticalAlignment="Top" Width="103">
+        <Label x:Name="label" FontFamily="Verdana" FontSize="38" Content="Dodavanje leka" HorizontalAlignment="Left" Margin="163,19,0,0" VerticalAlignment="Top" Height="65" Width="305"/>
+        <Label Content="Opis leka:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,283,0,0" VerticalAlignment="Top" Width="210"/>
+        <TextBox x:Name="opis_txt" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="106" Margin="21,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="447"/>
+        <Label Content="Da li je za lek potreban recept:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="42" Margin="0,457,0,0" VerticalAlignment="Top" Width="459"/>
+        <ComboBox x:Name="potreban_recept_txt" FontSize="28" FontFamily="Verdana" HorizontalAlignment="Left" Height="40" Margin="200,515,0,0" VerticalAlignment="Top" Width="103">
 
             <ComboBoxItem IsSelected="True" Content="DA"/>
             <ComboBoxItem Content="NE"/>
 
         </ComboBox>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Margin="32,10,367,607" Click="Button_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Upravnik/back.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
 
 
 

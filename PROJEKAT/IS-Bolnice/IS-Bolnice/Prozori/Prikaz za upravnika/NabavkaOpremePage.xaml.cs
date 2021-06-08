@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -77,6 +78,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             if (listBox.SelectedIndex != -1)
             {
                 sadrzajKontroler.DodajUMagacin((Predmet)listBox.SelectedItem, Int32.Parse(textBox.Text));
+                CustomMessageBox.ShowOK("Nabavka je uspešno izvršena", "Upseh", "Potvrdi");
             }
             else {
                 MessageBox.Show("Nije selektovan deo opreme za nabavku");
@@ -105,10 +107,6 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void search_TextChanged(object sender, TextChangedEventArgs e)
         {

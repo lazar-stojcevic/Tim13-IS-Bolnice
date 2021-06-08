@@ -44,7 +44,7 @@ namespace IS_Bolnice
                     if (u.Sifra.Equals(sifra))
                     {
                         found = true;
-                        UpravnikWindow upravnik = new UpravnikWindow();
+                        UpravnikWindow upravnik = new UpravnikWindow(u);
                         upravnik.Show();
                         this.Close();
                     }

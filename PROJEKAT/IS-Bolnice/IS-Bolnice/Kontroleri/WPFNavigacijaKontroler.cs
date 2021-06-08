@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Navigation;
 using IS_Bolnice.Prozori.Prikaz_kod_lekara;
 using WPFCustomMessageBox;
+using IS_Bolnice.Prozori.Prikaz_za_upravnika;
 
 namespace IS_Bolnice.Kontroleri
 {
@@ -19,6 +20,11 @@ namespace IS_Bolnice.Kontroleri
         public WPFNavigacijaKontroler(NavigationService service)
         {
             navService = service;
+        }
+
+        public void PrikaziObavestenja()
+        {
+            navService.Navigate(new ObavestenjaPage());
         }
 
         public void PrikaziAddSalePage()

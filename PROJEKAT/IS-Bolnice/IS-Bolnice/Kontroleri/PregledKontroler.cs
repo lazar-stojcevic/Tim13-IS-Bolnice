@@ -109,5 +109,20 @@ namespace IS_Bolnice.Kontroleri
         {
             return pregledServis.PacijentImaZakazanPregled(pregledZaProveru);
         }
+
+        public int[] BrojPregledaKodLekaraZaPetMeseci(string idLekara) {
+
+            return pregledServis.BrojPregledaKodLekaraZaPetMeseci(idLekara);
+        }
+
+        public int[] BrojPregledaZaPetMeseci()
+        {
+            return pregledServis.BrojPregledaZaPetMeseci();
+        }
+
+        public int[] BrojPrijemaZaPetDana(string idLekara)
+        {
+            return pregledServis.BrojPrijemaZaPetDana(idLekara);
+        }
     }
 }

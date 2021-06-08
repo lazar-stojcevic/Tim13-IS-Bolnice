@@ -428,5 +428,103 @@ namespace IS_Bolnice.Servisi
 
             return false;
         }
+        public int[] BrojPregledaZaPetMeseci()
+        {
+            int[] brojPregleda = new int[5];
+            List<Pregled> sviPreglediKodOvogLekara = GetsviPregledi();
+            int trenutniMesec = DateTime.Now.Month;
+            int mesecPregleda;
+            foreach (Pregled pregledIter in sviPreglediKodOvogLekara)
+            {
+                mesecPregleda = pregledIter.VremePocetkaPregleda.Month;
+                if (mesecPregleda == trenutniMesec)
+                {
+                    brojPregleda[4]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 1) || mesecPregleda == (trenutniMesec + 11))
+                {
+                    brojPregleda[3]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 2) || mesecPregleda == (trenutniMesec + 10))
+                {
+                    brojPregleda[2]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 3) || mesecPregleda == (trenutniMesec + 9))
+                {
+                    brojPregleda[1]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 4) || mesecPregleda == (trenutniMesec + 8))
+                {
+                    brojPregleda[0]++;
+                }
+            }
+            return brojPregleda;
+        }
+
+        public int[] BrojPregledaKodLekaraZaPetMeseci(string idLekara)
+        {
+            int[] brojPregleda = new int[5];
+            List<Pregled> sviPreglediKodOvogLekara = GetSviPreglediLekara(idLekara);
+            int trenutniMesec = DateTime.Now.Month;
+            int mesecPregleda;
+            foreach (Pregled pregledIter in sviPreglediKodOvogLekara)
+            {
+                mesecPregleda = pregledIter.VremePocetkaPregleda.Month;
+                if (mesecPregleda == trenutniMesec)
+                {
+                    brojPregleda[4]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 1) || mesecPregleda == (trenutniMesec + 11))
+                {
+                    brojPregleda[3]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 2) || mesecPregleda == (trenutniMesec + 10))
+                {
+                    brojPregleda[2]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 3) || mesecPregleda == (trenutniMesec + 9))
+                {
+                    brojPregleda[1]++;
+                }
+                else if (mesecPregleda == (trenutniMesec - 4) || mesecPregleda == (trenutniMesec + 8))
+                {
+                    brojPregleda[0]++;
+                }
+            }
+            return brojPregleda;
+        }
+
+        public int[] BrojPrijemaZaPetDana(string idLekara)
+        {
+            int[] brojPregleda = { 0, 0, 0, 0, 0 };
+            List<Pregled> sviPreglediKodOvogLekara = GetSviBuduciPreglediLekara(idLekara);
+            List<DateTime> narednihPetDana = ListaNaprednihPetDatuma();
+            DateTime datumPregleda = new DateTime();
+            foreach (Pregled pregledIter in sviPreglediKodOvogLekara)
+            {
+                datumPregleda = pregledIter.VremePocetkaPregleda;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (datumPregleda.Day == narednihPetDana.ElementAt(i).Day && datumPregleda.Month == narednihPetDana.ElementAt(i).Month && datumPregleda.Year == narednihPetDana.ElementAt(i).Year)
+                    {
+                        brojPregleda[i]++;
+                        break;
+                    }
+                }
+            }
+            return brojPregleda;
+        }
+
+        private List<DateTime> ListaNaprednihPetDatuma()
+        {
+            List<DateTime> narednihPetDana = new List<DateTime>();
+            narednihPetDana.Add(DateTime.Now);
+            narednihPetDana.Add(DateTime.Now.AddDays(1));
+            narednihPetDana.Add(DateTime.Now.AddDays(2));
+            narednihPetDana.Add(DateTime.Now.AddDays(3));
+            narednihPetDana.Add(DateTime.Now.AddDays(4));
+            return narednihPetDana;
+        }
+
     }
 }

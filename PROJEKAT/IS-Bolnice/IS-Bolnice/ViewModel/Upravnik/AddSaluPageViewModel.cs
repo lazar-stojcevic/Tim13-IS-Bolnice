@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.ViewModel.Upravnik
 {
@@ -50,8 +51,15 @@ namespace IS_Bolnice.ViewModel.Upravnik
             get { return id; }
             set
             {
-                id = value;
-                OnPropertyChanged();
+                if (value.Contains("#") || value.Contains("/"))
+                {
+                    CustomMessageBox.ShowOK("Podaci nisu validno uneti! Ne sme biti #!", "Greška", "Potvrdi");
+                }
+                else
+                {
+                    id = value;
+                    OnPropertyChanged();
+                }
             }
         }
         public RoomType Tip

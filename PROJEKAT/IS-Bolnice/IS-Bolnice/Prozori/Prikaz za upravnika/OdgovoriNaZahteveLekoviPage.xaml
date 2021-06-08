@@ -9,14 +9,19 @@
       Title="OdgovoriNaZahteveLekoviPage" Background="White">
 
     <Grid>
-        <Label x:Name="label" FontSize="40" Content="Odgovori na zahteve" HorizontalAlignment="Left" Margin="39,39,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="listBox" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
+        <Label x:Name="label" FontFamily="Verdana" FontSize="34" Content="Odgovori na zahteve" HorizontalAlignment="Left" Margin="130,61,0,0" VerticalAlignment="Top" Width="364"/>
+        <ListView x:Name="listBox" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Naziv" DisplayMemberBinding="{Binding Lek.Ime}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Margin="29,40,370,577" Click="Button_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Upravnik/back.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using System.Text.RegularExpressions;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -37,20 +39,36 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void Potvrdi_btn_Click(object sender, RoutedEventArgs e)
         {
-            novaSoba.Id = id_txt.Text;
-            novaSoba.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
-            if (CheckDatum(MakeRenovacija()))
+            if (Validiraj())
             {
-                if (kontroler.SpajanjeSobe(selectovaneSobe, MakeRenovacija()))
+                novaSoba.Id = id_txt.Text;
+                novaSoba.Tip = (RoomType)tip_sobe_txt.SelectedIndex;
+                if (CheckDatum(MakeRenovacija()))
                 {
-                    Page renoviranje = new RenoviranjeSpajanjePage();
-                    this.NavigationService.Navigate(renoviranje);
+                    if (kontroler.SpajanjeSobe(selectovaneSobe, MakeRenovacija()))
+                    {
+                        Page renoviranje = new RenoviranjeSpajanjePage();
+                        this.NavigationService.Navigate(renoviranje);
+                    }
+                }
+                else
+                {
+                    CustomMessageBox.ShowOK("Datumi se logički ne poklapaju", "Greška", "Potvrdi");
                 }
             }
-            else
-            {
-                MessageBox.Show("Datumi se ne poklapaju logicki");
+            else {
+                CustomMessageBox.ShowOK("Ne sme se koristiti # ili /", "Greška", "Potvrdi");
             }
+        }
+        private bool Validiraj()
+        {
+            Regex regex = new Regex("^[#]+");
+            if (regex.IsMatch(id_txt.Text) || id_txt.Text.Contains("/"))
+            {
+                return false;
+            }
+
+            return true;
         }
 
 

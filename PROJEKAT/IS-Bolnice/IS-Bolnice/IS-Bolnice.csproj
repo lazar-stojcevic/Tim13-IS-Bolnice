@@ -74,6 +74,12 @@
     <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -166,6 +172,7 @@
     <Compile Include="Kontroleri\RenovacijaKontroler.cs" />
     <Compile Include="Kontroleri\SadrzajSobeKontroler.cs" />
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
+    <Compile Include="Kontroleri\UpravnikKontroler.cs" />
     <Compile Include="Kontroleri\WPFNavigacijaKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
     <Compile Include="Konverteri\LekarToTextConverter.cs" />
@@ -292,6 +299,12 @@
     <Compile Include="Prozori\Prikaz za upravnika\AddSastojakWindow.xaml.cs">
       <DependentUpon>AddSastojakWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\BrojPrijemaGraf.xaml.cs">
+      <DependentUpon>BrojPrijemaGraf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\CenovnikPage.xaml.cs">
+      <DependentUpon>CenovnikPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\EditBrisanjePage.xaml.cs">
       <DependentUpon>EditBrisanjePage.xaml</DependentUpon>
     </Compile>
@@ -310,6 +323,15 @@
     <Compile Include="Prozori\Prikaz za upravnika\EditSastojakWindow.xaml.cs">
       <DependentUpon>EditSastojakWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\IzvestajPage.xaml.cs">
+      <DependentUpon>IzvestajPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\IzvestajPage2.xaml.cs">
+      <DependentUpon>IzvestajPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\LekarPage.xaml.cs">
+      <DependentUpon>LekarPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\LekoviPage.xaml.cs">
       <DependentUpon>LekoviPage.xaml</DependentUpon>
     </Compile>
@@ -318,6 +340,9 @@
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\NalogPage.xaml.cs">
       <DependentUpon>NalogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\ObavestenjaPage.xaml.cs">
+      <DependentUpon>ObavestenjaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\OdgovoriNaZahteveLekoviPage.xaml.cs">
       <DependentUpon>OdgovoriNaZahteveLekoviPage.xaml</DependentUpon>
@@ -328,14 +353,23 @@
     <Compile Include="Prozori\Prikaz za upravnika\OpremaPage.xaml.cs">
       <DependentUpon>OpremaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\PregledRecenzijeWindow.xaml.cs">
+      <DependentUpon>PregledRecenzijeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\PrepaspodelaOpremePage.xaml.cs">
       <DependentUpon>PrepaspodelaOpremePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\PreraspodelaStatickeOpremeWindow.xaml.cs">
       <DependentUpon>PreraspodelaStatickeOpremeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\PrikazObavestenjaWindow.xaml.cs">
+      <DependentUpon>PrikazObavestenjaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\RazdvajanjeSobePage.xaml.cs">
       <DependentUpon>RazdvajanjeSobePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\RecenzijePagexaml.xaml.cs">
+      <DependentUpon>RecenzijePagexaml.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\RenoviranjePage.xaml.cs">
       <DependentUpon>RenoviranjePage.xaml</DependentUpon>
@@ -349,6 +383,9 @@
     <Compile Include="Prozori\Prikaz za upravnika\SastojciPage.xaml.cs">
       <DependentUpon>SastojciPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\SlobodniZauzetiTerminiGraf.xaml.cs">
+      <DependentUpon>SlobodniZauzetiTerminiGraf.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\SpajanjePage.xaml.cs">
       <DependentUpon>SpajanjePage.xaml</DependentUpon>
     </Compile>
@@ -357,6 +394,9 @@
     </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\UpravnikWindow.xaml.cs">
       <DependentUpon>UpravnikWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\ZaposleniPage.xaml.cs">
+      <DependentUpon>ZaposleniPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prozori\Prozori za pacijenta\FormaZaOcenjivanjeAplikacije.xaml.cs">
       <DependentUpon>FormaZaOcenjivanjeAplikacije.xaml</DependentUpon>
@@ -501,6 +541,7 @@
     <Compile Include="Servisi\RenovacijaServis.cs" />
     <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
+    <Compile Include="Servisi\UpravnikServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
     <Compile Include="ViewModel\Lekar\GlavniMeniViewModel.cs" />
     <Compile Include="ViewModel\Lekar\RasporedLekaraViewModel.cs" />
@@ -638,6 +679,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\BrojPrijemaGraf.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\CenovnikPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\EditBrisanjePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -662,6 +711,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\IzvestajPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\IzvestajPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\LekarPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\LekoviPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -671,6 +732,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\NalogPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\ObavestenjaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -686,6 +751,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\PregledRecenzijeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\PrepaspodelaOpremePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -694,7 +763,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\PrikazObavestenjaWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\RazdvajanjeSobePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\RecenzijePagexaml.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -714,6 +791,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Prozori\Prikaz za upravnika\SlobodniZauzetiTerminiGraf.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Prozori\Prikaz za upravnika\SpajanjePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -725,6 +806,10 @@
     <Page Include="Prozori\Prikaz za upravnika\UpravnikWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\ZaposleniPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Prozori\Prozori za pacijenta\FormaZaOcenjivanjeAplikacije.xaml">
       <SubType>Designer</SubType>

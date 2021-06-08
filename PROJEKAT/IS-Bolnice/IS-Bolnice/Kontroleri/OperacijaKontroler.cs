@@ -77,5 +77,20 @@ namespace IS_Bolnice.Kontroleri
         {
             return operacijaServis.SlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaOperacije);
         }
+
+        public int[] BrojOperacijaKodLekaraZaPetMeseci(string idLekara)
+        {
+            return operacijaServis.BrojOperacijaKodLekaraZaPetMeseci(idLekara);
+        }
+
+        public int[] BrojOperacijaZaPetMeseci()
+        {
+            return operacijaServis.BrojOperacijaZaPetMeseci();
+        }
+
+        public int[] BrojPrijemaZaPetDana(string idLekara)
+        {
+            return operacijaServis.BrojPrijemaZaPetDana(idLekara);
+        }
     }
 }

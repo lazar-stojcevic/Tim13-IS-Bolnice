@@ -19,7 +19,7 @@
                 <Image Source="/IS-Bolnice;component/Slike/Upravnik/edit.png" Height="90" Width="100" />
             </StackPanel>
         </Button>
-        <Label Content="Obriši lek" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="172,280,0,0" VerticalAlignment="Top" Width="210"/>
-        <Label Content="Izmeni lek" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="172,570,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Obriši lek" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="172,280,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Izmeni lek" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="172,570,0,0" VerticalAlignment="Top" Width="210"/>
     </Grid>
 </Page>

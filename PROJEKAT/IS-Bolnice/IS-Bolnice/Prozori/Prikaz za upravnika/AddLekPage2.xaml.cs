@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -22,17 +23,19 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     public partial class AddLekPage2 : Page
     {
         private ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
+        private LekKontroler kontroler = new LekKontroler();
         public Lek noviLek;
+
+        public List<Lek> sviLekovi;
         public AddLekPage2(Lek lek)
         {
             InitializeComponent();
+            sviLekovi = kontroler.GetSviLekovi();
             listBox_sastojci.ItemsSource = ParseSastojakToString();
-            listBox.ItemsSource = ParseLekToString();
+            listBox.ItemsSource = sviLekovi;
             noviLek = lek;
         }
     
-
-
 
         public List<string> ParseSastojakToString() {
             List<Sastojak> sastojci = sastojakRepo.DobaviSve();
@@ -40,19 +43,6 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             foreach (Sastojak sastojak in sastojci)
             {
                 tekst.Add(sastojak.Ime);
-            }
-            return tekst;
-        }
-
-        public List<string> ParseLekToString()
-        {
-            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
-            List<string> tekst = new List<string>();
-            List<Lek> lekovi = lekFajlRepozitorijum.DobaviSve();
-            foreach (Lek lek in lekovi)
-            {
-                string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;
-                tekst.Add(linija);
             }
             return tekst;
         }
@@ -65,9 +55,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 noviLek.Alergeni.Add(noviSastojak);
             }
             
-            foreach (string linija in listBox.SelectedItems) {
-                string[] deo = linija.Split(' ');
-                Lek lek = new Lek(deo[1]);
+            foreach (Lek lek in listBox.SelectedItems) {
                 noviLek.ZamenskiLekovi.Add(lek);
             }
             Page addLekSledeci = new AddLekPage3(noviLek);
@@ -86,5 +74,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             Page sastojci = new SastojciPage();
             this.NavigationService.Navigate(sastojci);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
     }
 }

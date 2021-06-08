@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -67,8 +69,31 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void Potvrdi_btn_Click(object sender, RoutedEventArgs e)
         {
-            List<Soba> noveSobe = KreirajNoveSobe();
-            renovacijaKontroler.RazdvajanjeSobe(renovacija, noveSobe);
+            if (Validiraj())
+            {
+                List<Soba> noveSobe = KreirajNoveSobe();
+                renovacijaKontroler.RazdvajanjeSobe(renovacija, noveSobe);
+                Page page = new RenoviranjeSpajanjePage();
+                this.NavigationService.Navigate(page);
+                CustomMessageBox.ShowOK("Renoviranje je uspešno kreirano!", "Uspeh", "Potvrdi");
+            }
+            else {
+                CustomMessageBox.ShowOK("Ne sme se koristiti # ili /", "Greška", "Potvrdi");
+            }
+        }
+
+        private bool Validiraj()
+        {
+            if (id1_txt.Text.Contains("#") || id1_txt.Text.Contains("/"))
+            {
+                return false;
+            }
+            if (id2_txt.Text.Contains("#") || id2_txt.Text.Contains("/"))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private List<Soba> KreirajNoveSobe() 
@@ -79,6 +104,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             sobe.Add(soba1);
             sobe.Add(soba2);
             return sobe;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

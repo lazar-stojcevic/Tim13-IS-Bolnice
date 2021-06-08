@@ -10,13 +10,13 @@
       Title="RenoviranjePage" Background="White">
 
     <Grid>
-        <Label x:Name="label" FontSize="38" Content="Renoviranje prostorije" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Height="65" Width="387"/>
-        <Label Content="Izaberite datum početka:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,158,0,0" VerticalAlignment="Top" Width="311"/>
-        <Label Content="Izaberite datum kraja:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,287,0,0" VerticalAlignment="Top" Width="311"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="38" Content="Renoviranje prostorije" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Height="65" Width="453"/>
+        <Label Content="Izaberite datum početka:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,158,0,0" VerticalAlignment="Top" Width="370"/>
+        <Label Content="Izaberite datum kraja:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,287,0,0" VerticalAlignment="Top" Width="311"/>
         <DatePicker BorderThickness="5" FontSize="26" x:Name="datePicker_pocetak"  Margin= "108,213,103,439" SelectedDate="{x:Static System:DateTime.Now}"/>
-        <DatePicker BorderThickness="5" FontSize="26" x:Name="datePicker_kraj" Margin= "108,371,103,281" SelectedDate="{x:Static System:DateTime.Now}"/>
-        <Label Content="Oprema se:" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,461,0,0" VerticalAlignment="Top" Width="146"/>
-        <ComboBox x:Name="comboBox_oprema" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="202,463,0,0" VerticalAlignment="Top" Width="273" >
+        <DatePicker BorderThickness="5" FontSize="26" x:Name="datePicker_kraj" Margin= "108,342,103,310" SelectedDate="{x:Static System:DateTime.Now}"/>
+        <Label Content="Oprema se:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="50" Margin="27,461,0,0" VerticalAlignment="Top" Width="168"/>
+        <ComboBox x:Name="comboBox_oprema" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="200,463,0,0" VerticalAlignment="Top" Width="290" >
 
             <ComboBoxItem IsSelected="True" Content="Baca"/>
             <ComboBoxItem Content="Prebacuje u magacin"/>

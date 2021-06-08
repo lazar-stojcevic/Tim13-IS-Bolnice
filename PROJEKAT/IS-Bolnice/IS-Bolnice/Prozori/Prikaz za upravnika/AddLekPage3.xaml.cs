@@ -24,24 +24,14 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         Lek noviLek;
 
         ZahtevZaValidacijuKontroler kontroler = new ZahtevZaValidacijuKontroler();
-
+        LekarKontroler lekarKontroler = new LekarKontroler();
+        List<Lekar> lekari;
         public AddLekPage3(Lek lek)
         {
             InitializeComponent();
             noviLek = lek;
-            listBox.ItemsSource = ParseLekarToString();
-        }
-
-        public List<string> ParseLekarToString() {
-            LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
-            List<Lekar> lekari = lekarFajlRepozitorijum.DobaviSve();
-            List<string> tekst = new List<string>();
-            foreach(Lekar lekar in lekari)
-            {
-                string linija = "Ime: " + lekar.Ime + " Prezime: " + lekar.Prezime + " JMBG: " + lekar.Jmbg;
-                tekst.Add(linija);
-            }
-            return tekst;
+            lekari = lekarKontroler.GetSviLekari();
+            listBox.ItemsSource = lekari;
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
@@ -53,16 +43,18 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private void Potvrdi_btn_Click(object sender, RoutedEventArgs e)
         {
             List<Lekar> lekari = new List<Lekar>();
-            foreach (string linija in listBox.SelectedItems) {
-                string[] deo = linija.Split(' ');
-                Lekar lekar = new Lekar();
-                lekar.Jmbg = deo[5];
+            foreach (Lekar lekar in listBox.SelectedItems) {
                 lekari.Add(lekar);
             }
             ZahtevZaValidacijuLeka zahtevZaValidaciju = new ZahtevZaValidacijuLeka(noviLek, lekari);
             kontroler.KreirajZahtevZaValidaciju(zahtevZaValidaciju);
             Page lekovi = new LekoviPage();
             this.NavigationService.Navigate(lekovi);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

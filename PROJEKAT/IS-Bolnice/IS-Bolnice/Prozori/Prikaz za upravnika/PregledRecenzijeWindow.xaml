@@ -1,0 +1,13 @@
+﻿<Window x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.PregledRecenzijeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+        mc:Ignorable="d"
+        Title="Tekst recenzije" Height="250" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBlock x:Name="textBlock" FontFamily="Verdana" FontSize="24" HorizontalAlignment="Left" Height="129" Margin="10,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="374"/>
+        <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="26" Content="Nazad" HorizontalAlignment="Left" Height="50" Margin="221,150,0,0" VerticalAlignment="Top" Width="143" Click="Potvrdi_btn_Click"/>
+    </Grid>
+</Window>

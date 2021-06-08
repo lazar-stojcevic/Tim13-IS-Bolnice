@@ -9,7 +9,7 @@
       Title="RenoviranjeSpajanjePage" Background="White">
 
     <Grid>
-        <ListView x:Name="listBox" FontSize="28" SelectionMode="Multiple" HorizontalAlignment="Left" Height="367" Margin="39,187,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
+        <ListView x:Name="listBox" FontFamily="Verdana" FontSize="28" SelectionMode="Multiple" HorizontalAlignment="Left" Height="367" Margin="39,187,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
@@ -18,10 +18,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="label" FontSize="40" Content="Renoviranje" HorizontalAlignment="Left" Margin="39,32,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="40" Content="Renoviranje" HorizontalAlignment="Left" Margin="39,32,0,0" VerticalAlignment="Top"/>
 
         <Button x:Name="Spoji_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Spoji" HorizontalAlignment="Left" Height="50" Margin="147,595,0,0" VerticalAlignment="Top" Width="179" Click="Spoji_btn_Click"/>
-        <CheckBox x:Name="checkBox" FontSize="10" Content="Spajanje prostorija" HorizontalAlignment="Left" Margin="50,123,0,0" VerticalAlignment="Top" Checked="checkBox_Checked">
+        <CheckBox x:Name="checkBox" FontFamily="Verdana" FontSize="10" Content="Spajanje prostorija" HorizontalAlignment="Left" Margin="50,123,0,0" VerticalAlignment="Top" Checked="checkBox_Checked">
             <CheckBox.RenderTransform>
                 <ScaleTransform ScaleX="3" ScaleY="3"/>
             </CheckBox.RenderTransform>

@@ -1,0 +1,23 @@
+﻿<Page x:Class="IS_Bolnice.Prozori.Prikaz_za_upravnika.RecenzijePagexaml"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IS_Bolnice.Prozori.Prikaz_za_upravnika"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="500"
+      Title="RecenzijePagexaml" Background="White">
+
+    <Grid>
+        <ListView x:Name="listBox" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="466" Margin="39,167,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Korisnicko ime" DisplayMemberBinding="{Binding Pacijent.KorisnickoIme}" />
+                    <GridViewColumn Header="Ocena" DisplayMemberBinding="{Binding Ocena}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="40" Content="Recenzije" HorizontalAlignment="Left" Margin="37,35,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

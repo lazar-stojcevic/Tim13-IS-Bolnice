@@ -9,12 +9,12 @@
       Title="AddOpremuPage" Background="White">
 
     <Grid>
-        <Label Content="ID opreme:" FontSize="26" HorizontalAlignment="Left" Height="47" Margin="10,172,0,0" VerticalAlignment="Top" Width="210"/>
-        <Label Content="Tip opreme:" FontSize="26" HorizontalAlignment="Left" Height="48" Margin="10,345,0,0" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.528,1.613"/>
-        <Label Content="Naziv:" FontSize="26" HorizontalAlignment="Left" Height="47" Margin="10,257,0,0" VerticalAlignment="Top" Width="210"/>
-        <TextBox x:Name="id_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239"/>
-        <TextBox x:Name="naziv_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239"/>
-        <ComboBox x:Name="tip_opreme_txt" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,351,0,0" VerticalAlignment="Top" Width="239">
+        <Label Content="ID opreme:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="47" Margin="10,172,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Tip opreme:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="48" Margin="10,345,0,0" VerticalAlignment="Top" Width="210" RenderTransformOrigin="0.528,1.613"/>
+        <Label Content="Naziv:" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="47" Margin="10,257,0,0" VerticalAlignment="Top" Width="210"/>
+        <TextBox x:Name="id_txt" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,176,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239"/>
+        <TextBox x:Name="naziv_txt" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239"/>
+        <ComboBox x:Name="tip_opreme_txt" FontFamily="Verdana" FontSize="26" HorizontalAlignment="Left" Height="40" Margin="229,351,0,0" VerticalAlignment="Top" Width="239">
 
             <ComboBoxItem IsSelected="True">dinamička</ComboBoxItem>
             <ComboBoxItem>statička</ComboBoxItem>
@@ -22,7 +22,7 @@
         </ComboBox>
         <Button x:Name="Dodaj_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Dodaj" HorizontalAlignment="Left" Height="50" Margin="41,519,0,0" VerticalAlignment="Top" Width="179" Click="Dodaj_btn_Click"/>
         <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,519,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
-        <Label x:Name="label" FontSize="38" Content="Dodavanje prostorije" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Height="65" Width="383"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="38" Content="Dodavanje opreme" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Height="65" Width="424"/>
 
     </Grid>
 </Page>

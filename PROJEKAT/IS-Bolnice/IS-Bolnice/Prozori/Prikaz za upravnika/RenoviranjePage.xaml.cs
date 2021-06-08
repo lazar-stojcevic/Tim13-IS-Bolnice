@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -51,6 +52,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 if (uspesno) {
                     renovacijaKontroler.RenovirajOpremu(comboBox_oprema.SelectedIndex, selektovanaSoba.Id);
                     this.NavigationService.GoBack();
+                    CustomMessageBox.ShowOK("Renoviranje je uspešno zakazano!", "Upseh", "Potvrdi");
                 }
             }
             else {

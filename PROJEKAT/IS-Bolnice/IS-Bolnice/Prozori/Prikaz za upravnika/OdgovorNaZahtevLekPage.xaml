@@ -9,9 +9,9 @@
       Title="OdgovorNaZahtevLekPage" Background="White">
 
     <Grid>
-        <Label x:Name="label" FontSize="40" Content="Izmeni lek po odgovoru" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
-        <Label Content="Obrazlozenje za odbijanje leka:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,115,0,0" VerticalAlignment="Top" Width="396"/>
-        <TextBox ScrollViewer.CanContentScroll="True" x:Name="opis_txt" FontSize="24" HorizontalAlignment="Left" Height="294" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="458"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="40" Content="Izmeni lek po odgovoru" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
+        <Label Content="Obrazloženje za odbijanje leka:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,115,0,0" VerticalAlignment="Top" Width="458"/>
+        <TextBox ScrollViewer.CanContentScroll="True" FontFamily="Verdana" x:Name="opis_txt" FontSize="24" HorizontalAlignment="Left" Height="294" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="458"/>
         <Button x:Name="Promeni_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Promeni" HorizontalAlignment="Left" Height="50" Margin="41,549,0,0" VerticalAlignment="Top" Width="179" Click="Promeni_btn_Click"/>
         <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,549,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
 

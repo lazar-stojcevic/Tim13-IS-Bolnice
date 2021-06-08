@@ -48,5 +48,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             Page odgovorNaZahtev = new OdgovorNaZahtevLekPage(odgovorNaZahtevZaValidaciju.Lek.Id);
             this.NavigationService.Navigate(odgovorNaZahtev);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }

@@ -9,7 +9,7 @@
       Title="PrepaspodelaOpremePage" Background="White">
 
     <Grid>
-        <ListView x:Name="listBox1" FontSize="28" HorizontalAlignment="Left" Height="180" Margin="39,113,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox1_SelectionChanged">
+        <ListView x:Name="listBox1" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="180" Margin="39,113,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox1_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Predmet.Id}" />
@@ -18,13 +18,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="sala1_txt" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,71,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="soba1_txt_SelectionChanged">
+        <ComboBox x:Name="sala1_txt" FontFamily="Verdana" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,71,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="soba1_txt_SelectionChanged">
 
         </ComboBox>
-        <TextBox x:Name="textBox" FontSize="32" HorizontalAlignment="Left" Height="48" Margin="42,338,0,0" TextWrapping="Wrap" Text="1" TextAlignment="Center" VerticalAlignment="Top" Width="97" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBox" FontFamily="Verdana" IsReadOnly="True" FontSize="32" HorizontalAlignment="Left" Height="48" Margin="42,338,0,0" TextWrapping="Wrap" Text="1" TextAlignment="Center" VerticalAlignment="Top" Width="97" TextChanged="textBox_TextChanged"/>
         <Button x:Name="Dodaj_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="+" HorizontalAlignment="Left" Height="38" Margin="156,311,0,0" VerticalAlignment="Top" Width="44" Click="Dodaj_btn_Click"/>
         <Button x:Name="Oduzmi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="-" HorizontalAlignment="Left" Height="38" Margin="156,375,0,0" VerticalAlignment="Top" Width="44" Click="Oduzmi_btn_Click"/>
-        <ListView x:Name="listBox2" FontSize="28" HorizontalAlignment="Left" Height="180" Margin="39,479,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox2_SelectionChanged">
+        <ListView x:Name="listBox2" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="180" Margin="39,479,0,0" VerticalAlignment="Top" Width="412" SelectionChanged="listBox2_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Predmet.Id}" />
@@ -33,12 +33,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox x:Name="sala2_txt" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,437,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="sala2_txt_SelectionChanged">
+        <ComboBox x:Name="sala2_txt" FontFamily="Verdana" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,437,0,0" VerticalAlignment="Top" Width="210" SelectionChanged="sala2_txt_SelectionChanged">
 
         </ComboBox>
         <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="UpMoveButton_Click" Margin="229,330,170,287">
             <StackPanel>
-                <Image Source="/Slike/3d-up-arrow.png" Height="68" Width="91" RenderTransformOrigin="0.626,0.5" />
+                <Image Source="/Slike/Lekar/3d-up-arrow.png" Height="68" Width="91" RenderTransformOrigin="0.626,0.5" />
             </StackPanel>
         </Button>
         <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Click="DownMoveButton_Click" Margin="350,333,49,284" RenderTransformOrigin="0.5,0.5">
@@ -51,7 +51,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
             <StackPanel>
-                <Image Source="/Slike/3d-up-arrow.png" Height="68" Width="91" />
+                <Image Source="/Slike/Lekar/3d-up-arrow.png" Height="68" Width="91" />
             </StackPanel>
         </Button>
     </Grid>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori
 {
@@ -78,22 +79,30 @@ namespace IS_Bolnice.Prozori
             if (listBox2.SelectedIndex != -1)
             {
                 SadrzajSobe noviSadrzaj = (SadrzajSobe)listBox2.SelectedItem;
-                noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
-                Predmet odabraneOprema = opremaKontroler.DobaviPoId(noviSadrzaj.Predmet.Id);
-                if (odabraneOprema.Tip == TipOpreme.dinamicka)
+                if (noviSadrzaj.Kolicina > Int32.Parse(textBox.Text))
                 {
-                    kontroler.PrebaciOpremu(noviSadrzaj, bolnicaKontroler.GetSobaPoId(sala1_txt.SelectedItem.ToString()));
+                    noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
+                    Predmet odabraneOprema = opremaKontroler.DobaviPoId(noviSadrzaj.Predmet.Id);
+                    if (odabraneOprema.Tip == TipOpreme.dinamicka)
+                    {
+                        kontroler.PrebaciOpremu(noviSadrzaj, bolnicaKontroler.GetSobaPoId(sala1_txt.SelectedItem.ToString()));
+                    }
+                    else
+                    {
+                        PrebaciOpremuUStanjeCekanja(false);
+                    }
+                    sadrzajPrveSobe = kontroler.GetSadrzajSobe(GetIDProstorije(true));
+                    listBox1.ItemsSource = sadrzajPrveSobe;
+                    sadrzajDrugeSobe = kontroler.GetSadrzajSobe(GetIDProstorije(false));
+                    listBox2.ItemsSource = sadrzajDrugeSobe;
+                    CustomMessageBox.ShowOK("Preraspodela je uspešno izvršena", "Upseh", "Potvrdi");
                 }
                 else {
-                    PrebaciOpremuUStanjeCekanja(false);
+                    CustomMessageBox.ShowOK("Količina opreme nije odgovarajuća!", "Greška", "Potvrdi");
                 }
-                sadrzajPrveSobe = kontroler.GetSadrzajSobe(GetIDProstorije(true));
-                listBox1.ItemsSource = sadrzajPrveSobe;
-                sadrzajDrugeSobe = kontroler.GetSadrzajSobe(GetIDProstorije(false));
-                listBox2.ItemsSource = sadrzajDrugeSobe;
             }
             else {
-                MessageBox.Show("Nije selektovana oprema za premestanje!");
+                CustomMessageBox.ShowOK("Nije selektovana oprema za premeštanje!", "Greška", "Potvrdi");
             }
         }
 
@@ -141,8 +150,10 @@ namespace IS_Bolnice.Prozori
             if (listBox1.SelectedIndex != -1)
             {
                 SadrzajSobe noviSadrzaj = (SadrzajSobe)listBox1.SelectedItem;
-                noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
-                Predmet odabraneOprema = opremaKontroler.DobaviPoId(noviSadrzaj.Predmet.Id);
+                if (noviSadrzaj.Kolicina > Int32.Parse(textBox.Text))
+                {
+                    noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
+                    Predmet odabraneOprema = opremaKontroler.DobaviPoId(noviSadrzaj.Predmet.Id);
                 if (odabraneOprema.Tip == TipOpreme.dinamicka)
                 {
                     kontroler.PrebaciOpremu(noviSadrzaj, bolnicaKontroler.GetSobaPoId(sala2_txt.SelectedItem.ToString()));
@@ -155,6 +166,12 @@ namespace IS_Bolnice.Prozori
                 listBox1.ItemsSource = sadrzajPrveSobe;
                 sadrzajDrugeSobe = kontroler.GetSadrzajSobe(GetIDProstorije(false));
                 listBox2.ItemsSource = sadrzajDrugeSobe;
+                    CustomMessageBox.ShowOK("Preraspodela je uspešno izvršena", "Upseh", "Potvrdi");
+                }
+                else
+                {
+                    CustomMessageBox.ShowOK("Količina opreme nije odgovarajuća!", "Greška", "Potvrdi");
+                }
             }
             else
             {

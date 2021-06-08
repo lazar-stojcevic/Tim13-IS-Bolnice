@@ -24,13 +24,16 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     {
         Lek noviLek;
         bool kreiranjeIzmena;
+        List<Lek> lekovi;
+        LekKontroler lekoviKontroler = new LekKontroler();
         public EditLekPage2(Lek lek, bool izmenaKreiranje)
         {
             InitializeComponent();
             noviLek = lek;
             kreiranjeIzmena = izmenaKreiranje;
+            lekovi = lekoviKontroler.GetSviLekovi();
             listBox_sastojci.ItemsSource = ParseSastojakToString();
-            listBox.ItemsSource = ParseLekToString();
+            listBox.ItemsSource = lekovi;
             SelectSastojke();
             SelectZamenskeLekove();
 
@@ -43,10 +46,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         }
 
         public void SelectZamenskiLek(string sifraLeka) {
-            MessageBox.Show("Radi");
-            foreach (string lek in listBox.Items) {
-                string[] podaciOLeku = lek.Split(' ');
-                if (podaciOLeku[1].Equals(sifraLeka)) {
+            foreach (Lek lek in listBox.Items) {
+                if (lek.Id.Equals(sifraLeka)) {
                     listBox.SelectedItems.Add(lek);
                 }
             }
@@ -79,19 +80,6 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             return tekst;
         }
 
-        public List<string> ParseLekToString()
-        {
-            LekFajlRepozitorijum lekFajlRepozitorijum = new LekFajlRepozitorijum();
-            List<string> tekst = new List<string>();
-            List<Lek> lekovi = lekFajlRepozitorijum.DobaviSve();
-            foreach (Lek lek in lekovi)
-            {
-                string linija = "ID: " + lek.Id + " Naziv: " + lek.Ime;
-                tekst.Add(linija);
-            }
-            return tekst;
-        }
-
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
         {
             if (kreiranjeIzmena)
@@ -120,7 +108,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             {
                 kontroler.IzmeniLek(noviLek);
             }
-            else {
+            else
+            {
                 OdgovorNaZahtevZaValidaciju odgovorNaZahtev = new OdgovorNaZahtevZaValidaciju(noviLek, null);
                 odgovorKontroler.ObrisiOdgovorNaZahtevZaValidaciju(odgovorNaZahtev);
                 AddLekPage3 addLekareZaZahtev = new AddLekPage3(noviLek);
@@ -131,11 +120,6 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 Page lekovi = new LekoviPage();
                 this.NavigationService.Navigate(lekovi);
             }
-            /*else
-            {
-                Page odgovoriNaZahteve = new OdgovoriNaZahteveLekoviPage();
-                this.NavigationService.Navigate(odgovoriNaZahteve);
-            }*/
         }
 
         private void listBox_sastojci_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -157,6 +141,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                 zamenskiLekovi.Add(lek);
             }
             noviLek.ZamenskiLekovi = zamenskiLekovi;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

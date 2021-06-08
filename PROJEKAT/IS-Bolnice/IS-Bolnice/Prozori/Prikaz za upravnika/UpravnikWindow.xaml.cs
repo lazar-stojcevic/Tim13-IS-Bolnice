@@ -20,19 +20,18 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     /// </summary>
     public partial class UpravnikWindow : Window
     {
-        public UpravnikWindow()
+        Upravnik upravnik = new Upravnik();
+
+        public UpravnikWindow(Upravnik ovajUpravnik)
         {
             InitializeComponent();
-        }
-
-        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
+            upravnik = ovajUpravnik;
+            this.frame.NavigationService.Navigate(new NalogPage(upravnik));
         }
 
         private void NalogMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Page nalog = new NalogPage();
+            Page nalog = new NalogPage(upravnik);
             this.frame.NavigationService.Navigate(nalog);
         }
 
@@ -58,6 +57,24 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             Page renoviranje = new RenoviranjeSpajanjePage();
             this.frame.NavigationService.Navigate(renoviranje);
+        }
+
+        private void CenovnikMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Page cenovnik = new CenovnikPage();
+            this.frame.NavigationService.Navigate(cenovnik);
+        }
+
+        private void ZaposleniMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Page zaposleni = new ZaposleniPage();
+            this.frame.NavigationService.Navigate(zaposleni);
+        }
+
+        private void IzvestajMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Page izvestaj = new IzvestajPage();
+            this.frame.NavigationService.Navigate(izvestaj);
         }
     }
 }

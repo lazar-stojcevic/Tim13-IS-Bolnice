@@ -8,7 +8,7 @@
       d:DesignHeight="700" d:DesignWidth="500"
       Title="SalePage" Background="White" Loaded="OnLoad">
     <Grid>
-        <ListView x:Name="listBox" ItemsSource="{Binding Sobe}" SelectedItem="{Binding SelektovanaSoba}" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412">
+        <ListView x:Name="listBox" FontFamily="Verdana" ItemsSource="{Binding Sobe}" SelectedItem="{Binding SelektovanaSoba}" FontSize="28" HorizontalAlignment="Left" Height="403" Margin="39,167,0,0" VerticalAlignment="Top" Width="412">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
@@ -17,8 +17,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="label" FontSize="40" Content="Prostorije" HorizontalAlignment="Left" Margin="39,10,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="tip_sale_txt" ItemsSource="{Binding MogucaFiltriranja}" SelectedItem="{Binding SelektovaniFilter}" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,98,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="40" Content="Prostorije" HorizontalAlignment="Left" Margin="39,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="tip_sale_txt" FontFamily="Verdana" ItemsSource="{Binding MogucaFiltriranja}" SelectedItem="{Binding SelektovaniFilter}" FontSize="24" HorizontalAlignment="Left" Height="37" Margin="39,98,0,0" VerticalAlignment="Top" Width="210"/>
         <Button Background="#FFF" BorderThickness="0" Height="83" Width="101"  Command="{Binding Path=AddCommand}" Margin="209,591,190,26">
             <StackPanel>
                 <Image Source="/Slike/Upravnik/heart.png" Height="68" Width="91" />

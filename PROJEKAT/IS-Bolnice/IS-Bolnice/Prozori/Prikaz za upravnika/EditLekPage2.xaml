@@ -9,14 +9,26 @@
       Title="EditLekPage2" Background="White">
 
     <Grid>
-        <ListBox x:Name="listBox_sastojci" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="158" Margin="36,191,0,0" VerticalAlignment="Top" Width="432" SelectionChanged="listBox_sastojci_SelectionChanged"/>
-        <ListBox x:Name="listBox" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="152" Margin="36,425,0,0" VerticalAlignment="Top" Width="432" SelectionChanged="listBox_SelectionChanged"/>
-        <Label Content="Sastojci leka:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,139,0,0" VerticalAlignment="Top" Width="210"/>
-        <Label Content="Zamenski lekovi:" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,373,0,0" VerticalAlignment="Top" Width="210"/>
-        <Label x:Name="label" FontSize="38" Content="Izmena leka" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="65" Width="278"/>
+        <ListBox x:Name="listBox_sastojci" FontFamily="Verdana" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="158" Margin="36,191,0,0" VerticalAlignment="Top" Width="432" SelectionChanged="listBox_sastojci_SelectionChanged"/>
+        <ListView x:Name="listBox" FontFamily="Verdana" SelectionMode="Multiple" FontSize="24" HorizontalAlignment="Left" Height="152" Margin="36,425,0,0" VerticalAlignment="Top" Width="432">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Naziv" DisplayMemberBinding="{Binding Naziv}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Sastojci leka:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,139,0,0" VerticalAlignment="Top" Width="210"/>
+        <Label Content="Zamenski lekovi:" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" Height="47" Margin="10,373,0,0" VerticalAlignment="Top" Width="297"/>
         <Button x:Name="Potvrdi_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Potvrdi" HorizontalAlignment="Left" Height="50" Margin="41,614,0,0" VerticalAlignment="Top" Width="179" Click="Potvrdi_btn_Click"/>
         <Button x:Name="Odustani_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Odustani" HorizontalAlignment="Left" Height="50" Margin="284,614,0,0" VerticalAlignment="Top" Width="184" Click="Odustani_btn_Click"/>
         <Button x:Name="Sastojci_btn" FontFamily="Verdana" FontWeight="Bold" Background="#78909C" FontSize="30" Content="Sastojci" HorizontalAlignment="Left" Height="50" Margin="284,136,0,0" VerticalAlignment="Top" Width="184" Click="Sastojci_btn_Click"/>
+        <Label x:Name="label" FontFamily="Verdana" FontSize="40" Content="Izmena leka" HorizontalAlignment="Left" Margin="190,33,0,0" VerticalAlignment="Top" Height="65" Width="269"/>
+        <Button Background="#FFF" BorderThickness="0" Height="83" Width="101" Margin="43,27,356,590" Click="Button_Click">
+            <StackPanel>
+                <Image Source="/IS-Bolnice;component/Slike/Upravnik/back.png" Height="68" Width="91" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

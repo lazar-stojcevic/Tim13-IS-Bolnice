@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,14 +45,26 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void Izmeni_btn_Click(object sender, RoutedEventArgs e)
         {
-            Predmet izmenjenPredmet = opremaKontroler.DobaviPoId(id_txt.Text);
-            izmenjenPredmet.Naziv = naziv_txt.Text;
-            izmenjenPredmet.Tip = DobaviTip();
-            opremaKontroler.IzmeniPredmet(izmenjenPredmet);
-            Page upravljanje = new UpravljanjeOpremomPage();
-            this.NavigationService.Navigate(upravljanje);
+            if (Validiraj())
+            {
+                Predmet izmenjenPredmet = opremaKontroler.DobaviPoId(id_txt.Text);
+                izmenjenPredmet.Naziv = naziv_txt.Text;
+                izmenjenPredmet.Tip = DobaviTip();
+                opremaKontroler.IzmeniPredmet(izmenjenPredmet);
+                Page upravljanje = new UpravljanjeOpremomPage();
+                this.NavigationService.Navigate(upravljanje);
+            }
         }
 
+        private bool Validiraj()
+        {
+            Regex regex = new Regex("^[#]+");
+            if (regex.IsMatch(naziv_txt.Text))
+            {
+                return false;
+            }
+            return true;
+        }
         private TipOpreme DobaviTip() 
         {
             if (tip_opreme_txt.SelectedIndex == 1)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.UpravnikPages
 {
@@ -31,19 +33,39 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void Dodaj_btn_Click(object sender, RoutedEventArgs e)
         {
-            Predmet noviPredmet = new Predmet(id_txt.Text);
-            noviPredmet.Naziv = naziv_txt.Text;
-            if (tip_opreme_txt.SelectedIndex == 1)
+            if (Validiraj())
             {
-                noviPredmet.Tip = TipOpreme.staticka;
+                Predmet noviPredmet = new Predmet(id_txt.Text);
+                noviPredmet.Naziv = naziv_txt.Text;
+                if (tip_opreme_txt.SelectedIndex == 1)
+                {
+                    noviPredmet.Tip = TipOpreme.staticka;
+                }
+                else
+                {
+                    noviPredmet.Tip = TipOpreme.dinamicka;
+                }
+                kontroler.KreirajNoviPredmet(noviPredmet);
+                Page upravljanje = new UpravljanjeOpremomPage();
+                this.NavigationService.Navigate(upravljanje);
             }
             else
             {
-                noviPredmet.Tip = TipOpreme.dinamicka;
+                CustomMessageBox.ShowOK("Podaci nisu validno uneti! Ne sme biti #!", "Greška", "Potvrdi");
             }
-            kontroler.KreirajNoviPredmet(noviPredmet);
-            Page upravljanje = new UpravljanjeOpremomPage();
-            this.NavigationService.Navigate(upravljanje);
+        }
+
+        private bool Validiraj()
+        {
+            if (id_txt.Text.Contains("#"))
+            {
+                return false;
+            }
+            if (naziv_txt.Text.Contains("#"))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
@@ -51,5 +73,6 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);
         }
+
     }
 }

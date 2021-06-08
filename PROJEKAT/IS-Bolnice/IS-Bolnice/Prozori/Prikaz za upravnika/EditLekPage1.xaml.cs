@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,8 +42,29 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private void Dalje_btn_Click(object sender, RoutedEventArgs e)
         {
-            Page editLek2 = new EditLekPage2(noviLek, kreiranjeIzmena);
-            this.NavigationService.Navigate(editLek2);
+            if (Validiraj())
+            {
+                Page editLek2 = new EditLekPage2(noviLek, kreiranjeIzmena);
+                this.NavigationService.Navigate(editLek2);
+            }
+        }
+
+        private bool Validiraj()
+        {
+            Regex regex = new Regex("^[#]+");
+            if (regex.IsMatch(id_txt.Text))
+            {
+                return false;
+            }
+            if (regex.IsMatch(naziv_txt.Text))
+            {
+                return false;
+            }
+            if (regex.IsMatch(opis_txt.Text))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void Odustani_btn_Click(object sender, RoutedEventArgs e)
@@ -86,6 +108,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                     noviLek.PotrebanRecept = false;
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }
