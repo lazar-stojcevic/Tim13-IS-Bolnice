@@ -18,6 +18,8 @@
         <RoutedUICommand x:Key="ZakazivanjeUTerminu" Text="UTerminu" />
         <RoutedUICommand x:Key="PrikazIzvestaja" Text="Izvestaj" />
         <RoutedUICommand x:Key="OceniAplikaciju" Text="OceniAplikaciju" />
+        <RoutedUICommand x:Key="SvetlaTema" Text="Svetla" />
+        <RoutedUICommand x:Key="TamnaTema" Text="Tamna" />
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -30,6 +32,8 @@
         <CommandBinding Command="{StaticResource ZakazivanjeUTerminu}" Executed="zakazivanjeUTerminu_Click" />
         <CommandBinding Command="{StaticResource PrikazIzvestaja}" Executed="izvestaj_Click" />
         <CommandBinding Command="{StaticResource OceniAplikaciju}" Executed="oceniBtn_Click" />
+        <CommandBinding Command="{StaticResource SvetlaTema}" Executed="svetlaTema_Click" />
+        <CommandBinding Command="{StaticResource TamnaTema}" Executed="tamnaTema_Click" />
     </Window.CommandBindings>
 
     <Window.InputBindings>
@@ -42,6 +46,8 @@
         <KeyBinding Command="{StaticResource ZakazivanjeUTerminu}" Key="T" Modifiers="Ctrl" />
         <KeyBinding Command="{StaticResource PrikazIzvestaja}" Key="I" Modifiers="Ctrl" />
         <KeyBinding Command="{StaticResource OceniAplikaciju}" Key="T" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource SvetlaTema}" Key="N" Modifiers="Ctrl" />
+        <KeyBinding Command="{StaticResource TamnaTema}" Key="M" Modifiers="Ctrl" />
     </Window.InputBindings>
 
 
@@ -69,8 +75,8 @@
             <!--UREDI-->
             <MenuItem Header="{x:Static p:Resources.btnUredi}">
                 <MenuItem Header="{x:Static p:Resources.menuTema}">
-                    <MenuItem x:Name="svetlaTema" Header="{x:Static p:Resources.menuSvetla}" ></MenuItem>
-                    <MenuItem x:Name="tamnaTema" Header="{x:Static p:Resources.menuTamna}" ></MenuItem>
+                    <MenuItem x:Name="svetlaTema" Header="{x:Static p:Resources.menuSvetla}" InputGestureText="Ctrl+N" Command="{StaticResource SvetlaTema}"></MenuItem>
+                    <MenuItem x:Name="tamnaTema" Header="{x:Static p:Resources.menuTamna}" InputGestureText="Ctrl+M" Command="{StaticResource TamnaTema}"></MenuItem>
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="{x:Static p:Resources.menuJezik}">

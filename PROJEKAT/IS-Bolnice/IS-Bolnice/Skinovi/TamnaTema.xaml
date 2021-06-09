@@ -27,8 +27,5 @@
         <Setter Property="Background" Value="LightGray"/>
     </Style>
 
-    <Style TargetType="Window">
-        <Setter Property="Background" Value="DarkOliveGreen"/>
-    </Style>
 
 </ResourceDictionary>
