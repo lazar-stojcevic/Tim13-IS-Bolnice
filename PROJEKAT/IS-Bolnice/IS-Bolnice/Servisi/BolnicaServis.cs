@@ -10,7 +10,7 @@ namespace IS_Bolnice.Servisi
 {
     class BolnicaServis
     {
-        private IBolnicaRepozitorijum bolnicaRepo = new BolnicaFajlRepozitorijum();
+        private IBolnicaRepozitorijum bolnicaRepo = new Injector().GetBolnicaRepozitorijum();
 
         public List<Soba> GetSveSobe()
         {

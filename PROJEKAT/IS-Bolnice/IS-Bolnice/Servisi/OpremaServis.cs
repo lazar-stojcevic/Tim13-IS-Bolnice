@@ -10,7 +10,7 @@ namespace IS_Bolnice.Servisi
 {
     class OpremaServis
     {
-        IOpremaRepozitorijum opremaRepo = new OpremaFajlRepozitorijum();
+        IOpremaRepozitorijum opremaRepo = new Injector().GetOpremaRepozitorijum();
         internal void KreirajNoviPredmet(Predmet noviPredmet)
         {
             opremaRepo.Sacuvaj(noviPredmet);
@@ -26,7 +26,7 @@ namespace IS_Bolnice.Servisi
             opremaRepo.Izmeni(izmenjenPredmet);
         }
 
-        public void ObrisiPredmet(string idPredmeta)
+        public bool ObrisiPredmet(string idPredmeta)
         {
             SadrzajSobeServis sadrzajSobeServis = new SadrzajSobeServis();
             Predmet predmetZaBrisanje = opremaRepo.GetPoId(idPredmeta);
@@ -34,12 +34,10 @@ namespace IS_Bolnice.Servisi
             {
                 predmetZaBrisanje.Obrisano = true;
                 opremaRepo.Izmeni(predmetZaBrisanje);
+                return true;
+            }
 
-            }
-            else
-            {
-                MessageBox.Show("Oprema postoji na stanju, ne može biti obrisana!");
-            }
+            return false;
         }
 
         public List<Predmet> GetSvaOprema()

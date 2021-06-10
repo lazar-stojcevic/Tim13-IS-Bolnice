@@ -1,0 +1,6 @@
+lekar#123#L
+laza#laza123#L
+nemanja#nemanja123#L
+sekretar#123#S
+upravnik#123#U
+pacijent#123#P

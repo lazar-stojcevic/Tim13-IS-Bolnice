@@ -30,9 +30,9 @@ namespace IS_Bolnice.Kontroleri
             sadrzajSobeServis.DodajUMagacin(p, kolicina);
         }
 
-        public void PrebaciOpremu(SadrzajSobe stariSadrzaj, Soba novaSoba)
+        public bool PrebaciOpremu(SadrzajSobe stariSadrzaj, Soba novaSoba)
         {
-            sadrzajSobeServis.PrebaciOpremu(stariSadrzaj, novaSoba);
+            return sadrzajSobeServis.PrebaciOpremu(stariSadrzaj, novaSoba);
         }
 
         public void PrebaciOpremuUStanjeCekanja(SadrzajSobe sadrzajZaPrenos)

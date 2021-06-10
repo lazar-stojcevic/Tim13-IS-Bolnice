@@ -10,7 +10,7 @@ namespace IS_Bolnice.Servisi
 {
     class HospitalizacijaServis
     {
-        private IHospitalizacijaRepozitorijum hospitalizacijaRepo = new HospitalizacijaFajlRepozitorijum();
+        private IHospitalizacijaRepozitorijum hospitalizacijaRepo = new Injector().GetHospitalizacijaRepozitorijum();
 
         public List<Hospitalizacija> GetSveHospitalizacije()
         {

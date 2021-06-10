@@ -14,5 +14,10 @@ namespace IS_Bolnice.Kontroleri
         public void Izmeni(Upravnik upravnik) {
             upravnikServis.Izmeni(upravnik);
         }
+
+        public Upravnik GetByJmbg(string jmbg)
+        {
+            return upravnikServis.GetByJmbg(jmbg);
+        }
     }
 }

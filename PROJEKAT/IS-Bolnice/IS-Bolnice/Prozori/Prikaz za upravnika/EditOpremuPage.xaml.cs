@@ -88,7 +88,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             MessageBoxResult resultat = MessageBox.Show("Da li ste sigurni da zelite da obrisete opremu?", "", MessageBoxButton.YesNo);
             if (resultat == MessageBoxResult.Yes)
             {
-                opremaKontroler.ObrisiPredmet(id_txt.Text);
+                if(!opremaKontroler.ObrisiPredmet(id_txt.Text)){ MessageBox.Show("Oprema postoji na stanju, ne može biti obrisana!"); }
             }
             Page upravljanje = new UpravljanjeOpremomPage();
             this.NavigationService.Navigate(upravljanje);

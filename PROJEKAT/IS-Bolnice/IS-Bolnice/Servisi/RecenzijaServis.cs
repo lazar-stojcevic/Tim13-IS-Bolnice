@@ -11,7 +11,7 @@ namespace IS_Bolnice.Servisi
 {
     class RecenzijaServis
     {
-        private IRecenzijaRepozitorijum recRepo = new RecenzijaFajlRepozitorijum();
+        private IRecenzijaRepozitorijum recRepo = new Injector().GetRecenzijaRepozitorijum();
         public void KreirajRecenziju(Recenzija recenzija)
         {
             recRepo.Sacuvaj(recenzija);

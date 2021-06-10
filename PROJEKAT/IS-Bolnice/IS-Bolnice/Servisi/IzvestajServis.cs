@@ -9,7 +9,7 @@ namespace IS_Bolnice.Servisi
 {
     class IzvestajServis
     {
-        private IIzvestajRepozitorijum izvestajRepo = new IzvestajFajlRepozitorijum();
+        private IIzvestajRepozitorijum izvestajRepo = new Injector().GetIzvestajRepozitorijum();
 
         public void KreirajIzvestaj(Izvestaj izvestaj)
         {

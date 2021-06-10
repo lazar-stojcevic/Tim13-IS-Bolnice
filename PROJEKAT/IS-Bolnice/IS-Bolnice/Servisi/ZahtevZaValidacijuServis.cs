@@ -9,7 +9,7 @@ namespace IS_Bolnice.Servisi
 {
     class ZahtevZaValidacijuServis
     {
-        private IZahteviZaValidacijuRepozitorijum zahteviZaValidacijuRepo = new ZahteviZaValidacijuFajlRepozitorijum();
+        private IZahteviZaValidacijuRepozitorijum zahteviZaValidacijuRepo = new Injector().GetZahteviZaValidacijuRepozitorijum();
 
         public void ObrisiZahtevZaValidacijuLeka(ZahtevZaValidacijuLeka zahtev)
         {

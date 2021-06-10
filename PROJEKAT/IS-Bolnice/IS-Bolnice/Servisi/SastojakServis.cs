@@ -9,7 +9,7 @@ namespace IS_Bolnice.Servisi
 {
     class SastojakServis
     {
-        private ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
+        private ISastojakRepozitorijum sastojakRepo = new Injector().GetSastojakRepozitorijum();
 
         public List<Sastojak> GetSviSastojci()
         {

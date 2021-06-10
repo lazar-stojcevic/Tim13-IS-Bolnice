@@ -12,7 +12,13 @@ namespace IS_Bolnice.Servisi
 {
     class RenovacijaServis
     {
-        private IRenovacijaRepozitorijum renovacijaRepo = new RenovacijaFajlRepozitorijum();
+        private IRenovacijaRepozitorijum renovacijaRepo = new Injector().GetRenovacijaRepozitorijum();
+        IBolnicaRepozitorijum bolnicaFajlRepozitorijum = new Injector().GetBolnicaRepozitorijum();
+        IHospitalizacijaRepozitorijum hospitalizacijaFajlRepozitorijum = new Injector().GetHospitalizacijaRepozitorijum();
+
+        Renovacija novaRenovacija;
+        List<Soba> sobeKojeSpajamo;
+
         public bool RenoviranjeOperacioneSale(Renovacija novaRenovacija)
         {
             OperacijaServis operacijaServis = new OperacijaServis();
@@ -20,7 +26,6 @@ namespace IS_Bolnice.Servisi
             {
                 if (operacija.VremePocetkaOperacije > novaRenovacija.DatumPocetka && operacija.VremeKrajaOperacije < novaRenovacija.DatumKraja)
                 {
-                    MessageBox.Show("Postoje zakazane operacije! Odaberite drugi period!");
                     return false;
                 }
             }
@@ -35,7 +40,6 @@ namespace IS_Bolnice.Servisi
             {
                 if (pregled.VremePocetkaPregleda > novaRenovacija.DatumPocetka && pregled.VremePocetkaPregleda < novaRenovacija.DatumKraja)
                 {
-                    MessageBox.Show("Postoje zakazani pregledi! Odaberite drugi period!");
                     return false;
                 }
             }
@@ -46,12 +50,11 @@ namespace IS_Bolnice.Servisi
 
         public bool RenovirajBolnickuSobu(Renovacija novaRenovacija)
         {
-            IHospitalizacijaRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
+            
             foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.GetSveHospitalizacijeZaSobu(novaRenovacija.ProstorijaZaRenoviranje.Id))
             {
                 if (hospitalizacija.PocetakHospitalizacije > novaRenovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < novaRenovacija.DatumKraja)
                 {
-                    MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
                     return false;
                 }
             }
@@ -79,9 +82,6 @@ namespace IS_Bolnice.Servisi
             }
         }
 
-        Renovacija novaRenovacija;
-        List<Soba> sobeKojeSpajamo;
-
         public bool SpajanjeSobe(List<Soba> sobeZaSpajanje, Renovacija renovacija)
         {
             sobeKojeSpajamo = sobeZaSpajanje;
@@ -94,6 +94,31 @@ namespace IS_Bolnice.Servisi
             return false;
         }
 
+        public void RazdvajanjeSobe(Renovacija renovacija, List<Soba> noveSobe)
+        {
+            novaRenovacija = renovacija;
+            BolnicaServis bolnicaServis = new BolnicaServis();
+            List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
+            if (ProvaraRaspolozivostiProstorije(renovacija.ProstorijaZaRenoviranje))
+            {
+                foreach (Soba iterSoba in noveSobe)
+                {
+                    updateSoba.Add(iterSoba);
+                }
+                foreach (Soba sobaIter in updateSoba)
+                {
+                    if (sobaIter.Id.Equals(renovacija.ProstorijaZaRenoviranje.Id))
+                    {
+                        sobaIter.Obrisano = true;
+                        break;
+                    }
+                }
+                Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
+                novaBolnica.Soba = updateSoba;
+                bolnicaFajlRepozitorijum.Izmeni(novaBolnica);
+            }
+        }
+
         private void SpajanjeSoba()
         {
             KreirajNovuSobu();
@@ -103,7 +128,6 @@ namespace IS_Bolnice.Servisi
 
         private void UkloniSobe()
         {
-            IBolnicaRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
             List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
             foreach (Soba selected in sobeKojeSpajamo)
             {
@@ -128,7 +152,6 @@ namespace IS_Bolnice.Servisi
                 novaRenovacija.ProstorijaZaRenoviranje.Kvadratura = novaRenovacija.ProstorijaZaRenoviranje.Kvadratura + sobaIter.Kvadratura;
                 novaRenovacija.ProstorijaZaRenoviranje.Sprat = sobaIter.Sprat;
             }
-            BolnicaFajlRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
             Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
             novaBolnica.AddSoba(novaRenovacija.ProstorijaZaRenoviranje);
             bolnicaFajlRepozitorijum.Izmeni(novaBolnica);
@@ -172,7 +195,6 @@ namespace IS_Bolnice.Servisi
             {
                     if (operacija.VremePocetkaOperacije > novaRenovacija.DatumPocetka)
                     {
-                        MessageBox.Show("Postoje zakazane operacije! Odaberite drugi period!");
                         return false;
                     }
             }
@@ -181,12 +203,10 @@ namespace IS_Bolnice.Servisi
 
         private bool ProveraBolnickeSobe(string idSobe)
         {
-            HospitalizacijaFajlRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
             foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.GetSveHospitalizacijeZaSobu(idSobe))
                 {
                     if (hospitalizacija.PocetakHospitalizacije > novaRenovacija.DatumPocetka)
                     {
-                        MessageBox.Show("Pacijenti su smešteni u odabranoj sobi! Odaberite drugi period!");
                         return false;
                     }
                 }
@@ -200,7 +220,6 @@ namespace IS_Bolnice.Servisi
                 {
                     if (pregled.VremePocetkaPregleda > novaRenovacija.DatumPocetka)
                     {
-                        MessageBox.Show("Postoje zakazani pregledi! Odaberite drugi period!");
                         return false;
                     }
                 }
@@ -208,30 +227,7 @@ namespace IS_Bolnice.Servisi
 
         }
 
-        public void RazdvajanjeSobe(Renovacija renovacija, List<Soba> noveSobe)
-        {
-            novaRenovacija = renovacija;
-            BolnicaServis bolnicaServis = new BolnicaServis();
-            IBolnicaRepozitorijum bolnicaFajlRepozitorijum = new BolnicaFajlRepozitorijum();
-            List<Soba> updateSoba = bolnicaFajlRepozitorijum.GetSobe();
-            if (ProvaraRaspolozivostiProstorije(renovacija.ProstorijaZaRenoviranje)) {
-                foreach (Soba iterSoba in noveSobe) 
-                {
-                    updateSoba.Add(iterSoba);
-                }
-                foreach (Soba sobaIter in updateSoba)
-                {
-                    if (sobaIter.Id.Equals(renovacija.ProstorijaZaRenoviranje.Id))
-                    {
-                        sobaIter.Obrisano = true;
-                        break;
-                    }
-                }
-                Bolnica novaBolnica = bolnicaFajlRepozitorijum.GetBolnica();
-                novaBolnica.Soba = updateSoba;
-                bolnicaFajlRepozitorijum.Izmeni(novaBolnica);
-            }   
-        }
+        
         
     }
 }

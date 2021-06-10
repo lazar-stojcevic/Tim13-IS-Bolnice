@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.DTOs;
 
 namespace IS_Bolnice.Servisi
 {
-    class PacijentServis
+    class PacijentServis: ILogInServis
     {
-        private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
+        private IPacijentRepozitorijum pacijentRepo = new Injector().GetPacijentRepozitorijum();
 
         public Pacijent GetPacijentSaOvimJMBG(string jmbgPacijenta)
         {
@@ -46,6 +47,25 @@ namespace IS_Bolnice.Servisi
         public void ObrisiPacijenta(string jmbgPacijenta)
         {
             pacijentRepo.Obrisi(jmbgPacijenta);
+        }
+
+        public LogInDTO GetKorisnika(string korisnickoIme, string sifra)
+        {
+            foreach (Pacijent p in pacijentRepo.GetSve())
+            {
+                if (p.KorisnickoIme.Equals(korisnickoIme))
+                {
+                    if (p.Sifra.Equals(sifra))
+                    {
+                        LogInDTO retVal = new LogInDTO();
+                        retVal.Jmbg = p.Jmbg;
+                        retVal.TipKorisnika = "P";
+                        return retVal;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

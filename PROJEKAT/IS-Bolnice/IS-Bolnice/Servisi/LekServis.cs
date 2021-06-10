@@ -9,7 +9,7 @@ namespace IS_Bolnice.Servisi
 {
     class LekServis
     {
-        private ILekRepozitorijum lekRepo = new LekFajlRepozitorijum();
+        private ILekRepozitorijum lekRepo = new Injector().GetLekRepozitorijum();
 
         public List<Lek> GetSviLekovi()
         {

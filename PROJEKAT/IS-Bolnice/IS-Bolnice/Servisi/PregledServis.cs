@@ -18,9 +18,9 @@ namespace IS_Bolnice.Servisi
         private readonly int MINUTI_INTERVALA_ZA_IZMENU_TERMINA_PREGLEDA = 30;
 
 
-        private IPregledRepozitorijum pregledRepo = new PreglediFajlRepozitorijum();
-        private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
-        private IIzmenaTerminaRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
+        private IPregledRepozitorijum pregledRepo = new Injector().GetPregledRepozitorijum();
+        private ILekarRepozitorijum lekarRepo = new Injector().GetLekarRepozitorijum();
+        private IIzmenaTerminaRepozitorijum izmenaTerminaRepo = new Injector().GetIzmenaTerminaRepozitorijum();
 
         public Pregled PostaviPrvogSlobodnogLekaraOpstePrakseNaPregled(Pregled pregled)
         {

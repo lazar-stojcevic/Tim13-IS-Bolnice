@@ -10,7 +10,7 @@ namespace IS_Bolnice.Servisi
 {
     class ObavestenjeServis
     {
-        private IObavestenjaRepozitorijum obavestenjaRepo = new ObavestenjeFajlRepozitorijum();
+        private IObavestenjaRepozitorijum obavestenjaRepo = new Injector().GetObavestenjaRepozitorijum();
 
         public void KreirajObavestenje(Obavestenje novoObavestenje)
         {

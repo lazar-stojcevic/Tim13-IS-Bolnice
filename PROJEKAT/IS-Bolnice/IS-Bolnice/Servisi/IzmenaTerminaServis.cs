@@ -1,13 +1,14 @@
 ﻿using IS_Bolnice.Baze;
 using IS_Bolnice.Model;
 using System;
+using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi
 {
     class IzmenaTerminaServis
     {
         private static int MAX_CHANGES_IN_WEEK = 3;
-        private IzmenaTerminaFajlRepozitorijum izmenaTerminaRepo = new IzmenaTerminaFajlRepozitorijum();
+        private IIzmenaTerminaRepozitorijum izmenaTerminaRepo = new Injector().GetIzmenaTerminaRepozitorijum();
 
         public void SacuvajIzmenu(IzmenaTermina izmenaTermina)
         {

@@ -110,6 +110,7 @@
     <Compile Include="Baze\BeleskaFajlRepozitorijum.cs" />
     <Compile Include="Baze\BolnicaFajlRepozitorijum.cs" />
     <Compile Include="Baze\HospitalizacijaFajlRepozitorijum.cs" />
+    <Compile Include="Baze\Interfejsi\ILoggerRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IRecenzijaRepozitorijum.cs" />
     <Compile Include="Baze\IzmenaTerminaFajlRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IAnketaRepozitorijum.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Baze\Interfejsi\IPregledRepozitorijum.cs" />
     <Compile Include="Baze\IzvestajFajlRepozitorijum.cs" />
     <Compile Include="Baze\LekFajlRepozitorijum.cs" />
+    <Compile Include="Baze\LoggerFajlRepozitorijum.cs" />
     <Compile Include="Baze\RecenzijaFajlRepozitorijum.cs" />
     <Compile Include="Baze\RenovacijaFajlRepozitorijum.cs" />
     <Compile Include="Baze\SadrzajSobeFajlRepozitorijum.cs" />
@@ -149,8 +151,10 @@
     <Compile Include="Baze\Interfejsi\ISastojakRepozitorijum.cs" />
     <Compile Include="Baze\Interfejsi\IZahteviZaValidacijuRepozitorijum.cs" />
     <Compile Include="Baze\Klase\GenerickiFajlRepozitorijum.cs" />
+    <Compile Include="DTOs\LogInDTO.cs" />
     <Compile Include="DTOs\OperacijaDTO.cs" />
     <Compile Include="DTOs\PregledDTO.cs" />
+    <Compile Include="Injector.cs" />
     <Compile Include="Kontroleri\AnketaKontroler.cs" />
     <Compile Include="Kontroleri\BelezkeKontroler.cs" />
     <Compile Include="Kontroleri\BolnicaKontroler.cs" />
@@ -160,6 +164,7 @@
     <Compile Include="Kontroleri\KorisnikKontroler.cs" />
     <Compile Include="Kontroleri\LekarKontroler.cs" />
     <Compile Include="Kontroleri\LekKontroler.cs" />
+    <Compile Include="Kontroleri\LoggerKontroler.cs" />
     <Compile Include="Kontroleri\ObavestenjeKontroler.cs" />
     <Compile Include="Kontroleri\OblastLekaraKontroler.cs" />
     <Compile Include="Kontroleri\OdgovoriNaZahtevZaValidacijeKontroler.cs" />
@@ -183,6 +188,7 @@
     <Compile Include="Model\Hospitalizacija.cs" />
     <Compile Include="Model\Izvestaj.cs" />
     <Compile Include="Model\Lek.cs" />
+    <Compile Include="Model\Logger.cs" />
     <Compile Include="Model\Obavestenje.cs" />
     <Compile Include="Model\OblastLekara.cs" />
     <Compile Include="Model\OdgovorNaZahtevZaValidaciju.cs" />
@@ -524,11 +530,13 @@
     <Compile Include="Servisi\BelezkeServis.cs" />
     <Compile Include="Servisi\BolnicaServis.cs" />
     <Compile Include="Servisi\HospitalizacijaServis.cs" />
+    <Compile Include="Servisi\ILogInServis.cs" />
     <Compile Include="Servisi\IzmenaTerminaServis.cs" />
     <Compile Include="Servisi\IzvestajServis.cs" />
     <Compile Include="Servisi\KorisnikServis.cs" />
     <Compile Include="Servisi\LekarServis.cs" />
     <Compile Include="Servisi\LekServis.cs" />
+    <Compile Include="Servisi\LoggerServis.cs" />
     <Compile Include="Servisi\ObavestenjeServis.cs" />
     <Compile Include="Servisi\OblastLekaraServis.cs" />
     <Compile Include="Servisi\OdgovorNaZahtevZaValidacijuServis.cs" />
@@ -541,6 +549,7 @@
     <Compile Include="Servisi\RenovacijaServis.cs" />
     <Compile Include="Servisi\SadrzajSobeServis.cs" />
     <Compile Include="Servisi\SastojakServis.cs" />
+    <Compile Include="Servisi\SekretarServis.cs" />
     <Compile Include="Servisi\UpravnikServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
     <Compile Include="ViewModel\Lekar\GlavniMeniViewModel.cs" />
@@ -1247,6 +1256,7 @@
     <Resource Include="Slike\Lekar\star.png" />
     <Resource Include="Datoteke\recenzije.txt" />
     <Resource Include="Slike\Sekretar\review.png" />
+    <Resource Include="Datoteke\logIn.txt" />
     <Content Include="Video\videoTutorijal.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

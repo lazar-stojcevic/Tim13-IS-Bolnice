@@ -11,7 +11,7 @@ namespace IS_Bolnice.Servisi
 {
     class OblastLekaraServis
     {
-        private IOblastLekaraRepozitorijum oblastLekaraRepo = new OblastLekaraFajlRepozitorijum();
+        private IOblastLekaraRepozitorijum oblastLekaraRepo = new Injector().GetOblastLekaraRepozitorijum();
 
         public List<OblastLekara> GetSveOblastiLekara()
         {

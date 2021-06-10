@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.DTOs;
 
 namespace IS_Bolnice
 {
@@ -33,109 +34,47 @@ namespace IS_Bolnice
             kontroler.IzvrsiTransport();
             string korisnik = txtUserId.Text;
             string sifra = txtPassword.Password;
-            IUpravnikRepozitorijum upravnikRepo = new UpravnikFajlRepozitorijum();
-            List<Upravnik> upravnici = new List<Upravnik>();
-            upravnici = upravnikRepo.GetSve();
-            bool found = false;
-            foreach (Upravnik u in upravnici)
+
+            LoggerKontroler kontrolerLogIn = new LoggerKontroler();
+            PacijentKontroler pacijentKontroler = new PacijentKontroler();
+            LogInDTO logIn = kontrolerLogIn.GetKorisnika(korisnik, sifra);
+            if (logIn == null)
             {
-                if (u.KorisnickoIme.Equals(korisnik))
+                MessageBox.Show("Podaci nisu ispravno uneseni");
+            }
+            else
+            {
+
+                switch (logIn.TipKorisnika)
                 {
-                    if (u.Sifra.Equals(sifra))
-                    {
-                        found = true;
-                        UpravnikWindow upravnik = new UpravnikWindow(u);
+                    case "P":
+                        PacijentWindow pacijent = new PacijentWindow();
+                        Pacijent p = pacijentKontroler.GetPacijentSaOvimJMBG(logIn.Jmbg);
+                        pacijent.imeKorisnika.Text = p.Ime + " " + p.Prezime + " " + p.Jmbg;
+                        pacijent.Show();
+                        this.Close();
+                        break;
+                    case "U":
+                        UpravnikWindow upravnik = new UpravnikWindow(logIn.Jmbg);
                         upravnik.Show();
                         this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
-                        found = true;
-                    }
+                        break;
+                    case "L":
+                        Prozori.Prikaz_kod_lekara.LekarFrejm lekar =
+                            new Prozori.Prikaz_kod_lekara.LekarFrejm(logIn.Jmbg);
+                        lekar.Show();
+                        this.Close();
+                        break;
+                    default:
+                        ISekretarRepozitorijum sekretarRepo = new SekretarFajlRepozitorijum();
+                        Prozori.Sekretar.SekretarWindow sekretar =
+                            new Prozori.Sekretar.SekretarWindow(sekretarRepo.GetPoId(logIn.Jmbg));
+                        sekretar.Show();
+                        this.Close();
+                        break;
                 }
             }
 
-            if (found == false)
-            {
-                ISekretarRepozitorijum sekretarRepo = new SekretarFajlRepozitorijum();
-                List<Sekretar> sekretari = new List<Sekretar>();
-                sekretari = sekretarRepo.GetSve();
-                foreach (Sekretar s in sekretari)
-                {
-                    if (s.KorisnickoIme.Equals(korisnik))
-                    {
-                        if (s.Sifra.Equals(sifra))
-                        {
-                            found = true;
-                            Prozori.Sekretar.SekretarWindow sekretar = new Prozori.Sekretar.SekretarWindow(s);
-                            sekretar.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
-                            found = true;
-                        }
-                    }
-                }
-            }
-
-            if (found == false)
-            {
-                LekarFajlRepozitorijum baza3 = new LekarFajlRepozitorijum();
-                List<Lekar> lekari = new List<Lekar>();
-                lekari = baza3.GetSve();
-                foreach (Lekar l in lekari)
-                {
-                    if (l.KorisnickoIme.Equals(korisnik))
-                    {
-                        if (l.Sifra.Equals(sifra))
-                        {
-                            found = true;
-                            Prozori.Prikaz_kod_lekara.LekarFrejm lekar = new Prozori.Prikaz_kod_lekara.LekarFrejm(l.Jmbg);
-                            lekar.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
-                            found = true;
-                        }
-                    }
-                }
-            }
-
-            if (found == false)
-            {
-                IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
-                List<Pacijent> pacijenti = new List<Pacijent>();
-                pacijenti = pacijentRepo.GetSve();
-                foreach (Pacijent p in pacijenti)
-                {
-                    if (p.KorisnickoIme.Equals(korisnik))
-                    {
-                        if (p.Sifra.Equals(sifra))
-                        {
-                            found = true;
-                            PacijentWindow pacijent = new PacijentWindow();
-                            pacijent.imeKorisnika.Text = p.Ime + " " + p.Prezime + " " + p.Jmbg;
-                            pacijent.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Korisnicko ime i sifra se ne poklapaju");
-                            found = true;
-                        }
-                    }
-                }
-            }
-
-            if (found == false)
-            {
-                MessageBox.Show("Korisnicko ime ne postoji!");
-            }
         }
 
         private void btnClose_Click_1(object sender, RoutedEventArgs e)

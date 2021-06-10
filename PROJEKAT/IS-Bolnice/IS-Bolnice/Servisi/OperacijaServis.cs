@@ -12,9 +12,9 @@ namespace IS_Bolnice.Servisi
 {
     class OperacijaServis
     {
-        private IOperacijaRepozitorijum operacijaRepo = new OperacijaFajlRepozitorijum();
-        private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
-        private IBolnicaRepozitorijum bolnicaRepo = new BolnicaFajlRepozitorijum();
+        private IOperacijaRepozitorijum operacijaRepo = new Injector().GetOperacijaRepozitorijum();
+        private ILekarRepozitorijum lekarRepo = new Injector().GetLekarRepozitorijum();
+        private IBolnicaRepozitorijum bolnicaRepo = new Injector().GetBolnicaRepozitorijum();
         private static int DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA = 6;
         private static int BROJ_MINUTA_ZA_HITAN_TERMIN = 60;
 

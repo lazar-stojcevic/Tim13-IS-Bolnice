@@ -9,8 +9,8 @@ namespace IS_Bolnice.Servisi
 {
     class AnketaServis
     {
-        private readonly IAnketaRepozitorijum anketaRepo = new AnketaFajlRepozitorijum();
-        private PreglediFajlRepozitorijum preglediFajlRepozitorijum = new PreglediFajlRepozitorijum();
+        private readonly IAnketaRepozitorijum anketaRepo = new Injector().GetAnketaRepozitorijum();
+        private IPregledRepozitorijum preglediFajlRepozitorijum = new Injector().GetPregledRepozitorijum();
 
         public List<Pregled> GetSviPreglediZaAnketu(string patientJmbg)
         {

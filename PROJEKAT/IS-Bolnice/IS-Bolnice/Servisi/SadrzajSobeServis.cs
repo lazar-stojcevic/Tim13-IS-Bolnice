@@ -10,8 +10,12 @@ namespace IS_Bolnice.Servisi
 {
     class SadrzajSobeServis
     {
-        private ISadrzajSobeRepozitorijum sadrzajSobeRepo = new SadrzajSobeFajlRepozitorijum();
-        private IBolnicaRepozitorijum bolnicaRepozitorijum = new BolnicaFajlRepozitorijum();
+        private ISadrzajSobeRepozitorijum sadrzajSobeRepo = new Injector().GetSadrzajSobeRepozitorijum();
+        private IBolnicaRepozitorijum bolnicaRepozitorijum = new Injector().GetBolnicaRepozitorijum();
+
+        SadrzajSobe sadrzajZaPrenos;
+        Soba sobaUKojuSePrenosi;
+
         public List<SadrzajSobe> GetSadrzajSobe(string idSobe)
         {
             return sadrzajSobeRepo.GetSadrzajSobe(idSobe);
@@ -143,15 +147,13 @@ namespace IS_Bolnice.Servisi
             return new SadrzajSobe();
         }
 
-        SadrzajSobe sadrzajZaPrenos;
-        Soba sobaUKojuSePrenosi;
 
-        public void PrebaciOpremu(SadrzajSobe stariSadrzaj, Soba novaSoba)
+        public bool PrebaciOpremu(SadrzajSobe stariSadrzaj, Soba novaSoba)
         {
             sadrzajZaPrenos = stariSadrzaj;
             sobaUKojuSePrenosi = novaSoba;
             DodajOdabranuKolicinuOpreme();
-            OduzmiOdabranuKolicinuOpreme();
+            return OduzmiOdabranuKolicinuOpreme();
 
         }
 
@@ -171,7 +173,7 @@ namespace IS_Bolnice.Servisi
             sadrzajSobeRepo.Sacuvaj(noviSadrzaj);
         }
 
-        private void OduzmiOdabranuKolicinuOpreme()
+        private bool OduzmiOdabranuKolicinuOpreme()
         {
             List<SadrzajSobe> sadrzajSobe = sadrzajSobeRepo.GetSadrzajSobe(sadrzajZaPrenos.Soba.Id);
             foreach (SadrzajSobe sadrzaj in sadrzajSobe)
@@ -182,13 +184,12 @@ namespace IS_Bolnice.Servisi
                     {
                         sadrzaj.Kolicina = sadrzaj.Kolicina - sadrzajZaPrenos.Kolicina;
                         sadrzajSobeRepo.Izmeni(sadrzaj);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Odabrana kolicina nije validna!");
+                        return true;
                     }
                 }
             }
+
+            return false;
         }
 
         public void PrebaciOpremuUStanjeCekanja(SadrzajSobe sadrzajZaPrenosStaticka)

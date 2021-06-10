@@ -54,6 +54,10 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                     this.NavigationService.GoBack();
                     CustomMessageBox.ShowOK("Renoviranje je uspešno zakazano!", "Upseh", "Potvrdi");
                 }
+                else
+                {
+                    CustomMessageBox.ShowOK("Zakazani termini postoje! Odaberite drugi datum!", "Greska", "Potvrdi");
+                }
             }
             else {
                 MessageBox.Show("Datumi se ne poklapaju logicki");

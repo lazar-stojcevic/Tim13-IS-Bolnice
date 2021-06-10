@@ -11,7 +11,7 @@ namespace IS_Bolnice.Servisi
 {
     class BelezkeServis
     {
-        private IBeleskaRepozitorijum beleskaRepo = new BeleskaFajlRepozitorijum();
+        private IBeleskaRepozitorijum beleskaRepo = new Injector().GetBeleskaRepozitorijum();
 
         public void IzmeniBelezku(Beleska izmenjenaBeleska)
         {

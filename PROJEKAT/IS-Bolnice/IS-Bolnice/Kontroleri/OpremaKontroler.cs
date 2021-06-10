@@ -25,9 +25,9 @@ namespace IS_Bolnice.Kontroleri
             servis.IzmeniPredmet(izmenjenPredmet);
         }
 
-        public void ObrisiPredmet(string idPredmeta)
+        public bool ObrisiPredmet(string idPredmeta)
         {
-            servis.ObrisiPredmet(idPredmeta);
+            return servis.ObrisiPredmet(idPredmeta);
         }
 
         public List<Predmet> GetSvaOprema()

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {
@@ -21,11 +22,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
     public partial class UpravnikWindow : Window
     {
         Upravnik upravnik = new Upravnik();
-
-        public UpravnikWindow(Upravnik ovajUpravnik)
+        private UpravnikKontroler kontroler = new UpravnikKontroler();
+        public UpravnikWindow(string jmbg)
         {
             InitializeComponent();
-            upravnik = ovajUpravnik;
+            upravnik = kontroler.GetByJmbg(jmbg);
             this.frame.NavigationService.Navigate(new NalogPage(upravnik));
         }
 

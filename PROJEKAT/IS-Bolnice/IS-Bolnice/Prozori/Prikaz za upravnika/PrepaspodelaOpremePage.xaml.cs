@@ -83,9 +83,15 @@ namespace IS_Bolnice.Prozori
                 {
                     noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
                     Predmet odabraneOprema = opremaKontroler.GetPoId(noviSadrzaj.Predmet.Id);
+                    bool uspeh = true;
                     if (odabraneOprema.Tip == TipOpreme.dinamicka)
                     {
-                        kontroler.PrebaciOpremu(noviSadrzaj, bolnicaKontroler.GetSobaPoId(sala1_txt.SelectedItem.ToString()));
+                        if (!kontroler.PrebaciOpremu(noviSadrzaj,
+                            bolnicaKontroler.GetSobaPoId(sala1_txt.SelectedItem.ToString())))
+                        {
+                            MessageBox.Show("Odabrana kolicina nije validna!");
+                            uspeh = false;
+                        }
                     }
                     else
                     {
@@ -95,7 +101,7 @@ namespace IS_Bolnice.Prozori
                     listBox1.ItemsSource = sadrzajPrveSobe;
                     sadrzajDrugeSobe = kontroler.GetSadrzajSobe(GetIDProstorije(false));
                     listBox2.ItemsSource = sadrzajDrugeSobe;
-                    CustomMessageBox.ShowOK("Preraspodela je uspešno izvršena", "Upseh", "Potvrdi");
+                    if(uspeh) CustomMessageBox.ShowOK("Preraspodela je uspešno izvršena", "Upseh", "Potvrdi");
                 }
                 else {
                     CustomMessageBox.ShowOK("Količina opreme nije odgovarajuća!", "Greška", "Potvrdi");

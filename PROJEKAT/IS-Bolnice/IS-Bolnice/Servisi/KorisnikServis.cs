@@ -9,10 +9,10 @@ namespace IS_Bolnice.Servisi
 {
     class KorisnikServis
     {
-        private IUpravnikRepozitorijum upravnikRepo = new UpravnikFajlRepozitorijum();
-        private ILekarRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
-        private ISekretarRepozitorijum sekretarRepo = new SekretarFajlRepozitorijum();
-        private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
+        private IUpravnikRepozitorijum upravnikRepo = new Injector().GetUpravnikRepozitorijum();
+        private ILekarRepozitorijum lekarRepo = new Injector().GetLekarRepozitorijum();
+        private ISekretarRepozitorijum sekretarRepo = new Injector().GetSekretarRepozitorijum();
+        private IPacijentRepozitorijum pacijentRepo = new Injector().GetPacijentRepozitorijum();
 
         public bool JedinstvenNoviJmbgKorisnika(string noviJmbg, string stariJmbg)
         {
