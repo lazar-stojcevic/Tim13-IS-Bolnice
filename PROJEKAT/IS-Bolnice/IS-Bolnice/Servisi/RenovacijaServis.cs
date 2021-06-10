@@ -19,6 +19,19 @@ namespace IS_Bolnice.Servisi
         Renovacija novaRenovacija;
         List<Soba> sobeKojeSpajamo;
 
+        public bool SalaNaRenoviranjuUOdredjenomPeriodu(string idSobe, DateTime datum)
+        {
+            foreach (Renovacija renovacijaIter in renovacijaRepo.SveRenovacijeJedneSobe(idSobe))
+            {
+                if (datum > renovacijaIter.DatumPocetka && datum < renovacijaIter.DatumKraja)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public bool RenoviranjeOperacioneSale(Renovacija novaRenovacija)
         {
             OperacijaServis operacijaServis = new OperacijaServis();

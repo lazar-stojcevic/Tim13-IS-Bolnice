@@ -154,7 +154,7 @@
     <value>Potvrid</value>
   </data>
   <data name="btnPregled" xml:space="preserve">
-    <value>Zakaži pregled</value>
+    <value>Zakaži operacija</value>
   </data>
   <data name="btnTerminiOperacija" xml:space="preserve">
     <value>Prikaz termina operacija</value>

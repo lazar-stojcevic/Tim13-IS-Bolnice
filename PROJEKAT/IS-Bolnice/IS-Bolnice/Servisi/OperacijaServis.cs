@@ -54,13 +54,29 @@ namespace IS_Bolnice.Servisi
             return GetSlobodneOperacijeLekaraUNarednomPeriodu(operacija);
         }
 
-        public List<Operacija> GetSlobodneOperacijeLekaraUNarednomPeriodu(OperacijaDTO pregled)
+        public List<Operacija> GetSlobodneOperacijeLekaraUNarednomPeriodu(OperacijaDTO operacija)
         {
-            List<Operacija> sviSkorasnjiTermini = GetSviPredloziTerminaOperacije(pregled);
-            List<Operacija> terminiURadnomVremenu = GetSviTerminiURadnomVremenuLekara(pregled.Lekar, sviSkorasnjiTermini);
+            List<Operacija> sviSkorasnjiTermini = GetSviPredloziTerminaOperacije(operacija);
+            List<Operacija> terminiURadnomVremenu = GetSviTerminiURadnomVremenuLekara(operacija.Lekar, sviSkorasnjiTermini);
             List<Operacija> slobodniTermini = GetSlobodneOperacijeLekara(terminiURadnomVremenu);
+            List<Operacija> terminiZaPrikaz = FiltirajTerminiNaOsnovuRenoviranjeSobe(slobodniTermini, operacija);
 
-            return slobodniTermini;
+            return terminiZaPrikaz;
+        }
+
+        private List<Operacija> FiltirajTerminiNaOsnovuRenoviranjeSobe(List<Operacija> slobodniTermini, OperacijaDTO operacija)
+        {
+            List<Operacija> retVal = new List<Operacija>();
+            foreach (Operacija op in slobodniTermini)
+            {
+                if (!new RenovacijaServis().SalaNaRenoviranjuUOdredjenomPeriodu(operacija.Soba.Id,
+                    op.VremePocetkaOperacije))
+                {
+                    retVal.Add(op);
+                }
+            }
+
+            return retVal;
         }
 
         private List<Operacija> GetSviPredloziTerminaOperacije(OperacijaDTO operacijaDto)
@@ -69,7 +85,7 @@ namespace IS_Bolnice.Servisi
             DateTime najbliziTermin = NajbliziTermin();
 
 
-            for (int i = 0; i < 7200; i += 10)
+            for (int i = 0; i < 4320; i += 10)
             {
                 DateTime pocetakTermina = najbliziTermin.AddMinutes(i);
 
@@ -81,7 +97,7 @@ namespace IS_Bolnice.Servisi
                     Soba = bolnicaRepo.GetSobaById(operacijaDto.Soba.Id),
                     Hitna = true
                 };
-                Console.Write(operacija.Lekar);
+                
                 sveSkorasnjeOperacije.Add(operacija);
             }
             return sveSkorasnjeOperacije;

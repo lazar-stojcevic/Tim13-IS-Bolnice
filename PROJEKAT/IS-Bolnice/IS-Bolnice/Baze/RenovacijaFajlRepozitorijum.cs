@@ -18,14 +18,14 @@ public class RenovacijaFajlRepozitorijum: GenerickiFajlRepozitorijum<Renovacija>
 
     public RenovacijaFajlRepozitorijum() : base(@"..\..\Datoteke\renoviranje.txt") { }
  
-    public List<Renovacija> SveRenovacijeJedneSobe(Soba soba)
+    public List<Renovacija> SveRenovacijeJedneSobe(string id)
     {
         List<Renovacija> sveRenovacije = GetSve();
         List<Renovacija> renovacijeJedneSobe = new List<Renovacija>();
 
         foreach (Renovacija renovacija in sveRenovacije)
         {
-            if (renovacija.ProstorijaZaRenoviranje.Jednaka(soba))
+            if (renovacija.ProstorijaZaRenoviranje.Id.Equals(id))
             {
                 renovacijeJedneSobe.Add(renovacija);
             }

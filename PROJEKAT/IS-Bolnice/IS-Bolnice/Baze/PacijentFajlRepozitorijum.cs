@@ -101,6 +101,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
 
             Pacijent p = new Pacijent();
             p.Jmbg = delovi[0];
+            p.Id = delovi[0];
             p.KorisnickoIme = delovi[1];
             p.Sifra = delovi[2];
             p.Ime = delovi[3];

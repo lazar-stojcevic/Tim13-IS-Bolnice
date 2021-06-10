@@ -21,6 +21,7 @@ namespace IS_Bolnice.Servisi
         private IPregledRepozitorijum pregledRepo = new Injector().GetPregledRepozitorijum();
         private ILekarRepozitorijum lekarRepo = new Injector().GetLekarRepozitorijum();
         private IIzmenaTerminaRepozitorijum izmenaTerminaRepo = new Injector().GetIzmenaTerminaRepozitorijum();
+        private IRenovacijaRepozitorijum renoviranjeRepozitorijum = new Injector().GetRenovacijaRepozitorijum();
 
         public Pregled PostaviPrvogSlobodnogLekaraOpstePrakseNaPregled(Pregled pregled)
         {
@@ -259,7 +260,7 @@ namespace IS_Bolnice.Servisi
             List<Pregled> slobodniTermini = new List<Pregled>();
             foreach (Pregled pregled in pregledi)
             {
-                if (!TerminSePreklapaKodLekara(lekar.Jmbg, pregled))
+                if (!TerminSePreklapaKodLekara(lekar.Jmbg, pregled) && !(new RenovacijaServis().SalaNaRenoviranjuUOdredjenomPeriodu(lekar.Ordinacija.Id, pregled.VremePocetkaPregleda)))
                 {
                     slobodniTermini.Add(pregled);
                 }

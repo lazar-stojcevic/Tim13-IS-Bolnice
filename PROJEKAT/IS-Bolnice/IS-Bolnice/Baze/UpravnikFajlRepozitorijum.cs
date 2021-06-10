@@ -19,6 +19,7 @@ public class UpravnikFajlRepozitorijum : GenerickiFajlRepozitorijum<Upravnik>, I
     {
         Upravnik u = new Upravnik();
         u.Jmbg = podaciEntiteta[0];
+        u.Id = podaciEntiteta[0];
         u.KorisnickoIme = podaciEntiteta[1];
         u.Sifra = podaciEntiteta[2];
         u.Ime = podaciEntiteta[3];

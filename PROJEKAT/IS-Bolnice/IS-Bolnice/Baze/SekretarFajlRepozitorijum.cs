@@ -19,6 +19,7 @@ public class SekretarFajlRepozitorijum : GenerickiFajlRepozitorijum<Sekretar>, I
     {
         Sekretar s = new Sekretar();
         s.Jmbg = podaciEntiteta[0];
+        s.Id = podaciEntiteta[0];
         s.KorisnickoIme = podaciEntiteta[1];
         s.Sifra = podaciEntiteta[2];
         s.Ime = podaciEntiteta[3];

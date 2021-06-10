@@ -8,6 +8,6 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IRenovacijaRepozitorijum: GenerickiRepozitorijum<Renovacija>
     {
-        List<Renovacija> SveRenovacijeJedneSobe(Soba soba);
+        List<Renovacija> SveRenovacijeJedneSobe(string id);
     }
 }
