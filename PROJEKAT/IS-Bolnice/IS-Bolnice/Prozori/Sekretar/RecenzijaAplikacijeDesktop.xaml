@@ -7,23 +7,20 @@
         mc:Ignorable="d"
         Title="Recenzija aplikacije" Height="600" Width="500"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Loaded="OnLoad">
     <Grid>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="494" Margin="0,0,-0.4,0"/>
         <Label Content="Vaše iskustno sa aplikacijom" FontSize="22" HorizontalAlignment="Left" Margin="105,4,0,0" VerticalAlignment="Top" Height="40" Width="288"/>
         <Label Content="Celokupna ocena:"  HorizontalAlignment="Left" Height="34" Margin="10,73,0,0" VerticalAlignment="Top" Width="107"/>
-        <ComboBox x:Name="ocena" FontSize="20" HorizontalAlignment="Left" Height="34" Margin="122,73,0,0" VerticalAlignment="Top" Width="53">
-            <ComboBoxItem Content="1" Tag="1" />
-            <ComboBoxItem Content="2" Tag="2" />
-            <ComboBoxItem Content="3" Tag="3" />
-            <ComboBoxItem Content="4" Tag="4" />
-            <ComboBoxItem Content="5" Tag="5" />
+        <ComboBox x:Name="ocena" FontSize="20" HorizontalAlignment="Left" Height="34" Margin="122,73,0,0" VerticalAlignment="Top" Width="53"
+                  ItemsSource="{Binding PonudjeneOcene}" SelectedItem="{Binding SelektovanaOcena}">
         </ComboBox>
 
-        <TextBox x:Name="opis" HorizontalAlignment="Left" Height="291" Margin="10,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="465"/>
+        <TextBox x:Name="opis" Text="{Binding Opis}" HorizontalAlignment="Left" Height="291" Margin="10,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="465"/>
         <Label Content="Vaše iskustvo sa aplikacijom:"  HorizontalAlignment="Left" Height="34" Margin="10,133,0,0" VerticalAlignment="Top" Width="165"/>
 
-        <Button Content="Potvrdi" HorizontalAlignment="Left" Height="32" Width="92" Margin="37,500,0,0" VerticalAlignment="Top" Click="Button_Click_Potvrdi"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Height="32" Width="92" Margin="358,500,0,0" VerticalAlignment="Top" Click="Button_Click_Close"/>
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Height="32" Width="92" Margin="37,500,0,0" VerticalAlignment="Top" Command="{Binding Path=PotvrdiCommand}"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Height="32" Width="92" Margin="358,500,0,0" VerticalAlignment="Top" Command="{Binding Path=OdustaniCommand}"/>
     </Grid>
 </Window>

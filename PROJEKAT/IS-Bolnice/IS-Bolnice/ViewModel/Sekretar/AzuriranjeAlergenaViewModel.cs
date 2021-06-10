@@ -11,14 +11,12 @@ namespace IS_Bolnice.ViewModel.Sekretar
 {
     class AzuriranjeAlergenaViewModel : ViewModel
     {
+        #region Polja
+
         private Window window;
         private Pacijent pacijentRef;
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private SastojakKontroler sastojakKontroler = new SastojakKontroler();
-        private RelayCommand dodajCommand;
-        private RelayCommand ukloniCommand;
-        private RelayCommand potvrdiCommand;
-        private RelayCommand odustaniCommand;
         private string pacijentTxt;
         private ObservableCollection<string> moguciAlergeniZaDodavanje;
         private ObservableCollection<Sastojak> alergeniPacijenta;
@@ -75,6 +73,15 @@ namespace IS_Bolnice.ViewModel.Sekretar
             }
         }
 
+        #endregion
+
+        #region Komande
+
+        private RelayCommand dodajCommand;
+        private RelayCommand ukloniCommand;
+        private RelayCommand potvrdiCommand;
+        private RelayCommand odustaniCommand;
+
         public RelayCommand DodajCommand
         {
             get { return dodajCommand; }
@@ -111,40 +118,12 @@ namespace IS_Bolnice.ViewModel.Sekretar
             }
         }
 
-        private void AzuriranjeMogucihAlergenaZaDodavanje()
-        {
-            List<Sastojak> sviSastojci = sastojakKontroler.GetSviSastojci();
-            moguciAlergeniZaDodavanje.Clear();
-            foreach (Sastojak sastojak in sviSastojci)
-            {
-                if (!PacijentPosedujeAlergen(sastojak))
-                {
-                    moguciAlergeniZaDodavanje.Add(sastojak.Ime);
-                }
-            }
-
-            MoguciAlergeniZaDodavanje = moguciAlergeniZaDodavanje;
-        }
-
-        private bool PacijentPosedujeAlergen(Sastojak sastojak)
-        {
-            foreach (Sastojak pacijentovAlergen in alergeniPacijenta)
-            {
-                if (sastojak.Isti(pacijentovAlergen))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public void Execute_DodajCommand(object obj)
         {
             if (selektovaniAlergenDodavanje != null)
             {
                 alergeniPacijenta.Add(new Sastojak(selektovaniAlergenDodavanje));
             }
-            //comboAlergeni.SelectedIndex = -1;
             AlergeniPacijenta = alergeniPacijenta;
             AzuriranjeMogucihAlergenaZaDodavanje();
         }
@@ -170,6 +149,35 @@ namespace IS_Bolnice.ViewModel.Sekretar
         public void Execute_OdustaniCommand(object obj)
         {
             window.Close();
+        }
+
+        #endregion
+
+        private void AzuriranjeMogucihAlergenaZaDodavanje()
+        {
+            List<Sastojak> sviSastojci = sastojakKontroler.GetSviSastojci();
+            moguciAlergeniZaDodavanje.Clear();
+            foreach (Sastojak sastojak in sviSastojci)
+            {
+                if (!PacijentPosedujeAlergen(sastojak))
+                {
+                    moguciAlergeniZaDodavanje.Add(sastojak.Ime);
+                }
+            }
+
+            MoguciAlergeniZaDodavanje = moguciAlergeniZaDodavanje;
+        }
+
+        private bool PacijentPosedujeAlergen(Sastojak sastojak)
+        {
+            foreach (Sastojak pacijentovAlergen in alergeniPacijenta)
+            {
+                if (sastojak.Isti(pacijentovAlergen))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public AzuriranjeAlergenaViewModel(Window prosledjenWindow, Pacijent pacijent)

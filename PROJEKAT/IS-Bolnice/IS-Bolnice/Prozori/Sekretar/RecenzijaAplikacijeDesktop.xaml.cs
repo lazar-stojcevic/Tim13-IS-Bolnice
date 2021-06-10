@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Model;
 using IS_Bolnice.Servisi;
+using IS_Bolnice.ViewModel.Sekretar;
 using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Sekretar
@@ -27,28 +28,9 @@ namespace IS_Bolnice.Prozori.Sekretar
             InitializeComponent();
         }
 
-        private void Button_Click_Potvrdi(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Recenzija recenzija = new Recenzija();
-                recenzija.Ocena = Int16.Parse(ocena.Text);
-                recenzija.Opis = opis.Text;
-                new RecenzijaServis().KreirajRecenziju(recenzija);
-                InformativniProzor ip = new InformativniProzor("Uspešno ste poslali recenziju.");
-                ip.ShowDialog();
-                Close();
-            }
-            catch
-            {
-                InformativniProzor ip = new InformativniProzor("Niste selektovali ocenu.");
-                ip.ShowDialog();
-            }
-        }
-
-        private void Button_Click_Close(object sender, RoutedEventArgs e)
-        {
-            Close();
+            this.DataContext = new RecenzijaAplikacijeDesktopViewModel(this);
         }
     }
 }

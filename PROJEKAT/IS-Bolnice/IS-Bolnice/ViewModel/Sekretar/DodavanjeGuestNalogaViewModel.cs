@@ -12,11 +12,11 @@ namespace IS_Bolnice.ViewModel.Sekretar
 {
     class DodavanjeGuestNalogaViewModel : ViewModel
     {
+        #region Polja
+
         private Window window;
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private KorisnikKontroler korisnikKontroler = new KorisnikKontroler();
-        private RelayCommand potvrdiCommand;
-        private RelayCommand odustaniCommand;
         private string ime;
         private string prezime;
         private string jmbg;
@@ -51,6 +51,13 @@ namespace IS_Bolnice.ViewModel.Sekretar
             }
         }
 
+        #endregion
+
+        #region Komande
+
+        private RelayCommand potvrdiCommand;
+        private RelayCommand odustaniCommand;
+
         public RelayCommand PotvrdiCommand
         {
             get { return potvrdiCommand; }
@@ -69,6 +76,25 @@ namespace IS_Bolnice.ViewModel.Sekretar
                 odustaniCommand = value;
             }
         }
+
+        public void Execute_PotvrdiCommand(object obj)
+        {
+            if (MozeDaSeKreira())
+            {
+                Pacijent noviGuestPacijent = new Pacijent(jmbg, ime, prezime);
+                noviGuestPacijent.Guest = true;
+                pacijentKontroler.KreirajPacijenta(noviGuestPacijent);
+                window.Close();
+            }
+        }
+
+        public void Execute_OdustaniCommand(object obj)
+        {
+            window.Close();
+        }
+
+        #endregion
+
 
         private bool PopunjenaObaveznaPolja()
         {
@@ -103,22 +129,6 @@ namespace IS_Bolnice.ViewModel.Sekretar
             }
 
             return true;
-        }
-
-        public void Execute_PotvrdiCommand(object obj)
-        {
-            if (MozeDaSeKreira())
-            {
-                Pacijent noviGuestPacijent = new Pacijent(jmbg, ime, prezime);
-                noviGuestPacijent.Guest = true;
-                pacijentKontroler.KreirajPacijenta(noviGuestPacijent);
-                window.Close();
-            }
-        }
-
-        public void Execute_OdustaniCommand(object obj)
-        {
-            window.Close();
         }
 
         public DodavanjeGuestNalogaViewModel(Window prosledjenWindow)
