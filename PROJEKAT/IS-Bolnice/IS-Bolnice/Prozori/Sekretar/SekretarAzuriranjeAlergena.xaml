@@ -7,20 +7,23 @@
         mc:Ignorable="d"
         Title="Sekretar ažuriranje alergena" Height="450" Width="500"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Loaded="OnLoad">
     <Grid>
         <Label Content="Alergeni za pacijenta " HorizontalAlignment="Left" Margin="7,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.153,0.707" FontWeight="Bold"/>
-        <TextBox Name="pacijentTxt" HorizontalAlignment="Left" Height="23" Margin="151,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>
+        <TextBox x:Name="pacijentTxt" Text="{Binding PacijentTxt}" HorizontalAlignment="Left" Height="23" Margin="151,20,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="170" IsReadOnly="True"/>
         <DataGrid Name="dgAlergeni" ItemsSource="{Binding AlergeniPacijenta}" Margin="10,110,9.6,76" SelectionMode="Single"
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False" SelectedItem="{Binding SelektovaniAlergenUklanjanje}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Alergeni" Binding="{Binding Ime}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="+" HorizontalAlignment="Left" Margin="200,72,0,0" VerticalAlignment="Top" Width="30" Height="25" Click="Button_Click_Dodaj"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="445,72,0,0" VerticalAlignment="Top" Width="30" Height="25" Click="Button_Click_Obrisi"/>
-        <ComboBox Name="comboAlergeni" IsEditable="True" IsTextSearchEnabled="True" HorizontalAlignment="Left" Height="23" Margin="10,72,0,0" VerticalAlignment="Top" Width="170"/>
-        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="52,366,0,0" VerticalAlignment="Top" Width="86" Height="31" Click="Button_Click_Potvrdi"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="345,366,0,0" VerticalAlignment="Top" Width="86" Height="31" Click="Button_Click_Odustani"/>
+        <Button Content="+" HorizontalAlignment="Left" Margin="200,72,0,0" VerticalAlignment="Top" Width="30" Height="25" Command="{Binding Path=DodajCommand}"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="445,72,0,0" VerticalAlignment="Top" Width="30" Height="25" Command="{Binding Path=UkloniCommand}"/>
+        <ComboBox Name="comboAlergeni" ItemsSource="{Binding MoguciAlergeniZaDodavanje}" SelectedItem="{Binding SelektovaniAlergenDodavanje}" IsEditable="True" IsTextSearchEnabled="True" 
+                  HorizontalAlignment="Left" Height="23" Margin="10,72,0,0" VerticalAlignment="Top" Width="170"/>
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="52,366,0,0" VerticalAlignment="Top" Width="86" Height="31" Command="{Binding Path=PotvrdiCommand}"/>
+        <Button Content="Odustani" HorizontalAlignment="Left" Margin="345,366,0,0" VerticalAlignment="Top" Width="86" Height="31" Command="{Binding Path=OdustaniCommand}"/>
     </Grid>
 </Window>
