@@ -23,9 +23,9 @@ namespace IS_Bolnice.Kontroleri
             anketaServis.SacuvajAnketu(anketa);
         }
 
-        public List<Anketa> DobaviSveAnketeLekara()
+        public List<Anketa> GetSveAnketeLekara()
         {
-            return anketaServis.DobaviSveAnketeLekara();
+            return anketaServis.GetSveAnketeLekara();
         }
     }
 }

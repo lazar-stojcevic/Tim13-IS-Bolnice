@@ -15,9 +15,9 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
         "M-d-yyyy h:mm:ss tt"
     };
 
-    public Pacijent DobaviPoJmbg(string jmbg)
+    public Pacijent GetPoJmbg(string jmbg)
     {
-        foreach (Pacijent p in DobaviSve())
+        foreach (Pacijent p in GetSve())
         {
             if (p.Obrisan == false)
             {
@@ -30,7 +30,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
         return null;
     }
 
-    public List<Pacijent> DobaviSve()
+    public List<Pacijent> GetSve()
     {
         List<string> linije = File.ReadAllLines(fileLocation).ToList();
 
@@ -52,7 +52,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
     {
         List<string> pacijentiString = new List<string>();
 
-        foreach (Pacijent p in DobaviSve())
+        foreach (Pacijent p in GetSve())
         {
             if (noviEntitet.Jmbg.Equals(p.Jmbg))
             {
@@ -71,7 +71,7 @@ public class PacijentFajlRepozitorijum : IPacijentRepozitorijum
     {
         List<string> pacijentiString = new List<string>();
 
-        foreach (Pacijent p in DobaviSve())
+        foreach (Pacijent p in GetSve())
         {
             if (p.Jmbg.Equals(jmbg))
             {

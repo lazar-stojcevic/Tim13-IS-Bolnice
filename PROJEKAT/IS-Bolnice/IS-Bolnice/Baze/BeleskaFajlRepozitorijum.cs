@@ -27,7 +27,7 @@ namespace IS_Bolnice.Baze
         public override Beleska KreirajEntitet(string[] podaciEntiteta)
         {
             PacijentFajlRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
-            Pacijent pacijent = pacijentRepo.DobaviPoJmbg(podaciEntiteta[1]);
+            Pacijent pacijent = pacijentRepo.GetPoJmbg(podaciEntiteta[1]);
 
             return new Beleska(podaciEntiteta[0], pacijent, podaciEntiteta[2], FormirajDatumZaCitanje(podaciEntiteta[4]), Int32.Parse(podaciEntiteta[3]),
                 podaciEntiteta[5]);

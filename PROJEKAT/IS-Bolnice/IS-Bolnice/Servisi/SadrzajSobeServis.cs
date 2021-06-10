@@ -24,7 +24,7 @@ namespace IS_Bolnice.Servisi
 
         public bool PostojiOpremaUBolnici(string idPredmeta)
         {
-            List<SadrzajSobe> sadrzajSoba = sadrzajSobeRepo.DobaviSve();
+            List<SadrzajSobe> sadrzajSoba = sadrzajSobeRepo.GetSve();
             foreach (SadrzajSobe sadrzaj in sadrzajSoba)
             {
                 if (sadrzaj.Predmet.Id.Equals(idPredmeta))
@@ -52,7 +52,7 @@ namespace IS_Bolnice.Servisi
 
         private List<SadrzajSobe> SadrzajiUPrenosu()
         {
-            List<SadrzajSobe> sviSadrzaji = sadrzajSobeRepo.DobaviSve();
+            List<SadrzajSobe> sviSadrzaji = sadrzajSobeRepo.GetSve();
             List<SadrzajSobe> sadrzajiUPrenosu = new List<SadrzajSobe>();
             foreach (SadrzajSobe sadrzaj in sviSadrzaji)
             {

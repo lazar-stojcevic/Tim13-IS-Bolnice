@@ -13,17 +13,17 @@ namespace IS_Bolnice.Servisi
 
         public Pacijent GetPacijentSaOvimJMBG(string jmbgPacijenta)
         {
-            return pacijentRepo.DobaviPoJmbg(jmbgPacijenta);
+            return pacijentRepo.GetPoJmbg(jmbgPacijenta);
         }
 
         public List<Pacijent> GetSviPacijenti()
         {
-            return pacijentRepo.DobaviSve();
+            return pacijentRepo.GetSve();
         }
 
         public Pacijent GetPoslednjiDodat()
         {
-            List<Pacijent> pacijenti = pacijentRepo.DobaviSve();
+            List<Pacijent> pacijenti = pacijentRepo.GetSve();
             int index = pacijenti.Count() - 1;
 
             if (index != -1)

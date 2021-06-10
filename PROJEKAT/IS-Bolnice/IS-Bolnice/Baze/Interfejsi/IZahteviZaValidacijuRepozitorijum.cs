@@ -8,6 +8,6 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IZahteviZaValidacijuRepozitorijum : GenerickiRepozitorijum<ZahtevZaValidacijuLeka>
     {
-        List<ZahtevZaValidacijuLeka> DobaviZahteveZaValidacijuZaLekara(string idLekara);
+        List<ZahtevZaValidacijuLeka> GetZahteviZaValidacijuZaLekara(string idLekara);
     }
 }

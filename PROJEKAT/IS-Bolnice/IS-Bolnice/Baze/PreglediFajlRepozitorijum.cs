@@ -29,7 +29,7 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
     public List<Pregled> GetSviPreglediLekara(string jmbgLekara)
     {
         List<Pregled> sviPreglediLekara = new List<Pregled>();
-        foreach (Pregled pregled in DobaviSve())
+        foreach (Pregled pregled in GetSve())
         {
             if (pregled.Lekar.Jmbg.Equals(jmbgLekara))
             {
@@ -43,7 +43,7 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
     public List<Pregled> GetSviBuduciPregledi()
     {
         List<Pregled> sviBuduciPregledi = new List<Pregled>();
-        foreach (Pregled pregled in DobaviSve())
+        foreach (Pregled pregled in GetSve())
         {
             if (pregled.VremePocetkaPregleda > DateTime.Now.AddHours(-1))
             {
@@ -100,10 +100,10 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
     {
         LekarFajlRepozitorijum lekarFajlRepozitorijum = new LekarFajlRepozitorijum();
         PacijentFajlRepozitorijum pacijentFajlRepozitorijum = new PacijentFajlRepozitorijum();
-        Lekar lekar = lekarFajlRepozitorijum.DobaviPoId(podaciEntiteta[2]);
+        Lekar lekar = lekarFajlRepozitorijum.GetPoId(podaciEntiteta[2]);
         Pregled p = new Pregled();
         p.Id = podaciEntiteta[0];
-        Pacijent pac = pacijentFajlRepozitorijum.DobaviPoJmbg(podaciEntiteta[1]);
+        Pacijent pac = pacijentFajlRepozitorijum.GetPoJmbg(podaciEntiteta[1]);
         p.Pacijent = pac;
         p.VremePocetkaPregleda = DateTime.ParseExact(podaciEntiteta[3], vremenskiFormatiCitanje, CultureInfo.InvariantCulture,
             DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
@@ -117,7 +117,7 @@ public class PreglediFajlRepozitorijum : GenerickiFajlRepozitorijum<Pregled>, IP
     public override string KreirajTextZaUpis(Pregled pregled)
     {
         
-        foreach (Lekar lekar in lekarFajlRepozitorijum.DobaviSve())
+        foreach (Lekar lekar in lekarFajlRepozitorijum.GetSve())
         {
             if (lekar.Jmbg.Equals(pregled.Lekar.Jmbg))
             {

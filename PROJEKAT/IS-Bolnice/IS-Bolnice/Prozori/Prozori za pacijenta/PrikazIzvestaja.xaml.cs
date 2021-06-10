@@ -27,8 +27,8 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
             jmbgPacijenta = jmbg;
 
-            listaIzvestaja.ItemsSource = izvestajKontroler.SviIzvestajiPacijenta(jmbgPacijenta);
-            foreach (Izvestaj izvestaj in izvestajKontroler.SviIzvestajiPacijenta(jmbgPacijenta))
+            listaIzvestaja.ItemsSource = izvestajKontroler.GetSviIzvestajiPacijenta(jmbgPacijenta);
+            foreach (Izvestaj izvestaj in izvestajKontroler.GetSviIzvestajiPacijenta(jmbgPacijenta))
             {
                 Console.WriteLine(izvestaj.Lekar.Ime);
                 Console.WriteLine(izvestaj.Lekar.Prezime);

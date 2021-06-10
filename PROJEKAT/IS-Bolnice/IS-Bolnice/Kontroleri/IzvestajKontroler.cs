@@ -16,29 +16,29 @@ namespace IS_Bolnice.Kontroleri
             izvestajServis.KreirajIzvestaj(izvestaj);
         }
 
-        public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)
+        public List<Izvestaj> GetSviIzvestajiPacijenta(string jmbgPacijenta)
         {
-            return izvestajServis.SviIzvestajiPacijenta(jmbgPacijenta);
+            return izvestajServis.GetSviIzvestajiPacijenta(jmbgPacijenta);
         }
 
-        public List<Izvestaj> DobaviSveIzvestaje()
+        public List<Izvestaj> GetSviIzvestaji()
         {
-            return izvestajServis.DobaviSveIzvestaje();
+            return izvestajServis.GetSviIzvestaji();
         }
 
-        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana()
+        public List<Izvestaj> GetSviIzvestajiIzPoslednjihNedeljuDana()
         {
-            return izvestajServis.DobaviSveIzvestajeizPoslednjihNedeljuDana();
+            return izvestajServis.GetSviIzvestajiIzPoslednjihNedeljuDana();
         }
 
-        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana()
+        public List<Izvestaj> GetSviIzvestajiIzPoslednjihMesecDana()
         {
-            return izvestajServis.DobaviSveIzvestajeizPoslednjihMesecDana();
+            return izvestajServis.GetSviIzvestajiIzPoslednjihMesecDana();
         }
 
-        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana()
+        public List<Izvestaj> GetSviIzvestajiIzPoslednjihGodinuDana()
         {
-            return izvestajServis.DobaviSveIzvestajeizPoslednjihGodinuDana();
+            return izvestajServis.GetSviIzvestajiIzPoslednjihGodinuDana();
         }
     }
 }

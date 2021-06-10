@@ -31,9 +31,9 @@ namespace IS_Bolnice.Kontroleri
             lekServis.IzmeniLek(lek);
         }
 
-        public Lek DobaviLekPoId(string idLeka)
+        public Lek GetLekPoId(string idLeka)
         {
-            return lekServis.DobaviLekPoId(idLeka);
+            return lekServis.GetLekPoId(idLeka);
         }
     }
 }

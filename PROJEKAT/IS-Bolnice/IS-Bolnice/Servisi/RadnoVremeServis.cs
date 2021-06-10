@@ -21,7 +21,7 @@ namespace IS_Bolnice.Servisi
         // ne racunaju se dani u nedelji koji su mu neradni
         public int PreracunajBrojIskoriscenihSlobodnihDanaLekara(string jmbgLekara, List<DateTime> noviSlobodniDani)
         {
-            RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.RadnoVremeOdredjenogLekara(jmbgLekara);
+            RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.GetRadnoVremeOdredjenogLekara(jmbgLekara);
 
             int iskorisceniSlobodniDani = 0;
             foreach (var dan in noviSlobodniDani)
@@ -35,14 +35,14 @@ namespace IS_Bolnice.Servisi
             return iskorisceniSlobodniDani;
         }
 
-        public RadnoVremeLekara DobaRadnoVremeLekara(string idLekara)
+        public RadnoVremeLekara GetRadnoVremeLekara(string idLekara)
         {
-            return radnoVremeRepo.RadnoVremeOdredjenogLekara(idLekara);
+            return radnoVremeRepo.GetRadnoVremeOdredjenogLekara(idLekara);
         }
 
         public bool PreklapanjeIntervalaGodisnjegOdmoraLekara(List<DateTime> potencijalniSlobodniDani, string jmbgLekara)
         {
-            RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.RadnoVremeOdredjenogLekara(jmbgLekara);
+            RadnoVremeLekara radnoVremeLekara = radnoVremeRepo.GetRadnoVremeOdredjenogLekara(jmbgLekara);
 
             foreach (var slobodanDan in radnoVremeLekara.SlobodniDani)
             {

@@ -14,7 +14,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Hospitalizacija> GetSveHospitalizacije()
         {
-            return hospitalizacijaRepo.DobaviSve();
+            return hospitalizacijaRepo.GetSve();
         }
 
         public bool KreirajHospitalizaciju(Hospitalizacija hospitalizacija)

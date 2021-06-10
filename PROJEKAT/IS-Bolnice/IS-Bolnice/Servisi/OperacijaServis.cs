@@ -20,7 +20,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Operacija> GetSveOperacije()
         {
-            return operacijaRepo.DobaviSve();
+            return operacijaRepo.GetSve();
         }
 
         public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
@@ -48,22 +48,22 @@ namespace IS_Bolnice.Servisi
             return operacijaRepo.GetSveBuduceOperacijeLekara(jmbgLekara);
         }
 
-        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)
+        public List<Operacija> GetDostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)
         {
-            Lekar lekar = lekarRepo.DobaviPoId(operacija.Lekar.Jmbg);
-            return SlobodneOperacijeLekaraUNarednomPeriodu(operacija);
+            Lekar lekar = lekarRepo.GetPoId(operacija.Lekar.Jmbg);
+            return GetSlobodneOperacijeLekaraUNarednomPeriodu(operacija);
         }
 
-        public List<Operacija> SlobodneOperacijeLekaraUNarednomPeriodu(OperacijaDTO pregled)
+        public List<Operacija> GetSlobodneOperacijeLekaraUNarednomPeriodu(OperacijaDTO pregled)
         {
-            List<Operacija> sviSkorasnjiTermini = SviPredloziTerminaOperacije(pregled);
-            List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(pregled.Lekar, sviSkorasnjiTermini);
-            List<Operacija> slobodniTermini = SlobodneOperacijeLekara(terminiURadnomVremenu);
+            List<Operacija> sviSkorasnjiTermini = GetSviPredloziTerminaOperacije(pregled);
+            List<Operacija> terminiURadnomVremenu = GetSviTerminiURadnomVremenuLekara(pregled.Lekar, sviSkorasnjiTermini);
+            List<Operacija> slobodniTermini = GetSlobodneOperacijeLekara(terminiURadnomVremenu);
 
             return slobodniTermini;
         }
 
-        private List<Operacija> SviPredloziTerminaOperacije(OperacijaDTO operacijaDto)
+        private List<Operacija> GetSviPredloziTerminaOperacije(OperacijaDTO operacijaDto)
         {
             List<Operacija> sveSkorasnjeOperacije = new List<Operacija>();
             DateTime najbliziTermin = NajbliziTermin();
@@ -105,13 +105,12 @@ namespace IS_Bolnice.Servisi
             return true;
         }
 
-        private List<Operacija> SviTerminiURadnomVremenuLekara(Lekar lekar, List<Operacija> operacije)
+        private List<Operacija> GetSviTerminiURadnomVremenuLekara(Lekar lekar, List<Operacija> operacije)
         {
             List<Operacija> operacijeURadnomVremenu = new List<Operacija>();
 
             foreach (Operacija operacija in operacije)
             {
-                // TODO: obrisati ovo formiranje intervala i u operaciju dodati polje za interval
                 VremenskiInterval termin = new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
 
                 if (lekar.TerminURadnomVremenuLekara(termin))
@@ -122,7 +121,7 @@ namespace IS_Bolnice.Servisi
             return operacijeURadnomVremenu;
         }
 
-        private List<Operacija> SlobodneOperacijeLekara(List<Operacija> operacije)
+        private List<Operacija> GetSlobodneOperacijeLekara(List<Operacija> operacije)
         {
             List<Operacija> slobodniTermini = new List<Operacija>();
             foreach (Operacija operacija in operacije)
@@ -235,7 +234,7 @@ namespace IS_Bolnice.Servisi
             return true;
         }
 
-        public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara prosledjenaOblast)
+        public List<Operacija> GetZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara prosledjenaOblast)
         {
             List<Lekar> sviLekariOdredjeneOblasti = lekarRepo.LekariOdredjeneOblasti(prosledjenaOblast.Naziv);
             List<Operacija> skorasnjeOperacijeLekara = new List<Operacija>();
@@ -243,8 +242,8 @@ namespace IS_Bolnice.Servisi
             foreach (Lekar lekar in sviLekariOdredjeneOblasti)
             {
                 List<Operacija> naredneOperacijeLekara = GetSveBuduceOperacijeLekara(lekar.Jmbg);
-                List<Operacija> operacijeKojeNisuHitne = SveOperacijeKojeNisuHitne(naredneOperacijeLekara);
-                skorasnjeOperacijeLekara.AddRange(OperacijeNarednihSatVremena(operacijeKojeNisuHitne));
+                List<Operacija> operacijeKojeNisuHitne = GetSveOperacijeKojeNisuHitne(naredneOperacijeLekara);
+                skorasnjeOperacijeLekara.AddRange(GetOperacijeNarednihSatVremena(operacijeKojeNisuHitne));
                 if (skorasnjeOperacijeLekara.Count > DOVOLJAN_BROJ_ZAKAZANIH_OPERACIJA)
                 {
                     return skorasnjeOperacijeLekara;
@@ -294,7 +293,7 @@ namespace IS_Bolnice.Servisi
             return operacije;
         }
 
-        private List<Operacija> SveOperacijeKojeNisuHitne(List<Operacija> operacije)
+        private List<Operacija> GetSveOperacijeKojeNisuHitne(List<Operacija> operacije)
         {
             List<Operacija> operacijeKojeNisuHitne = new List<Operacija>();
 
@@ -310,7 +309,7 @@ namespace IS_Bolnice.Servisi
         }
 
 
-        private List<Operacija> OperacijeNarednihSatVremena(List<Operacija> operacije)
+        private List<Operacija> GetOperacijeNarednihSatVremena(List<Operacija> operacije)
         {
             List<Operacija> operacijeiNarednihSatVremena = new List<Operacija>();
             DateTime trenutnoVreme = DateTime.Now;
@@ -325,11 +324,11 @@ namespace IS_Bolnice.Servisi
             return operacijeiNarednihSatVremena;
         }
 
-        public List<Operacija> SlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaOperacije)
+        public List<Operacija> GetSlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara prosledjenaOblast, int minutiTrajanjaOperacije)
         {
             foreach (Lekar lekar in lekarRepo.LekariOdredjeneOblasti(prosledjenaOblast.Naziv))
             {
-                List<Operacija> slobodniTerminiLekara = SlobodneHitneOperacijeLekaraSaTrajanjem(lekar, minutiTrajanjaOperacije);
+                List<Operacija> slobodniTerminiLekara = GetSlobodneHitneOperacijeLekaraSaTrajanjem(lekar, minutiTrajanjaOperacije);
                 if (slobodniTerminiLekara.Count > 0)
                 {
                     return slobodniTerminiLekara;
@@ -338,11 +337,11 @@ namespace IS_Bolnice.Servisi
             return null;
         }
 
-        private List<Operacija> SlobodneHitneOperacijeLekaraSaTrajanjem(Lekar lekar, int minutiTrajanjaOperacije)
+        private List<Operacija> GetSlobodneHitneOperacijeLekaraSaTrajanjem(Lekar lekar, int minutiTrajanjaOperacije)
         {
             List<Operacija> sviSkorasnjiTermini = SviPredloziHitnihOperacija(lekar, minutiTrajanjaOperacije);
-            List<Operacija> terminiURadnomVremenu = SviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
-            List<Operacija> slobodniTermini = SlobodneOperacijeLekara(terminiURadnomVremenu);
+            List<Operacija> terminiURadnomVremenu = GetSviTerminiURadnomVremenuLekara(lekar, sviSkorasnjiTermini);
+            List<Operacija> slobodniTermini = GetSlobodneOperacijeLekara(terminiURadnomVremenu);
 
             return slobodniTermini;
         }

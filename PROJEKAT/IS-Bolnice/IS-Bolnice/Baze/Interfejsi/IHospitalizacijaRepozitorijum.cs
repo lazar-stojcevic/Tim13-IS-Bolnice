@@ -8,7 +8,7 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IHospitalizacijaRepozitorijum:GenerickiRepozitorijum<Hospitalizacija>
     {
-        List<Hospitalizacija> DobaviSveHospitalizacijeZaSobu(string sobaID);
+        List<Hospitalizacija> GetSveHospitalizacijeZaSobu(string sobaID);
 
         bool KreirajHospitalizaciju(Hospitalizacija hospitalizacija);
     }

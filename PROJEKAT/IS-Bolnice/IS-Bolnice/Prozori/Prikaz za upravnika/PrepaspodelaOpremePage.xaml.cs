@@ -82,7 +82,7 @@ namespace IS_Bolnice.Prozori
                 if (noviSadrzaj.Kolicina > Int32.Parse(textBox.Text))
                 {
                     noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
-                    Predmet odabraneOprema = opremaKontroler.DobaviPoId(noviSadrzaj.Predmet.Id);
+                    Predmet odabraneOprema = opremaKontroler.GetPoId(noviSadrzaj.Predmet.Id);
                     if (odabraneOprema.Tip == TipOpreme.dinamicka)
                     {
                         kontroler.PrebaciOpremu(noviSadrzaj, bolnicaKontroler.GetSobaPoId(sala1_txt.SelectedItem.ToString()));
@@ -153,7 +153,7 @@ namespace IS_Bolnice.Prozori
                 if (noviSadrzaj.Kolicina > Int32.Parse(textBox.Text))
                 {
                     noviSadrzaj.Kolicina = Int32.Parse(textBox.Text);
-                    Predmet odabraneOprema = opremaKontroler.DobaviPoId(noviSadrzaj.Predmet.Id);
+                    Predmet odabraneOprema = opremaKontroler.GetPoId(noviSadrzaj.Predmet.Id);
                 if (odabraneOprema.Tip == TipOpreme.dinamicka)
                 {
                     kontroler.PrebaciOpremu(noviSadrzaj, bolnicaKontroler.GetSobaPoId(sala2_txt.SelectedItem.ToString()));

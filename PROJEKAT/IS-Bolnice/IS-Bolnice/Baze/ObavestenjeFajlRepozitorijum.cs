@@ -69,7 +69,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
     {
         List<Obavestenje> svaObavestenjaLekara = new List<Obavestenje>();
 
-        foreach (Obavestenje obavestenje in DobaviSve())
+        foreach (Obavestenje obavestenje in GetSve())
         {
             if (obavestenje.Uloge.Contains(Uloge.Lekari))
             {
@@ -84,7 +84,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
     {
         List<Obavestenje> svaObavestenjaPacijenata = new List<Obavestenje>();
 
-        foreach (Obavestenje obavestenje in DobaviSve())
+        foreach (Obavestenje obavestenje in GetSve())
         {
             if (obavestenje.Uloge.Contains(Uloge.Pacijenti))
             {
@@ -99,7 +99,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
     {
         List<Obavestenje> svaObavestenjaPacijenta = SvaObavestenjaPacijenata();
 
-        foreach (Obavestenje obavestenje in DobaviSve())
+        foreach (Obavestenje obavestenje in GetSve())
         {
             foreach (Pacijent p in obavestenje.OdredjeniPacijenti)
             {
@@ -118,7 +118,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
     {
         List<Obavestenje> svaObavestenjaSekretara = new List<Obavestenje>();
 
-        foreach (Obavestenje obavestenje in DobaviSve())
+        foreach (Obavestenje obavestenje in GetSve())
         {
             if (obavestenje.Uloge.Contains(Uloge.Sekretari))
             {
@@ -133,7 +133,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
     {
         List<Obavestenje> svaObavestenjaUpravnika = new List<Obavestenje>();
 
-        foreach (Obavestenje obavestenje in DobaviSve())
+        foreach (Obavestenje obavestenje in GetSve())
         {
             if (obavestenje.Uloge.Contains(Uloge.Upravnici))
             {
@@ -168,7 +168,7 @@ public class ObavestenjeFajlRepozitorijum : GenerickiFajlRepozitorijum<Obavesten
         {
             foreach (string pacijentJMBG in odredjeniPacijenti)
             {
-                sviPacijentiObavestenja.Add(pacijentRepo.DobaviPoJmbg(pacijentJMBG));
+                sviPacijentiObavestenja.Add(pacijentRepo.GetPoJmbg(pacijentJMBG));
             }
         }
         return sviPacijentiObavestenja;

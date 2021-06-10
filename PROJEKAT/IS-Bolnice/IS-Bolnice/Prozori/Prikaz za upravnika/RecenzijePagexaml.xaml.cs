@@ -30,7 +30,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public RecenzijePagexaml(string idLekara)
         {
             InitializeComponent();
-            sveAnketeLekara = kontroler.DobaviSveAnketeLekara();
+            sveAnketeLekara = kontroler.GetSveAnketeLekara();
             listBox.ItemsSource = sveAnketeLekara;
         }
 

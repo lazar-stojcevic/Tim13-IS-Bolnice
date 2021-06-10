@@ -34,7 +34,7 @@ namespace IS_Bolnice.Baze
         {
             List<IzmenaTermina> changesOfPatient = new List<IzmenaTermina>();
 
-            foreach (IzmenaTermina change in DobaviSve())
+            foreach (IzmenaTermina change in GetSve())
             {
                 if (DaLiJeJmbgJednak(change, pacijent))
                 {
@@ -63,7 +63,7 @@ namespace IS_Bolnice.Baze
 
         public void OdblokirajPacijenta(Pacijent pacijent)
         {
-            List<IzmenaTermina> sveIzmene = DobaviSve();
+            List<IzmenaTermina> sveIzmene = GetSve();
             List<IzmenaTermina> filtriraneIzmene = new List<IzmenaTermina>();
 
             foreach (IzmenaTermina izmena in sveIzmene)

@@ -7,6 +7,6 @@ namespace IS_Bolnice.Baze.Interfejsi
     interface IAnketaRepozitorijum : GenerickiRepozitorijum<Anketa>
     {
         List<Anketa> GetSveAnketeBolnice();
-        List<Anketa> DobaviSveAnketeLekara();
+        List<Anketa> GetSveAnketeLekara();
     }
 }

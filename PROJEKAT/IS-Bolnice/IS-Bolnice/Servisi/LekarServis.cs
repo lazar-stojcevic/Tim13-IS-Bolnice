@@ -22,12 +22,12 @@ namespace IS_Bolnice.Servisi
 
         public List<Lekar> GetSviLekari()
         {
-            return lekarRepo.DobaviSve();
+            return lekarRepo.GetSve();
         }
 
         public Lekar GetLekar(string jmbgLekara)
         {
-            return lekarRepo.DobaviPoId(jmbgLekara);
+            return lekarRepo.GetPoId(jmbgLekara);
         }
     }
 }

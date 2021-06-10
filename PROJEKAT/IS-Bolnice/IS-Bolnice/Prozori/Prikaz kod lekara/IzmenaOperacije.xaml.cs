@@ -161,7 +161,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     TrajanjeOperacijeUMinutima = trajanjeOperacije
                 };
 
-                operacije = operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(operacijaDto);
+                operacije = operacijaKontroler.GetDostuptniTerminiLekaraZaDatuProstoriju(operacijaDto);
 
 
 

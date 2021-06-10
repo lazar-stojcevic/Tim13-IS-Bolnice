@@ -25,7 +25,7 @@ namespace IS_Bolnice.Baze
         public List<Anketa> GetSveAnketeBolnice()
         {
             List<Anketa> anketeBolnice = new List<Anketa>();
-            foreach (Anketa anketa in DobaviSve())
+            foreach (Anketa anketa in GetSve())
             {
                 if (anketa.Bolnica != null)
                 {
@@ -35,10 +35,10 @@ namespace IS_Bolnice.Baze
             return anketeBolnice;
         }
 
-        public List<Anketa> DobaviSveAnketeLekara()
+        public List<Anketa> GetSveAnketeLekara()
         {
             List<Anketa> anketeBolnice = new List<Anketa>();
-            foreach (Anketa anketa in DobaviSve())
+            foreach (Anketa anketa in GetSve())
             {
                 if (anketa.Lekar != null)
                 {
@@ -69,7 +69,7 @@ namespace IS_Bolnice.Baze
             survery.Trajanje = FormirajDatumZaCitanje(items[1]);
             survery.Ocena = Int32.Parse(items[2]);
             survery.Komentar = items[3];
-            survery.Pacijent = pacijentRepo.DobaviPoJmbg(items[4]);
+            survery.Pacijent = pacijentRepo.GetPoJmbg(items[4]);
             survery.Lekar = doctor;
             survery.Lekar.Jmbg = items[5];
             return survery;
@@ -82,7 +82,7 @@ namespace IS_Bolnice.Baze
             survery.Trajanje = FormirajDatumZaCitanje(items[1]);
             survery.Ocena = Int32.Parse(items[2]);
             survery.Komentar = items[3];
-            survery.Pacijent = pacijentRepo.DobaviPoJmbg(items[4]);
+            survery.Pacijent = pacijentRepo.GetPoJmbg(items[4]);
             survery.Bolnica = hospital;
             survery.Bolnica.Ime = items[5];
             return survery;

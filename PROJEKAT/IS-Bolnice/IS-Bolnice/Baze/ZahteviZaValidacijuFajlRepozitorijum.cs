@@ -27,14 +27,14 @@ public class ZahteviZaValidacijuFajlRepozitorijum : GenerickiFajlRepozitorijum<Z
 
         p.PotrebanRecept = PostaviDaLiJePotrebanRecept(podaciEntiteta[3]);
 
-        p.Alergeni = DobaviAlergeneLeka(podaciEntiteta[4]);
+        p.Alergeni = GetAlergeniLeka(podaciEntiteta[4]);
 
-        p.ZamenskiLekovi = DobaviZamenskeLekove(podaciEntiteta[5]);
+        p.ZamenskiLekovi = GetZamenskiLekovi(podaciEntiteta[5]);
 
         ZahtevZaValidacijuLeka zahtev = new ZahtevZaValidacijuLeka(p);
 
         string[] idLekara = podaciEntiteta[6].Split('-');
-        foreach (Lekar lekarIter in new LekarFajlRepozitorijum().DobaviSve())
+        foreach (Lekar lekarIter in new LekarFajlRepozitorijum().GetSve())
         {
             foreach (string id in idLekara)
             {
@@ -68,7 +68,7 @@ public class ZahteviZaValidacijuFajlRepozitorijum : GenerickiFajlRepozitorijum<Z
         return novaLinija;
     }
 
-    private List<Lek> DobaviZamenskeLekove(string podaciEntiteta)
+    private List<Lek> GetZamenskiLekovi(string podaciEntiteta)
     {
         List<Lek> zamenskiLekovi = new List<Lek>();
         if (!podaciEntiteta.Equals(""))
@@ -77,7 +77,7 @@ public class ZahteviZaValidacijuFajlRepozitorijum : GenerickiFajlRepozitorijum<Z
             foreach (string deo in zameskiLek)
             {
                 Lek lek = new Lek(deo);
-                foreach (Lek lekIter in new LekFajlRepozitorijum().DobaviSve())
+                foreach (Lek lekIter in new LekFajlRepozitorijum().GetSve())
                 {
                     if (deo.Equals(lekIter.Id))
                     {
@@ -92,7 +92,7 @@ public class ZahteviZaValidacijuFajlRepozitorijum : GenerickiFajlRepozitorijum<Z
         return zamenskiLekovi;
     }
 
-    private List<Sastojak> DobaviAlergeneLeka(string podaciEntiteta)
+    private List<Sastojak> GetAlergeniLeka(string podaciEntiteta)
     {
         List<Sastojak> listaAlergena = new List<Sastojak>();
         if (!podaciEntiteta.Equals(""))
@@ -175,11 +175,11 @@ public class ZahteviZaValidacijuFajlRepozitorijum : GenerickiFajlRepozitorijum<Z
         return novaLinija;
     }
 
-    public List<ZahtevZaValidacijuLeka> DobaviZahteveZaValidacijuZaLekara(string idLekara)
+    public List<ZahtevZaValidacijuLeka> GetZahteviZaValidacijuZaLekara(string idLekara)
     {
         List<ZahtevZaValidacijuLeka> povratnaVrednost = new List<ZahtevZaValidacijuLeka>();
 
-        foreach (ZahtevZaValidacijuLeka zahtev in DobaviSve())
+        foreach (ZahtevZaValidacijuLeka zahtev in GetSve())
         {
             foreach (Lekar lekar in zahtev.lekariKomeIdeNaValidaciju)
             {

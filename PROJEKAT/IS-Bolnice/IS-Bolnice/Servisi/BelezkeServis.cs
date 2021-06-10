@@ -23,11 +23,11 @@ namespace IS_Bolnice.Servisi
             beleskaRepo.Sacuvaj(beleska);
         }
 
-        public List<Beleska> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
+        public List<Beleska> GetSveTrenutneBelezkePacijenta(string jmbgPacijenta)
         {
             List<Beleska> pacijentoveBelezke = new List<Beleska>();
 
-            foreach (Beleska belezka in beleskaRepo.DobaviSve())
+            foreach (Beleska belezka in beleskaRepo.GetSve())
             {
                 if (TrajeLiBelezka(belezka) && belezka.Pacijent.Jmbg == jmbgPacijenta)
                 {

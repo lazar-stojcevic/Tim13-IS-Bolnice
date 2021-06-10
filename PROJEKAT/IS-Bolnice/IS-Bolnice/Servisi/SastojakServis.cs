@@ -13,7 +13,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Sastojak> GetSviSastojci()
         {
-            return sastojakRepo.DobaviSve();
+            return sastojakRepo.GetSve();
         }
 
         internal void KreirajNoviSastojak(Sastojak noviSastojak)

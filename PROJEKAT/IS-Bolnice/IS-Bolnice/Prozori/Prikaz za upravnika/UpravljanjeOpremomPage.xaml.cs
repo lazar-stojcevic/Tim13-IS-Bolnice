@@ -27,7 +27,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         public UpravljanjeOpremomPage()
         {
             InitializeComponent();
-            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            List<Predmet> predmeti = kontroler.GetSvaOprema();
             svaOprema.Clear();
             foreach (Predmet predmet in predmeti)
             {
@@ -43,7 +43,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         {
             bool svaOpremaSelektovana = SelectovanaSvaOprema();
             TipOpreme tip = SelektovaniTipOpreme();
-            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            List<Predmet> predmeti = kontroler.GetSvaOprema();
             svaOprema.Clear();
             foreach (Predmet predmet in predmeti)
             {
@@ -87,7 +87,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
 
         private void search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            List<Predmet> predmeti = kontroler.GetSvaOprema();
             svaOprema.Clear();
             foreach (Predmet predmet in predmeti)
             {

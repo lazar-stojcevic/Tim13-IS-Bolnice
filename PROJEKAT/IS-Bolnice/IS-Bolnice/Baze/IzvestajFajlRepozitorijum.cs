@@ -23,7 +23,7 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
     {
         List<Izvestaj> izvestajiPacijenta = new List<Izvestaj>();
 
-        foreach (Izvestaj izvestaj in DobaviSve())
+        foreach (Izvestaj izvestaj in GetSve())
         {
             if (izvestaj.Pacijent.Jmbg == jmbgPacijenta)
             {
@@ -34,11 +34,11 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
         return izvestajiPacijenta;
     }
 
-    public List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana()
+    public List<Izvestaj> GetSviIzvestajiIzPoslednjihNedeljuDana()
     {
         List<Izvestaj> retVal = new List<Izvestaj>();
 
-        foreach (Izvestaj izvestaj in DobaviSve())
+        foreach (Izvestaj izvestaj in GetSve())
         {
             if (izvestaj.DatumKreiranja > DateTime.Now.AddDays(-7))
             {
@@ -49,11 +49,11 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
         return retVal;
     }
 
-    public List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana()
+    public List<Izvestaj> GetSviIzvestajiIzPoslednjihMesecDana()
     {
         List<Izvestaj> retVal = new List<Izvestaj>();
 
-        foreach (Izvestaj izvestaj in DobaviSve())
+        foreach (Izvestaj izvestaj in GetSve())
         {
             if (izvestaj.DatumKreiranja > DateTime.Now.AddMonths(-1))
             {
@@ -64,11 +64,11 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
         return retVal;
     }
 
-    public List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana()
+    public List<Izvestaj> GetSviIzvestajiIzPoslednjihGodinuDana()
     {
         List<Izvestaj> retVal = new List<Izvestaj>();
 
-        foreach (Izvestaj izvestaj in DobaviSve())
+        foreach (Izvestaj izvestaj in GetSve())
         {
             if (izvestaj.DatumKreiranja > DateTime.Now.AddYears(-1))
             {
@@ -83,8 +83,8 @@ public class IzvestajFajlRepozitorijum: GenerickiFajlRepozitorijum<Izvestaj>, II
     {
         LekarFajlRepozitorijum lekarRepo = new LekarFajlRepozitorijum();
         PacijentFajlRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
-        Lekar lekar = lekarRepo.DobaviPoId(podaciEntiteta[1]);
-        Pacijent pacijent = pacijentRepo.DobaviPoJmbg(podaciEntiteta[2]);
+        Lekar lekar = lekarRepo.GetPoId(podaciEntiteta[1]);
+        Pacijent pacijent = pacijentRepo.GetPoJmbg(podaciEntiteta[2]);
 
         List<Terapija> terapije = NapraviTerapijeOdLinije(podaciEntiteta[5]);
 

@@ -15,7 +15,7 @@ namespace IS_Bolnice.Servisi
 
         public List<OblastLekara> GetSveOblastiLekara()
         {
-            return oblastLekaraRepo.DobaviSve();
+            return oblastLekaraRepo.GetSve();
         }
     }
 }

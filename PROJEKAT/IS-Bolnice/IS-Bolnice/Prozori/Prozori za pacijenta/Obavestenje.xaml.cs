@@ -29,7 +29,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             InitializeComponent();
             jmbgPacijenta = jmbg;
 
-            listaObavestenja.ItemsSource = belezkaKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
+            listaObavestenja.ItemsSource = belezkaKontroler.GetSveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
         private void kreirajBelezku_Click(object sender, RoutedEventArgs e)
@@ -66,7 +66,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             Beleska beleskaZaBrisanje = (Beleska)listaObavestenja.SelectedItem;
             belezkaKontroler.ObrisiBelezku(beleskaZaBrisanje.Id);
             poljeZaIspis.Text = "";
-            listaObavestenja.ItemsSource = belezkaKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
+            listaObavestenja.ItemsSource = belezkaKontroler.GetSveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
         private void izmeniBelezku_Click(object sender, RoutedEventArgs e)

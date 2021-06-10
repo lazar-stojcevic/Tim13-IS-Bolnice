@@ -152,11 +152,11 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                 IzvestajKontroler izvestajKontroler = new IzvestajKontroler();
                 List<Izvestaj> sviIzvetaji = new List<Izvestaj>();
                 if ((bool)mesecDana.IsChecked)
-                    sviIzvetaji = izvestajKontroler.DobaviSveIzvestajeizPoslednjihMesecDana();
+                    sviIzvetaji = izvestajKontroler.GetSviIzvestajiIzPoslednjihMesecDana();
                 if ((bool)nedeljuDana.IsChecked)
-                    sviIzvetaji = izvestajKontroler.DobaviSveIzvestajeizPoslednjihNedeljuDana();
+                    sviIzvetaji = izvestajKontroler.GetSviIzvestajiIzPoslednjihNedeljuDana();
                 if ((bool)godinuDana.IsChecked)
-                    sviIzvetaji = izvestajKontroler.DobaviSveIzvestajeizPoslednjihGodinuDana();
+                    sviIzvetaji = izvestajKontroler.GetSviIzvestajiIzPoslednjihGodinuDana();
 
 
                 LekKontroler lekKontroler = new LekKontroler();
@@ -190,7 +190,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
                 foreach (KeyValuePair<string, int> iterLek in lekovi)
                 {
-                    Lek lek = lekKontroler.DobaviLekPoId(iterLek.Key);
+                    Lek lek = lekKontroler.GetLekPoId(iterLek.Key);
                     tabelaLekova.AddCell(lek.Ime);
                     tabelaLekova.AddCell(lek.Opis);
                     tabelaLekova.AddCell(iterLek.Value.ToString());

@@ -35,7 +35,7 @@ namespace IS_Bolnice
             string sifra = txtPassword.Password;
             IUpravnikRepozitorijum upravnikRepo = new UpravnikFajlRepozitorijum();
             List<Upravnik> upravnici = new List<Upravnik>();
-            upravnici = upravnikRepo.DobaviSve();
+            upravnici = upravnikRepo.GetSve();
             bool found = false;
             foreach (Upravnik u in upravnici)
             {
@@ -60,7 +60,7 @@ namespace IS_Bolnice
             {
                 ISekretarRepozitorijum sekretarRepo = new SekretarFajlRepozitorijum();
                 List<Sekretar> sekretari = new List<Sekretar>();
-                sekretari = sekretarRepo.DobaviSve();
+                sekretari = sekretarRepo.GetSve();
                 foreach (Sekretar s in sekretari)
                 {
                     if (s.KorisnickoIme.Equals(korisnik))
@@ -85,7 +85,7 @@ namespace IS_Bolnice
             {
                 LekarFajlRepozitorijum baza3 = new LekarFajlRepozitorijum();
                 List<Lekar> lekari = new List<Lekar>();
-                lekari = baza3.DobaviSve();
+                lekari = baza3.GetSve();
                 foreach (Lekar l in lekari)
                 {
                     if (l.KorisnickoIme.Equals(korisnik))
@@ -110,7 +110,7 @@ namespace IS_Bolnice
             {
                 IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
                 List<Pacijent> pacijenti = new List<Pacijent>();
-                pacijenti = pacijentRepo.DobaviSve();
+                pacijenti = pacijentRepo.GetSve();
                 foreach (Pacijent p in pacijenti)
                 {
                     if (p.KorisnickoIme.Equals(korisnik))

@@ -25,8 +25,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             InitializeComponent();
             OdgovorNaZahtevFajlRepozitorijum baza = new OdgovorNaZahtevFajlRepozitorijum();
-            noviLek = baza.DobaviPoId(idLeka).Lek;
-            opis_txt.Text = baza.DobaviPoId(idLeka).Obrazlozenje;
+            noviLek = baza.GetPoId(idLeka).Lek;
+            opis_txt.Text = baza.GetPoId(idLeka).Obrazlozenje;
         }
 
         private void Promeni_btn_Click(object sender, RoutedEventArgs e)

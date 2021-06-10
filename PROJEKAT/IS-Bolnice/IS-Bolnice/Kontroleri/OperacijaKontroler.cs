@@ -42,9 +42,9 @@ namespace IS_Bolnice.Kontroleri
             return operacijaServis.GetSveBuduceOperacijeSale(idSale);
         }
 
-        public List<Operacija> DostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)
+        public List<Operacija> GetDostuptniTerminiLekaraZaDatuProstoriju(OperacijaDTO operacija)
         {
-            return operacijaServis.DostuptniTerminiLekaraZaDatuProstoriju(operacija);
+            return operacijaServis.GetDostuptniTerminiLekaraZaDatuProstoriju(operacija);
         }
 
         public bool IzmeniOperaciju(Operacija novaOperacija)
@@ -67,15 +67,15 @@ namespace IS_Bolnice.Kontroleri
             operacijaServis.OdloziOperacijuStoPre(pomeranaOperacija);
         }
 
-        public List<Operacija> ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara oblastLekara)
+        public List<Operacija> GetZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(OblastLekara oblastLekara)
         {
-            return operacijaServis.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara);
+            return operacijaServis.GetZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara);
         }
 
-        public List<Operacija> SlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara oblastLekara,
+        public List<Operacija> GetSlobodneHitneOperacijeLekaraOdredjeneOblasti(OblastLekara oblastLekara,
             int minutiTrajanjaOperacije)
         {
-            return operacijaServis.SlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaOperacije);
+            return operacijaServis.GetSlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaOperacije);
         }
 
         public int[] BrojOperacijaKodLekaraZaPetMeseci(string idLekara)

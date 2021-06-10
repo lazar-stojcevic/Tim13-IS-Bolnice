@@ -38,7 +38,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             try
             {
                 PreglediLekara.Clear();
-                foreach (var pregled in pregledKontroler.SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu())
+                foreach (var pregled in pregledKontroler.GetSlobodniPreglediLekaraOpstePrakseUNarednomPeriodu())
                 {
                     PreglediLekara.Add(pregled);
                 }

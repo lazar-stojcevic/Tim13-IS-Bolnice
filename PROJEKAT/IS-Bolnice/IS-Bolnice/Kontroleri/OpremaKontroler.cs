@@ -15,9 +15,9 @@ namespace IS_Bolnice.Kontroleri
             servis.KreirajNoviPredmet(noviPredmet);
         }
 
-        public Predmet DobaviPoId(string idOpreme)
+        public Predmet GetPoId(string idOpreme)
         {
-            return servis.DodaviPoID(idOpreme);
+            return servis.GetPoId(idOpreme);
         }
 
         public void IzmeniPredmet(Predmet izmenjenPredmet)
@@ -30,9 +30,9 @@ namespace IS_Bolnice.Kontroleri
             servis.ObrisiPredmet(idPredmeta);
         }
 
-        public List<Predmet> DobaviSvuOpremu()
+        public List<Predmet> GetSvaOprema()
         {
-            return servis.DobaviSvuOpremu();
+            return servis.GetSvaOprema();
         }
     }
 }

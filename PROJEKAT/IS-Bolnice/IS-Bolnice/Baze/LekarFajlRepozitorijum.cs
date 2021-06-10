@@ -16,7 +16,7 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
     public List<Lekar> GetSviLekariOpstePrakse()
     {
         List<Lekar> listaSvihLekaraOpstePrakse = new List<Lekar>();
-        foreach (Lekar lekar in DobaviSve())
+        foreach (Lekar lekar in GetSve())
         {
             if (lekar.JelLekarOpstePrakse())
             {
@@ -30,7 +30,7 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
     public List<Lekar> GetSviLekariSpecijalisti()
     {
         List<Lekar> listaSvihLekara = new List<Lekar>();
-        foreach (Lekar lekar in DobaviSve())
+        foreach (Lekar lekar in GetSve())
         {
             if (!lekar.JelLekarOpstePrakse())
             {
@@ -44,7 +44,7 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
     public List<Lekar> LekariOdredjeneOblasti(string trazenaOblast)
     {
         List<Lekar> lekariOdredjeneOblasti = new List<Lekar>();
-        List<Lekar> sviLekari = DobaviSve();
+        List<Lekar> sviLekari = GetSve();
 
         foreach (Lekar lekar in sviLekari)
         {
@@ -66,7 +66,7 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
         lekar.Oblast = new OblastLekara(delovi[3]);
         lekar.KorisnickoIme = delovi[4];
         lekar.Sifra = delovi[5];
-        lekar.RadnoVreme = radnoVremeRepo.RadnoVremeOdredjenogLekara(delovi[0]);
+        lekar.RadnoVreme = radnoVremeRepo.GetRadnoVremeOdredjenogLekara(delovi[0]);
         lekar.Ordinacija = new Soba(delovi[6]);
         return lekar;
     }

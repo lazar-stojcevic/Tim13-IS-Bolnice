@@ -47,7 +47,7 @@ namespace IS_Bolnice.Servisi
         public bool RenovirajBolnickuSobu(Renovacija novaRenovacija)
         {
             IHospitalizacijaRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
-            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.DobaviSveHospitalizacijeZaSobu(novaRenovacija.ProstorijaZaRenoviranje.Id))
+            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.GetSveHospitalizacijeZaSobu(novaRenovacija.ProstorijaZaRenoviranje.Id))
             {
                 if (hospitalizacija.PocetakHospitalizacije > novaRenovacija.DatumPocetka && hospitalizacija.KrajHospitalizacije < novaRenovacija.DatumKraja)
                 {
@@ -182,7 +182,7 @@ namespace IS_Bolnice.Servisi
         private bool ProveraBolnickeSobe(string idSobe)
         {
             HospitalizacijaFajlRepozitorijum hospitalizacijaFajlRepozitorijum = new HospitalizacijaFajlRepozitorijum();
-            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.DobaviSveHospitalizacijeZaSobu(idSobe))
+            foreach (Hospitalizacija hospitalizacija in hospitalizacijaFajlRepozitorijum.GetSveHospitalizacijeZaSobu(idSobe))
                 {
                     if (hospitalizacija.PocetakHospitalizacije > novaRenovacija.DatumPocetka)
                     {

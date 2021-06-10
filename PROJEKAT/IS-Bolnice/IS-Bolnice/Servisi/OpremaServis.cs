@@ -15,10 +15,10 @@ namespace IS_Bolnice.Servisi
         {
             opremaRepo.Sacuvaj(noviPredmet);
         }
-        public Predmet DodaviPoID(string idOpreme)
+        public Predmet GetPoId(string idOpreme)
         {
 
-            return opremaRepo.DobaviPoId(idOpreme);
+            return opremaRepo.GetPoId(idOpreme);
         }
 
         public void IzmeniPredmet(Predmet izmenjenPredmet)
@@ -29,7 +29,7 @@ namespace IS_Bolnice.Servisi
         public void ObrisiPredmet(string idPredmeta)
         {
             SadrzajSobeServis sadrzajSobeServis = new SadrzajSobeServis();
-            Predmet predmetZaBrisanje = opremaRepo.DobaviPoId(idPredmeta);
+            Predmet predmetZaBrisanje = opremaRepo.GetPoId(idPredmeta);
             if (!sadrzajSobeServis.PostojiOpremaUBolnici(idPredmeta))
             {
                 predmetZaBrisanje.Obrisano = true;
@@ -42,9 +42,9 @@ namespace IS_Bolnice.Servisi
             }
         }
 
-        public List<Predmet> DobaviSvuOpremu()
+        public List<Predmet> GetSvaOprema()
         {
-            return opremaRepo.DobaviSve();
+            return opremaRepo.GetSve();
         }
     }
 }

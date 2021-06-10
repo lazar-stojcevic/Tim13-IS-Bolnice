@@ -13,7 +13,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Lek> GetSviLekovi()
         {
-            return lekRepo.DobaviSve();
+            return lekRepo.GetSve();
         }
 
         public void ObrisiLek(Lek lek)
@@ -31,9 +31,9 @@ namespace IS_Bolnice.Servisi
             lekRepo.Izmeni(lek);
         }
 
-        public Lek DobaviLekPoId(string idLeka)
+        public Lek GetLekPoId(string idLeka)
         {
-            return lekRepo.DobaviPoId(idLeka);
+            return lekRepo.GetPoId(idLeka);
         }
     }
 }

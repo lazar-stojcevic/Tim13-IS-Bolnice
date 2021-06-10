@@ -22,9 +22,9 @@ namespace IS_Bolnice.Kontroleri
             belezkeServis.SacuvajBelezku(beleska);
         }
 
-        public List<Beleska> SveTrenutneBelezkePacijenta(string jmbgPacijenta)
+        public List<Beleska> GetSveTrenutneBelezkePacijenta(string jmbgPacijenta)
         {
-            return belezkeServis.SveTrenutneBelezkePacijenta(jmbgPacijenta);
+            return belezkeServis.GetSveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
         public void ObrisiBelezku(string idBeleske)

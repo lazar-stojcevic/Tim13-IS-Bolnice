@@ -23,9 +23,9 @@ namespace IS_Bolnice.Kontroleri
             odgovorNaZahtevServis.ObrisiOdgovorNaZahtev(odgovor);
         }
 
-        public List<OdgovorNaZahtevZaValidaciju> DobaviSve()
+        public List<OdgovorNaZahtevZaValidaciju> GetSve()
         {
-            return odgovorNaZahtevServis.DobaviSve();
+            return odgovorNaZahtevServis.GetSve();
         }
     }
 }

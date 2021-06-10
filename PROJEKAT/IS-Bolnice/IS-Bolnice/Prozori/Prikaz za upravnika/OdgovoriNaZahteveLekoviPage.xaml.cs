@@ -27,13 +27,13 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public OdgovoriNaZahteveLekoviPage()
         {
             InitializeComponent();
-            odgovori = kontroler.DobaviSve();
+            odgovori = kontroler.GetSve();
             listBox.ItemsSource = odgovori;
         }
 
         public List<string> ParseToString() {
             OdgovorNaZahtevFajlRepozitorijum baza = new OdgovorNaZahtevFajlRepozitorijum();
-            List<OdgovorNaZahtevZaValidaciju> odgovoriNaZahteve = baza.DobaviSve();
+            List<OdgovorNaZahtevZaValidaciju> odgovoriNaZahteve = baza.GetSve();
             List<string> linije = new List<string>();
             foreach (OdgovorNaZahtevZaValidaciju odgovor in odgovoriNaZahteve) {
                 string linija = "ID: " + odgovor.Lek.Id + " Naziv: " + odgovor.Lek.Ime;

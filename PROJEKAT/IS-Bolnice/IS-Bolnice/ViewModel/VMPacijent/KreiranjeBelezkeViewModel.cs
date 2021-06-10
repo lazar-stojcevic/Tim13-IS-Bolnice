@@ -137,7 +137,7 @@ namespace IS_Bolnice.ViewModel.VMPacijent
         private void OsveziPrikaz()
         {
             if (listaZaOsvezavanje != null)
-                listaZaOsvezavanje.ItemsSource = belezkeKontroler.SveTrenutneBelezkePacijenta(jmbgPacijenta);
+                listaZaOsvezavanje.ItemsSource = belezkeKontroler.GetSveTrenutneBelezkePacijenta(jmbgPacijenta);
         }
 
         private Beleska NapraviBelesku()

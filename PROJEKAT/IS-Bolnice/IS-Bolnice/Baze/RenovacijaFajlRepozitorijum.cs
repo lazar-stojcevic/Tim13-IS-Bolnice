@@ -20,7 +20,7 @@ public class RenovacijaFajlRepozitorijum: GenerickiFajlRepozitorijum<Renovacija>
  
     public List<Renovacija> SveRenovacijeJedneSobe(Soba soba)
     {
-        List<Renovacija> sveRenovacije = DobaviSve();
+        List<Renovacija> sveRenovacije = GetSve();
         List<Renovacija> renovacijeJedneSobe = new List<Renovacija>();
 
         foreach (Renovacija renovacija in sveRenovacije)

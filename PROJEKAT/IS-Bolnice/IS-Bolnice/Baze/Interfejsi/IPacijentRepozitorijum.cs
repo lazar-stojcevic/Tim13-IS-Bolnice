@@ -8,9 +8,9 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IPacijentRepozitorijum
     {
-        List<Pacijent> DobaviSve();
+        List<Pacijent> GetSve();
 
-        Pacijent DobaviPoJmbg(string jmbg);
+        Pacijent GetPoJmbg(string jmbg);
 
         void Sacuvaj(Pacijent noviEntitet);
 

@@ -29,7 +29,7 @@ public class SadrzajSobeFajlRepozitorijum: GenerickiFajlRepozitorijum<SadrzajSob
         Soba soba = new Soba();
         soba.Id = podaciEntiteta[0];
         OpremaFajlRepozitorijum opremaFajlRepozitorijum = new OpremaFajlRepozitorijum();
-        Predmet predmet = opremaFajlRepozitorijum.DobaviPoId(podaciEntiteta[1]);
+        Predmet predmet = opremaFajlRepozitorijum.GetPoId(podaciEntiteta[1]);
         Soba novaSoba = new Soba();
         SadrzajSobe s;
         if (!podaciEntiteta[3].Equals(""))
@@ -62,7 +62,7 @@ public class SadrzajSobeFajlRepozitorijum: GenerickiFajlRepozitorijum<SadrzajSob
     {
 
         List<SadrzajSobe> sadrzajSobe = new List<SadrzajSobe>();
-        List<SadrzajSobe> sadrzajSvihSoba = DobaviSve();
+        List<SadrzajSobe> sadrzajSvihSoba = GetSve();
         foreach (SadrzajSobe sadrzaj in sadrzajSvihSoba)
         {
             if (sadrzaj.Soba.Id.Equals(idSobe) && sadrzaj.NovaSoba == null)
@@ -76,7 +76,7 @@ public class SadrzajSobeFajlRepozitorijum: GenerickiFajlRepozitorijum<SadrzajSob
     public List<SadrzajSobe> GetDinamickiSadrzajSobe(string idSobe)
     {
         List<SadrzajSobe> sadrzajSobe = new List<SadrzajSobe>();
-        List<SadrzajSobe> sadrzajSvihSoba = DobaviSve();
+        List<SadrzajSobe> sadrzajSvihSoba = GetSve();
         foreach (SadrzajSobe sadrzaj in sadrzajSvihSoba)
         {
             if (sadrzaj.Soba.Id.Equals(idSobe) && sadrzaj.NovaSoba == null && sadrzaj.Predmet.Tip.Equals(TipOpreme.dinamicka))

@@ -71,7 +71,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public List<string> ParseSastojakToString()
         {
             ISastojakRepozitorijum sastojakRepo = new SastojakFajlRepozitorijum();
-            List<Sastojak> sastojci = sastojakRepo.DobaviSve();
+            List<Sastojak> sastojci = sastojakRepo.GetSve();
             List<string> tekst = new List<string>();
             foreach (Sastojak sastojak in sastojci)
             {

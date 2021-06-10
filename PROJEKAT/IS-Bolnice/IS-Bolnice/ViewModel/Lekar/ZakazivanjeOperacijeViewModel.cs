@@ -287,9 +287,9 @@ namespace IS_Bolnice.ViewModel.Lekar
                     Soba = soba,
                     TrajanjeOperacijeUMinutima = trajanjeOperacije
                 };
-                RadnoVremeLekara radnoVreme = new RadnoVremeKontroler().DobaviRadnoVremeLekara(lekar.Jmbg);
+                RadnoVremeLekara radnoVreme = new RadnoVremeKontroler().GetRadnoVremeLekara(lekar.Jmbg);
 
-                foreach (Operacija termin in operacijaKontroler.DostuptniTerminiLekaraZaDatuProstoriju(operacijaDto))
+                foreach (Operacija termin in operacijaKontroler.GetDostuptniTerminiLekaraZaDatuProstoriju(operacijaDto))
                 {
                     termin.Lekar.RadnoVreme = radnoVreme;
                     Termini.Add(termin);

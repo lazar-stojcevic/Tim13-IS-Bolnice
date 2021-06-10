@@ -56,7 +56,7 @@ namespace IS_Bolnice.Kontroleri
         {
             LekarKontroler lekarKontroler = new LekarKontroler();
             lekar = lekarKontroler.GetLekar(lekar.Jmbg);
-            return pregledServis.SlobodniTerminiZaIzmenuPregledaPacijenta(lekar, datumIzmene);
+            return pregledServis.GetSlobodniTerminiZaIzmenuPregledaPacijenta(lekar, datumIzmene);
         }
 
         public List<Pregled> GetDostupniTerminiPregledaLekaraUNarednomPeriodu(Lekar lekar)
@@ -90,19 +90,19 @@ namespace IS_Bolnice.Kontroleri
             return pregledServis.ZakaziPregled(pregled);
         }
 
-        public List<Pregled> ZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara)
+        public List<Pregled> GetZauzetiHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara)
         {
-            return pregledServis.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara);
+            return pregledServis.GetZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara);
         }
 
-        public List<Pregled> SlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara, int minutiTrajanjaTermina)
+        public List<Pregled> GetSlobodniHitniPreglediLekaraOdredjeneOblasti(OblastLekara oblastLekara, int minutiTrajanjaTermina)
         {
-            return pregledServis.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
+            return pregledServis.GetSlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
         }
 
-        public List<Pregled> SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu()
+        public List<Pregled> GetSlobodniPreglediLekaraOpstePrakseUNarednomPeriodu()
         {
-            return pregledServis.SlobodniPreglediLekaraOpstePrakseUNarednomPeriodu();
+            return pregledServis.GetSlobodniPreglediLekaraOpstePrakseUNarednomPeriodu();
         }
 
         public bool PacijentImaZakazanPregled(Pregled pregledZaProveru)

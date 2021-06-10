@@ -10,12 +10,10 @@ namespace IS_Bolnice.Baze.Interfejsi
     {
         List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta);
 
-        List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana();
+        List<Izvestaj> GetSviIzvestajiIzPoslednjihNedeljuDana();
 
-        List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana();
+        List<Izvestaj> GetSviIzvestajiIzPoslednjihMesecDana();
 
-        List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana();
-
-
+        List<Izvestaj> GetSviIzvestajiIzPoslednjihGodinuDana();
     }
 }

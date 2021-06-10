@@ -37,9 +37,9 @@ namespace IS_Bolnice.Kontroleri
                 jmbgLekara);
         }
 
-        public RadnoVremeLekara DobaviRadnoVremeLekara(string idLekara)
+        public RadnoVremeLekara GetRadnoVremeLekara(string idLekara)
         {
-            return radnoVremeServis.DobaRadnoVremeLekara(idLekara);
+            return radnoVremeServis.GetRadnoVremeLekara(idLekara);
         }
 
         public void OdloziSaObavestenjemTermineLekaraKojiSeNeUklapaju(VremenskiInterval vremenskiInterval, String jmbgLekara)

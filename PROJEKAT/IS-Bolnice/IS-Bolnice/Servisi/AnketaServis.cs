@@ -25,9 +25,9 @@ namespace IS_Bolnice.Servisi
             return pregledi;
         }
 
-        public List<Anketa> DobaviSveAnketeLekara()
+        public List<Anketa> GetSveAnketeLekara()
         {
-            return anketaRepo.DobaviSveAnketeLekara();
+            return anketaRepo.GetSveAnketeLekara();
         }
 
         public bool DaLiJeVremeZaAnketuBolnice(string jmbgPacijenta)
@@ -39,7 +39,7 @@ namespace IS_Bolnice.Servisi
                 return true;
             }
 
-            Anketa lastSurvery = NadjiPoslednjuAnketuBolnicePacijenta(sveAnketePacijentaZaBlonicu);
+            Anketa lastSurvery = GetPoslednjuAnketuBolnicePacijenta(sveAnketePacijentaZaBlonicu);
 
             return !DaLiJePacijentDostavioAnketuBolnice(lastSurvery);
         }
@@ -79,7 +79,7 @@ namespace IS_Bolnice.Servisi
             return hospitalSurveryOfPatient;
         }
 
-        private Anketa NadjiPoslednjuAnketuBolnicePacijenta(List<Anketa> ankete)
+        private Anketa GetPoslednjuAnketuBolnicePacijenta(List<Anketa> ankete)
         {
             return ankete.ElementAt(ankete.Count - 1);
         }
@@ -98,7 +98,7 @@ namespace IS_Bolnice.Servisi
 
         private bool DaLiJePregledVecOcenjen(Pregled pregled)
         {
-            foreach (Anketa anketa in anketaRepo.DobaviSve())
+            foreach (Anketa anketa in anketaRepo.GetSve())
             {
                 if (anketa.Lekar != null)
                 {
@@ -115,7 +115,7 @@ namespace IS_Bolnice.Servisi
         {
             List<Pregled> pastReviews = new List<Pregled>();
 
-            foreach (Pregled pregled in preglediFajlRepozitorijum.DobaviSve())
+            foreach (Pregled pregled in preglediFajlRepozitorijum.GetSve())
             {
                 if (pregled.Pacijent.Jmbg == pacijentJmbg && pregled.VremeKrajaPregleda < DateTime.Now)
                 {

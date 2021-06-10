@@ -9,6 +9,6 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface IRadnoVremeRepozitorijum : GenerickiRepozitorijum<RadnoVremeLekara>
     {
-        RadnoVremeLekara RadnoVremeOdredjenogLekara(string jmbg);
+        RadnoVremeLekara GetRadnoVremeOdredjenogLekara(string jmbg);
     }
 }

@@ -23,7 +23,7 @@ public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, I
     public List<Operacija> GetSveOperacijeLekara(string jmbgLekara)
     {
         List<Operacija> ret = new List<Operacija>();
-        foreach (Operacija operacija in DobaviSve())
+        foreach (Operacija operacija in GetSve())
         {
             if (operacija.Lekar.Jmbg.Equals(jmbgLekara))
             {
@@ -36,7 +36,7 @@ public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, I
     public List<Operacija> GetSveBuduceOperacije()
     {
         List<Operacija> ret = new List<Operacija>();
-        foreach (Operacija operacija in DobaviSve())
+        foreach (Operacija operacija in GetSve())
         {
             if (operacija.VremePocetkaOperacije > DateTime.Now.AddHours(-1))
             {
@@ -121,7 +121,7 @@ public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, I
     private static void PostaviLekaraOperacije(string[] delovi, Operacija operacija)
     {
         operacija.Lekar.Jmbg = delovi[4];
-        foreach (Lekar lekar in new LekarFajlRepozitorijum().DobaviSve())
+        foreach (Lekar lekar in new LekarFajlRepozitorijum().GetSve())
         {
             if (delovi[4].Equals(lekar.Jmbg))
             {
@@ -146,7 +146,7 @@ public class OperacijaFajlRepozitorijum:GenerickiFajlRepozitorijum<Operacija>, I
     private static void PostaviPacijentaOperacije(string[] delovi, Operacija operacija)
     {
         operacija.Pacijent.Jmbg = delovi[3];
-        foreach (Pacijent p in new PacijentFajlRepozitorijum().DobaviSve())
+        foreach (Pacijent p in new PacijentFajlRepozitorijum().GetSve())
         {
             if (operacija.Pacijent.Jmbg.Equals(p.Jmbg))
             {

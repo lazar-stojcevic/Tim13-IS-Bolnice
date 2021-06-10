@@ -16,29 +16,29 @@ namespace IS_Bolnice.Servisi
             izvestajRepo.Sacuvaj(izvestaj);
         }
 
-        public List<Izvestaj> SviIzvestajiPacijenta(string jmbgPacijenta)
+        public List<Izvestaj> GetSviIzvestajiPacijenta(string jmbgPacijenta)
         {
             return izvestajRepo.SviIzvestajiPacijenta(jmbgPacijenta);
         }
 
-        public List<Izvestaj> DobaviSveIzvestaje()
+        public List<Izvestaj> GetSviIzvestaji()
         {
-            return izvestajRepo.DobaviSve();
+            return izvestajRepo.GetSve();
         }
 
-        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihNedeljuDana()
+        public List<Izvestaj> GetSviIzvestajiIzPoslednjihNedeljuDana()
         {
-           return izvestajRepo.DobaviSveIzvestajeizPoslednjihNedeljuDana();
+           return izvestajRepo.GetSviIzvestajiIzPoslednjihNedeljuDana();
         }
 
-        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihMesecDana()
+        public List<Izvestaj> GetSviIzvestajiIzPoslednjihMesecDana()
         {
-            return izvestajRepo.DobaviSveIzvestajeizPoslednjihMesecDana();
+            return izvestajRepo.GetSviIzvestajiIzPoslednjihMesecDana();
         }
 
-        public List<Izvestaj> DobaviSveIzvestajeizPoslednjihGodinuDana()
+        public List<Izvestaj> GetSviIzvestajiIzPoslednjihGodinuDana()
         {
-            return izvestajRepo.DobaviSveIzvestajeizPoslednjihGodinuDana();
+            return izvestajRepo.GetSviIzvestajiIzPoslednjihGodinuDana();
         }
     }
 }

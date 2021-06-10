@@ -66,7 +66,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             noviPregled.Pacijent.Jmbg = txtOperJmbg.Text;
             noviPregled.VremePocetkaPregleda = pocetak;
             noviPregled.VremeKrajaPregleda = kraj;
-            noviPregled.Lekar.RadnoVreme = new RadnoVremeKontroler().DobaviRadnoVremeLekara(idLekara);
+            noviPregled.Lekar.RadnoVreme = new RadnoVremeKontroler().GetRadnoVremeLekara(idLekara);
             return noviPregled;
         }
 

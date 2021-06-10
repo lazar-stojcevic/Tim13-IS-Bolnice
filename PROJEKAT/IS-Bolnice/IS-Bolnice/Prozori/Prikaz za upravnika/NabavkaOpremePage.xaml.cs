@@ -30,7 +30,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         public NabavkaOpremePage()
         {
             InitializeComponent();
-            List<Predmet> predmeti = kontroler.DobaviSvuOpremu();
+            List<Predmet> predmeti = kontroler.GetSvaOprema();
             listBox.ItemsSource = predmeti;
 
         }
@@ -46,7 +46,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             bool svaOpremaSelektovana = SelectovanaSvaOprema();
             TipOpreme tip = SelektovaniTipOpreme();
             List<Predmet> predmeti = new List<Predmet>();
-            foreach (Predmet predmet in kontroler.DobaviSvuOpremu())
+            foreach (Predmet predmet in kontroler.GetSvaOprema())
             {
 
                 if (predmet.Obrisano == false && (svaOpremaSelektovana == true || predmet.Tip == tip))
@@ -112,7 +112,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         {
             OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
             List<Predmet> predmeti = new List<Predmet>();
-            predmeti = baza.DobaviSve();
+            predmeti = baza.GetSve();
             List<string> tekst = new List<string>();
             foreach (Predmet predmet in predmeti)
             {

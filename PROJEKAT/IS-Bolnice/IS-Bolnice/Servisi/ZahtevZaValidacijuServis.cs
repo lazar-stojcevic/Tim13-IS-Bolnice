@@ -18,7 +18,7 @@ namespace IS_Bolnice.Servisi
 
         public List<ZahtevZaValidacijuLeka> GetSviZaValidacijuLeka()
         {
-            return zahteviZaValidacijuRepo.DobaviSve();
+            return zahteviZaValidacijuRepo.GetSve();
         }
 
         internal void KreirajZahtevZaValidaciju(ZahtevZaValidacijuLeka zahtevZaValidaciju)

@@ -20,7 +20,7 @@ namespace IS_Bolnice.Baze.Klase
        }
 
 
-        public List<T> DobaviSve()
+        public List<T> GetSve()
         {
             List<T> povratnaVrednost = new List<T>();
             if (File.Exists(putanjaDoFajla))
@@ -40,9 +40,9 @@ namespace IS_Bolnice.Baze.Klase
         }
 
 
-        public T DobaviPoId(string id)
+        public T GetPoId(string id)
         {
-            List<T> sviEntiteti = DobaviSve();
+            List<T> sviEntiteti = GetSve();
             foreach (T entitet in sviEntiteti)
             {
                 if (entitet.Id.Equals(id))
@@ -74,7 +74,7 @@ namespace IS_Bolnice.Baze.Klase
 
         public void Obrisi(string id)
         {
-            List<T> sviEntiteti = DobaviSve();
+            List<T> sviEntiteti = GetSve();
             List<string> tekst = new List<string>();
             foreach (T entitet in sviEntiteti)
             {

@@ -9,9 +9,9 @@ namespace IS_Bolnice.Baze.Interfejsi
 {
     interface GenerickiRepozitorijum<T> where T : Entitet
     {
-        List<T> DobaviSve();
+        List<T> GetSve();
 
-        T DobaviPoId(string id);
+        T GetPoId(string id);
 
         void Sacuvaj(T noviEntitet);
 

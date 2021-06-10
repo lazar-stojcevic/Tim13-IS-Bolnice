@@ -24,7 +24,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Obavestenje> GetSvaSortiranaObavestenja()
         {
-            List<Obavestenje> svaObavestenja = obavestenjaRepo.DobaviSve();
+            List<Obavestenje> svaObavestenja = obavestenjaRepo.GetSve();
             svaObavestenja.Sort((o1, o2) => DateTime.Compare(o1.VremeKreiranja,o2.VremeKreiranja));
             svaObavestenja.Reverse();
             return svaObavestenja;

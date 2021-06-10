@@ -28,7 +28,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
             InitializeComponent();
             List<Anketa> recenzije = new List<Anketa>();
 
-            foreach (Anketa recenzija in new AnketaKontroler().DobaviSveAnketeLekara())
+            foreach (Anketa recenzija in new AnketaKontroler().GetSveAnketeLekara())
             {
                 try
                 {

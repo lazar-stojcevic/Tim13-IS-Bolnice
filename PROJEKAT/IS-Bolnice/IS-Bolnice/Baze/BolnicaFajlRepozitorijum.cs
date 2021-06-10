@@ -17,7 +17,7 @@ public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBol
 
    
     public Bolnica GetBolnica() {
-        foreach (Bolnica bolnicaIter in DobaviSve()) {
+        foreach (Bolnica bolnicaIter in GetSve()) {
             return bolnicaIter;
         }
         return new Bolnica();
@@ -37,7 +37,7 @@ public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBol
 
     public List<Soba> GetSobe()
     {
-        List<Bolnica> bolnice = DobaviSve();
+        List<Bolnica> bolnice = GetSve();
         foreach (Bolnica b in bolnice)
         {
             return b.Soba;
@@ -49,7 +49,7 @@ public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBol
     public Soba GetMagacin()
     {
         Soba soba = new Soba();
-        List<Bolnica> bolnice = DobaviSve();
+        List<Bolnica> bolnice = GetSve();
         foreach (Bolnica b in bolnice)
         {
             foreach (Soba s in b.Soba)

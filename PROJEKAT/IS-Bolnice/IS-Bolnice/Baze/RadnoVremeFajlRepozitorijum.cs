@@ -147,9 +147,9 @@ namespace IS_Bolnice.Baze
             return slobodniDaniUNedelji;
         }
 
-        public RadnoVremeLekara RadnoVremeOdredjenogLekara(string jmbg)
+        public RadnoVremeLekara GetRadnoVremeOdredjenogLekara(string jmbg)
         {
-            List<RadnoVremeLekara> svaRadnaVremena = DobaviSve();
+            List<RadnoVremeLekara> svaRadnaVremena = GetSve();
 
             foreach (RadnoVremeLekara radnoVreme in svaRadnaVremena)
             {

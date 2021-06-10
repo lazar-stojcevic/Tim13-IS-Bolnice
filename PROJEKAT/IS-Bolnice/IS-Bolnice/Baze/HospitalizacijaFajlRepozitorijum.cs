@@ -24,10 +24,10 @@ namespace IS_Bolnice.Baze
       };
 
       public HospitalizacijaFajlRepozitorijum():base(@"..\..\Datoteke\hospitalizacija.txt"){}
-      public List<Hospitalizacija> DobaviSveHospitalizacijeZaSobu(string sobaID) {
+      public List<Hospitalizacija> GetSveHospitalizacijeZaSobu(string sobaID) {
 
             List<Hospitalizacija> hospitalizacije = new List<Hospitalizacija>();
-            foreach (Hospitalizacija hospIter in DobaviSve()) {
+            foreach (Hospitalizacija hospIter in GetSve()) {
                 if (hospIter.Soba.Id.Equals(sobaID)) {
                     hospitalizacije.Add(hospIter);
                 }
@@ -41,7 +41,7 @@ namespace IS_Bolnice.Baze
           List<string> linije = new List<string>();
           string novaLinija = hospitalizacija.PocetakHospitalizacije.ToString(vremenskiFormatPisanje) + "#" + hospitalizacija.KrajHospitalizacije.ToString(vremenskiFormatPisanje) + "#" + hospitalizacija.Soba.Id + "#" + hospitalizacija.Pacijent.Jmbg;
           linije.Add(novaLinija);
-          List<Hospitalizacija> sveHospitalizacije = DobaviSve();
+          List<Hospitalizacija> sveHospitalizacije = GetSve();
           int brojUSobi = 0;
           foreach (Hospitalizacija hostIter in sveHospitalizacije)
           {
@@ -73,7 +73,7 @@ namespace IS_Bolnice.Baze
                 DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
 
             hospitalizacija.Soba = new BolnicaFajlRepozitorijum().GetSobaById(delovi[2]);
-            hospitalizacija.Pacijent = new PacijentFajlRepozitorijum().DobaviPoJmbg(delovi[3]);
+            hospitalizacija.Pacijent = new PacijentFajlRepozitorijum().GetPoJmbg(delovi[3]);
             hospitalizacija.Id = hospitalizacija.Pacijent.Id + "+" + hospitalizacija.Soba.Id;
 
             return hospitalizacija;

@@ -31,7 +31,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             InitializeComponent();
             id_txt.Text = selectedID;
             OpremaFajlRepozitorijum baza = new OpremaFajlRepozitorijum();
-            Predmet izmenjenPredmet = baza.DobaviPoId(selectedID);
+            Predmet izmenjenPredmet = baza.GetPoId(selectedID);
             naziv_txt.Text = izmenjenPredmet.Naziv;
             if (izmenjenPredmet.Tip == TipOpreme.dinamicka)
             {
@@ -47,9 +47,9 @@ namespace IS_Bolnice.Prozori.UpravnikPages
         {
             if (Validiraj())
             {
-                Predmet izmenjenPredmet = opremaKontroler.DobaviPoId(id_txt.Text);
+                Predmet izmenjenPredmet = opremaKontroler.GetPoId(id_txt.Text);
                 izmenjenPredmet.Naziv = naziv_txt.Text;
-                izmenjenPredmet.Tip = DobaviTip();
+                izmenjenPredmet.Tip = GetTip();
                 opremaKontroler.IzmeniPredmet(izmenjenPredmet);
                 Page upravljanje = new UpravljanjeOpremomPage();
                 this.NavigationService.Navigate(upravljanje);
@@ -65,7 +65,7 @@ namespace IS_Bolnice.Prozori.UpravnikPages
             }
             return true;
         }
-        private TipOpreme DobaviTip() 
+        private TipOpreme GetTip() 
         {
             if (tip_opreme_txt.SelectedIndex == 1)
             {

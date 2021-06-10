@@ -62,7 +62,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenoKorisnickoImePacijenta(string korisnickoIme)
         {
-            foreach (var pacijent in pacijentRepo.DobaviSve())
+            foreach (var pacijent in pacijentRepo.GetSve())
             {
                 if (pacijent.KorisnickoIme.Equals(korisnickoIme))
                 {
@@ -75,7 +75,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenoKorisnickoImeSekretara(string korisnickoIme)
         {
-            foreach (var sekretar in sekretarRepo.DobaviSve())
+            foreach (var sekretar in sekretarRepo.GetSve())
             {
                 if (sekretar.KorisnickoIme.Equals(korisnickoIme))
                 {
@@ -88,7 +88,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenoKorisnickoImeLekara(string korisnickoIme)
         {
-            foreach (var lekar in lekarRepo.DobaviSve())
+            foreach (var lekar in lekarRepo.GetSve())
             {
                 if (lekar.KorisnickoIme.Equals(korisnickoIme))
                 {
@@ -101,7 +101,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinsvenoKorisnickoImeUpravnika(string korisnickoIme)
         {
-            foreach (var upravnik in upravnikRepo.DobaviSve())
+            foreach (var upravnik in upravnikRepo.GetSve())
             {
                 if (upravnik.KorisnickoIme.Equals(korisnickoIme))
                 {
@@ -114,7 +114,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenJmbgPacijenta(string jmbg)
         {
-            foreach (var pacijent in pacijentRepo.DobaviSve())
+            foreach (var pacijent in pacijentRepo.GetSve())
             {
                 if (pacijent.Jmbg.Equals(jmbg))
                 {
@@ -127,7 +127,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenJmbgSekretara(string jmbg)
         {
-            foreach (var sekretar in sekretarRepo.DobaviSve())
+            foreach (var sekretar in sekretarRepo.GetSve())
             {
                 if (sekretar.Jmbg.Equals(jmbg))
                 {
@@ -140,7 +140,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenJmbgLekara(string jmbg)
         {
-            foreach (var lekar in lekarRepo.DobaviSve())
+            foreach (var lekar in lekarRepo.GetSve())
             {
                 if (lekar.Jmbg.Equals(jmbg))
                 {
@@ -153,7 +153,7 @@ namespace IS_Bolnice.Servisi
 
         private bool JedinstvenJmbgUpravnika(string jmbg)
         {
-            foreach (var upravnik in upravnikRepo.DobaviSve())
+            foreach (var upravnik in upravnikRepo.GetSve())
             {
                 if (upravnik.Jmbg.Equals(jmbg))
                 {

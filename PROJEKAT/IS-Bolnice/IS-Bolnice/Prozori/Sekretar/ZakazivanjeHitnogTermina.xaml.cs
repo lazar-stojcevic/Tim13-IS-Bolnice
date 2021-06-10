@@ -65,8 +65,8 @@ namespace IS_Bolnice.Prozori.Sekretar
 
         private void OsvezavanjePrikazaZauzetihTermina(OblastLekara oblastLekara)
         {
-            OsvezavanjePrikazaZauzetihPregleda(pregledKontroler.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
-            OsvezavanjePrikazaZauzetihOperacija(operacijaKontroler.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
+            OsvezavanjePrikazaZauzetihPregleda(pregledKontroler.GetZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+            OsvezavanjePrikazaZauzetihOperacija(operacijaKontroler.GetZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
         }
 
         private void OsvezavanjePrikazaZauzetihPregleda(List<Pregled> zauzetiPregledi)
@@ -147,7 +147,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             double satiTrajanjaTermina = (double)comboTrajanja.SelectedItem;
             int minutiTrajanjaTermina = (int) (satiTrajanjaTermina * 60);
             List<Pregled> slobodniPregledi =
-                pregledKontroler.SlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
+                pregledKontroler.GetSlobodniHitniPreglediLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
 
             if (slobodniPregledi != null)
             {
@@ -177,7 +177,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             double trajanjeTermina = (double)comboTrajanja.SelectedItem;
             int minutiTrajanjaTermina = (int) (trajanjeTermina * 60);
             List<Operacija> slobodneOperacije =
-                operacijaKontroler.SlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
+                operacijaKontroler.GetSlobodneHitneOperacijeLekaraOdredjeneOblasti(oblastLekara, minutiTrajanjaTermina);
 
             if (slobodneOperacije != null)
             {
@@ -215,7 +215,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     pregledKontroler.OdloziPregledStoPre(pregledZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
-                OsvezavanjePrikazaZauzetihPregleda(pregledKontroler.ZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
+                OsvezavanjePrikazaZauzetihPregleda(pregledKontroler.GetZauzetiHitniPreglediLekaraOdredjeneOblasti(oblastLekara));
             }
         }
 
@@ -229,7 +229,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                     operacijaKontroler.OdloziOperacijuStoPre(operacijaZaOdlaganje);
                 }
                 OblastLekara oblastLekara = new OblastLekara((string)comboOblastLekara.SelectedItem);
-                OsvezavanjePrikazaZauzetihOperacija(operacijaKontroler.ZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
+                OsvezavanjePrikazaZauzetihOperacija(operacijaKontroler.GetZauzeteOperacijeLekaraOdredjeneOblastiZaOdlaganje(oblastLekara));
             }
         }
 
