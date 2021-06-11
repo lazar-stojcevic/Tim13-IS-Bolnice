@@ -18,7 +18,7 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
         List<Lekar> listaSvihLekaraOpstePrakse = new List<Lekar>();
         foreach (Lekar lekar in GetSve())
         {
-            if (lekar.JelLekarOpstePrakse())
+            if (lekar.Oblast.JelOpstaPraksa())
             {
                 listaSvihLekaraOpstePrakse.Add(lekar);
             }
@@ -32,7 +32,7 @@ public class LekarFajlRepozitorijum: GenerickiFajlRepozitorijum<Lekar>, ILekarRe
         List<Lekar> listaSvihLekara = new List<Lekar>();
         foreach (Lekar lekar in GetSve())
         {
-            if (!lekar.JelLekarOpstePrakse())
+            if (!lekar.Oblast.JelOpstaPraksa())
             {
                 listaSvihLekara.Add(lekar);
             }

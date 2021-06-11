@@ -100,7 +100,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
                     document.Add(pdfTable
                         .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                         .SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER));
-                    if (!lekar.JelLekarOpstePrakse())
+                    if (!lekar.Oblast.JelOpstaPraksa())
                     {
                         document.Add(new iText.Layout.Element.Paragraph());
                         document.Add(new iText.Layout.Element.Paragraph("Operacije lekara:"));

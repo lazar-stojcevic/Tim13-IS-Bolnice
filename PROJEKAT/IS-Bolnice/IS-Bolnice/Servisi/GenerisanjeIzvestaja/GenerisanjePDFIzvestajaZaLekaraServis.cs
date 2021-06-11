@@ -28,7 +28,7 @@ namespace IS_Bolnice.Servisi.GenerisanjeIzvestaja
                 document.Add(new iText.Layout.Element.Paragraph());
                 GenerisiDeoZaPreglede(document);
                 document.Add(new iText.Layout.Element.Paragraph());
-                if (!lekar.JelLekarOpstePrakse())
+                if (!lekar.Oblast.JelOpstaPraksa())
                 {
                     GenerisiDeoZaOperacije(document);
                 }
@@ -100,7 +100,7 @@ namespace IS_Bolnice.Servisi.GenerisanjeIzvestaja
 
         private string GetOdgovarajucaDestinacijaIzvestaja(Lekar lekar)
         {
-            if (lekar.JelLekarOpstePrakse())
+            if (lekar.Oblast.JelOpstaPraksa())
                 return @"..\..\..\..\izvestajZaLekaraOpstePrakse.pdf";
             else
                 return @"..\..\..\..\izvestajZaLekaraSpecijalistu.pdf";

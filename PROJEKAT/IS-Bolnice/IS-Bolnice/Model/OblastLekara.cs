@@ -28,5 +28,10 @@ namespace IS_Bolnice.Model
         {
             return prosledjenaOblast.Naziv.Equals(Naziv);
         }
+
+        public bool JelOpstaPraksa()
+        {
+            return this.Naziv.Equals(oznakaOpstePrakse);
+        }
     }
 }

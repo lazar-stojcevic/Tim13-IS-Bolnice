@@ -186,7 +186,7 @@ namespace IS_Bolnice.Servisi
             VremenskiInterval vremenskiIntervalNovogPregleda =
                 new VremenskiInterval(noviPregled.VremePocetkaPregleda, noviPregled.VremeKrajaPregleda);
 
-            if (!noviPregled.Lekar.TerminURadnomVremenuLekara(vremenskiIntervalNovogPregleda))
+            if (!noviPregled.Lekar.RadnoVreme.TerminURadnomVremenuLekara(vremenskiIntervalNovogPregleda))
             {
                 return false;
             }
@@ -247,7 +247,7 @@ namespace IS_Bolnice.Servisi
             {
                 VremenskiInterval termin = new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);
 
-                if (lekar.TerminURadnomVremenuLekara(termin))
+                if (lekar.RadnoVreme.TerminURadnomVremenuLekara(termin))
                 {
                     preglediURadnomVremenu.Add(pregled);
                 }

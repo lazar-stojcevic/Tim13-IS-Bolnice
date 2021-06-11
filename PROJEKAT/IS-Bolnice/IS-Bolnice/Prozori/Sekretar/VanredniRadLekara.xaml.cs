@@ -123,7 +123,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 return;
             }
 
-            if (selektovaniLekar.VecDodeljenoVanrednoRadnoVreme(vanrednoRadnoVreme))
+            if (selektovaniLekar.RadnoVreme.VecDodeljenoVanrednoRadnoVremeLekaru(vanrednoRadnoVreme))
             {
                 InformativniProzor ip = new InformativniProzor("Lekaru je već dodeljeno vanredno radno vreme za uneti dan.");
                 ip.ShowDialog();

@@ -129,7 +129,7 @@ namespace IS_Bolnice.Servisi
             {
                 VremenskiInterval termin = new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
 
-                if (lekar.TerminURadnomVremenuLekara(termin))
+                if (lekar.RadnoVreme.TerminURadnomVremenuLekara(termin))
                 {
                     operacijeURadnomVremenu.Add(operacija);
                 }
@@ -237,7 +237,7 @@ namespace IS_Bolnice.Servisi
         {
             VremenskiInterval vremenskiInterval =
                 new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
-            if (!operacija.Lekar.TerminURadnomVremenuLekara(vremenskiInterval))
+            if (!operacija.Lekar.RadnoVreme.TerminURadnomVremenuLekara(vremenskiInterval))
             {
                 return false;
             }
