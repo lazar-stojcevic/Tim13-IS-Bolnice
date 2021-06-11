@@ -7,7 +7,7 @@ using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Baze.Interfejsi
 {
-    interface ILoggerRepozitorijum:GenerickiRepozitorijum<Logger>
+    interface ILoggerRepozitorijum:GenerickiRepozitorijum<Model.Logger>
     {
 
     }

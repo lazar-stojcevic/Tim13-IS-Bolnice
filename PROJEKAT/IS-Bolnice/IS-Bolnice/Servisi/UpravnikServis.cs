@@ -8,7 +8,7 @@ using IS_Bolnice.DTOs;
 
 namespace IS_Bolnice.Servisi
 {
-    class UpravnikServis: ILogInServis
+    class UpravnikServis
     {
         IUpravnikRepozitorijum upravnikRepo = new Injector().GetUpravnikRepozitorijum();
 
@@ -17,24 +17,6 @@ namespace IS_Bolnice.Servisi
             upravnikRepo.Izmeni(upravnik);
         }
 
-        public LogInDTO GetKorisnika(string korisnickoIme, string sifra)
-        {
-            foreach (Upravnik u in upravnikRepo.GetSve())
-            {
-                if (u.KorisnickoIme.Equals(korisnickoIme))
-                {
-                    if (u.Sifra.Equals(sifra))
-                    {
-                        LogInDTO retVal = new LogInDTO();
-                        retVal.Jmbg = u.Jmbg;
-                        retVal.TipKorisnika = "U";
-                        return retVal;
-                    }
-                }
-            }
-
-            return null;
-        }
 
         public Upravnik GetByJmbg(string jmbg)
         {

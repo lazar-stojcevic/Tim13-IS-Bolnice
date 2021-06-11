@@ -15,7 +15,7 @@ namespace IS_Bolnice.Servisi
         private ILoggerRepozitorijum repo = new Injector().GetLoggerRepozitorijum();
         public LogInDTO GetKorisnika(string korisnickoIme, string sifra)
         {
-            Logger logger = repo.GetPoId(korisnickoIme);
+            Model.Logger logger = repo.GetPoId(korisnickoIme);
             if (logger == null) return null;
             return logger.LogInServis.GetKorisnika(korisnickoIme, sifra);
         }

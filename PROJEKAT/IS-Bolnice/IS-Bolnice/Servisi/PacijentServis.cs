@@ -8,7 +8,7 @@ using IS_Bolnice.DTOs;
 
 namespace IS_Bolnice.Servisi
 {
-    class PacijentServis: ILogInServis
+    class PacijentServis
     {
         private IPacijentRepozitorijum pacijentRepo = new Injector().GetPacijentRepozitorijum();
 
@@ -65,23 +65,6 @@ namespace IS_Bolnice.Servisi
             return preglediPacijenta.Count == 0 && operacijePacijenta.Count == 0;
         }
 
-        public LogInDTO GetKorisnika(string korisnickoIme, string sifra)
-        {
-            foreach (Pacijent p in pacijentRepo.GetSve())
-            {
-                if (p.KorisnickoIme.Equals(korisnickoIme))
-                {
-                    if (p.Sifra.Equals(sifra))
-                    {
-                        LogInDTO retVal = new LogInDTO();
-                        retVal.Jmbg = p.Jmbg;
-                        retVal.TipKorisnika = "P";
-                        return retVal;
-                    }
-                }
-            }
-
-            return null;
-        }
+        
     }
 }
