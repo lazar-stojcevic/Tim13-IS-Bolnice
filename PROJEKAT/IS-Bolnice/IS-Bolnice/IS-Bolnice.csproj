@@ -158,6 +158,7 @@
     <Compile Include="Kontroleri\AnketaKontroler.cs" />
     <Compile Include="Kontroleri\BelezkeKontroler.cs" />
     <Compile Include="Kontroleri\BolnicaKontroler.cs" />
+    <Compile Include="Kontroleri\GenerisanjeIzvestajaZaLekaraKontroler.cs" />
     <Compile Include="Kontroleri\HospitalizacijaKontroler.cs" />
     <Compile Include="Kontroleri\IzmenaTerminaKontroler.cs" />
     <Compile Include="Kontroleri\IzvestajKontroler.cs" />
@@ -529,6 +530,8 @@
     <Compile Include="Servisi\AnketaServis.cs" />
     <Compile Include="Servisi\BelezkeServis.cs" />
     <Compile Include="Servisi\BolnicaServis.cs" />
+    <Compile Include="Servisi\GenerisanjeIzvestaja\GenerisanjeIzvestajaZaLekara.cs" />
+    <Compile Include="Servisi\GenerisanjeIzvestaja\GenerisanjePDFIzvestajaZaLekaraServis.cs" />
     <Compile Include="Servisi\HospitalizacijaServis.cs" />
     <Compile Include="Servisi\ILogInServis.cs" />
     <Compile Include="Servisi\IzmenaTerminaServis.cs" />
