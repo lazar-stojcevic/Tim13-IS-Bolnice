@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IS_Bolnice.LogIn;
 using IS_Bolnice.Servisi;
 
 namespace IS_Bolnice.Model

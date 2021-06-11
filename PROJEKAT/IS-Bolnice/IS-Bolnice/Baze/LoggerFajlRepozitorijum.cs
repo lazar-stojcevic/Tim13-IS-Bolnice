@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
+using IS_Bolnice.LogIn;
 using IS_Bolnice.Model;
 using IS_Bolnice.Servisi;
 
 namespace IS_Bolnice.Baze
 {
-    public class LoggerFajlRepozitorijum: GenerickiFajlRepozitorijum<Logger>, ILoggerRepozitorijum
+    public class LoggerFajlRepozitorijum: GenerickiFajlRepozitorijum<Model.Logger>, ILoggerRepozitorijum
     {
         public LoggerFajlRepozitorijum() : base(@"..\..\Datoteke\logIn.txt")
         {
@@ -22,16 +23,16 @@ namespace IS_Bolnice.Baze
             switch (podaciEntiteta[2])
             {
                 case "P":
-                    logInServis = new PacijentServis();
+                    logInServis = new PacijentLogIn();
                     break;
                 case "U":
-                    logInServis = new UpravnikServis();
+                    logInServis = new UpravnikLogIn();
                     break;
                 case "L":
-                    logInServis = new LekarServis();
+                    logInServis = new LekarLogIn();
                     break;
                 default:
-                    logInServis = new SekretarServis();
+                    logInServis = new SekretarLogIn();
                     break;
 
             }
