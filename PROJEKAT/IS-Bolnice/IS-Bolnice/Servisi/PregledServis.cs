@@ -59,7 +59,7 @@ namespace IS_Bolnice.Servisi
 
         public List<Pregled> GetSviBuduciPreglediPacijenta(string jmbgPacijenta)
         {
-            return pregledRepo.GetSviBuduciPreglediLekara(jmbgPacijenta);
+            return pregledRepo.GetSviBuduciPreglediPacijenta(jmbgPacijenta);
         }
 
         public List<Pregled> GetSviBuduciSortiraniPreglediPacijenta(string jmbgPacijenta)

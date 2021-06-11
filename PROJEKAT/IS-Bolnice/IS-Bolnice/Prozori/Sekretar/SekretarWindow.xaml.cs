@@ -125,8 +125,16 @@ namespace IS_Bolnice.Prozori.Sekretar
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
-                        pacijentKontroler.ObrisiPacijenta(p.Jmbg);
-                        Pacijenti.Remove(p);
+                        bool uspesno = pacijentKontroler.ObrisiPacijenta(p.Jmbg);
+                        if (uspesno)
+                            Pacijenti.Remove(p);
+                        else
+                        {
+                            InformativniProzor ip =
+                                new InformativniProzor("Nemoguće obrisati pacijenta jer poseduje zakazane termine.");
+                            ip.ShowDialog();
+                        }
+
                         break;
 
                     case MessageBoxResult.No:

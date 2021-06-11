@@ -36,9 +36,9 @@ namespace IS_Bolnice.Kontroleri
             pacijentServis.IzmeniPacijenta(izmenjen);
         }
 
-        public void ObrisiPacijenta(string jmbgPacijenta)
+        public bool ObrisiPacijenta(string jmbgPacijenta)
         {
-            pacijentServis.ObrisiPacijenta(jmbgPacijenta);
+            return pacijentServis.ObrisiPacijenta(jmbgPacijenta);
         }
     }
 }

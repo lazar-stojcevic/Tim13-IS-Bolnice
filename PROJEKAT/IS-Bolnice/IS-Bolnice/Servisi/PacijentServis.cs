@@ -44,9 +44,25 @@ namespace IS_Bolnice.Servisi
             pacijentRepo.Izmeni(izmenjen);
         }
 
-        public void ObrisiPacijenta(string jmbgPacijenta)
+        public bool ObrisiPacijenta(string jmbgPacijenta)
         {
-            pacijentRepo.Obrisi(jmbgPacijenta);
+            if (MozeSeObrisati(jmbgPacijenta))
+            {
+                pacijentRepo.Obrisi(jmbgPacijenta);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool MozeSeObrisati(string jmbgPacijenta)
+        {
+            PregledServis pregledServis = new PregledServis();
+            OperacijaServis operacijaServis = new OperacijaServis();
+            List<Pregled> preglediPacijenta = pregledServis.GetSviBuduciPreglediPacijenta(jmbgPacijenta);
+            List<Operacija> operacijePacijenta = operacijaServis.GetSveBuduceOperacijePacijenta(jmbgPacijenta);
+
+            return preglediPacijenta.Count == 0 && operacijePacijenta.Count == 0;
         }
 
         public LogInDTO GetKorisnika(string korisnickoIme, string sifra)
