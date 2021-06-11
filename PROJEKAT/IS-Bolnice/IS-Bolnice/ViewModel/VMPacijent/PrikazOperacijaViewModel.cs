@@ -12,13 +12,14 @@ namespace IS_Bolnice.ViewModel.VMPacijent
     {
         private PrikazTerminaOperacija prikazTerminaOperacijaProzor;
         private OperacijaKontroler operacijaKontroler = new OperacijaKontroler();
+        private string jmbgPacijenta;
 
         public PrikazOperacijaViewModel(PrikazTerminaOperacija prikazTerminaOperacija, string jmbgPacijenta)
         {
             this.prikazTerminaOperacijaProzor = prikazTerminaOperacija;
 
             OperacijePacijenta = operacijaKontroler.GetSveBuduceOperacijePacijenta(jmbgPacijenta);
-
+            this.jmbgPacijenta = jmbgPacijenta;
             Izadji = new RelayCommand(IzvrsiIzadjiKomandu);
             Izvestaj = new RelayCommand(IzvrisIzvestajKomandu);
         }
@@ -41,47 +42,17 @@ namespace IS_Bolnice.ViewModel.VMPacijent
 
         public void KreirajPDFIzvestajOSvimOperacijama()
         {
-            try
+            GenerisanjeIzvestajaZaPacijentaKontroler generisanje = new GenerisanjeIzvestajaZaPacijentaKontroler();
+            bool uspesno = generisanje.GenerisiIzvestajBuducihOperacijaPacijenta(jmbgPacijenta);
+            if (uspesno)
             {
-                string odrediste = @"..\..\PDF\izvestaj.pdf";
-                PdfWriter pdfWriter = new PdfWriter(odrediste);
-                PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-                pdfDocument.AddNewPage();
-
-                Document document = new Document(pdfDocument);
-                PdfFont pdfFont = PdfFontFactory.CreateFont("C:/windows/fonts/arial.ttf", "Identity-H", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
-                document.SetFont(pdfFont);
-
-                string naslov = "Lista svih operacije";
-                document.Add(new iText.Layout.Element.Paragraph(naslov));
-                document.Add(new iText.Layout.Element.Paragraph());
-
-                float[] sirinaKolone = { 150F, 150F, 150F, 150F };
-                iText.Layout.Element.Table tabela = new iText.Layout.Element.Table(sirinaKolone);
-                tabela.AddCell("Ime lekara");
-                tabela.AddCell("Prezime lekara");
-                tabela.AddCell("Vreme pocetka");
-                tabela.AddCell("Ordinacija");
-
-                foreach (Operacija operacija in OperacijePacijenta)
-                {
-                    tabela.AddCell(operacija.Lekar.Ime);
-                    tabela.AddCell(operacija.Lekar.Prezime);
-                    tabela.AddCell(operacija.VremePocetkaOperacije.ToString());
-                    tabela.AddCell(operacija.Soba.Id);
-                }
-
-                document.Add(tabela.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
-                    .SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER));
-                document.Close();
                 string message = "PDF je kreiran";
                 MessageBox.Show(message);
             }
-            catch
+            else
             {
                 string message = "PDF nije kreiran";
                 MessageBox.Show(message);
-                return;
             }
         }
     }
