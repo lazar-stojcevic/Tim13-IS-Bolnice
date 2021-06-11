@@ -29,5 +29,10 @@ namespace IS_Bolnice.Servisi
 
             return null;
         }
+
+        public Sekretar GetByJmbg(string jmbg)
+        {
+            return repo.GetPoId(jmbg);
+        }
     }
 }

@@ -66,10 +66,11 @@ namespace IS_Bolnice
                         this.Close();
                         break;
                     default:
-                        ISekretarRepozitorijum sekretarRepo = new SekretarFajlRepozitorijum();
-                        Prozori.Sekretar.SekretarWindow sekretar =
-                            new Prozori.Sekretar.SekretarWindow(sekretarRepo.GetPoId(logIn.Jmbg));
-                        sekretar.Show();
+                        SekretarKontroler sekretarKontroler = new SekretarKontroler();
+                        Sekretar sekretar = sekretarKontroler.GetByJmbg(logIn.Jmbg);
+                        Prozori.Sekretar.SekretarWindow sekretarWindow =
+                            new Prozori.Sekretar.SekretarWindow(sekretar);
+                        sekretarWindow.Show();
                         this.Close();
                         break;
                 }

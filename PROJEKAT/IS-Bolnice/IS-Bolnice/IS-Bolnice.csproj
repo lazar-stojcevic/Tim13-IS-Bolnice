@@ -178,6 +178,7 @@
     <Compile Include="Kontroleri\RenovacijaKontroler.cs" />
     <Compile Include="Kontroleri\SadrzajSobeKontroler.cs" />
     <Compile Include="Kontroleri\SastojakKontroler.cs" />
+    <Compile Include="Kontroleri\SekretarKontroler.cs" />
     <Compile Include="Kontroleri\UpravnikKontroler.cs" />
     <Compile Include="Kontroleri\WPFNavigacijaKontroler.cs" />
     <Compile Include="Kontroleri\ZahtevZaValidacijuKontroler.cs" />
