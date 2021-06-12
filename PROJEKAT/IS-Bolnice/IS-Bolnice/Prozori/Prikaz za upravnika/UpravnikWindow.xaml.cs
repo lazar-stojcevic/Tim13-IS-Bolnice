@@ -77,5 +77,11 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
             Page izvestaj = new IzvestajPage();
             this.frame.NavigationService.Navigate(izvestaj);
         }
+
+        private void RecenzijaMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Page recenzija = new RecenzijaPage();
+            this.frame.NavigationService.Navigate(recenzija);
+        }
     }
 }

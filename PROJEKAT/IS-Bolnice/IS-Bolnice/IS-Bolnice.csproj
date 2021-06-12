@@ -382,6 +382,9 @@
     <Compile Include="Prozori\Prikaz za upravnika\RazdvajanjeSobePage.xaml.cs">
       <DependentUpon>RazdvajanjeSobePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Prozori\Prikaz za upravnika\RecenzijaPage.xaml.cs">
+      <DependentUpon>RecenzijaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prozori\Prikaz za upravnika\RecenzijePagexaml.xaml.cs">
       <DependentUpon>RecenzijePagexaml.xaml</DependentUpon>
     </Compile>
@@ -792,6 +795,10 @@
     <Page Include="Prozori\Prikaz za upravnika\RazdvajanjeSobePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Prozori\Prikaz za upravnika\RecenzijaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Prozori\Prikaz za upravnika\RecenzijePagexaml.xaml">
       <Generator>MSBuild:Compile</Generator>
