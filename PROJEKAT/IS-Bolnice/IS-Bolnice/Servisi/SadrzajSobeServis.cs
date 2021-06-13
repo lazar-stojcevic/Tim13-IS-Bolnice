@@ -80,7 +80,7 @@ namespace IS_Bolnice.Servisi
                         SadrzajSobe noviSadrzaj = new SadrzajSobe(sadrzaj.NovaSoba.Id, sadrzaj.Predmet.Id, sadrzaj.Kolicina);
                         sadrzajSobeRepo.Sacuvaj(noviSadrzaj);
                     }
-                    sadrzajSobeRepo.Obrisi(sadrzaj.Id);
+                    sadrzajSobeRepo.Obrisi(sadrzaj.Id+"0000");
 
                 }
             }
@@ -152,8 +152,10 @@ namespace IS_Bolnice.Servisi
         {
             sadrzajZaPrenos = stariSadrzaj;
             sobaUKojuSePrenosi = novaSoba;
+            bool ispravanUnos = OduzmiOdabranuKolicinuOpreme();
+            sadrzajZaPrenos.Id = sadrzajZaPrenos.Id + "0000";
             DodajOdabranuKolicinuOpreme();
-            return OduzmiOdabranuKolicinuOpreme();
+            return ispravanUnos;
 
         }
 
