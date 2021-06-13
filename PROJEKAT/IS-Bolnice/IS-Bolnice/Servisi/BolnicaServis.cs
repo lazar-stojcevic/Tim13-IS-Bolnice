@@ -5,13 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.StanjeSobe;
 
 namespace IS_Bolnice.Servisi
 {
     class BolnicaServis
     {
         private IBolnicaRepozitorijum bolnicaRepo = new Injector().GetBolnicaRepozitorijum();
-
+        private HospitalizacijaServis hospitalizacijaServis = new HospitalizacijaServis();
+        private SadrzajSobeServis sobeServis = new SadrzajSobeServis();
+        private PregledServis pregledServis = new PregledServis();
+        private OperacijaServis operacijaServis = new OperacijaServis();
+        private RenovacijaServis renovacijaServis = new RenovacijaServis();
         public List<Soba> GetSveSobe()
         {
             List<Soba> oneKojeNisuLogickiObrisane = new List<Soba>();
@@ -19,6 +24,7 @@ namespace IS_Bolnice.Servisi
             {
                 if (!soba.Obrisano)
                 {
+                    soba.StanjeSobe = ProveriStanje(soba);
                     oneKojeNisuLogickiObrisane.Add(soba);
                 }
             }
@@ -33,6 +39,7 @@ namespace IS_Bolnice.Servisi
             {
                 if (!soba.Obrisano)
                 {
+                    soba.StanjeSobe = ProveriStanje(soba);
                     oneKojeNisuLogickiObrisane.Add(soba);
                 }
             }
@@ -46,6 +53,7 @@ namespace IS_Bolnice.Servisi
             {
                 if (!soba.Obrisano)
                 {
+                    soba.StanjeSobe = ProveriStanje(soba);
                     oneKojeNisuLogickiObrisane.Add(soba);
                 }
             }
@@ -59,6 +67,7 @@ namespace IS_Bolnice.Servisi
             {
                 if (!soba.Obrisano)
                 {
+                    soba.StanjeSobe = ProveriStanje(soba);
                     oneKojeNisuLogickiObrisane.Add(soba);
                 }
             }
@@ -102,7 +111,9 @@ namespace IS_Bolnice.Servisi
 
         public Soba GetSobaPoId(string idSobe)
         {
-            return bolnicaRepo.GetSobaById(idSobe);
+            Soba soba = bolnicaRepo.GetSobaById(idSobe);
+            soba.StanjeSobe = ProveriStanje(soba);
+            return soba;
         }
 
         public void IzmeniSobu(Soba izmenjenaSoba)
@@ -138,6 +149,48 @@ namespace IS_Bolnice.Servisi
             }
             bolnicaRepo.Izmeni(bolnica);
 
+        }
+
+        private IStanjeSobe ProveriStanje(Soba soba) {
+            if (ProveriPodRenoviranjemStanje(soba))
+            {
+                return new StanjePodRenoviranjem();
+            }
+            else if (ProveriZauzetoStanje(soba))
+            {
+                return new StanjeZauzeto();
+            }
+            return new StanjeSlobodna();
+        }
+
+        private bool ProveriZauzetoStanje(Soba soba)
+        {
+            if (soba.Tip == RoomType.bolnickaSoba)
+            {
+                if (sobeServis.BrojKrevetaUSobi(soba.Id) <= hospitalizacijaServis.GetBrojTrenutnoHospitalizovanjihUSobi(soba.Id))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else if (soba.Tip == RoomType.ordinacija)
+            {
+                return pregledServis.PostojiPregledTrenutnoUOrdinaciji(soba.Id);
+            }
+            else if (soba.Tip == RoomType.operacionaSala)
+            {
+                return operacijaServis.PostojiOperacijaTrenutnoUSali(soba.Id);
+            }
+            return false;
+        }
+
+        private bool ProveriPodRenoviranjemStanje(Soba soba)
+        {
+            if (renovacijaServis.SalaNaRenoviranjuUOdredjenomPeriodu(soba.Id, DateTime.Now))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

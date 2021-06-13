@@ -98,8 +98,8 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 
         private List<Soba> KreirajNoveSobe() 
         {
-            Soba soba1 = new Soba(id1_txt.Text,false, false, (RoomType)tip_sobe1_txt.SelectedIndex, false, renovacija.ProstorijaZaRenoviranje.Sprat, Double.Parse(kvadratura1_txt.Text));
-            Soba soba2 = new Soba(id2_txt.Text, false, false, (RoomType)tip_sobe2_txt.SelectedIndex, false, renovacija.ProstorijaZaRenoviranje.Sprat, Double.Parse(kvadratura2_txt.Text));
+            Soba soba1 = new Soba(id1_txt.Text, (RoomType)tip_sobe1_txt.SelectedIndex, false, renovacija.ProstorijaZaRenoviranje.Sprat, Double.Parse(kvadratura1_txt.Text));
+            Soba soba2 = new Soba(id2_txt.Text, (RoomType)tip_sobe2_txt.SelectedIndex, false, renovacija.ProstorijaZaRenoviranje.Sprat, Double.Parse(kvadratura2_txt.Text));
             List<Soba> sobe = new List<Soba>();
             sobe.Add(soba1);
             sobe.Add(soba2);

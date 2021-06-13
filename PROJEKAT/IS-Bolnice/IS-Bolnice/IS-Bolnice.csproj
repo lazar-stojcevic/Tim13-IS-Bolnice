@@ -566,6 +566,10 @@
     <Compile Include="Servisi\SekretarServis.cs" />
     <Compile Include="Servisi\UpravnikServis.cs" />
     <Compile Include="Servisi\ZahtevZaValidacijuServis.cs" />
+    <Compile Include="StanjeSobe\IStanjeSobe.cs" />
+    <Compile Include="StanjeSobe\StanjePodRenoviranjem.cs" />
+    <Compile Include="StanjeSobe\StanjeSlobodna.cs" />
+    <Compile Include="StanjeSobe\StanjeZauzeto.cs" />
     <Compile Include="ViewModel\Lekar\GlavniMeniViewModel.cs" />
     <Compile Include="ViewModel\Lekar\RasporedLekaraViewModel.cs" />
     <Compile Include="ViewModel\Lekar\ZakazivanjeOperacijeViewModel.cs" />

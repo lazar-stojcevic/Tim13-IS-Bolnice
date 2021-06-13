@@ -17,6 +17,18 @@ namespace IS_Bolnice.Servisi
             return hospitalizacijaRepo.GetSve();
         }
 
+        public int GetBrojTrenutnoHospitalizovanjihUSobi(string idSobe)
+        {
+            int brojTrenutnoHospitalizovanih = 0;
+            foreach (Hospitalizacija hospitalizacija in GetSveHospitalizacije()) 
+            {
+                if (DateTime.Now > hospitalizacija.PocetakHospitalizacije && DateTime.Now < hospitalizacija.KrajHospitalizacije) {
+                    brojTrenutnoHospitalizovanih++;
+                }
+            }
+            return brojTrenutnoHospitalizovanih;
+        }
+
         public bool KreirajHospitalizaciju(Hospitalizacija hospitalizacija)
         {
             return hospitalizacijaRepo.KreirajHospitalizaciju(hospitalizacija);

@@ -105,6 +105,18 @@ namespace IS_Bolnice.Servisi
             return validni;
         }
 
+        public bool PostojiPregledTrenutnoUOrdinaciji(string idSobe)
+        {
+            foreach (Pregled pregled in GetSviBuduciPreglediSobe(idSobe)) 
+            {
+                if (DateTime.Now > pregled.VremePocetkaPregleda && DateTime.Now < pregled.VremeKrajaPregleda)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private DateTime FormirajPocetakIntervalaZaIzmenu(DateTime datum)
         {
             return new System.DateTime(datum.Year, datum.Month, datum.Day, 0, 0, 0, 0);

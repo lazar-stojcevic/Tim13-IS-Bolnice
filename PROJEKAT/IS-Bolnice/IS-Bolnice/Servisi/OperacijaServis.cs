@@ -54,6 +54,18 @@ namespace IS_Bolnice.Servisi
             return GetSlobodneOperacijeLekaraUNarednomPeriodu(operacija);
         }
 
+        public bool PostojiOperacijaTrenutnoUSali(string idSobe)
+        {
+            foreach (Operacija operacija in GetSveBuduceOperacijeSale(idSobe))
+            {
+                if (DateTime.Now > operacija.VremePocetkaOperacije && DateTime.Now < operacija.VremeKrajaOperacije)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public List<Operacija> GetSlobodneOperacijeLekaraUNarednomPeriodu(OperacijaDTO operacija)
         {
             List<Operacija> sviSkorasnjiTermini = GetSviPredloziTerminaOperacije(operacija);
@@ -63,7 +75,6 @@ namespace IS_Bolnice.Servisi
 
             return terminiZaPrikaz;
         }
-
         private List<Operacija> FiltirajTerminiNaOsnovuRenoviranjeSobe(List<Operacija> slobodniTermini, OperacijaDTO operacija)
         {
             List<Operacija> retVal = new List<Operacija>();

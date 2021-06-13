@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Soba
 
 using IS_Bolnice.Model;
+using IS_Bolnice.StanjeSobe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,9 @@ using System.Windows.Documents;
 public class Soba: Entitet
 {
 
-    public Soba(string id, bool zauzeta, bool podRenoviranje, RoomType tip, bool obrisano, int sprat, double kvadratura): base(id)
+    public Soba(string id, RoomType tip, bool obrisano, int sprat, double kvadratura): base(id)
     {
         Id = id;
-        Zauzeta = zauzeta;
         Tip = tip;
         Obrisano = obrisano;
         Sprat = sprat;
@@ -42,43 +42,15 @@ public class Soba: Entitet
         return false;
     }
 
-    public bool TrenutnoPodRenoviranjem()
-    {
-        RenovacijaFajlRepozitorijum renovacijaFajlRepozitorijum = new RenovacijaFajlRepozitorijum();
-        List<Renovacija> renovacijeSobe = renovacijaFajlRepozitorijum.SveRenovacijeJedneSobe(this.Id);
-
-        foreach (Renovacija renovacija in renovacijeSobe)
-        {
-            if (PoklapanjeTerminaRenovacije(renovacija))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool PoklapanjeTerminaRenovacije(Renovacija renovacija)
-    {
-        DateTime trenutnoVreme = DateTime.Now;
-        if (renovacija.DatumPocetka <= trenutnoVreme && renovacija.DatumKraja >= trenutnoVreme)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public override string ToString()
     {
         return Id + " " + Kvadratura + "m^2 " + "Sprat: " + Sprat;
     }
 
-    public bool Zauzeta { get; set; }
-    public bool PodRenoviranje { get; set; }
     public RoomType Tip { get; set; }
     public bool Obrisano { get; set; }
     public int Sprat { get; set; }
     public double Kvadratura { get; set; }
+    public IStanjeSobe StanjeSobe { get; set; }
 
 }

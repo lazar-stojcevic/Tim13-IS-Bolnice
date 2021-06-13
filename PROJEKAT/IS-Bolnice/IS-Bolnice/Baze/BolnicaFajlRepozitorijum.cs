@@ -127,11 +127,10 @@ public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBol
             Soba s = new Soba();
             string[] ds = linije.Split('/');
             s.Id = ds[0];
-            s.Zauzeta = ParseStringToBool(ds[1]);
-            s.Tip = (RoomType)Enum.Parse(typeof(RoomType), ds[2]);
-            s.Obrisano = ParseStringToBool(ds[3]);
-            s.Sprat = Int32.Parse(ds[4]);
-            s.Kvadratura = Double.Parse(ds[5]);
+            s.Tip = (RoomType)Enum.Parse(typeof(RoomType), ds[1]);
+            s.Obrisano = ParseStringToBool(ds[2]);
+            s.Sprat = Int32.Parse(ds[3]);
+            s.Kvadratura = Double.Parse(ds[4]);
             b.AddSoba(s);
         }
         return b;
@@ -142,7 +141,7 @@ public class BolnicaFajlRepozitorijum: GenerickiFajlRepozitorijum<Bolnica>, IBol
         string linija= entitet.Ime + "#" + entitet.Adresa + "#" + entitet.EMail + "#" + entitet.BrojTelefona + "#";
         foreach (Soba s in entitet.Soba)
         {
-            linija = linija + s.Id + "/" + s.Zauzeta + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "%";
+            linija = linija + s.Id  + "/" + s.Tip + "/" + s.Obrisano + "/" + s.Sprat + "/" + s.Kvadratura + "%";
         }
         linija = linija + "#";
         return linija;
