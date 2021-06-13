@@ -54,27 +54,9 @@
         <CheckBox x:Name="boxHitno" IsChecked="{Binding Hitna, UpdateSourceTrigger = PropertyChanged}" Grid.ColumnSpan="2" Content="CheckBox" HorizontalAlignment="Left" Margin="88,570,0,0" VerticalAlignment="Top" Height="19" Width="17"/>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400" Margin="-2,0,-4.4,0" Grid.ColumnSpan="2"/>
         <Label Content="Zakazivanje operacije" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="216" Grid.ColumnSpan="2"/>
-        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Grid.ColumnSpan="2" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
         <TextBox x:Name="txtDuzina"  HorizontalAlignment="Left" Height="29" Margin="229,513,0,0" TextWrapping="Wrap" Text="{Binding DuzinaTrajanjeOperacijeUMinutima}" VerticalAlignment="Top" Width="155" Grid.ColumnSpan="2"/>
         <Label Content="Dužina trajanja operacije u minutima:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,513,0,0" Width="219" Grid.ColumnSpan="2"/>
 
-        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="617" Margin="0,51,0,0" VerticalAlignment="Top" Width="398" Grid.ColumnSpan="2">
-            <Rectangle  HorizontalAlignment="Left" Height="137" Margin="118,12,0,0" Stroke="Red" VerticalAlignment="Top" Width="266"/>
-            <Label Foreground="Red"  Content="Osnovni podaci pacijenta" HorizontalAlignment="Left" Height="31" Margin="191,122,0,0" VerticalAlignment="Top" Width="145"/>
-
-            <Rectangle HorizontalAlignment="Left" Height="67" Margin="10,154,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
-            <Label Foreground="Red"  Content="ID operacione sale i njena kvadratura" HorizontalAlignment="Left" Height="32" Margin="97,195,0,0" VerticalAlignment="Top" Width="209"/>
-
-            <Rectangle   HorizontalAlignment="Left" Height="130" Margin="10,228,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
-            <Label Foreground="Red"  Content="Svi lekari specijalisti i njihove specijalizacije" HorizontalAlignment="Left" Height="33" Margin="148,325,0,0" VerticalAlignment="Top" Width="240"/>
-
-            <Rectangle HorizontalAlignment="Left" Height="66" Margin="10,379,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
-            <Label Foreground="Red"  Content="Dostupni termini za selektovanu prostoriju i lekara" HorizontalAlignment="Left" Height="32" Margin="104,413,0,0" VerticalAlignment="Top" Width="284"/>
-
-            <Rectangle HorizontalAlignment="Left" Height="49" Margin="10,497,0,0" Stroke="Red" VerticalAlignment="Top" Width="374"/>
-            <Label Foreground="Red"  Content="Da li operacija može da se odloži (čekirano - NE / nije čekirano DA)" HorizontalAlignment="Left" Height="28" Margin="10,497,0,0" VerticalAlignment="Top" Width="374"/>
-
-        </Grid>
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47"  Grid.ColumnSpan="2" Command="{Binding OdustaniOdZakazivanjeOperacije}">
             <StackPanel>
                 <Image Source="/IS-Bolnice;component/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />

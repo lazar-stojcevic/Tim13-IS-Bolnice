@@ -43,6 +43,7 @@ namespace IS_Bolnice.Baze
           linije.Add(novaLinija);
           List<Hospitalizacija> sveHospitalizacije = GetSve();
           int brojUSobi = 0;
+          
           foreach (Hospitalizacija hostIter in sveHospitalizacije)
           {
               if (hostIter.Pacijent.Jmbg.Equals(hospitalizacija.Pacijent.Jmbg) &&
@@ -54,12 +55,14 @@ namespace IS_Bolnice.Baze
               if (hospitalizacija.Soba.Id.Equals(hostIter.Soba.Id) && hostIter.KrajHospitalizacije > DateTime.Now)
               {
                   ++brojUSobi;
-                  if (brojUSobi >= new SadrzajSobeServis().BrojKrevetaUSobi(hospitalizacija.Soba.Id))
+                  Soba soba = new BolnicaServis().GetSobaPoId(hospitalizacija.Soba.Id);
+                  if (!soba.StanjeSobe.zauzmi())
                   {
                       return false;
                   }
               }
           }
+          
           File.AppendAllLines(fileLocation, linije);
           return true;
       }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,7 +66,7 @@ namespace IS_Bolnice.Servisi
             List<Soba> oneKojeNisuLogickiObrisane = new List<Soba>();
             foreach (Soba soba in bolnicaRepo.GetSveSobeZaHospitalizaciju())
             {
-                if (!soba.Obrisano)
+                if (!soba.Obrisano && ProveriStanje(soba).zauzmi())
                 {
                     soba.StanjeSobe = ProveriStanje(soba);
                     oneKojeNisuLogickiObrisane.Add(soba);

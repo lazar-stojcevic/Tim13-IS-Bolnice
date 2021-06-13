@@ -53,7 +53,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
                     }
                     else
                     {
-                        MessageBox.Show("Pacijent je već na hospitalizaciji", "Nije kreirana hospitalizacija",
+                        MessageBox.Show("Nije moguće kreirati hospitalizaciju", "Nije kreirana hospitalizacija",
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }

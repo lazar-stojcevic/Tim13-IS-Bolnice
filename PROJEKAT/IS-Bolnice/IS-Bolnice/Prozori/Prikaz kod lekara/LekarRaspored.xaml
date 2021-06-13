@@ -50,28 +50,9 @@
         <Button Content="Vidi pacijenta" HorizontalAlignment="Left" Margin="283,303,0,0" VerticalAlignment="Top" Width="101" Height="54" Command="{Binding VidiPacijentaPregleda}"/>
         <ToolBarPanel Orientation="Horizontal" Opacity="0.4" HorizontalAlignment="Left" Background="#2dac99" Height="48" VerticalAlignment="Top" Width="400"/>
         <Label Content="Raspored lekara" FontSize="22" HorizontalAlignment="Left" Margin="55,4,0,0" VerticalAlignment="Top" Height="40" Width="174"/>
-        <ToggleButton Style="{DynamicResource ToggleButtonStil}" HorizontalAlignment="Left" Height="26" Margin="315,12,0,0" VerticalAlignment="Top" Width="69" Checked="ToggleButton_Checked" Unchecked="ToggleButton_OnUnchecked_UnChecked"/>
 
-        <Grid x:Name="help"  IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Left" Height="618" Margin="0,52,0,0" VerticalAlignment="Top" Width="394">
-            <Rectangle  HorizontalAlignment="Left" Height="193" Margin="2,57,0,0" Stroke="Red" VerticalAlignment="Top" Width="392"/>
-            <Label Foreground="Red"  Content="Svi budući pregledi" HorizontalAlignment="Left" Height="31" Margin="142,214,0,0" VerticalAlignment="Top" Width="113"/>
-
-            <Rectangle HorizontalAlignment="Left" Height="65" Margin="2,250,0,0" Stroke="Red" VerticalAlignment="Top" Width="253"/>
-            <Label Foreground="Red"  Content="Upravljanje selektovanim pregledom" HorizontalAlignment="Left" Height="32" Margin="1,311,0,0" VerticalAlignment="Top" Width="209"/>
-
-            <Rectangle   HorizontalAlignment="Left" Height="181" Margin="2,367,-2,0" Stroke="Red" VerticalAlignment="Top" Width="394"/>
-            <Label Foreground="Red"  Content="Sve buduće operacije" HorizontalAlignment="Left" Height="33" Margin="131,513,0,0" VerticalAlignment="Top" Width="124"/>
-
-            <Rectangle HorizontalAlignment="Left" Height="68" Margin="0,551,0,0" Stroke="Red" VerticalAlignment="Top" Width="255"/>
-            <Label Foreground="Red"  Content="Upravljanje selektovanom operacijom" HorizontalAlignment="Left" Height="32" Margin="0,615,0,-28" VerticalAlignment="Top" Width="208"/>
-
-            <Rectangle  HorizontalAlignment="Left" Height="65" Margin="277,250,0,0" Stroke="Red" VerticalAlignment="Top" Width="113"/>
-            <Label Foreground="Red"  Content="Pacijent selektovanog pregleda" HorizontalAlignment="Left" Height="32" Margin="225,310,-6,0" VerticalAlignment="Top" Width="175"/>
-            <Rectangle  HorizontalAlignment="Left" Height="65" Margin="277,554,0,0" Stroke="Red" VerticalAlignment="Top" Width="113"/>
-            <Label Foreground="Red"  Content="Pacijent selektovane operacije" HorizontalAlignment="Left" Height="32" Margin="231,620,-12,-33" VerticalAlignment="Top" Width="175"/>
-
-
-        </Grid>
+        
+       
         <Button Background="Transparent" ToolTip="Nazad" BorderThickness="0" HorizontalAlignment="Left" Height="42" Margin="2,0,0,653" VerticalAlignment="Bottom" Width="47" Command="{Binding IdiNazad}">
             <StackPanel>
                 <Image Source="/Slike/Lekar/arrow.png" Height="25" Width="33" RenderTransformOrigin="1.966,0.541" />
