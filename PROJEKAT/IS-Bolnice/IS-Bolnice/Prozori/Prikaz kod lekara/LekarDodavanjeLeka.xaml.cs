@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Korisnicki;
 using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara

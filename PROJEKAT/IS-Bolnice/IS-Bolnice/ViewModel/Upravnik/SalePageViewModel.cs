@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using IS_Bolnice.Kontroleri.Ustanova;
 
 namespace IS_Bolnice.ViewModel.Upravnik
 {

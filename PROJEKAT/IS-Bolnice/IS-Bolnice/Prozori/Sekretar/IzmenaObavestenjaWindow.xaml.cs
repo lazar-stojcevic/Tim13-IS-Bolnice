@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Informativni;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar

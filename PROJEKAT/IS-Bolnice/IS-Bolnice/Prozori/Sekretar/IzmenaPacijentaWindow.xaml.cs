@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using IS_Bolnice.Baze;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Korisnicki;
+using IS_Bolnice.Kontroleri.Termini;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {

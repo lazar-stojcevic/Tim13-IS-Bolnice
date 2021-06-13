@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Model;
 using IS_Bolnice.Servisi;
+using IS_Bolnice.Servisi.Informativni;
 using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
+using IS_Bolnice.Kontroleri.Termini;
 using WPFCustomMessageBox;
 
 namespace IS_Bolnice.ViewModel.Lekar

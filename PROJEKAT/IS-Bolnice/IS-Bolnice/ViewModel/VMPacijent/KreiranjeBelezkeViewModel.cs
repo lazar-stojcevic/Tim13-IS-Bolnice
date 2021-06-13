@@ -5,6 +5,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using IS_Bolnice.Kontroleri.Informativni;
 
 namespace IS_Bolnice.ViewModel.VMPacijent
 {

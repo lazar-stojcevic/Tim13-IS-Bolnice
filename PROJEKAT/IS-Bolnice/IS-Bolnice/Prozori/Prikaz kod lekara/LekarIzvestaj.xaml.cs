@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Informativni;
+using IS_Bolnice.Kontroleri.Korisnicki;
 using WPFCustomMessageBox;
 
 

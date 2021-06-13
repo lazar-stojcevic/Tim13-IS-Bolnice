@@ -7,6 +7,7 @@ using System.Windows;
 using IS_Bolnice.Model;
 using IS_Bolnice.Prozori.Sekretar;
 using IS_Bolnice.Servisi;
+using IS_Bolnice.Servisi.Informativni;
 
 namespace IS_Bolnice.ViewModel.Sekretar
 {

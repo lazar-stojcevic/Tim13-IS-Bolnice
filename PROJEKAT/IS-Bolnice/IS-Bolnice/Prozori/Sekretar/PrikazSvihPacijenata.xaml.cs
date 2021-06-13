@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Korisnicki;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {

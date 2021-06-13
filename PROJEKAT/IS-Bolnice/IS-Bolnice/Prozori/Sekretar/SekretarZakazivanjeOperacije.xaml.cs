@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Ustanova;
+using IS_Bolnice.Kontroleri.Korisnicki;
+using IS_Bolnice.Kontroleri.Termini;
 
 namespace IS_Bolnice.Prozori.Sekretar
 {

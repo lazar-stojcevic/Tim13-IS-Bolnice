@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Termini;
 
 namespace IS_Bolnice.Servisi.GenerisanjeIzvestaja
 {

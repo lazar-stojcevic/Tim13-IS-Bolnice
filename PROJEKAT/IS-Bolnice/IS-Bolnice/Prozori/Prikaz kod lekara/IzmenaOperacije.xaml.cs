@@ -17,6 +17,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.DTOs;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Ustanova;
+using IS_Bolnice.Kontroleri.Korisnicki;
+using IS_Bolnice.Kontroleri.Termini;
 using IS_Bolnice.Servisi;
 using WPFCustomMessageBox;
 

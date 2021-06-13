@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Korisnicki;
+using IS_Bolnice.Kontroleri.Termini;
 
 namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {

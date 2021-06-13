@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using IS_Bolnice.Baze;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Korisnicki;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Sekretar

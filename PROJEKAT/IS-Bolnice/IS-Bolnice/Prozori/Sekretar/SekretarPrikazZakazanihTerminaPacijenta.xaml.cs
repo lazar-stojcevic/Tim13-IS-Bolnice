@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Termini;
 using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Sekretar

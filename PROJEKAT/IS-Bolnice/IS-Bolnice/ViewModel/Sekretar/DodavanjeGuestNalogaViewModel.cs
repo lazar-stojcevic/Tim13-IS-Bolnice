@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Korisnicki;
 using IS_Bolnice.Prozori.Sekretar;
 
 namespace IS_Bolnice.ViewModel.Sekretar

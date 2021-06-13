@@ -5,6 +5,8 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using System.Collections.Generic;
 using System.Windows;
+using IS_Bolnice.Kontroleri.GenerisanjeIzvestaja;
+using IS_Bolnice.Kontroleri.Termini;
 
 namespace IS_Bolnice.ViewModel.VMPacijent
 {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.GenerisanjeIzvestaja;
+using IS_Bolnice.Kontroleri.Termini;
 using IS_Bolnice.Model;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;

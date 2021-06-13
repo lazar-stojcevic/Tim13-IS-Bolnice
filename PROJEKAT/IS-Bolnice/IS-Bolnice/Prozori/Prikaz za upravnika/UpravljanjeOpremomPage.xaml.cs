@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IS_Bolnice.Kontroleri.Ustanova;
 
 namespace IS_Bolnice.Prozori.UpravnikPages
 {

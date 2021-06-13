@@ -10,6 +10,7 @@ using System.IO;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Baze.Klase;
 using IS_Bolnice.Servisi;
+using IS_Bolnice.Servisi.Ustanova;
 
 namespace IS_Bolnice.Baze
 {

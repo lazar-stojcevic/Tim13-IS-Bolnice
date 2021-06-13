@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using WPFCustomMessageBox;
 using IS_Bolnice.Model;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Informativni;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {

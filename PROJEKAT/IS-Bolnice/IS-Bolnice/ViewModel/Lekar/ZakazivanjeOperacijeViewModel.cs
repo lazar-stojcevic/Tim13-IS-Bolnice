@@ -10,6 +10,9 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using IS_Bolnice.DTOs;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Ustanova;
+using IS_Bolnice.Kontroleri.Korisnicki;
+using IS_Bolnice.Kontroleri.Termini;
 using IS_Bolnice.Model;
 using WPFCustomMessageBox;
 

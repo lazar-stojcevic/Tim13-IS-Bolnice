@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using IS_Bolnice.Kontroleri.Informativni;
 
 namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 {

@@ -2,6 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Ustanova;
+using IS_Bolnice.Kontroleri.Informativni;
+using IS_Bolnice.Kontroleri.Korisnicki;
+using IS_Bolnice.Kontroleri.Termini;
 using IS_Bolnice.Model;
 using WPFCustomMessageBox;
 

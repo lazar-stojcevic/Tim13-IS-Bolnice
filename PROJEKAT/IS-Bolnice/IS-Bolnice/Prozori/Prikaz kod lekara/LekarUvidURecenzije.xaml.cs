@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Informativni;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara

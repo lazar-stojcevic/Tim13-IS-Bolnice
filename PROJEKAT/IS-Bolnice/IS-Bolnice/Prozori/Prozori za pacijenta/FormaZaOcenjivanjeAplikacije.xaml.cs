@@ -2,6 +2,7 @@
 using IS_Bolnice.Model;
 using System.Text.RegularExpressions;
 using System.Windows;
+using IS_Bolnice.Kontroleri.Informativni;
 
 
 namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
