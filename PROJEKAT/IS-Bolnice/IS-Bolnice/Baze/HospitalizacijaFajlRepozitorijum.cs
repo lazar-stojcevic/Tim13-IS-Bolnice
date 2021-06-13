@@ -43,8 +43,20 @@ namespace IS_Bolnice.Baze
           linije.Add(novaLinija);
           List<Hospitalizacija> sveHospitalizacije = GetSve();
           int brojUSobi = 0;
-          
-          foreach (Hospitalizacija hostIter in sveHospitalizacije)
+
+          DateTime validFrom = hospitalizacija.PocetakHospitalizacije;
+
+          DateTime validTo = hospitalizacija.KrajHospitalizacije;
+
+          for (DateTime dt = validFrom; dt <= validTo; dt = dt.AddDays(1))
+          {
+              if (new RenovacijaServis().SalaNaRenoviranjuUOdredjenomPeriodu(hospitalizacija.Soba.Id, dt))
+              {
+                  return false;
+              }
+          }
+
+            foreach (Hospitalizacija hostIter in sveHospitalizacije)
           {
               if (hostIter.Pacijent.Jmbg.Equals(hospitalizacija.Pacijent.Jmbg) &&
                   hostIter.KrajHospitalizacije > DateTime.Now)

@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Servisi;
+using WPFCustomMessageBox;
 
 namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 {
@@ -33,8 +35,20 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
 
         private void ButtonClick_Produzi(object sender, RoutedEventArgs e)
         {
-            hospitalizacijaKontroler.ObrisiHospitalizaciju(hospitalizacija);
             hospitalizacija.KrajHospitalizacije = datumProduzenja.SelectedDate.Value;
+            DateTime validFrom = hospitalizacija.PocetakHospitalizacije;
+            DateTime validTo = hospitalizacija.KrajHospitalizacije;
+            for (DateTime dt = validFrom; dt <= validTo; dt = dt.AddDays(1))
+            {
+                if (new RenovacijaServis().SalaNaRenoviranjuUOdredjenomPeriodu(hospitalizacija.Soba.Id, dt))
+                {
+                    CustomMessageBox.Show("Hospitalizacije se ne može produžiti zbog renoviranja sobe", "Hospitalizacija se ne može produžiti",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
+            hospitalizacijaKontroler.ObrisiHospitalizaciju(hospitalizacija);
             hospitalizacijaKontroler.KreirajHospitalizaciju(hospitalizacija);
 
             MessageBox.Show("Hospitalizacije uspešno produžena", "Produžena hospitalizacija",
