@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IS_Bolnice.Baze;
 using IS_Bolnice.Baze.Interfejsi;
 
 namespace IS_Bolnice.Servisi.Korisnici

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using IS_Bolnice.Baze;
 using IS_Bolnice.Baze.Interfejsi;
 
-namespace IS_Bolnice.Servisi
+namespace IS_Bolnice.Servisi.Lekovi
 {
     class LekServis
     {

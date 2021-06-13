@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IS_Bolnice.Servisi;
+﻿using System.Collections.Generic;
+using IS_Bolnice.Servisi.Termini;
 
-namespace IS_Bolnice.Kontroleri
+namespace IS_Bolnice.Kontroleri.Termini
 {
     class HospitalizacijaKontroler
     {

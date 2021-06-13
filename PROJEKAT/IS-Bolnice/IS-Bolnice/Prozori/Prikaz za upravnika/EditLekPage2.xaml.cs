@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Lekovi;
 
 namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
 {

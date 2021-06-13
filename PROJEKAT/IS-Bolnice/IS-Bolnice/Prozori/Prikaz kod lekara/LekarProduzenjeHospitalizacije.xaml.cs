@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Termini;
 using IS_Bolnice.Servisi;
 using IS_Bolnice.Servisi.Ustanova;
 using WPFCustomMessageBox;

@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri.Ustanova;
 using IS_Bolnice.Kontroleri.Informativni;
+using IS_Bolnice.Kontroleri.Lekovi;
 using WPFCustomMessageBox;
 using iTextSharp;
 using iTextSharp.text;

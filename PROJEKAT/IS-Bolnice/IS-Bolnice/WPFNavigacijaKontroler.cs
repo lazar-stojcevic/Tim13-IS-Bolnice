@@ -1,17 +1,11 @@
-﻿using IS_Bolnice.Prozori.UpravnikPages;
-using IS_Bolnice.ViewModel.Upravnik;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Navigation;
 using IS_Bolnice.Prozori.Prikaz_kod_lekara;
-using WPFCustomMessageBox;
 using IS_Bolnice.Prozori.Prikaz_za_upravnika;
+using IS_Bolnice.Prozori.UpravnikPages;
+using WPFCustomMessageBox;
 
-namespace IS_Bolnice.Kontroleri
+namespace IS_Bolnice
 {
     class WPFNavigacijaKontroler
     {
