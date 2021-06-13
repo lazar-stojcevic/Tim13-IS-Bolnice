@@ -19,5 +19,16 @@ namespace IS_Bolnice.Servisi
             if (logger == null) return null;
             return logger.LogInServis.GetKorisnika(korisnickoIme, sifra);
         }
+
+        public void KreirajKorisnika(string korisnickoIme, string sifra, string tip)
+        {
+            Logger logger = new Logger(korisnickoIme, sifra, tip);
+            repo.Sacuvaj(logger);
+        }
+
+        public void ObrisiKorisnika(string korisnickoIme)
+        {
+            repo.Obrisi(korisnickoIme);
+        }
     }
 }

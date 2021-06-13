@@ -16,5 +16,15 @@ namespace IS_Bolnice.Kontroleri
         {
             return servis.GetKorisnika(korisnickoIme, sifra);
         }
+
+        public void KreirajKorisnika(string korisnickoIme, string sifra, string tip)
+        {
+            servis.KreirajKorisnika(korisnickoIme, sifra, tip);
+        }
+
+        public void ObrisiKorisnika(string korisnickoIme)
+        {
+            servis.ObrisiKorisnika(korisnickoIme);
+        }
     }
 }

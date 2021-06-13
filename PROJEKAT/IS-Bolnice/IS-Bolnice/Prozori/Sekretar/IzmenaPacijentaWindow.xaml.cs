@@ -10,11 +10,10 @@ namespace IS_Bolnice.Prozori.Sekretar
 {
     public partial class IzmenaPacijentaWindow : Window
     {
-        private Pacijent pacijentZaIzmenu;   // potrebno za izmenu pacijenta da bi se prosledio stari JMBG
+        private Pacijent pacijentZaIzmenu;
         private PacijentKontroler pacijentKontroler = new PacijentKontroler();
         private KorisnikKontroler korisnikKontroler = new KorisnikKontroler();
         private LekarKontroler lekarKontroler = new LekarKontroler();
-        private IzmenaTerminaFajlRepozitorijum bazaIzmena = new IzmenaTerminaFajlRepozitorijum();
         private List<Lekar> lekari;
         private ObservableCollection<Pacijent> PacijentiRef;
         private IzmenaTerminaKontroler izmenaTerminaKontroler = new IzmenaTerminaKontroler();
@@ -123,7 +122,7 @@ namespace IS_Bolnice.Prozori.Sekretar
                 DateTime tempDatumRodjenja = (DateTime)datum.SelectedDate;
                 Lekar lekar = OdrediIzabranogLekara();
 
-                Pacijent p = new Pacijent
+                Pacijent izmenjenPacijent = new Pacijent
                 {
                     Jmbg = tempJmbg,
                     KorisnickoIme = tempKorisnickoIme,
@@ -139,12 +138,12 @@ namespace IS_Bolnice.Prozori.Sekretar
                     Guest = false
                 };
 
-                pacijentKontroler.IzmeniPacijenta(p);
-                OsvezavanjeListePacijenata(p);
+                pacijentKontroler.IzmeniPacijenta(izmenjenPacijent, pacijentZaIzmenu);
+                OsvezavanjeListePacijenata(izmenjenPacijent);
                 // ako nije oznaceno da je blokiran poziva se metoda za odblokiranje
                 if (!(bool)CbBlokiran.IsChecked)
                 {
-                    izmenaTerminaKontroler.OdblokirajPacijenta(p);
+                    izmenaTerminaKontroler.OdblokirajPacijenta(izmenjenPacijent);
                 }
 
                 this.Close();

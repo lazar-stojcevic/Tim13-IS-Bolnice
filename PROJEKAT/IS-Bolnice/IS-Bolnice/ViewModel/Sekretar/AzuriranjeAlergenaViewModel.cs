@@ -142,7 +142,7 @@ namespace IS_Bolnice.ViewModel.Sekretar
         public void Execute_PotvrdiCommand(object obj)
         {
             pacijentRef.Alergeni = alergeniPacijenta.ToList();
-            pacijentKontroler.IzmeniPacijenta(pacijentRef);
+            pacijentKontroler.IzmeniPacijenta(pacijentRef, pacijentRef);
             window.Close();
         }
 
