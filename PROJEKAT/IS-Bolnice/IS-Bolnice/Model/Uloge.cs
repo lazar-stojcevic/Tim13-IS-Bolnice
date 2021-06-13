@@ -1,6 +1,4 @@
-﻿using System;
-
-public enum Uloge
+﻿public enum Uloge
 {
     Lekari,
     Upravnici,

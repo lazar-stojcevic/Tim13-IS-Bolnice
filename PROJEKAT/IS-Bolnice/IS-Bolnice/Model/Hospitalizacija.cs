@@ -1,8 +1,3 @@
-// File:    Hospitalizacija.cs
-// Author:  Zola
-// Created: Monday, May 17, 2021 7:16:29 PM
-// Purpose: Definition of Class Hospitalizacija
-
 using System;
 using System.ComponentModel;
 using IS_Bolnice.Model;
@@ -35,11 +30,6 @@ public class Hospitalizacija :Entitet ,INotifyPropertyChanged
         Soba = new Soba();
         Pacijent = new Pacijent();
     }
-
-    /// <summary>
-    /// Property for Soba
-    /// </summary>
-    /// <pdGenerated>Default opposite class property</pdGenerated>
 
     public DateTime PocetakHospitalizacije
     {

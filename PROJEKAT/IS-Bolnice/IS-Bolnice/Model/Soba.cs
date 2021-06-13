@@ -1,14 +1,5 @@
-// File:    Soba.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 6:39:01 PM
-// Purpose: Definition of Class Soba
-
 using IS_Bolnice.Model;
 using IS_Bolnice.StanjeSobe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Documents;
 
 public class Soba: Entitet
 {
@@ -30,16 +21,6 @@ public class Soba: Entitet
     public Soba(string idSobe)
     {
         this.Id = idSobe;
-    }
-   
-
-    public bool Jednaka(Soba soba)
-    {
-        if (Id.Equals(soba.Id))
-        {
-            return true;
-        }
-        return false;
     }
 
     public override string ToString()

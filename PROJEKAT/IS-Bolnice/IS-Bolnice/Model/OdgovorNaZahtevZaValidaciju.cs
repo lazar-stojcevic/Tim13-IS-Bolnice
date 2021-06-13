@@ -1,10 +1,3 @@
-// File:    OdgovorNaZahtevZaValidaciju.cs
-// Author:  Zola
-// Created: Monday, May 3, 2021 9:29:25 PM
-// Purpose: Definition of Class OdgovorNaZahtevZaValidaciju
-
-using System;
-using System.Runtime.CompilerServices;
 using IS_Bolnice.Model;
 
 public class OdgovorNaZahtevZaValidaciju: Entitet

@@ -1,8 +1,3 @@
-// File:    Izvestaj.cs
-// Author:  Matija
-// Created: 31 March, 2021 16:29:54
-// Purpose: Definition of Class Izvestaj
-
 using System;
 using System.Collections.Generic;
 using IS_Bolnice.Model;
@@ -55,15 +50,6 @@ public class Izvestaj : Entitet
             this.terapija = new System.Collections.Generic.List<Terapija>();
         if (!this.terapija.Contains(newTerapija))
             this.terapija.Add(newTerapija);
-    }
-
-    public void RemoveTerapija(Terapija oldTerapija)
-    {
-        if (oldTerapija == null)
-            return;
-        if (this.terapija != null)
-            if (this.terapija.Contains(oldTerapija))
-                this.terapija.Remove(oldTerapija);
     }
 
     public void RemoveAllTerapija()

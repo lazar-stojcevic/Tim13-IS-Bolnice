@@ -1,4 +1,3 @@
-using System;
 using IS_Bolnice.Model;
 
 public class Sastojak: Entitet

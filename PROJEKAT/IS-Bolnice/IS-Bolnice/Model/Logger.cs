@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IS_Bolnice.LogIn;
-using IS_Bolnice.Servisi;
+﻿using IS_Bolnice.LogIn;
 
 namespace IS_Bolnice.Model
 {

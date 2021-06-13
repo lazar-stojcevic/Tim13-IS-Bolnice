@@ -1,9 +1,3 @@
-// File:    ZahtevZaValidacijuLeka.cs
-// Author:  Zola
-// Created: Monday, May 3, 2021 9:24:36 PM
-// Purpose: Definition of Class ZahtevZaValidacijuLeka
-
-using System;
 using System.Collections.Generic;
 using IS_Bolnice.Model;
 

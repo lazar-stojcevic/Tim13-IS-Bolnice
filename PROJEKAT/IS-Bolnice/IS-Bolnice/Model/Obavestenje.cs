@@ -1,8 +1,3 @@
-// File:    Obavestenje.cs
-// Author:  Matija
-// Created: 31 March, 2021 17:33:07
-// Purpose: Definition of Class Obavestenje
-
 using System;
 using System.Collections.Generic;
 

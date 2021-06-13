@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IS_Bolnice.Model
 {
@@ -44,11 +40,6 @@ namespace IS_Bolnice.Model
             Komentar = beleska.Komentar;
             VremePocetkaVazenja = beleska.VremePocetkaVazenja;
             PeriodVazenja = beleska.PeriodVazenja;
-        }
-
-        public bool Iste(Beleska beleska)
-        {
-            return this.Pacijent.Jmbg == beleska.Pacijent.Jmbg && this.VremePocetkaVazenja == beleska.VremePocetkaVazenja;
         }
     }
 }

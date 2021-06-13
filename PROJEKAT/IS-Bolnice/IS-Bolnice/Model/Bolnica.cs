@@ -1,5 +1,4 @@
 using IS_Bolnice.Model;
-using System;
 using System.Collections.Generic;
 
 public class Bolnica: Entitet

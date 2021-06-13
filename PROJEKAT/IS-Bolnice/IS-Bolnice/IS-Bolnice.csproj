@@ -1052,7 +1052,6 @@
     <Compile Include="Model\Pregled.cs" />
     <Compile Include="Model\RoomType.cs" />
     <Compile Include="Model\Sekretar.cs" />
-    <Compile Include="Model\TipLekara.cs" />
     <Compile Include="Model\TipOpreme.cs" />
     <Compile Include="Model\Upravnik.cs" />
     <Compile Include="Prozori\Prozori za pacijenta\PacijentWindow.xaml.cs">

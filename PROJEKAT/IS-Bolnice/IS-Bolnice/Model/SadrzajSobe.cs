@@ -1,8 +1,3 @@
-// File:    SadrzajSobe.cs
-// Author:  Matija
-// Created: Friday, April 23, 2021 3:30:43 PM
-// Purpose: Definition of Class SadrzajSobe
-
 using System;
 using IS_Bolnice.Model;
 

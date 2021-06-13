@@ -1,5 +1,4 @@
 using IS_Bolnice.Model;
-using System;
 
 public class Lekar : Korisnik
 {

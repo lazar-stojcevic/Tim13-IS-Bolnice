@@ -1,10 +1,4 @@
-// File:    Pregled.cs
-// Author:  Zola
-// Created: Monday, March 22, 2021 5:52:52 PM
-// Purpose: Definition of Class Pregled
-
 using System;
-using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Model;
 
 public class Pregled: Entitet
