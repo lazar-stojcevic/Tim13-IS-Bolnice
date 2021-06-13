@@ -1,13 +1,13 @@
-﻿using IS_Bolnice.Baze;
-using IS_Bolnice.Baze.Interfejsi;
+﻿using IS_Bolnice.Baze.Interfejsi;
 using IS_Bolnice.Model;
+using IS_Bolnice.Servisi.CommandInterfejsi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace IS_Bolnice.Servisi
 {
-    class AnketaServis
+    class AnketaServis : AnketaCommandInterfejs
     {
         private readonly IAnketaRepozitorijum anketaRepo = new Injector().GetAnketaRepozitorijum();
         private IPregledRepozitorijum preglediFajlRepozitorijum = new Injector().GetPregledRepozitorijum();

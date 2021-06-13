@@ -37,7 +37,7 @@ namespace IS_Bolnice.Prozori.Prikaz_za_upravnika
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Anketa anketa = (Anketa)listBox.SelectedItem;
-            Window window = new PregledRecenzijeWindow(anketa.Komentar);
+            Window window = new PregledRecenzijeWindow(anketa.Opis);
             window.Show();
         }
     }

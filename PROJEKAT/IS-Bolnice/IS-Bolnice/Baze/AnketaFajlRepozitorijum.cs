@@ -11,16 +11,13 @@ namespace IS_Bolnice.Baze
     {
         private IPacijentRepozitorijum pacijentRepo = new PacijentFajlRepozitorijum();
 
-        private static string timeFormatForWriting = "M/d/yyyy h:mm:ss tt";
         private static string[] timeFormatForReading = new[]
         {
         "M/d/yyyy h:mm:ss tt",
         "M-d-yyyy h:mm:ss tt"
         };
 
-        public AnketaFajlRepozitorijum() : base(@"..\..\Datoteke\Ocene.txt")
-        {
-        }
+        public AnketaFajlRepozitorijum() : base(@"..\..\Datoteke\Ocene.txt") { }
 
         public List<Anketa> GetSveAnketeBolnice()
         {
@@ -64,57 +61,40 @@ namespace IS_Bolnice.Baze
 
         private Anketa NapraviAnketuZaDoktora(string[] items)
         {
-            Anketa survery = new Anketa();
-            Lekar doctor = new Lekar();
-            survery.Trajanje = FormirajDatumZaCitanje(items[1]);
-            survery.Ocena = Int32.Parse(items[2]);
-            survery.Komentar = items[3];
-            survery.Pacijent = pacijentRepo.GetPoJmbg(items[4]);
-            survery.Lekar = doctor;
-            survery.Lekar.Jmbg = items[5];
-            return survery;
+            Anketa anketa = new Anketa();
+            Lekar lekar = new Lekar();
+            anketa.Trajanje = FormirajDatumZaCitanje(items[1]);
+            anketa.Ocena = Int32.Parse(items[2]);
+            anketa.Opis = items[3];
+            anketa.Pacijent = pacijentRepo.GetPoJmbg(items[4]);
+            anketa.Lekar = lekar;
+            anketa.Lekar.Jmbg = items[5];
+            return anketa;
         }
 
         private Anketa NapraviAnketuZaBolnicu(string[] items)
         {
-            Anketa survery = new Anketa();
-            Bolnica hospital = new Bolnica();
-            survery.Trajanje = FormirajDatumZaCitanje(items[1]);
-            survery.Ocena = Int32.Parse(items[2]);
-            survery.Komentar = items[3];
-            survery.Pacijent = pacijentRepo.GetPoJmbg(items[4]);
-            survery.Bolnica = hospital;
-            survery.Bolnica.Ime = items[5];
-            return survery;
+            Anketa anketa = new Anketa();
+            Bolnica bolnica = new Bolnica();
+            anketa.Trajanje = FormirajDatumZaCitanje(items[1]);
+            anketa.Ocena = Int32.Parse(items[2]);
+            anketa.Opis = items[3];
+            anketa.Pacijent = pacijentRepo.GetPoJmbg(items[4]);
+            anketa.Bolnica = bolnica;
+            anketa.Bolnica.Ime = items[5];
+            return anketa;
         }
 
-        private DateTime FormirajDatumZaCitanje(string date)
+        private DateTime FormirajDatumZaCitanje(string datum)
         {
-            return DateTime.ParseExact(date, timeFormatForReading, CultureInfo.InvariantCulture,
+            return DateTime.ParseExact(datum, timeFormatForReading, CultureInfo.InvariantCulture,
                                                   DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
         }
 
         public override string KreirajTextZaUpis(Anketa entitet)
         {
-            Anketa anketa = entitet;
-
-            if(entitet.KojaAnketa == 0)
-            {
-                return "0" + "#" + FormirajDatumZaPisanje(anketa.Trajanje) + "#" + anketa.Ocena.ToString() + "#" + anketa.Komentar
-                    + "#" + anketa.Pacijent.Jmbg + "#" + anketa.Lekar.Jmbg;
-            }
-            else
-            {
-                return "1" + "#" + FormirajDatumZaPisanje(anketa.Trajanje) + "#" + anketa.Ocena + "#" + anketa.Komentar
-                    + "#" + anketa.Pacijent.Jmbg + "#" + anketa.Bolnica.Ime;
-            }
+            return entitet.ToString();
         }
-
-        private String FormirajDatumZaPisanje(DateTime date)
-        {
-            return date.ToString(timeFormatForWriting);
-        }
-
     }
 
 }

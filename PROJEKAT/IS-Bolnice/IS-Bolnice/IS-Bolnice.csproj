@@ -540,6 +540,9 @@
     <Compile Include="Servisi\AnketaServis.cs" />
     <Compile Include="Servisi\BelezkeServis.cs" />
     <Compile Include="Servisi\BolnicaServis.cs" />
+    <Compile Include="Servisi\CommandInterfejsi\AnketaCommandInterfejs.cs" />
+    <Compile Include="Servisi\CommandInterfejsi\BelezkeCommandInterfejs.cs" />
+    <Compile Include="Servisi\CommandInterfejsi\IzmenaTerminaCommandInterfejs.cs" />
     <Compile Include="Servisi\GenerisanjeIzvestaja\GenerisanjeIzvestajaZaPacijenta.cs" />
     <Compile Include="Servisi\GenerisanjeIzvestaja\GenerisanjeIzvestajaZaLekara.cs" />
     <Compile Include="Servisi\GenerisanjeIzvestaja\GenerisanjePDFIzvestajaZaPacijentaServis.cs" />

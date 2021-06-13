@@ -51,7 +51,7 @@ namespace IS_Bolnice.Prozori.Prikaz_kod_lekara
         {
             Button button = sender as Button;
             Anketa recenzija = button.DataContext as Anketa;
-            MessageBox.Show(recenzija.Komentar, "Recenzija");
+            MessageBox.Show(recenzija.Opis, "Recenzija");
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

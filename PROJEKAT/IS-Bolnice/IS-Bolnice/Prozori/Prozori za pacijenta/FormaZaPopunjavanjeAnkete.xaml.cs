@@ -56,7 +56,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
             anketa.Pacijent = pregled.Pacijent;
             anketa.Ocena = KojaOcenaJeSelektovana();
             anketa.Trajanje = pregled.VremePocetkaPregleda;
-            anketa.Komentar = komentar.Text;
+            anketa.Opis = komentar.Text;
             anketa.KojaAnketa = 0;
             anketaKontroler.SacuvajAnketu(anketa);
         }
@@ -71,7 +71,7 @@ namespace IS_Bolnice.Prozori.Prozori_za_pacijenta
 
             anketa.Pacijent = patient;
             anketa.Trajanje = DateTime.Now;
-            anketa.Komentar = komentar.Text;
+            anketa.Opis = komentar.Text;
             anketa.Ocena = KojaOcenaJeSelektovana();
             anketa.Bolnica = hospital;
             anketa.KojaAnketa = 1;
