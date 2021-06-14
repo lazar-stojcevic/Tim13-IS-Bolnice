@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IS_Bolnice.DTOs;
-using IS_Bolnice.Servisi;
+﻿using IS_Bolnice.DTOs;
+using IS_Bolnice.Servisi.Korisnicki;
 
-namespace IS_Bolnice.Kontroleri
+namespace IS_Bolnice.Kontroleri.Korisnicki
 {
     class LoggerKontroler
     {

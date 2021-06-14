@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IS_Bolnice.Servisi;
 using IS_Bolnice.Servisi.Korisnici;
+using IS_Bolnice.Servisi.Korisnicki;
 
 namespace IS_Bolnice.Kontroleri.Korisnicki
 {

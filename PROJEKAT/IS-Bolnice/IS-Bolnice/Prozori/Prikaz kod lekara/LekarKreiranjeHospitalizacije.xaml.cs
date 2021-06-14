@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IS_Bolnice.Kontroleri;
+using IS_Bolnice.Kontroleri.Termini;
 using IS_Bolnice.Kontroleri.Ustanova;
 using WPFCustomMessageBox;
 
