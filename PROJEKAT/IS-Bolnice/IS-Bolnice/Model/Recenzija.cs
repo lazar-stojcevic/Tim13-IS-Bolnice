@@ -12,10 +12,5 @@ namespace IS_Bolnice.Model
 
         }
 
-        public override string ToString()
-        {
-            return Id + "#" + Ocena + "#" + Opis;
-        }
-
     }
 }
