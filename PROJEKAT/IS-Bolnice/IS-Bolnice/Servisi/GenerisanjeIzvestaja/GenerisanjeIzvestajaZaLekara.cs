@@ -22,10 +22,16 @@ namespace IS_Bolnice.Servisi.GenerisanjeIzvestaja
             this.intervalIzvestaja = PripremiVremenskiInterval(intervalIzvestaja);
             preglediLekaraZaIzvestaj = GetPreglediLekaraUZadatomPeriodu();
             operacijeLekaraZaIzvestaj = GetOperacijeLekaraUZadatomPeriodu();
+            SortirajTermine();
             return GenerisiIzvestajZauzetostiLekara();
         }
 
         protected abstract bool GenerisiIzvestajZauzetostiLekara();
+
+        protected void SortirajTermine()
+        {
+
+        }
 
         private VremenskiInterval PripremiVremenskiInterval(VremenskiInterval intervalZaPripremu)
         {

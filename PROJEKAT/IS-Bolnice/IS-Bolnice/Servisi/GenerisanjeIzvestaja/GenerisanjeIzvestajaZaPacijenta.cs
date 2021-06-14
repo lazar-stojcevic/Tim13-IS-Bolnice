@@ -14,9 +14,15 @@ namespace IS_Bolnice.Servisi.GenerisanjeIzvestaja
         {
             OperacijaServis operacijaServis = new OperacijaServis();
             operacijePacijenta = operacijaServis.GetSveBuduceOperacijePacijenta(jmbgPacijenta);
+            SortirajTermine();
             return GenerisiIzvestajBuducihOperacijaPacijenta();
         }
 
         protected abstract bool GenerisiIzvestajBuducihOperacijaPacijenta();
+
+        protected void SortirajTermine()
+        {
+
+        }
     }
 }
