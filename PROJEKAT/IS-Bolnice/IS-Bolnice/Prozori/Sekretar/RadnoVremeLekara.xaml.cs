@@ -146,12 +146,25 @@ namespace IS_Bolnice.Prozori.Sekretar
             selektovaniLekar.RadnoVreme.StandardnoRadnoVreme = radnoVreme;
         }
 
+        private void IspisiNemogucnostOdabiraSlobodnogDanaNedelje(string danNedelje)
+        {
+            InformativniProzor ip = new InformativniProzor(
+                "Nije moguće dodeliti" + danNedelje + " kao slobodan dan u nedelji zato što lekar poseduje obaveze u tom danu.");
+            ip.ShowDialog();
+        }
+
         private void AzurirajSlobodneDaneLekara()
         {
             if ((bool) boxPonedeljak.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Monday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Monday);
+                {
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar, DayOfWeek.Monday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Monday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("ponedeljak");
+                }
+                    
             }
             else
             {
@@ -161,7 +174,10 @@ namespace IS_Bolnice.Prozori.Sekretar
             if ((bool) boxUtorak.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Tuesday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Tuesday);
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar, DayOfWeek.Tuesday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Tuesday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("utorak");
             }
             else
             {
@@ -171,7 +187,10 @@ namespace IS_Bolnice.Prozori.Sekretar
             if ((bool) boxSreda.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Wednesday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Wednesday);
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar,DayOfWeek.Wednesday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Wednesday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("sreda");
             }
             else
             {
@@ -181,7 +200,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             if ((bool) boxCetvrtak.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Thursday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Thursday);
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar, DayOfWeek.Thursday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Thursday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("četvrak");
+                    
             }
             else
             {
@@ -191,7 +214,10 @@ namespace IS_Bolnice.Prozori.Sekretar
             if ((bool) boxPetak.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Friday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Friday);
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar, DayOfWeek.Friday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Friday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("petak");
             }
             else
             {
@@ -201,7 +227,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             if ((bool) boxSubota.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Saturday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Saturday);
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar, DayOfWeek.Saturday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Saturday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("subota");
+                    
             }
             else
             {
@@ -211,7 +241,11 @@ namespace IS_Bolnice.Prozori.Sekretar
             if ((bool) boxNedelja.IsChecked)
             {
                 if (!selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Contains(DayOfWeek.Sunday))
-                    selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Sunday);
+                    if (radnoVremeKontroler.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(selektovaniLekar, DayOfWeek.Sunday))
+                        selektovaniLekar.RadnoVreme.SlobodniDaniUNedelji.Add(DayOfWeek.Sunday);
+                    else
+                        IspisiNemogucnostOdabiraSlobodnogDanaNedelje("nedelja");
+                    
             }
             else
             {

@@ -99,6 +99,45 @@ namespace IS_Bolnice.Servisi.Korisnicki
             return false;
         }
 
+        public bool MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(Lekar lekar, DayOfWeek danNedelje)
+        {
+            if (DanUNedeljiSePreklapaSaBuducimPregledimaLekara(lekar, danNedelje)) return false;
+
+            if (DanUNedeljiSePreklapaSaBuducimOperacijamaLekara(lekar, danNedelje)) return false;
+
+            return true;
+        }
+
+        private bool DanUNedeljiSePreklapaSaBuducimOperacijamaLekara(Lekar lekar, DayOfWeek danNedelje)
+        {
+            OperacijaServis operacijaServis = new OperacijaServis();
+            foreach (Operacija operacija in operacijaServis.GetSveBuduceOperacijeLekara(lekar.Jmbg))
+            {
+                if (operacija.VremePocetkaOperacije.DayOfWeek == danNedelje ||
+                    operacija.VremeKrajaOperacije.DayOfWeek == danNedelje)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool DanUNedeljiSePreklapaSaBuducimPregledimaLekara(Lekar lekar, DayOfWeek danNedelje)
+        {
+            PregledServis pregledServis = new PregledServis();
+            foreach (Pregled pregled in pregledServis.GetSviBuduciPreglediLekara(lekar.Jmbg))
+            {
+                if (pregled.VremePocetkaPregleda.DayOfWeek == danNedelje ||
+                    pregled.VremeKrajaPregleda.DayOfWeek == danNedelje)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void OdloziSaObavestenjemTermineLekaraKojiSeNeUklapaju(VremenskiInterval vremenskiInterval, String jmbgLekara)
         {
             List<Pregled> odlozeniPregledi = OdloziTerminePregledaLekaraKojiSeNeUklapaju(vremenskiInterval, jmbgLekara);

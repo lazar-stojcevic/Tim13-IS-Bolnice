@@ -48,5 +48,10 @@ namespace IS_Bolnice.Kontroleri.Korisnicki
         {
             radnoVremeServis.OdloziSaObavestenjemBuduceTermineLekaraZbogPromene(lekar);
         }
+
+        public bool MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(Lekar lekar, DayOfWeek dan)
+        {
+            return radnoVremeServis.MozeLiSeDodelitiSlobodanDanUNedeljiLekaru(lekar, dan);
+        }
     }
 }
