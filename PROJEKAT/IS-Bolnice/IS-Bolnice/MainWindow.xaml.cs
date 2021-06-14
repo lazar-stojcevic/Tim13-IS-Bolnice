@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Repozitorijumi.Interfejsi;
 using IS_Bolnice.DTOs;
 using IS_Bolnice.Kontroleri.Ustanova;
 using IS_Bolnice.Kontroleri.Korisnicki;

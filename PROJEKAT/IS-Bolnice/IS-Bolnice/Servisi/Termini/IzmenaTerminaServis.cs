@@ -1,6 +1,6 @@
 ﻿using System;
-using IS_Bolnice.Baze;
-using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Repozitorijumi;
+using IS_Bolnice.Repozitorijumi.Interfejsi;
 using IS_Bolnice.Model;
 using IS_Bolnice.Servisi.CommandInterfejsi;
 

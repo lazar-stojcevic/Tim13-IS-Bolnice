@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IS_Bolnice.Baze;
-using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Repozitorijumi;
+using IS_Bolnice.Repozitorijumi.Interfejsi;
 using IS_Bolnice.DTOs;
 using IS_Bolnice.Model;
 using IS_Bolnice.Servisi.Ustanova;

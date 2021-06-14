@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using IS_Bolnice.Baze;
-using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Repozitorijumi;
+using IS_Bolnice.Repozitorijumi.Interfejsi;
 using IS_Bolnice.Model;
 
 namespace IS_Bolnice.Servisi.Informativni

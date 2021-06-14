@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IS_Bolnice.Baze;
+using IS_Bolnice.Repozitorijumi;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Kontroleri.Informativni;
 using IS_Bolnice.Model;

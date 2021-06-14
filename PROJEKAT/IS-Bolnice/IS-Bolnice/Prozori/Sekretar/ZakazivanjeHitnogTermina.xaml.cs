@@ -1,4 +1,4 @@
-﻿using IS_Bolnice.Baze;
+﻿using IS_Bolnice.Repozitorijumi;
 using IS_Bolnice.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

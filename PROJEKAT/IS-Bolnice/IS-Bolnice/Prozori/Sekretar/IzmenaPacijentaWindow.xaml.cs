@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
-using IS_Bolnice.Baze;
+using IS_Bolnice.Repozitorijumi;
 using IS_Bolnice.Kontroleri;
 using IS_Bolnice.Kontroleri.Korisnicki;
 using IS_Bolnice.Kontroleri.Termini;

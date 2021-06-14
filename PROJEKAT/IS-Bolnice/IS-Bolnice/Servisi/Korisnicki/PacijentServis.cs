@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IS_Bolnice.Baze;
-using IS_Bolnice.Baze.Interfejsi;
+using IS_Bolnice.Repozitorijumi;
+using IS_Bolnice.Repozitorijumi.Interfejsi;
 using IS_Bolnice.Servisi.Termini;
 
 namespace IS_Bolnice.Servisi.Korisnici
