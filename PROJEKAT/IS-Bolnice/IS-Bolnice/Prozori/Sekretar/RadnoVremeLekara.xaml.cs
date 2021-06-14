@@ -13,7 +13,7 @@ namespace IS_Bolnice.Prozori.Sekretar
     {
         private Lekar selektovaniLekar;
         private readonly int INTERVAL_MINUTA_RADNOG_VREMENA = 10;
-        private bool napravljenaIzmena = false;
+        private bool napravljenaIzmena;
         private RadnoVremeKontroler radnoVremeKontroler = new RadnoVremeKontroler();
 
         public RadnoVremeLekara(Lekar lekar)
@@ -27,6 +27,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             PopuniComboBoxMinuta();
             PodesavanjeRedovnogRadnogVremena();
             PodesavanjeComboBoxevaSlobodnihDana();
+            napravljenaIzmena = false;
         }
 
         private void PodesavanjeRedovnogRadnogVremena()
@@ -149,7 +150,7 @@ namespace IS_Bolnice.Prozori.Sekretar
         private void IspisiNemogucnostOdabiraSlobodnogDanaNedelje(string danNedelje)
         {
             InformativniProzor ip = new InformativniProzor(
-                "Nije moguće dodeliti" + danNedelje + " kao slobodan dan u nedelji zato što lekar poseduje obaveze u tom danu.");
+                "Nije moguće dodeliti " + danNedelje + " kao slobodan dan u nedelji zato što lekar poseduje obaveze u tom danu.");
             ip.ShowDialog();
         }
 
