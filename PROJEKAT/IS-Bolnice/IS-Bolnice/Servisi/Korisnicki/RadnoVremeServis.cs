@@ -246,8 +246,7 @@ namespace IS_Bolnice.Servisi.Korisnicki
                 {
                     VremenskiInterval intervalPregleda =
                         new VremenskiInterval(pregled.VremePocetkaPregleda, pregled.VremeKrajaPregleda);
-                    VremenskiInterval standardnoRadnoVreme = lekar.RadnoVreme.StandardnoRadnoVreme;
-                    if (!standardnoRadnoVreme.SadrziInterval(intervalPregleda))
+                    if (!lekar.RadnoVreme.TerminURadnomVremenuLekara(intervalPregleda))
                     {
                         pregledServis.OdloziPregledStoPre(pregled);
                         odlozeniPregledi.Add(pregled);
@@ -269,8 +268,7 @@ namespace IS_Bolnice.Servisi.Korisnicki
                 {
                     VremenskiInterval intervalOperacije =
                         new VremenskiInterval(operacija.VremePocetkaOperacije, operacija.VremeKrajaOperacije);
-                    VremenskiInterval standardnoRadnoVreme = lekar.RadnoVreme.StandardnoRadnoVreme;
-                    if (!standardnoRadnoVreme.SadrziInterval(intervalOperacije))
+                    if (!lekar.RadnoVreme.TerminURadnomVremenuLekara(intervalOperacije))
                     {
                         operacijaServis.OdloziOperacijuStoPre(operacija);
                         odlozeneOperacije.Add(operacija);

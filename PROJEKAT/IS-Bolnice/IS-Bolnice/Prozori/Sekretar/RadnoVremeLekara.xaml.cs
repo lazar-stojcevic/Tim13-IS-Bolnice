@@ -27,7 +27,7 @@ namespace IS_Bolnice.Prozori.Sekretar
             PopuniComboBoxMinuta();
             PodesavanjeRedovnogRadnogVremena();
             PodesavanjeComboBoxevaSlobodnihDana();
-            napravljenaIzmena = false;
+            //napravljenaIzmena = false;
         }
 
         private void PodesavanjeRedovnogRadnogVremena()
