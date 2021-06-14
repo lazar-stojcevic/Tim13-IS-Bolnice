@@ -17,6 +17,8 @@ namespace IS_Bolnice.Baze
         "M-d-yyyy h:mm:ss tt"
         };
 
+        private static string formatDatumaZaPisanje = "M/d/yyyy h:mm:ss tt";
+
         public AnketaFajlRepozitorijum() : base(@"..\..\Datoteke\Ocene.txt") { }
 
         public List<Anketa> GetSveAnketeBolnice()
@@ -91,9 +93,23 @@ namespace IS_Bolnice.Baze
                                                   DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
         }
 
+        private string FormirajDatumZaPisanje(DateTime datum)
+        {
+            return datum.ToString(formatDatumaZaPisanje);
+        }
+
         public override string KreirajTextZaUpis(Anketa entitet)
         {
-            return entitet.ToString();
+            if (entitet.KojaAnketa == 0)
+            {
+                return "0" + "#" + FormirajDatumZaPisanje(entitet.Trajanje) + "#" + entitet.Ocena.ToString() + "#" + entitet.Opis
+                    + "#" + entitet.Pacijent.Jmbg + "#" + entitet.Lekar.Jmbg;
+            }
+            else
+            {
+                return "1" + "#" + FormirajDatumZaPisanje(entitet.Trajanje) + "#" + entitet.Ocena + "#" + entitet.Opis
+                    + "#" + entitet.Pacijent.Jmbg + "#" + entitet.Bolnica.Ime;
+            }
         }
     }
 
